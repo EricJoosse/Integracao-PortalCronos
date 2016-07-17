@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Update\Policy]
+"EnableJavaUpdate"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92\MSI]
+"JAVAUPDATE"="0"
+"AUTOUPDATECHECK"="0"

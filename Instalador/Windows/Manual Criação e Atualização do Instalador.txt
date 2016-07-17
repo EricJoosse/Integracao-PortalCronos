@@ -1,0 +1,152 @@
+Roteiro + checklist ANTES da instalação em um fornecedor novo 
+=============================================================
+    1. Atualizar o único /conf/.properties file no diretório da instalação.
+
+	2. Conectar no Team Viewer
+	
+	3. Verificar se o usuário logado é administrador ou administrator, 
+	   local ou da rede (como administrador da rede ainda não foi testado).
+	
+	4. No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
+		- Verificar a versão de Windows no servidor do fornecedor 
+		  e descomentar a variável "osVersion" correta no início do .bat. 
+		  
+		- Verificar a variável "tipoOS=32" ou "tipoOS=64" no .bat
+		
+		- Se a versão de Windows ainda não está homologada, 
+		  comentar "regedit.exe /s %arquivoRegedit%" no  "if %tipoOS% == 64" ou "32".		  
+		  CUIDADO PARA NÃO CORROMPER O REGEDIT !!!!!!!!!
+		  CUIDADO PARA NÃO CORROMPER O REGEDIT !!!!!!!!!
+		  CUIDADO PARA NÃO CORROMPER O REGEDIT !!!!!!!!!
+		  
+		  Também comentar :
+		  	) 
+		  	REM else (
+			REM     echo MSGBOX "Esta versão de Windows ainda não está suportada ! Favor contatar o  Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
+    		REM 	call %temp%\TEMPmessage.vbs
+			REM     del %temp%\TEMPmessage.vbs /f /q
+			REM     exit
+			REM )
+			
+		  Observação ; depois de "REM" deve ter pelo menos UM espaço em branco !!!!!
+
+		- Verificar a variável "set drive=C:"  ou "set drive=D:" no início do .bat
+		  Verificar se tem espaço livre de 1 GB nos discos C:/, D:/, etc. :
+			- 303 MB : 
+				- C:\Arquivos de Programas PC\*
+				- C:\Program Files\Java\jre1.8.0_92\*
+				- C:\temp\Instalar Integração Fornecedores - Portal Cronos.exe
+			- 700 MB :
+				- C:\temp\PortalCronos\XML\*.xml  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
+
+		  
+		- Verificar se precisa descomentar um dos seguintes skips no início do .bat :
+						REM goto SKIP_JRE
+						REM goto SKIP_JRE_TEMPDIR
+						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
+						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
+		  e verificar eventuais outros goto´s 
+ 
+    5. Regerar o instalador, veja o "Manual para a geração do instalador Setup.exe" abaixo.
+    
+    6. O instalador pode ser copiado para qualquer diretório no servidor do fornecedor.
+       Por padrão copiar para C:\temp\.
+     
+    7. Antes da instalação :
+       primeiro verificar : 
+       	  1. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
+     	  2. se tem outro caminho de java no PATH e se java.exe se encontra em um dos caminhos do PATH, 
+     	     por exemplo em C:\WINDOWS\System\
+     	  3. No caso que já tinha um C:\ProgramData\Oracle\Java\javapath\ no servidor, fazer backup dos atalhos atuais 
+     	     antes da instalação.
+
+       No caso que no servidor do fornecedor já tem outra versão mais antiga do JRE instalada na mesma maquina, 
+       depois da instalação remover C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH, se não tinha antes. 
+       Isso é para evitar que programas de terceiros param de funcionar corretamente.
+
+       No caso que no servidor do fornecedor já tinha outra versão mais nova do JRE instalada na mesma maquina, 
+       após a instalação voltar os atalhos em C:\ProgramData\Oracle\Java\javapath\ para como estava antes.
+
+    8. Após a instalação :
+       no caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
+          [HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92\MSI]
+			   "JAVAUPDATE"="0"
+			   "AUTOUPDATECHECK"="0"
+           
+       Isso é por causa do seguinte bug : 
+       ----------------------------------
+       O regedit.exe e o jre-8u92-windows-x64.exe são incompatíveis em relação a : 
+	 	HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft\Java Runtime Environment\1.8.0_92\MSI
+	      e 
+        HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92\MSI
+
+		=> Bug da oracle no instalador do jre.64.exe : 
+		   está criando as chaves no lugar errado, no lugar do 32 bit 
+		=> O regedit.exe 64 bits automaticamente substitui \SOFTWARE\ por \SOFTWARE\Wow6432Node\
+       
+       
+    9. No caso que a versão de Windows ainda não está homologada,
+       após a instalação, fazer um export de teste das chaves do regedit no servidor
+	   e comparar com os arquivos .reg no instalador.
+	   No caso, criar um novo arquivo DeshabilitarJavaUpdates.xxxxxxxxxxx.reg, 
+	   e adaptar Primeira_Instalacao_Versao_Windows.bat.
+	   Depois disso executar "regedit.exe /s %arquivoRegedit%" em um arquivo .bat separado.
+	   
+   10. No caso que a versão de Windows ainda não está homologada,
+       verificar todas as propriedades do task criado no Task Scheduler, 
+       e, no caso, copiar Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml 
+       para outro arquivo novo, e adaptar Primeira_Instalacao_Versao_Windows.bat. 
+       No outro caso que funcionou, adicionar o novo SO no nome do arquivo e adaptar Primeira_Instalacao_Versao_Windows.bat.
+
+   11. No final, no caso que a versão de Windows ainda não estava homologada,
+       descomentar "REM regedit.exe /s %arquivoRegedit%"
+	   no arquivo Primeira_Instalacao_Versao_Windows.bat.
+      
+	   Também descomentar :
+		  	) else (
+			    echo MSGBOX "Esta versão de Windows ainda não está suportada ! Favor contatar o  Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
+    			call %temp%\TEMPmessage.vbs
+			    del %temp%\TEMPmessage.vbs /f /q
+			    exit
+			)
+
+Manual para a geração do instalador Setup.exe:
+==============================================
+
+1. Navegar na máquina de desenvolvimento para o diretório 
+   C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\.
+    
+2. Deletar ou renomear o arquivo Instalar Integração Fornecedores - Portal Cronos.exe.
+     
+3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
+   que cria /"Arquivos de Programas PC"/* no servidor do fornecedor :
+      - Selecionar todos os arquivos no raiz do diretório 
+        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
+            - selecionar apenas UM dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
+            - selecionar apenas UM dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
+        e selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.                       
+      - WinRAR                   : Mudar .rar para .zip
+      - WinRAR                   : marcar checkbox SFX
+      - Nome                     : Instalar Integração Fornecedores - Portal Cronos.exe
+
+   Aba "Avancado" > botão "Opções Avançadas do SFX" : 
+      - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
+      - Marcar                   : Absolute path
+      - Deixar marcado           : Salvar e restaurar caminho
+      - Executar após a extração : Primeira_Instalacao_Versao_Windows.bat 
+                                   (pelo menos o Winrar 4.01 tem este After Extraction Trigger)
+      - Sub-aba "Avançado"       : Marcar checkbox "Pedido de acesso administrativo"
+      - Sub-aba "Métodos"        : Selecionar "Modo silencioso" > "Ocultar tudo"     
+      - Sub-aba "Atualizar"      : Marcar "substituir todos os arquivos"
+      - Sub-aba "Geral"          : Botão "Salvar configurações SFX" 
+                                   Apenas na primeira vez. 
+                                   Na segunda vez apenas abrir Aba "Avancado" > botão "Opções Avançadas do SFX" e clicar OK.
+
+
+IMPORTANTE !!!!!!!!
+===================
+Ao alterar o arquivo .bat do job, editar com o editor de DOS 
+e não com o Notepad para evitar problemas com cedilhas e acentos !
+ 
+
+ 

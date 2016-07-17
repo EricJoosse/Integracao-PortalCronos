@@ -1,0 +1,29 @@
+
+REM Limpar CLASSPATH :
+?????
+
+export PATH = ${PATH}:/opt/Java/JDK1.8.0_92/bin
+
+export CLASSPATH= ${CLASSPATH}:/opt/Java/jre1.8.0_92/lib/rt.jar
+
+export CLASSPATH= ${CLASSPATH}:/opt/PortalCronos/bin/lib/jersey-bundle-1.12.jar
+export CLASSPATH= ${CLASSPATH}:/opt/PortalCronos/bin/lib/jersey-core-1.12.jar
+export CLASSPATH= ${CLASSPATH}:/opt/PortalCronos/bin/lib/jersey-multipart-1.12.jar
+export CLASSPATH= ${CLASSPATH}:/opt/PortalCronos/bin/lib/jdbc-oracle.jar
+export CLASSPATH= ${CLASSPATH}:/opt/PortalCronos/bin/lib/jaybird-2.2.10.jar
+export CLASSPATH= ${CLASSPATH}:. ??????
+
+type PATH
+type CLASSPATH
+
+cd /opt/PortalCronos/bin
+
+REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
+REM e o caminho do outro JRE vem primeiro no PATH de DOS :
+
+REM /opt/Java/jre1.8.0_92/bin/javac.exe pcronos.integracao.fornecedor.TestesComponentes.java
+REM /opt/Java/jre1.8.0_92/bin/java.exe pcronos.integracao.fornecedor.TestesComponentes  (java pcronos.integracao.fornecedor.TestesComponentes.class dá erro !)
+
+/opt/Java/jre1.8.0_92/bin/javac.exe pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta.java
+/opt/Java/jre1.8.0_92/bin/java.exe pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta
+

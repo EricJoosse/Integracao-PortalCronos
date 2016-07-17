@@ -1,0 +1,77 @@
+# Configurações Integração Portal Cronos - Fornecedores
+
+# =========================================================================================================
+######### Identificação da empresa fornecedora usada na integração com o Portal Cronos :
+
+CnpjFornecedor                    = 07534303000133
+
+NomeFantasiaFornecedor            = Comal
+
+# =========================================================================================================
+######### Sistema do fornecedor que integra com o Portal Cronos :
+
+SiglaSistema                      = WinThor
+#                                          # Opções: SAP, APS, WinThor
+
+VerificarEstoque                  = true
+#                                          # Opções: true, false
+
+CriterioVerificacaoEstoque        = QtdEstoqueMaiorZero
+#                                          # Opções: QtdEstoqueMaiorZero, QtdEstoqueMaiorOuIgualQtdSolicitada
+
+ObsOfertasPadraoSeNaoTemNoSistema = Texto padrão OPCIONAL do fornecedor para todas as cotações de todos os compradores.
+#                                          # EXEMPLO: Entrega apenas de Segunda-feira até Sexta-feira
+#                                          
+#                                          # INSTRUÇÕES:
+#                                             - APAGAR ESTE TEXTO OU SUBSTITUIR
+#                                             - ESTE TEXTO SÓ PODE CONTER UMA ÚNICA LINHA (MAX. 500 CARACTERS)
+#                                             - APENAS PREENCHER AQUI SE NÃO EXISTE NENHUM LUGAR NO SISTEMA DO FORNECEDOR PARA ISSO
+
+# =========================================================================================================
+######### Base de Dados do sistema do fornecedor :
+
+TipoBancoDeDados                  = Oracle
+#                                          # Opções: SQL Server, Access, MySQL, Firebird, Oracle
+
+EnderecoIpServidorBancoDeDados    = localhost
+#                                          # Exemplos: localhost, 11.22.333.4
+
+InstanciaBancoDeDados             = teste
+#                                          # Opções: 
+#                                              - no caso de SQL Server: o nome do "Database",
+#                                              - no caso de Firebird  : o caminho completo + nome do arquivo.FDB, exemplo: /home/usuario/banco.fdb (Linux) ou C:/diretorio/NomeBanco.FDB (Windows),
+#                                              - no caso de Access    : o caminho completo + nome do arquivo.mdb, exemplo: C:/diretorio/NomeBanco.mdb,
+#                                              - no caso de Oracle    : o "SID" da instância 
+
+PortaServidorBancoDeDados         = 1521
+UsuarioBancoDeDados               = comal
+SenhaBancoDeDados                 = comal
+
+# =========================================================================================================
+######### Chamada dos web services do Portal Cronos :
+
+EnderecoBaseWebServiceHomologacao = http://52.10.223.6/v2/api/
+
+EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/
+
+WindowsServiceEmProducao          = false               
+#                                          # Opções: true, false
+
+UsuarioWebService                 = ws-comal
+
+SenhaWebService                   = 123456
+
+# =========================================================================================================
+######### Configurações diversas :
+
+DiretorioArquivosXml              = C:/temp/PortalCronos/XML
+#                                          # Opções PADRÃO : 
+#                                              - no caso de Windows : C:/temp/PortalCronos/XML
+#                                              - no caso de Linux   : /var/PortalCronos/XML
+
+QtdDiasArquivosXmlGuardados       = 365
+#                                          # É recomendavel guardar os arquivos alguns meses para poder   
+#                                          # analisar as causas de eventuais problemas.
+
+Debugar                           = false
+#                                          # Opções: true, false. Uso exclusivo pelo Suporte do Portal Cronos.
