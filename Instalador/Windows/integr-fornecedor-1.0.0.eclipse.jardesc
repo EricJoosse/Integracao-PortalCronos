@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
     <jar path="Integração Fornecedor - Portal Cronos/Instalador/Windows/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/integr-fornecedor-1.0.0.jar"/>
-    <options buildIfNeeded="true" compress="true" descriptionLocation="/Integração Fornecedor - Portal Cronos/Instalador/Windows/integr-fornecedor-1.0.0.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/Integração Fornecedor - Portal Cronos/Instalador/Windows/integr-fornecedor-1.0.0.eclipse.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
     <manifest generateManifest="false" manifestLocation="/Integração Fornecedor - Portal Cronos/Instalador/Windows/TemplateManifest.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
