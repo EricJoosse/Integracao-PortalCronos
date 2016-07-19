@@ -9,9 +9,9 @@ A integração tem as seguintes duas partes :
    Esta parte se encontra no BitBucket.
    
 Os seguintes sistemas já foram integrados com o Portal Cronos : 
-	* APS	     (ofertas)
-	* WinThor   (ofertas)
-	* IFS       (requisições)
-	* 3LM       (requisições, ordens de compras) 
-	* MVarandas (requisições)
+* APS	     (ofertas)
+* WinThor   (ofertas)
+* IFS       (requisições)
+* 3LM       (requisições, ordens de compras) 
+* MVarandas (requisições)
 
