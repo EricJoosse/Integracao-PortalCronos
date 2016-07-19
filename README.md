@@ -1,4 +1,4 @@
-# Integrador de Sistemas de Fornecedores com o Portal Cronos
+# Integrador de Sistemas com o Portal Cronos para Fornecedores
 
 Integração de ofertas, ordens de compras, etc.
 
