@@ -2,7 +2,7 @@
 
 O Portal Cronos é um sistema web para automatizar cotações, ofertas, e ordens de compras.
 
-O Portal oferece integração automatizada com qualquer outro sistema de cotações, ofertas, ordens de compras, etc.
+O Portal oferece integração automatizada de cotações, ofertas, ordens de compras, etc, com qualquer outro sistema.
 
 __A integração tem as seguintes duas partes :__
 
