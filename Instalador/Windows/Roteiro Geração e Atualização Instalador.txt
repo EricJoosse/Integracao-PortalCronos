@@ -1,5 +1,5 @@
-Roteiro + checklist ANTES da instalação em um fornecedor novo 
-=============================================================
+Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
+==================================================================================================
     1. Atualizar o único /conf/.properties file no diretório da instalação.
 
 	2. Conectar no Team Viewer
