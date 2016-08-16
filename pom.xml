@@ -60,6 +60,7 @@
 
     <plugins>
 
+      <!-- O Integrador de Sistemas com o Portal Cronos só compila com compatibilidade configurada para JDK 1.7 ou mais : -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.5.1</version>
