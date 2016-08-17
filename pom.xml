@@ -105,6 +105,9 @@
                    <!--  A versão 3.0.2 gera rt.jar na posição errada  -->
 		  <configuration>
 		    <archive>
+		      
+		      <!-- Não gerar META-INF/maven/${groupId}/${artifactId}/pom.xml e pom.properties : -->
+		      <addMavenDescriptor>false</addMavenDescriptor>
 		    
 		      <manifest>
 		        <packageName>pcronos.integracao.fornecedor</packageName>
