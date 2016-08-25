@@ -64,13 +64,14 @@ import org.firebirdsql.jdbc.FBDriver   ;
 
 import java.io.FilePermission;
 import java.security.AccessController;
-
+ 
 
 final class IntegracaoFornecedorCompleta {
-
+  
 						     // Relative paths (those without a leading '/') mean that the resource 
 						     // will be searched relative to the directory which represents the package 
-						     // the class is in.
+						     // the class is in. 
+                         	// (Quer dizer: in a stand-alone environment.  "Run" in Eclipse searches however relative to the project root). 
 						     // Using an absolute path (one that starts with '/') means that the current 
 						     // package is ignored.
   public static final String NOME_ARQUIVO_PROPERTIES = "conf/Integração Fornecedor - Portal Cronos.properties";  

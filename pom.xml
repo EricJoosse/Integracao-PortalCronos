@@ -56,7 +56,7 @@
   </dependencies>
   
   <build>
-    <sourceDirectory>${project.basedir}</sourceDirectory>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
 
     <plugins>
 
@@ -74,7 +74,7 @@
 <!-- As seguintes 3 seções são necessárias para automatizar o deploy do nosso standalone Java Application (sem integração com Apache, Tomcat, etc) : -->
 <!-- Veja o tutorial excelente no link http://www.javacreed.com/how-to-use-maven-with-an-application/) -->
 
-<!-- 1. Copiar dependent jars : -->
+<!-- 1. Copiar dependent jars para o Instalador, subdiretório /lib: -->
 		<plugin>
 		  <groupId>org.apache.maven.plugins</groupId>
 		  <artifactId>maven-dependency-plugin</artifactId>
@@ -98,7 +98,7 @@
 		  </executions>
 		</plugin>
 
-<!-- 2. Adicionar dependent jars no Class-Path entry no Manifest file : -->
+<!-- 2.  Gerar o arquivo .jar no Instalador e adicionar dependent jars no Class-Path entry no Manifest file : -->
 		<plugin>
 		  <groupId>org.apache.maven.plugins</groupId>
 		  <artifactId>maven-jar-plugin</artifactId>
