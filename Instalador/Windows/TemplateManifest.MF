@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Class-Path: file:///C:/Program%20Files/Java/jre1.8.0_92/lib/rt.jar lib/jersey-bundle-1.12.jar lib/jersey-core-1.12.jar lib/jersey-multipart-1.12.jar lib/jdbc-oracle.jar lib/jaybird-full-2.2.10.jar .
+Class-Path: lib/jersey-bundle-1.12.jar lib/jersey-core-1.12.jar lib/jersey-multipart-1.12.jar lib/jdbc-oracle.jar lib/jaybird-full-2.2.10.jar .
 Created-By: eric.jo@bol.com.br (Portal Cronos)
 
 Name: integr-fornecedor-1.0.0.jar
