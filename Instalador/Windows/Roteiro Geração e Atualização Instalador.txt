@@ -1,6 +1,7 @@
 Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
 ==================================================================================================
     1. Atualizar o único /conf/.properties file no diretório da instalação.
+        Executar Maven para atualizar integr-fornecedor-x.y.z.jar.
 
 	2. Conectar no Team Viewer
 	
@@ -30,7 +31,7 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 			
 		  Observação ; depois de "REM" deve ter pelo menos UM espaço em branco !!!!!
 
-		- Verificar a variável "set drive=C:"  ou "set drive=D:" no início do .bat
+		- Verificar a variável "set drive=C:"  ou "set drive=D:" no início de Primeira_Instalacao_Versao_Windows.bat 
 		  Verificar se tem espaço livre de 1 GB nos discos C:/, D:/, etc. :
 			- 303 MB : 
 				- C:\Arquivos de Programas PC\*
@@ -40,7 +41,7 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 				- C:\temp\PortalCronos\XML\*.xml  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
 
 		  
-		- Verificar se precisa descomentar um dos seguintes skips no início do .bat :
+		- Verificar se precisa descomentar um dos seguintes skips no início de Primeira_Instalacao_Versao_Windows.bat :
 						REM goto SKIP_JRE
 						REM goto SKIP_JRE_TEMPDIR
 						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
@@ -113,23 +114,25 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 Manual para a geração do instalador Setup.exe:
 ==============================================
 
-1. Navegar na máquina de desenvolvimento para o diretório 
-   C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\.
+1. No Windows Explorer (não no Eclipse) navegar na máquina de desenvolvimento para o diretório 
+   C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
+   e ordenar os arquivos por nome alfabético.
     
-2. Deletar ou renomear o arquivo Instalar Integração Fornecedores - Portal Cronos.exe.
+2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.exe".
      
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
    que cria /"Arquivos de Programas PC"/* no servidor do fornecedor :
-      - Selecionar todos os arquivos no raiz do diretório 
-        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
+      - Selecionar todos os arquivos e subdir no raiz do diretório navegado no Windows Explorer :
             - selecionar apenas UM dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
             - selecionar apenas UM dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
-        e selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.                       
+            - selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.
+            - NÃO selecionar    Instalador*.exe                   
       - WinRAR                   : Mudar .rar para .zip
+      - WinRAR                   : Método de compressão : Ótimo
       - WinRAR                   : marcar checkbox SFX
-      - Nome                     : Instalar Integração Fornecedores - Portal Cronos.exe
+      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.exe
 
-   Aba "Avancado" > botão "Opções Avançadas do SFX" : 
+   Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
       - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
       - Marcar                   : Absolute path
       - Deixar marcado           : Salvar e restaurar caminho
@@ -140,7 +143,7 @@ Manual para a geração do instalador Setup.exe:
       - Sub-aba "Atualizar"      : Marcar "substituir todos os arquivos"
       - Sub-aba "Geral"          : Botão "Salvar configurações SFX" 
                                    Apenas na primeira vez. 
-                                   Na segunda vez apenas abrir Aba "Avancado" > botão "Opções Avançadas do SFX" e clicar OK.
+                                   Na segunda vez apenas abrir Aba "Avancado" > botão "Opções SFX..." e clicar OK.
 
 
 IMPORTANTE !!!!!!!!
