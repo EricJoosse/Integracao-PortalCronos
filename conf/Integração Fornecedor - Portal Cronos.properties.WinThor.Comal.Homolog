@@ -28,6 +28,13 @@ ObsOfertasPadraoSeNaoTemNoSistema = Texto padrão OPCIONAL do fornecedor para tod
 #                                             - APENAS PREENCHER AQUI SE NÃO EXISTE NENHUM LUGAR NO SISTEMA DO FORNECEDOR PARA ISSO
 
 # =========================================================================================================
+######### WinThor: 
+######### apenas usar esta seção no caso que o sistema do fornecedor que integra com o Portal Cronos for o WinThor :
+
+UsarValorMinimoSistemaFornecedor  = true
+#                                          # Opções: true, false
+ 
+# =========================================================================================================
 ######### Base de Dados do sistema do fornecedor :
 
 TipoBancoDeDados                  = Oracle

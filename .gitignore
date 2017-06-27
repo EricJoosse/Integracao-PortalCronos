@@ -8,7 +8,6 @@
 .mtj.tmp/
 
 # Package Files :
-*.jar
 *.war
 *.ear
 
@@ -18,3 +17,6 @@ hs_err_pid*
 # Maven (com Eclipse) :
 target/*
 .settings/*
+/res.out
+/Chamada_de_Localizar_String.bat
+/Localizar_String.bat
