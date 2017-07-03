@@ -58,7 +58,7 @@ SenhaBancoDeDados                 = masterkey
 # =========================================================================================================
 ######### Chamada dos web services do Portal Cronos :
 
-EnderecoBaseWebServiceHomologacao = http://40.76.2.90/v2/api/
+EnderecoBaseWebServiceHomologacao = http://52.168.77.56/v2/api/
 #                                          # IP anterior : 52.10.223.6
 
 EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/
