@@ -1,12 +1,18 @@
 Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
 ==================================================================================================
-    1. Atualizar o único /conf/.properties file no diretório da instalação.
+    1. Atualizar o único /conf/.properties file no diretório da instalação 
+       C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
         Executar Maven para atualizar integr-fornecedor-x.y.z.jar.
 
 	2. Conectar no Team Viewer
 	
-	3. Verificar se o usuário logado é administrador ou administrator, 
-	   local ou da rede (como administrador da rede ainda não foi testado).
+	3. a. Verificar se o usuário logado é administrador ou administrator, 
+	      local ou da rede (como administrador da rede ainda não foi testado).
+	      (Formaggio: user "techcorp")
+	      
+	   b. Nas opções do Windows Explorer marcar "Exibir Arquivos do Sistema e Arquivos Ocultos". 
+	      Fechar e re-abrir o Windows Explorer. Senão, vai pensar indevidamente que não existe o dir 
+	      C:\ProgramData\ por exemplo............. 
 	
 	4. No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
 		- Verificar a versão de Windows no servidor do fornecedor 
@@ -23,7 +29,7 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 		  Também comentar :
 		  	) 
 		  	REM else (
-			REM     echo MSGBOX "Esta versão de Windows ainda não está suportada ! Favor contatar o  Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
+			REM     echo MSGBOX "Esta versão de Windows ainda não está suportada ! Favor entrar em contato com o Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
     		REM 	call %temp%\TEMPmessage.vbs
 			REM     del %temp%\TEMPmessage.vbs /f /q
 			REM     exit
@@ -52,14 +58,49 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
     
     6. O instalador pode ser copiado para qualquer diretório no servidor do fornecedor.
        Por padrão copiar para C:\temp\.
-     
+    
     7. Antes da instalação :
-       primeiro verificar : 
+
+	    Formaggio: antes:                                       H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
+    					    %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
+
+					depois da instalação: C:\ProgramData\Oracle\Java\javapath;H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
+					        %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
+					        
+					depois da desinstalação:                    H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
+					        %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
+					     
+					     
+					     
+	    JR Emb: antes:                                       H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
+					     C:\oracle\product\11.2.0\client_1;C:\oracle\product\11.2.0\client_1\bin;
+					     C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;
+					     C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\iCLS Client\;
+					     C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;
+					     C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;
+					     C:\ProgramData\Oracle\Java\javapath;
+					     C:\Users\Administrador\AppData\Local\Microsoft\WindowsApps;
+					     C:\Windows;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
+					     c:\InstantClient;C:\instantclient
+					     
+					        
+          0. Primeiro fazer backup:
+                (i)  do variável de ambiente do sistema: 
+                (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
+                
+             e verificar :
+              
        	  1. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
+       	       (i)   no variável de ambiente do usuário administrador
+       	       (ii)  no variável de ambiente do sistema
      	  2. se tem outro caminho de java no PATH e se java.exe se encontra em um dos caminhos do PATH, 
      	     por exemplo em C:\WINDOWS\System\
+       	       (i)   no variável de ambiente do usuário administrador
+       	       (ii)  no variável de ambiente do sistema
      	  3. No caso que já tinha um C:\ProgramData\Oracle\Java\javapath\ no servidor, fazer backup dos atalhos atuais 
      	     antes da instalação.
+       	       (i)   do variável de ambiente do usuário administrador
+       	       (ii)  do variável de ambiente do sistema
 
        No caso que no servidor do fornecedor já tem outra versão mais antiga do JRE instalada na mesma maquina, 
        depois da instalação remover C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH, se não tinha antes. 
@@ -111,6 +152,8 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 			    exit
 			)
 
+   12. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
+    
 Manual para a geração do instalador Setup.exe:
 ==============================================
 
