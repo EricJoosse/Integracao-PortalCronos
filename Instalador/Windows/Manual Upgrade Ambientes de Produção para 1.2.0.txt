@@ -1,0 +1,27 @@
+Manual Upgrade dos Ambientes de Produção de 1.1.0 para 1.2.0
+============================================================
+
+1. No arquivo .properties susbtituir:
+
+EnderecoBaseWebServiceHomologacao = http://52.168.77.56/v2/api/
+#                                          # IP anterior : 52.10.223.6
+
+EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/
+
+WindowsServiceEmProducao          = false
+#                                          # Opções: true, false
+
+  
+  por:
+  
+EnderecoBaseWebServiceTeste       = http://52.168.77.56/v2/api/
+EnderecoBaseWebServiceHomologacao = http://www.portalcronos.com.br:81/v2/api/
+EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/
+
+TipoAmbiente                      = H
+#                                          # Opções: P (= Produção), H (= Homologação), T (= Teste)
+
+  
+2. Copiar arquivo novo integr-fornecedor-1.2.0.jar
+ 
+3. Atualizar Job15a15minOfertamentoJava_Windows.bat

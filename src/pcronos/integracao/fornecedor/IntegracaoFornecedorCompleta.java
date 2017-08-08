@@ -99,7 +99,7 @@ final class IntegracaoFornecedorCompleta {
   public static String       instanciaBancoDeDados;
   public static String       cnpjFornecedor;
   public static String       nomeFantasiaFornecedor;
-  public static boolean      isWindowsServiceEmProducao;
+  public static String       tipoAmbiente;
   public static String       enderecoBaseWebService;
   public static String       diretorioArquivosXml;
   public static String       ObsOfertasPadraoSeNaoTemNoSistema;
@@ -142,13 +142,15 @@ final class IntegracaoFornecedorCompleta {
       instanciaBancoDeDados             = config.getProperty("InstanciaBancoDeDados");
       cnpjFornecedor                    = config.getProperty("CnpjFornecedor");
       nomeFantasiaFornecedor            = config.getProperty("NomeFantasiaFornecedor");
-      isWindowsServiceEmProducao        = Boolean.parseBoolean(config.getProperty("WindowsServiceEmProducao"));
+      tipoAmbiente                      = config.getProperty("TipoAmbiente");
       toDebugar                         = Boolean.parseBoolean(config.getProperty("Debugar"));
 
-      if (isWindowsServiceEmProducao)
+      if (tipoAmbiente.equals("P"))
         enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceProducao");
-      else
-        enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceHomologacao");
+      else if (tipoAmbiente.equals("H"))
+          enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceHomologacao");
+      else if (tipoAmbiente.equals("T"))
+          enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceTeste");
 
       diretorioArquivosXml              = config.getProperty("DiretorioArquivosXml");
       
@@ -197,7 +199,7 @@ final class IntegracaoFornecedorCompleta {
 	  debugar("portaServidorBancoDeDados      = " + portaServidorBancoDeDados);
 	  debugar("instanciaBancoDeDados          = " + instanciaBancoDeDados);
 	  debugar("cnpjFornecedor                 = " + cnpjFornecedor);
-	  debugar("isWindowsServiceEmProducao     = " + isWindowsServiceEmProducao);
+	  debugar("tipoAmbiente                   = " + tipoAmbiente);
 	  debugar("toDebugar                      = " + toDebugar);
 	  debugar("enderecoBaseWebService         = " + enderecoBaseWebService);
 	  debugar("ObsOfertasPadraoSeNaoTemNoSistema = " + ObsOfertasPadraoSeNaoTemNoSistema);

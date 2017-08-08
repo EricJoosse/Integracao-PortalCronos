@@ -1,0 +1,5 @@
+Fornecedor		Sistema		Versão integr-fornecedor-x.y.z.jar
+----------		-------     ----------------------------------
+Formaggio		APS			1.1.0
+Maritimos		WinThor		1.1.0
+JR Embalagem	WinThor		1.1.0
