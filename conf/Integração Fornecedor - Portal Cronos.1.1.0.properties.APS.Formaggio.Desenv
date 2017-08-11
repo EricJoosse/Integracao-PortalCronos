@@ -40,7 +40,7 @@ UsarValorMinimoSistemaFornecedor  = true
 TipoBancoDeDados                  = Firebird
 #                                          # Opções: SQL Server, Access, MySQL, Firebird, Oracle
 
-EnderecoIpServidorBancoDeDados    = 52.168.77.56
+EnderecoIpServidorBancoDeDados    = 52.170.47.238
 #                                          # Exemplos: localhost, 11.22.333.4;  IP anterior : 52.10.223.6
 
 InstanciaBancoDeDados             = C:/Banco_Firebird/FORMAGGIO.FDB 
@@ -58,7 +58,7 @@ SenhaBancoDeDados                 = masterkey
 # =========================================================================================================
 ######### Chamada dos web services do Portal Cronos :
 
-EnderecoBaseWebServiceHomologacao = http://52.168.77.56/v2/api/
+EnderecoBaseWebServiceHomologacao = http://52.170.47.238/v2/api/
 #                                          # IP anterior : 52.10.223.6
 
 EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/

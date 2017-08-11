@@ -3,7 +3,7 @@ Manual Upgrade dos Ambientes de Produção de 1.1.0 para 1.2.0
 
 1. No arquivo .properties susbtituir:
 
-EnderecoBaseWebServiceHomologacao = http://52.168.77.56/v2/api/
+EnderecoBaseWebServiceHomologacao = http://52.170.47.238/v2/api/
 #                                          # IP anterior : 52.10.223.6
 
 EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/
@@ -14,7 +14,7 @@ WindowsServiceEmProducao          = false
   
   por:
   
-EnderecoBaseWebServiceTeste       = http://52.168.77.56/v2/api/
+EnderecoBaseWebServiceTeste       = http://52.170.47.238/v2/api/
 EnderecoBaseWebServiceHomologacao = http://www.portalcronos.com.br:81/v2/api/
 EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/
 
