@@ -17,6 +17,8 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 	4. No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
 		- Verificar a versão de Windows no servidor do fornecedor 
 		  e descomentar a variável "osVersion" correta no início do .bat. 
+		  CMD: winver
+		  ou:  systeminfo | findstr OS
 		  
 		- Verificar a variável "tipoOS=32" ou "tipoOS=64" no .bat
 		
@@ -83,9 +85,15 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 					     C:\Windows;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
 					     c:\InstantClient;C:\instantclient
 					     
-					        
+       Prolac antes: 	C:\ProgramData\Oracle\Java\javapath;C:\oracle\product\10.2.0\client_1\bin;
+       					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
+       					%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;
+       					C:\Program Files (x86)\Skype\Phone\;C:\Program Files\SafeNet\Authentication\SAC\x64;
+       					C:\Program Files\SafeNet\Authentication\SAC\x32
+       
+       					        
           0. Primeiro fazer backup:
-                (i)  do variável de ambiente do sistema: 
+                (i)  do variável de ambiente do sistema "Path": 
                 (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
                 
              e verificar :
@@ -109,8 +117,12 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
        No caso que no servidor do fornecedor já tinha outra versão mais nova do JRE instalada na mesma maquina, 
        após a instalação voltar os atalhos em C:\ProgramData\Oracle\Java\javapath\ para como estava antes.
 
+ 
     8. Após a instalação :
-       no caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
+    
+    8a. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
+     
+    8b. No caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
           [HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92\MSI]
 			   "JAVAUPDATE"="0"
 			   "AUTOUPDATECHECK"="0"
@@ -153,6 +165,9 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 			)
 
    12. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
+   
+   13. Enviar Email/ Skype: 
+       Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de confiiguração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
 Manual para a geração do instalador Setup.exe:
 ==============================================
