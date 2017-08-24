@@ -189,6 +189,7 @@ final class IntegracaoFornecedorCompleta {
 
       ObsOfertasPadraoSeNaoTemNoSistema = config.getProperty("ObsOfertasPadraoSeNaoTemNoSistema");
 
+	  debugar("sun.boot.class.path            = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
 	  debugar("toVerificarEstoque             = " + toVerificarEstoque);
 	  debugar("criterioVerificacaoEstoque     = " + criterioVerificacaoEstoque);
 	  debugar("username                       = " + username);
