@@ -65,8 +65,17 @@ import org.firebirdsql.jdbc.FBDriver   ;
 import java.io.FilePermission;
 import java.security.AccessController;
  
-
-final class IntegracaoFornecedorCompleta {
+/** 
+ * 
+ * @author Eric Joosse - Cronos Tecnology <p>
+ * 
+ *Este programa das ofertas automáticas: <br>
+ *  1. recebe um único arquivo XML com todas as cotações não ofertadas juntas no mesmo arquivo XML das cotações <br>
+ *  2. faz um "loop" sobre todas as cotações e dentro do loop envia os arquivos XML das ofertas um por um de volta <br> &nbsp;&nbsp;
+ *     para o Portal Cronos, um arquivo XML para cada cotação 
+ * 
+ */
+public final class IntegracaoFornecedorCompleta {
 
    public static final String NOME_ARQUIVO_PROPERTIES = "conf/Integração Fornecedor - Portal Cronos.properties";
                               // Using an absolute path (one that starts WITH '/') means that the current 
@@ -415,7 +424,7 @@ final class IntegracaoFornecedorCompleta {
   }
 
 
-  private static String printStackTraceToString(Exception ex)
+  public static String printStackTraceToString(Exception ex)
   {
 
    // Writer writer = new StringWriter();
@@ -534,7 +543,7 @@ final class IntegracaoFornecedorCompleta {
 	//  Ofertas
 	//
 	//  =====================================================================================
-	
+		    
 	    docOfertas = docBuilder.newDocument();
 	
 	    elmErros = docOfertas.createElement("Erros");
@@ -1159,7 +1168,7 @@ final class IntegracaoFornecedorCompleta {
 
 
 
-  public static void downloadCotacoes(String url, String cnpjFornecedor, String username, String senha)   
+  private static void downloadCotacoes(String url, String cnpjFornecedor, String username, String senha)   
   {
  
     try 
