@@ -97,7 +97,7 @@ public final class IntegracaoFornecedorCompleta {
   public static String       siglaSistema;
   public static boolean      toVerificarEstoque;
   public static String       criterioVerificacaoEstoque;
-  public static boolean       toUsarValorMinimoSistemaFornecedor;
+  public static boolean      toUsarValorMinimoSistemaFornecedor;
   public static String       username;
   public static String       senha;
   public static String       tipoBancoDeDados;
@@ -132,36 +132,54 @@ public final class IntegracaoFornecedorCompleta {
       Properties config = new Properties();
       config.load(new FileInputStream(NOME_ARQUIVO_PROPERTIES));
 
-      siglaSistema                      = config.getProperty("SiglaSistema");
-      toVerificarEstoque                = Boolean.parseBoolean(config.getProperty("VerificarEstoque"));
-      criterioVerificacaoEstoque        = config.getProperty("CriterioVerificacaoEstoque");
-      
-      if (config.getProperty("UsarValorMinimoSistemaFornecedor") == null) // Se esta chave não existir no *.properties
-          toUsarValorMinimoSistemaFornecedor = true;
-      else 
-          toUsarValorMinimoSistemaFornecedor = Boolean.parseBoolean(config.getProperty("UsarValorMinimoSistemaFornecedor"));
+      siglaSistema  = config.getProperty("SiglaSistema");
 
+      if ( !( siglaSistema.equals("SAP") || siglaSistema.equals("APS") || siglaSistema.equals("WinThor") ) ) {
+    	  String msgErro = "O sistema " + siglaSistema + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
+    	  throw new Exception(msgErro);
+      }
+      
+      if (!siglaSistema.equals("SAP"))
+	  {
+         toVerificarEstoque                = Boolean.parseBoolean(config.getProperty("VerificarEstoque"));
+         criterioVerificacaoEstoque        = config.getProperty("CriterioVerificacaoEstoque");
+         ObsOfertasPadraoSeNaoTemNoSistema = config.getProperty("ObsOfertasPadraoSeNaoTemNoSistema");
+         tipoBancoDeDados                  = config.getProperty("TipoBancoDeDados");
+         
+         if ( !( tipoBancoDeDados.equals("Firebird") || tipoBancoDeDados.equals("Oracle") ) ) {
+       	  String msgErro = "O banco de dados " + tipoBancoDeDados + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
+       	  throw new Exception(msgErro);
+         }
+         usernameBancoDeDados              = config.getProperty("UsuarioBancoDeDados");
+         senhaBancoDeDados                 = config.getProperty("SenhaBancoDeDados");
+         enderecoIpServidorBancoDeDados    = config.getProperty("EnderecoIpServidorBancoDeDados");
+         portaServidorBancoDeDados         = config.getProperty("PortaServidorBancoDeDados");
+         instanciaBancoDeDados             = config.getProperty("InstanciaBancoDeDados");
+         
+         if (config.getProperty("UsarValorMinimoSistemaFornecedor") == null) // Se esta chave não existir no *.properties
+             toUsarValorMinimoSistemaFornecedor = true;
+         else 
+             toUsarValorMinimoSistemaFornecedor = Boolean.parseBoolean(config.getProperty("UsarValorMinimoSistemaFornecedor"));
+	  }
       username                          = config.getProperty("UsuarioWebService");
       senha                             = config.getProperty("SenhaWebService");
-      tipoBancoDeDados                  = config.getProperty("TipoBancoDeDados");
-      usernameBancoDeDados              = config.getProperty("UsuarioBancoDeDados");
-      senhaBancoDeDados                 = config.getProperty("SenhaBancoDeDados");
-      enderecoIpServidorBancoDeDados    = config.getProperty("EnderecoIpServidorBancoDeDados");
-      portaServidorBancoDeDados         = config.getProperty("PortaServidorBancoDeDados");
-      instanciaBancoDeDados             = config.getProperty("InstanciaBancoDeDados");
       cnpjFornecedor                    = config.getProperty("CnpjFornecedor");
       nomeFantasiaFornecedor            = config.getProperty("NomeFantasiaFornecedor");
-      tipoAmbiente                      = config.getProperty("TipoAmbiente");
       toDebugar                         = Boolean.parseBoolean(config.getProperty("Debugar"));
+      tipoAmbiente                      = config.getProperty("TipoAmbiente");
 
       if (tipoAmbiente.equals("P"))
-        enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceProducao");
+          enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceProducao");
       else if (tipoAmbiente.equals("H"))
           enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceHomologacao");
       else if (tipoAmbiente.equals("T"))
           enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceTeste");
-
-      diretorioArquivosXml              = config.getProperty("DiretorioArquivosXml");
+      else {
+    	  String msgErro = "O tipo de ambiente " + tipoAmbiente + " não existe. Opções permitidas: P (= Produção), H (= Homologação), T (= Teste)";
+    	  throw new Exception(msgErro);
+      }
+	
+      diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
       
       if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
     	  String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " não existe! Favor contatar o setor TI.";
@@ -196,23 +214,27 @@ public final class IntegracaoFornecedorCompleta {
       	 throw new Exception(msgErroDiretorio);
       }
 
-      ObsOfertasPadraoSeNaoTemNoSistema = config.getProperty("ObsOfertasPadraoSeNaoTemNoSistema");
 
-	  debugar("sun.boot.class.path            = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
-	  debugar("toVerificarEstoque             = " + toVerificarEstoque);
-	  debugar("criterioVerificacaoEstoque     = " + criterioVerificacaoEstoque);
+	  debugar("sun.boot.class.path = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
+
+	  if (!siglaSistema.equals("SAP"))
+	  {
+	      debugar("toVerificarEstoque             = " + toVerificarEstoque);
+	      debugar("criterioVerificacaoEstoque     = " + criterioVerificacaoEstoque);
+		  debugar("tipoBancoDeDados               = " + tipoBancoDeDados);
+		  debugar("usernameBancoDeDados           = " + usernameBancoDeDados);
+		  debugar("senhaBancoDeDados              = " + senhaBancoDeDados);
+		  debugar("enderecoIpServidorBancoDeDados = " + enderecoIpServidorBancoDeDados);
+		  debugar("portaServidorBancoDeDados      = " + portaServidorBancoDeDados);
+		  debugar("instanciaBancoDeDados          = " + instanciaBancoDeDados);
+		  debugar("ObsOfertasPadraoSeNaoTemNoSistema = " + ObsOfertasPadraoSeNaoTemNoSistema);
+	  }
 	  debugar("username                       = " + username);
 	  debugar("senha                          = " + senha);
-	  debugar("usernameBancoDeDados           = " + usernameBancoDeDados);
-	  debugar("senhaBancoDeDados              = " + senhaBancoDeDados);
-	  debugar("enderecoIpServidorBancoDeDados = " + enderecoIpServidorBancoDeDados);
-	  debugar("portaServidorBancoDeDados      = " + portaServidorBancoDeDados);
-	  debugar("instanciaBancoDeDados          = " + instanciaBancoDeDados);
 	  debugar("cnpjFornecedor                 = " + cnpjFornecedor);
 	  debugar("tipoAmbiente                   = " + tipoAmbiente);
 	  debugar("toDebugar                      = " + toDebugar);
 	  debugar("enderecoBaseWebService         = " + enderecoBaseWebService);
-	  debugar("ObsOfertasPadraoSeNaoTemNoSistema = " + ObsOfertasPadraoSeNaoTemNoSistema);
          
       // throw new Exception("teste exception static constructor");
     } 
