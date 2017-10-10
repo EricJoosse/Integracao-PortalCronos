@@ -1,5 +1,6 @@
 package pcronos.integracao.fornecedor;
 
+import pcronos.integracao.ConfiguracaoException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
@@ -116,6 +117,7 @@ public final class IntegracaoFornecedorCompleta {
   public static boolean      temErroGeralCotacao;
   public static String       erroStaticConstructor;
   public static String       nomeArquivoDebug;
+  public static TransformerFactory transformerFactory;
 
 
   static 
@@ -123,6 +125,7 @@ public final class IntegracaoFornecedorCompleta {
     try {
       Date hoje = new Date();
       nomeArquivoDebug = "Debug" + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm ").format(hoje) + ".log";
+      transformerFactory = TransformerFactory.newInstance();
  
       erroStaticConstructor = null;
 
@@ -136,19 +139,28 @@ public final class IntegracaoFornecedorCompleta {
 
       if ( !( siglaSistema.equals("SAP") || siglaSistema.equals("APS") || siglaSistema.equals("WinThor") ) ) {
     	  String msgErro = "O sistema " + siglaSistema + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
-    	  throw new Exception(msgErro);
+    	  throw new ConfiguracaoException(msgErro);
       }
       
       if (!siglaSistema.equals("SAP"))
 	  {
          toVerificarEstoque                = Boolean.parseBoolean(config.getProperty("VerificarEstoque"));
          criterioVerificacaoEstoque        = config.getProperty("CriterioVerificacaoEstoque");
+	    
+         if (    !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada")
+		      && !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero")
+		    )
+		 {
+         	 String msgErro = "Erro : configuração \"CriterioVerificacaoEstoque\" inválida! Opções permitidas: \"QtdEstoqueMaiorOuIgualQtdSolicitada\" ou \"QtdEstoqueMaiorZero\".";
+         	 throw new ConfiguracaoException(msgErro);
+		 }
+			
          ObsOfertasPadraoSeNaoTemNoSistema = config.getProperty("ObsOfertasPadraoSeNaoTemNoSistema");
          tipoBancoDeDados                  = config.getProperty("TipoBancoDeDados");
          
          if ( !( tipoBancoDeDados.equals("Firebird") || tipoBancoDeDados.equals("Oracle") ) ) {
        	  String msgErro = "O banco de dados " + tipoBancoDeDados + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
-       	  throw new Exception(msgErro);
+       	  throw new ConfiguracaoException(msgErro);
          }
          usernameBancoDeDados              = config.getProperty("UsuarioBancoDeDados");
          senhaBancoDeDados                 = config.getProperty("SenhaBancoDeDados");
@@ -176,7 +188,7 @@ public final class IntegracaoFornecedorCompleta {
           enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceTeste");
       else {
     	  String msgErro = "O tipo de ambiente " + tipoAmbiente + " não existe. Opções permitidas: P (= Produção), H (= Homologação), T (= Teste)";
-    	  throw new Exception(msgErro);
+    	  throw new ConfiguracaoException(msgErro);
       }
 	
       diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
@@ -184,7 +196,7 @@ public final class IntegracaoFornecedorCompleta {
       if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
     	  String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " não existe! Favor contatar o setor TI.";
     	  diretorioArquivosXml = "C:/";
-    	  throw new Exception(msgErroDiretorio);
+    	  throw new ConfiguracaoException(msgErroDiretorio);
       }
       
       try {
@@ -196,7 +208,7 @@ public final class IntegracaoFornecedorCompleta {
         { 
            String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " é protegido contra gravação de arquivos ! Favor contatar o setor TI.";
       	   diretorioArquivosXml = "C:/";
-           throw new Exception(msgErroDiretorio);
+           throw new ConfiguracaoException(msgErroDiretorio);
         }
 
     	  // O seguinte tb não funciona com Windows : 
@@ -211,7 +223,7 @@ public final class IntegracaoFornecedorCompleta {
       {
    	     String msgErroDiretorio = "Erro! Não tem permissões suficientes para gravar arquivos no diretório " + diretorioArquivosXml + " ! Favor contatar o setor TI.";
    	     diretorioArquivosXml = "C:/";
-      	 throw new Exception(msgErroDiretorio);
+      	 throw new ConfiguracaoException(msgErroDiretorio);
       }
 
 
@@ -238,11 +250,21 @@ public final class IntegracaoFornecedorCompleta {
          
       // throw new Exception("teste exception static constructor");
     } 
-    catch (Exception ex) 
-    {
+    catch (ConfiguracaoException cex) {
+        try
+        {
+          erroStaticConstructor = cex.getMessage(); 
+          logarErro(cex.getMessage());
+        }
+        catch (Exception ex2)
+        {
+          throw new ExceptionInInitializerError(ex2);
+        }
+    }
+    catch (Exception ex) {
       try
       {
-        erroStaticConstructor = printStackTraceToString(ex); 
+        erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex); 
         logarErro(ex, true);
       }
       catch (Exception ex2)
@@ -478,9 +500,6 @@ public final class IntegracaoFornecedorCompleta {
 
   private static void readCotacao(NodeList cotacoes, int i, DocumentBuilder docBuilder) throws SQLException, ParserConfigurationException, TransformerException
   {
-	java.sql.Connection conn = null;
-	java.sql.Statement stat = null;
-	java.sql.ResultSet rSet = null;
     Document docOfertas = null;
     Element elmErros = null;
 
@@ -488,7 +507,7 @@ public final class IntegracaoFornecedorCompleta {
     {  
 	    Element element = (Element)cotacoes.item(i);
 	
-	    NodeList nlist = element.getElementsByTagName("Cd_Cotacao");
+        NodeList nlist = element.getElementsByTagName("Cd_Cotacao");
 	    Element elm = (Element) nlist.item(0);
 	    String cdCotacao = getCharacterDataFromElement(elm);
 	    debugar("cdCotacao: " + cdCotacao);
@@ -496,7 +515,7 @@ public final class IntegracaoFornecedorCompleta {
 	    nlist = element.getElementsByTagName("Cd_Comprador");
 	    elm = (Element) nlist.item(0);
 	    String cdComprador = getCharacterDataFromElement(elm);
-	 // Debugar("cdComprador: " + cdComprador);
+	 // debugar("cdComprador: " + cdComprador);
 	
 	 	// Tag <Cd_Condicao_Pagamento>123</Cd_Condicao_Pagamento> pulado, pois não serve para nada 
 
@@ -541,7 +560,6 @@ public final class IntegracaoFornecedorCompleta {
 	    elmDtRecebimento.appendChild(docRecebimentosCotacoes.createTextNode(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(hoje)));
 	    elmRecebimentoCotacao.appendChild(elmDtRecebimento);
 	
-	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	    Transformer transformer = transformerFactory.newTransformer();
 	    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 	 // transformer.setOutputProperty(OutputKeys.METHOD, "xml");
@@ -566,425 +584,457 @@ public final class IntegracaoFornecedorCompleta {
 	//
 	//  =====================================================================================
 		    
-	    docOfertas = docBuilder.newDocument();
-	
-	    elmErros = docOfertas.createElement("Erros");
-	    String mensagemErro;
-	
-	
-	    if (erroStaticConstructor != null)
-	    {
-	      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Erro imprevisto ! " + erroStaticConstructor);
-	    }
-	
-	
-	    if (    !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada")
-	         && !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero")
-	       )
-	    {
-	      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Erro : configuração \"CriterioVerificacaoEstoque\" inválida ! Opções permitidas: \"QtdEstoqueMaiorOuIgualQtdSolicitada\" ou \"QtdEstoqueMaiorZero\".");
-	    }
-	
-	    Element elmOfertasCotacao = docOfertas.createElement("OfertasCotacao");
-	    docOfertas.appendChild(elmOfertasCotacao);
-	
-	    Element elmDtGravacao = docOfertas.createElement("Dt_Gravacao");
-	    hoje = new Date();
-	    elmDtGravacao.appendChild(docOfertas.createTextNode(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(hoje)));
-	    elmOfertasCotacao.appendChild(elmDtGravacao);
-	
-	    Element elmCdCotacao2 = docOfertas.createElement("Cd_Cotacao");
-	    elmCdCotacao2.appendChild(docOfertas.createTextNode(cdCotacao));
-	    elmOfertasCotacao.appendChild(elmCdCotacao2);
-	
-	    Element elmCdComprador2 = docOfertas.createElement("Cd_Comprador");
-	    elmCdComprador2.appendChild(docOfertas.createTextNode(cdComprador));
-	    elmOfertasCotacao.appendChild(elmCdComprador2);
-	
-	    Element elmCdFornecedor2 = docOfertas.createElement("Cd_Fornecedor");
-	    elmCdFornecedor2.appendChild(docOfertas.createTextNode(cnpjFornecedor));
-	    elmOfertasCotacao.appendChild(elmCdFornecedor2);
-	
-	    String connectionString = null;
-	    
-	    if (tipoBancoDeDados.equals("Oracle"))
-	    {
-	      OracleDriver orclDriver = new OracleDriver() ; 
-	      DriverManager.registerDriver( orclDriver ) ; 	
-	      connectionString = "jdbc:oracle:thin:@" + enderecoIpServidorBancoDeDados + ":" + portaServidorBancoDeDados + ":" + instanciaBancoDeDados; 
-	    }
-	    else if (tipoBancoDeDados.equals("Firebird"))
-	    {
-	         FBDriver fbDriver = new FBDriver();
-	         DriverManager.registerDriver(fbDriver); // Antigamente: Class.forName("org.firebirdsql.jdbc.FBDriver"); 
-	         connectionString = "jdbc:firebirdsql://" + enderecoIpServidorBancoDeDados + ":" + portaServidorBancoDeDados + "/" + instanciaBancoDeDados;
-	    }
-   
-	    conn = DriverManager.getConnection(connectionString, usernameBancoDeDados, senhaBancoDeDados ) ;	    
-	    stat = conn.createStatement() ;
-	    String sqlString = null;
-	    boolean toNaoVerificarDemaisErros = false;
-	    boolean existeCompradora = true;
-	    String dsComprador = "";		
-	    
-	    
-        if (siglaSistema.equals("APS"))
-        {
-        	sqlString = "select cpfcgc   "
-                      + "  from cliente  "
-                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-                      ;
-        }
-        else if (siglaSistema.equals("WinThor"))
-        {
-		    sqlString = "select (PCCLIENT.CLIENTE || ' - ' || nvl(PCCLIENT.ESTCOB, '')) "
-		              + "  from PCCLIENT        "
-		              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-		              ;
-        }
-	    // Para executar o SELECT direto no banco de dados, se precisar :
-	    debugar(sqlString);
-	
-	    rSet = stat.executeQuery( sqlString ) ;
-	    
-	    if (rSet == null || !rSet.next()) 
-	    {
-	    	toNaoVerificarDemaisErros = true;
-	    	existeCompradora = false;
-	        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O CNPJ " + cdComprador + " da empresa compradora não foi encontrado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-	    }
-	    else
-	    {
-		      if (siglaSistema.equals("WinThor")) 
-		      {
-			      dsComprador = ( (rSet.getObject(1) == null) ? "" : rSet.getString(1) ) ; 
-		      }	    	
-	    }
+        if (siglaSistema.equals("SAP")) {
 
-	    
-	    
-	    
-	    rSet = null;
-	    
-	    if (existeCompradora)
-	    {
-			if (siglaSistema.equals("APS"))
+        // No caso do SAP, quebrar as cotações em pedaços e enviar de uma por uma para o SAP, 
+        // transformando Element element para string:
+
+           Transformer transformerSAP = transformerFactory.newTransformer();    
+	       transformerSAP.setOutputProperty(OutputKeys.ENCODING, "iso-8859-1");
+		   transformerSAP.setOutputProperty(OutputKeys.INDENT, "yes");
+           transformerSAP.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+           final DOMSource sourceSAP = new DOMSource(element);
+           final StreamResult resultSAP = new StreamResult(new StringWriter());
+           transformerSAP.transform(sourceSAP, resultSAP);
+           String strCotacao = resultSAP.getWriter().toString().replaceAll("<Cotacao>", "<Cotacoes><Cotacao>").replaceAll("</Cotacao>", "</Cotacao></Cotacoes>");
+           debugar("strCotacao = " + strCotacao);
+        }
+        else  // (!siglaSistema.equals("SAP"))
+           montarXmlOfertas(transformer, docOfertas, produtos, elmErros, cdCotacao, cdComprador, tpFrete, docBuilder);
+    }
+    catch (java.lang.Exception ex) { 
+      logarErro(ex, false);
+      if (!siglaSistema.equals("SAP")) enviarErroParaPortalCronos(docOfertas, elmErros, null, printStackTraceToString(ex));  
+    }
+  }
+
+
+
+  private static void montarXmlOfertas(Transformer transformer, Document docOfertas, NodeList produtos, Element elmErros, String cdCotacao, String cdComprador, String tpFrete, DocumentBuilder docBuilder) throws SQLException {
+
+		java.sql.Connection conn = null;
+		java.sql.Statement stat = null;
+		java.sql.ResultSet rSet = null;
+
+		try
+	    {  
+		    docOfertas = docBuilder.newDocument();
+			
+		    elmErros = docOfertas.createElement("Erros");
+		    String mensagemErro;
+		
+		
+		    if (erroStaticConstructor != null)
+		    {
+		      enviarErroParaPortalCronos(docOfertas, elmErros, "", erroStaticConstructor);
+		    }
+		
+		
+		    Element elmOfertasCotacao = docOfertas.createElement("OfertasCotacao");
+		    docOfertas.appendChild(elmOfertasCotacao);
+		
+		    Element elmDtGravacao = docOfertas.createElement("Dt_Gravacao");
+		    Date hoje = new Date();
+		    elmDtGravacao.appendChild(docOfertas.createTextNode(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(hoje)));
+		    elmOfertasCotacao.appendChild(elmDtGravacao);
+		
+		    Element elmCdCotacao2 = docOfertas.createElement("Cd_Cotacao");
+		    elmCdCotacao2.appendChild(docOfertas.createTextNode(cdCotacao));
+		    elmOfertasCotacao.appendChild(elmCdCotacao2);
+		
+		    Element elmCdComprador2 = docOfertas.createElement("Cd_Comprador");
+		    elmCdComprador2.appendChild(docOfertas.createTextNode(cdComprador));
+		    elmOfertasCotacao.appendChild(elmCdComprador2);
+		
+		    Element elmCdFornecedor2 = docOfertas.createElement("Cd_Fornecedor");
+		    elmCdFornecedor2.appendChild(docOfertas.createTextNode(cnpjFornecedor));
+		    elmOfertasCotacao.appendChild(elmCdFornecedor2);
+		
+		    String connectionString = null;
+		    
+		    if (tipoBancoDeDados.equals("Oracle"))
+		    {
+		      OracleDriver orclDriver = new OracleDriver() ; 
+		      DriverManager.registerDriver( orclDriver ) ; 	
+		      connectionString = "jdbc:oracle:thin:@" + enderecoIpServidorBancoDeDados + ":" + portaServidorBancoDeDados + ":" + instanciaBancoDeDados; 
+		    }
+		    else if (tipoBancoDeDados.equals("Firebird"))
+		    {
+		         FBDriver fbDriver = new FBDriver();
+		         DriverManager.registerDriver(fbDriver); // Antigamente: Class.forName("org.firebirdsql.jdbc.FBDriver"); 
+		         connectionString = "jdbc:firebirdsql://" + enderecoIpServidorBancoDeDados + ":" + portaServidorBancoDeDados + "/" + instanciaBancoDeDados;
+		    }
+	   
+		    conn = DriverManager.getConnection(connectionString, usernameBancoDeDados, senhaBancoDeDados ) ;	    
+		    stat = conn.createStatement() ;
+		    String sqlString = null;
+		    boolean toNaoVerificarDemaisErros = false;
+		    boolean existeCompradora = true;
+		    String dsComprador = "";		
+		    
+		    
+	        if (siglaSistema.equals("APS"))
 	        {
-	        	sqlString = null;
+	        	sqlString = "select cpfcgc   "
+	                      + "  from cliente  "
+	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+	                      ;
 	        }
 	        else if (siglaSistema.equals("WinThor"))
 	        {
-			    sqlString = "select PCCLIENT.CGCENT "
+			    sqlString = "select (PCCLIENT.CLIENTE || ' - ' || nvl(PCCLIENT.ESTCOB, '')) "
 			              + "  from PCCLIENT        "
+			              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+			              ;
+	        }
+		    // Para executar o SELECT direto no banco de dados, se precisar :
+		    debugar(sqlString);
+		
+		    rSet = stat.executeQuery( sqlString ) ;
+		    
+		    if (rSet == null || !rSet.next()) 
+		    {
+		    	toNaoVerificarDemaisErros = true;
+		    	existeCompradora = false;
+		        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O CNPJ " + cdComprador + " da empresa compradora não foi encontrado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+		    }
+		    else
+		    {
+			      if (siglaSistema.equals("WinThor")) 
+			      {
+				      dsComprador = ( (rSet.getObject(1) == null) ? "" : rSet.getString(1) ) ; 
+			      }	    	
+		    }
+
+		    
+		    
+		    
+		    rSet = null;
+		    
+		    if (existeCompradora)
+		    {
+				if (siglaSistema.equals("APS"))
+		        {
+		        	sqlString = null;
+		        }
+		        else if (siglaSistema.equals("WinThor"))
+		        {
+				    sqlString = "select PCCLIENT.CGCENT "
+				              + "  from PCCLIENT        "
+				              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+				              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
+				              + "   and PCCLIENT.DTEXCLUSAO is null "
+				              ;
+		        }
+		
+		        if (sqlString != null)
+		        {
+				    // Para executar o SELECT direto no banco de dados, se precisar :
+				    debugar(sqlString);
+				
+				    rSet = stat.executeQuery( sqlString ) ;
+				
+				    if (rSet == null || !rSet.next()) 
+				    {
+				       // Se o cliente for bloqueado ou excluido, não enviar NENHUMA mensagem de erro, e nao gerar nenhum arquivo XML, 
+				       // porém apenas Debugar (para verificação na primeira instalação deste programa no fornecedor)
+			  	       debugar("Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada ou desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+				       return; // aborta a cotação  atual e continua com a próxima cotação
+				    }
+		        } // if (sqlString != null)
+	        } // if (existeCompradora)
+
+		    
+	        
+		    rSet = null;
+
+		    if (siglaSistema.equals("APS"))
+	        {
+	        	sqlString = "select codtipopag "
+	                      + "  from cliente    "
+	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+	                      ;
+	                   // + "   and codstatus = 1" // 1 = BLOQUEADO, no APS isso quer dizer apenas bloqueado para pagto. a prazo, e NÃO bloqueado para pagto. a vista !
+	        }
+	        else if (siglaSistema.equals("WinThor"))
+	        {
+			    sqlString = "select PCCLIENT.CODPLPAG "
+			              + "  from PCCLIENT          "
 			              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
 			              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
 			              + "   and PCCLIENT.DTEXCLUSAO is null "
 			              ;
 	        }
-	
-	        if (sqlString != null)
+		    // Para executar o SELECT direto no banco de dados, se precisar :
+		    debugar(sqlString);
+		
+		    rSet = stat.executeQuery( sqlString ) ;
+		
+		    String cdCondicaoPagamento = "";
+		
+		    if (rSet != null && rSet.next()) 
+		    {
+		      cdCondicaoPagamento = ( (rSet.getObject(1) == null) ? "" 
+		    		                                              : (siglaSistema.equals("APS") ? Integer.toString(rSet.getInt(1))
+		    		                                            		                        : (siglaSistema.equals("WinThor") ? rSet.getString(1)
+		    		                                            		                        		                          : ""
+		    		                                            		                          )
+		    		                                                )
+		    		                ) ;  
+		    } 
+		
+		    if (cdCondicaoPagamento.equals("") && !toNaoVerificarDemaisErros)
+		    {
+		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+		    }
+		
+		
+		
+		    Element elmCdCondicaoPagamento = docOfertas.createElement("Cd_Condicao_Pagamento_Fornecedor");
+		    elmCdCondicaoPagamento.appendChild(docOfertas.createTextNode(cdCondicaoPagamento));
+		    elmOfertasCotacao.appendChild(elmCdCondicaoPagamento);
+		
+		    Element elmTpFrete = docOfertas.createElement("Tp_Frete_Fornecedor");
+		    elmTpFrete.appendChild(docOfertas.createTextNode(tpFrete));
+		    elmOfertasCotacao.appendChild(elmTpFrete);
+		 
+		    String strQtPrzEntrega = "";
+	        if (siglaSistema.equals("APS"))
+	 	      strQtPrzEntrega = "";
+	        else if (siglaSistema.equals("WinThor"))
+	   	      strQtPrzEntrega = "";
+		
+		    Element elmQtPrzEntrega = docOfertas.createElement("Qt_Prz_Entrega");
+		    elmQtPrzEntrega.appendChild(docOfertas.createTextNode(strQtPrzEntrega));
+		    elmOfertasCotacao.appendChild(elmQtPrzEntrega);
+		
+		    BigDecimal vlMinimoPedido = null;
+			
+		    rSet = null;
+
+		    if (        siglaSistema.equals("APS")
+		    		|| (siglaSistema.equals("WinThor") && !toUsarValorMinimoSistemaFornecedor )
+		       )
 	        {
+	        	vlMinimoPedido = null; // Versão anterior : new BigDecimal(300.00); 
+	        }
+	        else if (siglaSistema.equals("WinThor"))
+	        {
+			    sqlString = "select PCPLPAG.VLMINPEDIDO "
+			              + "  from PCCLIENT            "
+			              + "     , PCPLPAG             "
+			              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+			              + "   and PCCLIENT.CODPLPAG   =  PCPLPAG.CODPLPAG "
+			              + "   and PCCLIENT.BLOQUEIO   <> 'S'              "
+			              + "   and PCCLIENT.DTEXCLUSAO is null             "
+			              ;
 			    // Para executar o SELECT direto no banco de dados, se precisar :
 			    debugar(sqlString);
 			
 			    rSet = stat.executeQuery( sqlString ) ;
 			
-			    if (rSet == null || !rSet.next()) 
+			    if (rSet != null && rSet.next()) 
 			    {
-			       // Se o cliente for bloqueado ou excluido, não enviar NENHUMA mensagem de erro, e nao gerar nenhum arquivo XML, 
-			       // porém apenas Debugar (para verificação na primeira instalação deste programa no fornecedor)
-		  	       debugar("Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada ou desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-			       return; // aborta a cotação  atual e continua com a próxima cotação
+			      vlMinimoPedido = ( (rSet.getObject(1) == null) ? null : rSet.getBigDecimal(1).setScale(2, BigDecimal.ROUND_HALF_UP)  ) ;  
 			    }
-	        } // if (sqlString != null)
-        } // if (existeCompradora)
 
-	    
-        
-	    rSet = null;
-
-	    if (siglaSistema.equals("APS"))
-        {
-        	sqlString = "select codtipopag "
-                      + "  from cliente    "
-                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-                      ;
-                   // + "   and codstatus = 1" // 1 = BLOQUEADO, no APS isso quer dizer apenas bloqueado para pagto. a prazo, e NÃO bloqueado para pagto. a vista !
-        }
-        else if (siglaSistema.equals("WinThor"))
-        {
-		    sqlString = "select PCCLIENT.CODPLPAG "
-		              + "  from PCCLIENT          "
-		              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-		              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
-		              + "   and PCCLIENT.DTEXCLUSAO is null "
-		              ;
-        }
-	    // Para executar o SELECT direto no banco de dados, se precisar :
-	    debugar(sqlString);
-	
-	    rSet = stat.executeQuery( sqlString ) ;
-	
-	    String cdCondicaoPagamento = "";
-	
-	    if (rSet != null && rSet.next()) 
-	    {
-	      cdCondicaoPagamento = ( (rSet.getObject(1) == null) ? "" 
-	    		                                              : (siglaSistema.equals("APS") ? Integer.toString(rSet.getInt(1))
-	    		                                            		                        : (siglaSistema.equals("WinThor") ? rSet.getString(1)
-	    		                                            		                        		                          : ""
-	    		                                            		                          )
-	    		                                                )
-	    		                ) ;  
-	    } 
-	
-	    if (cdCondicaoPagamento.equals("") && !toNaoVerificarDemaisErros)
-	    {
-	      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-	    }
-	
-	
-	
-	    Element elmCdCondicaoPagamento = docOfertas.createElement("Cd_Condicao_Pagamento_Fornecedor");
-	    elmCdCondicaoPagamento.appendChild(docOfertas.createTextNode(cdCondicaoPagamento));
-	    elmOfertasCotacao.appendChild(elmCdCondicaoPagamento);
-	
-	    Element elmTpFrete = docOfertas.createElement("Tp_Frete_Fornecedor");
-	    elmTpFrete.appendChild(docOfertas.createTextNode(tpFrete));
-	    elmOfertasCotacao.appendChild(elmTpFrete);
-	 
-	    String strQtPrzEntrega = "";
-        if (siglaSistema.equals("APS"))
- 	      strQtPrzEntrega = "";
-        else if (siglaSistema.equals("WinThor"))
-   	      strQtPrzEntrega = "";
-	
-	    Element elmQtPrzEntrega = docOfertas.createElement("Qt_Prz_Entrega");
-	    elmQtPrzEntrega.appendChild(docOfertas.createTextNode(strQtPrzEntrega));
-	    elmOfertasCotacao.appendChild(elmQtPrzEntrega);
-	
-	    BigDecimal vlMinimoPedido = null;
-		
-	    rSet = null;
-
-	    if (        siglaSistema.equals("APS")
-	    		|| (siglaSistema.equals("WinThor") && !toUsarValorMinimoSistemaFornecedor )
-	       )
-        {
-        	vlMinimoPedido = null; // Versão anterior : new BigDecimal(300.00); 
-        }
-        else if (siglaSistema.equals("WinThor"))
-        {
-		    sqlString = "select PCPLPAG.VLMINPEDIDO "
-		              + "  from PCCLIENT            "
-		              + "     , PCPLPAG             "
-		              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-		              + "   and PCCLIENT.CODPLPAG   =  PCPLPAG.CODPLPAG "
-		              + "   and PCCLIENT.BLOQUEIO   <> 'S'              "
-		              + "   and PCCLIENT.DTEXCLUSAO is null             "
-		              ;
-		    // Para executar o SELECT direto no banco de dados, se precisar :
-		    debugar(sqlString);
-		
-		    rSet = stat.executeQuery( sqlString ) ;
-		
-		    if (rSet != null && rSet.next()) 
-		    {
-		      vlMinimoPedido = ( (rSet.getObject(1) == null) ? null : rSet.getBigDecimal(1).setScale(2, BigDecimal.ROUND_HALF_UP)  ) ;  
-		    }
-
-		    if (vlMinimoPedido == null && !toNaoVerificarDemaisErros)
-		    {
-		    	// O Valor Mínimo pode ser R$ 0,00 porém não pode ser em branco porque assim o sistema não sabe 
-		    	// se for R$ 0,00 ou se é para usar o Valor Mínimo geral do fornecedor cadastrado no Portal Cronos :
-		        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ". Portanto não foi posssível verificar se o valor seria R$ 0,00 ou se o valor seria igual ao Valor Mínimo geral do fornecedor cadastrado no Portal Cronos.");
-		    }
-        }
-	
-        
-	
-	
-	    nf.setGroupingUsed(false);
-	    nf.setMaximumFractionDigits(2);
-	    nf.setMinimumFractionDigits(2);  
-	
-	    Element elmVlMinimoPedido = docOfertas.createElement("Vl_Minimo_Pedido");
-	    elmVlMinimoPedido.appendChild(docOfertas.createTextNode( (vlMinimoPedido == null ? "" : nf.format(vlMinimoPedido))  ));
-	    elmOfertasCotacao.appendChild(elmVlMinimoPedido);
-	
-	    Element elmDsObservacaoFornecedor = docOfertas.createElement("Ds_Observacao_Fornecedor");
-	    elmDsObservacaoFornecedor.appendChild(docOfertas.createTextNode(ObsOfertasPadraoSeNaoTemNoSistema));
-	    elmOfertasCotacao.appendChild(elmDsObservacaoFornecedor);
-	
-	
-	    rSet = null;
-
-	    if (siglaSistema.equals("APS"))
-        {
-        	sqlString = "select replace(precousado,'ç','c') "
-                      + "  from cliente "
-                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'";
-        }
-        else if (siglaSistema.equals("WinThor"))
-        {
-		    // PVENDA1 NUMBER(16,6) preco referente tabela 1
-		    // PVENDA2 NUMBER(16,6) preco referente tabela 2
-		    // PVENDA3 NUMBER(16,6) preco referente tabela 3
-		    // PVENDA4 NUMBER(16,6) preco referente tabela 4
-		    // PVENDA5 NUMBER(16,6) preco referente tabela 5
-		    // PVENDA6 NUMBER(16,6) preco referente tabela 6
-		    // PVENDA7 NUMBER(16,6) preco referente tabela 7
-		
-		    // OBS: Compor o campo pvenda com a seguinte forma
-		    // 1. Acessar a tabela PCPLPAG (TABELA DE PLANO DE PAGAMENTO) atraves do campo CODPLPAG na tabela PCLIENT (Tabela de Clientes)
-		    // 2. Acessar os seguintes campos:
-		    //    NUMPR NUMBER(6,2) = O intervalo fica entre 1 e 7. Serve para identificar o final do campo PVENDAx
-		    //    VLMINPEDIDO NUMBER(12,2) = Valor minimo para o pedido.
-		
-		    sqlString = "select PCPLPAG.NUMPR "
-		              + "  from PCCLIENT, PCPLPAG "
-		              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-		              + "   and PCCLIENT.CODPLPAG   =  PCPLPAG.CODPLPAG "
-		              + "   and PCCLIENT.BLOQUEIO   <> 'S' "
-		              + "   and PCCLIENT.DTEXCLUSAO is null "
-		              ;
-        }
-	
-	    // Para executar o SELECT direto no banco de dados, se precisar :
-	    debugar(sqlString);
-	
-	    rSet = stat.executeQuery( sqlString ) ;
-		
-	    String tipoPrecoComprador = null;
-	
-	    if (rSet != null && rSet.next()) 
-	    {
-  	      tipoPrecoComprador = ( (rSet.getObject(1) == null) ? null 
-  	    		                                             : (siglaSistema.equals("APS") ? rSet.getString(1) 
-  	    		                                            		                       : (siglaSistema.equals("WinThor") ? rSet.getBigDecimal(1).toString()
-  	    		                                            		                    		                             : null
-  	    		                                            		                         )
-  	    		                                               )
-  	    		               ) ; 
-	    }
-	
-	    if (tipoPrecoComprador == null && !toNaoVerificarDemaisErros)
-	    {
-	      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O tipo de preço para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-	    }
-	    else if (    siglaSistema.equals("WinThor")
-                      && tipoPrecoComprador != null 
-     	              && !(    tipoPrecoComprador.equals("1")
-		                    || tipoPrecoComprador.equals("2")
-		                    || tipoPrecoComprador.equals("3")
-		                    || tipoPrecoComprador.equals("4")
-		                    || tipoPrecoComprador.equals("5")
-		                    || tipoPrecoComprador.equals("6")
-		                    || tipoPrecoComprador.equals("7")
-	                  )
-	            )
-	    {
-          // Apenas verificar isso na primeira instalação en cada empresa fornecedora,
-          // pois a causa do "erro" pode ser que uma versão nova do WinThor tem uma coluna nova, então não é erro, 
-          // e tb pode ser algum erro de verdade : 
-	      debugar("Possível erro: tipo de preço (" + tipoPrecoComprador + ") imprevisto no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ". Valores previstos : 1, 2, 3, 4, 5, 6, 7. Favor verificar.");
-	    }
-	    
-	
-	    Integer numRegiaoWinThor = null;
-	    rSet = null;
-		
-	    if (siglaSistema.equals("WinThor"))
-	    {
-		    sqlString = "select PCPRACA.NUMREGIAO "
-		              + "  from PCPRACA           "
-		              + "     , PCCLIENT          "
-		              + " where PCPRACA.CODPRACA = PCCLIENT.CODPRACA "
-		              + "   and replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-		              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
-		              + "   and PCCLIENT.DTEXCLUSAO is null "
-		              ;
-		
-		    // Para executar o SELECT direto no banco de dados, se precisar :
-		    debugar(sqlString);
-		
-		    rSet = stat.executeQuery( sqlString ) ;
-		
-		    if (rSet != null && rSet.next()) 
-		    {
-		      numRegiaoWinThor = ( (rSet.getObject(1) == null) ? null : rSet.getInt(1)  ) ;  
-		    }
-
-		    if (numRegiaoWinThor == null && !toNaoVerificarDemaisErros)
-		    {
-		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A região da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-		    }
-	    }
-	
-	
-	    Element elmProdutos = docOfertas.createElement("Produtos");
-        elmOfertasCotacao.appendChild(elmProdutos); // Para pelo menos gerar o tag vazio "<Produtos/>" no caso que o arquivo XML for gravado 
-	
-	    if (!temErroGeralCotacao)
-	    {	
-	      for (int j = 0; j < produtos.getLength(); j++) 
-	      {
-	        readProduto(produtos, j, docOfertas, elmProdutos, elmErros, stat, rSet, tipoPrecoComprador, numRegiaoWinThor);
-	      }
-	    }
-	
-	    elmOfertasCotacao.appendChild(elmErros);  // Para pelo menos gerar o tag vazio "<Erros/>" no caso que o arquivo XML for gravado
-	    
-	    debugar("elmProdutos.hasChildNodes() = " + elmProdutos.hasChildNodes());
-	    debugar("elmErros.hasChildNodes()    = " + elmErros.hasChildNodes());
-	
-	    // elmProdutos e elmErros nunca são null se chegar aqui :
-	    if (    elmProdutos.hasChildNodes()
-	         || elmErros.hasChildNodes() 
-	       )
-	    { 
-	    	final DOMSource sourceOfertas = new DOMSource(docOfertas);
-		    String filenameOfertas = diretorioArquivosXml + String.format("OFE_%s_%s_%s.xml", cnpjFornecedor, cdCotacao, new SimpleDateFormat("yyyyMMdd'_'HHmmss").format(hoje));
-	    	Files.deleteIfExists(Paths.get(filenameOfertas));
-		    final StreamResult resultOfertas = new StreamResult(new File(filenameOfertas));
-		    transformer.transform(sourceOfertas, resultOfertas);
-		
-		    upload_File(enderecoBaseWebService + "FornecedorCotacao/EnviaArquivosOfertasCotacao", new File(filenameOfertas), "form1", username, senha) ;
-		 // Funcionou : uploadOfertas_File(enderecoBaseWebService + "cotacao/EnviaArquivosRecebimentoCotacao", new File(diretorioArquivosXml + "TesteWebServiceConfirmRecebCotacoes.xml"), "form1", username, senha) ;
-		 // uploadOfertas_BodyXML(enderecoBaseWebService + "cotacao/EnviaArquivosRecebimentoCotacao", (diretorioArquivosXml + "TesteWebServiceConfirmRecebCotacoes.xml"), username, senha) ;
-	    }
-    }
-    catch (java.lang.Exception ex) { 
-      logarErro(ex, false);
-      enviarErroParaPortalCronos(docOfertas, elmErros, null, printStackTraceToString(ex));  
-    }
-    finally { 
-      if (stat != null) {
-        try {
-          stat.close() ;  // Isso fecha o rSet automaticamente também
-        }
-        catch (java.sql.SQLException e) {
-        }
-        stat = null  ;
-      }
-      if (rSet != null)  rSet = null  ;
-      
-	  if (conn != null) { 
-	      try { 
-	        if ( !conn.isClosed() ) {
-	        	conn.close() ;
+			    if (vlMinimoPedido == null && !toNaoVerificarDemaisErros)
+			    {
+			    	// O Valor Mínimo pode ser R$ 0,00 porém não pode ser em branco porque assim o sistema não sabe 
+			    	// se for R$ 0,00 ou se é para usar o Valor Mínimo geral do fornecedor cadastrado no Portal Cronos :
+			        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ". Portanto não foi posssível verificar se o valor seria R$ 0,00 ou se o valor seria igual ao Valor Mínimo geral do fornecedor cadastrado no Portal Cronos.");
+			    }
 	        }
-	      }
-	      catch ( java.lang.Throwable t ) {  
-	      }
+		
+	        
+		
+		
+		    nf.setGroupingUsed(false);
+		    nf.setMaximumFractionDigits(2);
+		    nf.setMinimumFractionDigits(2);  
+		
+		    Element elmVlMinimoPedido = docOfertas.createElement("Vl_Minimo_Pedido");
+		    elmVlMinimoPedido.appendChild(docOfertas.createTextNode( (vlMinimoPedido == null ? "" : nf.format(vlMinimoPedido))  ));
+		    elmOfertasCotacao.appendChild(elmVlMinimoPedido);
+		
+		    Element elmDsObservacaoFornecedor = docOfertas.createElement("Ds_Observacao_Fornecedor");
+		    elmDsObservacaoFornecedor.appendChild(docOfertas.createTextNode(ObsOfertasPadraoSeNaoTemNoSistema));
+		    elmOfertasCotacao.appendChild(elmDsObservacaoFornecedor);
+		
+		
+		    rSet = null;
 
-	      conn = null ; 
-	  }
-    } // finally
+		    if (siglaSistema.equals("APS"))
+	        {
+	        	sqlString = "select replace(precousado,'ç','c') "
+	                      + "  from cliente "
+	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'";
+	        }
+	        else if (siglaSistema.equals("WinThor"))
+	        {
+			    // PVENDA1 NUMBER(16,6) preco referente tabela 1
+			    // PVENDA2 NUMBER(16,6) preco referente tabela 2
+			    // PVENDA3 NUMBER(16,6) preco referente tabela 3
+			    // PVENDA4 NUMBER(16,6) preco referente tabela 4
+			    // PVENDA5 NUMBER(16,6) preco referente tabela 5
+			    // PVENDA6 NUMBER(16,6) preco referente tabela 6
+			    // PVENDA7 NUMBER(16,6) preco referente tabela 7
+			
+			    // OBS: Compor o campo pvenda com a seguinte forma
+			    // 1. Acessar a tabela PCPLPAG (TABELA DE PLANO DE PAGAMENTO) atraves do campo CODPLPAG na tabela PCLIENT (Tabela de Clientes)
+			    // 2. Acessar os seguintes campos:
+			    //    NUMPR NUMBER(6,2) = O intervalo fica entre 1 e 7. Serve para identificar o final do campo PVENDAx
+			    //    VLMINPEDIDO NUMBER(12,2) = Valor minimo para o pedido.
+			
+			    sqlString = "select PCPLPAG.NUMPR "
+			              + "  from PCCLIENT, PCPLPAG "
+			              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+			              + "   and PCCLIENT.CODPLPAG   =  PCPLPAG.CODPLPAG "
+			              + "   and PCCLIENT.BLOQUEIO   <> 'S' "
+			              + "   and PCCLIENT.DTEXCLUSAO is null "
+			              ;
+	        }
+		
+		    // Para executar o SELECT direto no banco de dados, se precisar :
+		    debugar(sqlString);
+		
+		    rSet = stat.executeQuery( sqlString ) ;
+			
+		    String tipoPrecoComprador = null;
+		
+		    if (rSet != null && rSet.next()) 
+		    {
+	  	      tipoPrecoComprador = ( (rSet.getObject(1) == null) ? null 
+	  	    		                                             : (siglaSistema.equals("APS") ? rSet.getString(1) 
+	  	    		                                            		                       : (siglaSistema.equals("WinThor") ? rSet.getBigDecimal(1).toString()
+	  	    		                                            		                    		                             : null
+	  	    		                                            		                         )
+	  	    		                                               )
+	  	    		               ) ; 
+		    }
+		
+		    if (tipoPrecoComprador == null && !toNaoVerificarDemaisErros)
+		    {
+		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O tipo de preço para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+		    }
+		    else if (    siglaSistema.equals("WinThor")
+	                      && tipoPrecoComprador != null 
+	     	              && !(    tipoPrecoComprador.equals("1")
+			                    || tipoPrecoComprador.equals("2")
+			                    || tipoPrecoComprador.equals("3")
+			                    || tipoPrecoComprador.equals("4")
+			                    || tipoPrecoComprador.equals("5")
+			                    || tipoPrecoComprador.equals("6")
+			                    || tipoPrecoComprador.equals("7")
+		                  )
+		            )
+		    {
+	          // Apenas verificar isso na primeira instalação en cada empresa fornecedora,
+	          // pois a causa do "erro" pode ser que uma versão nova do WinThor tem uma coluna nova, então não é erro, 
+	          // e tb pode ser algum erro de verdade : 
+		      debugar("Possível erro: tipo de preço (" + tipoPrecoComprador + ") imprevisto no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ". Valores previstos : 1, 2, 3, 4, 5, 6, 7. Favor verificar.");
+		    }
+		    
+		
+		    Integer numRegiaoWinThor = null;
+		    rSet = null;
+			
+		    if (siglaSistema.equals("WinThor"))
+		    {
+			    sqlString = "select PCPRACA.NUMREGIAO "
+			              + "  from PCPRACA           "
+			              + "     , PCCLIENT          "
+			              + " where PCPRACA.CODPRACA = PCCLIENT.CODPRACA "
+			              + "   and replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+			              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
+			              + "   and PCCLIENT.DTEXCLUSAO is null "
+			              ;
+			
+			    // Para executar o SELECT direto no banco de dados, se precisar :
+			    debugar(sqlString);
+			
+			    rSet = stat.executeQuery( sqlString ) ;
+			
+			    if (rSet != null && rSet.next()) 
+			    {
+			      numRegiaoWinThor = ( (rSet.getObject(1) == null) ? null : rSet.getInt(1)  ) ;  
+			    }
+
+			    if (numRegiaoWinThor == null && !toNaoVerificarDemaisErros)
+			    {
+			      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A região da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+			    }
+		    }
+		
+		
+		    Element elmProdutos = docOfertas.createElement("Produtos");
+	        elmOfertasCotacao.appendChild(elmProdutos); // Para pelo menos gerar o tag vazio "<Produtos/>" no caso que o arquivo XML for gravado 
+		
+		    if (!temErroGeralCotacao)
+		    {	
+		      for (int j = 0; j < produtos.getLength(); j++) 
+		      {
+		        readProduto(produtos, j, docOfertas, elmProdutos, elmErros, stat, rSet, tipoPrecoComprador, numRegiaoWinThor);
+		      }
+		    }
+		
+		    elmOfertasCotacao.appendChild(elmErros);  // Para pelo menos gerar o tag vazio "<Erros/>" no caso que o arquivo XML for gravado
+		    
+		    debugar("elmProdutos.hasChildNodes() = " + elmProdutos.hasChildNodes());
+		    debugar("elmErros.hasChildNodes()    = " + elmErros.hasChildNodes());
+		
+		    // elmProdutos e elmErros nunca são null se chegar aqui :
+		    if (    elmProdutos.hasChildNodes()
+		         || elmErros.hasChildNodes() 
+		       )
+		    {   
+		    	uploadXmlOfertas(docOfertas, cdCotacao, transformer, hoje);
+		    }
+	    }
+	    catch (java.lang.Exception ex) { 
+	      logarErro(ex, false);
+	      enviarErroParaPortalCronos(docOfertas, elmErros, null, printStackTraceToString(ex));  
+	    }
+	    finally { 
+	      if (stat != null) {
+	        try {
+	          stat.close() ;  // Isso fecha o rSet automaticamente também
+	        }
+	        catch (java.sql.SQLException e) {
+	        }
+	        stat = null  ;
+	      }
+	      if (rSet != null)  rSet = null  ;
+	      
+		  if (conn != null) { 
+		      try { 
+		        if ( !conn.isClosed() ) {
+		        	conn.close() ;
+		        }
+		      }
+		      catch ( java.lang.Throwable t ) {  
+		      }
+
+		      conn = null ; 
+		  }
+	    } // finally
+  }
+ 
+  
+  
+  private static void uploadXmlOfertas(Document doc, String cdCotacao, Transformer transformer, Date hoje) throws IOException, TransformerException {
+	    final DOMSource sourceOfertas = new DOMSource(doc);
+	    String filenameOfertas = diretorioArquivosXml + String.format("OFE_%s_%s_%s.xml", cnpjFornecedor, cdCotacao, new SimpleDateFormat("yyyyMMdd'_'HHmmss").format(hoje));
+      	Files.deleteIfExists(Paths.get(filenameOfertas));
+	    final StreamResult resultOfertas = new StreamResult(new File(filenameOfertas));
+	    transformer.transform(sourceOfertas, resultOfertas);
+	
+	    upload_File(enderecoBaseWebService + "FornecedorCotacao/EnviaArquivosOfertasCotacao", new File(filenameOfertas), "form1", username, senha) ;
+	 // Funcionou : uploadOfertas_File(enderecoBaseWebService + "cotacao/EnviaArquivosRecebimentoCotacao", new File(diretorioArquivosXml + "TesteWebServiceConfirmRecebCotacoes.xml"), "form1", username, senha) ;
+	 // uploadOfertas_BodyXML(enderecoBaseWebService + "cotacao/EnviaArquivosRecebimentoCotacao", (diretorioArquivosXml + "TesteWebServiceConfirmRecebCotacoes.xml"), username, senha) ;
   }
 
-
-
+	    
   private static void readProduto(NodeList produtos, int i, Document docOfertas, Element elmProdutos, Element elmErros, java.sql.Statement stat, java.sql.ResultSet rSet, String tipoPrecoComprador, Integer numRegiaoWinThor) throws SQLException
   {
     String mensagemErro;
@@ -1232,6 +1282,15 @@ public final class IntegracaoFornecedorCompleta {
         is.setCharacterStream(new StringReader(strXmlRecebido));
 
         Document xmlCotacoes = docBuilder.parse(is);
+
+	    Transformer transformerDebug = transformerFactory.newTransformer();
+	    transformerDebug.setOutputProperty(OutputKeys.ENCODING, "iso-8859-1");
+		transformerDebug.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformerDebug.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        final DOMSource sourceDebug = new DOMSource(xmlCotacoes);
+        final StreamResult resultDebug = new StreamResult(new StringWriter());
+        transformerDebug.transform(sourceDebug, resultDebug);
+        debugar("xmlCotacoesRecebido = " + resultDebug.getWriter().toString());
 
         NodeList cotacoes = xmlCotacoes.getElementsByTagName("Cotacao");
 
