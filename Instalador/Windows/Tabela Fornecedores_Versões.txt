@@ -1,6 +1,7 @@
-Fornecedor		Sistema		Versão integr-fornecedor-x.y.z.jar
-----------		-------     ----------------------------------
-Formaggio		APS			1.1.0
-Maritimos		WinThor		1.1.0
-JR Embalagem	WinThor		1.1.0
-Prolac			WinThor		1.2.0
+Fornecedor		Sistema		Versão integr-fornecedor-x.y.z.jar	Em produção
+----------		-------     ----------------------------------  ------------
+Formaggio		APS			1.1.0								Sim
+JR Embalagem	WinThor		1.1.0								Sim
+Marítimos		WinThor		1.1.0								Não
+Prolac			WinThor		1.2.0								Não
+Karne Keijo		SAP			1.3.0								Não

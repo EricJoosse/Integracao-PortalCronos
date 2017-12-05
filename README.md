@@ -12,6 +12,7 @@ __A integração tem as seguintes duas partes :__
    Esta parte se encontra no BitBucket.
    
 Os seguintes sistemas já foram integrados com o Portal Cronos : 
+* SAP	     
 * APS	     
 * WinThor   
 * IFS       

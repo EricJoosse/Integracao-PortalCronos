@@ -91,6 +91,8 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
        					C:\Program Files (x86)\Skype\Phone\;C:\Program Files\SafeNet\Authentication\SAC\x64;
        					C:\Program Files\SafeNet\Authentication\SAC\x32
        
+       KarneKeijo Testes antes:
+       					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
        					        
           0. Primeiro fazer backup:
                 (i)  do variável de ambiente do sistema "Path": 
@@ -167,7 +169,7 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
    12. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
    
    13. Enviar Email/ Skype: 
-       Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de confiiguração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
+       Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
 Manual para a geração do instalador Setup.exe:
 ==============================================

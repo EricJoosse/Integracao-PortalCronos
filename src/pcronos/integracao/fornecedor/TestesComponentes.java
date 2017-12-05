@@ -64,6 +64,16 @@ public class TestesComponentes {
 	  }
 	  
 	  
+	  public static void testNullParam(Document doc, String txt) {
+		    if (doc == null)
+		    	System.out.println("doc == null, txt = " + txt);
+		  }
+		  
+	  public static void testNullParam(File fi, String txt, boolean toLog) {
+		    if (fi == null)
+		    	System.out.println("file == null, txt = " + txt);
+		  }
+		  
 	  public static void main(String[] args) throws Exception {
 		java.sql.Connection conn = null;
 		java.sql.Statement stat = null;
@@ -71,6 +81,17 @@ public class TestesComponentes {
 
 		try
         {
+
+			  testNullParam(null, "abc");
+			  testNullParam(null, "abc", true);
+		  
+          if (1 == 1) return;
+
+          File dir = new File("C:/temp/a/b/c/log");
+          dir.mkdirs();
+
+	      if (1 == 1) return;
+
 		  System.out.println("Teste jar -cp .jar class");
 		  if (1 == 1) return;
 			 

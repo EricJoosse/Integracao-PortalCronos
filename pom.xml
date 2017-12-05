@@ -2,12 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>pcronos.integracao.fornecedor</groupId>
   <artifactId>integr-fornecedor</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
   <name>Integrador de Sistemas com o Portal Cronos - para Empresas Fornecedoras</name>
   
   <properties>
 <!--     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
     <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
+    <pcronos.jre.ambiente_producao>C:\Program Files\Java\jre1.8.0_92</pcronos.jre.ambiente_producao>
   </properties>
   
   <repositories>
@@ -65,9 +66,62 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.5.1</version>
         <configuration>
+          <encoding>Cp1252</encoding>   <!-- Para evitar erro de compilação para todos os acentos Portugueses : "unmappable character for encoding UTF-8" -->
           <source>1.8</source>
           <target>1.8</target>
-          <encoding>Cp1252</encoding>   <!-- Para evitar erro de compilação para todos os acentos Portugueses : "unmappable character for encoding UTF-8" -->
+          <fork>true</fork>
+
+<!--     O seguinte NÃO dá erro de opções inválidas de javac, porém não é o desejado : -->
+<!--           <compilerArguments> -->
+<!--             <verbose /> -->
+<!--              Em todos os dezenas de  servidores de produção tem o jre1.8.0_92 instalado, então melhor compilar exatamente com esta versão de rt.jar -->
+<!--             <bootclasspath>${java.home}\lib\rt.jar</bootclasspath> -->
+<!--             <extdirs>${java.home}\lib\ext</extdirs> -->
+<!--           </compilerArguments> -->
+
+<!--       O seguinte é o desejado , porém dá erro de opções inválidas de javac : -->
+<!--          <compilerArgument>"-verbose -bootclasspath ${java.home}\lib\rt.jar"</compilerArgument> -->
+<!--          <compilerArgument>-verbose -bootclasspath "${java.home}\lib\rt.jar"</compilerArgument> -->
+<!--          <compilerArgument>-verbose -bootclasspath ${java.home}\lib\rt.jar</compilerArgument> -->
+
+<!--             <bootclasspath>${java.home}..\jre1.8.0_92\lib\rt.jar</bootclasspath> -->
+<!--             <extdirs>${java.home}..\jre1.8.0_92\lib\ext</extdirs> -->
+
+<!--           O seguinte também dá erro de opções inválidas de javac : -->
+<!-- 			 <compilerArgs> -->
+<!-- 			<arg>-verbose</arg> -->
+<!-- 			<arg>-bootclasspath "C:\Program Files\Java\jre1.8.0_92\lib\rt.jar"</arg> -->
+<!-- 			<arg>-extdirs "C:\Program Files\Java\jre1.8.0_92\lib\ext"</arg> -->
+<!-- 			</compilerArgs> -->
+
+<!--           <compilerArguments> -->
+<!--             <verbose /> -->
+                       <!--  Em todos os dezenas de  servidores de produção tem o jre1.8.0_92 instalado, então melhor compilar exatamente com esta versão de rt.jar -->
+<!--             <bootclasspath>"C:\Program Files\Java\jre1.8.0_92\lib\rt.jar"</bootclasspath> -->
+<!--             <extdirs>"C:\Program Files\Java\jre1.8.0_92\lib\ext"</extdirs> -->
+<!--           </compilerArguments> -->
+
+<!--           <compilerArguments> -->
+<!--             <verbose /> -->
+<!--                         Em todos os dezenas de  servidores de produção tem o jre1.8.0_92 instalado, então melhor compilar exatamente com esta versão de rt.jar -->
+<!--             <bootclasspath>"C:/Program Files/Java/jre1.8.0_92/lib/rt.jar"</bootclasspath> -->
+<!--             <extdirs>"C:\Program Files\Java\jre1.8.0_92\lib\ext"</extdirs> -->
+<!--           </compilerArguments> -->
+
+<!--                  <compilerArgument>"-verbose -bootclasspath C:\Program Files\Java\jre1.8.0_92\lib\rt.jar -extdirs C:\Program Files\Java\jre1.8.0_92\lib\ext"</compilerArgument> -->
+<!--                  <compilerArgument>'-verbose -bootclasspath "C:\Program Files\Java\jre1.8.0_92\lib\rt.jar" -extdirs "C:\Program Files\Java\jre1.8.0_92\lib\ext"'</compilerArgument> -->
+<!--                  <compilerArgument>-verbose -bootclasspath C:\Program Files\Java\jre1.8.0_92\lib\rt.jar -extdirs C:\Program Files\Java\jre1.8.0_92\lib\ext</compilerArgument> -->
+<!--                  <compilerArgument>-verbose -bootclasspath "C:\Program Files\Java\jre1.8.0_92\lib\rt.jar" -extdirs "C:\Program Files\Java\jre1.8.0_92\lib\ext"</compilerArgument> -->
+<!--                  <compilerArgument>-verbose -bootclasspath "C:/Program Files/Java/jre1.8.0_92/lib/rt.jar" -extdirs "C:/Program Files/Java\jre1.8.0_92/lib/ext"</compilerArgument> -->
+
+<!-- Apenas o seguinte funciona, finalmente :  -->
+          <compilerArguments>
+            <verbose />
+<!--              Em todos os dezenas de  servidores de produção tem o jre1.8.0_92 instalado, então melhor compilar exatamente com esta versão de rt.jar -->
+            <bootclasspath>${pcronos.jre.ambiente_producao}\lib\rt.jar</bootclasspath>
+            <extdirs>${pcronos.jre.ambiente_producao}\lib\ext</extdirs>
+          </compilerArguments>
+
         </configuration>
       </plugin>
         
@@ -125,7 +179,7 @@
 		            <manifestEntries>
 				        <Specification-Title>Integrador Fornecedor - Portal Cronos</Specification-Title>
 				        <Specification-Vendor>Cronos Technology, PE, Brasil</Specification-Vendor>
-				        <Specification-Version>1.2.0</Specification-Version>
+				        <Specification-Version>1.3.0</Specification-Version>
 		            </manifestEntries>
 		          </manifestSection>
 
@@ -133,9 +187,9 @@
 		            <name>Implementation</name>
 		            <manifestEntries>
 				        <Implementation-Title>pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta.class</Implementation-Title>
-				        <Implementation-Version>1.2.0</Implementation-Version>
+				        <Implementation-Version>1.3.0</Implementation-Version>
 				        <Implementation-Vendor>eric.jo@bol.com.br</Implementation-Vendor>
-				        <Jar-Name>integr-fornecedor-1.2.0.jar</Jar-Name>
+				        <Jar-Name>integr-fornecedor-1.3.0.jar</Jar-Name>
 		            </manifestEntries>
 		          </manifestSection>
 
