@@ -719,11 +719,10 @@ public final class IntegracaoFornecedorCompleta {
 		        }
 		        else if (siglaSistema.equals("WinThor"))
 		        {
-				    sqlString = "select PCCLIENT.CGCENT "
-				              + "  from PCCLIENT        "
+				    sqlString = "select PCCLIENT.DTEXCLUSAO "
+				              + "  from PCCLIENT            "
 				              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-				              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
-				              + "   and PCCLIENT.DTEXCLUSAO is null "
+				              + "   and PCCLIENT.DTEXCLUSAO is not null "
 				              ;
 		        }
 		
@@ -734,15 +733,49 @@ public final class IntegracaoFornecedorCompleta {
 				
 				    rSet = stat.executeQuery( sqlString ) ;
 				
-				    if (rSet == null || !rSet.next()) 
+				    if (rSet != null && rSet.next()) 
 				    {
-				       // Se o cliente for bloqueado ou excluido, não enviar NENHUMA mensagem de erro, e nao gerar nenhum arquivo XML, 
-				       // porém apenas Debugar (para verificação na primeira instalação deste programa no fornecedor)
-			  	       debugar("Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada ou desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-				       return; // aborta a cotação  atual e continua com a próxima cotação
+			    	   toNaoVerificarDemaisErros = true;
+			    	   try {
+					       Date dataExclusao = rSet.getDate(1);  
+			    	       enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao) + ".");
+			    	   }
+			    	   catch (java.lang.Exception ex) {
+				    	   debugar("Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
+			    	   }
 				    }
 		        } // if (sqlString != null)
-	        } // if (existeCompradora)
+
+		    
+			    rSet = null;
+			    
+				if (siglaSistema.equals("APS"))
+		        {
+		        	sqlString = null;
+		        }
+		        else if (siglaSistema.equals("WinThor"))
+		        {
+				    sqlString = "select PCCLIENT.CGCENT "
+				              + "  from PCCLIENT        "
+				              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+				              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
+				              ;
+		        }
+		
+		        if (sqlString != null && !toNaoVerificarDemaisErros)
+		        {
+				    // Para executar o SELECT direto no banco de dados, se precisar :
+				    debugar(sqlString);
+				
+				    rSet = stat.executeQuery( sqlString ) ;
+				
+				    if (rSet == null || !rSet.next()) 
+				    {
+			    	   toNaoVerificarDemaisErros = true;
+			    	   enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+				    }
+		        } // if (sqlString != null)
+		    } // if (existeCompradora)
 
 		    
 	        
