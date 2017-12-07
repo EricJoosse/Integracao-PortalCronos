@@ -93,6 +93,14 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
        
        KarneKeijo Testes antes:
        					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+
+	Marítimos antes (servidor producao): 	C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
+						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+
+			depois: 		C:\ProgramData\Oracle\Java\javapath;
+						C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
+						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+
        					        
           0. Primeiro fazer backup:
                 (i)  do variável de ambiente do sistema "Path": 
@@ -168,7 +176,32 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 
    12. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
    
-   13. Enviar Email/ Skype: 
+   13. No caso de integração com o  SAP: 
+			There are different distribution packages for various JRE versions and hardware processors available:
+			
+			    sapjco3-ntintel-3.0.17.zip for a 32-bit JRE running on a 32- or 64-bit AMD or INTEL x86 or a 64-bit INTEL Itanium processor
+			    sapjco3-ntia64-3.0.17.zip for a 64-bit JRE running on a 64-bit INTEL Itanium processor
+			    sapjco3-ntamd64-3.0.17.zip for a 64-bit JRE running on a 64-bit AMD or INTEL x86 processor 
+			
+			Note: Before installing JCo, please install the latest Microsoft Visual Studio 2005 C/C++ 
+			      runtime libraries as described in note 684106.
+			
+			To install JCo for Windows unzip the appropriate distribution package into 
+			an own arbitrary directory {sapjco3-path}.
+			
+			Note: Do not copy the sapjco3.dll neither into the {windows-dir}\system32 
+			      nor into the {windows-dir}\SysWOW64 directory. 
+			      This will break the operability of other JCo versions that are already 
+			      installed on the same system. Furthermore you would risk that the 
+			      current installation also would not work anymore, if the sapjco3.dll 
+			      gets replaced in the respective Windows system directory in the future.
+			
+			Then add {sapjco3-path} to the PATH environment variable.
+			Finally, add {sapjco3-path}\sapjco3.jar to your CLASSPATH environment variable. 
+
+   14. Verificar se debug = true no arquivo de configuração para facilitar atendimento imediato no futuro. 
+ 
+   15. Enviar Email/ Skype: 
        Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
 Manual para a geração do instalador Setup.exe:
