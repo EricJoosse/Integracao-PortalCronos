@@ -199,7 +199,8 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 			Then add {sapjco3-path} to the PATH environment variable.
 			Finally, add {sapjco3-path}\sapjco3.jar to your CLASSPATH environment variable. 
 
-   14. Verificar se debug = true no arquivo de configuração para facilitar atendimento imediato no futuro. 
+   14. (i)  Verificar se debug = true no arquivo de configuração para facilitar atendimento imediato no futuro.
+       (ii) Verificar se o default de QtdDiasArquivosXmlGuardados = 100 
  
    15. Enviar Email/ Skype: 
        Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
