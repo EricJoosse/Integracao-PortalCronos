@@ -741,7 +741,7 @@ public final class IntegracaoFornecedorCompleta {
 			    	       enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao) + ".");
 			    	   }
 			    	   catch (java.lang.Exception ex) {
-				    	   debugar("Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
+				    	   debugar("Catch Exception entrado: não foi possível enviar a seguinte mensagem informando dataExclusao: Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
 			    	   }
 				    }
 		        } // if (sqlString != null)
@@ -755,10 +755,10 @@ public final class IntegracaoFornecedorCompleta {
 		        }
 		        else if (siglaSistema.equals("WinThor"))
 		        {
-				    sqlString = "select PCCLIENT.CGCENT "
+				    sqlString = "select PCCLIENT.DTBLOQ "
 				              + "  from PCCLIENT        "
 				              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-				              + "   and PCCLIENT.BLOQUEIO   <> 'S'  "
+				              + "   and PCCLIENT.BLOQUEIO = 'S'  "
 				              ;
 		        }
 		
@@ -769,10 +769,22 @@ public final class IntegracaoFornecedorCompleta {
 				
 				    rSet = stat.executeQuery( sqlString ) ;
 				
-				    if (rSet == null || !rSet.next()) 
+				    if (rSet != null && rSet.next()) 
 				    {
 			    	   toNaoVerificarDemaisErros = true;
-			    	   enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+			    	   
+			    	   if (rSet.getObject(1) == null)
+				    	   enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+			    	   else 
+			    	   {
+				    	   try {
+			    	          Date dataBloqueio = rSet.getDate(1);  
+			    	          enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataBloqueio) + ".");
+				    	   }
+				    	   catch (java.lang.Exception ex) {
+					    	   debugar("Catch Exception entrado: não foi possível enviar a seguinte mensagem informando dataBloqueio: Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
+				    	   }
+			    	   }
 				    }
 		        } // if (sqlString != null)
 		    } // if (existeCompradora)

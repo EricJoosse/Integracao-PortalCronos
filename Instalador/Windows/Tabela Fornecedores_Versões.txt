@@ -3,7 +3,7 @@ Fornecedor   IdForn	Sistema		Versão integr-fornecedor-x.y.z.jar	Em produção		Deb
 Formaggio 		13	APS			1.1.0								Sim									365			Braytner Vasconcelos
 JR Embalagem	947	WinThor		1.1.0								Sim									365			Ivan Barros
 Prolac 			30	WinThor		1.2.1								Sim				true	297 GB		100			Marcelo Bezerra			marcelo@casadoqueijo.net.br
-Marítimos		21	WinThor		1.2.0								Sim  								365			Felipe Lolaia			felipe.lolaia@maritimospescados.com.br
+Marítimos		21	WinThor		1.2.1								Sim  			true	 48 GB		100			Felipe Lolaia			felipe.lolaia@maritimospescados.com.br
 Karne Keijo		60	SAP			1.3.0								Não												Timon Dourado			timons@kk.com.br
 Comal 			33	WinThor			 								Não
 Master Commerce 51	WinThor			 								Não

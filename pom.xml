@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>pcronos.integracao.fornecedor</groupId>
   <artifactId>integr-fornecedor</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.2</version>
   <name>Integrador de Sistemas com o Portal Cronos - para Empresas Fornecedoras</name>
   
   <properties>
@@ -179,7 +179,7 @@
 		            <manifestEntries>
 				        <Specification-Title>Integrador Fornecedor - Portal Cronos</Specification-Title>
 				        <Specification-Vendor>Cronos Technology, PE, Brasil</Specification-Vendor>
-				        <Specification-Version>1.2.1</Specification-Version>
+				        <Specification-Version>1.2.2</Specification-Version>
 		            </manifestEntries>
 		          </manifestSection>
 
@@ -187,9 +187,9 @@
 		            <name>Implementation</name>
 		            <manifestEntries>
 				        <Implementation-Title>pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta.class</Implementation-Title>
-				        <Implementation-Version>1.2.1</Implementation-Version>
+				        <Implementation-Version>1.2.2</Implementation-Version>
 				        <Implementation-Vendor>eric.jo@bol.com.br</Implementation-Vendor>
-				        <Jar-Name>integr-fornecedor-1.2.1.jar</Jar-Name>
+				        <Jar-Name>integr-fornecedor-1.2.2.jar</Jar-Name>
 		            </manifestEntries>
 		          </manifestSection>
 
