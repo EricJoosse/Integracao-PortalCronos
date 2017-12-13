@@ -196,8 +196,12 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 			      current installation also would not work anymore, if the sapjco3.dll 
 			      gets replaced in the respective Windows system directory in the future.
 			
-			Then add {sapjco3-path} to the PATH environment variable.
-			Finally, add {sapjco3-path}\sapjco3.jar to your CLASSPATH environment variable. 
+			Then add {sapjco3-path} (C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\lib) 
+			to the PATH environment variable.
+			
+			Finally, add {sapjco3-path}\sapjco3.jar to your CLASSPATH environment variable: 
+			1. No Eclipse: .............. 
+			2. Já foi feito automaticamente pelo pom.xml na geração do .jar. 
 
    14. (i)  Verificar se debug = true no arquivo de configuração para facilitar atendimento imediato no futuro.
        (ii) Verificar se o default de QtdDiasArquivosXmlGuardados = 100 

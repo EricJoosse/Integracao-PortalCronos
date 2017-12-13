@@ -54,6 +54,11 @@ import org.w3c.dom.CharacterData;
 import org.xml.sax.InputSource;
 import oracle.jdbc.driver.OracleDriver ; // http://www.java2s.com/Code/Jar/j/Downloadjdbcoraclejar.htm
 import org.firebirdsql.jdbc.FBDriver   ;
+import com.sap.conn.jco.JCoDestination;
+import com.sap.conn.jco.JCoDestinationManager;
+import com.sap.conn.jco.JCoFunction;
+import com.sap.conn.jco.JCoException;
+import com.sap.conn.jco.AbapException;
 
 // Javadocs Jersey downloaded de http://repo1.maven.org/maven2/com/sun/jersey/
 //                             e https://www.versioneye.com/java/com.sun.jersey.contribs:jersey-multipart/1.12       
@@ -598,6 +603,44 @@ public final class IntegracaoFornecedorCompleta {
            transformerSAP.transform(sourceSAP, resultSAP);
            String strCotacao = resultSAP.getWriter().toString().replaceAll("<Cotacao>", "<Cotacoes><Cotacao>").replaceAll("</Cotacao>", "</Cotacao></Cotacoes>");
            debugar("strCotacao = " + strCotacao);
+
+           JCoDestination destination = JCoDestinationManager.getDestination("conf/SAP_API");
+           JCoFunction function = destination.getRepository().getFunction("ZFCSD00_IMPCOT");
+
+           if (function == null)
+             throw new Exception("Funçao ZFCSD00_IMPCOT não encontrada no SAP.");
+
+           function.getImportParameterList().setValue("I_XML", strCotacao);
+
+           try {
+                function.execute(destination);
+	        String strXmlOfertasRecebido = function.getExportParameterList().getString("E_RESULT");
+                debugar("strXmlOfertasRecebido = " + strXmlOfertasRecebido);
+
+                if (strXmlOfertasRecebido == null) {
+                   logarErro("Erro ao chamar a função do SAP: string Xml Ofertas Recebido == null");
+                   return;
+                }
+                else if (strXmlOfertasRecebido.substring(0,2).equals("Err")) {
+                   logarErro("Erro ao chamar a função do SAP: " + strXmlOfertasRecebido);
+                   return;
+                }
+	        InputSource isOfertas = new InputSource();
+	        isOfertas.setCharacterStream(new StringReader(strXmlOfertasRecebido));
+	
+	        docOfertas = docBuilder.parse(isOfertas);
+	    	uploadXmlOfertas(docOfertas, cdCotacao, transformer, hoje);
+           }
+           catch(AbapException aex)
+           {
+              logarErro((aex.getKey() == null ? "" : aex.getKey()) + ": " + aex.toString() + " - " + aex.getMessageText());
+           }
+           catch (JCoException jex) {
+              logarErro((jex.getKey() == null ? "" : jex.getKey()) + ": " + jex.toString() + " - " + jex.getMessageText());
+           }
+           catch (Exception ex) { // Exemplo: xml invalido retornado pela function do SAP, ou erro SQL na function do SAP
+              logarErro("Erro ao chamar a função do SAP: " + ex.getMessage());
+           }
         }
         else  // (!siglaSistema.equals("SAP"))
            montarXmlOfertas(transformer, docOfertas, produtos, elmErros, cdCotacao, cdComprador, tpFrete, docBuilder);
