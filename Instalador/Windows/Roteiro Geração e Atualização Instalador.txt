@@ -74,16 +74,9 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 					     
 					     
 					     
-	    JR Emb: antes:                                       H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
-					     C:\oracle\product\11.2.0\client_1;C:\oracle\product\11.2.0\client_1\bin;
-					     C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;
-					     C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\iCLS Client\;
-					     C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;
-					     C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;
-					     C:\ProgramData\Oracle\Java\javapath;
-					     C:\Users\Administrador\AppData\Local\Microsoft\WindowsApps;
-					     C:\Windows;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
-					     c:\InstantClient;C:\instantclient
+	   JR Emb: antes:   C:\app\SERVIDOR\product\11.2.0\client_1;C:\app\SERVIDOR\product\11.2.0\client_1\bin;
+	                    %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
+	                    %SYSTEMROOT%\System32\WindowsPowerShell\v1.0\           
 					     
        Prolac antes: 	C:\ProgramData\Oracle\Java\javapath;C:\oracle\product\10.2.0\client_1\bin;
        					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
@@ -91,19 +84,20 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
        					C:\Program Files (x86)\Skype\Phone\;C:\Program Files\SafeNet\Authentication\SAC\x64;
        					C:\Program Files\SafeNet\Authentication\SAC\x32
        
-       KarneKeijo Testes antes:
+       KarneKeijo - Testes antes:
        					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
 
-	Marítimos antes (servidor producao): 	C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
+	   Marítimos antes (servidor producao): 	
+	                    C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
 						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
 
-			depois: 		C:\ProgramData\Oracle\Java\javapath;
+			depois: 	C:\ProgramData\Oracle\Java\javapath;
 						C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
 						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
 
        					        
           0. Primeiro fazer backup:
-                (i)  do variável de ambiente do sistema "Path": 
+                (i)  do variável de ambiente do sistema "Path" de Windows: 
                 (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
                 
              e verificar :
@@ -130,9 +124,11 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
  
     8. Após a instalação :
     
-    8a. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
+    8a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
+    
+    8b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
      
-    8b. No caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
+    8c. No caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
           [HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92\MSI]
 			   "JAVAUPDATE"="0"
 			   "AUTOUPDATECHECK"="0"
@@ -157,8 +153,12 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 	   Depois disso executar "regedit.exe /s %arquivoRegedit%" em um arquivo .bat separado.
 	   
    10. No caso que a versão de Windows ainda não está homologada,
-       verificar todas as propriedades do task criado no Task Scheduler, 
-       e, no caso, copiar Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml 
+       verificar todas as propriedades do task criado no Task Scheduler:  
+       a forma mais fácil é comparar com uma instalação em qualquer Windows Server 2008 R2 SP 1 
+       onde a primeir task foi desenvolvida originalmente. 
+       Fazer isso ainda no caso de Windows 10 e Windows Server 2012. 
+
+       Se tiver alguma diferença, copiar Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml 
        para outro arquivo novo, e adaptar Primeira_Instalacao_Versao_Windows.bat. 
        No outro caso que funcionou, adicionar o novo SO no nome do arquivo e adaptar Primeira_Instalacao_Versao_Windows.bat.
 
@@ -174,9 +174,19 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 			    exit
 			)
 
+   11. Só uma vez: 
+       No caso de Windows_10_Pro_64bit: testar e remover o seguinte: 
+		REM Falta testar o seguinte!!!!!!!!!!!!!!!!!!!!!!!!
+		REM Se é para usar %~dp0DeshabilitarJavaUpdates.x64.reg ou DeshabilitarJavaUpdates.x64.reg
+		REM no seguinte caso de if %Windows_10_Pro_64bit% == 1:
+		REM ) else if %Windows_10_Pro_64bit% == 1 (
+		REM     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
+
+   
+
    12. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
    
-   13. No caso de integração com o  SAP: 
+   13. No caso de integração com o SAP: 
 			There are different distribution packages for various JRE versions and hardware processors available:
 			
 			    sapjco3-ntintel-3.0.17.zip for a 32-bit JRE running on a 32- or 64-bit AMD or INTEL x86 or a 64-bit INTEL Itanium processor
@@ -219,7 +229,7 @@ Manual para a geração do instalador Setup.exe:
 2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.exe".
      
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
-   que cria /"Arquivos de Programas PC"/* no servidor do fornecedor :
+   que cria /"Arquivos de Programas PC"/* no servidor do fornecedor, da seguinte forma :
       - Selecionar todos os arquivos e subdir no raiz do diretório navegado no Windows Explorer :
             - selecionar apenas UM dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
             - selecionar apenas UM dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
@@ -233,7 +243,7 @@ Manual para a geração do instalador Setup.exe:
    Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
       - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
       - Marcar                   : Absolute path
-      - Deixar marcado           : Salvar e restaurar caminho
+      - Marcar ou deixar marcado : Checkbox "Salvar e restaurar caminho"
       - Executar após a extração : Primeira_Instalacao_Versao_Windows.bat 
                                    (pelo menos o Winrar 4.01 tem este After Extraction Trigger)
       - Sub-aba "Avançado"       : Marcar checkbox "Pedido de acesso administrativo"

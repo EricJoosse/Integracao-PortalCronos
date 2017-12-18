@@ -15,7 +15,7 @@ echo.
 REM set osVersion=Windows_Server_2016
 REM set osVersion=Windows_Server_2012_R2
 REM set osVersion=Windows_Server_2012
-set osVersion=Windows_Server_2008_R2_SP1
+REM set osVersion=Windows_Server_2008_R2_SP1
 REM set osVersion=Windows_Server_2008
 REM set osVersion=Windows_Server_2003_R2
 REM set osVersion=Windows_Server_2003
@@ -24,8 +24,9 @@ REM set osVersion=Windows_NT_40
 REM set osVersion=Windows_NT_351
 REM set osVersion=Windows_NT_35
 REM set osVersion=Windows_NT_31
-REM set osVersion=Windows_8_Pro
 REM set osVersion=Windows_7_Professional_SP1
+REM set osVersion=Windows_8_Pro
+set osVersion=Windows_10_Pro
   
   
 if %osVersion% == Windows_Server_2016 (
@@ -42,13 +43,27 @@ if %osVersion% == Windows_Server_2016 (
     set /A tipoOS=32
 ) else if %osVersion% == Windows_NT_31 (
     set /A tipoOS=32
+) else if %osVersion% == Windows_10_Pro (
+REM set /A tipoOS=32
+    set /A tipoOS=64
 ) else (
 REM set /A tipoOS=32
     set /A tipoOS=64
 )
 
+
+set Windows_10_Pro_64bit=0
+if %osVersion% == Windows_10_Pro (
+   if %tipoOS% == 64 (
+      set Windows_10_Pro_64bit=1
+   )
+)
+
+
     set drive=C:
 REM set drive=D:
+
+
 
 REM goto SKIP_JRE
 REM goto SKIP_JRE_TEMPDIR
@@ -65,14 +80,27 @@ REM !!!!!!!!!!!!!!! CUIDADO PARA NÃO CORROMPER O REGEDIT !!!!!!!!!
 REM !!!!!!!!!!!!!!! CUIDADO PARA NÃO CORROMPER O REGEDIT !!!!!!!!!
 REM !!!!!!!!!!!!!!! CUIDADO PARA NÃO CORROMPER O REGEDIT !!!!!!!!!
 
+
+
+
+REM Falta testar o seguinte!!!!!!!!!!!!!!!!!!!!!!!!
+REM Se é para usar %~dp0DeshabilitarJavaUpdates.x64.reg ou DeshabilitarJavaUpdates.x64.reg
+REM no seguinte caso de if Windows_10_Pro_64bit == 1:
+REM ) else if %Windows_10_Pro_64bit% == 1 (
+REM     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
+
+
 if %osVersion% == Windows_Server_2008_R2_SP1 (
     set arquivoRegedit="%drive%\\Arquivos de Programas PC\\DeshabilitarJavaUpdates.x64.reg"
 ) else if %osVersion% == Windows_Server_2012_R2 (
     set arquivoRegedit=%~dp0DeshabilitarJavaUpdates.x64.reg
+) else if %Windows_10_Pro_64bit% == 1 (
+    set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 ) else if %osVersion% == Windows_7_Professional_SP1 (
     set arquivoRegedit=DeshabilitarJavaUpdates.i586.reg
-) else (
-    echo MSGBOX "Esta versão de Windows ainda não está suportada ! Favor contatar o  Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
+)
+else (
+    echo MSGBOX "Esta versão de Windows ainda não está suportada ! Favor entrar em contato com o  Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     exit
@@ -126,7 +154,15 @@ REM SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /TR "C:\Arquivo
 
 REM O seguinte XML tem as configurações completas e foi criado criando a task manualmente,
 REM e em seguida exportada para XML : 
-SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+if %osVersion% == Windows_Server_2008_R2_SP1 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else if %Windows_10_Pro_64bit% == 1 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else (
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+)
 
 SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
 
