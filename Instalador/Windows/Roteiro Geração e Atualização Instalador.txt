@@ -195,6 +195,8 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 			
 			Note: Before installing JCo, please install the latest Microsoft Visual Studio 2005 C/C++ 
 			      runtime libraries as described in note 684106.
+			      Obs.: foi testado que tudo funcionou com o Microsoft Visual C/C++ 2010 x64 Redistributable 
+			            e  o  Microsoft Visual C/C++ 2013 Redistributable x64 instalados ao mesmo tempo.
 			
 			To install JCo for Windows unzip the appropriate distribution package into 
 			an own arbitrary directory {sapjco3-path}.

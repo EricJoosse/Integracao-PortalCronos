@@ -54,10 +54,19 @@
     	<artifactId>jaybird-full</artifactId>
     	<version>2.2.10</version>
     </dependency>
+<!--     O seguinte dá runtime error ao executar "java -jar {sapjco3-path}/sapjco3.jar"  -->
+<!--     que "sapjco3.jar não pode ser renomeado":  -->
+<!--<dependency> -->
+<!--   	<groupId>com.sap</groupId> -->
+<!--   	<artifactId>jco-sap</artifactId> -->
+<!--  	<version>3.0.17</version> -->
+<!--</dependency> -->
     <dependency>
-    	<groupId>com.sap</groupId>
-    	<artifactId>jco-sap</artifactId>
-    	<version>3.0.17</version>
+         <groupId>sapjco3</groupId>
+         <artifactId>sapjco3</artifactId>
+         <scope>system</scope>
+         <version>3.0.17</version>
+         <systemPath>C:\PCronos\PCronos Lib\lib\sapjco3.jar</systemPath>
     </dependency>
   </dependencies>
   
@@ -152,6 +161,12 @@
 		        <overWriteSnapshots>false</overWriteSnapshots>
 		        <overWriteIfNewer>true</overWriteIfNewer>
 		        <includeScope>compile</includeScope>
+<!-- 		    Exceto o seguinte, pois o "copy-dependencies" do maven-dependency-plugin -->
+<!-- 		    faz uma cópia de "sapjco3.jar" para "sapjco3-3.0.17.jar" indevidamente: -->
+		        <excludeArtifactIds>sapjco3</excludeArtifactIds>
+<!--            Mais tarde copiar para 2 diretórios intermediários, uma vez com <stripversion>true</stripversion> -->
+<!--            e outra vez com <stripversion>false</stripversion>  -->
+<!--            e em seguinte usar o assembly-plugin:    -->
 		      </configuration>
 		    </execution>
 		  </executions>
@@ -205,7 +220,7 @@
 		        <Build-Time>${maven.build.timestamp}</Build-Time>
 <!-- 3. O seguinte concatena "rt.jar" e "." ANTES do Class-Path gerado automaticamente por Maven : -->
         <!-- <Class-Path>file:///C:/Program%20Files/Java/jre1.8.0_92/lib/rt.jar .</Class-Path> -->
-   		        <Class-Path>.</Class-Path>  <!-- rt.jar não precisa, pois rt.jar já está no bootclasspath do JVM -->
+   		        <Class-Path>. lib/sapjco3.jar</Class-Path>  <!-- rt.jar não precisa, pois rt.jar já está no bootclasspath do JVM -->
 		     </manifestEntries>
 
 		    </archive>

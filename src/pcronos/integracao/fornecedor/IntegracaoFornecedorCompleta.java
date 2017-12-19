@@ -604,42 +604,68 @@ public final class IntegracaoFornecedorCompleta {
            String strCotacao = resultSAP.getWriter().toString().replaceAll("<Cotacao>", "<Cotacoes><Cotacao>").replaceAll("</Cotacao>", "</Cotacao></Cotacoes>");
            debugar("strCotacao = " + strCotacao);
 
-           JCoDestination destination = JCoDestinationManager.getDestination("conf/SAP_API");
-           JCoFunction function = destination.getRepository().getFunction("ZFCSD00_IMPCOT");
-
-           if (function == null)
-             throw new Exception("Funçao ZFCSD00_IMPCOT não encontrada no SAP.");
-
-           function.getImportParameterList().setValue("I_XML", strCotacao);
-
            try {
+	            JCoDestination destination = JCoDestinationManager.getDestination("conf/SAP_API");
+	            debugar("Passou JCoDestination destination");
+	            debugar("Attributes: ");
+	            debugar(destination.getAttributes().toString());
+	            JCoFunction function = destination.getRepository().getFunction("ZFCSD00_IMPCOT");
+	            debugar("Passou JCoFunction function");
+	
+	            if (function == null)
+	              throw new Exception("Funçao ZFCSD00_IMPCOT não encontrada no SAP.");
+	
+	            function.getImportParameterList().setValue("I_XML", strCotacao);
+
                 function.execute(destination);
-	        String strXmlOfertasRecebido = function.getExportParameterList().getString("E_RESULT");
+	            String strXmlOfertasRecebido = function.getExportParameterList().getString("E_RESULT");
                 debugar("strXmlOfertasRecebido = " + strXmlOfertasRecebido);
 
                 if (strXmlOfertasRecebido == null) {
                    logarErro("Erro ao chamar a função do SAP: string Xml Ofertas Recebido == null");
                    return;
                 }
-                else if (strXmlOfertasRecebido.substring(0,2).equals("Err")) {
-                   logarErro("Erro ao chamar a função do SAP: " + strXmlOfertasRecebido);
-                   return;
+                else {
+                	if (strXmlOfertasRecebido.substring(0,3).toUpperCase().equals("ERR")) {
+                       debugar("Entrou no if strXmlOfertasRecebido.substring(0,3).toUpperCase().equals(ERR)");
+                       logarErro("Erro ao chamar a função do SAP: " + strXmlOfertasRecebido);
+                       return;
+                    }
                 }
-	        InputSource isOfertas = new InputSource();
-	        isOfertas.setCharacterStream(new StringReader(strXmlOfertasRecebido));
-	
-	        docOfertas = docBuilder.parse(isOfertas);
-	    	uploadXmlOfertas(docOfertas, cdCotacao, transformer, hoje);
+                
+//              Thread.sleep((5 * 60 * 1000);
+                
+//	            function = destination.getRepository().getFunction("ZFCSD00_EXPCOT");
+//	            debugar("Passou JCoFunction function");
+//	
+//	            if (function == null)
+//	              throw new Exception("Funçao ZFCSD00_EXPCOT não encontrada no SAP.");
+//	
+//              function.execute(destination);
+//	            strXmlOfertasRecebido = function.getExportParameterList().getString("E_XML");
+//              debugar("strXmlOfertasRecebido = " + strXmlOfertasRecebido);
+//
+//              if (strXmlOfertasRecebido == null) {
+//                   logarErro("Erro ao chamar a função do SAP: string Xml Ofertas Recebido == null");
+//                   return;
+//              }
+                
+                debugar("Entrando em InputSource isOfertas = new InputSource();");
+		        InputSource isOfertas = new InputSource();
+		        isOfertas.setCharacterStream(new StringReader(strXmlOfertasRecebido));
+		
+		        docOfertas = docBuilder.parse(isOfertas);
+		    	uploadXmlOfertas(docOfertas, cdCotacao, transformer, hoje);
            }
            catch(AbapException aex)
            {
-              logarErro((aex.getKey() == null ? "" : aex.getKey()) + ": " + aex.toString() + " - " + aex.getMessageText());
+              logarErro("Exception aex entrado: " + (aex.getKey() == null ? "" : aex.getKey()) + ": " + aex.toString() + " - " + aex.getMessageText());
            }
            catch (JCoException jex) {
-              logarErro((jex.getKey() == null ? "" : jex.getKey()) + ": " + jex.toString() + " - " + jex.getMessageText());
+              logarErro("Exception jex entrado: " + (jex.getKey() == null ? "" : jex.getKey()) + ": " + jex.toString() + " - " + jex.getMessageText());
            }
            catch (Exception ex) { // Exemplo: xml invalido retornado pela function do SAP, ou erro SQL na function do SAP
-              logarErro("Erro ao chamar a função do SAP: " + ex.getMessage());
+              logarErro("Exception ex entrado: Erro ao chamar a função do SAP: " + ex.getMessage());
            }
         }
         else  // (!siglaSistema.equals("SAP"))
