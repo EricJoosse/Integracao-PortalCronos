@@ -807,10 +807,10 @@ public final class IntegracaoFornecedorCompleta {
 			    	   toNaoVerificarDemaisErros = true;
 			    	   try {
 					       Date dataExclusao = rSet.getDate(1);  
-			    	       enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao) + ".");
+			    	       enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao) + ".");
 			    	   }
 			    	   catch (java.lang.Exception ex) {
-				    	   debugar("Catch Exception entrado: não foi possível enviar a seguinte mensagem informando dataExclusao: Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
+				    	   debugar("Catch Exception entrado: não foi possível enviar a seguinte mensagem informando dataExclusao: Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
 			    	   }
 				    }
 		        } // if (sqlString != null)
@@ -843,15 +843,15 @@ public final class IntegracaoFornecedorCompleta {
 			    	   toNaoVerificarDemaisErros = true;
 			    	   
 			    	   if (rSet.getObject(1) == null)
-				    	   enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+				    	   enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
 			    	   else 
 			    	   {
 				    	   try {
 			    	          Date dataBloqueio = rSet.getDate(1);  
-			    	          enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " desde o dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataBloqueio) + ".");
+			    	          enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " desde o dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataBloqueio) + ".");
 				    	   }
 				    	   catch (java.lang.Exception ex) {
-					    	   debugar("Catch Exception entrado: não foi possível enviar a seguinte mensagem informando dataBloqueio: Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
+					    	   debugar("Catch Exception entrado: não foi possível enviar a seguinte mensagem informando dataBloqueio: Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") está bloqueada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
 				    	   }
 			    	   }
 				    }
@@ -899,7 +899,7 @@ public final class IntegracaoFornecedorCompleta {
 		
 		    if (cdCondicaoPagamento.equals("") && !toNaoVerificarDemaisErros)
 		    {
-		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
 		    }
 		
 		
@@ -956,7 +956,7 @@ public final class IntegracaoFornecedorCompleta {
 			    {
 			    	// O Valor Mínimo pode ser R$ 0,00 porém não pode ser em branco porque assim o sistema não sabe 
 			    	// se for R$ 0,00 ou se é para usar o Valor Mínimo geral do fornecedor cadastrado no Portal Cronos :
-			        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ". Portanto não foi posssível verificar se o valor seria R$ 0,00 ou se o valor seria igual ao Valor Mínimo geral do fornecedor cadastrado no Portal Cronos.");
+			        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ". Portanto não foi posssível verificar se o valor seria R$ 0,00 ou se o valor seria igual ao Valor Mínimo geral do fornecedor cadastrado no Portal Cronos.");
 			    }
 	        }
 		
@@ -1029,7 +1029,7 @@ public final class IntegracaoFornecedorCompleta {
 		
 		    if (tipoPrecoComprador == null && !toNaoVerificarDemaisErros)
 		    {
-		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O tipo de preço para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O tipo de preço para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
 		    }
 		    else if (    siglaSistema.equals("WinThor")
 	                      && tipoPrecoComprador != null 
@@ -1076,7 +1076,7 @@ public final class IntegracaoFornecedorCompleta {
 
 			    if (numRegiaoWinThor == null && !toNaoVerificarDemaisErros)
 			    {
-			      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A região da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+			      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A região da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
 			    }
 		    }
 		
