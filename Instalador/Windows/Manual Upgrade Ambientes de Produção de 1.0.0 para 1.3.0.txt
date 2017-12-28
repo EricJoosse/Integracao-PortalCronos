@@ -29,7 +29,7 @@ TipoAmbiente                      = H
  
 4. Copiar arquivo novo conf/ABAP_PCronos.jcoDestionation do instalador para o servidor do fornecedor
  
-5. Copiar os arquivos novos lib/jco-sap-3.0.17.jar, lib\sapjco3.dll e lib\sapjco3.pdb 
+5. Copiar os arquivos novos lib/sapjco3.jar, lib/sapjco3.dll e lib/sapjco3.pdb 
    do instalador para o servidor do fornecedor 
  
 6. Adicionar "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\lib" 
