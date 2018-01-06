@@ -1,6 +1,9 @@
 package pcronos.integracao.fornecedor;
 
 import pcronos.integracao.ConfiguracaoException;
+import pcronos.integracao.Criptografia;
+import pcronos.integracao.EmailAutomatico;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
@@ -119,6 +122,13 @@ public final class IntegracaoFornecedorCompleta {
   public static String       diretorioArquivosXml;
   public static String       ObsOfertasPadraoSeNaoTemNoSistema;
   public static boolean      toDebugar;
+  public static boolean      toEnviarEmailAutomatico;
+  public static String       provedorEmailAutomatico;
+  public static String       remetenteEmailAutomatico;
+  public static String       destinoEmailAutomatico;
+  public static String       ccEmailAutomatico;
+  public static String       usuarioEmailAutomatico;
+  public static String       senhaCriptografadaEmailAutomatico;	  
   public static boolean      temErroGeralCotacao;
   public static String       erroStaticConstructor;
   public static String       nomeArquivoDebug;
@@ -142,10 +152,28 @@ public final class IntegracaoFornecedorCompleta {
 
       siglaSistema  = config.getProperty("SiglaSistema");
 
-      if ( !( siglaSistema.equals("SAP") || siglaSistema.equals("APS") || siglaSistema.equals("WinThor") ) ) {
+      if ( !( siglaSistema.equals("SAP") || siglaSistema.equals("APS") || siglaSistema.equals("WinThor") || siglaSistema.equals("PCronos") ) ) {
     	  String msgErro = "O sistema " + siglaSistema + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
     	  throw new ConfiguracaoException(msgErro);
       }
+      
+
+      if (siglaSistema.equals("PCronos"))
+	  {
+          toEnviarEmailAutomatico = Boolean.parseBoolean(config.getProperty("EnviarEmailAutomatico"));
+          // Foi debugado que toEnviarEmailAutomatico fica false corretamente no caso que a configuração NÃO existe no arq .config
+
+          
+          if (toEnviarEmailAutomatico) 
+          {
+        	 provedorEmailAutomatico = config.getProperty("ProvedorEmailAutomatico");
+        	 remetenteEmailAutomatico = config.getProperty("RemetenteEmailAutomatico");
+        	 destinoEmailAutomatico = config.getProperty("DestinoEmailAutomatico");
+        	 ccEmailAutomatico = (config.getProperty("CcEmailAutomatico").equals("") ? null : config.getProperty("CcEmailAutomatico"));
+             usuarioEmailAutomatico = config.getProperty("UsuarioEmailAutomatico");
+             senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"));
+          }
+	  }
       
       if (!siglaSistema.equals("SAP"))
 	  {
@@ -409,7 +437,7 @@ public final class IntegracaoFornecedorCompleta {
 
 */
 
-  private static void debugar(String txt) 
+  public static void debugar(String txt) 
   {  
      if (toDebugar) 
      {
@@ -430,7 +458,7 @@ public final class IntegracaoFornecedorCompleta {
   }
   
 
-  private static void logarErro( String erro )
+  public static void logarErro( String erro )
   {
      Date hoje = new Date();
       
@@ -1534,7 +1562,12 @@ public final class IntegracaoFornecedorCompleta {
 
 	  LocalDateTime horaInicio = LocalDateTime.now();
 
-      downloadCotacoes(enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
+	  if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
+	  {
+	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "test criptof", null, "test123", provedorEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
+	  }
+	  else
+		  downloadCotacoes(enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
 
   	  nf.setMinimumIntegerDigits(2);
   	  nf.setMaximumFractionDigits(0);

@@ -42,6 +42,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.OutputKeys;
 import oracle.jdbc.driver.OracleDriver ; // http://www.java2s.com/Code/Jar/j/Downloadjdbcoraclejar.htm
+import pcronos.integracao.Criptografia;
+
 import org.firebirdsql.jdbc.FBDriver   ;
 import java.sql.DriverManager          ;
 import java.sql.Connection             ; 
@@ -81,6 +83,9 @@ public class TestesComponentes {
 
 		try
         {
+			System.out.println("cript = " + Criptografia.encrypt("a"));
+			System.out.println("decript = " + Criptografia.decrypt("ежTф"));
+			
 
 			  testNullParam(null, "abc");
 			  testNullParam(null, "abc", true);
