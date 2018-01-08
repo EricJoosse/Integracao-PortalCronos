@@ -124,6 +124,7 @@ public final class IntegracaoFornecedorCompleta {
   public static boolean      toDebugar;
   public static boolean      toEnviarEmailAutomatico;
   public static String       provedorEmailAutomatico;
+  public static String       portaEmailAutomatico;
   public static String       remetenteEmailAutomatico;
   public static String       destinoEmailAutomatico;
   public static String       ccEmailAutomatico;
@@ -166,7 +167,8 @@ public final class IntegracaoFornecedorCompleta {
           
           if (toEnviarEmailAutomatico) 
           {
-        	 provedorEmailAutomatico = config.getProperty("ProvedorEmailAutomatico");
+         	 provedorEmailAutomatico = config.getProperty("ProvedorEmailAutomatico");
+        	 portaEmailAutomatico = config.getProperty("PortaEmailAutomatico");
         	 remetenteEmailAutomatico = config.getProperty("RemetenteEmailAutomatico");
         	 destinoEmailAutomatico = config.getProperty("DestinoEmailAutomatico");
         	 ccEmailAutomatico = (config.getProperty("CcEmailAutomatico").equals("") ? null : config.getProperty("CcEmailAutomatico"));
@@ -1564,7 +1566,7 @@ public final class IntegracaoFornecedorCompleta {
 
 	  if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
 	  {
-	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "test criptof", null, "test123", provedorEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
+	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "test criptof", null, "test123", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
 	  }
 	  else
 		  downloadCotacoes(enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);

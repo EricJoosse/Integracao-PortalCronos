@@ -217,6 +217,7 @@ public static void enviar( java.lang.String p_De
                           , java.lang.String p_Anexo
                           , java.lang.String p_Mensagem 
                           , java.lang.String p_Endereco_IP_Servidor_Email
+                          , java.lang.String PortaEmailAutomatico
                           , java.lang.String UsuarioEmailAutomatico
                           , java.lang.String SenhaCriptografadaEmailAutomatico
                           ) {
@@ -242,7 +243,7 @@ java.util.Properties props = java.lang.System.getProperties()       ;
 props.setProperty( "mail.smtp.host", p_Endereco_IP_Servidor_Email ) ;
 props.put("mail.smtp.auth", "true");
 //props.put("mail.smtp.starttls.enable", "true");
-props.setProperty("mail.smtp.port", "587");
+props.setProperty("mail.smtp.port", PortaEmailAutomatico);
 
 session = Session.getInstance( props, null ) ;  // Sessão default
 session = Session.getInstance(props,
