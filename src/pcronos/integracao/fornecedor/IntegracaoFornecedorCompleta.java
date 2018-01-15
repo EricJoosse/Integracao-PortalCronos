@@ -55,6 +55,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.w3c.dom.CharacterData;
 import org.xml.sax.InputSource;
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import oracle.jdbc.driver.OracleDriver ; // http://www.java2s.com/Code/Jar/j/Downloadjdbcoraclejar.htm
 import org.firebirdsql.jdbc.FBDriver   ;
 import com.sap.conn.jco.JCoDestination;
@@ -193,7 +194,7 @@ public final class IntegracaoFornecedorCompleta {
          ObsOfertasPadraoSeNaoTemNoSistema = config.getProperty("ObsOfertasPadraoSeNaoTemNoSistema");
          tipoBancoDeDados                  = config.getProperty("TipoBancoDeDados");
          
-         if ( !( tipoBancoDeDados.equals("Firebird") || tipoBancoDeDados.equals("Oracle") ) ) {
+         if ( !( tipoBancoDeDados.equals("Firebird") || tipoBancoDeDados.equals("Oracle") || tipoBancoDeDados.equals("SQL Server") ) ) {
        	  String msgErro = "O banco de dados " + tipoBancoDeDados + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
        	  throw new ConfiguracaoException(msgErro);
          }
