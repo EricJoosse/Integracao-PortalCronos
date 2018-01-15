@@ -72,6 +72,12 @@
 	    <groupId>javax.mail</groupId>
 	    <artifactId>mail</artifactId>
 	    <version>1.5.0-b01</version>
+	    <exclusions>
+	    	<exclusion>
+	    		<artifactId>activation</artifactId>
+	    		<groupId>javax.activation</groupId>
+	    	</exclusion>
+	    </exclusions>
 	</dependency>
 	<dependency>
 	    <groupId>com.microsoft.sqlserver</groupId>
@@ -142,7 +148,7 @@
           <compilerArguments>
             <verbose />
 <!--              Em todos os dezenas de  servidores de produção tem o jre1.8.0_92 instalado, então melhor compilar exatamente com esta versão de rt.jar -->
-            <bootclasspath>${pcronos.jre.ambiente_producao}\lib\rt.jar</bootclasspath>
+            <bootclasspath>${pcronos.jre.ambiente_producao}\lib\rt.jar:${pcronos.jre.ambiente_producao}\lib\jce.jar</bootclasspath>
             <extdirs>${pcronos.jre.ambiente_producao}\lib\ext</extdirs>
           </compilerArguments>
 

@@ -245,7 +245,7 @@ props.put("mail.smtp.auth", "true");
 //props.put("mail.smtp.starttls.enable", "true");
 props.setProperty("mail.smtp.port", PortaEmailAutomatico);
 
-session = Session.getInstance( props, null ) ;  // Sessão default
+//session = Session.getInstance( props, null ) ;  // Sessão default
 session = Session.getInstance(props,
 		  new javax.mail.Authenticator() {
 			@Override
