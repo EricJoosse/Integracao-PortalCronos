@@ -27,16 +27,23 @@ TipoAmbiente                      = H
 3. Atualizar a chamada de integr-fornecedor-1.3.0.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
-4. Copiar arquivo novo conf/ABAP_PCronos.jcoDestionation do instalador para o servidor do fornecedor
+4. No caso de integração com o SAP,  
+   copiar arquivo novo conf/ABAP_PCronos.jcoDestionation do instalador para o servidor do fornecedor
  
-5. Copiar os arquivos novos lib/sapjco3.jar, lib/sapjco3.dll e lib/sapjco3.pdb 
-   do instalador para o servidor do fornecedor 
- 
-6. Adicionar "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\lib" 
+5. Copiar o arquivo lib/sapjco3.jar do instalador para o servidor do fornecedor (dir /lib/)
+   apenas para evitar runtime error que está faltando de pacotes e classes, mesmo que a 
+   integração é com outro sistema diferente do SAP.
+    
+   Obs.: os arquivos lib/sapjco3.dll e lib/sapjco3.pdb apenas precisam ser copiados 
+         no caso de integração com o SAP  
+
+6. No caso de integração com o SAP,  
+   adicionar "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\lib" 
    to the PATH environment variable
  
 7. Alterar o default de QtdDiasArquivosXmlGuardados para 100 
  
 8. Alterar o default de debug para true
  
-9. Instalar "the latest Microsoft Visual Studio 2005 C/C++ runtime libraries"
+9. No caso de integração com o SAP,  
+   instalar "the latest Microsoft Visual Studio 2005 C/C++ runtime libraries"

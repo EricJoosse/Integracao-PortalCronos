@@ -31,6 +31,7 @@ import java.sql.DriverManager;
 import java.sql.Connection; 
 import java.sql.SQLException;
 import javax.ws.rs.core.MediaType;
+import javax.xml.crypto.Data;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -104,6 +105,8 @@ public final class IntegracaoFornecedorCompleta {
   public static final String NAO_OFERTADA_IMPACTO_SE_ALTERAR = "não ofertada";
   public static Locale       locale;
   public static NumberFormat nf;
+  public static LocalDateTime dtCadastroIni;
+  public static LocalDateTime dtCadastroFim;
   public static String       siglaSistema;
   public static boolean      toVerificarEstoque;
   public static String       criterioVerificacaoEstoque;
@@ -709,7 +712,91 @@ public final class IntegracaoFornecedorCompleta {
   }
 
 
+  private static void monitorarPendencias() {
+		java.sql.Connection conn = null;
+		java.sql.CallableStatement cstat = null;
+		java.sql.ResultSet rSet = null;
 
+		try
+	    {  
+		    String connectionString = null;
+		    
+		    if (tipoBancoDeDados.equals("SQL Server"))
+		    {
+		      SQLServerDriver sqlsrvDriver = new SQLServerDriver() ; 
+		      DriverManager.registerDriver( sqlsrvDriver ) ; 	
+		      //connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+		    	//         "databaseName=AdventureWorks;user=UserName;password=*****";  
+		      connectionString = "jdbc:sqlserver://" + enderecoIpServidorBancoDeDados + ":" + portaServidorBancoDeDados + ";databaseName=" + instanciaBancoDeDados; 
+		    }
+		    else 
+		    {
+		         logarErro("O tipo de banco de dados pode ser apenas SQL Server no caso que o sistema for PCronos.");
+		         return;
+		    }
+	   
+		    conn = DriverManager.getConnection(connectionString, usernameBancoDeDados, senhaBancoDeDados ) ;	    
+		    String sqlString = "{call dbo.monitorarIntegracaoFornecedores()}";
+		    cstat = conn.prepareCall(sqlString);
+	        boolean results = cstat.execute();
+	        int rsCount = 0;
+
+	       while (results) {
+	             rSet = cstat.getResultSet();
+	             String body = "";
+	             String assunto = "";
+	             while (rSet.next()) {
+	            	 assunto = rSet.getString(1) + " - a integração parou!";
+
+		             if (!assunto.equals(" - a integração parou!")) {
+		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		            	 body += rSet.getString(2) + "\r\n" 
+		              		  + "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(3)) + "\r\n" 
+		              		  + "Data Fim Cotação: " + rSet.getTimestamp(7).toLocalDateTime().format(formatter) + "\r\n" 
+		            	      + "Erro: " + rSet.getString(4) + "\r\n" 
+		            		  + "\r\n\r\n";
+		             }
+	            	 dtCadastroIni = rSet.getTimestamp(5).toLocalDateTime();
+	            	 dtCadastroFim = rSet.getTimestamp(6).toLocalDateTime();
+	             }
+	             
+	             if (!assunto.equals(" - a integração parou!"))
+	 	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
+
+	 	         rSet.close();
+  	             results = cstat.getMoreResults();
+	        } 
+	    }
+	    catch (java.lang.Exception ex) { 
+	      logarErro(ex, false);
+          EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
+	    }
+	    finally { 
+	      if (cstat != null) {
+	        try {
+	          cstat.close() ;  // Isso fecha o rSet automaticamente também
+	        }
+	        catch (java.sql.SQLException e) {
+	        }
+	        cstat = null  ;
+	      }
+	      if (rSet != null)  rSet = null  ;
+	      
+		  if (conn != null) { 
+		      try { 
+		        if ( !conn.isClosed() ) {
+		        	conn.close() ;
+		        }
+		      }
+		      catch ( java.lang.Throwable t ) {  
+		      }
+
+		      conn = null ; 
+		  }
+	    } // finally  
+  }
+
+		
   private static void montarXmlOfertas(Transformer transformer, Document docOfertas, NodeList produtos, Element elmErros, String cdCotacao, String cdComprador, String tpFrete, DocumentBuilder docBuilder) throws SQLException {
 
 		java.sql.Connection conn = null;
@@ -1565,9 +1652,11 @@ public final class IntegracaoFornecedorCompleta {
 
 	  LocalDateTime horaInicio = LocalDateTime.now();
 
-	  if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
-	  {
-	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "test criptof", null, "test123", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
+	  if (siglaSistema.equals("PCronos")) {
+		  if (erroStaticConstructor == null && toEnviarEmailAutomatico)
+	      {
+		     monitorarPendencias();
+	      }  
 	  }
 	  else
 		  downloadCotacoes(enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
@@ -1580,11 +1669,17 @@ public final class IntegracaoFornecedorCompleta {
 	  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
 	  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
 	  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	  
 	  try
 	  {
 	      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
 	      bWriter.append(horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao);
+	      
+		  if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
+		  {
+			  bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
+		  }
 	      bWriter.newLine();
 	      bWriter.flush();
 	      bWriter.close();

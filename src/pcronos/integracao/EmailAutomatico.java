@@ -279,7 +279,7 @@ try
     mbp1 = new MimeBodyPart()  ;
     if ( p_Mensagem == null ) p_Mensagem = "" ;
     mbp1.setText( p_Mensagem 
-                + "\n\nEste email foi enviado automaticamente pelo sistema Portal Cronos\n" ) ;
+                + "\n\n\n\n\n\n\n\n\n\n\n\nEste email foi enviado automaticamente pelo sistema Portal Cronos\n" ) ;
 
     mbp2 = new MimeBodyPart() ;
 
