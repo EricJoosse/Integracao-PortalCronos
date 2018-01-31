@@ -76,6 +76,17 @@ import com.sap.conn.jco.AbapException;
 import java.io.FilePermission;
 import java.security.AccessController;
  
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+//import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /** 
  * 
  * @author Eric Joosse - Cronos Tecnology <p>
@@ -443,6 +454,65 @@ public final class IntegracaoFornecedorCompleta {
 
 */
 
+  public static String performPostCall(String txt) {
+
+      URL url;
+      String response = "";
+      try {
+          JSONObject tokenJSON = new JSONObject();
+          tokenJSON.put("userName", username);
+       // tokenJSON.put("nomeFantasiaFornecedor", nomeFantasiaFornecedor);
+          tokenJSON.put("linhaArqLog", txt);
+
+          String payload = tokenJSON.toString();
+          String contentType = "application/json";
+          String requestMethod = "POST";
+
+          url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogRemoto");
+
+          HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+          conn.setReadTimeout(30000);
+          conn.setConnectTimeout(30000);
+          conn.setRequestMethod(requestMethod);
+          conn.setDoInput(true);
+          conn.setDoOutput(true);
+          conn.setRequestProperty("content-type", contentType);
+
+
+          byte[] outputBytes = payload.getBytes("UTF-8");
+          OutputStream os = conn.getOutputStream();
+          os.write(outputBytes);
+
+          int responseCode = conn.getResponseCode();
+          // Se descomentar o seguinte, tomar providências para evitar laços infinitos:
+       // debugar("Response Meassage: " + conn.getResponseMessage());
+
+          if (responseCode == HttpsURLConnection.HTTP_OK) {
+              String line;
+              BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+              while ((line=br.readLine()) != null) {
+                  response += line;
+              }
+          //  logarErro("COOKIE: " + conn.getHeaderField("Set-Cookie"));
+          //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
+          }
+          else {
+              response="";
+
+          }
+      } 
+      catch (JSONException e) {
+          logarErro("performPostCall(): Can´t format JSON");  
+      }
+      catch (Exception e) {
+          e.printStackTrace();
+      }
+
+      return response;
+  }
+
+  
+  
   public static void debugar(String txt) 
   {  
      if (toDebugar) 
@@ -452,7 +522,7 @@ public final class IntegracaoFornecedorCompleta {
 	        BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + nomeArquivoDebug, true));
 	        bWriter.append(txt);
 	        bWriter.newLine();
-	        bWriter.newLine();
+	     // bWriter.newLine();
 	        bWriter.flush();
 	        bWriter.close();
     	 }
@@ -461,6 +531,8 @@ public final class IntegracaoFornecedorCompleta {
     	   System.out.println(txt);
     	 }
      }
+     
+     performPostCall(txt);
   }
   
 
