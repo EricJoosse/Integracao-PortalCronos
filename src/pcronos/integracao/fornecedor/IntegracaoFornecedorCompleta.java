@@ -822,11 +822,11 @@ public final class IntegracaoFornecedorCompleta {
 
 		             if (!assunto.equals(" - a integração parou!")) {
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		            	 body += rSet.getString(2) + "\r\n" 
-		              		  + "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(3)) + "\r\n" 
-		              		  + "Data Fim Cotação: " + rSet.getTimestamp(7).toLocalDateTime().format(formatter) + "\r\n" 
+		            	 body += rSet.getString(2) + "\r\n\r\n" 
+		              		  + "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(3)) + "\r\n\r\n" 
+		              		  + "Só temos até " + rSet.getTimestamp(8).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n" 
 		            	      + "Erro: " + rSet.getString(4) + "\r\n" 
-		            		  + "\r\n\r\n";
+		            		  + "\r\n\r\n\r\n\r\n";
 		             }
 	            	 dtCadastroIni = rSet.getTimestamp(5).toLocalDateTime();
 	            	 dtCadastroFim = rSet.getTimestamp(6).toLocalDateTime();
@@ -1146,7 +1146,7 @@ public final class IntegracaoFornecedorCompleta {
 			    {
 			    	// O Valor Mínimo pode ser R$ 0,00 porém não pode ser em branco porque assim o sistema não sabe 
 			    	// se for R$ 0,00 ou se é para usar o Valor Mínimo geral do fornecedor cadastrado no Portal Cronos :
-			        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") não foi informado no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ". Portanto não foi posssível verificar se o valor seria R$ 0,00 ou se o valor seria igual ao Valor Mínimo geral do fornecedor cadastrado no Portal Cronos.");
+			        enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") não pode ser nulo ou em branco no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ", pois a configuração \"UsarValorMinimoSistemaFornecedor\" = \"true\". Valores permitidos: (R$) 0,00 ou um valor > 0.");
 			    }
 	        }
 		

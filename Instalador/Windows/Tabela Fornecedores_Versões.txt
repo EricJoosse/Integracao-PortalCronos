@@ -7,4 +7,4 @@ Marítimos		21	WinThor		1.2.3							Sim  			true	 48 GB		100			Team Viewer		Felip
 Karne Keijo		60	SAP			1.3.0							Não				true	 66 GB		100			Team Viewer		Timon Dourado			timons@kk.com.br
 Comal 			33	WinThor			 							Não												Team Viewer		
 Master Commerce 51	WinThor			 							Não												Team Viewer		
-Monitoramento   --  PCronos     2.0.0           Win 2008 R2 SP1 Sim				true	 30 GB		100			mstsc
+Monitoramento   --  PCronos     2.1.1           Win 2008 R2 SP1 Sim				true	 30 GB		100			mstsc
