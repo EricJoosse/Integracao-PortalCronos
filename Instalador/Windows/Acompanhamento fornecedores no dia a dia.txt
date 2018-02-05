@@ -1,0 +1,33 @@
+
+Assunto: Urgente! A integração WinThor/Portal Cronos parou!
+
+
+Felipe,
+ 
+   desde sábado (03/02/2018) 20:10 o Portal Cronos não está mais recebendo ofertas automáticas do Marítimos Pescados.
+O servidor de vocês envolvido está desligado? 
+ 
+No momento já tem 3 cotações esperando e esta quantidade vai crescer rapidamente,
+  
+Só temos até hoje (05/02/2018) 12:30 para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada). 
+ 
+Atc,
+Eric 
+
+
+SELECT  *
+  FROM [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]
+  where id_fornecedor_fornec = 21
+order by dt_envio_cotacao_icotfor desc
+
+-- Verificar se pelo menos os usuários estão ofertando manualmente: 
+
+update [PCronos_Producao].[dbo].[Usuario_Sistema]  
+    set id_fornecedor_fornec = 21
+  where cd_usuario_sistema_ususis = 'ericcoringa'
+
+e conectar no Portal Cronos como ericcoringa
+
+-- Acompanhar se já está resolvido:
+exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0
+
