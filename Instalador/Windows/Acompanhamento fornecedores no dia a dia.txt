@@ -1,4 +1,6 @@
 
+Email/Skype padrão: 
+
 Assunto: Urgente! A integração WinThor/Portal Cronos parou!
 
 
@@ -17,16 +19,16 @@ Eric
 
 SELECT  *
   FROM [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]
-  where id_fornecedor_fornec = 21
+  where id_fornecedor_fornec = .....
 order by dt_envio_cotacao_icotfor desc
 
 -- Verificar se pelo menos os usuários estão ofertando manualmente: 
 
 update [PCronos_Producao].[dbo].[Usuario_Sistema]  
-    set id_fornecedor_fornec = 21
+    set id_fornecedor_fornec = .....
   where cd_usuario_sistema_ususis = 'ericcoringa'
 
-e conectar no Portal Cronos como ericcoringa
+-- e em seguida conectar no Portal Cronos como ericcoringa
 
 -- Acompanhar se já está resolvido:
 exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0

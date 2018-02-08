@@ -1,0 +1,38 @@
+	    Formaggio: antes:                                       H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
+    					    %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
+
+					depois da instalação: C:\ProgramData\Oracle\Java\javapath;H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
+					        %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
+					        
+					depois da desinstalação:                    H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
+					        %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
+					     
+					     
+					     
+	   JR Emb: antes:   C:\app\SERVIDOR\product\11.2.0\client_1;C:\app\SERVIDOR\product\11.2.0\client_1\bin;
+	                    %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
+	                    %SYSTEMROOT%\System32\WindowsPowerShell\v1.0\           
+					     
+       Prolac antes: 	C:\ProgramData\Oracle\Java\javapath;C:\oracle\product\10.2.0\client_1\bin;
+       					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
+       					%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;
+       					C:\Program Files (x86)\Skype\Phone\;C:\Program Files\SafeNet\Authentication\SAC\x64;
+       					C:\Program Files\SafeNet\Authentication\SAC\x32
+       
+       KarneKeijo - Testes antes:
+       					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+
+	   Marítimos antes (servidor producao): 	
+	                    C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
+						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+
+			depois: 	C:\ProgramData\Oracle\Java\javapath;
+						C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
+						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+
+       SOST antes: 	    C:\ProgramData\Oracle\Java\javapath;C:\Windows;C:\Windows\system32;
+                        C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;c:\InstantClient
+          					        
+          	depois:		C:\ProgramData\Oracle\Java\javapath;C:\Windows;C:\Windows\system32;
+          	            C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;c:\InstantClient
+          					        

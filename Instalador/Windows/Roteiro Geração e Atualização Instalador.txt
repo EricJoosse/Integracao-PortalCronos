@@ -6,6 +6,12 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 
 	2. Conectar no Team Viewer
 	
+	   Skype:
+	   Existem 2 tipos de instalação do Team Viewer: free (pessoal) e pago/trial (empresarial)
+O meu é free e pessoal então não consigo conectar com seu Team Viewer empresarial. 
+Você quer instalar a versão free do Team Viewer? Caso contrário, sugiro instalar o AnyDesk.
+
+	
 	3. a. Verificar se o usuário logado é administrador ou administrator, 
 	      local ou da rede (como administrador da rede ainda não foi testado).
 	      (Formaggio: user "techcorp")
@@ -62,41 +68,8 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
        Por padrão copiar para C:\temp\.
     
     7. Antes da instalação :
-
-	    Formaggio: antes:                                       H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
-    					    %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
-
-					depois da instalação: C:\ProgramData\Oracle\Java\javapath;H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
-					        %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
-					        
-					depois da desinstalação:                    H:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;
-					        %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27
-					     
-					     
-					     
-	   JR Emb: antes:   C:\app\SERVIDOR\product\11.2.0\client_1;C:\app\SERVIDOR\product\11.2.0\client_1\bin;
-	                    %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
-	                    %SYSTEMROOT%\System32\WindowsPowerShell\v1.0\           
-					     
-       Prolac antes: 	C:\ProgramData\Oracle\Java\javapath;C:\oracle\product\10.2.0\client_1\bin;
-       					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
-       					%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;
-       					C:\Program Files (x86)\Skype\Phone\;C:\Program Files\SafeNet\Authentication\SAC\x64;
-       					C:\Program Files\SafeNet\Authentication\SAC\x32
-       
-       KarneKeijo - Testes antes:
-       					%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
-
-	   Marítimos antes (servidor producao): 	
-	                    C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
-						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
-
-			depois: 	C:\ProgramData\Oracle\Java\javapath;
-						C:\app\product\11.2.0\client_1\bin;%SystemRoot%\system32;
-						%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
-
        					        
-          0. Primeiro fazer backup:
+          0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
                 (i)  do variável de ambiente do sistema "Path" de Windows: 
                 (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
                 
@@ -218,8 +191,56 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
    14. (i)  Verificar se debug = true no arquivo de configuração para facilitar atendimento imediato no futuro.
        (ii) Verificar se o default de QtdDiasArquivosXmlGuardados = 100 
  
-   15. Enviar Email/ Skype: 
-       Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
+   15. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
+       na procedure [dbo].[monitorarIntegracaoFornecedores]
+   
+   16. update [dbo].[Usuario_Sistema]  
+          set id_fornecedor_fornec = .....
+        where cd_usuario_sistema_ususis = 'ericcoringa'
+   
+       Conectar no Portal Cronos (produção) logado como ericcoringa e verificar se eles usam 
+       um texto padrão do fornecedor para todas as cotações de todos os compradores 
+       e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema". 
+    
+   17. Enviar Email/ Skype: 
+   
+       Vocês têm apenas UMA base de dados WinThor/Oracle? Ou talvez tem uma base de produção e outra base de teste, por exemplo?
+
+
+
+       Qual é o endereço IP, porta, SID, usuário e senha do banco Oracle de produção? A porta é a porta "default" (1521) ?
+       Pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhum salvamento no WinThor.
+
+       Se o DBA demorar demais para criar um usuário novo, não podemos usar um dos usuários Oracle que já existe? Com certeza deve existir pelo menos um. Eu posso até colocar a senha deste usuário no arquivo de parâmetros do Portal Cronos de forma criptografada. 
+
+
+       Dúvida: na versão atual do Portal Cronos normalmente a senha fica registrada de forma NÃO criptografada no arquivo de configuração no diretório C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\. Pode ser assim? Ou esta senha deve aparecer de forma criptografada neste arquivo?
+       
+Leão, 
+   
+  a SOST vai usar um usuário Oracle existente com mais privilêgios do que consulta, 
+porém eles preferem que a gente vai registrar a senha no arquivo de configuração de forma criptografada.
+Eu posso fazer uma versão nova do serviço de ofertas automáticas com esta funcionalidade nova. 
+Previsão: 4 horas no máximo. Vou fazer hoje?
+ 
+Atc,
+Eric         
+       No caso (falar primeiro com Leão): então vou desenvolver uma versão nova do Portal Cronos, eu faço isso em 4 horas.
+
+
+       
+       Outra dúvida: os vendedores querem qual das seguintes opções?
+       1. que o WinThor envia automaticamente os preços ofertados de TODOS os produtos solicitados para o Portal Cronos mesmo no caso que o estoque de alguns produtos estiver zerado? 
+       2. ou apenas os preços dos produtos solicitados que tiverem pelo menos 1 produto no estoque?
+       3. ou apenas os preços dos produtos solicitados que tiverem uma quantidade no estoque maior ou igual à quantidade solicitada?            
+       Exemplos de vantagens / desvantagens:
+       por exemplo uma possível desvantagem da opção 1: se o cliente escolher a SOST para fornecer alguns produtos e mandar uma ordem de compra, o risco é que vocês não vão conseguir cumprir o pedido ou apenas parcialmente
+       por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da SOST não está sendo informado no WinThor, pode acontecer que a SOST vai perder oportunidades de vendas porque a integração automática vai deixar de ofertar produtos       
+       
+       No caso que escolham fora do padrão: Todos os vendedores concordam com esta escolha?
+        
+       ANTIGO: Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
+    
     
 Manual para a geração do instalador Setup.exe:
 ==============================================

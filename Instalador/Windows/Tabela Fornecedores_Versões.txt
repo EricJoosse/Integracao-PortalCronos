@@ -1,6 +1,6 @@
 Fornecedor   IdForn	Sistema		Versão do .jar	S.O.					Em produção		Debug	Esp.Livre	Qtd.Dias	Acesso remoto	Skype					Email
 ----------	 ------	-------     --------------  ---------------------	------------	-----	---------	--------	-------------	---------------------	-----
-Formaggio 		 13	APS			1.1.0									Sim									365			Team Viewer		Braytner Vasconcelos
+Formaggio 		 13	APS			1.1.0									Sim									365			Team Viewer		Braytner Vasconcelos	ti@formaggio.com.br
 JR Embalagem	947	WinThor		1.2.3			Windows 10 Pro			Sim				true	902 GB		100			AnyDesk			ivan barros				jrembalagem.ti@gmail.com
 Prolac 			 30	WinThor		1.2.4									Sim				true	297 GB		100			AnyDesk			Marcelo Bezerra			marcelo@casadoqueijo.net.br
 Marítimos		 21	WinThor		1.2.3									Sim  			true	 48 GB		100			Team Viewer		Felipe Lolaia			felipe.lolaia@maritimospescados.com.br

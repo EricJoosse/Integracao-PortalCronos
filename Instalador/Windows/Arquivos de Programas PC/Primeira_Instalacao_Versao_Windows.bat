@@ -15,7 +15,7 @@ echo.
 REM set osVersion=Windows_Server_2016
 REM set osVersion=Windows_Server_2012_R2
 REM set osVersion=Windows_Server_2012
-REM set osVersion=Windows_Server_2008_R2_SP1
+set osVersion=Windows_Server_2008_R2_SP1
 REM set osVersion=Windows_Server_2008
 REM set osVersion=Windows_Server_2003_R2
 REM set osVersion=Windows_Server_2003
@@ -26,7 +26,7 @@ REM set osVersion=Windows_NT_35
 REM set osVersion=Windows_NT_31
 REM set osVersion=Windows_7_Professional_SP1
 REM set osVersion=Windows_8_Pro
-set osVersion=Windows_10_Pro
+REM set osVersion=Windows_10_Pro
   
   
 if %osVersion% == Windows_Server_2016 (
@@ -98,9 +98,8 @@ if %osVersion% == Windows_Server_2008_R2_SP1 (
     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 ) else if %osVersion% == Windows_7_Professional_SP1 (
     set arquivoRegedit=DeshabilitarJavaUpdates.i586.reg
-)
-else (
-    echo MSGBOX "Esta versão de Windows ainda não está suportada ! Favor entrar em contato com o  Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
+) else (
+    echo MSGBOX "Esta versão de Windows ainda não está suportada! Favor entrar em contato com o Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     exit
