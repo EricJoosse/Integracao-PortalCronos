@@ -228,16 +228,22 @@ Eric
        No caso (falar primeiro com Leão): então vou desenvolver uma versão nova do Portal Cronos, eu faço isso em 4 horas.
 
 
+Este usuário está dando erro "ORA-00942: a tabela ou view não existe" então este usuário não tem privilégios suficientes.
+Sugiro conectar no SQL Navigator ou outra ferramenta com este usuário para ver se este usuário consegue visualizar pelo menos uma tabela ou nenhuma
+
+
        
-       Outra dúvida: os vendedores querem qual das seguintes opções?
-       1. que o WinThor envia automaticamente os preços ofertados de TODOS os produtos solicitados para o Portal Cronos mesmo no caso que o estoque de alguns produtos estiver zerado? 
-       2. ou apenas os preços dos produtos solicitados que tiverem pelo menos 1 produto no estoque?
-       3. ou apenas os preços dos produtos solicitados que tiverem uma quantidade no estoque maior ou igual à quantidade solicitada?            
-       Exemplos de vantagens / desvantagens:
-       por exemplo uma possível desvantagem da opção 1: se o cliente escolher a SOST para fornecer alguns produtos e mandar uma ordem de compra, o risco é que vocês não vão conseguir cumprir o pedido ou apenas parcialmente
-       por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da SOST não está sendo informado no WinThor, pode acontecer que a SOST vai perder oportunidades de vendas porque a integração automática vai deixar de ofertar produtos       
+Outra dúvida: os vendedores querem qual das seguintes opções?
+1. que o WinThor envia automaticamente os preços ofertados de TODOS os produtos solicitados para o Portal Cronos mesmo no caso que o estoque de alguns produtos estiver zerado no WinThor? 
+2. ou apenas os preços dos produtos solicitados que tiverem pelo menos 1 produto no estoque no WinThor?
+3. ou apenas os preços dos produtos solicitados que tiverem uma quantidade no estoque no WinThor maior ou igual à quantidade solicitada?            
+
+Exemplos de vantagens / desvantagens:
+por exemplo uma possível desvantagem da opção 1: se o cliente escolher a SOST para fornecer alguns produtos e mandar uma ordem de compra, o risco é que vocês não vão conseguir cumprir o pedido ou apenas parcialmente
+por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da SOST não está sendo informado no WinThor, pode acontecer que a SOST vai perder oportunidades de vendas porque a integração automática vai deixar de ofertar produtos       
        
-       No caso que escolham fora do padrão: Todos os vendedores concordam com esta escolha?
+
+       No caso que os vendedores escolham fora do padrão (2): Todos os vendedores concordam com esta escolha?
         
        ANTIGO: Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
