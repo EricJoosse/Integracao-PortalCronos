@@ -532,7 +532,8 @@ public final class IntegracaoFornecedorCompleta {
     	 }
      }
      
-     performPostCall(txt);
+     if (!siglaSistema.equals("PCronos"))
+       performPostCall(txt);
   }
   
 
