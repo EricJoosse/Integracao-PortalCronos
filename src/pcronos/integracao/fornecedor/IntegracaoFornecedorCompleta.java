@@ -279,24 +279,33 @@ public final class IntegracaoFornecedorCompleta {
 
 	  debugar("sun.boot.class.path = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
 
+	  debugar("CnpjFornecedor                    = " + cnpjFornecedor);
+	  debugar("NomeFantasiaFornecedor            = " + nomeFantasiaFornecedor);
+	  debugar("SiglaSistema                      = " + siglaSistema);
+
 	  if (!siglaSistema.equals("SAP"))
 	  {
-	      debugar("toVerificarEstoque             = " + toVerificarEstoque);
-	      debugar("criterioVerificacaoEstoque     = " + criterioVerificacaoEstoque);
-		  debugar("tipoBancoDeDados               = " + tipoBancoDeDados);
-		  debugar("usernameBancoDeDados           = " + usernameBancoDeDados);
-		  debugar("senhaBancoDeDados              = " + senhaBancoDeDados);
-		  debugar("enderecoIpServidorBancoDeDados = " + enderecoIpServidorBancoDeDados);
-		  debugar("portaServidorBancoDeDados      = " + portaServidorBancoDeDados);
-		  debugar("instanciaBancoDeDados          = " + instanciaBancoDeDados);
+	      debugar("VerificarEstoque                  = " + toVerificarEstoque);
+	      debugar("CriterioVerificacaoEstoque        = " + criterioVerificacaoEstoque);
 		  debugar("ObsOfertasPadraoSeNaoTemNoSistema = " + ObsOfertasPadraoSeNaoTemNoSistema);
+		  
+		  if (siglaSistema.equals("WinThor"))
+			  debugar("UsarValorMinimoSistemaFornecedor  = " + toUsarValorMinimoSistemaFornecedor);
+
+		  debugar("TipoBancoDeDados                  = " + tipoBancoDeDados);
+		  debugar("EnderecoIpServidorBancoDeDados    = " + enderecoIpServidorBancoDeDados);
+		  debugar("InstanciaBancoDeDados             = " + instanciaBancoDeDados);
+		  debugar("PortaServidorBancoDeDados         = " + portaServidorBancoDeDados);
+		  debugar("UsuarioBancoDeDados               = " + usernameBancoDeDados);
+		  debugar("SenhaBancoDeDados                 = " + senhaBancoDeDados);
 	  }
-	  debugar("username                       = " + username);
-	  debugar("senha                          = " + senha);
-	  debugar("cnpjFornecedor                 = " + cnpjFornecedor);
-	  debugar("tipoAmbiente                   = " + tipoAmbiente);
-	  debugar("toDebugar                      = " + toDebugar);
-	  debugar("enderecoBaseWebService         = " + enderecoBaseWebService);
+	  debugar("EnderecoBaseWebService            = " + enderecoBaseWebService);
+	  debugar("TipoAmbiente                      = " + tipoAmbiente);
+	  debugar("UsuarioWebService                 = " + username);
+	  debugar("SenhaWebService                   = " + senha);
+	  debugar("DiretorioArquivosXml              = " + diretorioArquivosXml);
+   // debugar("QtdDiasArquivosXmlGuardados       = " + .....);
+	  debugar("Debugar                           = " + toDebugar);
          
       // throw new Exception("teste exception static constructor");
     } 

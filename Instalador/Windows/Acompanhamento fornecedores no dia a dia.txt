@@ -38,6 +38,7 @@ Skype:
 Felipe, boa tarde! Você não prefere que vou instalar a integração WinThor/Portal Cronos em outro servidor de vocês?
 Pois com o servidor atual, desde muito tempo, o Portal Cronos nunca mais está recebendo ofertas automáticas do Marítimos Pescados...
 
+
 SELECT  *
   FROM [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]
   where id_fornecedor_fornec = 
