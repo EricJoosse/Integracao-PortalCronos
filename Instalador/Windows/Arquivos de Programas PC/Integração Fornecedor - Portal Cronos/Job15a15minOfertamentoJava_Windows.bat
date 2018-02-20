@@ -4,7 +4,9 @@ cls
 REM Limpar CLASSPATH :
 REM set CLASSPATH=
 
-set path=%path%;C:\Program Files\Java\jre1.8.0_92\bin
+SETLOCAL
+set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
+REM Prolac: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
 
 REM http://stackoverflow.com/questions/23730887/why-is-rt-jar-not-part-of-the-class-path-system-property : 
 REM 	"rt.jar doesn't need to be in the classpath, since it is already in the bootclasspath. It is safe to remove it from your classpath."
@@ -28,7 +30,9 @@ REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
 REM e o caminho do outro JRE vem primeiro no PATH de DOS :
 REM C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.1.2.jar pcronos.integracao.fornecedor.TestesComponentes >> Job15a15minOfertamentoJava.log
 C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.1.2.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-1.0.0.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
 
+ENDLOCAL
 exit
 
 
