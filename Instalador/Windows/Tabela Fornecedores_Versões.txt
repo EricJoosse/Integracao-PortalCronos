@@ -3,7 +3,7 @@ Fornecedor   IdForn	Sistema		Versão .jar	 Versão JRE	 S.O.					Em produção		Debu
 Formaggio 		 13	APS			1.1.0		 92	(.. bit) Win Server 2012 R2		Sim				true	 13 GB		100			Team Viewer		1. live:projetosti_1	1. projetosti@formaggio.com.br	  (Geymison Lima - Coordenador de Projetos de TI)
 											  			 																						2. Braytner Vasconcelos	2. ti@formaggio.com.br
 JR Embalagem	947	WinThor		1.2.3		 92	(.. bit) Windows 10 Pro			Sim				true	902 GB		100			AnyDesk			ivan barros				jrembalagem.ti@gmail.com
-Prolac 			 30	WinThor		2.1.2		161 (32 bit) Win Server 2008 R2 SP1	Sim				true	297 GB		100			AnyDesk			Marcelo Bezerra			marcelo@casadoqueijo.net.br
+Prolac 			 30	WinThor		2.1.2B		161 (32 bit) Win Server 2008 R2 SP1	Sim				true	297 GB		100			AnyDesk			Marcelo Bezerra			marcelo@casadoqueijo.net.br
 Marítimos		 21	WinThor		1.2.3		 92	(.. bit) 						Sim  			true	 48 GB		100			Team Viewer		Felipe Lolaia			felipe.lolaia@maritimospescados.com.br
 Karne Keijo		 60	SAP			1.3.0		 92	(.. bit) 						Não				true	 66 GB		100			Team Viewer		Timon Dourado			timons@kk.com.br
 Comal 			 33	WinThor			 		 92	(.. bit) 						Não												Team Viewer		

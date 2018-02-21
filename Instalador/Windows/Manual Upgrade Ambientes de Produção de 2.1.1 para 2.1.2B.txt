@@ -1,0 +1,25 @@
+Manual Upgrade dos Ambientes de Produção de 2.1.1 para 2.1.2B
+=============================================================
+
+1. Copiar arquivo novo integr-fornecedor-2.1.2.jar do instalador para o servidor do fornecedor
+ 
+2. Atualizar a chamada de integr-fornecedor-2.1.2.jar no Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor
+ 
+3. Corrigir Job15a15minOfertamentoJava_Windows.bat:
+
+a.
+
+SETLOCAL
+set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
+REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_161\bin
+REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
+
+b.
+
+ENDLOCAL
+exit
+
+
+

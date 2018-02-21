@@ -6,7 +6,9 @@ REM set CLASSPATH=
 
 SETLOCAL
 set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
-REM Prolac: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
+REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_161\bin
+REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
 
 REM http://stackoverflow.com/questions/23730887/why-is-rt-jar-not-part-of-the-class-path-system-property : 
 REM 	"rt.jar doesn't need to be in the classpath, since it is already in the bootclasspath. It is safe to remove it from your classpath."
