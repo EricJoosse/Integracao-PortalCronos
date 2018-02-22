@@ -828,23 +828,30 @@ public final class IntegracaoFornecedorCompleta {
 	             String body = "";
 	             String assunto = "";
 	             while (rSet.next()) {
-	            	 assunto = rSet.getString(1) + " - a integração parou!";
-
-		             if (!assunto.equals(" - a integração parou!")) {
-		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		            	 body += rSet.getString(2) + "\r\n\r\n" 
-		              		  +  ((rSet.getInt(3) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(3)) + "\r\n\r\n" 
-		              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(3)) + ") nesta cotação!\r\n\r\n"
-		              		     )                                
-		              		  +  "Só temos até " + rSet.getTimestamp(8).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n" 
-		            	      +  "Erro: " + rSet.getString(4) + "\r\n" 
-		            		  +  "\r\n\r\n\r\n\r\n";
-		             }
+	            	 if (rSet.getString(2).equals("INI")) {
+		            	 assunto = "Integração ofertas colocada em produção!";
+		            	 body += "Começou a integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " em produção!\r\n";
+		            	 body += "Favor comentar este id_fornecedor no OR na sp dbo.monitorarIntegracaoFornecedores\r\n\r\n\r\n\r\n";
+	            	 }
+	            	 else {
+		            	 assunto = rSet.getString(1) + " - Parada integração!";
+	
+			             if (!assunto.equals(" - Parada integração!")) {
+			           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+			            	 body += rSet.getString(2) + "\r\n\r\n" 
+			              		  +  ((rSet.getInt(3) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(3)) + "\r\n\r\n" 
+			              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(3)) + ") nesta cotação!\r\n\r\n"
+			              		     )                                
+			              		  +  "Só temos até " + rSet.getTimestamp(8).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n" 
+			            	      +  "Erro: " + rSet.getString(4) + "\r\n" 
+			            		  +  "\r\n\r\n\r\n\r\n";
+			             }
+	            	 }
 	            	 dtCadastroIni = rSet.getTimestamp(5).toLocalDateTime();
 	            	 dtCadastroFim = rSet.getTimestamp(6).toLocalDateTime();
 	             }
 	             
-	             if (!assunto.equals(" - a integração parou!"))
+	             if (!assunto.equals(" - Parada integração!"))
 	 	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
 
 	 	         rSet.close();
