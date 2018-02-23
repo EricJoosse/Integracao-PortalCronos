@@ -463,10 +463,11 @@ public final class IntegracaoFornecedorCompleta {
 
 */
 
-  public static String performPostCall(String txt) {
+  public static String performPostCall(String txt, String tipoArquivo) {
 
-      URL url;
+      URL url = null;
       String response = "";
+      
       try {
           JSONObject tokenJSON = new JSONObject();
           tokenJSON.put("userName", username);
@@ -477,7 +478,12 @@ public final class IntegracaoFornecedorCompleta {
           String contentType = "application/json";
           String requestMethod = "POST";
 
-          url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogRemoto");
+          if (tipoArquivo.equals("Debug"))
+              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogRemoto");
+          else if (tipoArquivo.equals("Erro"))
+              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogErroRemoto");
+          else if (tipoArquivo.equals("TemposExecução"))
+              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogTempoExecucaoRemoto");
 
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
           conn.setReadTimeout(30000);
@@ -494,7 +500,7 @@ public final class IntegracaoFornecedorCompleta {
 
           int responseCode = conn.getResponseCode();
           // Se descomentar o seguinte, tomar providências para evitar laços infinitos:
-       // debugar("Response Meassage: " + conn.getResponseMessage());
+       // debugarApenasLocal("Response Message: " + conn.getResponseMessage());
 
           if (responseCode == HttpsURLConnection.HTTP_OK) {
               String line;
@@ -502,7 +508,7 @@ public final class IntegracaoFornecedorCompleta {
               while ((line=br.readLine()) != null) {
                   response += line;
               }
-          //  logarErro("COOKIE: " + conn.getHeaderField("Set-Cookie"));
+          //  logarErroApenasLocal("COOKIE: " + conn.getHeaderField("Set-Cookie"));
           //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
           }
           else {
@@ -510,11 +516,13 @@ public final class IntegracaoFornecedorCompleta {
 
           }
       } 
-      catch (JSONException e) {
-          logarErro("performPostCall(): Can´t format JSON");  
+      catch (JSONException jsonex) {
+    	  // Para evitar laços infinitos:
+          logarErroApenasLocal("performPostCall(): Can´t format JSON");  
       }
-      catch (Exception e) {
-          e.printStackTrace();
+      catch (Exception ex) {
+    	  // Para evitar laços infinitos:
+    	  logarErroApenasLocal(ex, true);
       }
 
       return response;
@@ -542,30 +550,51 @@ public final class IntegracaoFornecedorCompleta {
      }
      
      if (!siglaSistema.equals("PCronos"))
-       performPostCall(txt);
+       performPostCall(txt, "Debug");
   }
   
 
+  public static void logarErroApenasLocal( String erro )
+  {
+	     Date hoje = new Date();
+	      
+	 	 try
+	 	 {
+		        BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "Erro - " + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm.ss ").format(hoje) + ".log", true));
+		        bWriter.append(erro);
+		        bWriter.newLine();
+		        bWriter.newLine();
+		        bWriter.flush();
+		        bWriter.close();
+	 	 }
+	 	 catch (IOException ioe)
+	 	 {
+	 	   System.out.println(erro);
+	 	 }  
+  }
+	  
+  
   public static void logarErro( String erro )
   {
-     Date hoje = new Date();
-      
- 	 try
- 	 {
-	        BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "Erro - " + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm.ss ").format(hoje) + ".log", true));
-	        bWriter.append(erro);
-	        bWriter.newLine();
-	        bWriter.newLine();
-	        bWriter.flush();
-	        bWriter.close();
- 	 }
- 	 catch (IOException ioe)
- 	 {
- 	   System.out.println(erro);
- 	 }  
+	  logarErroApenasLocal(erro);  
+
+      if (!siglaSistema.equals("PCronos"))
+         performPostCall(erro, "Erro");
   }
   
+  
   private static void logarErro( Exception ex, boolean toConsoleTambem ) 
+  {
+	  logarErroApenasLocal(ex, toConsoleTambem);  
+
+      if (!siglaSistema.equals("PCronos"))
+      {
+          performPostCall(printStackTraceToString(ex), "Erro");
+      }
+  }
+  
+  
+  private static void logarErroApenasLocal( Exception ex, boolean toConsoleTambem ) 
   {  
 	  if (toConsoleTambem)
 	  {
@@ -1765,15 +1794,19 @@ public final class IntegracaoFornecedorCompleta {
 	  try
 	  {
 	      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
-	      bWriter.append(horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao);
+	      String strHorarioComTempoExecucao = horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao; 
+	      bWriter.append(strHorarioComTempoExecucao);
 	      
-		  if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
+	      if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
 		  {
 			  bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
 		  }
 	      bWriter.newLine();
 	      bWriter.flush();
 	      bWriter.close();
+
+	      if (!siglaSistema.equals("PCronos"))
+	          performPostCall(strHorarioComTempoExecucao, "TemposExecução");
 	  }
   	  catch (IOException ioe)
 	  {
