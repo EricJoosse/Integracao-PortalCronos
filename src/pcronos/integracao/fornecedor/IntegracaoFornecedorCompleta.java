@@ -499,16 +499,16 @@ public final class IntegracaoFornecedorCompleta {
           os.write(outputBytes);
 
           int responseCode = conn.getResponseCode();
-          // Se descomentar o seguinte, tomar providências para evitar laços infinitos:
-       // debugarApenasLocal("Response Message: " + conn.getResponseMessage());
+          // Para evitar laços infinitos:
+          debugarApenasLocalmente("Response Message: " + conn.getResponseMessage());
 
           if (responseCode == HttpsURLConnection.HTTP_OK) {
               String line;
-              BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+              BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
               while ((line=br.readLine()) != null) {
                   response += line;
               }
-          //  logarErroApenasLocal("COOKIE: " + conn.getHeaderField("Set-Cookie"));
+          debugarApenasLocalmente("COOKIE: " + conn.getHeaderField("Set-Cookie"));
           //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
           }
           else {
@@ -518,11 +518,11 @@ public final class IntegracaoFornecedorCompleta {
       } 
       catch (JSONException jsonex) {
     	  // Para evitar laços infinitos:
-          logarErroApenasLocal("performPostCall(): Can´t format JSON");  
+          logarErroApenasLocalmente("performPostCall(): Can´t format JSON");  
       }
       catch (Exception ex) {
     	  // Para evitar laços infinitos:
-    	  logarErroApenasLocal(ex, true);
+    	  logarErroApenasLocalmente(ex, true);
       }
 
       return response;
@@ -530,7 +530,7 @@ public final class IntegracaoFornecedorCompleta {
 
   
   
-  public static void debugar(String txt) 
+  public static void debugarApenasLocalmente(String txt) 
   {  
      if (toDebugar) 
      {
@@ -548,13 +548,24 @@ public final class IntegracaoFornecedorCompleta {
     	   System.out.println(txt);
     	 }
      }
-     
+  }
+  
+
+  public static void debugarApenasRemotamente(String txt) 
+  {  
      if (!siglaSistema.equals("PCronos"))
        performPostCall(txt, "Debug");
   }
   
 
-  public static void logarErroApenasLocal( String erro )
+  public static void debugar(String txt) 
+  {  
+	 debugarApenasLocalmente(txt); 
+	 debugarApenasRemotamente(txt);
+  }
+  
+
+  public static void logarErroApenasLocalmente( String erro )
   {
 	     Date hoje = new Date();
 	      
@@ -571,30 +582,12 @@ public final class IntegracaoFornecedorCompleta {
 	 	 {
 	 	   System.out.println(erro);
 	 	 }  
+
+		 debugarApenasLocalmente(erro); 
   }
 	  
   
-  public static void logarErro( String erro )
-  {
-	  logarErroApenasLocal(erro);  
-
-      if (!siglaSistema.equals("PCronos"))
-         performPostCall(erro, "Erro");
-  }
-  
-  
-  private static void logarErro( Exception ex, boolean toConsoleTambem ) 
-  {
-	  logarErroApenasLocal(ex, toConsoleTambem);  
-
-      if (!siglaSistema.equals("PCronos"))
-      {
-          performPostCall(printStackTraceToString(ex), "Erro");
-      }
-  }
-  
-  
-  private static void logarErroApenasLocal( Exception ex, boolean toConsoleTambem ) 
+  private static void logarErroApenasLocalmente( Exception ex, boolean toConsoleTambem ) 
   {  
 	  if (toConsoleTambem)
 	  {
@@ -615,9 +608,35 @@ public final class IntegracaoFornecedorCompleta {
     	  // Deve ter tratado no static constructor
     	  throw new RuntimeException("Erro interno no método LogarErro() : arquivo não encontrado.");
       }
+
+      debugarApenasLocalmente(printStackTraceToString(ex)); 
   }
 
 
+  public static void logarErro( String erro )
+  {
+	  logarErroApenasLocalmente(erro);  
+
+      if (!siglaSistema.equals("PCronos")) {
+         performPostCall(erro, "Erro");
+         debugarApenasRemotamente(erro);
+      }
+  }
+  
+  
+  private static void logarErro( Exception ex, boolean toConsoleTambem ) 
+  {
+	  logarErroApenasLocalmente(ex, toConsoleTambem);  
+
+      if (!siglaSistema.equals("PCronos"))
+      {
+    	  String erro = printStackTraceToString(ex);
+          performPostCall(erro, "Erro");
+          debugarApenasRemotamente(erro);
+      }
+  }
+  
+  
   public static String printStackTraceToString(Exception ex)
   {
 
