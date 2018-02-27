@@ -1462,7 +1462,7 @@ public final class IntegracaoFornecedorCompleta {
 	              + " where PCPRODUT.CODPROD    = " + cdProdutoFornecedor
 	              + "   and PCPRODUT.REVENDA    = 'S' "
 	              + "   and PCPRODUT.DTEXCLUSAO is null  ";
-    }
+    } // if (siglaSistema.equals("WinThor"))
     
     // Para executar o SELECT direto no banco de dados, se precisar :
     if (i == 0) debugar(sqlString);
@@ -1482,6 +1482,7 @@ public final class IntegracaoFornecedorCompleta {
     // =============================================================================
 
     rSet = null;
+    sqlString = null;
 
     if (siglaSistema.equals("APS"))
     {
@@ -1501,59 +1502,87 @@ public final class IntegracaoFornecedorCompleta {
 	              + "     , PCPRODUT "
 	              + "     , PCSECAO  "
 	              ;
-    }
+    } // if (siglaSistema.equals("WinThor"))
+    
+    String sqlStringSemEstoque = sqlString;
+    String sqlStringComEstoque = sqlString;
 
     if (toVerificarEstoque)
     {
         if (siglaSistema.equals("APS"))
         {
-        	sqlString += "       join estoqueempresa  on estoqueempresa.codprodfilho = precoempresa.codprodfilho ";
+        	sqlStringComEstoque += "       join estoqueempresa  on estoqueempresa.codprodfilho = precoempresa.codprodfilho ";
 
             if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-            	sqlString += "                        and estoqueempresa.estoque >= " + qtSolicitada;
+            	sqlStringComEstoque += "                        and estoqueempresa.estoque >= " + qtSolicitada;
             else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-            	sqlString += "                        and estoqueempresa.estoque > 0 ";
+            	sqlStringComEstoque += "                        and estoqueempresa.estoque > 0 ";
         }
         else if (siglaSistema.equals("WinThor"))
         {
-           sqlString += "       , PCEST  ";
+           sqlStringComEstoque += "       , PCEST  ";
         }
-    }
+    } // if (toVerificarEstoque)
 
+    
     if (siglaSistema.equals("APS"))
     {
-    	sqlString += " where precoempresa.codprodfilho = " + cdProdutoFornecedor
-                  +  "   and produto.ativo             = 2 "
-                  +  "   and produto.ativopesq         = 1 ";
+    	sqlStringSemEstoque += " where precoempresa.codprodfilho = " + cdProdutoFornecedor
+                            +  "   and produto.ativo             = 2 "
+                            +  "   and produto.ativopesq         = 1 ";
+        if (toVerificarEstoque) 
+        	sqlStringComEstoque += " where precoempresa.codprodfilho = " + cdProdutoFornecedor
+                                +  "   and produto.ativo             = 2 "
+                                +  "   and produto.ativopesq         = 1 ";
     }
     else if (siglaSistema.equals("WinThor"))
     {
-	    sqlString += " where PCTABPR.CODPROD   = " + cdProdutoFornecedor
-	              +  "   and PCTABPR.NUMREGIAO = " + Integer.toString((numRegiaoWinThor)) 
-	              +  "   and PCPRODUT.CODPROD = PCTABPR.CODPROD "
-	              +  "   and PCPRODUT.REVENDA = 'S' "
-	              +  "   and PCPRODUT.DTEXCLUSAO is null "
-	              +  "   and PCPRODUT.CODSEC = PCSECAO.CODSEC "
-	           // +  "   and PCTABPR.CODPLPAG = " + cdCondicaoPagamento
-	              ;
+    	String sqlStringTemp = " where PCTABPR.CODPROD   = " + cdProdutoFornecedor
+                             +  "   and PCTABPR.NUMREGIAO = " + Integer.toString((numRegiaoWinThor)) 
+                             +  "   and PCPRODUT.CODPROD = PCTABPR.CODPROD "
+                             +  "   and PCPRODUT.REVENDA = 'S' "
+                             +  "   and PCPRODUT.DTEXCLUSAO is null "
+                             +  "   and PCPRODUT.CODSEC = PCSECAO.CODSEC "
+                          // +  "   and PCTABPR.CODPLPAG = " + cdCondicaoPagamento
+                             ;
+	    sqlStringSemEstoque += sqlStringTemp;
 	
 	    if (toVerificarEstoque)
 	    {
-	      sqlString += "   and PCEST.CODPROD   = PCTABPR.CODPROD "
-	                +  "   and PCEST.CODFILIAL = 1               "
-	                ;
+		    sqlStringComEstoque += sqlStringTemp
+	                            +  "   and PCEST.CODPROD   = PCTABPR.CODPROD "
+	                            +  "   and PCEST.CODFILIAL = 1               "
+	                            ;
 	  
-	      if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-	        sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) >= " + qtSolicitada;
-	      else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-	        sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) > 0 ";
+	        if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
+	          sqlStringComEstoque += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) >= " + qtSolicitada;
+	        else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
+	          sqlStringComEstoque += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) > 0 ";
 	   
 	    } // if (toVerificarEstoque)
+    } // if (siglaSistema.equals("WinThor"))
+
+	BigDecimal preco = null;
+	boolean temPreco = true;
+
+    if (toVerificarEstoque) {
+  	   rSet = stat.executeQuery( sqlStringSemEstoque ) ;
+
+  	   if (rSet != null && rSet.next()) 
+ 	      preco = ( (rSet.getObject(1) == null) ? null : rSet.getBigDecimal(1).setScale(4, BigDecimal.ROUND_HALF_UP)  ) ;
+  	   else
+           temPreco = false;
+
+  	   if (preco == null) {
+           debugar("Tipo de preço " + tipoPrecoComprador + ": preço não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+           temPreco = false;
+  	   }
     }
 
-    rSet = stat.executeQuery( sqlString ) ;
+	rSet = null;
+	preco = null;
 
-    BigDecimal preco = null;
+	rSet = stat.executeQuery( toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque ) ;
 
     if (rSet != null && rSet.next()) 
     {
@@ -1568,17 +1597,22 @@ public final class IntegracaoFornecedorCompleta {
 
     if (preco == null)
     {
-    	if (toVerificarEstoque)
-            debugar("Tipo de preço " + tipoPrecoComprador + ": preço ou estoque não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-    	else
-            debugar("Tipo de preço " + tipoPrecoComprador + ": preço não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+    	if (toVerificarEstoque) {
+    		if (temPreco) {
+                 debugar("Estoque não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+    		}
+    	}
+    	else {
+    		temPreco = false;
+    		debugar("Tipo de preço " + tipoPrecoComprador + ": preço não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+    	}
 
-    	debugar(sqlString);
+    	debugar(toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque);
     	// se não tiver preço ou estoque, não ofertar o produto e continuar com o próximo produto:
         return;
     }
     else if (i == 0) 
-    	debugar(sqlString);
+    	debugar(toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque);
     else
     	debugar("Preço: " + nf.format(preco));
      
