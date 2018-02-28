@@ -86,9 +86,17 @@ public class TestesComponentes {
 			System.out.println("cript = " + Criptografia.encrypt("a"));
 			System.out.println("decript = " + Criptografia.decrypt("ежTф"));
 			
+			
+         // BigDecimal bigDec = new BigDecimal(0);
+			BigDecimal bigDec = new BigDecimal("0.00");
+			if (bigDec.compareTo(BigDecimal.ZERO) == 0)
+				System.out.println("bigDec == 0");
+			else
+				System.out.println("bigDec != 0, bigDec = " + bigDec.toString());
 
-			  testNullParam(null, "abc");
-			  testNullParam(null, "abc", true);
+			
+			testNullParam(null, "abc");
+			testNullParam(null, "abc", true);
 		  
           if (1 == 1) return;
 

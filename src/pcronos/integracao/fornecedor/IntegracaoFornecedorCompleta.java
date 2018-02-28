@@ -1563,7 +1563,7 @@ public final class IntegracaoFornecedorCompleta {
     } // if (siglaSistema.equals("WinThor"))
 
 	BigDecimal preco = null;
-	boolean temPreco = true;
+	boolean temCadastroPreco = true;
 
     if (toVerificarEstoque) {
   	   rSet = stat.executeQuery( sqlStringSemEstoque ) ;
@@ -1571,11 +1571,15 @@ public final class IntegracaoFornecedorCompleta {
   	   if (rSet != null && rSet.next()) 
  	      preco = ( (rSet.getObject(1) == null) ? null : rSet.getBigDecimal(1).setScale(4, BigDecimal.ROUND_HALF_UP)  ) ;
   	   else
-           temPreco = false;
+           temCadastroPreco = false;
 
   	   if (preco == null) {
            debugar("Tipo de preço " + tipoPrecoComprador + ": preço não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-           temPreco = false;
+           temCadastroPreco = false;
+  	   }
+  	   else if (preco.compareTo(BigDecimal.ZERO) == 0) {
+           debugar("Tipo de preço " + tipoPrecoComprador + ": preço = R$ 0,00 para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+           temCadastroPreco = true; // Este flag indica apenas se existe um registro na tabela de preços ou não
   	   }
     }
 
@@ -1598,18 +1602,25 @@ public final class IntegracaoFornecedorCompleta {
     if (preco == null)
     {
     	if (toVerificarEstoque) {
-    		if (temPreco) {
+    		if (temCadastroPreco) {
                  debugar("Estoque não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
     		}
     	}
     	else {
-    		temPreco = false;
+    		temCadastroPreco = false;
     		debugar("Tipo de preço " + tipoPrecoComprador + ": preço não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
     	}
 
     	debugar(toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque);
     	// se não tiver preço ou estoque, não ofertar o produto e continuar com o próximo produto:
         return;
+    }
+    else if (preco.compareTo(BigDecimal.ZERO) == 0) {
+    	// Não debugar a mesma coisa duas vezes:
+    	if (!toVerificarEstoque) {
+          debugar("Tipo de preço " + tipoPrecoComprador + ": preço = R$ 0,00 para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+          temCadastroPreco = true; // Este flag indica apenas se existe um registro na tabela de preços ou não
+        }
     }
     else if (i == 0) 
     	debugar(toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque);
