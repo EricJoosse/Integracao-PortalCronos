@@ -14,7 +14,7 @@ SOST (BA)		170 WinThor     2.1.1		 92	(.. bit) Win Server 2008 R2 SP1	Não				tru
 Walmart         385 PCronos					 92 (.. bit) 
 
 
-Obs.: para verificar 32/64 bit JRE: 
+Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
    CMD> java -d32 -version
    CMD> java -d64 -version
    

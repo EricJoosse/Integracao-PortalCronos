@@ -1,0 +1,44 @@
+Possíveis causas de paradas da integração WinThor/PCronos:
+==========================================================  
+  - O servidor de vocês que está hospedando este serviço está desligado?
+
+  - O disco rígido ("HD") C:\ está cheio?
+
+  - Houve uma atualização de Windows?
+
+  - Houve uma atualização de Java?
+
+  - A memória RAM está 100% cheia ou perto disso?
+    No caso que a memória RAM estiver mais de 95 %, favor deixar assim por enquanto 
+    e não fazer nada ainda e me avise primeiro para conectar logo via AnyDesk 
+    pois preciso verificar uma coisa que é só comigo (apenas na primeira vez que isso acontece)
+
+  - Algum anti-virus está travando a máquina? (100 % memória RAM)
+
+  - O endereço IP, usuário ou senha do banco Oracle mudou?
+
+  - A senha do usuário ws-jrembalagem foi alterado no site do Portal Cronos porém não foi atualizado
+     no arquivo de configuração? (Este arquivo se encontra no diretório 
+     C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração Fornecedor - Portal Cronos.properties) 
+
+  - Outras ideias suas. 
+
+Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro. 
+Se você não sabe já o que é, veja em anexo uma lista de possíveis causas e outras dicas. 
+
+No caso que o manual em anexo não foi suficiente para identificar ou resolver a causa, 
+favor habilitar o AnyDesk/Team Viewer para mim, e informar o ID e a senha no Skype (contato "Eric Jo"), 
+para ver se a causa foi alguma falha dentro do serviço das ofertas automáticas.
+
+No caso que você mesmo resolveu o problema, favor me informar para re-processar as cotações pendentes, 
+pois normalmente a integração faz apenas 3 tentativas para cada cotação.   
+ 
+  
+Outras dicas:
+=============
+- O servidor de hospedagem do serviço das ofertas automáticas 
+  é o servidor no qual existe um diretório C:\Arquivos de Programas PC\ 
+             
+- Nunca precisa reiniciar ou startar o serviço. Ao ligar ou reiniciar o servidor, 
+  o serviço starta automaticamente.
+  

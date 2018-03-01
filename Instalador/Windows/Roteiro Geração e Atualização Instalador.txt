@@ -12,6 +12,10 @@ O meu é free e pessoal então não consigo conectar com seu Team Viewer empresaria
 Você quer instalar a versão free do Team Viewer? Caso contrário, sugiro instalar o AnyDesk.
 
 	
+		Skype:
+		Quando você desocupar o servidor, me avise
+
+
 	3. a. Verificar se o usuário logado é administrador ou administrator, 
 	      local ou da rede (como administrador da rede ainda não foi testado).
 	      (Formaggio: user "techcorp")
@@ -247,7 +251,14 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
         
        ANTIGO: Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
-    
+
+   18. No caso que você precisa atualizar a versão de Java um dia no futuro, 
+       no servidor que está hospedando a integração WinThor / PCronos, 
+       favor não se esquecer para me avisar com alguns dias de antecedência! 
+       Caso contrário, o serviço será interrompido indevidamente alguns dias 
+       depois de uma atualização de Java!
+       
+        
 Manual para a geração do instalador Setup.exe:
 ==============================================
 
