@@ -208,9 +208,8 @@ update [PCronos_Producao].[dbo].[Usuario_Sistema]
 -- Acompanhar se já está resolvido:
 exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0
 
--- Se precisar:
-SELECT *
-  --delete
+-- Se precisar, re-processar cotações com 3 tentativas:
+delete
   FROM [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]
   where id_cotacao_cot in ()  -- Copiar todos os id´s de uma vez de 
                               -- "exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0"

@@ -890,13 +890,19 @@ public final class IntegracaoFornecedorCompleta {
 			              		  +  ((rSet.getInt(3) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(3)) + "\r\n\r\n" 
 			              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(3)) + ") nesta cotação!\r\n\r\n"
 			              		     )                                
-			              		  +  "Só temos até " + rSet.getTimestamp(8).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n" 
-			            	      +  "Erro: " + rSet.getString(4) + "\r\n" 
+			              		  +  "Só temos até " + rSet.getTimestamp(9).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n"
+			              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
+			              		  +  ((rSet.getInt(4) > 0) ? ("Favor verificar o percentual de ocupação da memória RAM\r\n\r\n"
+			              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
+			              				                     )
+        		                                           : ""
+			              			 )                                
+			            	      +  "Erro: " + rSet.getString(5) + "\r\n" 
 			            		  +  "\r\n\r\n\r\n\r\n";
 			             }
 	            	 }
-	            	 dtCadastroIni = rSet.getTimestamp(5).toLocalDateTime();
-	            	 dtCadastroFim = rSet.getTimestamp(6).toLocalDateTime();
+	            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
+	            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	             }
 	             
 	             if (!assunto.equals(" - Parada integração!"))
