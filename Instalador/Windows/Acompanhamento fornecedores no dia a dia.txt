@@ -12,7 +12,10 @@ OBSERVAÇÕES:
       A FUNCIONAR.      
    4. NÃO ADICIONAR NO MANUAL PARA A TI VERIFICAR OS ARQUIVOS DE LOG DE ERRO 
       NO DIR C:\TEMP\PORTAL CRONOS\XML\ POIS ELES VÃO OLHAR EM ARQUIVOS ANTIGOS 
-      QUE NÃO TEM NADA A VER COM O PROBLEMA!      
+      QUE NÃO TEM NADA A VER COM O PROBLEMA!   
+   5. SE A PARADA COMEÇÕU NO FINAL DA SEMANA, SEGUNDA-FEIRA ESPERAR ATÉ 9:00 - 10:00 
+      PARA VER SE O TI JÁ RESOLVE SOZINHO QUE FALTOU ENERGIA OU INTERNET OU OUTRA COISA.  
+           
 
 Para: felipe.lolaia@maritimospescados.com.br
 Assunto: URGENTE! Parada integração PCronos/WinThor - Marítimos Pescados
@@ -34,6 +37,9 @@ Marcelo, bom dia!
  
 <b>Isso é urgente e importante para resolver logo para evitar que a  Prolac perde muitas oportunidades de venda!</b>
 OU:  
+Só temos até hoje (05/03/2018) 12:30 para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada).
+É urgente pois tem muitos produtos vendidos pela Prolac (200 "Meus Produtos") pendentes sem ofertas vencendo às 12:30 horas!
+OU:
 É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos "Meus Produtos" vendidos pela Prolac (164) nesta cotação!
 E a quantidade de cotações vai crescer rapidamente no final da semana!
 OU:
@@ -46,19 +52,21 @@ para ofertar estas cotações automaticamente.
 OU:
 Se não conseguir resolver antes de amanhã (15/02/2018) 10:30 horas, favor solicitar os vendedores ofertar as cotações ...... manualmente, 
 pois a cotação que vence primeiro e que não está ofertada vence 15/02/2018 10:30,  
-e tem muitos Meus Produtos (178) nesta cotação!
+e tem muitos produtos vendidos pela Prolac (200 "Meus Produtos") nesta cotação!
 OU:
 É melhor resolver isso logo, antes de amanhã (15/02/2018) 10:30 (é a data fim da cotação que vence primeiro e que não está ofertada),  
-pois tem muitos Meus Produtos (178) nesta cotação!
+pois tem muitos produtos vendidos pela Prolac (200 "Meus Produtos") nesta cotação!
  
 <b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>. 
 Se você não sabe já o que é, veja em anexo uma lista de possíveis causas e outras dicas. 
-
+OU:
+Se você não sabe já o que é, veja em anexo a última versão da lista de possíveis causas e outras dicas.
+ 
 No caso que o manual em anexo não foi suficiente para identificar ou resolver a causa, 
-favor habilitar o AnyDesk/Team Viewer para mim, e informar o ID e a senha no Skype (contato "Eric Jo"), 
+favor colocar o AnyDesk/Team Viewer no ar, e informar o ID e a senha no Skype (contato "Eric Jo"), 
 para ver se a causa foi alguma falha dentro do serviço das ofertas automáticas.
 
-No caso que você mesmo resolveu o problema, favor me informar para re-processar as cotações pendentes, 
+No caso que você mesmo resolveu o problema, favor informar "Eric Jo" no Skype para re-processar as cotações pendentes, 
 pois normalmente a integração faz apenas 3 tentativas para cada cotação.   
               
 Atc,
@@ -72,7 +80,7 @@ Ivan, bom dia!
  
   ontem (19/02/2018) de 11:00 até 21:00 o serviço das ofertas automáticas no servidor da JR Embalagem 
 estava comunicando com o Portal Cronos, enviando arquivos REC_*.xml, porém não estava enviando arquivos OFE_*.xml, 
-então não estava ofertando. Precisamos descobrir a causa para tomar providências.   
+então não estava ofertando. Precisamos descobrir a causa para evitar que acontece novamente.   
 
 1. Favor verificar no diretório C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\ 
     se existir um dos seguintes tipos de arquivos de log com data no período acima: 
@@ -128,7 +136,7 @@ Isso é muito importante para evitar ainda mais atraso e ainda mais perda de opor
   	CASO QUE NÂO:
 	Então hoje vou precisar de sua confirmação diversas vezes! A Anydesk caiu neste momento!
 
-Emai:
+Email:
 PARA GANHAR TEMPO:
 Leão, Marcelo,
  

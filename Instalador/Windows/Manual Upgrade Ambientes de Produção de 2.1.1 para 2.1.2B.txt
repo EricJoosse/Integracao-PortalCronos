@@ -8,15 +8,24 @@ Manual Upgrade dos Ambientes de Produção de 2.1.1 para 2.1.2B
  
 3. Corrigir Job15a15minOfertamentoJava_Windows.bat:
 
-a.
+a. Substituir:
 
+set path=%path%;C:\Program Files\Java\jre1.8.0_92\bin
+
+   por:
+   
 SETLOCAL
 set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
 REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
 REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_161\bin
 REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
 
-b.
+
+b. Substituir:
+
+exit
+
+   por:
 
 ENDLOCAL
 exit

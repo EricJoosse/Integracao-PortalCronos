@@ -24,13 +24,12 @@ Possíveis causas de paradas da integração WinThor/PCronos:
   - Outras ideias suas. 
 
 Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro. 
-Se você não sabe já o que é, veja em anexo uma lista de possíveis causas e outras dicas. 
 
-No caso que o manual em anexo não foi suficiente para identificar ou resolver a causa, 
-favor habilitar o AnyDesk/Team Viewer para mim, e informar o ID e a senha no Skype (contato "Eric Jo"), 
+No caso que este manual não foi suficiente para identificar ou resolver a causa, 
+favor colocar o AnyDesk/Team Viewer no ar, e informar o ID e a senha no Skype (contato "Eric Jo"), 
 para ver se a causa foi alguma falha dentro do serviço das ofertas automáticas.
 
-No caso que você mesmo resolveu o problema, favor me informar para re-processar as cotações pendentes, 
+No caso que você mesmo resolveu o problema, favor informar "Eric Jo" no Skype para re-processar as cotações pendentes, 
 pois normalmente a integração faz apenas 3 tentativas para cada cotação.   
  
   
