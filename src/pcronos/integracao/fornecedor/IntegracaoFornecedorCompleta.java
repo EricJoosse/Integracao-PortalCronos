@@ -875,42 +875,91 @@ public final class IntegracaoFornecedorCompleta {
 	             rSet = cstat.getResultSet();
 	             String body = "";
 	             String assunto = "";
+            	 String nmFornecedor = null;
+	             
 	             while (rSet.next()) {
-	            	 if (rSet.getString(2).equals("INI")) {
+	            	 nmFornecedor = rSet.getString(2);
+	            	 
+	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
 		            	 assunto = "Integração ofertas colocada em produção!";
 		            	 body += "Começou a integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " em produção!\r\n";
 		            	 body += "Favor comentar este id_fornecedor no OR na sp dbo.monitorarIntegracaoFornecedores\r\n\r\n\r\n\r\n";
+		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
+		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	            	 }
-	            	 else {
-		            	 assunto = rSet.getString(1) + " - Parada integração!";
-	
-			             if (!assunto.equals(" - Parada integração!")) {
-			           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-			            	 body += rSet.getString(2) + "\r\n\r\n" 
-			              		  +  ((rSet.getInt(3) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(3)) + "\r\n\r\n" 
-			              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(3)) + ") nesta cotação!\r\n\r\n"
-			              		     )                                
-			              		  +  "Só temos até " + rSet.getTimestamp(9).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n"
-			              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
-			              		  +  ((rSet.getInt(4) > 0) ? ("Favor verificar o percentual de ocupação da memória RAM\r\n\r\n"
-			              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
-			              				                     )
-        		                                           : ""
-			              			 )                                
-			            	      +  "Erro: " + rSet.getString(5) + "\r\n" 
-			            		  +  "\r\n\r\n\r\n\r\n";
-			             }
-	            	 }
-	            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
-	            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
-	             }
+	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) {
+	            		 FornecedorRepositorio fRep = new FornecedorRepositorio();
+	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
+		            	 assunto = "URGENTE! " + rSet.getString(2) + " - Parada integração PCronos/" + f.SiglaSistemaFornecedor;
+		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		            	 body += rSet.getString(3) + "\r\n\r\n" 
+		              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
+		              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação!\r\n\r\n"
+		              		     )                                
+		              		  +  "Só temos até " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n"
+		              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
+		              		  +  ((rSet.getInt(5) > 0) ? ("Favor verificar o percentual de ocupação da memória RAM\r\n\r\n"
+		              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
+		              				                     )
+    		                                           : ""
+		              			 )                                
+		            	      +  "Erro: " + rSet.getString(6) + "\r\n" 
+		            		  +  "\r\n\r\n\r\n\r\n";
+		            	 
+		            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
++ f.ApelidoResponsavelTI + ", bom dia!" + "\r\n"
++ " " + "\r\n"
++ "   desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + f.NomeFantasiaEmpresa + "." + "\r\n"
++ "" + "\r\n"
++ "<b>Isso é urgente e importante para resolver logo para evitar que a " + f.NomeFantasiaEmpresa + " perde muitas oportunidades de venda!</b>" + "\r\n"
++ "OU:  " + "\r\n"
++ "Só temos até hoje (05/03/2018) 12:30 para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
++ "É urgente pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às 12:30 horas!" + "\r\n"
++ "OU:" + "\r\n"
++ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + f.NomeFantasiaEmpresa + " (164) nesta cotação!" + "\r\n"
++ "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
++ "OU:" + "\r\n"
++ "No momento já tem 3 cotações esperando e esta quantidade vai crescer rapidamente!" + "\r\n"
++ "OU:  " + "\r\n"
++ "Só temos até hoje (05/02/2018) 12:30 para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n" 
++ "OU:" + "\r\n"
++ "Favor solicitar os vendedores ofertar as cotações ...... manualmente, pois não vai dar mais tempo suficiente" + "\r\n" 
++ "para ofertar estas cotações automaticamente. " + "\r\n"
++ "OU:" + "\r\n"
++ "Se não conseguir resolver antes de amanhã (15/02/2018) 10:30 horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
++ "pois a cotação que vence primeiro e que não está ofertada vence 15/02/2018 10:30,"   + "\r\n"
++ "e tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
++ "OU:" + "\r\n"
++ "É melhor resolver isso logo, antes de amanhã (15/02/2018) 10:30 (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
++ "pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
++ "" + "\r\n"
++ "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
++ "Se você não sabe já o que é, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
++ "OU:" + "\r\n"
++ "Se você não sabe já o que é, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
++ "" + "\r\n"
++ "No caso que o manual em anexo não foi suficiente para identificar ou resolver a causa," + "\r\n" 
++ "favor colocar o" + f.AplicativoDesktopRemoto + " no ar, e informar o ID e a senha no Skype (contato \"Eric Jo\")," + "\r\n" 
++ "para ver se a causa foi alguma falha dentro do serviço das ofertas automáticas." + "\r\n"
++ "" + "\r\n"
++ "No caso que você mesmo resolveu o problema, favor informar \"Eric Jo\" no Skype para re-processar as cotações pendentes," + "\r\n" 
++ "pois normalmente a integração faz apenas 3 tentativas para cada cotação.   " + "\r\n"
++ "" + "\r\n"
++ "Atc," + "\r\n"
++ "Eric " + "\r\n"
++  "\r\n\r\n\r\n\r\n";
+
+		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
+		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
+	            	 } // if (!rSet.getString(2).equals("INI")) {
+	             } // while (rSet.next())
 	             
-	             if (!assunto.equals(" - Parada integração!"))
+	             if (!Utils.isNullOrBlank(nmFornecedor))
 	 	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
 
 	 	         rSet.close();
   	             results = cstat.getMoreResults();
-	        } 
+	        } // while (results)
 	    }
 	    catch (java.lang.Exception ex) { 
 	      logarErro(ex, false);
