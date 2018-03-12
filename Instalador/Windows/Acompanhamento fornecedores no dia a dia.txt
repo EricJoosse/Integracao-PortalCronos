@@ -55,13 +55,6 @@ Eric
 
 
 
-(  ) Leão,
-  
-    precisamos automatizar o re-processamento das cotações pendentes após a liberação da memória RAM, 
-pois isso acontece em média uma vez por semana e não posso ficar reprocessando as cotações 
-manualmente toda vez, apagando os registros com 3 tentativas na tabela dbo.Integracao_Cotacao_Fornecedor, 
- 
-Eric     
 
 ==========================================================================================================
 DIVERSOS: 
