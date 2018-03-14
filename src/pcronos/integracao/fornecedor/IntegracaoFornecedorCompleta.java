@@ -28,8 +28,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.net.URI;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Connection; 
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.ws.rs.core.MediaType;
 import javax.xml.crypto.Data;
 import javax.xml.parsers.DocumentBuilder;
@@ -946,14 +949,39 @@ public final class IntegracaoFornecedorCompleta {
 + "Se você não tiver um usuário/senha no site do Portal Cronos, favor confirmar isso com os vendedores. " + "\r\n" 
 + "Se as ofertas automáticas não voltaram a funcionar ainda, " + "\r\n" 
 + "favor entrar em contato com \"Eric Jo\" via Skype (ou eric.jo@bol.com.br via email)." + "\r\n" 
-+ "" + "\r\n"
-+ "Atc," + "\r\n"
-+ "Eric " + "\r\n"
-+  "\r\n\r\n\r\n\r\n";
+;
 
-		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
+		     		    String sqlVerificacaoCadastros = 
+		     		    		  "select distinct ds_ocorrencia_logeint "
+		     		    		+ "  from dbo.Log_Erro_Integracao "
+		     		    		+ " where id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+		     		    		+ "   and dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -7, getdate()) "
+		     		    		+ "   and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' ";
+		     		    Statement statVerificacaoCadastros = conn.createStatement();
+		     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
+		     		    int qtdVerificacaoCadastros = 0;
+		     		    while (rSetVerificacaoCadastros.next()) {
+		     		    	qtdVerificacaoCadastros += 1;
+		     		    	if (qtdVerificacaoCadastros == 1) {
+		     		    		body += "" + "\r\n"
+		     		    				+ "Aproveitando: nos últimos 7 dias aconteceram as seguintes ausências de cadastros no " + f.SiglaSistemaFornecedor +", impedindo bastante ofertas automáticas, " + "\r\n"
+		     		    				+ "Favor resolver ou encaminhar para o gerente de vendas: "+ "\r\n";
+		     		    	}
+							body += rSetVerificacaoCadastros.getString(1) + "\r\n";
+							
+						} 
+		     		   body += "" + "\r\n"
+		     				+ "Atc," + "\r\n"
+		     				+ "Eric " + "\r\n"
+		     				+  "\r\n\r\n\r\n\r\n";
+
+		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
-	            	 } // if (!rSet.getString(2).equals("INI")) {
+	            	 } // if (!rSet.getString(2).equals("INI")) 
+	            	 else {
+		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
+		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();	            		 
+	            	 }
 	             } // while (rSet.next())
 	             
 	             if (!Utils.isNullOrBlank(nmFornecedor))

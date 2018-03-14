@@ -60,6 +60,11 @@ Eric
 DIVERSOS: 
 
 Skype:
+Felipe, bom dia! Vocês têm um servidor Linux no Marítimos Pescados? 
+Se quiser, posso instalar a integração WinThor/Portal Cronos no servidor Linux, 
+pois com o servidor atual, desde muito tempo, o Portal Cronos nunca mais está recebendo ofertas automáticas do Marítimos Pescados...
+
+Skype:
 Felipe, boa tarde! Você não prefere que vou instalar a integração WinThor/Portal Cronos em outro servidor de vocês?
 Pois com o servidor atual, desde muito tempo, o Portal Cronos nunca mais está recebendo ofertas automáticas do Marítimos Pescados...
 
@@ -145,23 +150,37 @@ SELECT  *
   where id_fornecedor_fornec = 
 order by dt_envio_cotacao_icotfor desc
 
+
 -- Verificar se pelo menos os usuários estão ofertando manualmente: 
 
 update [PCronos_Producao].[dbo].[Usuario_Sistema]  
     set id_fornecedor_fornec = 
   where cd_usuario_sistema_ususis = 'ericcoringa'
 
+
 -- e em seguida conectar no Portal Cronos como ericcoringa
 
 -- Acompanhar se já está resolvido:
+
 exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0
 
+
 -- Se precisar, re-processar cotações com 3 tentativas:
+
 delete
   FROM [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]
   where id_cotacao_cot in ()  -- Copiar todos os id´s de uma vez de 
                               -- "exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0"
                               -- e adicionar vírgulas
   and id_fornecedor_fornec = 
+
+
+-- Verificação de cadastros de clientes e produtos: 
+
+select distinct ds_ocorrencia_logeint
+  from dbo.Log_Erro_Integracao
+ where id_fornecedor_fornec = 
+   and dt_hr_ocorrencia_logeint > DATEADD("DAY", -7, getdate())
+   and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.'
 
 
