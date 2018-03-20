@@ -1,0 +1,32 @@
+Manual Upgrade dos Ambientes de Produção de 2.1.2B para 2.3.0
+=============================================================
+
+1. Copiar arquivo novo integr-fornecedor-2.3.0.jar do instalador para o servidor do fornecedor
+ 
+
+2. Atualizar a chamada de integr-fornecedor-2.3.0.jar no Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor
+ 
+
+3. Adicionar no arquivo  /conf/Integração Fornecedor - Portal Cronos.properties:
+
+SenhaBancoDeDadosCriptografada    = true
+#                                          # Opções: true, false. 
+#                                          # No caso que você preferir criptografar a senha, por enquanto favor enviar a senha  
+#                                          # "normal" para eric.jo@bol.com.br que retornará a senha criptografada.   
+#                                          # No futuro será disponibilizado uma telinha no site do Portal Cronos 
+#                                          # para você mesmo obter a senha criptografada. 
+
+
+   e: 
+   
+SenhaWebServiceCriptografada      = false
+#                                          # Opções: true, false. 
+#                                          # No caso que você preferir criptografar a senha, por enquanto favor enviar a senha  
+#                                          # "normal" para eric.jo@bol.com.br que retornará a senha criptografada.   
+#                                          # No futuro será disponibilizado uma telinha no site do Portal Cronos 
+#                                          # para você mesmo obter a senha criptografada. 
+
+   
+4. Copiar o arquivo /lib/commons-codec-1.11.jar do instalador 
+   para o servidor do fornecedor (dir /lib/).

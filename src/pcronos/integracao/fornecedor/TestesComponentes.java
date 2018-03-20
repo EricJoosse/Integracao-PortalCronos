@@ -83,8 +83,10 @@ public class TestesComponentes {
 
 		try
         {
-			System.out.println("cript = " + Criptografia.encrypt("a"));
-			System.out.println("decript = " + Criptografia.decrypt("ежTф"));
+			String strToCript = "aaa"; // "ab$AB@12";
+			String strToDecript = "ST+o/6W2VnE=";
+			System.out.println("cript de " + strToCript + " = " + Criptografia.encrypt(strToCript));
+			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript));
 			
 			
          // BigDecimal bigDec = new BigDecimal(0);

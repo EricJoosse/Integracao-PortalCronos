@@ -127,9 +127,11 @@ public final class IntegracaoFornecedorCompleta {
   public static boolean      toUsarValorMinimoSistemaFornecedor;
   public static String       username;
   public static String       senha;
+  public static boolean      senhaCriptografada;
   public static String       tipoBancoDeDados;
   public static String       usernameBancoDeDados;
   public static String       senhaBancoDeDados;
+  public static boolean      senhaBancoDeDadosCriptografada;
   public static String       enderecoIpServidorBancoDeDados;
   public static String       portaServidorBancoDeDados;
   public static String       instanciaBancoDeDados;
@@ -216,7 +218,13 @@ public final class IntegracaoFornecedorCompleta {
        	  throw new ConfiguracaoException(msgErro);
          }
          usernameBancoDeDados              = config.getProperty("UsuarioBancoDeDados");
-         senhaBancoDeDados                 = config.getProperty("SenhaBancoDeDados");
+         senhaBancoDeDadosCriptografada    = Boolean.parseBoolean(config.getProperty("SenhaBancoDeDadosCriptografada"));
+
+         if (senhaBancoDeDadosCriptografada)
+             senhaBancoDeDados             = Criptografia.decrypt(config.getProperty("SenhaBancoDeDados"));
+         else
+             senhaBancoDeDados             = config.getProperty("SenhaBancoDeDados");
+        	 
          enderecoIpServidorBancoDeDados    = config.getProperty("EnderecoIpServidorBancoDeDados");
          portaServidorBancoDeDados         = config.getProperty("PortaServidorBancoDeDados");
          instanciaBancoDeDados             = config.getProperty("InstanciaBancoDeDados");
@@ -227,7 +235,13 @@ public final class IntegracaoFornecedorCompleta {
              toUsarValorMinimoSistemaFornecedor = Boolean.parseBoolean(config.getProperty("UsarValorMinimoSistemaFornecedor"));
 	  }
       username                          = config.getProperty("UsuarioWebService");
-      senha                             = config.getProperty("SenhaWebService");
+      senhaCriptografada                = Boolean.parseBoolean(config.getProperty("SenhaWebServiceCriptografada"));
+      
+      if (senhaCriptografada)
+          senha                         = Criptografia.decrypt(config.getProperty("SenhaWebService"));
+      else
+          senha                         = config.getProperty("SenhaWebService");
+    	  
       cnpjFornecedor                    = config.getProperty("CnpjFornecedor");
       nomeFantasiaFornecedor            = config.getProperty("NomeFantasiaFornecedor");
       toDebugar                         = Boolean.parseBoolean(config.getProperty("Debugar"));
@@ -300,12 +314,14 @@ public final class IntegracaoFornecedorCompleta {
 		  debugar("InstanciaBancoDeDados             = " + instanciaBancoDeDados);
 		  debugar("PortaServidorBancoDeDados         = " + portaServidorBancoDeDados);
 		  debugar("UsuarioBancoDeDados               = " + usernameBancoDeDados);
-		  debugar("SenhaBancoDeDados                 = " + senhaBancoDeDados);
+		  debugar("SenhaBancoDeDados                 = " + config.getProperty("SenhaBancoDeDados"));
+		  debugar("SenhaBancoDeDadosCriptografada    = " + senhaBancoDeDadosCriptografada);
 	  }
 	  debugar("EnderecoBaseWebService            = " + enderecoBaseWebService);
 	  debugar("TipoAmbiente                      = " + tipoAmbiente);
 	  debugar("UsuarioWebService                 = " + username);
-	  debugar("SenhaWebService                   = " + senha);
+	  debugar("SenhaWebService                   = " + config.getProperty("SenhaWebService"));
+	  debugar("SenhaWebServiceCriptografada      = " + senhaCriptografada);
 	  debugar("DiretorioArquivosXml              = " + diretorioArquivosXml);
    // debugar("QtdDiasArquivosXmlGuardados       = " + .....);
 	  debugar("Debugar                           = " + toDebugar);
@@ -511,7 +527,8 @@ public final class IntegracaoFornecedorCompleta {
               while ((line=br.readLine()) != null) {
                   response += line;
               }
-          debugarApenasLocalmente("COOKIE: " + conn.getHeaderField("Set-Cookie"));
+          // debugarApenasLocalmente("COOKIE: " + conn.getHeaderField("Set-Cookie"));
+                // -> deu "COOKIE: NULL"
           //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
           }
           else {
