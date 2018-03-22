@@ -5,8 +5,10 @@ import pcronos.integracao.Criptografia;
 import pcronos.integracao.EmailAutomatico;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Locale;
@@ -141,6 +143,7 @@ public final class IntegracaoFornecedorCompleta {
   public static String       enderecoBaseWebService;
   public static String       diretorioArquivosXml;
   public static String       ObsOfertasPadraoSeNaoTemNoSistema;
+  public static int          qtdDiasArquivosXmlGuardados;
   public static boolean      toDebugar;
   public static boolean      toEnviarEmailAutomatico;
   public static String       provedorEmailAutomatico;
@@ -257,7 +260,16 @@ public final class IntegracaoFornecedorCompleta {
     	  String msgErro = "O tipo de ambiente " + tipoAmbiente + " não existe. Opções permitidas: P (= Produção), H (= Homologação), T (= Teste)";
     	  throw new ConfiguracaoException(msgErro);
       }
+      
+      
+      try {
+      qtdDiasArquivosXmlGuardados = Integer.parseInt(config.getProperty("QtdDiasArquivosXmlGuardados"));
+      }
+      catch (NumberFormatException nfex) {
+    	  throw new ConfiguracaoException("Parâmetro \"QtdDiasArquivosXmlGuardados\" inválido. Deve ser um número inteiro igual a zero ou maior.");
+      }
 	
+      
       diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
       
       if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
@@ -323,7 +335,7 @@ public final class IntegracaoFornecedorCompleta {
 	  debugar("SenhaWebService                   = " + config.getProperty("SenhaWebService"));
 	  debugar("SenhaWebServiceCriptografada      = " + senhaCriptografada);
 	  debugar("DiretorioArquivosXml              = " + diretorioArquivosXml);
-   // debugar("QtdDiasArquivosXmlGuardados       = " + .....);
+      debugar("QtdDiasArquivosXmlGuardados       = " + qtdDiasArquivosXmlGuardados);
 	  debugar("Debugar                           = " + toDebugar);
          
       // throw new Exception("teste exception static constructor");
@@ -518,8 +530,6 @@ public final class IntegracaoFornecedorCompleta {
           os.write(outputBytes);
 
           int responseCode = conn.getResponseCode();
-          // Para evitar laços infinitos:
-          debugarApenasLocalmente("Response Message: " + conn.getResponseMessage());
 
           if (responseCode == HttpsURLConnection.HTTP_OK) {
               String line;
@@ -532,8 +542,9 @@ public final class IntegracaoFornecedorCompleta {
           //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
           }
           else {
-              response="";
-
+              response = "";
+              // Para evitar laços infinitos:
+              debugarApenasLocalmente("Response Message: " + conn.getResponseMessage());
           }
       } 
       catch (JSONException jsonex) {
@@ -1931,12 +1942,50 @@ public final class IntegracaoFornecedorCompleta {
     debugar("response : " + response);
 
    }
+  
+  
+   public static void excluirArquivos(LocalDateTime horaInicio)
+   {
+	   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm");
+	   
+	   // Limpeza dump files do JRE:
+	   File dir = new File("C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos");
+	   for (final File file : dir.listFiles()) 
+	   {
+		   if (file.getName().indexOf("hs_err_pid") == 0 || file.getName().indexOf("replay_pid") == 0) 
+		   {
+		      logarErro("Arquivo " + file.getName() + " encontrado, então a memória RAM estava cheia na execução anterior do serviço de ofertas automáticas no dia " + sdf.format(file.lastModified()) + "." );
+		      file.delete();
+		   }
+	   }
+	   
+	   
+	   // Limpeza dos arquivos próprios deste serviço (arquivos .log e .xml):
+	   dir = new File("C:\\temp\\PortalCronos\\XML");
+	   for (final File file : dir.listFiles()) 
+	   {
+		   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+		   
+		   if (datahoraArquivo.isBefore(horaInicio.minusDays(qtdDiasArquivosXmlGuardados))) 
+		   {
+		      file.delete();
+		   }
+	   }
+	   
+	   
+   }
 
-    public static void main(String[] args)
-    {    
-   // criarTabelasTeste();
-
+   
+   public static void main(String[] args)
+   {    
 	  LocalDateTime horaInicio = LocalDateTime.now();
+
+	  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+	  excluirArquivos(horaInicio);
+	   
+   // criarTabelasTeste();
 
 	  if (siglaSistema.equals("PCronos")) {
 		  if (erroStaticConstructor == null && toEnviarEmailAutomatico)
@@ -1954,8 +2003,6 @@ public final class IntegracaoFornecedorCompleta {
 	  long MinutosExecucao = Duration.between(horaInicio, horaFim).toMinutes() % 60;
 	  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
 	  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
-	  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-	  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	  
 	  try
 	  {

@@ -1,0 +1,12 @@
+Manual Upgrade dos Ambientes de Produção de outra versão para outra versão que não se encontra 
+==============================================================================================
+na lista de manuais para upgrade
+================================
+
+
+1. Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor
+ 
+
+2. Atualizar a chamada de integr-fornecedor-x.y.z.jar no Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor
+ 

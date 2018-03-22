@@ -51,12 +51,15 @@ Você quer instalar a versão free do Team Viewer? Caso contrário, sugiro instalar
 
 		- Verificar a variável "set drive=C:"  ou "set drive=D:" no início de Primeira_Instalacao_Versao_Windows.bat 
 		  Verificar se tem espaço livre de 1 GB nos discos C:/, D:/, etc. :
-			- 303 MB : 
+			- 303 MB: 
 				- C:\Arquivos de Programas PC\*
 				- C:\Program Files\Java\jre1.8.0_92\*
 				- C:\temp\Instalar Integração Fornecedores - Portal Cronos.exe
-			- 700 MB :
+			- 250 MB: 
+			    - C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\hs_err_pidxxxx.mdmp
+			- 450 MB: (Prolac: 30 MB por mês)
 				- C:\temp\PortalCronos\XML\*.xml  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
+				- C:\temp\PortalCronos\XML\*.log  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
 
 		  
 		- Verificar se precisa descomentar um dos seguintes skips no início de Primeira_Instalacao_Versao_Windows.bat :
