@@ -7,9 +7,12 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
 	2. Conectar no Team Viewer
 	
 	   Skype:
-	   Existem 2 tipos de instalação do Team Viewer: free (pessoal) e pago/trial (empresarial)
-O meu é free e pessoal então não consigo conectar com seu Team Viewer empresarial. 
-Você quer instalar a versão free do Team Viewer? Caso contrário, sugiro instalar o AnyDesk.
+	   Existem 2 tipos de instalação do Team Viewer: "free" (pessoal) e "trial"/pago (empresarial). 
+Meu Team Viewer é "free" e pessoal então não consigo conectar com seu Team Viewer empresarial. 
+Você quer desinstalar sua versão "trial" (ou pago?) e instalar a versão "free" do Team Viewer? 
+Caso contrário, sugiro instalar o AnyDesk, que é sempre de graça. 
+Como última opção vou falar com Leão para ele pagar a licença do Team Viewer empresarial. 
+Como vai ser?
 
 	
 		Skype:
@@ -261,7 +264,41 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        Caso contrário, o serviço será interrompido indevidamente alguns dias 
        depois de uma atualização de Java!
        
-        
+   19. Verificar, e no caso, enviar o seguinte email: 
+   
+Leão,
+  
+   você tem um script pronto para corrigir os caminhos nas base de homologação nova 
+[BKP_PCronos_Producao_2018.02.21].[dbo].[Configuracao]?
+Pois o servidor da SOST está apontando para o ambiente de homologação e a tabela 
+dbo].[Configuracao está apontando para o ambiente de produção. 
+Assim o serviço das ofertas da SOST nunca vai poder funcionar pois o site de homologação 
+não tem privilêgio para gravar no site de produção então vai dar erro fatal, 
+sem nenhum registro de log deste erro... 
+ 
+Eric
+   
+   20. Scripts para troubleshooting se não funcionar:
+   
+declare @fornecedor_id  int
+set @fornecedor_id = 
+
+SELECT  *
+--delete
+  FROM [dbo].[Integracao_Cotacao_Fornecedor]
+  where id_fornecedor_fornec = @fornecedor_id
+
+select * 
+--delete
+  from dbo.Log_Erro_Integracao
+  where id_fornecedor_fornec = @fornecedor_id
+  --and ds_ocorrencia_logeint like 'Já%'
+   
+select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))
+  from  dbo.Integracao_Cotacao_Fornecedor
+ where id_fornecedor_fornec = @fornecedor_id
+ 
+         
 Manual para a geração do instalador Setup.exe:
 ==============================================
 

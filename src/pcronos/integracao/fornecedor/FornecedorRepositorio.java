@@ -51,7 +51,7 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "Cleijonatas";
 			f.ApelidoResponsavelAlternativoTI = "Sena";
 			f.SiglaSistemaFornecedor = "WinThor";
-			f.AplicativoDesktopRemoto = "Team Viewer";
+			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.NomeFantasiaEmpresa = "SOST";
 		}			   
 		return f;
