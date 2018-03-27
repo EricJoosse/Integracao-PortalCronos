@@ -914,7 +914,8 @@ public final class IntegracaoFornecedorCompleta {
 	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
 		            	 assunto = "Integração ofertas colocada em produção!";
 		            	 body += "Começou a integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " em produção!\r\n";
-		            	 body += "Favor comentar este id_fornecedor no OR na sp dbo.monitorarIntegracaoFornecedores\r\n\r\n\r\n\r\n";
+		            	 body += "Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores.\r\n";
+		            	 body += "Dica: procura \"" + rSet.getString(1) + "\" nesta sp.\r\n\r\n\r\n\r\n";
 		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	            	 }

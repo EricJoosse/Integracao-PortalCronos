@@ -294,9 +294,6 @@ select *
   where id_fornecedor_fornec = @fornecedor_id
   --and ds_ocorrencia_logeint like 'Já%'
    
-select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))
-  from  dbo.Integracao_Cotacao_Fornecedor
- where id_fornecedor_fornec = @fornecedor_id
  
          
 Manual para a geração do instalador Setup.exe:
