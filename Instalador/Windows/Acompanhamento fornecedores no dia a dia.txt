@@ -59,6 +59,24 @@ Eric
 ==========================================================================================================
 DIVERSOS: 
 
+NO CASO DE PROBLEMAS COM A LICENÇA DO TEAM VIEWER:
+Skype:
+Existem 2 tipos de instalação do Team Viewer: "free" (pessoal) e "trial"/pago (empresarial). 
+Meu Team Viewer é "free" e pessoal então não consigo conectar com seu Team Viewer empresarial. 
+Você quer desinstalar sua versão "trial" (ou pago?) e instalar a versão "free" do Team Viewer? 
+Caso contrário, sugiro instalar o AnyDesk, que é sempre de graça. 
+Como última opção vou falar com Leão para ele pagar a licença do Team Viewer empresarial. 
+Como vai ser?
+
+	
+Skype:
+Quando você desocupar o servidor, me avise
+
+
+Skype:
+Bom dia! Favor colocar o  AnyDesk no ar 5 minutos para uma atualização de versão. Agora vai ser a última vez de verdade por um bom tempo.
+
+
 Skype:
 Felipe, bom dia! Vocês têm um servidor Linux no Marítimos Pescados? 
 Se quiser, posso instalar a integração WinThor/Portal Cronos no servidor Linux, 
@@ -102,6 +120,62 @@ O Código de Produto 101488 do Fornecedor, informado na tela De-Para de Produtos 
  
 Atc,
 Eric
+
+
+Leão,
+ 
+descobri um bug novo na tabela de log que fica acusando indevidamente (na maioria dos casos) que "a cotação não foi ofertada porque o usuário já fez isso manualmente" então  fiquei enganado.
+Na verdade a tabela de log comprova que o gerente de vendas Marco Aurelio da JR Embalagem entende muito bem que o sistema está ofertando automaticamente
+e mesmo assim, segundo a tabela de log, ele fica ofertando manualmente o tempo todo por 3 motivos:  
+ 
+1. por causa do bug das 2 interpretações da condição de pagamento "21 / 28 dias" e outras,
+    veja o email abaixo.
+ 
+2. Outro motivo deve ser que o gerente de vendas Marco Aurelio simplesmente não sabe que os seguintes CNPJ´s
+    não estão cadastrados no WinThor, então seria melhor informar ele (jrembalagem.posvenda@gmail.com):
+    O CNPJ 00501070000123 da empresa compradora Softex Recife
+    O CNPJ 04208473000130 da empresa compradora Di Branco Recepções
+    O CNPJ 04998127000100 da empresa compradora Skillus Classic - Ilha do Leite
+    O CNPJ 06035073000103 da empresa compradora CEASA - PE
+    O CNPJ 08873461000180 da empresa compradora Chiwake
+    O CNPJ 11553247000151 da empresa compradora Restaurante O Pátio Café, Cozinha e Eventos
+    O CNPJ 16099143010790 da empresa compradora Central Mineiro Delivery
+    O CNPJ 16888022000170 da empresa compradora Subcondomínio Riomar Recife
+    O CNPJ 22063740000100 da empresa compradora Genki
+    O CNPJ 28851899000175 da empresa compradora Portal da Picanha
+ 
+Seria bom aproveitar também informar Marco Aurelio os seguintes erros:
+O Código de Produto 23036 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 25224 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 25228 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 26032 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 26033 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 26034 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 26035 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 26037 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 26284 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 26628 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+ 
+Eric
+ 
+
+De: eric.jo@bol.com.br
+Enviada: 2017/12/06 17:36:30
+Para: leao@cronos-tech.com.br
+Assunto: Bug novo impedindo ofertas automáticas via integração
+ 
+Leão,
+ 
+encontrei um bug grave na integração automatizada de ofertas:
+a Formaggio não ofertou a cotação 191-0272 indevidamente porque a Condição de Pagamento "21 dias"
+cadastrada no APS segundo o web service do Portal Cronos
+   "não pode ser diferente da condição "21 / 28 dias" definida obrigatoriamente na cotação".
+Porém acho que o correto seria permitir "21 dias" pois "21 dias" faz parte de "21 ou 28 dias".
+Concorda?
+Vou colocar isso onde na lista de atividades? Acho que dá para resolver rapidinho em 1 ou 2 horas,
+ 
+Eric
+  
 ==========================================================================================================
 NO CASO DE UMA PARADA POR CAUSA DE ATUALIZAÇÃO JAVA:
 
@@ -177,10 +251,49 @@ delete
 
 -- Verificação de cadastros de clientes e produtos: 
 
+declare @fornecedor_id  int
+set @fornecedor_id = 
+
 select distinct ds_ocorrencia_logeint
   from dbo.Log_Erro_Integracao
- where id_fornecedor_fornec = 
-   and dt_hr_ocorrencia_logeint > DATEADD("DAY", -7, getdate())
+ where id_fornecedor_fornec = @fornecedor_id
+   and dt_hr_ocorrencia_logeint > DATEADD("DAY", -8, getdate())
    and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.'
+ 
 
+-- Levantamento específico para fornecedores que ficam ofertando manualmente 
+-- ao mesmo  tempo ocomo o web service:
+select max(SUBSTRING(lei.ds_ocorrencia_logeint, 32, LEN(lei.ds_ocorrencia_logeint)))
+     , comp.nm_pessoa  as nm_comprador
+     , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32)
+  from dbo.Log_Erro_Integracao lei
+       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot
+       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr
+       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa 
+ where lei.id_fornecedor_fornec = @fornecedor_id
+   and lei.dt_hr_ocorrencia_logeint > DATEADD("DAY", -8, getdate())
+   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.'
+   and isnull(lei.ds_ocorrencia_logeint, '')     like '%O CNPJ%'
+group by comp.nm_pessoa
+       , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32)  
+UNION
+select lei.ds_ocorrencia_logeint
+     , comp.nm_pessoa  as nm_comprador
+     , lei.ds_ocorrencia_logeint
+  from dbo.Log_Erro_Integracao lei
+       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot
+       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr
+       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa 
+ where lei.id_fornecedor_fornec = @fornecedor_id
+   and lei.dt_hr_ocorrencia_logeint > DATEADD("DAY", -8, getdate())
+   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.'
+   and isnull(lei.ds_ocorrencia_logeint, '') not like '%O CNPJ%'
+
+
+-- Levantamento específico de DE/PARA´s de Produtos:
+select distinct lei.ds_ocorrencia_logeint
+  from dbo.Log_Erro_Integracao lei
+ where lei.id_fornecedor_fornec = @fornecedor_id
+   and lei.dt_hr_ocorrencia_logeint > DATEADD("DAY", -20, getdate())
+   and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'
 
