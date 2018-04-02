@@ -24,7 +24,7 @@ cd PCronos
 cd "Integração Fornecedor - Portal Cronos"
 
 
-REM javac src/pcronos/integracao/fornecedor/TestesComponentes.java
+REM javac src/pcronos/integracao/fornecedor/TestadorSnippets.java
 REM javac src/pcronos/integracao/fornecedor/IntegracaoFornecedorCompleta.java
 javac -d target/classes src/pcronos/integracao/fornecedor/*.java
 

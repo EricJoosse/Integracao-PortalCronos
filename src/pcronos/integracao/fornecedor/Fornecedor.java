@@ -7,9 +7,11 @@ public class Fornecedor {
 	
 	int IdFornecedor;
 	String EmailResponsavelTI;
-	String EmailResponsavelAlternativoTI;
+	String EmailResponsavelTIAlternativo;
 	String ApelidoResponsavelTI;
-	String ApelidoResponsavelAlternativoTI;
+	String ApelidoResponsavelTIAlternativo;
+	String FuncaoResponsavelTI;
+	String FuncaoResponsavelTIAlternativo;
 	String SiglaSistemaFornecedor;
 	String AplicativoDesktopRemoto;
 	String NomeFantasiaEmpresa;

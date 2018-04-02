@@ -5,6 +5,9 @@ import java.util.Properties;
 import java.util.Locale;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.text.NumberFormat;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,7 +52,7 @@ import java.sql.DriverManager          ;
 import java.sql.Connection             ; 
 import java.sql.SQLException           ;
 
-public class TestesComponentes {
+public class TestadorSnippets {
 
 	  public static String       instanciaBancoDeDados;
 
@@ -87,21 +90,41 @@ public class TestesComponentes {
 			String strToDecript = "ST+o/6W2VnE=";
 			System.out.println("cript de " + strToCript + " = " + Criptografia.encrypt(strToCript));
 			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript));
+			System.out.println("");
 			
 			
-         // BigDecimal bigDec = new BigDecimal(0);
+			LocalDateTime horaInicio = LocalDateTime.now();
+       	    if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY)
+				System.out.println("sábado");
+       	    else if (horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY.SATURDAY)
+				System.out.println("domingo");
+       	    else 
+				System.out.println("dia útil");
+				
+
+   		    System.out.println("");
+            if (1 == 1) return;
+
+   		    FornecedorRepositorio fRep = new FornecedorRepositorio();
+   		    int iForn = 60;
+   		    Fornecedor f = fRep.getFornecedor(iForn);
+			System.out.println("fRep.getFornecedor(60) = " + f.NomeFantasiaEmpresa);
+
+     	    DateTimeFormatter formatterParenteses = DateTimeFormatter.ofPattern("'('dd/MM/yyyy')' HH:mm");
+      	    System.out.println(LocalDateTime.now().format(formatterParenteses));
+
+       	    // BigDecimal bigDec = new BigDecimal(0);
 			BigDecimal bigDec = new BigDecimal("0.00");
 			if (bigDec.compareTo(BigDecimal.ZERO) == 0)
 				System.out.println("bigDec == 0");
 			else
 				System.out.println("bigDec != 0, bigDec = " + bigDec.toString());
 
+
 			
 			testNullParam(null, "abc");
 			testNullParam(null, "abc", true);
 		  
-          if (1 == 1) return;
-
           File dir = new File("C:/temp/a/b/c/log");
           dir.mkdirs();
 

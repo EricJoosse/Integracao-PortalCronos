@@ -21,8 +21,8 @@ cd /opt/PortalCronos/bin
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
 REM e o caminho do outro JRE vem primeiro no PATH de DOS :
 
-REM /opt/Java/jre1.8.0_92/bin/javac.exe pcronos.integracao.fornecedor.TestesComponentes.java
-REM /opt/Java/jre1.8.0_92/bin/java.exe pcronos.integracao.fornecedor.TestesComponentes  (java pcronos.integracao.fornecedor.TestesComponentes.class dá erro !)
+REM /opt/Java/jre1.8.0_92/bin/javac.exe pcronos.integracao.fornecedor.TestadorSnippets.java
+REM /opt/Java/jre1.8.0_92/bin/java.exe pcronos.integracao.fornecedor.TestadorSnippets  (java pcronos.integracao.fornecedor.TestadorSnippets.class dá erro !)
 
 /opt/Java/jre1.8.0_92/bin/javac.exe pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta.java
 /opt/Java/jre1.8.0_92/bin/java.exe pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta

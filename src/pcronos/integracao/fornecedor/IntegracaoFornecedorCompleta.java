@@ -7,6 +7,7 @@ import pcronos.integracao.EmailAutomatico;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
@@ -873,7 +874,7 @@ public final class IntegracaoFornecedorCompleta {
   }
 
 
-  private static void monitorarPendencias() {
+  private static void monitorarPendencias(LocalDateTime horaInicio) {
 		java.sql.Connection conn = null;
 		java.sql.CallableStatement cstat = null;
 		java.sql.ResultSet rSet = null;
@@ -924,13 +925,26 @@ public final class IntegracaoFornecedorCompleta {
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
 		            	 assunto = "URGENTE! " + rSet.getString(2) + " - Parada integração PCronos/" + f.SiglaSistemaFornecedor;
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		           	     DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm");
+		           	     
+		           	     DateTimeFormatter formatterParenteses = DateTimeFormatter.ofPattern("'('dd/MM/yyyy')' HH:mm");
+		           	     String ateQuando = "";
+		           	     if (rSet.getTimestamp(10).toLocalDateTime().getDayOfYear() == horaInicio.getDayOfYear())
+		           	       ateQuando = "hoje " + rSet.getTimestamp(10).toLocalDateTime().format(formatterParenteses);
+		           	     else if (rSet.getTimestamp(10).toLocalDateTime().getDayOfYear() == (horaInicio.getDayOfYear() + 1))
+			           	       ateQuando = "amanhã " + rSet.getTimestamp(10).toLocalDateTime().format(formatterParenteses);
+		           	     else 
+			           	       ateQuando = rSet.getTimestamp(10).toLocalDateTime().format(formatter);
+		           	     
+		           	     
+		           	     
 		            	 body += rSet.getString(3) + "\r\n\r\n" 
 		              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
 		              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação!\r\n\r\n"
 		              		     )                                
-		              		  +  "Só temos até " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + " para resolver este problema (data fim da cotação). \r\n\r\n"
+		              		  +  "Só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
 		              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
-		              		  +  ((rSet.getInt(5) > 0) ? ("Favor verificar o percentual de ocupação da memória RAM\r\n\r\n"
+		              		  +  ((rSet.getInt(5) > 0) ? ( "Favor verificar o percentual de ocupação da memória RAM ou verificar a comunicação com o servidor de banco.\r\n"
 		              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
 		              				                     )
     		                                           : ""
@@ -938,31 +952,41 @@ public final class IntegracaoFornecedorCompleta {
 		            	      +  "Erro: " + rSet.getString(6) + "\r\n" 
 		            		  +  "\r\n\r\n\r\n\r\n";
 		            	 
+		            	 String strParteDoDia = null;
+		            	 if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY || horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY)
+			            	    strParteDoDia = "bom dia"; // o email será enviado na próxima segunda-feira por enquanto
+		            	 else if (horaInicio.getHour() < 12)
+			            	    strParteDoDia = "bom dia";
+		            	 else if (horaInicio.getHour() >= 12 && horaInicio.getHour() < 18)
+			            	    strParteDoDia = "boa tarde";
+		            	 else
+			            	    strParteDoDia = "bom dia"; //"boa noite"; o email será enviado no próximo dia por enquanto
+		            	 
 		            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
-+ f.ApelidoResponsavelTI + ", bom dia!" + "\r\n"
++ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 + " " + "\r\n"
 + "   desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + f.NomeFantasiaEmpresa + "." + "\r\n"
 + "" + "\r\n"
 + "<b>Isso é urgente e importante para resolver logo para evitar que a " + f.NomeFantasiaEmpresa + " perde muitas oportunidades de venda!</b>" + "\r\n"
 + "OU:  " + "\r\n"
-+ "Só temos até hoje (05/03/2018) 12:30 para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
-+ "É urgente pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às 12:30 horas!" + "\r\n"
++ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
++ "É urgente pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
 + "OU:" + "\r\n"
 + "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + f.NomeFantasiaEmpresa + " (164) nesta cotação!" + "\r\n"
 + "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
 + "OU:" + "\r\n"
 + "No momento já tem 3 cotações esperando e esta quantidade vai crescer rapidamente!" + "\r\n"
 + "OU:  " + "\r\n"
-+ "Só temos até hoje (05/02/2018) 12:30 para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n" 
++ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n" 
 + "OU:" + "\r\n"
 + "Favor solicitar os vendedores ofertar as cotações ...... manualmente, pois não vai dar mais tempo suficiente" + "\r\n" 
 + "para ofertar estas cotações automaticamente. " + "\r\n"
 + "OU:" + "\r\n"
-+ "Se não conseguir resolver antes de amanhã (15/02/2018) 10:30 horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
-+ "pois a cotação que vence primeiro e que não está ofertada vence 15/02/2018 10:30,"   + "\r\n"
++ "Se não conseguir resolver antes de " + ateQuando + " horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
++ "pois a cotação que vence primeiro e que não está ofertada vence " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + ","   + "\r\n"
 + "e tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
 + "OU:" + "\r\n"
-+ "É melhor resolver isso logo, antes de amanhã (15/02/2018) 10:30 (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
++ "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
 + "pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
 + "" + "\r\n"
 + "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
@@ -977,14 +1001,14 @@ public final class IntegracaoFornecedorCompleta {
 + "No caso que você mesmo resolveu o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente." + "\r\n" 
 + "Se você não tiver um usuário/senha no site do Portal Cronos, favor confirmar isso com os vendedores. " + "\r\n" 
 + "Se as ofertas automáticas não voltaram a funcionar ainda, " + "\r\n" 
-+ "favor entrar em contato com \"Eric Jo\" via Skype (ou eric.jo@bol.com.br via email)." + "\r\n" 
++ "favor entrar em contato com \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email)." + "\r\n" 
 ;
 
 		     		    String sqlVerificacaoCadastros = 
 		     		    		  "select distinct ds_ocorrencia_logeint "
 		     		    		+ "  from dbo.Log_Erro_Integracao "
 		     		    		+ " where id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
-		     		    		+ "   and dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -7, getdate()) "
+		     		    		+ "   and dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
 		     		    		+ "   and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' ";
 		     		    Statement statVerificacaoCadastros = conn.createStatement();
 		     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
@@ -1008,8 +1032,8 @@ public final class IntegracaoFornecedorCompleta {
 		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
 	            	 } // if (!rSet.getString(2).equals("INI")) 
 	            	 else {
-		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
-		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();	            		 
+		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
+		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
 	            	 }
 	             } // while (rSet.next())
 	             
@@ -1991,7 +2015,7 @@ public final class IntegracaoFornecedorCompleta {
 	  if (siglaSistema.equals("PCronos")) {
 		  if (erroStaticConstructor == null && toEnviarEmailAutomatico)
 	      {
-		     monitorarPendencias();
+		     monitorarPendencias(horaInicio);
 	      }  
 	  }
 	  else
