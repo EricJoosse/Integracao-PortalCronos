@@ -262,7 +262,7 @@ select distinct ds_ocorrencia_logeint
  
 
 -- Levantamento específico para fornecedores que ficam ofertando manualmente 
--- ao mesmo  tempo ocomo o web service:
+-- ao mesmo  tempo como o web service:
 select max(SUBSTRING(lei.ds_ocorrencia_logeint, 32, LEN(lei.ds_ocorrencia_logeint)))
      , comp.nm_pessoa  as nm_comprador
      , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32)

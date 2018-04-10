@@ -278,7 +278,19 @@ sem nenhum registro de log deste erro...
  
 Eric
    
-   20. Scripts para troubleshooting se não funcionar:
+   20. Na sp dbo.monitorarIntegracaoFornecedores: 
+      (i)  adicionar: 
+	       		--and f.id_fornecedor_fornec <> xxx -- AAAAAAAAAA
+	       depois de: 
+	       		--and f.id_fornecedor_fornec <> 385 -- Walmart
+   
+      (ii) adicionar:
+				  or @fornecedor_id = xxx -- AAAAAAAAA ainda não está em produção 
+	       depois de: 
+				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
+
+      
+   21. Scripts para troubleshooting se não funcionar:
    
 declare @fornecedor_id  int
 set @fornecedor_id = 

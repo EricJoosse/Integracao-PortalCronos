@@ -95,9 +95,9 @@ public class TestadorSnippets {
 			
 			LocalDateTime horaInicio = LocalDateTime.now();
        	    if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY)
-				System.out.println("sábado");
+				System.out.println("Hoje é sábado");
        	    else if (horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY.SATURDAY)
-				System.out.println("domingo");
+				System.out.println("Hoje é domingo");
        	    else 
 				System.out.println("dia útil");
 				
