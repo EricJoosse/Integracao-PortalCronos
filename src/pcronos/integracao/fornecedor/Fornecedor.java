@@ -6,14 +6,15 @@ public class Fornecedor {
 	}
 	
 	int IdFornecedor;
+	String NomeFantasiaEmpresa;
+	String SiglaSistemaFornecedor;
 	String EmailResponsavelTI;
 	String EmailResponsavelTIAlternativo;
 	String ApelidoResponsavelTI;
 	String ApelidoResponsavelTIAlternativo;
 	String FuncaoResponsavelTI;
 	String FuncaoResponsavelTIAlternativo;
-	String SiglaSistemaFornecedor;
 	String AplicativoDesktopRemoto;
-	String NomeFantasiaEmpresa;
+	String IdAplicativoDesktopRemoto;
 
 }

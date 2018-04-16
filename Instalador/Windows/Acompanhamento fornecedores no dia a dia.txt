@@ -175,6 +175,31 @@ Concorda?
 Vou colocar isso onde na lista de atividades? Acho que dá para resolver rapidinho em 1 ou 2 horas,
  
 Eric
+
+
+
+Assunto: URGENTE! - Comercial Prolac - Parada integração PCronos/WinThor  
+Marcelo, bom dia!
+
+desde sábado (14/04/2018) 00:40 o Portal Cronos não está mais recebendo ofertas automáticas da Prolac.
+Esta vez a causa não é apenas a placa de rede do servidor de banco, porém esta vez também o servidor
+que está hospedando o serviço das ofertas automáticas não está "pingando"!
+
+É urgente pois tem muitos produtos vendidos pela Prolac (200 "Meus Produtos") pendentes sem ofertas vencendo hoje no horário de almoço!
+ 
+Atc,
+Eric
+
+
+
+Assunto: Favor ativar o AnyDesk - Versão nova 2.3.1 da integração PCronos/WinThor
+Marcelo,
+ 
+   favor ativar o AnyDesk e informar o ID no Skype (contato "Eric Jo"), pois preciso atualizar a versão da integração.
+É necessário para melhorar a lentidão pois o ofertamento não pode demorar mais de 15 minutos,
+visto que o serviço roda de 15 a 15 minutos,
+ 
+Eric
   
 ==========================================================================================================
 NO CASO DE UMA PARADA POR CAUSA DE ATUALIZAÇÃO JAVA:
