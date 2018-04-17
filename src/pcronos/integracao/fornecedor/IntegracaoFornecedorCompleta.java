@@ -911,17 +911,19 @@ public final class IntegracaoFornecedorCompleta {
 	             
 	             while (rSet.next()) {
 	            	 nmFornecedor = rSet.getString(2);
+            		 FornecedorRepositorio fRep = new FornecedorRepositorio();
 	            	 
 	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
+	            		 Fornecedor f = fRep.getFornecedor(Integer.parseInt(rSet.getString(1)));
 		            	 assunto = "Integração ofertas colocada em produção!";
 		            	 body += "Começou a integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " em produção!\r\n";
-		            	 body += "Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores.\r\n";
-		            	 body += "Dica: procura \"" + rSet.getString(1) + "\" nesta sp.\r\n\r\n\r\n\r\n";
+		            	 body += "1. Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores.\r\n";
+		            	 body += "    Dica: procura \"" + rSet.getString(1) + "\" nesta sp.\r\n";
+		            	 body += "2. Enviar o manual \"Manual solução paradas integração Portal Cronos - v1.2 (09.03.2018).txt\" para o TI (" + f.EmailResponsavelTI + ".). \r\n\r\n\r\n\r\n";
 		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	            	 }
 	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) {
-	            		 FornecedorRepositorio fRep = new FornecedorRepositorio();
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
 		            	 assunto = "URGENTE! " + rSet.getString(2) + " - Parada integração PCronos/" + f.SiglaSistemaFornecedor;
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -962,6 +964,10 @@ public final class IntegracaoFornecedorCompleta {
 		            	 else
 			            	    strParteDoDia = "bom dia"; //"boa noite"; o email será enviado no próximo dia por enquanto
 		            	 
+		            	 body += "Para: leao@cronos-tech.com.br\r\n";
+		            	 body += "Leão, \r\n";
+		            	 body += "    \r\n";
+		            	 body += "   a integração do " + f.NomeFantasiaEmpresa + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solução paradas integração Portal Cronos - v1.2 (09.03.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
 		            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 + f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 + " " + "\r\n"
