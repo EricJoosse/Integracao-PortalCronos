@@ -25,15 +25,17 @@ Possíveis causas de paradas da integração WinThor/PCronos:
 
 Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro. 
 
-No caso que este manual não foi suficiente para identificar ou resolver a causa, 
-favor colocar o AnyDesk/Team Viewer no ar, e informar o ID e a senha via Skype (contato "Eric Jo"), 
-para ver se a causa foi alguma falha dentro do serviço das ofertas automáticas.
-
-No caso que você mesmo resolveu o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente. 
-Se você não tiver um usuário/senha no site do Portal Cronos, favor confirmar isso com os vendedores. 
-Se as ofertas automáticas não voltaram a funcionar ainda, 
-favor entrar em contato com "Eric Jo" via Skype (ou com eric.jo@bol.com.br via email). 
+No caso que você mesmo conseguiu resolver o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente. 
+Se você não tiver um usuário/senha no site do Portal Cronos, favor verificar isso com os vendedores. 
  
+No caso que as ofertas automáticas não voltaram a funcionar ainda, 
+veja as outras possíveis causas neste manual. 
+ 
+Apenas no último caso, se não conseguir resolver, 
+entrar em contato com o contato "Eric Jo" via Skype (ou com eric.jo@bol.com.br via email), 
+e colocar o AnyDesk/Team Viewer no ar, e informar o ID e a senha via Skype, 
+para ele ver se a causa foi alguma falha dentro do serviço das ofertas automáticas.
+
   
 Outras dicas:
 =============

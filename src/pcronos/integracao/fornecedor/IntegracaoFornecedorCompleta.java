@@ -964,6 +964,10 @@ public final class IntegracaoFornecedorCompleta {
 		            	 else
 			            	    strParteDoDia = "bom dia"; //"boa noite"; o email será enviado no próximo dia por enquanto
 		            	 
+		            	 body += "LIGAR O SKYPE!!!!!!\r\n\r\n\r\n\r\n";
+		            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
+		            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n";
+		            	 body += "Este email foi enviado automaticamente pelo sistema Portal Cronos\r\n";
 		            	 body += "Para: leao@cronos-tech.com.br\r\n";
 		            	 body += "Leão, \r\n";
 		            	 body += "    \r\n";
@@ -1000,14 +1004,16 @@ public final class IntegracaoFornecedorCompleta {
 + "OU:" + "\r\n"
 + "Se você não sabe já o que é, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
 + "" + "\r\n"
-+ "No caso que o manual em anexo não foi suficiente para identificar ou resolver a causa," + "\r\n" 
-+ "favor colocar o" + f.AplicativoDesktopRemoto + " no ar, e informar o ID e a senha via Skype (contato \"Eric Jo\")," + "\r\n" 
-+ "para ver se a causa foi alguma falha dentro do serviço das ofertas automáticas." + "\r\n"
++ "No caso que você mesmo conseguiu resolver o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente." + "\r\n" 
++ "Se você não tiver um usuário/senha no site do Portal Cronos, favor verificar isso com os vendedores. " + "\r\n" 
 + "" + "\r\n"
-+ "No caso que você mesmo resolveu o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente." + "\r\n" 
-+ "Se você não tiver um usuário/senha no site do Portal Cronos, favor confirmar isso com os vendedores. " + "\r\n" 
 + "Se as ofertas automáticas não voltaram a funcionar ainda, " + "\r\n" 
-+ "favor entrar em contato com \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email)." + "\r\n" 
++ "veja as outras possíveis causas no manual. " + "\r\n" 
++ "" + "\r\n"
++ "Apenas no último caso, se não conseguir resolver, entrar em contato com o contato \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email), " + "\r\n" 
++ "E colocar o" + f.AplicativoDesktopRemoto + " no ar, e informar o ID e a senha via Skype," + "\r\n" 
++ "para ele ver se a causa foi alguma falha dentro do serviço das ofertas automáticas." + "\r\n"
++ "" + "\r\n"
 ;
 
 		     		    String sqlVerificacaoCadastros = 
@@ -1031,7 +1037,7 @@ public final class IntegracaoFornecedorCompleta {
 						} 
 		     		   body += "" + "\r\n"
 		     				+ "Atc," + "\r\n"
-		     				+ "Eric " + "\r\n"
+		     				+ "Email automaticO do sistema " + "\r\n"
 		     				+  "\r\n\r\n\r\n\r\n";
 
 		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
