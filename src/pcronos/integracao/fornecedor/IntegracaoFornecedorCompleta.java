@@ -2033,35 +2033,38 @@ public final class IntegracaoFornecedorCompleta {
 	  else
 		  downloadCotacoes(enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
 
-  	  nf.setMinimumIntegerDigits(2);
-  	  nf.setMaximumFractionDigits(0);
-	  LocalDateTime horaFim = LocalDateTime.now();
-	  long HorasExecucao = Duration.between(horaInicio, horaFim).toHours(); // inclui os dias em horas
-	  long MinutosExecucao = Duration.between(horaInicio, horaFim).toMinutes() % 60;
-	  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
-	  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
-	  
-	  try
-	  {
-	      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
-	      String strHorarioComTempoExecucao = horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao; 
-	      bWriter.append(strHorarioComTempoExecucao);
-	      
-	      if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
-		  {
-			  bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
-		  }
-	      bWriter.newLine();
-	      bWriter.flush();
-	      bWriter.close();
 
-	      if (!siglaSistema.equals("PCronos"))
-	          performPostCall(strHorarioComTempoExecucao, "TemposExecução");
-	  }
-  	  catch (IOException ioe)
-	  {
-  		  ioe.printStackTrace();
-	  }
+      if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {
+		  nf.setMinimumIntegerDigits(2);
+	  	  nf.setMaximumFractionDigits(0);
+		  LocalDateTime horaFim = LocalDateTime.now();
+		  long HorasExecucao = Duration.between(horaInicio, horaFim).toHours(); // inclui os dias em horas
+		  long MinutosExecucao = Duration.between(horaInicio, horaFim).toMinutes() % 60;
+		  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
+		  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
+		  
+		  try
+		  {
+		      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
+		      String strHorarioComTempoExecucao = horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao; 
+		      bWriter.append(strHorarioComTempoExecucao);
+		      
+		      if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
+			  {
+				  bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
+			  }
+		      bWriter.newLine();
+		      bWriter.flush();
+		      bWriter.close();
+	
+		      if (!siglaSistema.equals("PCronos"))
+		          performPostCall(strHorarioComTempoExecucao, "TemposExecução");
+		  }
+	  	  catch (IOException ioe)
+		  {
+	  		  ioe.printStackTrace();
+		  }
+      } // if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) 
     }
 
 }

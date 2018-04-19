@@ -8,7 +8,7 @@ Marítimos		 21	WinThor		1.2.3		 92	(.. bit) 						Não  			15 min		true	 48 GB		1
 Karne Keijo		 60	SAP			1.3.0		 92	(.. bit) 						Não				15 min		true	 66 GB		100			Karne Keijo		Timon Dourado			
 Comal 			 33	WinThor			 		 92	(.. bit) 						Não															Comal					
 Master Commerce  51	WinThor			 		 92	(.. bit) 						Não															Master Commerce			
-Monitoramento    -- PCronos     2.3.1        92	(.. bit) Win Server 2008 R2 SP1	Sim				15 min		true	 30 GB		 30			Monitoramento
+Monitoramento    -- PCronos     2.3.1        92	(.. bit) Win Server 2008 R2 SP1	Sim				15 min		false	 30 GB		 30			Monitoramento
 SOST (BA)		170 WinThor     2.3.1		 92	(.. bit) Win Server 2008 R2 SP1	Sim				15 min		true	0.6 GB		 15			SOST (BA)		1. Cleijonatas S Silva 	
 																																							2. Sena Junior			
 Walmart         385 PCronos					 92 (.. bit) 																					Walmart

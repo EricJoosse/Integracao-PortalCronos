@@ -198,8 +198,9 @@ Como vai ser?
 			1. No Eclipse: .............. 
 			2. Já foi feito automaticamente pelo pom.xml na geração do .jar. 
 
-   14. (i)  Verificar se debug = true no arquivo de configuração para facilitar atendimento imediato no futuro.
-       (ii) Verificar se o default de QtdDiasArquivosXmlGuardados = 100 
+   14. (i)  Verificar se "debug" = "true" no arquivo de configuração para facilitar atendimento imediato no futuro, 
+            exceto no caso que "SiglaSistema" = "PCronos" (fornecedor "Monitoramento").
+       (ii) Verificar se o default de "QtdDiasArquivosXmlGuardados" = "100"
  
    15. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
        na procedure [dbo].[monitorarIntegracaoFornecedores]
