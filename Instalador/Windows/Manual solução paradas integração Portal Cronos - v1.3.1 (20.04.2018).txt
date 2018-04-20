@@ -10,8 +10,9 @@ Possíveis causas de paradas da integração WinThor/PCronos:
 
   - A memória RAM está 100% cheia ou perto disso?
     No caso que a memória RAM estiver mais de 95 %, favor deixar assim por enquanto 
-    e não fazer nada ainda e me avise primeiro para conectar logo via AnyDesk 
-    pois preciso verificar uma coisa que é só comigo (apenas na primeira vez que isso acontece)
+    e não fazer nada ainda e avisar o contato "Eric Jo" via Skype (ou eric.jo@bol.com.br via email) 
+    primeiro para conectar via AnyDesk/Team Viewer para testar uma solução automática para este problema.  
+    (Isso é necessário apenas na primeira vez que isso acontece.) 
 
   - Algum anti-virus está travando a máquina? (100 % memória RAM)
 
@@ -25,10 +26,10 @@ Possíveis causas de paradas da integração WinThor/PCronos:
 
 Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro. 
 
-No caso que você mesmo conseguiu resolver o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente. 
+No caso que você mesmo consegue resolver o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente. 
 Se você não tiver um usuário/senha no site do Portal Cronos, favor verificar isso com os vendedores. 
  
-No caso que as ofertas automáticas não voltaram a funcionar ainda, 
+No caso que as ofertas automáticas ainda não voltaram a funcionar, 
 veja as outras possíveis causas neste manual. 
  
 Apenas no último caso, se não conseguir resolver, 

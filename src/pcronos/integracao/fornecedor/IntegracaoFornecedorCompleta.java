@@ -964,10 +964,9 @@ public final class IntegracaoFornecedorCompleta {
 		            	 else
 			            	    strParteDoDia = "bom dia"; //"boa noite"; o email será enviado no próximo dia por enquanto
 		            	 
-		            	 body += "LIGAR O SKYPE!!!!!!\r\n\r\n\r\n\r\n";
+		            	 body += "LIGAR O SKYPE!!!!!!\r\n";
 		            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
-		            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n";
-		            	 body += "Este email foi enviado automaticamente pelo sistema Portal Cronos\r\n";
+		            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n\r\n\r\n\r\n";
 		            	 body += "Para: leao@cronos-tech.com.br\r\n";
 		            	 body += "Leão, \r\n";
 		            	 body += "    \r\n";
@@ -975,45 +974,53 @@ public final class IntegracaoFornecedorCompleta {
 		            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 + f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 + " " + "\r\n"
-+ "   desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + f.NomeFantasiaEmpresa + "." + "\r\n"
-+ "" + "\r\n"
++ "<i>Este email foi enviado automaticamente pelo sistema Portal Cronos</i>\r\n"
++ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + f.NomeFantasiaEmpresa + "." + "\r\n"
++ " " + "\r\n"
 + "<b>Isso é urgente e importante para resolver logo para evitar que a " + f.NomeFantasiaEmpresa + " perde muitas oportunidades de venda!</b>" + "\r\n"
++ " " + "\r\n"
 + "OU:  " + "\r\n"
 + "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
 + "É urgente pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
++ " " + "\r\n"
 + "OU:" + "\r\n"
 + "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + f.NomeFantasiaEmpresa + " (164) nesta cotação!" + "\r\n"
 + "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
++ " " + "\r\n"
 + "OU:" + "\r\n"
 + "No momento já tem 3 cotações esperando e esta quantidade vai crescer rapidamente!" + "\r\n"
++ " " + "\r\n"
 + "OU:  " + "\r\n"
 + "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n" 
++ " " + "\r\n"
 + "OU:" + "\r\n"
 + "Favor solicitar os vendedores ofertar as cotações ...... manualmente, pois não vai dar mais tempo suficiente" + "\r\n" 
 + "para ofertar estas cotações automaticamente. " + "\r\n"
++ " " + "\r\n"
 + "OU:" + "\r\n"
 + "Se não conseguir resolver antes de " + ateQuando + " horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
 + "pois a cotação que vence primeiro e que não está ofertada vence " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + ","   + "\r\n"
 + "e tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
++ " " + "\r\n"
 + "OU:" + "\r\n"
 + "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
 + "pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
-+ "" + "\r\n"
++ " " + "\r\n"
 + "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
-+ "Se você não sabe já o que é, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
++ "Se você não tem nenhuma ideia da causa, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
++ " " + "\r\n"
 + "OU:" + "\r\n"
-+ "Se você não sabe já o que é, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
-+ "" + "\r\n"
-+ "No caso que você mesmo conseguiu resolver o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente." + "\r\n" 
++ "Se você não tem nenhuma ideia da causa, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
++ " " + "\r\n"
++ "No caso que você mesmo consegue resolver o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente." + "\r\n" 
 + "Se você não tiver um usuário/senha no site do Portal Cronos, favor verificar isso com os vendedores. " + "\r\n" 
-+ "" + "\r\n"
-+ "Se as ofertas automáticas não voltaram a funcionar ainda, " + "\r\n" 
-+ "veja as outras possíveis causas no manual. " + "\r\n" 
-+ "" + "\r\n"
++ " " + "\r\n"
++ "Se as ofertas automáticas não voltaram a funcionar ainda, veja as outras possíveis causas no manual. " + "\r\n" 
++ " " + "\r\n"
 + "Apenas no último caso, se não conseguir resolver, entrar em contato com o contato \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email), " + "\r\n" 
-+ "E colocar o" + f.AplicativoDesktopRemoto + " no ar, e informar o ID e a senha via Skype," + "\r\n" 
++ "e colocar o" + f.AplicativoDesktopRemoto + " no ar, e informar o ID e a senha via Skype," + "\r\n" 
 + "para ele ver se a causa foi alguma falha dentro do serviço das ofertas automáticas." + "\r\n"
-+ "" + "\r\n"
++ " " + "\r\n"
 ;
 
 		     		    String sqlVerificacaoCadastros = 
@@ -1037,7 +1044,7 @@ public final class IntegracaoFornecedorCompleta {
 						} 
 		     		   body += "" + "\r\n"
 		     				+ "Atc," + "\r\n"
-		     				+ "Email automaticO do sistema " + "\r\n"
+		     				+ "Email automático do Portal Cronos " + "\r\n"
 		     				+  "\r\n\r\n\r\n\r\n";
 
 		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
