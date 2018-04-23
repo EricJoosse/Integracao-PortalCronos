@@ -1,0 +1,84 @@
+Introdução:
+===========
+O "serviço" de integração é um "serviço" de Java portanto é independente de Windows, 
+então não consta na lista de Serviços de Windows, nem consta no "Gerenciador de Tarefas" ("Task Manager") 
+de Windows, nem consta no "Visualizador de Eventos" ("Event Viewer") de Windows. 
+Nunca precisa reiniciar, parar ou iniciar este "serviço" e portanto nem é possível. 
+Reiniciamento é coisa de Windows, não tem nada a ver. 
+Ao ligar ou reiniciar o servidor, o serviço starta automaticamente. 
+Apenas tem uma opção para desinstalação do serviço que será disponibilizada no menu de Windows 
+em uma das próximas versões do serviço. 
+ 
+Normalmente o serviço executa de 15 a 15 minutos. 
+Se a integração parou de ofertar automaticamente:  
+  1. Se precisar, veja, opcionalmente, abaixo capítulo "A" com a lista de possíveis causas; 
+  2. Em todos os casos, após a solução, veja no capítulo "B" como verificar se o serviço 
+     realmente voltou a funcionar.
+      
+Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro. 
+
+
+A. Possíveis causas de paradas da integração WinThor/PCronos:
+=============================================================  
+  - O servidor da Formaggio que está hospedando este serviço está desligado?
+
+  - O disco rígido ("HD") C:\ está cheio?
+
+  - Houve uma atualização de Windows?
+    Isso pode acabar com o serviço. Neste caso, entrar em contato com "Eric Jo" via Skype (ou com eric.jo@bol.com.br via email).
+
+  - Houve uma atualização de Java?
+    Isso acaba com o serviço com certeza. Neste caso, entrar em contato com "Eric Jo" via Skype (ou com eric.jo@bol.com.br via email).
+
+  - A memória RAM está 100 % cheia ou perto disso?
+    No caso que a memória RAM estiver mais de 95 %, favor deixar assim por enquanto 
+    e não fazer nada ainda e avisar o contato "Eric Jo" via Skype (ou eric.jo@bol.com.br via email) 
+    primeiro para conectar via AnyDesk/Team Viewer para testar uma solução automática para este problema.  
+    (Isso é necessário apenas na primeira vez que isso acontece.) 
+
+  - Algum anti-virus está travando a máquina? (100 % memória RAM)
+
+  - O endereço IP, usuário ou senha do banco Oracle/Firebird mudou?
+
+  - A senha do usuário ws-jrembalagem foi alterada no site do Portal Cronos porém não foi atualizada
+     no arquivo de configuração? (Este arquivo se encontra no diretório 
+     C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração Fornecedor - Portal Cronos.properties) 
+
+  - No "Gerenciador de Tarefas" ("Task Manager") ordenar por nome do processo, e procurar 
+    "Java(TM) Platform SE binary". 
+    Se não tiver nenhum processo com este nome, tudo está certo.   
+    Se tiver um ou mais processos na lista, verifica com o botão á direita do mouse, 
+    na aba "Geral" se o "Local" de cada processo for igual a "C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe". 
+    Se não tiver nenhum processo com este "Local", tudo está certo.   
+    Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão paradas, 
+    este processo está travado. Neste caso, com o botão a direita do mouse clicar em "Finalizar tarefa".  
+    Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão processando 
+    normalmente, tudo está certo e não mexe com este processo.   
+        
+  - Outras ideias suas (Firewall, proxy, portas, Internet, etc). 
+
+  - Apenas no último caso, se não conseguir resolver, 
+    entrar em contato com o contato "Eric Jo" via Skype (ou com eric.jo@bol.com.br via email), 
+    e colocar o AnyDesk/Team Viewer no ar, e informar o ID e a senha via Skype, 
+    para ele ver se a causa foi alguma falha dentro do serviço das ofertas automáticas.
+
+
+B. Como verificar se o serviço realmente voltou a funcionar:
+============================================================
+No caso que você mesmo consegue resolver o problema: 
+  1. Favor verificar após 15 minutos se o serviço atualizou o arquivo 
+     "C:/ProgramData/PortalCronos/Logs/Local/TemposExecução.log" no final do arquivo.  
+      
+  2. Em seguida: 
+     (i).  No caso afirmativo favor verificar também se as cotações pendentes foram ofertadas automaticamente. 
+           Se você não tiver um usuário/senha no site do Portal Cronos, favor verificar isso com os vendedores. 
+     (ii). No caso que as ofertas automáticas ainda não voltaram a funcionar, 
+           veja as outras possíveis causas neste manual. 
+  
+  
+C. Outras dicas:
+================
+- O servidor de hospedagem do serviço das ofertas automáticas 
+  é o servidor no qual existe um diretório C:\Arquivos de Programas PC\ 
+             
+  

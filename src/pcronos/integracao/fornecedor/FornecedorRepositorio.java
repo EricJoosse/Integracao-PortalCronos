@@ -13,11 +13,11 @@ public class FornecedorRepositorio {
 			f.NomeFantasiaEmpresa = "Formaggio";
 			f.SiglaSistemaFornecedor = "APS";
 			f.EmailResponsavelTI = "projetosti@formaggio.com.br";  
-			f.EmailResponsavelTIAlternativo = "ti@formaggio.com.br"; 
+			f.EmailResponsavelTIAlternativo = "ti@formaggio.com.br??????"; 
 			f.ApelidoResponsavelTI = "Geymison";
-			f.ApelidoResponsavelTIAlternativo = "Braytner";
+			f.ApelidoResponsavelTIAlternativo = "";
 			f.FuncaoResponsavelTI = "Coordenador de Projetos de TI";
-			f.FuncaoResponsavelTIAlternativo = "Coordenador Geral de TI";
+			f.FuncaoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "Team Viewer";
 		}			   
 		else if (idFornecedor == 947) {
