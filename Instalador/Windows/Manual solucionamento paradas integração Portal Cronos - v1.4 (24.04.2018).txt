@@ -1,12 +1,12 @@
-Introdução:
-===========
+Introdução técnica:
+===================
 O "serviço" de integração é um "serviço" de Java portanto é independente de Windows, 
-então não consta na lista de Serviços de Windows, nem consta no "Gerenciador de Tarefas" ("Task Manager") 
-de Windows, nem consta no "Visualizador de Eventos" ("Event Viewer") de Windows. 
-Nunca precisa reiniciar, parar ou iniciar este "serviço" e portanto nem é possível. 
-Reiniciamento é coisa de Windows, não tem nada a ver. 
+então não está na lista de Serviços de Windows, nem aparece no "Gerenciador de Tarefas" ("Task Manager") 
+de Windows, e também nunca aparece no "Visualizador de Eventos" ("Event Viewer") de Windows. 
+Nunca precisa reiniciar, parar ou iniciar este "serviço" e nem existem estas opções. 
+Reiniciamento é coisa de Windows, não tem nada a ver com Java. 
 Ao ligar ou reiniciar o servidor, o serviço starta automaticamente. 
-Apenas tem uma opção para desinstalação do serviço que será disponibilizada no menu de Windows 
+Apenas existe uma opção para desinstalação do serviço que será disponibilizada no menu de Windows 
 em uma das próximas versões do serviço. 
  
 Normalmente o serviço executa de 15 a 15 minutos. 
@@ -17,6 +17,9 @@ Se a integração parou de ofertar automaticamente:
       
 Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro. 
 
+Observação: este manual contem apenas a parte técnica da integração. Para aprender o objetivo e os conceitos, 
+            pergunta o gerente de vendas ou Leão do Portal Cronos para explicaar issso.
+            
 
 A. Possíveis causas de paradas da integração WinThor/PCronos:
 =============================================================  

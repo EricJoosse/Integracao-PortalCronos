@@ -919,7 +919,7 @@ public final class IntegracaoFornecedorCompleta {
 		            	 body += "Começou a integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " em produção!\r\n";
 		            	 body += "1. Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores.\r\n";
 		            	 body += "    Dica: procura \"" + rSet.getString(1) + "\" nesta sp.\r\n";
-		            	 body += "2. Enviar o manual \"Manual solução paradas integração Portal Cronos - v1.2 (09.03.2018).txt\" para o TI (" + f.EmailResponsavelTI + ".). \r\n\r\n\r\n\r\n";
+		            	 body += "2. Enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\" para o TI (" + f.EmailResponsavelTI + ".). \r\n\r\n\r\n\r\n";
 		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	            	 }
@@ -970,7 +970,7 @@ public final class IntegracaoFornecedorCompleta {
 		            	 body += "Para: leao@cronos-tech.com.br\r\n";
 		            	 body += "Leão, \r\n";
 		            	 body += "    \r\n";
-		            	 body += "   a integração do " + f.NomeFantasiaEmpresa + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solução paradas integração Portal Cronos - v1.2 (09.03.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
+		            	 body += "   a integração do " + f.NomeFantasiaEmpresa + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
 		            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 + f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 + " " + "\r\n"
