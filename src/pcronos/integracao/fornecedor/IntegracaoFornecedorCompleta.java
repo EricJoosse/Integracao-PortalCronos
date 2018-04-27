@@ -1023,28 +1023,78 @@ public final class IntegracaoFornecedorCompleta {
 + " " + "\r\n"
 ;
 
+//		     		    String sqlVerificacaoCadastros = 
+//		     		    		  "select distinct ds_ocorrencia_logeint "
+//		     		    		+ "  from dbo.Log_Erro_Integracao "
+//		     		    		+ " where id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+//		     		    		+ "   and dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
+//		     		    		+ "   and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' ";
+		     		    
 		     		    String sqlVerificacaoCadastros = 
-		     		    		  "select distinct ds_ocorrencia_logeint "
-		     		    		+ "  from dbo.Log_Erro_Integracao "
-		     		    		+ " where id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
-		     		    		+ "   and dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
-		     		    		+ "   and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' ";
-		     		    Statement statVerificacaoCadastros = conn.createStatement();
+		     		   "select max(SUBSTRING(lei.ds_ocorrencia_logeint, 32, LEN(lei.ds_ocorrencia_logeint))) "
+		     	+ "     , comp.nm_pessoa  as nm_comprador "
+		     	+ " 	     , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32) "
+		     	+ " 	  from dbo.Log_Erro_Integracao lei "
+		     	+ " 	       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot "
+		     	+ " 	       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr "
+		     	+ " 	       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa  "
+		     	+ " 	 where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+		     	+ " 	   and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
+		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' "
+		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '')     like '%O CNPJ%' "
+		     	+ " 	group by comp.nm_pessoa "
+		     	+ "         , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32) "  
+		     	+ " 	UNION "
+		     	+ " 	select lei.ds_ocorrencia_logeint "
+		     	+ " 	     , comp.nm_pessoa  as nm_comprador "
+		     	+ " 	     , lei.ds_ocorrencia_logeint "
+		     	+ " 	  from dbo.Log_Erro_Integracao lei "
+		     	+ " 	       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot "
+		     	+ " 	       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr "
+		     	+ " 	       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa  "
+		     	+ " 	 where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+		     	+ " 	   and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
+		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' "
+		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%O CNPJ%' "
+		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%informada no XML das ofertas não pode ser diferente da condição%' "
+		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like 'Já existe outra oferta ativa da mesma empresa fornecedora%' "
+		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está bloqueada no sistema " + f.SiglaSistemaFornecedor + " do fornecedor%' ";
+
+		     		   Statement statVerificacaoCadastros = conn.createStatement();
 		     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
 		     		    int qtdVerificacaoCadastros = 0;
 		     		    while (rSetVerificacaoCadastros.next()) {
 		     		    	qtdVerificacaoCadastros += 1;
 		     		    	if (qtdVerificacaoCadastros == 1) {
-		     		    		body += "" + "\r\n"
-		     		    				+ "Aproveitando: nos últimos 7 dias aconteceram as seguintes ausências de cadastros no " + f.SiglaSistemaFornecedor +", impedindo bastante ofertas automáticas, " + "\r\n"
-		     		    				+ "Favor resolver ou encaminhar para o gerente de vendas: "+ "\r\n";
+		     		    		body += " " + "\r\n"
+		     		    				+ "Aproveitando: nos últimos 7 dias diversas cotações não foram ofertadas automaticamente por causa de falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "\r\n"
+		     		    				+ "Favor informar o gerente de vendas as causas: "+ "\r\n";
+		     		    	}
+							body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
+							
+						} 
+
+		     		    sqlVerificacaoCadastros = "select distinct lei.ds_ocorrencia_logeint "
+		     			     	+ "   from dbo.Log_Erro_Integracao lei "
+		     			     	+ "  where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+		     			     	+ "    and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -21, getdate()) "
+		     	                + "    and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'";
+   		
+		     		    rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
+		     		    qtdVerificacaoCadastros = 0;
+		     		    while (rSetVerificacaoCadastros.next()) {
+		     		    	qtdVerificacaoCadastros += 1;
+		     		    	if (qtdVerificacaoCadastros == 1) {
+		 		     		   body += " " + "\r\n"
+		 				     			+ "Outra coisa, nos últimos 20 dias os seguintes produtos não foram ofertados em nenhuma cotação por causa de falta ou erro de cadastro: " + "\r\n";
 		     		    	}
 							body += rSetVerificacaoCadastros.getString(1) + "\r\n";
 							
 						} 
-		     		   body += "" + "\r\n"
-		     				+ "Atc," + "\r\n"
-		     				+ "Email automático do Portal Cronos " + "\r\n"
+
+		     		    body += " " + "\r\n"
+			     			+ "Atc," + "\r\n"
+		     				+ "O email automático do Portal Cronos " + "\r\n"
 		     				+  "\r\n\r\n\r\n\r\n";
 
 		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();

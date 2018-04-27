@@ -242,7 +242,11 @@ Atc,
 Eric
  
 ==========================================================================================================
-Scripts:
+--
+-- Scripts: 
+--
+==========================================================================================================
+Script 1:
 
 SELECT  *
   FROM [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]
@@ -273,6 +277,8 @@ delete
                               -- e adicionar vírgulas
   and id_fornecedor_fornec = 
 
+==========================================================================================================
+Script 2:
 
 -- Verificação de cadastros de clientes e produtos: 
 
@@ -322,3 +328,4 @@ select distinct lei.ds_ocorrencia_logeint
    and lei.dt_hr_ocorrencia_logeint > DATEADD("DAY", -20, getdate())
    and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'
 
+==========================================================================================================
