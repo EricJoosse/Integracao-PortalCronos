@@ -89,7 +89,7 @@ public class TestadorSnippets {
 			String strToCript = "aaa"; // "ab$AB@12";
 			String strToDecript = "ST+o/6W2VnE=";
 			System.out.println("cript de " + strToCript + " = " + Criptografia.encrypt(strToCript));
-			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript));
+			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript, true));
 			System.out.println("");
 			
 			

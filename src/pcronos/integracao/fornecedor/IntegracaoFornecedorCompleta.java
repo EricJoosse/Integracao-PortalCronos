@@ -197,7 +197,7 @@ public final class IntegracaoFornecedorCompleta {
         	 destinoEmailAutomatico = config.getProperty("DestinoEmailAutomatico");
         	 ccEmailAutomatico = (config.getProperty("CcEmailAutomatico").equals("") ? null : config.getProperty("CcEmailAutomatico"));
              usuarioEmailAutomatico = config.getProperty("UsuarioEmailAutomatico");
-             senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"));
+             senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"), toDebugar);
           }
 	  }
       
@@ -225,7 +225,7 @@ public final class IntegracaoFornecedorCompleta {
          senhaBancoDeDadosCriptografada    = Boolean.parseBoolean(config.getProperty("SenhaBancoDeDadosCriptografada"));
 
          if (senhaBancoDeDadosCriptografada)
-             senhaBancoDeDados             = Criptografia.decrypt(config.getProperty("SenhaBancoDeDados"));
+             senhaBancoDeDados             = Criptografia.decrypt(config.getProperty("SenhaBancoDeDados"), toDebugar);
          else
              senhaBancoDeDados             = config.getProperty("SenhaBancoDeDados");
         	 
@@ -242,7 +242,7 @@ public final class IntegracaoFornecedorCompleta {
       senhaCriptografada                = Boolean.parseBoolean(config.getProperty("SenhaWebServiceCriptografada"));
       
       if (senhaCriptografada)
-          senha                         = Criptografia.decrypt(config.getProperty("SenhaWebService"));
+          senha                         = Criptografia.decrypt(config.getProperty("SenhaWebService"), toDebugar);
       else
           senha                         = config.getProperty("SenhaWebService");
     	  

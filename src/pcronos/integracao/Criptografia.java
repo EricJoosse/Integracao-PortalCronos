@@ -20,10 +20,10 @@ public class Criptografia {
 	}
 
 	
-	public static String decrypt(String strEncrypted) throws Exception
+	public static String decrypt(String strEncrypted, boolean toDebugar) throws Exception
 	{
 		String key = "lKj@#%$&BDg84952"; // Mesmo 128 bit key
-		return doubleDecryption_Base64_Blowfish(strEncrypted, key, "UTF-8");
+		return doubleDecryption_Base64_Blowfish(strEncrypted, key, "UTF-8", toDebugar);
 	 // return decrypt(strEncrypted, key);
 	}
 	
@@ -117,7 +117,7 @@ public class Criptografia {
     }
 
     
-    public static String doubleDecryption_Base64_Blowfish(String to_decrypt, String key, String charSet) throws Exception
+    public static String doubleDecryption_Base64_Blowfish(String to_decrypt, String key, String charSet, boolean toDebugar) throws Exception
     {          
         // charSet="UTF-8";
          Cipher cipher;
@@ -125,14 +125,14 @@ public class Criptografia {
               byte[] decodedBytes = Base64.decodeBase64(to_decrypt.getBytes(charSet));
            // byte[] decodedBytes = Base64.decodeBase64(hexToByteArray(to_decrypt.getBytes(charSet)));
              if(decodedBytes.length % 8 != 0){ //not a multiple of 8
-                 System.out.println("decodedBytes is not padded properly in 8 bits");
+                 if (toDebugar) System.out.println("decodedBytes is not padded properly in 8 bits");
                  //create a new array with a size which is a multiple of 8
                  byte[] padded = new byte[decodedBytes.length + 8 - (decodedBytes.length % 8)];
                  //copy the old array into it
                  System.arraycopy(decodedBytes, 0, padded, 0, decodedBytes.length);
                  decodedBytes = padded;
              }else{
-                 System.out.println("decodedBytes is padded properly in 8 bits");
+            	 if (toDebugar) System.out.println("decodedBytes is padded properly in 8 bits");
              }
             
              byte[] keyBytes=key.getBytes(charSet);
