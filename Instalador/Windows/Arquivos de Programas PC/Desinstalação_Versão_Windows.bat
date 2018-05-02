@@ -29,10 +29,10 @@ rmdir /s /q "Integração Fornecedor - Portal Cronos"
 for %%f in (*) do if not %%~xf==.bat del /f /q "%%f"
 del /f /q Primeira_Instalacao_Versao_Windows.bat
 
-REM ================ Remover diretório Temp ========================================
+REM ================ Remover diretório de Log ========================================
 
 cd\
-cd temp
+cd ProgramData
 rmdir /s /q PortalCronos
 cd\
 

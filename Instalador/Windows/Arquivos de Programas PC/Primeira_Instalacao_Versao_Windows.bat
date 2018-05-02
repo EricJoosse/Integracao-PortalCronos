@@ -123,14 +123,21 @@ if %tipoOS% == 64 (
 
 :SKIP_JRE
 
-REM ================ Instalar diretório Temp ========================================
+REM ================ Instalar diretório de Log ========================================
 
 cd\
-if not exist C:\temp\ mkdir temp
-cd temp
-mkdir PortalCronos
+if not exist C:\ProgramData\ (
+    echo MSGBOX "O diretório padrão de Windows ProgramData não existe! Favor entrar em contato com o Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
+)
+cd ProgramData
+if not exist C:\ProgramData\PortalCronos\ mkdir PortalCronos
 cd PortalCronos
-mkdir XML
+if not exist C:\ProgramData\PortalCronos\Logs\ mkdir Logs
+cd Logs
+if not exist C:\ProgramData\PortalCronos\Logs\Local\ mkdir Local
 REM Não precisa dar privilêgios mais, pois a Scheduled Task roda como SYSTEM
 
 :SKIP_JRE_TEMPDIR

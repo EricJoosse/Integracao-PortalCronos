@@ -42,7 +42,7 @@ então não estava ofertando. Precisamos descobrir a causa para evitar que acontec
 3. Estava rodando um scan de anti-virus neste período?
  
 4. Favor enviar para mim o maior arquivo Debugxxxxx.log com data dentro deste período que se encontra 
-    no outro diretório  C:\temp\PortalCronos\XML\.
+    no outro diretório  C:\ProgramData\PortalCronos\Logs\Local\.
     Estou precisando disso para achar uma forma para automatizar o re-processamento das cotações pendentes 
     após a liberação da memória RAM, ou após a volta de uma queda do banco Oracle. 
    

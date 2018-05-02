@@ -143,6 +143,7 @@ public final class IntegracaoFornecedorCompleta {
   public static String       tipoAmbiente;
   public static String       enderecoBaseWebService;
   public static String       diretorioArquivosXml;
+  public static String       diretorioArquivosXmlSemBarraNoFinal;
   public static String       ObsOfertasPadraoSeNaoTemNoSistema;
   public static int          qtdDiasArquivosXmlGuardados;
   public static boolean      toDebugar;
@@ -297,6 +298,7 @@ public final class IntegracaoFornecedorCompleta {
           // A única maneira para verificar os priviêgios necessários em Java 8 é : 
           File.createTempFile("check", null, testDir).delete();
 
+          diretorioArquivosXmlSemBarraNoFinal = diretorioArquivosXml;
           diretorioArquivosXml = diretorioArquivosXml + "/" ;
       }
       catch (SecurityException | IOException se_io_ex)
@@ -2055,9 +2057,11 @@ public final class IntegracaoFornecedorCompleta {
 	   
 	   
 	   // Limpeza dos arquivos próprios deste serviço (arquivos .log e .xml):
-	   dir = new File("C:\\temp\\PortalCronos\\XML");
+	   dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCronos\\XML"
+	// System.out.println("dir = " + dir.getAbsolutePath());
 	   for (final File file : dir.listFiles()) 
 	   {
+		// System.out.println("file = " + file.getName());
 		   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
 		   
 		   if (datahoraArquivo.isBefore(horaInicio.minusDays(qtdDiasArquivosXmlGuardados))) 

@@ -61,8 +61,8 @@ Como vai ser?
 			- 250 MB: 
 			    - C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\hs_err_pidxxxx.mdmp
 			- 450 MB: (Prolac: 30 MB por mês)
-				- C:\temp\PortalCronos\XML\*.xml  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
-				- C:\temp\PortalCronos\XML\*.log  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
+				- C:\ProgramData\PortalCronos\Logs\Local\*.xml  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
+				- C:\ProgramData\PortalCronos\Logs\Local\*.log  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
 
 		  
 		- Verificar se precisa descomentar um dos seguintes skips no início de Primeira_Instalacao_Versao_Windows.bat :
