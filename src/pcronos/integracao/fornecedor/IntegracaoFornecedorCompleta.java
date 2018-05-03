@@ -816,17 +816,17 @@ public final class IntegracaoFornecedorCompleta {
 	            function.getImportParameterList().setValue("I_XML", strCotacao);
 
                 function.execute(destination);
-	            String strXmlOfertasRecebido = function.getExportParameterList().getString("E_RESULT");
-                debugar("strXmlOfertasRecebido = " + strXmlOfertasRecebido);
+	            String strXmlProblemas = function.getExportParameterList().getString("E_RESULT");
+                debugar("strXmlProblemas = " + strXmlProblemas);
 
-                if (strXmlOfertasRecebido == null) {
-                   logarErro("Erro ao chamar a função do SAP: string Xml Ofertas Recebido == null");
+                if (strXmlProblemas == null) {
+                   logarErro("Erro ao chamar a função do SAP: string Xml E_RESULT == null");
                    return;
                 }
                 else {
-                	if (strXmlOfertasRecebido.substring(0,3).toUpperCase().equals("ERR")) {
-                       debugar("Entrou no if strXmlOfertasRecebido.substring(0,3).toUpperCase().equals(ERR)");
-                       logarErro("Erro ao chamar a função do SAP: " + strXmlOfertasRecebido);
+                	if (strXmlProblemas.substring(0,3).toUpperCase().equals("ERR")) {
+                       debugar("Entrou no if strXmlProblemas.substring(0,3).toUpperCase().equals(ERR)");
+                       logarErro("Erro ao chamar a função do SAP: " + strXmlProblemas);
                        return;
                     }
                 }
@@ -840,13 +840,13 @@ public final class IntegracaoFornecedorCompleta {
 //	              throw new Exception("Funçao ZFCSD00_EXPCOT não encontrada no SAP.");
 //	
 //              function.execute(destination);
-//	            strXmlOfertasRecebido = function.getExportParameterList().getString("E_XML");
-//              debugar("strXmlOfertasRecebido = " + strXmlOfertasRecebido);
-//
-//              if (strXmlOfertasRecebido == null) {
-//                   logarErro("Erro ao chamar a função do SAP: string Xml Ofertas Recebido == null");
-//                   return;
-//              }
+                String strXmlOfertasRecebido = function.getExportParameterList().getString("E_XML");
+                debugar("strXmlOfertasRecebido = " + strXmlOfertasRecebido);
+
+                if (strXmlOfertasRecebido == null) {
+                   logarErro("Erro ao chamar a função do SAP: string Xml Ofertas Recebido == null");
+                   return;
+                }
                 
                 debugar("Entrando em InputSource isOfertas = new InputSource();");
 		        InputSource isOfertas = new InputSource();
