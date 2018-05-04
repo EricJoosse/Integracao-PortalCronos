@@ -713,7 +713,7 @@ public final class IntegracaoFornecedorCompleta {
         NodeList nlist = element.getElementsByTagName("Cd_Cotacao");
 	    Element elm = (Element) nlist.item(0);
 	    String cdCotacao = getCharacterDataFromElement(elm);
-	    debugar("cdCotacao: " + cdCotacao);
+	    debugar("\r\n\r\ncdCotacao: " + cdCotacao);
 	
 	    nlist = element.getElementsByTagName("Cd_Comprador");
 	    elm = (Element) nlist.item(0);
@@ -794,13 +794,13 @@ public final class IntegracaoFornecedorCompleta {
 
            Transformer transformerSAP = transformerFactory.newTransformer();    
 	       transformerSAP.setOutputProperty(OutputKeys.ENCODING, "iso-8859-1");
-		   transformerSAP.setOutputProperty(OutputKeys.INDENT, "yes");
-           transformerSAP.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+		   transformerSAP.setOutputProperty(OutputKeys.INDENT, "no");
+           transformerSAP.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "0");
            final DOMSource sourceSAP = new DOMSource(element);
            final StreamResult resultSAP = new StreamResult(new StringWriter());
            transformerSAP.transform(sourceSAP, resultSAP);
            String strCotacao = resultSAP.getWriter().toString().replaceAll("<Cotacao>", "<Cotacoes><Cotacao>").replaceAll("</Cotacao>", "</Cotacao></Cotacoes>");
-           debugar("strCotacao = " + strCotacao);
+           debugar("O parâmetro \"I_XML\" de tipo string Xml da função do SAP \"ZFCSD00_IMPCOT\" = " + strCotacao);
 
            try {
 	            JCoDestination destination = JCoDestinationManager.getDestination("conf/SAP_API");
@@ -817,17 +817,16 @@ public final class IntegracaoFornecedorCompleta {
 
                 function.execute(destination);
 	            String strXmlProblemas = function.getExportParameterList().getString("E_RESULT");
-                debugar("strXmlProblemas = " + strXmlProblemas);
+                debugar("A função do SAP \"ZFCSD00_IMPCOT\" retornou o parâmetro \"E_RESULT\" de tipo string Xml = " + strXmlProblemas);
 
                 if (strXmlProblemas == null) {
-                   logarErro("Erro ao chamar a função do SAP: string Xml E_RESULT == null");
+                   logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_RESULT\" de tipo string Xml retornou \"null\"");
                    return;
                 }
                 else {
                 	if (strXmlProblemas.substring(0,3).toUpperCase().equals("ERR")) {
                        debugar("Entrou no if strXmlProblemas.substring(0,3).toUpperCase().equals(ERR)");
-                       logarErro("Erro ao chamar a função do SAP: " + strXmlProblemas);
-                       return;
+                       logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_RESULT\" de tipo string Xml retornou: " + strXmlProblemas);
                     }
                 }
                 
@@ -841,18 +840,22 @@ public final class IntegracaoFornecedorCompleta {
 //	
 //              function.execute(destination);
                 String strXmlOfertasRecebido = function.getExportParameterList().getString("E_XML");
-                debugar("strXmlOfertasRecebido = " + strXmlOfertasRecebido);
+                debugar("A função do SAP \"ZFCSD00_IMPCOT\" retornou o parâmetro \"E_XML\" de tipo string Xml = " + strXmlOfertasRecebido);
 
                 if (strXmlOfertasRecebido == null) {
-                   logarErro("Erro ao chamar a função do SAP: string Xml Ofertas Recebido == null");
-                   return;
+                    logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_XML\" de tipo string Xml que deveria conter a lista de ofertas retornou \"null\".");
+                    return;
+                }
+                else if (strXmlOfertasRecebido.trim().equals("")) {
+                    logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_XML\" de tipo string Xml que deveria conter a lista de ofertas retornou um valor vazio.");
+                    return;
                 }
                 
-                debugar("Entrando em InputSource isOfertas = new InputSource();");
-		        InputSource isOfertas = new InputSource();
-		        isOfertas.setCharacterStream(new StringReader(strXmlOfertasRecebido));
+                debugar("Chegou antes de InputSource inputsource = new InputSource();");
+		        InputSource inputsource = new InputSource();
+		        inputsource.setCharacterStream(new StringReader(strXmlOfertasRecebido));
 		
-		        docOfertas = docBuilder.parse(isOfertas);
+		        docOfertas = docBuilder.parse(inputsource);
 		    	uploadXmlOfertas(docOfertas, cdCotacao, transformer, hoje);
            }
            catch(AbapException aex)

@@ -308,6 +308,8 @@ select *
   --and ds_ocorrencia_logeint like 'Já%'
    
  
+   22. Apagar o instalador no diretório C:/temp/ no servidor do fornecedor.
+  
          
 Manual para a geração do instalador Setup.exe:
 ==============================================
