@@ -1017,14 +1017,7 @@ public final class IntegracaoFornecedorCompleta {
 + "OU:" + "\r\n"
 + "Se você não tem nenhuma ideia da causa, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
 + " " + "\r\n"
-+ "No caso que você mesmo consegue resolver o problema, favor verificar após 15 minutos se as cotações pendentes foram ofertadas automaticamente." + "\r\n" 
-+ "Se você não tiver um usuário/senha no site do Portal Cronos, favor verificar isso com os vendedores. " + "\r\n" 
-+ " " + "\r\n"
-+ "Se as ofertas automáticas não voltaram a funcionar ainda, veja as outras possíveis causas no manual. " + "\r\n" 
-+ " " + "\r\n"
-+ "Apenas no último caso, se não conseguir resolver, entrar em contato com o contato \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email), " + "\r\n" 
-+ "e colocar o" + f.AplicativoDesktopRemoto + " no ar, e informar o ID e a senha via Skype," + "\r\n" 
-+ "para ele ver se a causa foi alguma falha dentro do serviço das ofertas automáticas." + "\r\n"
++ "Após a solução da causa, veja no manual em anexo como verificar se o serviço realmente voltou a funcionar.\r\n"
 + " " + "\r\n"
 ;
 
@@ -1050,7 +1043,7 @@ public final class IntegracaoFornecedorCompleta {
 		     	+ " 	group by comp.nm_pessoa "
 		     	+ "         , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32) "  
 		     	+ " 	UNION "
-		     	+ " 	select lei.ds_ocorrencia_logeint "
+		     	+ " 	select distinct lei.ds_ocorrencia_logeint "
 		     	+ " 	     , comp.nm_pessoa  as nm_comprador "
 		     	+ " 	     , lei.ds_ocorrencia_logeint "
 		     	+ " 	  from dbo.Log_Erro_Integracao lei "
@@ -1072,8 +1065,8 @@ public final class IntegracaoFornecedorCompleta {
 		     		    	qtdVerificacaoCadastros += 1;
 		     		    	if (qtdVerificacaoCadastros == 1) {
 		     		    		body += " " + "\r\n"
-		     		    				+ "Aproveitando: nos últimos 7 dias diversas cotações não foram ofertadas automaticamente por causa de falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "\r\n"
-		     		    				+ "Favor informar o gerente de vendas as causas: "+ "\r\n";
+		     		    	         + "<b>Aproveitando: após a solução dp problema, favor informar ao gerente de vendas que o motivo porque nos últimos 7 dias diversas cotações não foram ofertadas automaticamente, é a falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
+		     		    			 ;
 		     		    	}
 							body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
 							

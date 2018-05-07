@@ -73,7 +73,7 @@ No caso que você mesmo consegue resolver o problema:
      "C:/ProgramData/PortalCronos/Logs/Local/TemposExecução.log" no final do arquivo.  
       
   2. Em seguida: 
-     (i).  No caso afirmativo favor verificar também se as cotações pendentes foram ofertadas automaticamente. 
+     (i).  No caso afirmativo, favor verificar também se as cotações pendentes foram ofertadas automaticamente. 
            Se você não tiver um usuário/senha no site do Portal Cronos, favor verificar isso com os vendedores. 
      (ii). No caso que as ofertas automáticas ainda não voltaram a funcionar, 
            veja as outras possíveis causas neste manual. 
