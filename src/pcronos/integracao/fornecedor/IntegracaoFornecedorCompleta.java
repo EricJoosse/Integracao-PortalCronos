@@ -801,7 +801,7 @@ public final class IntegracaoFornecedorCompleta {
            transformerSAP.transform(sourceSAP, resultSAP);
            String strCotacao = resultSAP.getWriter().toString().replaceAll("<Cotacao>", "<Cotacoes><Cotacao>").replaceAll("</Cotacao>", "</Cotacao></Cotacoes>");
            debugar("O parâmetro \"I_XML\" de tipo string Xml da função do SAP \"ZFCSD00_IMPCOT\" = " + strCotacao);
-           debugar("O mesmo parâmetro transformado para legível = " + Utils.transformarXmlParaLegivel(element));
+           debugar("O mesmo parâmetro transformado para legível = \r\n1. String I_XML, transformado para xml legível:\r\n===============================================\r\n" + Utils.transformarXmlParaLegivel(strCotacao));
 
            try {
 	            JCoDestination destination = JCoDestinationManager.getDestination("conf/SAP_API");
@@ -819,11 +819,15 @@ public final class IntegracaoFornecedorCompleta {
                 function.execute(destination);
 	            String strXmlProblemas = function.getExportParameterList().getString("E_RESULT");
                 debugar("A função do SAP \"ZFCSD00_IMPCOT\" retornou o parâmetro \"E_RESULT\" de tipo string Xml = " + strXmlProblemas);
-                debugar("O mesmo parâmetro transformado para legível = \r\nString E_RESULT, transformado para xml legível:\r\n===============================================\r\n" + Utils.transformarXmlParaLegivel(strXmlProblemas));
+                debugar("O mesmo parâmetro transformado para legível = \r\n2. String E_RESULT, transformado para xml legível:\r\n==================================================\r\n" + Utils.transformarXmlParaLegivel(strXmlProblemas));
 
                 if (strXmlProblemas == null) {
                    logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_RESULT\" de tipo string Xml retornou \"null\"");
                    return;
+                }
+                else if (strXmlProblemas.trim().equals("")) {
+                    logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_RESULT\" de tipo string Xml que deveria conter pelo menos os dados gerais da cotação retornou um valor vazio de tamanho zero.");
+                    return;
                 }
                 else {
                 	if (strXmlProblemas.substring(0,3).toUpperCase().equals("ERR")) {
@@ -844,14 +848,13 @@ public final class IntegracaoFornecedorCompleta {
 //              function.execute(destination);
                 String strXmlOfertasRecebido = function.getExportParameterList().getString("E_XML");
                 debugar("A função do SAP \"ZFCSD00_IMPCOT\" retornou o parâmetro \"E_XML\" de tipo string Xml = " + strXmlOfertasRecebido);
-                debugar("O mesmo parâmetro transformado para legível = \r\nString E_XML, transformado para xml legível:\r\n============================================\r\n" + Utils.transformarXmlParaLegivel(strXmlOfertasRecebido));
+                debugar("O mesmo parâmetro transformado para legível = \r\n3. String E_XML, transformado para xml legível:\r\n===============================================\r\n" + Utils.transformarXmlParaLegivel(strXmlOfertasRecebido));
 
                 if (strXmlOfertasRecebido == null) {
                     logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_XML\" de tipo string Xml que deveria conter a lista de ofertas retornou \"null\".");
                     return;
                 }
                 else if (strXmlOfertasRecebido.trim().equals("")) {
-                    logarErro("Erro ao chamar a função do SAP \"ZFCSD00_IMPCOT\": o parâmetro \"E_XML\" de tipo string Xml que deveria conter a lista de ofertas retornou um valor vazio.");
                     return;
                 }
                 

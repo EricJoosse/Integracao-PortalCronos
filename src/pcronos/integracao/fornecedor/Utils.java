@@ -60,6 +60,9 @@ public class Utils {
 
 	public static String transformarXmlParaLegivel(String stringIlegivel) throws TransformerException, ParserConfigurationException, IOException, SAXException
 	{
+		if (isNullOrBlank(stringIlegivel))
+			return new String("");
+		
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
