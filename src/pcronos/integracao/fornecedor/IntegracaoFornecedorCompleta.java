@@ -1981,6 +1981,7 @@ public final class IntegracaoFornecedorCompleta {
 </xml>
   
  */
+	    debugar("upload_File(): nome arquivo = " + f.getName());
 	  
 	    ClientConfig config = new DefaultClientConfig();
         Client client = Client.create(config);
@@ -1998,20 +1999,20 @@ public final class IntegracaoFornecedorCompleta {
         ClientResponse clientResp = resource.type(MediaType.MULTIPART_FORM_DATA_TYPE)
         		                                  .post(ClientResponse.class, multiPart);
         
-        debugar("HTTP Status Code = " + clientResp.getClientResponseStatus().getStatusCode() + " (" + clientResp.getClientResponseStatus().getReasonPhrase() + ")");
+        debugar("upload_File(): HTTP Status Code = " + clientResp.getClientResponseStatus().getStatusCode() + " (" + clientResp.getClientResponseStatus().getReasonPhrase() + ")");
 
         // Neste caso JAXB seria mais trabalhoso do que SAX e DOM,
     	// então não usar um Entity :
         String xmlResposta = clientResp.getEntity(String.class);
-        debugar("HTTP Response = " + xmlResposta) ;
+        debugar("upload_File(): HTTP Response = " + xmlResposta) ;
         
         if (    clientResp.getClientResponseStatus().getStatusCode() != 200 
              && clientResp.getClientResponseStatus().getStatusCode() != 202)
         {
             client.destroy();
             // Não fazer throw new RuntimeException, porém continuar com a próxima cotação :
-        	logarErro("Erro! HTTP Status Code = " + clientResp.getClientResponseStatus().getStatusCode() + " (" + clientResp.getClientResponseStatus().getReasonPhrase() + ")");
-            logarErro("HTTP Response = " + xmlResposta) ;
+        	logarErro("Erro! upload_File(): HTTP Status Code = " + clientResp.getClientResponseStatus().getStatusCode() + " (" + clientResp.getClientResponseStatus().getReasonPhrase() + ")");
+            logarErro("upload_File(): HTTP Response = " + xmlResposta) ;
         }
         else
         {
