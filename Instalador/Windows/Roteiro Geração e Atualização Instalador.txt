@@ -341,8 +341,7 @@ Manual para a geração do instalador Setup.exe:
       - Sub-aba "Avançado"       : Marcar checkbox "Pedido de acesso administrativo"
       - Sub-aba "Métodos"        : Selecionar "Modo silencioso" > "Ocultar tudo"     
       - Sub-aba "Atualizar"      : Marcar "substituir todos os arquivos"
-      - Sub-aba "Geral"          : Botão "Salvar configurações SFX" 
-                                   Apenas na primeira vez. 
+      - Sub-aba "Geral"          : Apenas na primeira vez: clicar botão "Salvar configurações SFX" 
                                    Na segunda vez apenas abrir Aba "Avancado" > botão "Opções SFX..." e clicar OK.
 
 
