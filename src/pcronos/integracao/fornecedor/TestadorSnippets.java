@@ -90,9 +90,16 @@ public class TestadorSnippets {
 			String strToDecript = "ST+o/6W2VnE=";
 			System.out.println("cript de " + strToCript + " = " + Criptografia.encrypt(strToCript));
 			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript, true));
+			
+			
+			FornecedorRepositorio fRep = new FornecedorRepositorio();
+            ManualManutencao m = new ManualManutencao(fRep.getFornecedor(13));
+            m.gravarEmArquivo();
+            
+            
 			System.out.println("");
-			
-			
+            if (1 == 1) return;
+
 			LocalDateTime horaInicio = LocalDateTime.now();
        	    if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY)
 				System.out.println("Hoje é sábado");
@@ -105,7 +112,7 @@ public class TestadorSnippets {
    		    System.out.println("");
             if (1 == 1) return;
 
-   		    FornecedorRepositorio fRep = new FornecedorRepositorio();
+   		 // FornecedorRepositorio fRep = new FornecedorRepositorio();
    		    int iForn = 60;
    		    Fornecedor f = fRep.getFornecedor(iForn);
 			System.out.println("fRep.getFornecedor(60) = " + f.NomeFantasiaEmpresa);

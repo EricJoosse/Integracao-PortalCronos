@@ -19,6 +19,8 @@ public class FornecedorRepositorio {
 			f.FuncaoResponsavelTI = "Coordenador de Projetos de TI";
 			f.FuncaoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "Team Viewer";
+			f.usuarioWebservice = "ws-formaggio";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		else if (idFornecedor == 947) {
 			f.NomeFantasiaEmpresa = "JR Embalagem";
@@ -28,6 +30,8 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "Ivan";
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "AnyDesk";
+			f.usuarioWebservice = "ws-jrembalagem";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		else if (idFornecedor == 30) {
 			f.NomeFantasiaEmpresa = "Prolac";
@@ -38,6 +42,8 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.IdAplicativoDesktopRemoto = "servidormaxima@ad";
+			f.usuarioWebservice = "ws-prolac";
+			f.versaoJRE = "jre1.8.0_161";
 		}			   
 		else if (idFornecedor == 21) {
 			f.NomeFantasiaEmpresa = "Marítimos";
@@ -47,6 +53,8 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "Felipe";
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "Team Viewer";
+			f.usuarioWebservice = "ws-mpescados";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		else if (idFornecedor == 170) {
 			f.NomeFantasiaEmpresa = "SOST";
@@ -56,6 +64,8 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "Cleijonatas";
 			f.ApelidoResponsavelTIAlternativo = "Sena";
 			f.AplicativoDesktopRemoto = "AnyDesk";
+			f.usuarioWebservice = "ws-sost";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		else if (idFornecedor == 60) {
 			f.NomeFantasiaEmpresa = "Karne Keijo";
@@ -65,6 +75,8 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "Timon";
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "Team Viewer";
+			f.usuarioWebservice = "ws-karnekeijo";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		else if (idFornecedor == 33) {
 			f.NomeFantasiaEmpresa = "Comal";
@@ -74,6 +86,8 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "";
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "Team Viewer";
+			f.usuarioWebservice = "ws-comal";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		else if (idFornecedor == 51) {
 			f.NomeFantasiaEmpresa = "Master Commerce";
@@ -83,6 +97,8 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "";
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "Team Viewer";
+			f.usuarioWebservice = "ws-mcommerce";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		else if (idFornecedor == null) {
 			f.NomeFantasiaEmpresa = "Monitoramento";
@@ -92,6 +108,7 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "";
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "mstsc";
+			f.versaoJRE = "jre1.8.0_92";
 		}			   
 		return f;
 	}
