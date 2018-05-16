@@ -3,22 +3,47 @@ package pcronos.integracao.fornecedor;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
 
 public class ManualManutencao {
 
 	private final String nomeArquivo = "Manual solucionamento paradas integração Portal Cronos - v1.4.1 (14.05.2018).txt";
 	private String conteudo;
+	private Fornecedor fornecedor;
 	
 	
-	public void gravarEmArquivo() throws IOException {
-	        BufferedWriter bWriter = new BufferedWriter(new FileWriter(nomeArquivo, false));
-	        bWriter.write(this.conteudo);
-	        bWriter.flush();
-	        bWriter.close();
+	public void gravarEmArquivo() throws IOException, Exception {
+		String caminhoManual = null;
+		
+        if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
+        	caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
+        }
+        else
+        	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
+
+        
+    	File diretorioManual = new File(caminhoManual);
+    	if(!diretorioManual.exists()) { 
+    		diretorioManual.mkdir();
+    	}
+    	else {
+    		for (final File file : diretorioManual.listFiles()) 
+    		{
+  			    file.delete();
+    		}
+    	}
+
+    	
+    	BufferedWriter bWriter = new BufferedWriter(new FileWriter(caminhoManual + nomeArquivo, false));
+        bWriter.write(this.conteudo);
+        bWriter.flush();
+        bWriter.close();
 	}
 	
 	
 	public ManualManutencao(Fornecedor f) throws Exception {
+		this.fornecedor = f;
+		
 		this.conteudo = "" +
 "Introdução técnica:" + "\r\n" +
 "===================" + "\r\n" +

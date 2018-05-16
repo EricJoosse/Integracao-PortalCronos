@@ -18,6 +18,7 @@ public class Fornecedor {
 	String IdAplicativoDesktopRemoto;
 	String usuarioWebservice;
 	String versaoJRE;
+	String tipoSO;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

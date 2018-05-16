@@ -174,13 +174,7 @@ SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
 
 :SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
 
+call InstalarManualTI.bat
+
 :FIM
-
-echo.
-echo          Instalação concluida!
-echo.
-
-echo MSGBOX "Instalação concluida!" > %temp%\TEMPmessage.vbs
-call %temp%\TEMPmessage.vbs
-del %temp%\TEMPmessage.vbs /f /q
 
