@@ -72,12 +72,21 @@ Como vai ser?
 						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
 		  e verificar eventuais outros goto´s 
  
-    5. Regerar o instalador, veja o "Manual para a geração do instalador Setup.exe" abaixo.
+ 
+    5a. No FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo 
+        e preencher TODOS os campos sem falta, antes de continuar, pois sem isso a instalação do 
+        Manual de Manutenção para a TI não vai funcionar corretamente.
+        
+    5b. Compilar e atualizar integr-fornecedor-x.y.z.jar 
+        (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
+          
+    6. NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
+       Regerar o instalador, veja o "Manual para a geração do instalador Setup.exe" abaixo.
     
-    6. O instalador pode ser copiado para qualquer diretório no servidor do fornecedor.
+    7. O instalador pode ser copiado para qualquer diretório no servidor do fornecedor.
        Por padrão copiar para C:\temp\.
     
-    7. Antes da instalação :
+    8. Antes da instalação :
        					        
           0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
                 (i)  do variável de ambiente do sistema "Path" de Windows: 
@@ -105,13 +114,13 @@ Como vai ser?
        após a instalação voltar os atalhos em C:\ProgramData\Oracle\Java\javapath\ para como estava antes.
 
  
-    8. Após a instalação :
+    9. Após a instalação :
     
-    8a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
+    9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
-    8b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
+    9b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
      
-    8c. No caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
+    9c. No caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
           [HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92\MSI]
 			   "JAVAUPDATE"="0"
 			   "AUTOUPDATECHECK"="0"
@@ -128,14 +137,14 @@ Como vai ser?
 		=> O regedit.exe 64 bits automaticamente substitui \SOFTWARE\ por \SOFTWARE\Wow6432Node\
        
        
-    9. No caso que a versão de Windows ainda não está homologada,
+   10. No caso que a versão de Windows ainda não está homologada,
        após a instalação, fazer um export de teste das chaves do regedit no servidor
 	   e comparar com os arquivos .reg no instalador.
 	   No caso, criar um novo arquivo DeshabilitarJavaUpdates.xxxxxxxxxxx.reg, 
 	   e adaptar Primeira_Instalacao_Versao_Windows.bat.
 	   Depois disso executar "regedit.exe /s %arquivoRegedit%" em um arquivo .bat separado.
 	   
-   10. No caso que a versão de Windows ainda não está homologada,
+   11. No caso que a versão de Windows ainda não está homologada,
        verificar todas as propriedades do task criado no Task Scheduler:  
        a forma mais fácil é comparar com uma instalação em qualquer Windows Server 2008 R2 SP 1 
        onde a primeir task foi desenvolvida originalmente. 
@@ -145,7 +154,7 @@ Como vai ser?
        para outro arquivo novo, e adaptar Primeira_Instalacao_Versao_Windows.bat. 
        No outro caso que funcionou, adicionar o novo SO no nome do arquivo e adaptar Primeira_Instalacao_Versao_Windows.bat.
 
-   11. No final, no caso que a versão de Windows ainda não estava homologada,
+   12. No final, no caso que a versão de Windows ainda não estava homologada,
        descomentar "REM regedit.exe /s %arquivoRegedit%"
 	   no arquivo Primeira_Instalacao_Versao_Windows.bat.
       
@@ -157,7 +166,7 @@ Como vai ser?
 			    exit
 			)
 
-   11. Só uma vez: 
+   13. Só uma vez: 
        No caso de Windows_10_Pro_64bit: testar e remover o seguinte: 
 		REM Falta testar o seguinte!!!!!!!!!!!!!!!!!!!!!!!!
 		REM Se é para usar %~dp0DeshabilitarJavaUpdates.x64.reg ou DeshabilitarJavaUpdates.x64.reg
@@ -167,9 +176,9 @@ Como vai ser?
 
    
 
-   12. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
+   14. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
    
-   13. No caso de integração com o SAP: 
+   15. No caso de integração com o SAP: 
 			There are different distribution packages for various JRE versions and hardware processors available:
 			
 			    sapjco3-ntintel-3.0.17.zip for a 32-bit JRE running on a 32- or 64-bit AMD or INTEL x86 or a 64-bit INTEL Itanium processor
@@ -198,14 +207,14 @@ Como vai ser?
 			1. No Eclipse: .............. 
 			2. Já foi feito automaticamente pelo pom.xml na geração do .jar. 
 
-   14. (i)  Verificar se "debug" = "true" no arquivo de configuração para facilitar atendimento imediato no futuro, 
+   16. (i)  Verificar se "debug" = "true" no arquivo de configuração para facilitar atendimento imediato no futuro, 
             exceto no caso que "SiglaSistema" = "PCronos" (fornecedor "Monitoramento").
        (ii) Verificar se o default de "QtdDiasArquivosXmlGuardados" = "100"
  
-   15. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
+   17. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
        na procedure [dbo].[monitorarIntegracaoFornecedores]
    
-   16. update [dbo].[Usuario_Sistema]  
+   18. update [dbo].[Usuario_Sistema]  
           set id_fornecedor_fornec = .....
         where cd_usuario_sistema_ususis = 'ericcoringa'
    
@@ -213,7 +222,7 @@ Como vai ser?
        um texto padrão do fornecedor para todas as cotações de todos os compradores 
        e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema". 
     
-   17. Enviar Email/ Skype: 
+   19. Enviar Email/ Skype: 
    
        Vocês têm apenas UMA base de dados WinThor/Oracle? Ou talvez tem uma base de produção e outra base de teste, por exemplo?
 
@@ -259,13 +268,13 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        ANTIGO: Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
 
-   18. No caso que você precisa atualizar a versão de Java um dia no futuro, 
+   20. No caso que você precisa atualizar a versão de Java um dia no futuro, 
        no servidor que está hospedando a integração WinThor / PCronos, 
        favor não se esquecer para me avisar com alguns dias de antecedência! 
        Caso contrário, o serviço será interrompido indevidamente alguns dias 
        depois de uma atualização de Java!
        
-   19. Verificar, e no caso, enviar o seguinte email: 
+   21. Verificar, e no caso, enviar o seguinte email: 
    
 Leão,
   
@@ -279,7 +288,7 @@ sem nenhum registro de log deste erro...
  
 Eric
    
-   20. Na sp dbo.monitorarIntegracaoFornecedores: 
+   22. Na sp dbo.monitorarIntegracaoFornecedores: 
       (i)  adicionar: 
 	       		--and f.id_fornecedor_fornec <> xxx -- AAAAAAAAAA
 	       depois de: 
@@ -291,7 +300,7 @@ Eric
 				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
 
       
-   21. Scripts para troubleshooting se não funcionar:
+   23. Scripts para troubleshooting se não funcionar:
    
 declare @fornecedor_id  int
 set @fornecedor_id = 
@@ -308,7 +317,7 @@ select *
   --and ds_ocorrencia_logeint like 'Já%'
    
  
-   22. Apagar o instalador no diretório C:/temp/ no servidor do fornecedor.
+   24. Apagar o instalador no diretório C:/temp/ no servidor do fornecedor.
   
          
 Manual para a geração do instalador Setup.exe:
