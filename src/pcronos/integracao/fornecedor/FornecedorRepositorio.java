@@ -5,7 +5,7 @@ public class FornecedorRepositorio {
 	public FornecedorRepositorio() {
 	}
 
-	Fornecedor getFornecedor(Integer idFornecedor) {
+	Fornecedor getFornecedor(Integer idFornecedor) throws Exception {
 		Fornecedor f = new Fornecedor();
 		f.IdFornecedor = idFornecedor;
 
@@ -119,6 +119,10 @@ public class FornecedorRepositorio {
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 		}			   
+		else { 
+			throw new Exception("Erro: idFornecedor " + idFornecedor.toString() + " não existe");
+		}
+		
 		return f;
 	}
 }

@@ -28,8 +28,10 @@ public class Fornecedor {
 			return "Oracle";
 		else if (this.SiglaSistemaFornecedor.equals("PCronos"))
 			return "SQL Server";
+		else if (this.SiglaSistemaFornecedor.equals("SAP"))
+			return "SAP DB/SAP HANA (?)";
 		else {
-			throw new Exception("O tipo da base de dados não cadastrado para fornecedor " + this.NomeFantasiaEmpresa);
+			throw new Exception("O tipo da base de dados não está cadastrado para fornecedor " + this.NomeFantasiaEmpresa);
 		}
 	}
 

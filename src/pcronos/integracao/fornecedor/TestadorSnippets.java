@@ -92,11 +92,6 @@ public class TestadorSnippets {
 			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript, true));
 			
 			
-			FornecedorRepositorio fRep = new FornecedorRepositorio();
-            ManualManutencao m = new ManualManutencao(fRep.getFornecedor(13));
-            m.gravarEmArquivo();
-            
-            
 			System.out.println("");
             if (1 == 1) return;
 
@@ -114,6 +109,7 @@ public class TestadorSnippets {
 
    		 // FornecedorRepositorio fRep = new FornecedorRepositorio();
    		    int iForn = 60;
+			FornecedorRepositorio fRep = new FornecedorRepositorio();
    		    Fornecedor f = fRep.getFornecedor(iForn);
 			System.out.println("fRep.getFornecedor(60) = " + f.NomeFantasiaEmpresa);
 

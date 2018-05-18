@@ -7,12 +7,12 @@ import java.io.File;
 
 public class ManualManutencao {
 
-	private final String nomeArquivo = "Manual solucionamento paradas integração Portal Cronos - v1.4.1 (14.05.2018).txt";
+	private final String nomeArquivo = "Manual solucionamento paradas integração Portal Cronos - v1.4.2 (18.05.2018).txt";
 	private String conteudo;
 	private Fornecedor fornecedor;
 	
 	
-	public void gravarEmArquivo() throws IOException, Exception {
+	public void gravarEmArquivoNoMenuWindows() throws IOException, Exception {
 		String caminhoManual = null;
 		
         if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
@@ -39,6 +39,21 @@ public class ManualManutencao {
         bWriter.flush();
         bWriter.close();
 	}
+	
+	
+	
+	public void gravarEmArquivoSoltoNoRaizDoProjeto() throws IOException, Exception {
+		File f = new File(nomeArquivo);
+		if(f.exists() && !f.isDirectory()) { 
+		    f.delete();
+		}
+		
+		BufferedWriter bWriter = new BufferedWriter(new FileWriter(nomeArquivo, false));
+        bWriter.write(this.conteudo);
+        bWriter.flush();
+        bWriter.close();
+	}
+	
 	
 	
 	public ManualManutencao(Fornecedor f) throws Exception {
@@ -87,12 +102,23 @@ public class ManualManutencao {
 "    (Isso é necessário apenas na primeira vez que isso acontece.) " + "\r\n" +
 "" + "\r\n" +
 "  - Algum anti-virus está travando a máquina? (100 % memória RAM)" + "\r\n" +
+"" + "\r\n";
+		
+		
+if (f.SiglaSistemaFornecedor.equals("SAP"))		
+	this.conteudo += "" +
+"  - O endereço IP, usuário ou senha do SAP_API mudou? " + "\r\n" + 
+"    Neste caso verifica se a mesma foi atualizada também no seguinte arquivo de configuração: " + "\r\n" +
+"    C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\conf\\SAP_API.jcoDestination" + "\r\n" +
+"" + "\r\n";
+
+	
+this.conteudo += "" +
+"  - O endereço IP, usuário ou senha da base de dados " + f.getTipoBaseDeDados() + " mudou?" + "\r\n" +
 "" + "\r\n" +
-"  - O endereço IP, usuário ou senha do banco " + f.getTipoBaseDeDados() + " mudou?" + "\r\n" +
-"" + "\r\n" +
-"  - A senha do usuário " + f.usuarioWebservice + " do site do Portal Cronos foi alterada no site porém não foi atualizada" + "\r\n" +
-"     no arquivo de configuração? (Este arquivo se encontra no diretório " + "\r\n" +
-"     C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\conf\\Integração Fornecedor - Portal Cronos.properties)" + "\r\n" + 
+"  - A senha do usuário " + f.usuarioWebservice + " do site do Portal Cronos foi alterada no site? " + "\r\n" + 
+"    Neste caso verifica se a mesma foi atualizada também no seguinte arquivo de configuração: " + "\r\n" +
+"    C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\conf\\Integração Fornecedor - Portal Cronos.properties" + "\r\n" + 
 "" + "\r\n" +
 "  - No \"Gerenciador de Tarefas\" (\"Task Manager\") ordenar por nome do processo, e procurar" + "\r\n" + 
 "    \"Java(TM) Platform SE binary\". " + "\r\n" +
