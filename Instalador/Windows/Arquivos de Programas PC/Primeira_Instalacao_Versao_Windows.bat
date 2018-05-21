@@ -108,7 +108,7 @@ if %osVersion% == Windows_Server_2008_R2_SP1 (
 REM goto FIM
 
 
-REM ================ Instalar JRE ========================================
+REM ================ Instalar JRE: ========================================
 
 if %tipoOS% == 64 (
     Start /wait jre-8u92-windows-x64.exe /s INSTALLDIR=%drive%\\"Program Files"\Java\jre1.8.0_92
@@ -123,7 +123,7 @@ if %tipoOS% == 64 (
 
 :SKIP_JRE
 
-REM ================ Instalar diretório de Log ========================================
+REM ================ Instalar diretório de Log: ========================================
 
 cd\
 if not exist C:\ProgramData\ (
@@ -142,7 +142,7 @@ REM Não precisa dar privilêgios mais, pois a Scheduled Task roda como SYSTEM
 
 :SKIP_JRE_TEMPDIR
 
-REM ================ Instalar diretório Arquivos de Programas PC ========================================
+REM ================ Instalar diretório Arquivos de Programas PC: ========================================
 
 REM Já instalado pelo self-extractable file 
 REM cd\
@@ -150,7 +150,7 @@ REM cd "Arquivos de Programas PC"
 
 :SKIP_JRE_TEMPDIR_PROGRAMDIR
 
-REM ================ Instalar Task no Windows Scheduler ========================================
+REM ================ Instalar Task no Windows Scheduler: ========================================
 
 REM O seguinte não marca a opção "Run whether user is logged on or not" :
 REM SCHTASKS /Create /TN "Teste Automação SCHTASKS" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15

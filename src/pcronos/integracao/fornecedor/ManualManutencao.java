@@ -10,18 +10,25 @@ public class ManualManutencao {
 	private final String nomeArquivo = "Manual solucionamento paradas integração Portal Cronos - v1.4.2 (18.05.2018).txt";
 	private String conteudo;
 	private Fornecedor fornecedor;
+	private String caminhoManual = null;
+	
+	
+	
+	public void removerPCronosDoMenuWindows() { 
+    	File diretorioManual = new File(caminhoManual);
+    	
+    	if(diretorioManual.exists()) { 
+    		for (final File file : diretorioManual.listFiles()) 
+    		{
+  			    file.delete();
+    		}
+    		diretorioManual.delete();
+    	}
+	}
+	
 	
 	
 	public void gravarEmArquivoNoMenuWindows() throws IOException, Exception {
-		String caminhoManual = null;
-		
-        if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
-        	caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
-        }
-        else
-        	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
-
-        
     	File diretorioManual = new File(caminhoManual);
     	if(!diretorioManual.exists()) { 
     		diretorioManual.mkdir();
@@ -59,7 +66,15 @@ public class ManualManutencao {
 	public ManualManutencao(Fornecedor f) throws Exception {
 		this.fornecedor = f;
 		
-		this.conteudo = "" +
+
+        if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
+        	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
+        }
+        else
+        	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
+
+
+        this.conteudo = "" +
 "Introdução técnica:" + "\r\n" +
 "===================" + "\r\n" +
 "O \"serviço\" de integração é um \"serviço\" de Java portanto é independente de Windows," + "\r\n" + 
