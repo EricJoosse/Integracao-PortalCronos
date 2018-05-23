@@ -5,7 +5,9 @@ SET /P idFornecedor=Favor digitar o ID do fornecedor:
 IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
 GOTO PularErro
 :ErroIdFornecedor
-ECHO ID do fornecedor não informado! Desinstalação abortada!!
+echo MSGBOX "Erro: ID do fornecedor não informado! Desinstalação abortada!!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
 exit /B 1
 :PularErro
 
@@ -36,11 +38,27 @@ cd\
 cd "Arquivos de Programas PC"
 cd "Integração Fornecedor - Portal Cronos"
 
+if exist Desinstalador.log del /f /q Desinstalador.log
+
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
 REM e o caminho do outro JRE vem primeiro no PATH de DOS :
-C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor%
-REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor%
+C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
+REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
 
+set arquivoLog="Desinstalador.log"
+
+FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
+
+if %tamanhoArqLog% GTR 0 (
+    echo.
+    echo          A desinstalação falhou!
+    echo.
+    
+    echo MSGBOX "A desinstalação falhou!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    start notepad Desinstalador.log
+)
 
 ENDLOCAL
 exit

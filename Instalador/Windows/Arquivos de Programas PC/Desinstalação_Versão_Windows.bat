@@ -40,11 +40,31 @@ del /f /q Primeira_Instalacao_Versao_Windows.bat
 
 REM ================ Remover diretório de Log: ========================================
 
+REM Evitando interferência indevida com outros diretórios:
+REM    C:\ProgramData\PortalCronos\Logs\Local
+REM    C:\ProgramData\PortalCronos\Logs\Remoto\Integracao\
+REM    C:\ProgramData\PortalCronos\Logs\Remoto\APK\
+
 cd\
 cd ProgramData
-rmdir /s /q PortalCronos
-cd\
 
+REM Foi testado que "rmdir /s /q PortalCronos" não funciona como deveria. 
+REM Talvez isso é porque existem diversos níveis de subsubsubdiretórios:
+ 
+cd PortalCronos
+cd Logs
+rmdir /s /q Local
+
+if NOT exist "Remoto" (
+  cd\
+  cd ProgramData
+  cd PortalCronos
+  rmdir /s /q Logs
+  cd\
+  cd ProgramData
+  rmdir /s /q PortalCronos
+)
+cd\
 
 REM ================ Remover JRE: ========================================
 

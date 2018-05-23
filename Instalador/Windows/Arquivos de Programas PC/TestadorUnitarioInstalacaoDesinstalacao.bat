@@ -3,14 +3,16 @@ cls
 
 chcp 1252>nul
 
-
-REM goto DesinstalarManualTI
-goto InstalarDirLog
+REM goto InstalarManualTI
+goto DesinstalarManualTI
+REM goto InstalarDirLog
 REM goto DesinstalarDirLog
+REM goto TesteIfNotExist
 
 
 REM ================ Testes INstalação Manual Manutenção TI do menu de Windows: ========================================
 
+:InstalarManualTI
 call InstalarManualTI.bat
 exit
 
@@ -57,20 +59,53 @@ exit
 REM ================ Testes DESinstalação diretório de Log: ========================================
 
 :DesinstalarDirLog
+REM Evitando interferência indevida com outros diretórios:
+REM    C:\ProgramData\PortalCronos\Logs\Local
+REM    C:\ProgramData\PortalCronos\Logs\Remoto\Integracao\
+REM    C:\ProgramData\PortalCronos\Logs\Remoto\APK\
+
 cd\
 cd ProgramData
-REM O seguinte não funciona como deveria: rmdir /s /q PortalCronos
+
+REM Foi testado que "rmdir /s /q PortalCronos" não funciona como deveria. 
+REM Talvez isso é porque existem diversos níveis de subsubsubdiretórios:
+ 
 cd PortalCronos
 cd Logs
 rmdir /s /q Local
+
+if NOT exist "Remoto" (
+  cd\
+  cd ProgramData
+  cd PortalCronos
+  rmdir /s /q Logs
+  cd\
+  cd ProgramData
+  rmdir /s /q PortalCronos
+)
+cd\
+
+exit
+
+REM ================ Testes if NOT exist subdir: ========================================
+
+:TesteIfNotExist
 cd\
 cd ProgramData
 cd PortalCronos
-rmdir /s /q Logs
-cd\
-cd ProgramData
-rmdir /s /q PortalCronos
-cd\
+cd Logs
+
+if NOT exist "Remoto" (
+    echo MSGBOX "O subdiretório Remoto não existe." > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+)
+
+if exist "Remoto" (
+    echo MSGBOX "O subdiretório Remoto existe sim." > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+)
 
 exit
 

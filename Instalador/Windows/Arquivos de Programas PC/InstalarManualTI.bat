@@ -5,7 +5,9 @@ SET /P idFornecedor=Favor digitar o ID do fornecedor:
 IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
 GOTO PularErro
 :ErroIdFornecedor
-ECHO ID do fornecedor não informado! Instalação não concluída!!
+echo MSGBOX "Erro: ID do fornecedor não informado! Instalação não concluída!!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
 exit
 :PularErro
 
@@ -36,18 +38,37 @@ cd\
 cd "Arquivos de Programas PC"
 cd "Integração Fornecedor - Portal Cronos"
 
+
+if exist Instalador.log del /f /q Instalador.log
+
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
 REM e o caminho do outro JRE vem primeiro no PATH de DOS :
 C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Instalador %idFornecedor% >> Instalador.log
 REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Instalador %idFornecedor% >> Instalador.log
 
-echo.
-echo          Instalação concluida!
-echo.
 
-echo MSGBOX "Instalação concluida!" > %temp%\TEMPmessage.vbs
-call %temp%\TEMPmessage.vbs
-del %temp%\TEMPmessage.vbs /f /q
+set arquivoLog="Instalador.log"
+
+FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
+
+if %tamanhoArqLog% GTR 0 (
+    echo.
+    echo          A instalação falhou!
+    echo.
+    
+    echo MSGBOX "A instalação falhou!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    start notepad Instalador.log
+) ELSE (
+    echo.
+    echo          Instalação concluida!
+    echo.
+    
+    echo MSGBOX "Instalação concluida!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+)
 
 
 ENDLOCAL

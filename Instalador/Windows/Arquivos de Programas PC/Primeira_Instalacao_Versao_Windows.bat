@@ -174,6 +174,8 @@ SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
 
 :SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
 
+REM ================ Instalar Manual Manutenção TI do menu de Windows, DEPOIS da instalação dos programas de Java: ========================================
+
 call InstalarManualTI.bat
 
 :FIM
