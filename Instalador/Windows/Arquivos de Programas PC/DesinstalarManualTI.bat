@@ -1,6 +1,9 @@
 cls
 @echo off
 
+REM Resettar ERRORLEVEL para 0 (não existe valor default):
+call (exit /b 0)
+
 SET /P idFornecedor=Favor digitar o ID do fornecedor: 
 IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
 GOTO PularErro
@@ -8,6 +11,7 @@ GOTO PularErro
 echo MSGBOX "Erro: ID do fornecedor não informado! Desinstalação abortada!!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+REM O seguinte sai settando ERRORLEVEL para 1, sem fechar o script chamador: 
 exit /B 1
 :PularErro
 
@@ -46,6 +50,7 @@ C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.4.1.jar
 REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
 
 set arquivoLog="Desinstalador.log"
+set tamanhoArqLog=0
 
 FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
 
@@ -58,9 +63,12 @@ if %tamanhoArqLog% GTR 0 (
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     start notepad Desinstalador.log
+    ENDLOCAL
+    exit /B 1
+) else (
+    ENDLOCAL
+REM /B para não fechar o script chamador:  
+    exit /B 0
 )
-
-ENDLOCAL
-exit
 
 

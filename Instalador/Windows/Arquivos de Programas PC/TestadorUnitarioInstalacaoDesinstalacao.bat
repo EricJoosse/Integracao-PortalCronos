@@ -4,10 +4,12 @@ cls
 chcp 1252>nul
 
 REM goto InstalarManualTI
-goto DesinstalarManualTI
+REM goto DesinstalarManualTI
 REM goto InstalarDirLog
 REM goto DesinstalarDirLog
 REM goto TesteIfNotExist
+REM goto TesteDelProprioArq
+goto TesteLimpeza
 
 
 REM ================ Testes INstalação Manual Manutenção TI do menu de Windows: ========================================
@@ -20,6 +22,10 @@ REM ================ Testes DESinstalação Manual Manutenção TI do menu de Window
 
 :DesinstalarManualTI
 call DesinstalarManualTI.bat
+
+echo Passou DesinstalarManualTI.bat
+echo Testador.bat: ERRORLEVEL = %ERRORLEVEL%
+pause
 
 IF %ERRORLEVEL% NEQ 0 (
     goto PULAR_MENSAGEM_SUCESSO
@@ -106,6 +112,29 @@ if exist "Remoto" (
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
 )
+
+exit
+
+
+REM ================ Testes de exclusão deste arquivo mesmo (funcionou): ========================================
+
+:TesteDelProprioArq
+del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
+
+exit
+
+
+REM ================ Testes Limpeza com wildcards (funcionou): ========================================
+
+:TesteLimpeza
+del /f /q *.reg
+del /f /q *.xml
+del /f /q *.exe
+del /f /q InstalarManualTI.bat
+del /f /q Primeira_Instalacao_Versao_Windows.bat
+REM Excluir este próprio arquivo apenas no final, 
+REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
+del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 
 exit
 

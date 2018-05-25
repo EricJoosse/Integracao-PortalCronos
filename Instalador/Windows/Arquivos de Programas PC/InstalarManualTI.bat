@@ -8,6 +8,7 @@ GOTO PularErro
 echo MSGBOX "Erro: ID do fornecedor não informado! Instalação não concluída!!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
 exit
 :PularErro
 
@@ -48,6 +49,7 @@ REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-f
 
 
 set arquivoLog="Instalador.log"
+set tamanhoArqLog=0
 
 FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
 
@@ -72,6 +74,7 @@ if %tamanhoArqLog% GTR 0 (
 
 
 ENDLOCAL
-exit
+REM /B para não fechar o script chamador:  
+exit /B 0
 
 

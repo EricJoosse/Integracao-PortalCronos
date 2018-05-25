@@ -178,5 +178,16 @@ REM ================ Instalar Manual Manutenção TI do menu de Windows, DEPOIS da
 
 call InstalarManualTI.bat
 
+del /f /q *.reg
+del /f /q *.xml
+del /f /q *.exe
+del /f /q InstalarManualTI.bat
+del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
+REM Excluir este próprio arquivo apenas no final, 
+REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
+del /f /q Primeira_Instalacao_Versao_Windows.bat
+
+exit
+
 :FIM
 
