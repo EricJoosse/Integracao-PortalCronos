@@ -137,6 +137,15 @@ Como vai ser?
 		=> O regedit.exe 64 bits automaticamente substitui \SOFTWARE\ por \SOFTWARE\Wow6432Node\
        
        
+   9d. No caso que o SO for diferente de Windows Server 2008 R2 SP1, fazer testes unitários usando os seguintes 
+       métodos de teste já prontos, descomentando no TestadorUnitário.bat:
+			- REM goto InstalarDirLog
+			- REM goto DesinstalarDirLog
+			- REM goto InstalarManualTI
+			- REM goto DesinstalarManualTI
+       * Adicionar nos cabeçalhos destes métodos no TestadorUnitário.bat que isso foi testado com o SO novo.  
+       * Adicionar este SO neste item "9d." para não testar mais no futuro. 
+       
    10. No caso que a versão de Windows ainda não está homologada,
        após a instalação, fazer um export de teste das chaves do regedit no servidor
 	   e comparar com os arquivos .reg no instalador.

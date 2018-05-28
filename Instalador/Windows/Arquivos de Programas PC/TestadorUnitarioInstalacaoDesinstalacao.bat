@@ -13,12 +13,14 @@ goto TesteLimpeza
 
 
 REM ================ Testes INstalação Manual Manutenção TI do menu de Windows: ========================================
+REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 
 :InstalarManualTI
 call InstalarManualTI.bat
 exit
 
 REM ================ Testes DESinstalação Manual Manutenção TI do menu de Windows: ========================================
+REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 
 :DesinstalarManualTI
 call DesinstalarManualTI.bat
@@ -42,7 +44,9 @@ del %temp%\TEMPmessage.vbs /f /q
 
 exit
 
-REM ================ Testes instalação diretório de Log: ========================================
+REM ================ Testes instalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
+REM ================                                     Obs.: foi testado também no caso que o dir =================================================
+REM ================                                     C:\ProgramData\PortalCronos\Logs\Remoto\ já existia antes ==================================
 
 :InstalarDirLog
 cd\
@@ -58,11 +62,13 @@ cd PortalCronos
 if not exist C:\ProgramData\PortalCronos\Logs\ mkdir Logs
 cd Logs
 if not exist C:\ProgramData\PortalCronos\Logs\Local\ mkdir Local
-REM Não precisa dar privilêgios mais, pois a Scheduled Task roda como SYSTEM
+REM Não precisa dar privilêgios, pois a Scheduled Task roda como SYSTEM
 
 exit
 
-REM ================ Testes DESinstalação diretório de Log: ========================================
+REM ================ Testes DESinstalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
+REM ================                                        Obs.: foi testado também no caso que o dir =================================================
+REM ================                                        C:\ProgramData\PortalCronos\Logs\Remoto\ também existe =====================================
 
 :DesinstalarDirLog
 REM Evitando interferência indevida com outros diretórios:
@@ -93,7 +99,7 @@ cd\
 
 exit
 
-REM ================ Testes if NOT exist subdir: ========================================
+REM ================ Testes if NOT exist subdir (testado, funcionou): ========================================
 
 :TesteIfNotExist
 cd\
@@ -116,7 +122,7 @@ if exist "Remoto" (
 exit
 
 
-REM ================ Testes de exclusão deste arquivo mesmo (funcionou): ========================================
+REM ================ Testes de exclusão deste arquivo mesmo (testado, funcionou): ========================================
 
 :TesteDelProprioArq
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
@@ -124,7 +130,7 @@ del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 exit
 
 
-REM ================ Testes Limpeza com wildcards (funcionou): ========================================
+REM ================ Testes Limpeza com wildcards (testado, funcionou): ========================================
 
 :TesteLimpeza
 del /f /q *.reg

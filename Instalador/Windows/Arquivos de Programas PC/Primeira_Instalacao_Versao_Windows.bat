@@ -138,7 +138,7 @@ cd PortalCronos
 if not exist C:\ProgramData\PortalCronos\Logs\ mkdir Logs
 cd Logs
 if not exist C:\ProgramData\PortalCronos\Logs\Local\ mkdir Local
-REM Não precisa dar privilêgios mais, pois a Scheduled Task roda como SYSTEM
+REM Não precisa dar privilêgios, pois a Scheduled Task roda como SYSTEM
 
 :SKIP_JRE_TEMPDIR
 
@@ -151,6 +151,9 @@ REM cd "Arquivos de Programas PC"
 :SKIP_JRE_TEMPDIR_PROGRAMDIR
 
 REM ================ Instalar Task no Windows Scheduler: ========================================
+
+cd\
+cd "Arquivos de Programas PC"
 
 REM O seguinte não marca a opção "Run whether user is logged on or not" :
 REM SCHTASKS /Create /TN "Teste Automação SCHTASKS" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15
@@ -176,7 +179,13 @@ SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
 
 REM ================ Instalar Manual Manutenção TI do menu de Windows, DEPOIS da instalação dos programas de Java: ========================================
 
+cd\
+cd "Arquivos de Programas PC"
+
 call InstalarManualTI.bat
+
+cd\
+cd "Arquivos de Programas PC"
 
 del /f /q *.reg
 del /f /q *.xml
