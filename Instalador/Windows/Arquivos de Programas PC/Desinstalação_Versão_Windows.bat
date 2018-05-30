@@ -36,7 +36,7 @@ cd\
 cd "Arquivos de Programas PC"
 rmdir /s /q "Integração Fornecedor - Portal Cronos"
 for %%f in (*) do if not %%~xf==.bat del /f /q "%%f"
-del /f /q Primeira_Instalacao_Versao_Windows.bat
+REM Não precisa mais, pois o Instalador já apaga no final da instalação: del /f /q Primeira_Instalacao_Versao_Windows.bat
 
 REM ================ Remover diretório de Log: ========================================
 

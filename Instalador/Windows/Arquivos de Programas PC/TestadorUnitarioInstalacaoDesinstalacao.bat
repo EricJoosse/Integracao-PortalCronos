@@ -9,7 +9,8 @@ REM goto InstalarDirLog
 REM goto DesinstalarDirLog
 REM goto TesteIfNotExist
 REM goto TesteDelProprioArq
-goto TesteLimpeza
+REM goto TesteLimpeza
+goto TesteDelInstalador
 
 
 REM ================ Testes INstalação Manual Manutenção TI do menu de Windows: ========================================
@@ -143,5 +144,14 @@ REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 
 exit
+
+
+REM ================ Testes Exclusão Instalador (testado, funcionou): ========================================
+
+:TesteDelInstalador
+del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+
+exit
+
 
 :FIM

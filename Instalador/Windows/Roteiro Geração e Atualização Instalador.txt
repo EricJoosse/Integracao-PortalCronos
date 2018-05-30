@@ -83,8 +83,8 @@ Como vai ser?
     6. NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
        Regerar o instalador, veja o "Manual para a geração do instalador Setup.exe" abaixo.
     
-    7. O instalador pode ser copiado para qualquer diretório no servidor do fornecedor.
-       Por padrão copiar para C:\temp\.
+    7. O instalador deve ser copiado para exatamente o diretório C:\temp\ no servidor do fornecedor.
+       Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.
     
     8. Antes da instalação :
        					        
@@ -325,9 +325,7 @@ select *
   where id_fornecedor_fornec = @fornecedor_id
   --and ds_ocorrencia_logeint like 'Já%'
    
- 
-   24. Apagar o instalador no diretório C:/temp/ no servidor do fornecedor.
-  
+   
          
 Manual para a geração do instalador Setup.exe:
 ==============================================
@@ -336,7 +334,7 @@ Manual para a geração do instalador Setup.exe:
    C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
    e ordenar os arquivos por nome alfabético.
     
-2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.exe".
+2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.2.4.1.Win2008.R2.SP1.exe".
      
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
    que cria /"Arquivos de Programas PC"/* no servidor do fornecedor, da seguinte forma :
@@ -348,9 +346,17 @@ Manual para a geração do instalador Setup.exe:
       - WinRAR                   : Mudar .rar para .zip
       - WinRAR                   : Método de compressão : Ótimo
       - WinRAR                   : marcar checkbox SFX
-      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.exe
+      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.2.4.1.Win2008.R2.SP1.exe
+                                   Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe", 
+                                         ajustar o mesmo no final de Primeira_Instalacao_Versao_Windows.bat.
 
    Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
+      - Sub-aba "Geral"          : Apenas na primeira vez em uma máquina de desenvolvimento nova 
+                                   ou em outra máquina diferente: clicar botão "Salvar configurações SFX" 
+                                   e fazer as configurações abaixo: 
+                                       (na segunda vez tudo já está  salvo, apenas precisa abrir 
+                                        a aba "Avancado" > botão "Opções SFX..." e clicar OK, 
+                                        e não precisa fazer o resto abaixo.)
       - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
       - Marcar                   : Absolute path
       - Marcar ou deixar marcado : Checkbox "Salvar e restaurar caminho"
@@ -359,8 +365,6 @@ Manual para a geração do instalador Setup.exe:
       - Sub-aba "Avançado"       : Marcar checkbox "Pedido de acesso administrativo"
       - Sub-aba "Métodos"        : Selecionar "Modo silencioso" > "Ocultar tudo"     
       - Sub-aba "Atualizar"      : Marcar "substituir todos os arquivos"
-      - Sub-aba "Geral"          : Apenas na primeira vez: clicar botão "Salvar configurações SFX" 
-                                   Na segunda vez apenas abrir Aba "Avancado" > botão "Opções SFX..." e clicar OK.
 
 
 IMPORTANTE !!!!!!!!

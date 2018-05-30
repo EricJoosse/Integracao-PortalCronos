@@ -192,6 +192,11 @@ del /f /q *.xml
 del /f /q *.exe
 del /f /q InstalarManualTI.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
+
+REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
+REM após o duplo-clique para executar a instalação:
+del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
 del /f /q Primeira_Instalacao_Versao_Windows.bat
