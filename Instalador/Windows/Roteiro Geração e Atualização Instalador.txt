@@ -136,6 +136,7 @@ Como vai ser?
 		   está criando as chaves no lugar errado, no lugar do 32 bit 
 		=> O regedit.exe 64 bits automaticamente substitui \SOFTWARE\ por \SOFTWARE\Wow6432Node\
        
+       Foi testado que este bug acontece com Windows Server 2008 R2 SP 1, e também com Windows Server 2012 R2.
        
    9d. No caso que o SO for diferente de Windows Server 2008 R2 SP1, fazer testes unitários usando os seguintes 
        métodos de teste já prontos, descomentando no TestadorUnitário.bat:
@@ -146,22 +147,42 @@ Como vai ser?
        * Adicionar nos cabeçalhos destes métodos no TestadorUnitário.bat que isso foi testado com o SO novo.  
        * Adicionar este SO neste item "9d." para não testar mais no futuro. 
        
-   10. No caso que a versão de Windows ainda não está homologada,
+       
+   10. No caso de versões de Windows que ainda não estão na lista abaixo,
        após a instalação, fazer um export de teste das chaves do regedit no servidor
-	   e comparar com os arquivos .reg no instalador.
-	   No caso, criar um novo arquivo DeshabilitarJavaUpdates.xxxxxxxxxxx.reg, 
+	   e comparar com os arquivos .reg no instalador para verificar se tiver diferenças 
+	   em versões diferentes do programa "regedit.exe".
+
+       Já foi testado e comparado nos seguintes SO´s:
+       		- Windows Server 2008 R2 SP 1
+       		- Windows Server 2012 R2
+       		- ......
+       Fazer isso ainda em todos os outros tipos de Windows. 
+
+	   No caso que tiver alguma diferença no syntax, criar um novo arquivo DeshabilitarJavaUpdates.xxxxxxxxxxx.reg, 
 	   e adaptar Primeira_Instalacao_Versao_Windows.bat.
 	   Depois disso executar "regedit.exe /s %arquivoRegedit%" em um arquivo .bat separado.
 	   
-   11. No caso que a versão de Windows ainda não está homologada,
-       verificar todas as propriedades do task criado no Task Scheduler:  
+       Em todos os casos, adicionar o novo SO na lista acima.
+
+	   
+   11. No caso de versões de Windows que ainda não estão na lista abaixo,
+       verificar todas as propriedades da task criada no Task Scheduler:  
        a forma mais fácil é comparar com uma instalação em qualquer Windows Server 2008 R2 SP 1 
-       onde a primeir task foi desenvolvida originalmente. 
-       Fazer isso ainda no caso de Windows 10 e Windows Server 2012. 
+       onde a primeir task foi desenvolvida originalmente, ou com outro  SO que já está na lista abaixo. 
+       
+       Já foi testado e comparado nos seguintes SO´s:
+       		- Windows Server 2008 R2 SP 1
+       		- Windows Server 2012 R2
+       		- ......
+       Fazer isso ainda em todos os outros tipos de Windows. 
 
        Se tiver alguma diferença, copiar Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml 
        para outro arquivo novo, e adaptar Primeira_Instalacao_Versao_Windows.bat. 
        No outro caso que funcionou, adicionar o novo SO no nome do arquivo e adaptar Primeira_Instalacao_Versao_Windows.bat.
+       
+       Em todos os casos, adicionar o novo SO na lista acima.
+
 
    12. No final, no caso que a versão de Windows ainda não estava homologada,
        descomentar "REM regedit.exe /s %arquivoRegedit%"
@@ -175,6 +196,7 @@ Como vai ser?
 			    exit
 			)
 
+
    13. Só uma vez: 
        No caso de Windows_10_Pro_64bit: testar e remover o seguinte: 
 		REM Falta testar o seguinte!!!!!!!!!!!!!!!!!!!!!!!!
@@ -184,8 +206,8 @@ Como vai ser?
 		REM     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 
    
-
    14. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
+   
    
    15. No caso de integração com o SAP: 
 			There are different distribution packages for various JRE versions and hardware processors available:

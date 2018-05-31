@@ -3,19 +3,28 @@ cls
 
 chcp 1252>nul
 
-REM echo MSGBOX "Instalando..." > %temp%\TEMPmessage.vbs
-REM call %temp%\TEMPmessage.vbs
-REM del %temp%\TEMPmessage.vbs /f /q
+echo Tipos de Windows homologados: 
+echo.
+echo 1 = Windows Server 2008 R2 SP1
+echo 2 = Windows Server 2012 R2
+echo.
 
-echo.
-echo          Instalando...................
-echo.
+SET /P idOsVersion=Favor digitar o ID do tipo de Windows: 
+IF "%idOsVersion%"=="" GOTO ErroTipoWin
+GOTO PularErroTipoWin
+:ErroTipoWin
+echo MSGBOX "Erro: ID do tipo de Windows não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:PularErroTipoWin
 
 
 REM set osVersion=Windows_Server_2016
 REM set osVersion=Windows_Server_2012_R2
 REM set osVersion=Windows_Server_2012
-set osVersion=Windows_Server_2008_R2_SP1
+REM set osVersion=Windows_Server_2008_R2_SP1
 REM set osVersion=Windows_Server_2008
 REM set osVersion=Windows_Server_2003_R2
 REM set osVersion=Windows_Server_2003
@@ -29,6 +38,28 @@ REM set osVersion=Windows_8_Pro
 REM set osVersion=Windows_10_Pro
   
   
+if "%idOsVersion%"=="1" (
+    set osVersion=Windows_Server_2008_R2_SP1
+) else if "%idOsVersion%"=="2" (
+    set osVersion=Windows_Server_2012_R2
+) else (
+    echo MSGBOX "Erro: ID do tipo de Windows inválido! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    REM Fechar o script chamador também: 
+    exit
+)
+
+  
+REM echo MSGBOX "Instalando..." > %temp%\TEMPmessage.vbs
+REM call %temp%\TEMPmessage.vbs
+REM del %temp%\TEMPmessage.vbs /f /q
+
+echo.
+echo          Instalando...................
+echo.
+
+
 if %osVersion% == Windows_Server_2016 (
     set /A tipoOS=64
 ) else if %osVersion% == Windows_Server_2012_R2 (
