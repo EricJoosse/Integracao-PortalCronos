@@ -13,8 +13,18 @@ public class ManualManutencao {
 	private String caminhoManual = null;
 	
 	
-	
-	public void removerPCronosDoMenuWindows() { 
+	private void setCaminhoManual() throws Exception { 	
+	    if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
+	    	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
+	    }
+	    else
+	    	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
+	}
+
+
+	public void removerPCronosDoMenuWindows() throws Exception { 
+		setCaminhoManual();
+		
     	File diretorioManual = new File(caminhoManual);
     	
     	if(diretorioManual.exists()) { 
@@ -29,6 +39,8 @@ public class ManualManutencao {
 	
 	
 	public void gravarEmArquivoNoMenuWindows() throws IOException, Exception {
+		setCaminhoManual();
+		
     	File diretorioManual = new File(caminhoManual);
     	if(!diretorioManual.exists()) { 
     		diretorioManual.mkdir();
@@ -66,13 +78,6 @@ public class ManualManutencao {
 	public ManualManutencao(Fornecedor f) throws Exception {
 		this.fornecedor = f;
 		
-
-        if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
-        	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
-        }
-        else
-        	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
-
 
         this.conteudo = "" +
 "Introdução técnica:" + "\r\n" +
