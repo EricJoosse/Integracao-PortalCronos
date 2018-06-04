@@ -1,5 +1,6 @@
 package pcronos.integracao.fornecedor;
 
+import java.awt.Window;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.io.File;
 
 public class ManualManutencao {
 
-	private final String nomeArquivo = "Manual solucionamento paradas integração Portal Cronos - v1.4.2 (18.05.2018).txt";
+	private String nomeArquivo = null;
 	private String conteudo;
 	private Fornecedor fornecedor;
 	private String caminhoManual = null;
@@ -17,8 +18,25 @@ public class ManualManutencao {
 	    if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
 	    	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 	    }
+	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
+	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
+	    }
 	    else
 	    	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
+	}
+
+
+	private void setNomeArquivo() throws Exception { 	
+		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.2 (18.05.2018).txt";
+
+//		if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
+//			this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.2 (18.05.2018).txt";
+//	    }
+//	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
+//			this.nomeArquivo = "Portal Cronos - Manual solucionamento paradas da integração - v1.4.2 (18.05.2018).txt";
+//	    }
+//	    else
+//	    	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem nome definido para o arquivo do Manual de Manutenção para a TI.");
 	}
 
 
@@ -28,11 +46,16 @@ public class ManualManutencao {
     	File diretorioManual = new File(caminhoManual);
     	
     	if(diretorioManual.exists()) { 
+    		boolean temOutrosArquivos = false;
+    		
     		for (final File file : diretorioManual.listFiles()) 
     		{
-  			    file.delete();
+    			if (file.getName().startsWith("Manual") && file.getName().endsWith(".txt"))
+  			       file.delete();
+    			else
+    			   temOutrosArquivos = true;
     		}
-    		diretorioManual.delete();
+    		if (!temOutrosArquivos) diretorioManual.delete();
     	}
 	}
 	
@@ -46,9 +69,11 @@ public class ManualManutencao {
     		diretorioManual.mkdir();
     	}
     	else {
+    		// Excluir eventuais manuais antigos:
     		for (final File file : diretorioManual.listFiles()) 
     		{
-  			    file.delete();
+    			if (file.getName().startsWith("Manual") && file.getName().endsWith(".txt"))
+   			       file.delete();
     		}
     	}
 
@@ -77,6 +102,7 @@ public class ManualManutencao {
 	
 	public ManualManutencao(Fornecedor f) throws Exception {
 		this.fornecedor = f;
+		setNomeArquivo();
 		
 
         this.conteudo = "" +

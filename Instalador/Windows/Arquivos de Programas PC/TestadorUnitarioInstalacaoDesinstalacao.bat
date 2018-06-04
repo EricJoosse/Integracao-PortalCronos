@@ -15,6 +15,7 @@ goto TesteDelInstalador
 
 REM ================ Testes INstalação Manual Manutenção TI do menu de Windows: ========================================
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
+REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
 
 :InstalarManualTI
 call InstalarManualTI.bat
@@ -22,6 +23,7 @@ exit
 
 REM ================ Testes DESinstalação Manual Manutenção TI do menu de Windows: ========================================
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
+REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
 
 :DesinstalarManualTI
 call DesinstalarManualTI.bat
@@ -46,6 +48,7 @@ del %temp%\TEMPmessage.vbs /f /q
 exit
 
 REM ================ Testes instalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
+REM ================                                    (testado com Windows Server 2012 R2,     funcionou)  ========================================
 REM ================                                     Obs.: foi testado também no caso que o dir =================================================
 REM ================                                     C:\ProgramData\PortalCronos\Logs\Remoto\ já existia antes ==================================
 
@@ -68,6 +71,7 @@ REM Não precisa dar privilêgios, pois a Scheduled Task roda como SYSTEM
 exit
 
 REM ================ Testes DESinstalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
+REM ================                                       (testado com Windows Server 2012 R2,     funcionou)  ========================================
 REM ================                                        Obs.: foi testado também no caso que o dir =================================================
 REM ================                                        C:\ProgramData\PortalCronos\Logs\Remoto\ também existe =====================================
 

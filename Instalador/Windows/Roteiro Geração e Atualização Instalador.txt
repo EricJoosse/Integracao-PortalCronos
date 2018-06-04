@@ -138,15 +138,36 @@ Como vai ser?
        
        Foi testado que este bug acontece com Windows Server 2008 R2 SP 1, e também com Windows Server 2012 R2.
        
-   9d. No caso que o SO for diferente de Windows Server 2008 R2 SP1, fazer testes unitários usando os seguintes 
-       métodos de teste já prontos, descomentando no TestadorUnitário.bat:
+       
+   9d. No caso de versões de Windows que ainda não estão na lista abaixo, 
+       fazer testes unitários usando os seguintes métodos de teste já prontos, 
+       descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarDirLog
 			- REM goto DesinstalarDirLog
-			- REM goto InstalarManualTI
-			- REM goto DesinstalarManualTI
        * Adicionar nos cabeçalhos destes métodos no TestadorUnitário.bat que isso foi testado com o SO novo.  
        * Adicionar este SO neste item "9d." para não testar mais no futuro. 
        
+       Já foi testado nos seguintes SO´s:
+       		- Windows Server 2008 R2 SP 1
+       		- Windows Server 2012 R2
+       		- ......
+       Fazer isso ainda em todos os outros tipos de Windows. 
+
+       
+   9e. No caso de versões de Windows que ainda não estão na lista abaixo, 
+       fazer testes unitários usando os seguintes métodos de teste já prontos, 
+       descomentando o seguinte no TestadorUnitário.bat:
+			- REM goto InstalarManualTI
+			- REM goto DesinstalarManualTI
+       * Adicionar nos cabeçalhos destes métodos no TestadorUnitário.bat que isso foi testado com o SO novo.  
+       * Adicionar este SO neste item "9e." para não testar mais no futuro. 
+       
+       Já foi testado nos seguintes SO´s:
+       		- Windows Server 2008 R2 SP 1
+       		- Windows Server 2012 R2
+       		- ......
+       Fazer isso ainda em todos os outros tipos de Windows. 
+
        
    10. No caso de versões de Windows que ainda não estão na lista abaixo,
        após a instalação, fazer um export de teste das chaves do regedit no servidor
@@ -376,7 +397,7 @@ Manual para a geração do instalador Setup.exe:
       - Sub-aba "Geral"          : Apenas na primeira vez em uma máquina de desenvolvimento nova 
                                    ou em outra máquina diferente: clicar botão "Salvar configurações SFX" 
                                    e fazer as configurações abaixo: 
-                                       (na segunda vez tudo já está  salvo, apenas precisa abrir 
+                                       (na segunda vez tudo já está salvo, apenas precisa abrir 
                                         a aba "Avancado" > botão "Opções SFX..." e clicar OK, 
                                         e não precisa fazer o resto abaixo.)
       - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
