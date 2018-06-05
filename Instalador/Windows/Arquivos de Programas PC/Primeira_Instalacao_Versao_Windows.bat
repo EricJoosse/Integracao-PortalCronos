@@ -124,7 +124,7 @@ REM     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 if %osVersion% == Windows_Server_2008_R2_SP1 (
     set arquivoRegedit="%drive%\\Arquivos de Programas PC\\DeshabilitarJavaUpdates.x64.reg"
 ) else if %osVersion% == Windows_Server_2012_R2 (
-    set arquivoRegedit=%~dp0DeshabilitarJavaUpdates.x64.reg
+    set arquivoRegedit="%~dp0DeshabilitarJavaUpdates.x64.reg"
 ) else if %Windows_10_Pro_64bit% == 1 (
     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 ) else if %osVersion% == Windows_7_Professional_SP1 (

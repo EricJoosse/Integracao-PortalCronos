@@ -10,7 +10,8 @@ REM goto DesinstalarDirLog
 REM goto TesteIfNotExist
 REM goto TesteDelProprioArq
 REM goto TesteLimpeza
-goto TesteDelInstalador
+REM goto TesteDelInstalador
+goto TesteRegedit
 
 
 REM ================ Testes INstalação Manual Manutenção TI do menu de Windows: ========================================
@@ -127,7 +128,7 @@ if exist "Remoto" (
 exit
 
 
-REM ================ Testes de exclusão deste arquivo mesmo (testado, funcionou): ========================================
+REM ================ Teste de exclusão deste arquivo mesmo (testado, funcionou): ========================================
 
 :TesteDelProprioArq
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
@@ -135,7 +136,7 @@ del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 exit
 
 
-REM ================ Testes Limpeza com wildcards (testado, funcionou): ========================================
+REM ================ Teste Limpeza com wildcards (testado, funcionou): ========================================
 
 :TesteLimpeza
 del /f /q *.reg
@@ -150,12 +151,63 @@ del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 exit
 
 
-REM ================ Testes Exclusão Instalador (testado, funcionou): ========================================
+REM ================ Teste Exclusão Instalador (testado, funcionou): ========================================
 
 :TesteDelInstalador
 del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
 
 exit
 
+
+REM ================ Teste instalação chaves no regedit (testado com Windows Server 2008 R2 SP1, NÃO funcionou    ): ========================================
+REM ================                                    (testado com Windows Server 2012 R2,         funcionou sim)  ========================================
+
+:TesteRegedit
+
+REM Primeiro rodar na mão, como Administrador, se o JRE não estiver instalado: 
+REM Start /wait jre-8u92-windows-x64.exe /s INSTALLDIR=C:\\"Program Files"\Java\jre1.8.0_92
+
+set osVersion=Windows_Server_2012_R2
+set /A tipoOS=64
+set drive=C:
+set Windows_10_Pro_64bit=0
+
+if %osVersion% == Windows_10_Pro (
+   if %tipoOS% == 64 (
+      set Windows_10_Pro_64bit=1
+   )
+)
+
+if %osVersion% == Windows_Server_2008_R2_SP1 (
+    set arquivoRegedit="%drive%\\Arquivos de Programas PC\\DeshabilitarJavaUpdates.x64.reg"
+) else if %osVersion% == Windows_Server_2012_R2 (
+    set arquivoRegedit="%~dp0DeshabilitarJavaUpdates.x64.reg"
+) else if %Windows_10_Pro_64bit% == 1 (
+    set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
+) else if %osVersion% == Windows_7_Professional_SP1 (
+    set arquivoRegedit=DeshabilitarJavaUpdates.i586.reg
+) else (
+    echo MSGBOX "Esta versão de Windows ainda não está suportada! Favor entrar em contato com o Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
+)
+
+echo arquivoRegedit = %arquivoRegedit%
+pause
+
+if %tipoOS% == 64 (
+    regedit.exe %arquivoRegedit%
+) else if %tipoOS% == 32 (
+    regedit.exe %arquivoRegedit%
+) else (
+    echo Tipo OS %tipoOS% não reconhecido ^! Opções: 32 ou 64 ^(Bits^)
+)
+
+pause
+
+exit
+
+REM ============================ Fim ========================================
 
 :FIM

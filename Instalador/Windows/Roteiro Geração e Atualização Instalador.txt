@@ -120,10 +120,16 @@ Como vai ser?
     
     9b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
      
-    9c. No caso de servidores 64 bit, corrigir as seguintes chaves manualmente no regedit :
+     
+    9c. Nos seguintes casos:
+             1. no caso de versões de Windows que ainda não estão em nenhuma das duas listas abaixo;
+             2. no caso de versões de Windows que estão com o bug abaixo: 
+             
+        Corrigir as seguintes chaves manualmente no regedit :
           [HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92\MSI]
 			   "JAVAUPDATE"="0"
 			   "AUTOUPDATECHECK"="0"
+           
            
        Isso é por causa do seguinte bug : 
        ----------------------------------
@@ -134,9 +140,12 @@ Como vai ser?
 
 		=> Bug da oracle no instalador do jre.64.exe : 
 		   está criando as chaves no lugar errado, no lugar do 32 bit 
-		=> O regedit.exe 64 bits automaticamente substitui \SOFTWARE\ por \SOFTWARE\Wow6432Node\
+		=> O regedit.exe 64 bits automaticamente substitui \SOFTWARE\ por \SOFTWARE\Wow6432Node\       
        
-       Foi testado que este bug acontece com Windows Server 2008 R2 SP 1, e também com Windows Server 2012 R2.
+       
+       Foi testado que este bug     acontece sim com Windows Server 2008 R2 SP 1.
+       Foi testado que este bug não acontece     com Windows Server 2012 R2.
+       
        
        
    9d. No caso de versões de Windows que ainda não estão na lista abaixo, 
