@@ -121,6 +121,9 @@ REM ) else if %Windows_10_Pro_64bit% == 1 (
 REM     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 
 
+cd\
+cd "Arquivos de Programas PC"
+
 if %osVersion% == Windows_Server_2008_R2_SP1 (
     set arquivoRegedit="%drive%\\Arquivos de Programas PC\\DeshabilitarJavaUpdates.x64.reg"
 ) else if %osVersion% == Windows_Server_2012_R2 (
@@ -139,13 +142,19 @@ if %osVersion% == Windows_Server_2008_R2_SP1 (
 REM goto FIM
 
 
-REM ================ Instalar JRE: ========================================
+REM ================ Instalar JRE + deshabilitar updates automoáticos: ========================================
 
 if %tipoOS% == 64 (
-    Start /wait jre-8u92-windows-x64.exe /s INSTALLDIR=%drive%\\"Program Files"\Java\jre1.8.0_92
+    Start "" /wait jre-8u92-windows-x64.exe /s INSTALLDIR=%drive%\\"Program Files"\Java\jre1.8.0_92
+REM O seguinte não adiantou: 
+REM echo Favor esperar 300 segundos, e NÃO CONTINUAR! Não aperta nenhuma tecla!
+REM timeout 300
     regedit.exe /s %arquivoRegedit%
 ) else if %tipoOS% == 32 (
-    Start /wait jre-8u92-windows-i586.exe /s INSTALLDIR=%drive%\\"Program Files"\Java\jre1.8.0_92
+    Start "" /wait jre-8u92-windows-i586.exe /s INSTALLDIR=%drive%\\"Program Files"\Java\jre1.8.0_92
+REM O seguinte não adiantou: 
+REM echo Favor esperar 300 segundos, e NÃO CONTINUAR! Não aperta nenhuma tecla!
+REM timeout 300
     regedit.exe /s %arquivoRegedit%
 ) else (
     echo Tipo OS %tipoOS% não reconhecido ^! Opções: 32 ou 64 ^(Bits^)

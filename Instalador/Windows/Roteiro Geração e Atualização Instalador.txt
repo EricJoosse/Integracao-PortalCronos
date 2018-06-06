@@ -130,7 +130,11 @@ Como vai ser?
 			   "JAVAUPDATE"="0"
 			   "AUTOUPDATECHECK"="0"
            
-           
+       É melhor verificar também todas as outras chaves no regedit. Parece que tem um bug no DOS ou no Winrar:  
+       paece que a automação do regedit funciona se rodar Primeira_Instalacao_Versao_Windows.bat na mão clicando 2 vezes neste .bat 
+       porém não funciona se executado automaticamente pelo Winrar. 
+       No teste unitário usando "TestadorUnitarioInstalacaoDesinstalacao.bat" funcionou, porém no teste integrado não funcionou. 
+       
        Isso é por causa do seguinte bug : 
        ----------------------------------
        O regedit.exe e o jre-8u92-windows-x64.exe são incompatíveis em relação a : 
