@@ -50,6 +50,7 @@ exit
 
 REM ================ Testes instalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
 REM ================                                    (testado com Windows Server 2012 R2,     funcionou)  ========================================
+REM ================                                    (testado com Windows Server 2016,        funcionou)  ========================================
 REM ================                                     Obs.: foi testado também no caso que o dir =================================================
 REM ================                                     C:\ProgramData\PortalCronos\Logs\Remoto\ já existia antes ==================================
 
@@ -73,6 +74,7 @@ exit
 
 REM ================ Testes DESinstalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
 REM ================                                       (testado com Windows Server 2012 R2,     funcionou)  ========================================
+REM ================                                       (testado com Windows Server 2016,        funcionou)  ========================================
 REM ================                                        Obs.: foi testado também no caso que o dir =================================================
 REM ================                                        C:\ProgramData\PortalCronos\Logs\Remoto\ também existe =====================================
 

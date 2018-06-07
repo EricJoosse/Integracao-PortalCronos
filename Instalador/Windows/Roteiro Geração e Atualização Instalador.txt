@@ -153,7 +153,7 @@ Como vai ser?
        
        
    9d. No caso de versões de Windows que ainda não estão na lista abaixo, 
-       fazer testes unitários usando os seguintes métodos de teste já prontos, 
+       fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarDirLog
 			- REM goto DesinstalarDirLog
@@ -163,12 +163,13 @@ Como vai ser?
        Já foi testado nos seguintes SO´s:
        		- Windows Server 2008 R2 SP 1
        		- Windows Server 2012 R2
+       		- Windows Server 2016
        		- ......
        Fazer isso ainda em todos os outros tipos de Windows. 
 
        
    9e. No caso de versões de Windows que ainda não estão na lista abaixo, 
-       fazer testes unitários usando os seguintes métodos de teste já prontos, 
+       fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarManualTI
 			- REM goto DesinstalarManualTI
