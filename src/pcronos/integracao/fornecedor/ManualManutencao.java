@@ -5,29 +5,37 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import mslinks.ShellLink;
 
 public class ManualManutencao {
 
 	private String nomeArquivo = null;
+	private String nomeAtalho = null;
 	private String conteudo;
 	private Fornecedor fornecedor;
 	private String caminhoManual = null;
+	private String caminhoAtalhoManual = null;
 	
 	
-	private void setCaminhoManual() throws Exception { 	
+	private void setCaminhoManualMaisCaminhoAtalho() throws Exception { 	
 	    if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
 	    	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 	    }
 	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
 	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
 	    }
+		else if (this.fornecedor.tipoSO.equals("Windows Server 2016")) {
+		  	this.caminhoManual = "C:/Arquivos de Programas PC/";
+		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
+	    }
 	    else
 	    	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
 	}
 
 
-	private void setNomeArquivo() throws Exception { 	
+	private void setNomeArquivoMaisAtalho() throws Exception { 	
 		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.2 (18.05.2018).txt";
+		this.nomeAtalho = "Manual Manutenção.lnk";
 
 //		if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
 //			this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.2 (18.05.2018).txt";
@@ -41,9 +49,28 @@ public class ManualManutencao {
 
 
 	public void removerPCronosDoMenuWindows() throws Exception { 
-		setCaminhoManual();
+        setCaminhoManualMaisCaminhoAtalho();
 		
-    	File diretorioManual = new File(caminhoManual);
+        if (this.fornecedor.tipoSO.equals("Windows Server 2016")) {
+        	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
+        	
+        	if(diretorioAtalhoManual.exists()) { 
+        		boolean temOutrosAtalhos = false;
+        		
+        		for (final File shortcut : diretorioAtalhoManual.listFiles()) 
+        		{
+        			if (shortcut.getName().startsWith("Manual") && shortcut.getName().endsWith(".lnk"))
+        				shortcut.delete();
+        			else
+        			   temOutrosAtalhos = true;
+        		}
+        		if (!temOutrosAtalhos) diretorioAtalhoManual.delete();
+        	}
+        }
+
+
+        
+        File diretorioManual = new File(caminhoManual);
     	
     	if(diretorioManual.exists()) { 
     		boolean temOutrosArquivos = false;
@@ -62,7 +89,7 @@ public class ManualManutencao {
 	
 	
 	public void gravarEmArquivoNoMenuWindows() throws IOException, Exception {
-		setCaminhoManual();
+		setCaminhoManualMaisCaminhoAtalho();
 		
     	File diretorioManual = new File(caminhoManual);
     	if(!diretorioManual.exists()) { 
@@ -82,6 +109,26 @@ public class ManualManutencao {
         bWriter.write(this.conteudo);
         bWriter.flush();
         bWriter.close();
+        
+        
+        
+        if (this.fornecedor.tipoSO.equals("Windows Server 2016")) {
+        	
+        	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
+        	if(!diretorioAtalhoManual.exists()) { 
+        		diretorioAtalhoManual.mkdir();
+        	}
+        	else {
+        		// Excluir eventuais atalhos antigos:
+        		for (final File file : diretorioManual.listFiles()) 
+        		{
+        			if (file.getName().startsWith("Manual") && file.getName().endsWith(".lnk"))
+       			       file.delete();
+        		}
+        	}
+
+        	ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
+        }
 	}
 	
 	
@@ -102,7 +149,7 @@ public class ManualManutencao {
 	
 	public ManualManutencao(Fornecedor f) throws Exception {
 		this.fornecedor = f;
-		setNomeArquivo();
+		setNomeArquivoMaisAtalho();
 		
 
         this.conteudo = "" +

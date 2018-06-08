@@ -14,17 +14,19 @@ REM goto TesteDelInstalador
 goto TesteRegedit
 
 
-REM ================ Testes INstalação Manual Manutenção TI do menu de Windows: ========================================
+REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
+REM ================  (testado com Windows Server 2016,        funcionou)       ========================================
 
 :InstalarManualTI
 call InstalarManualTI.bat
 exit
 
-REM ================ Testes DESinstalação Manual Manutenção TI do menu de Windows: ========================================
+REM ================ Testes Desinstalação Manual Manutenção TI do menu de Windows: ========================================
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
+REM ================  (testado com Windows Server 2016,        funcionou)       ========================================
 
 :DesinstalarManualTI
 call DesinstalarManualTI.bat
@@ -72,7 +74,7 @@ REM Não precisa dar privilêgios, pois a Scheduled Task roda como SYSTEM
 
 exit
 
-REM ================ Testes DESinstalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
+REM ================ Testes Desinstalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
 REM ================                                       (testado com Windows Server 2012 R2,     funcionou)  ========================================
 REM ================                                       (testado com Windows Server 2016,        funcionou)  ========================================
 REM ================                                        Obs.: foi testado também no caso que o dir =================================================

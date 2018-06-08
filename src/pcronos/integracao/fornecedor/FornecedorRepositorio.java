@@ -108,6 +108,18 @@ public class FornecedorRepositorio {
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "?????????????????????";
 		}			   
+		else if (idFornecedor == 2016) {
+			f.NomeFantasiaEmpresa = "Teste Windows Server 2016";
+			f.SiglaSistemaFornecedor = "WinThor";
+			f.EmailResponsavelTI = "";
+			f.EmailResponsavelTIAlternativo = "";
+			f.ApelidoResponsavelTI = "";
+			f.ApelidoResponsavelTIAlternativo = "";
+			f.AplicativoDesktopRemoto = "";
+			f.usuarioWebservice = "";
+			f.versaoJRE = "";
+			f.tipoSO = "Windows Server 2016";
+		}			   
 		else if (idFornecedor == null) {
 			f.NomeFantasiaEmpresa = "Monitoramento";
 			f.SiglaSistemaFornecedor = "PCronos";

@@ -160,7 +160,7 @@ Como vai ser?
        * Adicionar nos cabeçalhos destes métodos no TestadorUnitário.bat que isso foi testado com o SO novo.  
        * Adicionar este SO neste item "9d." para não testar mais no futuro. 
        
-       Já foi testado nos seguintes SO´s:
+       A instalação e também a desinstalação já foram testadas nos seguintes SO´s:
        		- Windows Server 2008 R2 SP 1
        		- Windows Server 2012 R2
        		- Windows Server 2016
@@ -176,9 +176,10 @@ Como vai ser?
        * Adicionar nos cabeçalhos destes métodos no TestadorUnitário.bat que isso foi testado com o SO novo.  
        * Adicionar este SO neste item "9e." para não testar mais no futuro. 
        
-       Já foi testado nos seguintes SO´s:
+       A instalação e também a desinstalação já foram testadas nos seguintes SO´s:
        		- Windows Server 2008 R2 SP 1
        		- Windows Server 2012 R2
+       		- Windows Server 2016
        		- ......
        Fazer isso ainda em todos os outros tipos de Windows. 
 
