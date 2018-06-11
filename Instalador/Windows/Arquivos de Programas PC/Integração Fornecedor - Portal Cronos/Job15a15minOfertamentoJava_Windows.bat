@@ -30,8 +30,8 @@ cd "Integração Fornecedor - Portal Cronos"
 
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
 REM e o caminho do outro JRE vem primeiro no PATH de DOS :
-C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
-REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.5.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.5.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
 
 ENDLOCAL
 exit

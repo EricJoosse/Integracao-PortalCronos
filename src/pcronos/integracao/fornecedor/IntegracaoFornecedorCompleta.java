@@ -128,6 +128,7 @@ public final class IntegracaoFornecedorCompleta {
   public static boolean      toVerificarEstoque;
   public static String       criterioVerificacaoEstoque;
   public static boolean      toUsarValorMinimoSistemaFornecedor;
+  public static int          codigoFilialWinThor;
   public static String       username;
   public static String       senha;
   public static boolean      senhaCriptografada;
@@ -238,6 +239,9 @@ public final class IntegracaoFornecedorCompleta {
              toUsarValorMinimoSistemaFornecedor = true;
          else 
              toUsarValorMinimoSistemaFornecedor = Boolean.parseBoolean(config.getProperty("UsarValorMinimoSistemaFornecedor"));
+         
+         if (siglaSistema.equals("WinThor"))
+        	 codigoFilialWinThor = Integer.parseInt(config.getProperty("CodigoFilial"));
 	  }
       username                          = config.getProperty("UsuarioWebService");
       senhaCriptografada                = Boolean.parseBoolean(config.getProperty("SenhaWebServiceCriptografada"));
@@ -265,7 +269,7 @@ public final class IntegracaoFornecedorCompleta {
       
       
       try {
-      qtdDiasArquivosXmlGuardados = Integer.parseInt(config.getProperty("QtdDiasArquivosXmlGuardados"));
+          qtdDiasArquivosXmlGuardados = Integer.parseInt(config.getProperty("QtdDiasArquivosXmlGuardados"));
       }
       catch (NumberFormatException nfex) {
     	  throw new ConfiguracaoException("Parâmetro \"QtdDiasArquivosXmlGuardados\" inválido. Deve ser um número inteiro igual a zero ou maior.");
@@ -321,8 +325,10 @@ public final class IntegracaoFornecedorCompleta {
 	      debugar("CriterioVerificacaoEstoque        = " + criterioVerificacaoEstoque);
 		  debugar("ObsOfertasPadraoSeNaoTemNoSistema = " + ObsOfertasPadraoSeNaoTemNoSistema);
 		  
-		  if (siglaSistema.equals("WinThor"))
+		  if (siglaSistema.equals("WinThor")) {
 			  debugar("UsarValorMinimoSistemaFornecedor  = " + toUsarValorMinimoSistemaFornecedor);
+			  debugar("CodigoFilial                      = " + codigoFilialWinThor);
+		  }
 
 		  debugar("TipoBancoDeDados                  = " + tipoBancoDeDados);
 		  debugar("EnderecoIpServidorBancoDeDados    = " + enderecoIpServidorBancoDeDados);
@@ -1762,7 +1768,7 @@ public final class IntegracaoFornecedorCompleta {
 	    {
 		    sqlStringComEstoque += sqlStringTemp
 	                            +  "   and PCEST.CODPROD   = PCTABPR.CODPROD "
-	                            +  "   and PCEST.CODFILIAL = 1               "
+	                            +  "   and PCEST.CODFILIAL = " + Integer.toString(codigoFilialWinThor) + " "
 	                            ;
 	  
 	        if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))

@@ -1,0 +1,53 @@
+Manual Upgrade dos Ambientes de Produção de 2.4 para 2.5
+========================================================
+
+1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+
+2. Copiar o arquivo novo integr-fornecedor-2.5.jar do instalador para o servidor do fornecedor
+ 
+3. Atualizar a chamada de integr-fornecedor-2.5.jar no Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor
+ 
+
+4. No arquivo /conf/Integração Fornecedor - Portal Cronos.properties adicionar na seção WinThor, 
+   depois da chave UsarValorMinimoSistemaFornecedor: 
+ 
+CodigoFilial                      = 1
+
+
+5. Copiar os arquivos /lib/annotations-15.0.jar e /lib/mslinks-1.0.4.jar do instalador 
+   para o servidor do fornecedor (dir /lib/).
+
+6. Copiar do instalador para o servidor do fornecedor: 
+     - /Arquivos de Programas PC/InstalarManualTI.bat
+     - /Arquivos de Programas PC/TestadorUnitarioInstalacaoDesinstalacao.bat
+     - /Arquivos de Programas PC/DesinstalarManualTI.bat
+     - /Arquivos de Programas PC/Desinstalação_Versão_Windows.bat (copiar por cima do atual)
+     - /Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/TestadorUnitario.bat
+
+7. a. Dentro do arquivo "TestadorUnitarioInstalacaoDesinstalacao.bat" descomentar
+      "REM goto InstalarManualTI" 
+       
+   b. Executar "TestadorUnitarioInstalacaoDesinstalacao.bat"
+    
+   c. Testar se o arquivo do manual foi gerado corretamente
+    
+   d. Testar se os eventuais atalhos foram criados no menu de Windows
+
+
+8. Apagar o instalador no diretório C:\temp\ no servidor do fornecedor.
+ 
+9. No final do upgrade, apagar os seguintes arquivos no diretório C:\Arquivos de Programas PC\ no servidor do fornecedor:
+		- InstalarManualTI.bat
+		- TestadorUnitarioInstalacaoDesinstalacao.bat
+		- Primeira_Instalacao_Versao_Windows.bat
+		- *.reg
+		- *.xml
+		- *.exe
+ 
+10. Verificar o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 
+    para poder fazer TNSping de fora para o servidor do fornecedor na hora que precisar. 
+    Testar isso usando PSPing. 
+    Atualizar isso no arquivo Tabela Fornecedores_Versões.txt.
+  
+11. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat

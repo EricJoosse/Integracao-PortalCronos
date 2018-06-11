@@ -1,16 +1,17 @@
 Manual Upgrade dos Ambientes de Produção de 2.3.x para 2.4
 ==========================================================
 
-1. Copiar o arquivo novo integr-fornecedor-2.4.jar do instalador para o servidor do fornecedor
+1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+
+   
+2. Copiar o arquivo novo integr-fornecedor-2.4.jar do instalador para o servidor do fornecedor
  
 
-2. Atualizar a chamada de integr-fornecedor-2.4.jar no Job15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.4.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 
-3. - Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
-
-   - criar o diretório novo C:/ProgramData/PortalCronos/Logs/Local (não precisa dar acesso a ninguêm)
+4. - criar o diretório novo C:/ProgramData/PortalCronos/Logs/Local (não precisa dar acesso a ninguêm)
 
    - mover o conteúdo de C:/temp/PortalCronos/XML para C:/ProgramData/PortalCronos/Logs/Local
 
@@ -29,4 +30,4 @@ DiretorioArquivosXml              = C:/ProgramData/PortalCronos/Logs/Local
 #                                              - no caso de Windows : C:/ProgramData/PortalCronos/Logs/Local
 #                                              - no caso de Linux   : /var/PortalCronos/Logs/Local
 
-   - Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+5. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
