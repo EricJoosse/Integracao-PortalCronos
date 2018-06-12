@@ -19,8 +19,30 @@ REM Limpar CLASSPATH :
 REM set CLASSPATH=
 
 SETLOCAL
+
+
+REM Se tiver um parentese dentro do path, o seguinte não funciona:
+
+REM if %idFornecedor% == 30 (
+REM     set path=C:\Program Files ^(x86^)\Java\jre1.8.0_161\bin;%path%
+REM ) else (
+REM     set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
+REM )
+
+if %idFornecedor% == 30 (
+    goto PathProlac
+) else (
+    goto PathOutros
+)
+
+:PathProlac
+set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+goto PularPathOutros
+:PathOutros
 set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
-REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+:PularPathOutros
+
+
 REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_161\bin
 REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
 
@@ -46,8 +68,12 @@ if exist Desinstalador.log del /f /q Desinstalador.log
 
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
 REM e o caminho do outro JRE vem primeiro no PATH de DOS :
-C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
-REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.4.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
+
+if %idFornecedor% == 30 (
+    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.5.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
+) else (
+    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.5.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
+)
 
 set arquivoLog="Desinstalador.log"
 set tamanhoArqLog=0

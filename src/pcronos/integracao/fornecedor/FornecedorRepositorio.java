@@ -39,9 +39,9 @@ public class FornecedorRepositorio {
 			f.NomeFantasiaEmpresa = "Prolac";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "marcelo@casadoqueijo.net.br"; 
-			f.EmailResponsavelTIAlternativo = "";
+			f.EmailResponsavelTIAlternativo = "mscomprolac@gmail.com";
 			f.ApelidoResponsavelTI = "Marcelo";
-			f.ApelidoResponsavelTIAlternativo = "";
+			f.ApelidoResponsavelTIAlternativo = "Marcos";
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.IdAplicativoDesktopRemoto = "servidormaxima@ad";
 			f.usuarioWebservice = "ws-prolac";

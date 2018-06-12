@@ -24,7 +24,7 @@ public class ManualManutencao {
 	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
 	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
 	    }
-		else if (this.fornecedor.tipoSO.equals("Windows Server 2016")) {
+		else if (this.fornecedor.tipoSO.equals("Windows Server 2016") || this.fornecedor.tipoSO.equals("Windows 10 Pro")) {
 		  	this.caminhoManual = "C:/Arquivos de Programas PC/";
 		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 	    }
@@ -51,7 +51,7 @@ public class ManualManutencao {
 	public void removerPCronosDoMenuWindows() throws Exception { 
         setCaminhoManualMaisCaminhoAtalho();
 		
-        if (this.fornecedor.tipoSO.equals("Windows Server 2016")) {
+        if (this.fornecedor.tipoSO.equals("Windows Server 2016") || this.fornecedor.tipoSO.equals("Windows 10 Pro")) {
         	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
         	
         	if(diretorioAtalhoManual.exists()) { 
@@ -112,7 +112,7 @@ public class ManualManutencao {
         
         
         
-        if (this.fornecedor.tipoSO.equals("Windows Server 2016")) {
+        if (this.fornecedor.tipoSO.equals("Windows Server 2016") || this.fornecedor.tipoSO.equals("Windows 10 Pro")) {
         	
         	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
         	if(!diretorioAtalhoManual.exists()) { 

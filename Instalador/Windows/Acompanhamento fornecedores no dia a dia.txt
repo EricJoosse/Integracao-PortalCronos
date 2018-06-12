@@ -201,6 +201,18 @@ visto que o serviço roda de 15 a 15 minutos,
  
 Eric
   
+  
+  
+  
+  
+Ivan, no tipo de Windows "Windows 10 Pro" está acontecendo um bug que está impedindo o funcionamento da integração WinThor/PCronos. 
+Para resolver este bug eu precisaria investir algumas horas, então isso tem que valer a pena. 
+A dúvida é se o gerente de vendas da Prolac acha ofertamento automático via integração importante ou urgente? 
+Favor verificar isso com ele. 
+No caso, envia uma solicitação para Leão, indicando o grau de urgência. 
+Caso contrário, a integração coninuará suspensa.  
+
+
 ==========================================================================================================
 NO CASO DE UMA PARADA POR CAUSA DE ATUALIZAÇÃO JAVA:
 

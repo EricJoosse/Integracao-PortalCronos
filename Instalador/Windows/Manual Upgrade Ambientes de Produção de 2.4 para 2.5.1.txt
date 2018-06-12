@@ -1,17 +1,21 @@
-Manual Upgrade dos Ambientes de Produção de 2.4 para 2.5
-========================================================
+Manual Upgrade dos Ambientes de Produção de 2.4 para 2.5.1
+==========================================================
 
 1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
 
-2. Copiar o arquivo novo integr-fornecedor-2.5.jar do instalador para o servidor do fornecedor
+2. Copiar o arquivo novo integr-fornecedor-2.5.1.jar do instalador para o servidor do fornecedor
  
-3. Atualizar a chamada de integr-fornecedor-2.5.jar no Job15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.5.1.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 
 4. No arquivo /conf/Integração Fornecedor - Portal Cronos.properties adicionar na seção WinThor, 
-   depois da chave UsarValorMinimoSistemaFornecedor: 
- 
+   depois da chave UsarValorMinimoSistemaFornecedor:
+   
+   a. No caso da Prolac: 
+CodigoFilial                      = 3
+
+   b. No caso dos outros fornecedores: 
 CodigoFilial                      = 1
 
 
@@ -19,16 +23,17 @@ CodigoFilial                      = 1
    para o servidor do fornecedor (dir /lib/).
 
 6. Copiar do instalador para o servidor do fornecedor: 
+     - /Arquivos de Programas PC/Desinstalação_Versão_Windows.bat (copiar por cima do atual)
+     - /Arquivos de Programas PC/DesinstalarManualTI.bat
      - /Arquivos de Programas PC/InstalarManualTI.bat
      - /Arquivos de Programas PC/TestadorUnitarioInstalacaoDesinstalacao.bat
-     - /Arquivos de Programas PC/DesinstalarManualTI.bat
-     - /Arquivos de Programas PC/Desinstalação_Versão_Windows.bat (copiar por cima do atual)
      - /Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/TestadorUnitario.bat
 
 7. a. Dentro do arquivo "TestadorUnitarioInstalacaoDesinstalacao.bat" descomentar
       "REM goto InstalarManualTI" 
+      e comentar todos os outros goto´s
        
-   b. Executar "TestadorUnitarioInstalacaoDesinstalacao.bat"
+   b. Executar "TestadorUnitarioInstalacaoDesinstalacao.bat" como Administrador
     
    c. Testar se o arquivo do manual foi gerado corretamente
     
