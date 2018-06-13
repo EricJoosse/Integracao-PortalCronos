@@ -23,6 +23,7 @@ public class ManualManutencao {
 	    }
 	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
 	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
+		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 	    }
 		else if (this.fornecedor.tipoSO.equals("Windows Server 2016") || this.fornecedor.tipoSO.equals("Windows 10 Pro")) {
 		  	this.caminhoManual = "C:/Arquivos de Programas PC/";
@@ -48,10 +49,75 @@ public class ManualManutencao {
 	}
 
 
+	public void gravarEmArquivoNoMenuWindows() throws IOException, Exception {
+		setCaminhoManualMaisCaminhoAtalho();
+		
+    	File diretorioManual = new File(caminhoManual);
+    	if(!diretorioManual.exists()) { 
+    		diretorioManual.mkdir();
+    	}
+    	else {
+    		// Excluir eventuais manuais antigos:
+    		for (final File file : diretorioManual.listFiles()) 
+    		{
+    			if (file.getName().startsWith("Manual") && file.getName().endsWith(".txt"))
+   			       file.delete();
+    		}
+    	}
+
+    	
+    	BufferedWriter bWriter = new BufferedWriter(new FileWriter(caminhoManual + nomeArquivo, false));
+        bWriter.write(this.conteudo);
+        bWriter.flush();
+        bWriter.close();
+        
+        
+        
+        if (     this.fornecedor.tipoSO.equals("Windows Server 2016") 
+              || this.fornecedor.tipoSO.equals("Windows 10 Pro")
+              || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
+            ) {
+        	
+        	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
+        	if(!diretorioAtalhoManual.exists()) { 
+        		diretorioAtalhoManual.mkdir();
+        	}
+        	else {
+        		// Excluir eventuais atalhos antigos:
+        		for (final File file : diretorioManual.listFiles()) 
+        		{
+        			if (file.getName().startsWith("Manual") && file.getName().endsWith(".lnk"))
+       			       file.delete();
+        		}
+        	}
+
+        	ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
+        }
+	}
+	
+	
+	
+	public void gravarEmArquivoSoltoNoRaizDoProjeto() throws IOException, Exception {
+		File f = new File(nomeArquivo);
+		if(f.exists() && !f.isDirectory()) { 
+		    f.delete();
+		}
+		
+		BufferedWriter bWriter = new BufferedWriter(new FileWriter(nomeArquivo, false));
+        bWriter.write(this.conteudo);
+        bWriter.flush();
+        bWriter.close();
+	}
+	
+	
+	
 	public void removerPCronosDoMenuWindows() throws Exception { 
         setCaminhoManualMaisCaminhoAtalho();
 		
-        if (this.fornecedor.tipoSO.equals("Windows Server 2016") || this.fornecedor.tipoSO.equals("Windows 10 Pro")) {
+        if (       this.fornecedor.tipoSO.equals("Windows Server 2016") 
+        		|| this.fornecedor.tipoSO.equals("Windows 10 Pro")
+                || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
+           ) {
         	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
         	
         	if(diretorioAtalhoManual.exists()) { 
@@ -84,65 +150,6 @@ public class ManualManutencao {
     		}
     		if (!temOutrosArquivos) diretorioManual.delete();
     	}
-	}
-	
-	
-	
-	public void gravarEmArquivoNoMenuWindows() throws IOException, Exception {
-		setCaminhoManualMaisCaminhoAtalho();
-		
-    	File diretorioManual = new File(caminhoManual);
-    	if(!diretorioManual.exists()) { 
-    		diretorioManual.mkdir();
-    	}
-    	else {
-    		// Excluir eventuais manuais antigos:
-    		for (final File file : diretorioManual.listFiles()) 
-    		{
-    			if (file.getName().startsWith("Manual") && file.getName().endsWith(".txt"))
-   			       file.delete();
-    		}
-    	}
-
-    	
-    	BufferedWriter bWriter = new BufferedWriter(new FileWriter(caminhoManual + nomeArquivo, false));
-        bWriter.write(this.conteudo);
-        bWriter.flush();
-        bWriter.close();
-        
-        
-        
-        if (this.fornecedor.tipoSO.equals("Windows Server 2016") || this.fornecedor.tipoSO.equals("Windows 10 Pro")) {
-        	
-        	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
-        	if(!diretorioAtalhoManual.exists()) { 
-        		diretorioAtalhoManual.mkdir();
-        	}
-        	else {
-        		// Excluir eventuais atalhos antigos:
-        		for (final File file : diretorioManual.listFiles()) 
-        		{
-        			if (file.getName().startsWith("Manual") && file.getName().endsWith(".lnk"))
-       			       file.delete();
-        		}
-        	}
-
-        	ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
-        }
-	}
-	
-	
-	
-	public void gravarEmArquivoSoltoNoRaizDoProjeto() throws IOException, Exception {
-		File f = new File(nomeArquivo);
-		if(f.exists() && !f.isDirectory()) { 
-		    f.delete();
-		}
-		
-		BufferedWriter bWriter = new BufferedWriter(new FileWriter(nomeArquivo, false));
-        bWriter.write(this.conteudo);
-        bWriter.flush();
-        bWriter.close();
 	}
 	
 	
