@@ -122,7 +122,7 @@ Como vai ser?
      
      
     9c. Nos seguintes casos:
-             1. no caso de versões de Windows que ainda não estão em nenhuma das duas listas abaixo;
+             1. no caso de versões de Windows que ainda não estão em nenhuma das duas listas abaixo dentro deste item 9c;
              2. no caso de versões de Windows que estão com o bug abaixo: 
              
         Corrigir as seguintes chaves manualmente no regedit :
@@ -131,7 +131,7 @@ Como vai ser?
 			   "AUTOUPDATECHECK"="0"
            
        É melhor verificar também todas as outras chaves no regedit. Parece que tem um bug no DOS ou no Winrar:  
-       paece que a automação do regedit funciona se rodar Primeira_Instalacao_Versao_Windows.bat na mão clicando 2 vezes neste .bat 
+       parece que a automação do regedit funciona se rodar Primeira_Instalacao_Versao_Windows.bat na mão clicando 2 vezes neste .bat 
        porém não funciona se executado automaticamente pelo Winrar. 
        No teste unitário usando "TestadorUnitarioInstalacaoDesinstalacao.bat" funcionou, porém no teste integrado não funcionou. 
        
@@ -148,11 +148,11 @@ Como vai ser?
        
        
        Foi testado que este bug     acontece sim com Windows Server 2008 R2 SP 1.
-       Foi testado que este bug não acontece     com Windows Server 2012 R2.
+       Foi testado que este bug não acontece     com Windows Server 2012 R2 usando o Testador Unitário, porém acontece sim no teste integrado....
        
        
        
-   9d. No caso de versões de Windows que ainda não estão na lista abaixo, 
+   9d. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9d, 
        fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarDirLog
@@ -168,7 +168,7 @@ Como vai ser?
        Fazer isso ainda em todos os outros tipos de Windows. 
 
        
-   9e. No caso de versões de Windows que ainda não estão na lista abaixo, 
+   9e. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9e, 
        fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarManualTI
@@ -184,7 +184,7 @@ Como vai ser?
        Fazer isso ainda em todos os outros tipos de Windows. 
 
        
-   10. No caso de versões de Windows que ainda não estão na lista abaixo,
+   10. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 10,
        após a instalação, fazer um export de teste das chaves do regedit no servidor
 	   e comparar com os arquivos .reg no instalador para verificar se tiver diferenças 
 	   em versões diferentes do programa "regedit.exe".
@@ -202,14 +202,16 @@ Como vai ser?
        Em todos os casos, adicionar o novo SO na lista acima.
 
 	   
-   11. No caso de versões de Windows que ainda não estão na lista abaixo,
+   11. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 11,
        verificar todas as propriedades da task criada no Task Scheduler:  
-       a forma mais fácil é comparar com uma instalação em qualquer Windows Server 2008 R2 SP 1 
-       onde a primeir task foi desenvolvida originalmente, ou com outro  SO que já está na lista abaixo. 
+       a forma mais fácil é comparar todas as propriedades da task com uma instalação em um Windows Server 2008 R2 SP 1 
+       onde a primeir task foi desenvolvida originalmente, ou que foi testado que funciona, 
+       ou com outro SO que já está na lista abaixo e que foi testado. 
        
        Já foi testado e comparado nos seguintes SO´s:
        		- Windows Server 2008 R2 SP 1
        		- Windows Server 2012 R2
+       		- Windows Server 2016
        		- ......
        Fazer isso ainda em todos os outros tipos de Windows. 
 

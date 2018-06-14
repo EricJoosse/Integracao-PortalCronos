@@ -183,19 +183,28 @@ if %osVersion% == Windows_10_Pro (
 )
 
 if %osVersion% == Windows_Server_2008_R2_SP1 (
+    echo Entrou no if 2008
     set arquivoRegedit="%drive%\\Arquivos de Programas PC\\DeshabilitarJavaUpdates.x64.reg"
 ) else if %osVersion% == Windows_Server_2012_R2 (
+    echo Entrou no else if 2012
+    set arquivoRegedit="%~dp0DeshabilitarJavaUpdates.x64.reg"
+) else if %osVersion% == Windows_Server_2016 (
+    echo Entrou no else if 2016
     set arquivoRegedit="%~dp0DeshabilitarJavaUpdates.x64.reg"
 ) else if %Windows_10_Pro_64bit% == 1 (
+    echo Entrou no else if Win 10
     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 ) else if %osVersion% == Windows_7_Professional_SP1 (
+    echo Entrou no else if Win 7 Professional
     set arquivoRegedit=DeshabilitarJavaUpdates.i586.reg
 ) else (
+    echo Entrou no else das osVersions
     echo MSGBOX "Esta versão de Windows ainda não está suportada! Favor entrar em contato com o Suporte do Portal Cronos." > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     exit
 )
+
 
 echo arquivoRegedit = %arquivoRegedit%
 pause

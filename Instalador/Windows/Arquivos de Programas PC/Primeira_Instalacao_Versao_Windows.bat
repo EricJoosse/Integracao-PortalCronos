@@ -7,6 +7,7 @@ echo Tipos de Windows homologados:
 echo.
 echo 1 = Windows Server 2008 R2 SP1
 echo 2 = Windows Server 2012 R2
+echo 3 = Windows Server 2016
 echo.
 
 SET /P idOsVersion=Favor digitar o ID do tipo de Windows: 
@@ -42,6 +43,8 @@ if "%idOsVersion%"=="1" (
     set osVersion=Windows_Server_2008_R2_SP1
 ) else if "%idOsVersion%"=="2" (
     set osVersion=Windows_Server_2012_R2
+) else if "%idOsVersion%"=="3" (
+    set osVersion=Windows_Server_2016
 ) else (
     echo MSGBOX "Erro: ID do tipo de Windows inválido! Instalação abortada!!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
@@ -128,6 +131,8 @@ if %osVersion% == Windows_Server_2008_R2_SP1 (
     set arquivoRegedit="%drive%\\Arquivos de Programas PC\\DeshabilitarJavaUpdates.x64.reg"
 ) else if %osVersion% == Windows_Server_2012_R2 (
     set arquivoRegedit="%~dp0DeshabilitarJavaUpdates.x64.reg"
+) else if %osVersion% == Windows_Server_2016 (
+    set arquivoRegedit="%~dp0DeshabilitarJavaUpdates.x64.reg"
 ) else if %Windows_10_Pro_64bit% == 1 (
     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 ) else if %osVersion% == Windows_7_Professional_SP1 (
@@ -142,7 +147,7 @@ if %osVersion% == Windows_Server_2008_R2_SP1 (
 REM goto FIM
 
 
-REM ================ Instalar JRE + deshabilitar updates automoáticos: ========================================
+REM ================ Instalar JRE + deshabilitar updates automáticos: ========================================
 
 if %tipoOS% == 64 (
     Start "" /wait jre-8u92-windows-x64.exe /s INSTALLDIR=%drive%\\"Program Files"\Java\jre1.8.0_92
@@ -203,10 +208,17 @@ REM SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /TR "C:\Arquivo
 
 REM O seguinte XML tem as configurações completas e foi criado criando a task manualmente,
 REM e em seguida exportada para XML : 
+
 if %osVersion% == Windows_Server_2008_R2_SP1 (
 REM Testado: 
     SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
 ) else if %Windows_10_Pro_64bit% == 1 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else if %osVersion% == Windows_Server_2012_R2 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else if %osVersion% == Windows_Server_2016 (
 REM Testado: 
     SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
 ) else (

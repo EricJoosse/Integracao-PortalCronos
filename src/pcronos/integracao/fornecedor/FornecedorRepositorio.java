@@ -9,7 +9,30 @@ public class FornecedorRepositorio {
 		Fornecedor f = new Fornecedor();
 		f.IdFornecedor = idFornecedor;
 
-		if (idFornecedor == 13) {
+		if (idFornecedor == 2016) {
+			f.NomeFantasiaEmpresa = "Teste Windows Server 2016";
+			f.SiglaSistemaFornecedor = "WinThor";
+			f.EmailResponsavelTI = "";
+			f.EmailResponsavelTIAlternativo = "";
+			f.ApelidoResponsavelTI = "";
+			f.ApelidoResponsavelTIAlternativo = "";
+			f.AplicativoDesktopRemoto = "";
+			f.usuarioWebservice = "";
+			f.versaoJRE = "";
+			f.tipoSO = "Windows Server 2016";
+		}			   
+		else if (idFornecedor == null) {
+			f.NomeFantasiaEmpresa = "Monitoramento";
+			f.SiglaSistemaFornecedor = "PCronos";
+			f.EmailResponsavelTI = "";
+			f.EmailResponsavelTIAlternativo = "";
+			f.ApelidoResponsavelTI = "";
+			f.ApelidoResponsavelTIAlternativo = "";
+			f.AplicativoDesktopRemoto = "mstsc";
+			f.versaoJRE = "jre1.8.0_92";
+			f.tipoSO = "Windows Server 2008 R2 SP1";
+		}			   
+		else if (idFornecedor == 13) {
 			f.NomeFantasiaEmpresa = "Formaggio";
 			f.SiglaSistemaFornecedor = "APS";
 			f.EmailResponsavelTI = "projetosti@formaggio.com.br";  
@@ -107,29 +130,6 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-mcommerce";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "?????????????????????";
-		}			   
-		else if (idFornecedor == 2016) {
-			f.NomeFantasiaEmpresa = "Teste Windows Server 2016";
-			f.SiglaSistemaFornecedor = "WinThor";
-			f.EmailResponsavelTI = "";
-			f.EmailResponsavelTIAlternativo = "";
-			f.ApelidoResponsavelTI = "";
-			f.ApelidoResponsavelTIAlternativo = "";
-			f.AplicativoDesktopRemoto = "";
-			f.usuarioWebservice = "";
-			f.versaoJRE = "";
-			f.tipoSO = "Windows Server 2016";
-		}			   
-		else if (idFornecedor == null) {
-			f.NomeFantasiaEmpresa = "Monitoramento";
-			f.SiglaSistemaFornecedor = "PCronos";
-			f.EmailResponsavelTI = "";
-			f.EmailResponsavelTIAlternativo = "";
-			f.ApelidoResponsavelTI = "";
-			f.ApelidoResponsavelTIAlternativo = "";
-			f.AplicativoDesktopRemoto = "mstsc";
-			f.versaoJRE = "jre1.8.0_92";
-			f.tipoSO = "Windows Server 2008 R2 SP1";
 		}			   
 		else { 
 			throw new Exception("Erro: idFornecedor " + idFornecedor.toString() + " não existe");
