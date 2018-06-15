@@ -131,9 +131,11 @@ Como vai ser?
 			   "AUTOUPDATECHECK"="0"
            
        É melhor verificar também todas as outras chaves no regedit. Parece que tem um bug no DOS ou no Winrar:  
-       parece que a automação do regedit funciona se rodar Primeira_Instalacao_Versao_Windows.bat na mão clicando 2 vezes neste .bat 
-       porém não funciona se executado automaticamente pelo Winrar. 
-       No teste unitário usando "TestadorUnitarioInstalacaoDesinstalacao.bat" funcionou, porém no teste integrado não funcionou. 
+       foi testado com Windows Server 2012 R2 e com Windows Server 2016 que a automação do regedit funciona 
+       se rodar "Primeira_Instalacao_Versao_Windows.bat" na mão clicando 2 vezes neste .bat ou usando o botão a direita 
+       usando "Executar como Administrador", 
+       porém não funciona se "Primeira_Instalacao_Versao_Windows.bat" for executado automaticamente pelo Winrar. 
+       No teste unitário usando "TestadorUnitarioInstalacaoDesinstalacao.bat" também funcionou, porém no teste integrado não funcionou. 
        
        Isso é por causa do seguinte bug : 
        ----------------------------------
@@ -149,6 +151,7 @@ Como vai ser?
        
        Foi testado que este bug     acontece sim com Windows Server 2008 R2 SP 1.
        Foi testado que este bug não acontece     com Windows Server 2012 R2 usando o Testador Unitário, porém acontece sim no teste integrado....
+       Foi testado que este bug não acontece     com Windows Server 2016    usando o Testador Unitário, porém acontece sim no teste integrado....
        
        
        
@@ -192,6 +195,7 @@ Como vai ser?
        Já foi testado e comparado nos seguintes SO´s:
        		- Windows Server 2008 R2 SP 1
        		- Windows Server 2012 R2
+       		- Windows Server 2016
        		- ......
        Fazer isso ainda em todos os outros tipos de Windows. 
 
