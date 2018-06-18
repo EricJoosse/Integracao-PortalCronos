@@ -183,8 +183,13 @@ Como vai ser?
        		- Windows Server 2008 R2 SP 1
        		- Windows Server 2012 R2
        		- Windows Server 2016
+       		- Windows 10 Pro - apenas testado no caso de um processador e SO 64 bit
        		- ......
        Fazer isso ainda em todos os outros tipos de Windows. 
+       
+       Obs.: se a instalação do manual no menu de Windows não funcionou usando o instalador integral, 
+             fazer isso executando InstalarManualTI.bat solto com o botão a direita do mouse usando 
+             "Executar como Administrador". 
 
        
    10. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 10,
@@ -196,6 +201,7 @@ Como vai ser?
        		- Windows Server 2008 R2 SP 1
        		- Windows Server 2012 R2
        		- Windows Server 2016
+       		- Windows 10 Pro - apenas testado e comparado no caso de um processador e SO 64 bit
        		- ......
        Fazer isso ainda em todos os outros tipos de Windows. 
 

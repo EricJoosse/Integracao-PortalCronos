@@ -19,6 +19,7 @@ public class Fornecedor {
 	String usuarioWebservice;
 	String versaoJRE;
 	String tipoSO;
+	String SO32ou64bit;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

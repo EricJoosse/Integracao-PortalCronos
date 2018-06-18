@@ -1,11 +1,11 @@
-Manual Upgrade dos Ambientes de Produção de 2.4 para 2.5.2
+Manual Upgrade dos Ambientes de Produção de 2.4 para 2.5.1
 ==========================================================
 
 1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
 
-2. Copiar o arquivo novo integr-fornecedor-2.5.2.jar do instalador para o servidor do fornecedor
+2. Copiar o arquivo novo integr-fornecedor-2.5.1.jar do instalador para o servidor do fornecedor
  
-3. Atualizar a chamada de integr-fornecedor-2.5.2.jar no Job15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.5.1.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 
@@ -50,9 +50,4 @@ CodigoFilial                      = 1
 		- *.xml
 		- *.exe
  
-10. Verificar o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 
-    para poder fazer TNSping de fora para o servidor do fornecedor na hora que precisar. 
-    Testar isso usando PSPing. 
-    Atualizar isso no arquivo Tabela Fornecedores_Versões.txt.
-  
-11. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+10. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat

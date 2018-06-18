@@ -8,7 +8,8 @@ Manual Upgrade dos Ambientes de Produção de 2.1.2B para 2.3.0
    no servidor do fornecedor
  
 
-3. Adicionar no arquivo  /conf/Integração Fornecedor - Portal Cronos.properties:
+3. Adicionar no arquivo  /conf/Integração Fornecedor - Portal Cronos.properties 
+   depois da chave "SenhaBancoDeDados":
 
 SenhaBancoDeDadosCriptografada    = false
 #                                          # Opções: true, false. 
@@ -18,7 +19,7 @@ SenhaBancoDeDadosCriptografada    = false
 #                                          # para você mesmo obter a senha criptografada. 
 
 
-   e: 
+   e depois da chave "SenhaWebService": 
    
 SenhaWebServiceCriptografada      = false
 #                                          # Opções: true, false. 

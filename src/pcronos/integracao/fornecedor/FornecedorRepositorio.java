@@ -54,17 +54,19 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "Ivan";
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "AnyDesk";
+			f.IdAplicativoDesktopRemoto = "734228115";
 			f.usuarioWebservice = "ws-jrembalagem";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "Windows 10 Pro";
+			f.SO32ou64bit = "64bit";
 		}			   
 		else if (idFornecedor == 30) {
 			f.NomeFantasiaEmpresa = "Prolac";
 			f.SiglaSistemaFornecedor = "WinThor";
-			f.EmailResponsavelTI = "marcelo@casadoqueijo.net.br"; 
-			f.EmailResponsavelTIAlternativo = "mscomprolac@gmail.com";
-			f.ApelidoResponsavelTI = "Marcelo";
-			f.ApelidoResponsavelTIAlternativo = "Marcos";
+			f.EmailResponsavelTI = "mscomprolac@gmail.com"; 
+			f.EmailResponsavelTIAlternativo = "marcelo@casadoqueijo.net.br";
+			f.ApelidoResponsavelTI = "Marcos";
+			f.ApelidoResponsavelTIAlternativo = "Marcelo";
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.IdAplicativoDesktopRemoto = "servidormaxima@ad";
 			f.usuarioWebservice = "ws-prolac";

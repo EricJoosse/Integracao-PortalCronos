@@ -3,7 +3,7 @@ cls
 
 chcp 1252>nul
 
-REM goto InstalarManualTI
+goto InstalarManualTI
 REM goto DesinstalarManualTI
 REM goto InstalarDirLog
 REM goto DesinstalarDirLog
@@ -11,14 +11,15 @@ REM goto TesteIfNotExist
 REM goto TesteDelProprioArq
 REM goto TesteLimpeza
 REM goto TesteDelInstalador
-goto TesteRegedit
+REM goto TesteRegedit
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
 REM ================  (testado com Windows Server 2016,        funcionou)       ========================================
-
+REM ================  (testado com Windows Server 2016,        funcionou)       ========================================
+REM ================  (testado com Windows 10 Pro - apenas testado no caso de um processador e SO 64 bit, funcionou)
 :InstalarManualTI
 call InstalarManualTI.bat
 exit
@@ -27,6 +28,7 @@ REM ================ Testes Desinstalação Manual Manutenção TI do menu de Window
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
 REM ================  (testado com Windows Server 2016,        funcionou)       ========================================
+REM ================  (testado com Windows 10 Pro - apenas testado no caso de um processador e SO 64 bit, funcionou)
 
 :DesinstalarManualTI
 call DesinstalarManualTI.bat
