@@ -1873,7 +1873,7 @@ public final class IntegracaoFornecedorCompleta {
 
 
 
-  private static void downloadCotacoes(String url, String cnpjFornecedor, String username, String senha)   
+  private static void downloadCotacoes(LocalDateTime horaInicio, String url, String cnpjFornecedor, String username, String senha)   
   {
  
     try 
@@ -1931,7 +1931,14 @@ public final class IntegracaoFornecedorCompleta {
         for (int i = 0; i < cotacoes.getLength(); i++) 
         { 
             temErroGeralCotacao = false;            
-            readCotacao(cotacoes, i, docBuilder);
+  		    LocalDateTime horaAtual = LocalDateTime.now();
+  		    long MinutosExecucao = Duration.between(horaInicio, horaAtual).toMinutes();
+  		    
+  			// O seguinte é necessário para evitar que o processo atual fica abortado indevidamente 
+  			// pelo Windows Task Scheduler, que tem que derrubar processos JRE anteriores travados 
+  			// a cada 15 minutos: 
+  		    if (MinutosExecucao < 10)
+              readCotacao(cotacoes, i, docBuilder);
         }
 
     }
@@ -2101,7 +2108,7 @@ public final class IntegracaoFornecedorCompleta {
 	      }  
 	  }
 	  else
-		  downloadCotacoes(enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
+		  downloadCotacoes(horaInicio, enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
 
 
       if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {

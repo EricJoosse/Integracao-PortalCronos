@@ -1,0 +1,14 @@
+Manual Upgrade dos Ambientes de Produção de 2.5.2 para 2.6
+==========================================================
+
+1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+
+2. Copiar o arquivo novo integr-fornecedor-2.6.jar do instalador para o servidor do fornecedor
+ 
+3. Atualizar a chamada de integr-fornecedor-2.6.jar no Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor
+ 
+4. No Windows Task Scheduler > Propriedades > Configurações: alterar o último combobox 
+   de "Não iniciar uma nova instância" para "Interromper a instância existente"
+  
+5. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
