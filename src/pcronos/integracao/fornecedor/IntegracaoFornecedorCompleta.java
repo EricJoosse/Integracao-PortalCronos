@@ -1077,7 +1077,7 @@ public final class IntegracaoFornecedorCompleta {
 		     		    	qtdVerificacaoCadastros += 1;
 		     		    	if (qtdVerificacaoCadastros == 1) {
 		     		    		body += " " + "\r\n"
-		     		    	         + "<b>Aproveitando: após a solução dp problema, favor informar ao gerente de vendas que o motivo porque nos últimos 7 dias diversas cotações não foram ofertadas automaticamente, é a falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
+		     		    	         + "<b>Aproveitando: após a solução do problema, favor informar ao gerente de vendas que o motivo porque nos últimos 7 dias diversas cotações não foram ofertadas automaticamente, é a falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
 		     		    			 ;
 		     		    	}
 							body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
@@ -1939,6 +1939,10 @@ public final class IntegracaoFornecedorCompleta {
   			// a cada 15 minutos: 
   		    if (MinutosExecucao < 10)
               readCotacao(cotacoes, i, docBuilder);
+  		    else {
+  		    	debugar("O processo JRE passou o limite de 10 minutos!! " + Integer.toString(cotacoes.getLength() - i) + " cotações foram deixadas para o próximo processamento.");
+  		    	break;
+  		    }
         }
 
     }
