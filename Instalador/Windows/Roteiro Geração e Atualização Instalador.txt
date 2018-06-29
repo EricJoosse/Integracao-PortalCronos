@@ -4,7 +4,12 @@ Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em u
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
         Executar Maven para atualizar integr-fornecedor-x.y.z.jar.
 
-	2. Conectar no Team Viewer
+	2. Conectar no Team Viewer. 
+	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
+	         na máquina no Cabo:                      verificar;
+	         na máquina de desenvolvimento no Azure:  o Team Viewer dá mensagem de suspeita de uso comercial;
+	         na máquina de desenvolvimento no Amazon: verificar;
+	         no servidor de teste:                    verificar.
 	
 	   Skype:
 	   Existem 2 tipos de instalação do Team Viewer: "free" (pessoal) e "trial"/pago (empresarial). 

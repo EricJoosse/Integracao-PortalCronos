@@ -12,3 +12,5 @@ Manual Upgrade dos Ambientes de Produção de 2.5.2 para 2.6
    de "Não iniciar uma nova instância" para "Interromper a instância existente"
   
 5. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+
+6. Aproveitar atualizar espaço livre em Tabela Fornecedores_Versões.txt

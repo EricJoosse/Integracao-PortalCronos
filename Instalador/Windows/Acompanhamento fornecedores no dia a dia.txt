@@ -192,17 +192,18 @@ Eric
 
 
 
-Assunto: Favor ativar o AnyDesk - Versão nova 2.3.1 da integração PCronos/WinThor
+Assunto: Favor ativar o AnyDesk - Versão nova 2.3.1 da integração PCronos / WinThor
 Marcelo,
  
-   favor ativar o AnyDesk e informar o ID no Skype (contato "Eric Jo"), pois preciso atualizar a versão da integração.
+   favor ativar o AnyDesk e informar o ID no Skype (contato "Eric Jo"), pois preciso atualizar a versão da integração PCronos / WinThor.
 É necessário para melhorar a lentidão pois o ofertamento não pode demorar mais de 15 minutos,
 visto que o serviço roda de 15 a 15 minutos,
  
 Eric
   
   
-  
+Skype:
+Geymison, bom dia! Favor ativar o Team Viewer e informar o ID / senha no Skype, pois preciso atualizar a versão da integração PCronos / WinThor.
   
   
 Ivan, no tipo de Windows "Windows 10 Pro" está acontecendo um bug que está impedindo o funcionamento da integração WinThor/PCronos. 

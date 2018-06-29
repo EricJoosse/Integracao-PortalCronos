@@ -18,7 +18,7 @@ EnderecoBaseWebServiceTeste       = http://52.170.47.238/v2/api/
 EnderecoBaseWebServiceHomologacao = http://www.portalcronos.com.br:81/v2/api/
 EnderecoBaseWebServiceProducao    = http://www.portalcronos.com.br/v2/api/
 
-TipoAmbiente                      = H
+TipoAmbiente                      = P
 #                                          # Opções: P (= Produção), H (= Homologação), T (= Teste)
 
   
