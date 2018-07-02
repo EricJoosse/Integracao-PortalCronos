@@ -8,10 +8,11 @@ Manual Upgrade dos Ambientes de Produção de 2.5.1 para 2.5.2
 3. Atualizar a chamada de integr-fornecedor-2.5.2.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
-4. Verificar o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 
-   para poder fazer TNSping de fora para o servidor do fornecedor na hora que precisar. 
+4. Descobrir o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 
+   para poder fazer ping ou TNSping de fora para o servidor do fornecedor na hora que precisar. 
    No IE, Chrome ou Firefox acessar http://ip4.me/
-   Testar isso usando ping. Se isso não funcionar, procurar uma porta IP que está aberta e usar PSPing. 
+   Testar ping primeiro (sem porta). Se isso não funcionar, procurar uma porta IP que está aberta e usar 
+   C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat. 
    Atualizar isso no arquivo Tabela Fornecedores_Versões.txt.
   
 5. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
