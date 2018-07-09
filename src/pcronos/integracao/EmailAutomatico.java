@@ -35,7 +35,13 @@ import javax.mail.internet.* ;
 
 import pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta;
 
-import javax.mail.*          ; 
+import javax.mail.*          ;
+
+import java.io.File;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import javax.activation.*    ;
 //
 public abstract class EmailAutomatico { 
@@ -220,6 +226,9 @@ public static void enviar( java.lang.String p_De
                           , java.lang.String PortaEmailAutomatico
                           , java.lang.String UsuarioEmailAutomatico
                           , java.lang.String SenhaCriptografadaEmailAutomatico
+                          , String diretorioArquivosXmlSemBarraNoFinal
+                          , LocalDateTime horaInicio
+                          , String nomeArquivoEnv
                           ) {
 javax.mail.internet.MimeMessage       mmsg                     ; 
 javax.mail.internet.MimeBodyPart      mbp1, mbp2               ;
@@ -227,12 +236,32 @@ javax.mail.internet.MimeMultipart     mmp                      ;
 javax.mail.internet.InternetAddress[] EnderecoPara, EnderecoCC ;
 javax.activation.FileDataSource       fds                      ;
 javax.mail.Session                    session                  ;
+int                                   qtdEmailsEnviadosHoje = 0;
 
 //SIV.setBooleanDebug( EmailAutomatico.bDebug ) ; 
 
-IntegracaoFornecedorCompleta.debugar( "Método EmailAutomatico.enviar com 7 parâmetros entrado" ) ; 
+IntegracaoFornecedorCompleta.debugar( "Método EmailAutomatico.enviar() entrado" ) ; 
 
-if ( ( p_Assunto == null ) && ( p_Anexo == null ) && ( p_Mensagem == null ) ) {
+File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCronos\\XML"
+// System.out.println("dir = " + dir.getAbsolutePath());
+   for (final File file : dir.listFiles()) 
+   {
+	 // System.out.println("file = " + file.getName());
+	    LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+	   
+	    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().endsWith(".env")) 
+	    {
+	       qtdEmailsEnviadosHoje += 1;
+	    }
+   }
+   
+   // Para evitar que o Bol talvez vai cancelar a conta de email: 
+   if (qtdEmailsEnviadosHoje >= 11)
+   	return;
+   
+
+
+   if ( ( p_Assunto == null ) && ( p_Anexo == null ) && ( p_Mensagem == null ) ) {
   IntegracaoFornecedorCompleta.logarErro( "Erro ! Informar o seguinte erro ao GINFO-Recife (Eric Joosse) \n"
                + "Email automático encontrado sem assunto, sem anexo, sem mensagem...\n" 
                + "Este email não foi enviado para " + p_Para + " por isso !" ) ; 
@@ -298,6 +327,9 @@ try
     mmsg.setSentDate(new java.util.Date() ) ;
     
     javax.mail.Transport.send( mmsg ) ;    
+
+    File fileEnviado = new File(nomeArquivoEnv);
+	boolean isFileEnvCriado = fileEnviado.createNewFile();
 } 
 catch ( javax.mail.internet.AddressException ae ) { 
   IntegracaoFornecedorCompleta.debugar( "Método EmailAutomatico.enviar : catch AddressException entrado." ) ; 

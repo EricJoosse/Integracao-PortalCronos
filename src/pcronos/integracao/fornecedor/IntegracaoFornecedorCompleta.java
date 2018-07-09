@@ -1116,16 +1116,17 @@ public final class IntegracaoFornecedorCompleta {
 	            	 }
 	             } // while (rSet.next())
 	             
-	             if (!Utils.isNullOrBlank(nmFornecedor))
-	 	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
+	             if (!Utils.isNullOrBlank(nmFornecedor)) {
+	 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + nmFornecedor + ".env"));
+	             }
 
 	 	         rSet.close();
   	             results = cstat.getMoreResults();
 	        } // while (results)
 	    }
 	    catch (java.lang.Exception ex) { 
-	      logarErro(ex, false);
-          EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico);
+	      logarErro(ex, false);	      
+	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + "Monitoramento" + ".env"));
 	    }
 	    finally { 
 	      if (cstat != null) {
