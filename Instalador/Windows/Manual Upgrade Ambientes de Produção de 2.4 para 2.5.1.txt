@@ -50,4 +50,6 @@ CodigoFilial                      = 1
 		- *.xml
 		- *.exe
  
-10. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+10. Apagar /Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/Instalador.log no servidor do fornecedor
+  
+11. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat

@@ -313,7 +313,14 @@ public final class IntegracaoFornecedorCompleta {
       }
 
 
-	  debugar("sun.boot.class.path = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
+      // Para não impossibilitar o limite de 11 emails por dia, no caso do Bol:
+      if (siglaSistema.equals("PCronos") && qtdDiasArquivosXmlGuardados < 1) {
+    	     String msgErro = "Erro! QtdDiasArquivosXmlGuardados não pode ser menor que 1 no caso que SiglaSistema = PCronos! (para não impossibilitar o limite de 11 emails por dia, no caso do Bol)";
+          	 throw new ConfiguracaoException(msgErro);
+      }
+
+    	  
+      debugar("sun.boot.class.path = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
 
 	  debugar("CnpjFornecedor                    = " + cnpjFornecedor);
 	  debugar("NomeFantasiaFornecedor            = " + nomeFantasiaFornecedor);
