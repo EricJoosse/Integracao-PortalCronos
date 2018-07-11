@@ -1124,7 +1124,7 @@ public final class IntegracaoFornecedorCompleta {
 	             } // while (rSet.next())
 	             
 	             if (!Utils.isNullOrBlank(nmFornecedor)) {
-	 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + nmFornecedor + ".env"));
+	 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + nmFornecedor + ".env"), nmFornecedor);
 	             }
 
 	 	         rSet.close();
@@ -1133,7 +1133,7 @@ public final class IntegracaoFornecedorCompleta {
 	    }
 	    catch (java.lang.Exception ex) { 
 	      logarErro(ex, false);	      
-	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + "Monitoramento" + ".env"));
+	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + "Monitoramento" + ".env"), "Monitoramento");
 	    }
 	    finally { 
 	      if (cstat != null) {

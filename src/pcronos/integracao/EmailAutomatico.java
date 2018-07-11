@@ -229,6 +229,7 @@ public static void enviar( java.lang.String p_De
                           , String diretorioArquivosXmlSemBarraNoFinal
                           , LocalDateTime horaInicio
                           , String nomeArquivoEnv
+                          , String nmFornecedor
                           ) {
 javax.mail.internet.MimeMessage       mmsg                     ; 
 javax.mail.internet.MimeBodyPart      mbp1, mbp2               ;
@@ -236,7 +237,8 @@ javax.mail.internet.MimeMultipart     mmp                      ;
 javax.mail.internet.InternetAddress[] EnderecoPara, EnderecoCC ;
 javax.activation.FileDataSource       fds                      ;
 javax.mail.Session                    session                  ;
-int                                   qtdEmailsEnviadosHoje = 0;
+int                                   qtdEmailsEnviadosHojeTotal      = 0;
+int                                   qtdEmailsEnviadosHojeFornecedor = 0;
 
 //SIV.setBooleanDebug( EmailAutomatico.bDebug ) ; 
 
@@ -251,14 +253,22 @@ File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCr
 	   
 	    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().endsWith(".env")) 
 	    {
-	       qtdEmailsEnviadosHoje += 1;
+	       qtdEmailsEnviadosHojeTotal += 1;
+	    }
+	    
+	    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().replace(".env", "").equals(nmFornecedor)) 
+	    {
+	       qtdEmailsEnviadosHojeFornecedor += 1;
 	    }
    }
    
    // Para evitar que o Bol talvez vai cancelar a conta de email: 
-   if (qtdEmailsEnviadosHoje >= 11)
-   	return;
+   if (qtdEmailsEnviadosHojeTotal >= 11)
+   	    return;
    
+   if (qtdEmailsEnviadosHojeFornecedor >= 3)
+	   	return;
+	   
 
 
    if ( ( p_Assunto == null ) && ( p_Anexo == null ) && ( p_Mensagem == null ) ) {
