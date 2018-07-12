@@ -47,7 +47,7 @@ public class FornecedorRepositorio {
 			f.tipoSO = "Windows Server 2012 R2";
 		}			   
 		else if (idFornecedor == 947) {
-			f.NomeFantasiaEmpresa = "JR Embalagem";
+			f.NomeFantasiaEmpresa = "JR Distribuição";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "jrembalagem.ti@gmail.com"; 
 			f.EmailResponsavelTIAlternativo = "";

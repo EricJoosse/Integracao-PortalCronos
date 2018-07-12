@@ -950,7 +950,7 @@ public final class IntegracaoFornecedorCompleta {
 	            	 }
 	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) {
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
-		            	 assunto = "URGENTE! " + rSet.getString(2) + " - Parada integração PCronos/" + f.SiglaSistemaFornecedor;
+		            	 assunto = "URGENTE! " + nmFornecedor + " - Parada integração PCronos/" + f.SiglaSistemaFornecedor;
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		           	     DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm");
 		           	     
@@ -995,21 +995,21 @@ public final class IntegracaoFornecedorCompleta {
 		            	 body += "Para: leao@cronos-tech.com.br\r\n";
 		            	 body += "Leão, \r\n";
 		            	 body += "    \r\n";
-		            	 body += "   a integração do " + f.NomeFantasiaEmpresa + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
+		            	 body += "   a integração da " + nmFornecedor + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
 		            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 + f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 + " " + "\r\n"
 + "<i>Este email foi enviado automaticamente pelo sistema Portal Cronos</i>\r\n"
-+ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + f.NomeFantasiaEmpresa + "." + "\r\n"
++ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + nmFornecedor + "." + "\r\n"
 + " " + "\r\n"
-+ "<b>Isso é urgente e importante para resolver logo para evitar que a " + f.NomeFantasiaEmpresa + " perde muitas oportunidades de venda!</b>" + "\r\n"
++ "<b>Isso é urgente e importante para resolver logo para evitar que a " + nmFornecedor + " perde muitas oportunidades de venda!</b>" + "\r\n"
 + " " + "\r\n"
 + "OU:  " + "\r\n"
 + "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
-+ "É urgente pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
++ "É urgente pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
 + " " + "\r\n"
 + "OU:" + "\r\n"
-+ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + f.NomeFantasiaEmpresa + " (164) nesta cotação!" + "\r\n"
++ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + nmFornecedor + " (164) nesta cotação!" + "\r\n"
 + "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
 + " " + "\r\n"
 + "OU:" + "\r\n"
@@ -1025,11 +1025,11 @@ public final class IntegracaoFornecedorCompleta {
 + "OU:" + "\r\n"
 + "Se não conseguir resolver antes de " + ateQuando + " horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
 + "pois a cotação que vence primeiro e que não está ofertada vence " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + ","   + "\r\n"
-+ "e tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
++ "e tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
 + " " + "\r\n"
 + "OU:" + "\r\n"
 + "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
-+ "pois tem muitos produtos vendidos pela " + f.NomeFantasiaEmpresa + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
++ "pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
 + " " + "\r\n"
 + "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
 + "Se você não tem nenhuma ideia da causa, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
@@ -1116,7 +1116,7 @@ public final class IntegracaoFornecedorCompleta {
 
 		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
-	            	 } // if (!rSet.getString(2).equals("INI")) 
+	            	 } // if (!nmFornecedor.equals("INI")) 
 	            	 else {
 		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 

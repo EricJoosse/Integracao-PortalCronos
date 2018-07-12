@@ -35,14 +35,14 @@ public class ManualManutencao {
 
 
 	private void setNomeArquivoMaisAtalho() throws Exception { 	
-		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.2 (18.05.2018).txt";
+		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.3 (12.07.2018).txt";
 		this.nomeAtalho = "Manual Manutenção.lnk";
 
 //		if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
-//			this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.2 (18.05.2018).txt";
+//			this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.3 (12.07.2018).txt";
 //	    }
 //	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
-//			this.nomeArquivo = "Portal Cronos - Manual solucionamento paradas da integração - v1.4.2 (18.05.2018).txt";
+//			this.nomeArquivo = "Portal Cronos - Manual solucionamento paradas da integração - v1.4.3 (12.07.2018).txt";
 //	    }
 //	    else
 //	    	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem nome definido para o arquivo do Manual de Manutenção para a TI.");

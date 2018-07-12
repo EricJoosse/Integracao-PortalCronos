@@ -2,7 +2,7 @@ Fornecedor   IdForn	Sistema		Versão .jar	 Versão JRE	 Em produção		IP Público 		
 ----------	 ------	-------     -----------  ----------	 ------------	    ---------- 		---------------	----------	-----	---------	--------	----------	 	---------------------
 Formaggio 		 13	APS			2.6			 92	(.. bit)    Sim				187.113.120.97	    80			15 min		true	  9 GB		100			Formaggio 		1. live:projetosti_1 = "Geymison Lima - TI Formaggio"	
 											  			    																											2. Braytner Vasconcelos	
-JR Embalagem	947	WinThor		2.6			 92	(.. bit)    Sim				186.215.200.205	Não precisa		15 min		true	902 GB		100			JR Embalagem	ivan barros				
+JR Distribuição	947	WinThor		2.6			 92	(.. bit)    Sim				186.215.200.205	Não precisa		15 min		true	902 GB		100			JR Distribuição	ivan barros				
 Prolac 			 30	WinThor		2.5.1		161 (32 bit)    Sim				....revisar....					15 min		true	297 GB		100			Prolac 			1. marcos.scognamiglio			
 											  			    																											2. Marcelo Bezerra
 Marítimos		 21	WinThor		1.2.3		 92	(.. bit)    Não	  											15 min		true	 48 GB		100			Marítimos		Felipe Lolaia			

@@ -9,7 +9,7 @@
 					     
 					     
 					     
-	   JR Emb: antes:   C:\app\SERVIDOR\product\11.2.0\client_1;C:\app\SERVIDOR\product\11.2.0\client_1\bin;
+	   JR Distr.: antes:   C:\app\SERVIDOR\product\11.2.0\client_1;C:\app\SERVIDOR\product\11.2.0\client_1\bin;
 	                    %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
 	                    %SYSTEMROOT%\System32\WindowsPowerShell\v1.0\           
 					     

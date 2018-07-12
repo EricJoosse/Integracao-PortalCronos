@@ -21,11 +21,11 @@ OBSERVAÇÕES:
 
 
 
-Assunto: JR Embalagem -  Problema no servidor de hospedagem da integração PCronos/WinThor
+Assunto: JR Distribuição -  Problema no servidor de hospedagem da integração PCronos/WinThor
 Para: jrembalagem.ti@gmail.com
 Ivan, bom dia!
  
-  ontem (19/02/2018) de 11:00 até 21:00 o serviço das ofertas automáticas no servidor da JR Embalagem 
+  ontem (19/02/2018) de 11:00 até 21:00 o serviço das ofertas automáticas no servidor da JR Distribuição 
 estava comunicando com o Portal Cronos, enviando arquivos REC_*.xml, porém não estava enviando arquivos OFE_*.xml, 
 então não estava ofertando. Precisamos descobrir a causa para evitar que acontece novamente.   
 
@@ -125,7 +125,7 @@ Eric
 Leão,
  
 descobri um bug novo na tabela de log que fica acusando indevidamente (na maioria dos casos) que "a cotação não foi ofertada porque o usuário já fez isso manualmente" então  fiquei enganado.
-Na verdade a tabela de log comprova que o gerente de vendas Marco Aurelio da JR Embalagem entende muito bem que o sistema está ofertando automaticamente
+Na verdade a tabela de log comprova que o gerente de vendas Marco Aurelio da JR Distribuição entende muito bem que o sistema está ofertando automaticamente
 e mesmo assim, segundo a tabela de log, ele fica ofertando manualmente o tempo todo por 3 motivos:  
  
 1. por causa do bug das 2 interpretações da condição de pagamento "21 / 28 dias" e outras,
@@ -145,16 +145,16 @@ e mesmo assim, segundo a tabela de log, ele fica ofertando manualmente o tempo t
     O CNPJ 28851899000175 da empresa compradora Portal da Picanha
  
 Seria bom aproveitar também informar Marco Aurelio os seguintes erros:
-O Código de Produto 23036 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 25224 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 25228 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 26032 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 26033 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 26034 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 26035 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 26037 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 26284 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
-O Código de Produto 26628 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Embalagem.
+O Código de Produto 23036 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 25224 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 25228 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 26032 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 26033 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 26034 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 26035 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 26037 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 26284 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
+O Código de Produto 26628 do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema WinThor do fornecedor JR Distribuição.
  
 Eric
  
