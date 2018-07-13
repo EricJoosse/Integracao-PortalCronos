@@ -904,9 +904,32 @@ public final class IntegracaoFornecedorCompleta {
 		java.sql.CallableStatement cstat = null;
 		java.sql.ResultSet rSet = null;
 
+				
 		try
 	    {  
-		    String connectionString = null;
+		    // Para evitar que o Bol talvez vai cancelar a conta de email por motivo de abuso: 
+			File dir = new File(diretorioArquivosXmlSemBarraNoFinal); 
+	        for (final File file : dir.listFiles()) 
+		    {
+				 LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+				   
+			    if (file.getName().startsWith("Erro"))
+			    {
+			    	// Aguardar 54 horas para o reset do limite diária ou semanal de emails,  
+			    	// e tentar enviar um email automaticamente avisando do erro: 
+			    	if (datahoraArquivo.isAfter(horaInicio.minusHours(54).minusMinutes(25)) && datahoraArquivo.isBefore(horaInicio.minusHours(54))) {
+			  	        EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, "Erro! Monitoramento parado! Aconteceu um erro fatal 54 horas atrás. Veja a causa no arquivo de log " + file.getName() + ". O monitoramento automático continuará parado até a verificação e a exclusão manual deste arquivo de log de erro! ", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + "Monitoramento" + ".env"), "Monitoramento");
+			    	}
+			    	// Se existir um arquivo de log com erro pelo email do Bol de qualquer data, 
+					// automaticamente nunca mais enviar emails sobre fornecedores até este arquivo será excluido: 
+			    	return;
+			    }
+			}
+		    	
+		    			    
+
+	        
+	        String connectionString = null;
 		    
 		    if (tipoBancoDeDados.equals("SQL Server"))
 		    {

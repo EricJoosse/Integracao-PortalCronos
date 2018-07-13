@@ -262,7 +262,7 @@ File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCr
 	    }
    }
    
-   // Para evitar que o Bol talvez vai cancelar a conta de email: 
+   // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email por motivo de abuso: 
    if (qtdEmailsEnviadosHojeTotal >= 11)
    	    return;
    
