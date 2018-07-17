@@ -921,7 +921,8 @@ public final class IntegracaoFornecedorCompleta {
 			  	        EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, "Erro! Monitoramento parado! Aconteceu um erro fatal 54 horas atrás. Veja a causa no arquivo de log " + file.getName() + ". O monitoramento automático continuará parado até a verificação e a exclusão manual deste arquivo de log de erro! ", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + "Monitoramento" + ".env"), "Monitoramento");
 			    	}
 			    	// Se existir um arquivo de log com erro pelo email do Bol de qualquer data, 
-					// automaticamente nunca mais enviar emails sobre fornecedores até este arquivo será excluido: 
+					// automaticamente nunca mais enviar nenhum email (nem sobre fornecedores nem sobre o monitoramento) 
+			    	// até este arquivo de log de erro será excluido: 
 			    	return;
 			    }
 			}
@@ -2146,15 +2147,25 @@ public final class IntegracaoFornecedorCompleta {
 		  downloadCotacoes(horaInicio, enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
 
 
-      if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {
-		  nf.setMinimumIntegerDigits(2);
-	  	  nf.setMaximumFractionDigits(0);
-		  LocalDateTime horaFim = LocalDateTime.now();
-		  long HorasExecucao = Duration.between(horaInicio, horaFim).toHours(); // inclui os dias em horas
-		  long MinutosExecucao = Duration.between(horaInicio, horaFim).toMinutes() % 60;
-		  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
-		  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
-		  
+	  nf.setMinimumIntegerDigits(2);
+  	  nf.setMaximumFractionDigits(0);
+	  LocalDateTime horaFim = LocalDateTime.now();
+	  long HorasExecucao = Duration.between(horaInicio, horaFim).toHours(); // inclui os dias em horas
+	  long MinutosExecucao = Duration.between(horaInicio, horaFim).toMinutes() % 60;
+	  long MinutosTotalExecucao = Duration.between(horaInicio, horaFim).toMinutes();
+	  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
+	  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
+	  
+
+	  if (siglaSistema.equals("PCronos") && MinutosTotalExecucao > 12) {
+		  String msgLimite13Min = "Erro! O monitoramento parou de vez pois o processamento passou o limite de 13 minutos e demorou " + nf.format(MinutosTotalExecucao) + " minutos. O monitoramento continuará parado até a exclusão do arquivo de log de erro e após a solução da causa. A última opção seria diminuir a frequência de execução de 15 minutos para 30 minutos.";
+	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, msgLimite13Min, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, (diretorioArquivosXml + "Monitoramento" + ".env"), "Monitoramento");
+	      // Logar o erro APÓS o envio de email, pois o sistema não envia nenhum email se existir qualquer arquivo de log de erro:
+	      IntegracaoFornecedorCompleta.logarErro(msgLimite13Min);
+	  }
+
+	  
+	  if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {
 		  try
 		  {
 		      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
