@@ -3,7 +3,7 @@ cls
 
 chcp 1252>nul
 
-goto InstalarManualTI
+REM goto InstalarManualTI
 REM goto DesinstalarManualTI
 REM goto InstalarDirLog
 REM goto DesinstalarDirLog
@@ -12,6 +12,7 @@ REM goto TesteDelProprioArq
 REM goto TesteLimpeza
 REM goto TesteDelInstalador
 REM goto TesteRegedit
+goto TesteSubDirBin
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
@@ -31,7 +32,7 @@ REM ================  (testado com Windows Server 2016,        funcionou)       
 REM ================  (testado com Windows 10 Pro - apenas testado no caso de um processador e SO 64 bit, funcionou)
 
 :DesinstalarManualTI
-call DesinstalarManualTI.bat
+call "Integração Fornecedor - Portal Cronos\bin\DesinstalarManualTI.bat"
 
 echo Passou DesinstalarManualTI.bat
 echo Testador.bat: ERRORLEVEL = %ERRORLEVEL%
@@ -50,6 +51,7 @@ echo MSGBOX "Sucesso: o comando acima foi pulado devidamente!" > %temp%\TEMPmess
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 
+pause
 exit
 
 REM ================ Testes instalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
@@ -74,6 +76,7 @@ cd Logs
 if not exist C:\ProgramData\PortalCronos\Logs\Local\ mkdir Local
 REM Não precisa dar privilêgios, pois a Scheduled Task roda como SYSTEM
 
+pause
 exit
 
 REM ================ Testes Desinstalação diretório de Log (testado com Windows Server 2008 R2 SP1, funcionou): ========================================
@@ -109,6 +112,7 @@ if NOT exist "Remoto" (
 )
 cd\
 
+pause
 exit
 
 REM ================ Testes if NOT exist subdir (testado, funcionou): ========================================
@@ -131,6 +135,7 @@ if exist "Remoto" (
     del %temp%\TEMPmessage.vbs /f /q
 )
 
+pause
 exit
 
 
@@ -139,6 +144,7 @@ REM ================ Teste de exclusão deste arquivo mesmo (testado, funcionou):
 :TesteDelProprioArq
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 
+pause
 exit
 
 
@@ -154,6 +160,7 @@ REM Excluir este próprio arquivo apenas no final,
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 
+pause
 exit
 
 
@@ -162,6 +169,7 @@ REM ================ Teste Exclusão Instalador (testado, funcionou): ===========
 :TesteDelInstalador
 del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
 
+pause
 exit
 
 
@@ -220,7 +228,17 @@ if %tipoOS% == 64 (
 )
 
 pause
+exit
 
+REM ================ Teste de chamada de arqs .bat em subdirs (testado, funcionou): ========================================
+
+:TesteSubDirBin
+
+REM Mover temporariamente "TestadorUnitario.bat" de \Integração Fornecedor - Portal Cronos\
+REM para \Integração Fornecedor - Portal Cronos\bin\;
+call "Integração Fornecedor - Portal Cronos\bin\TestadorUnitario.bat"
+
+pause
 exit
 
 REM ============================ Fim ========================================

@@ -1,3 +1,19 @@
+
+goto OutrosTestes
+
+REM ================ Teste de chamada de arqs .bat em subdirs (testado, funcionou): ========================================
+
+echo MSGBOX "Teste de chamada de arqs .bat em subdirs" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+
+pause
+exit
+
+REM ==================== Outros testes: ===============================================================
+
+:OutrosTestes
+
 cls
 @echo off
 

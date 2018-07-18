@@ -22,4 +22,13 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 			- Se precisar (depende da versão de Windows), renomear o atalho 
 
 
-6. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+6. Mover "DesinstalarManualTI.bat" de "Arquivos de Programas PC" 
+   para "Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/bin/"
+   
+7. Apagar "Desinstalação_Versão_Windows.bat"
+
+8. Copiar "Desinstalar_Integração_Fornecedor_PortalCronos.bat" do instalador para o servidor do fornecedor
+
+9. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+
+

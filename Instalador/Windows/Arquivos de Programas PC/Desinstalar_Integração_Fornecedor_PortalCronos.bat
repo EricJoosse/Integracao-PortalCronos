@@ -17,7 +17,7 @@ REM set drive=D:
 
 REM ================ Remover Manual Manutenção TI do menu de Windows, ANTES da remoção dos programas de Java: ========================================
 
-call DesinstalarManualTI.bat
+call "Integração Fornecedor - Portal Cronos\bin\DesinstalarManualTI.bat"
 
 IF %ERRORLEVEL% NEQ 0 (
     goto PULAR_MENSAGEM_SUCESSO
