@@ -5,7 +5,7 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 
 2. Copiar o arquivo novo integr-fornecedor-2.6.1.jar do instalador para o servidor do fornecedor
  
-3. Atualizar a chamada de integr-fornecedor-2.6.1.jar no Job15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.6.1.jar no xJob15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
  
@@ -27,8 +27,84 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
    
 7. Apagar "Desinstalação_Versão_Windows.bat"
 
-8. Copiar "Desinstalar_Integração_Fornecedor_PortalCronos.bat" do instalador para o servidor do fornecedor
+8. Copiar do instalador para o servidor do fornecedor:
+		- Desinstalar_Integração_Fornecedor_PortalCronos.bat
+		- DesinstalarManualTI.bat
+		- InstalarManualTI.bat
+		- TestadorUnitario.bat
 
-9. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+
+9. No caso do Prolac: 
+			- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
+			- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
+
+   No caso de fornecedores diferente do Prolac: 
+			- remover diretório C:/"Program Files"/Java/jre1.8.0_161/bin/       por completo
+			- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/ por completo
+
+
+10. xJob15a15minOfertamentoJava_Windows.bat: 
+     Substituir: 
+
+REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
+REM e o caminho do outro JRE vem primeiro no PATH de DOS :
+C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+
+     Por:
+     
+REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor 
+REM e o caminho do outro JRE está na primeira posição no PATH de DOS:
+
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
+    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
+    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+) else (
+    echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
+    exit
+)
+
+
+11. xJob15a15minOfertamentoJava_Windows.bat: 
+     Substituir: 
+
+SETLOCAL
+set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
+REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_161\bin
+REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
+
+
+
+
+     Por:
+     
+SETLOCAL
+
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
+    goto PathProlac
+) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
+    goto PathOutros
+) else (
+    echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
+    exit
+)
+
+:PathProlac
+set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
+goto PularPathOutros
+:PathOutros
+set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_92\bin
+:PularPathOutros
+
+
+12. Apenas no caso do Prolac: 
+    	- executar TestadorUnitario.bat e verificar se funcionou: veja TestadorUnitario.log
+		- depois do teste, apagar TestadorUnitario.log
+ 
+13. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
 
 

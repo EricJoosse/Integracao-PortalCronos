@@ -7,7 +7,7 @@ Manual Upgrade dos Ambientes de Produção de 2.3.x para 2.4
 2. Copiar o arquivo novo integr-fornecedor-2.4.jar do instalador para o servidor do fornecedor
  
 
-3. Atualizar a chamada de integr-fornecedor-2.4.jar no Job15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.4.jar no xJob15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 

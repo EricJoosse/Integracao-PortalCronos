@@ -12,7 +12,8 @@ REM goto TesteDelProprioArq
 REM goto TesteLimpeza
 REM goto TesteDelInstalador
 REM goto TesteRegedit
-goto TesteSubDirBin
+REM goto TesteSubDirBin
+goto TesteIfExist
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
@@ -241,6 +242,27 @@ call "Integração Fornecedor - Portal Cronos\bin\TestadorUnitario.bat"
 pause
 exit
 
-REM ============================ Fim ========================================
+REM ================ Teste unitário if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (testado, funcionou): ========
+
+:TesteIfExist
+
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
+    echo MSGBOX "jre1.8.0_161 existe!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
+    echo MSGBOX "jre1.8.0_92 existe!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+) else (
+    echo MSGBOX "Erro! Nem jre1.8.0_161 nem jre1.8.0_92 existe!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+)
+		
+pause
+exit
+
+REM ============================ Fim =========================================================================
 
 :FIM

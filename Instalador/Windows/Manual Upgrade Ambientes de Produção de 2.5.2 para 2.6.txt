@@ -13,7 +13,7 @@ Manual Upgrade dos Ambientes de Produção de 2.5.2 para 2.6
 
 3. Copiar o arquivo novo integr-fornecedor-2.6.jar do instalador para o servidor do fornecedor
  
-4. Atualizar a chamada de integr-fornecedor-2.6.jar no Job15a15minOfertamentoJava_Windows.bat 
+4. Atualizar a chamada de integr-fornecedor-2.6.jar no xJob15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 5. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat

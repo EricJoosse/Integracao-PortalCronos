@@ -5,7 +5,7 @@ Manual Upgrade dos Ambientes de Produção de 2.5.1 para 2.5.2
 
 2. Copiar o arquivo novo integr-fornecedor-2.5.2.jar do instalador para o servidor do fornecedor
  
-3. Atualizar a chamada de integr-fornecedor-2.5.2.jar no Job15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.5.2.jar no xJob15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 4. Descobrir o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 

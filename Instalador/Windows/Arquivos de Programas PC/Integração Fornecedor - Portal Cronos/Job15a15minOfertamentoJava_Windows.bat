@@ -5,10 +5,25 @@ REM Limpar CLASSPATH :
 REM set CLASSPATH=
 
 SETLOCAL
+
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
+    goto PathProlac
+) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
+    goto PathOutros
+) else (
+    echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
+    exit
+)
+
+:PathProlac
+set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
+goto PularPathOutros
+:PathOutros
 set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
-REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
-REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_161\bin
-REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_92\bin
+:PularPathOutros
+
 
 REM http://stackoverflow.com/questions/23730887/why-is-rt-jar-not-part-of-the-class-path-system-property : 
 REM 	"rt.jar doesn't need to be in the classpath, since it is already in the bootclasspath. It is safe to remove it from your classpath."
@@ -28,10 +43,17 @@ cd\
 cd "Arquivos de Programas PC"
 cd "Integração Fornecedor - Portal Cronos"
 
-REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
-REM e o caminho do outro JRE vem primeiro no PATH de DOS :
-C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
-REM Prolac: C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor 
+REM e o caminho do outro JRE está na primeira posição no PATH de DOS:
+
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
+    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
+    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+) else (
+    echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
+    exit
+)
 
 ENDLOCAL
 exit
