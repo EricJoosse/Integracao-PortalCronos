@@ -20,6 +20,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "";
 			f.versaoJRE = "";
 			f.tipoSO = "Windows Server 2016";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == null) {
 			f.NomeFantasiaEmpresa = "Monitoramento";
@@ -31,6 +32,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "mstsc";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 13) {
 			f.NomeFantasiaEmpresa = "Formaggio";
@@ -45,6 +47,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-formaggio";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "Windows Server 2012 R2";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 947) {
 			f.NomeFantasiaEmpresa = "JR Distribuição";
@@ -59,6 +62,7 @@ public class FornecedorRepositorio {
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "Windows 10 Pro";
 			f.SO32ou64bit = "64bit";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 30) {
 			f.NomeFantasiaEmpresa = "Prolac";
@@ -72,6 +76,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-prolac";
 			f.versaoJRE = "jre1.8.0_161";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
+			f.dirProgramFiles = "Program Files (x86)";
 		}			   
 		else if (idFornecedor == 21) {
 			f.NomeFantasiaEmpresa = "Marítimos";
@@ -84,6 +89,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-mpescados";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "?????????????????????";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 170) {
 			f.NomeFantasiaEmpresa = "SOST";
@@ -96,6 +102,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-sost";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 60) {
 			f.NomeFantasiaEmpresa = "Karne Keijo";
@@ -108,6 +115,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-karnekeijo";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 33) {
 			f.NomeFantasiaEmpresa = "Comal";
@@ -120,6 +128,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-comal";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "?????????????????????";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 51) {
 			f.NomeFantasiaEmpresa = "Master Commerce";
@@ -132,6 +141,7 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-mcommerce";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "?????????????????????";
+			f.dirProgramFiles = "Program Files";
 		}			   
 		else { 
 			throw new Exception("Erro: idFornecedor " + idFornecedor.toString() + " não existe");

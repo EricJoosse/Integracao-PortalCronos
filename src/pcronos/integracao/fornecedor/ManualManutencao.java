@@ -224,7 +224,7 @@ this.conteudo += "" +
 "    \"Java(TM) Platform SE binary\". " + "\r\n" +
 "    Se não tiver nenhum processo com este nome, tudo está certo." + "\r\n" +   
 "    Se tiver um ou mais processos na lista, verifica com o botão á direita do mouse," + "\r\n" + 
-"    na aba \"Geral\" se o \"Local\" de cada processo for igual a \"C:/\"Program Files\"/Java/" + f.versaoJRE + "/bin/java.exe\"." + "\r\n" + 
+"    na aba \"Geral\" se o \"Local\" de cada processo for igual a \"C:/" + f.dirProgramFiles + "/Java/" + f.versaoJRE + "/bin/java.exe\"." + "\r\n" + 
 "    Se não tiver nenhum processo com este \"Local\", tudo está certo.   " + "\r\n" +
 "    Se tiver um processo com este \"Local\" enquanto que as ofertas automáticas estão paradas," + "\r\n" + 
 "    este processo está travado. Neste caso, com o botão a direita do mouse clicar em \"Finalizar tarefa\".  " + "\r\n" +

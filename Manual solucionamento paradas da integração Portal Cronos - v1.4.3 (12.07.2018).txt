@@ -51,7 +51,7 @@ A. Possíveis causas de paradas da integração WinThor/PCronos:
     "Java(TM) Platform SE binary". 
     Se não tiver nenhum processo com este nome, tudo está certo.
     Se tiver um ou mais processos na lista, verifica com o botão á direita do mouse,
-    na aba "Geral" se o "Local" de cada processo for igual a "C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe".
+    na aba "Geral" se o "Local" de cada processo for igual a "C:/Program Files/Java/jre1.8.0_92/bin/java.exe".
     Se não tiver nenhum processo com este "Local", tudo está certo.   
     Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão paradas,
     este processo está travado. Neste caso, com o botão a direita do mouse clicar em "Finalizar tarefa".  

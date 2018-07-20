@@ -10,31 +10,39 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
  
  
 4. Apenas no servidor da JR Distribuição: 
-			- Editar /config/xxx.properties: JR Embalagem -> JR Distribuição
-			- Editar conteúdo manual TI:     JR Embalagem -> JR Distribuição
+			- Editar /config/xxx.properties:             JR Embalagem -> JR Distribuição
+			- Editar conteúdo manual TI manualmente:     JR Embalagem -> JR Distribuição
 			- Copiar o conteúdo do .properties para o arquivo "Eclipse - Integração Fornecedor - Portal Cronos.2.6.1.properties.WinThor.JR_Distribuição.Producao"
 			- Remover .properties antigos da JR Embalagem
 			
 			
-5. Em todos os servidores de todos os fornecedores: 
-			- Renomear o nome do arquivo do Manual TI (aumentar a versão)
-			- Editar o atalho no menu de Windows para apontar para o arquivo renomeado
-			- Se precisar (depende da versão de Windows), renomear o atalho 
+5. Apenas no servidor da Prolac:
+		- Corrigir Manual TI manualmente: substituir "Program Files" por "Program Files (x86)" 
+		- Não precisa aumentar a versão do manual na Prolac pois na Prolac ainda não tem versão 2.6.1 do .jar instalado
 
 
-6. Mover "DesinstalarManualTI.bat" de "Arquivos de Programas PC" 
+6. Em todos os servidores de todos os fornecedores: 
+			- Renomear o nome do arquivo do Manual TI manualmente: aumentar a versão para v1.4.3 (12.07.2018)
+			- Editar o atalho no menu de Windows manualmente para apontar para o arquivo renomeado
+			- Se precisar (depende da versão de Windows), renomear o atalho manualmente
+
+
+7. Mover "DesinstalarManualTI.bat" de "Arquivos de Programas PC" 
    para "Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/bin/"
    
-7. Apagar "Desinstalação_Versão_Windows.bat"
+8. Apagar "Desinstalação_Versão_Windows.bat"
 
-8. Copiar do instalador para o servidor do fornecedor:
+9. Copiar do instalador para o servidor do fornecedor:
 		- Desinstalar_Integração_Fornecedor_PortalCronos.bat
 		- DesinstalarManualTI.bat
-		- InstalarManualTI.bat
 		- TestadorUnitario.bat
 
+   Observação: 
+		- Não copiar InstalarManualTI.bat do instalador para o servidor do fornecedor, 
+		  pois o instalador remove isso também automaticamente no final da instalação
 
-9. No caso do Prolac: 
+
+10. No caso do Prolac: 
 			- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
 			- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
 
@@ -43,7 +51,7 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 			- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/ por completo
 
 
-10. xJob15a15minOfertamentoJava_Windows.bat: 
+11. xJob15a15minOfertamentoJava_Windows.bat: 
      Substituir: 
 
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
@@ -66,7 +74,7 @@ if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
 )
 
 
-11. xJob15a15minOfertamentoJava_Windows.bat: 
+12. xJob15a15minOfertamentoJava_Windows.bat: 
      Substituir: 
 
 SETLOCAL
@@ -101,10 +109,10 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
 :PularPathOutros
 
 
-12. Apenas no caso do Prolac: 
-    	- executar TestadorUnitario.bat e verificar se funcionou: veja TestadorUnitario.log
-		- depois do teste, apagar TestadorUnitario.log
+13. Apenas no caso do Prolac: 
+    	- Executar TestadorUnitario.bat e verificar se o snippet qualquer funcionou: veja TestadorUnitario.log
+		- Depois do teste, apagar TestadorUnitario.log
  
-13. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+14. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
 
 

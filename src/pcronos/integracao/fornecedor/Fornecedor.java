@@ -20,6 +20,7 @@ public class Fornecedor {
 	String versaoJRE;
 	String tipoSO;
 	String SO32ou64bit;
+	String dirProgramFiles;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {
