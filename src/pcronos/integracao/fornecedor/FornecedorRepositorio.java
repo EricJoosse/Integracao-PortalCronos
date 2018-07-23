@@ -5,6 +5,29 @@ public class FornecedorRepositorio {
 	public FornecedorRepositorio() {
 	}
 
+	Integer getIdFornecedorByCnpj(String cnpj) throws Exception {
+		if (cnpj.equals("02870737000190"))
+			return 13;
+		else if (cnpj.equals("00680755000265"))
+			return 947;
+		else if (cnpj.equals("07182763000140"))
+			return 30;
+		else if (cnpj.equals("04666316000178"))
+			return 21;
+		else if (cnpj.equals("07041307000180"))
+			return 170;
+		else if (cnpj.equals("24150377000195"))
+			return 60;
+		else if (cnpj.equals("07534303000133"))
+			return 33;
+		else if (cnpj.equals("11799763000160"))
+			return 51;
+		else {
+			throw new Exception("Erro! CNPJ " + cnpj + " não cadastrado no FornecedorRepository!");
+		}
+	}
+	
+	
 	Fornecedor getFornecedor(Integer idFornecedor) throws Exception {
 		Fornecedor f = new Fornecedor();
 		f.IdFornecedor = idFornecedor;

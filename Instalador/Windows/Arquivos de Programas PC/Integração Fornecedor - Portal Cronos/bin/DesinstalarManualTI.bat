@@ -4,17 +4,6 @@ cls
 REM Resettar ERRORLEVEL para 0 (não existe valor default):
 call (exit /b 0)
 
-SET /P idFornecedor=Favor digitar o ID do fornecedor: 
-IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
-GOTO PularErro
-:ErroIdFornecedor
-echo MSGBOX "Erro: ID do fornecedor não informado! Desinstalação abortada!!" > %temp%\TEMPmessage.vbs
-call %temp%\TEMPmessage.vbs
-del %temp%\TEMPmessage.vbs /f /q
-REM O seguinte sai settando ERRORLEVEL para 1, sem fechar o script chamador: 
-exit /B 1
-:PularErro
-
 REM Limpar CLASSPATH :
 REM set CLASSPATH=
 
@@ -22,12 +11,6 @@ SETLOCAL
 
 
 REM Se tiver um parentese dentro do path, o seguinte não funciona:
-
-REM if %idFornecedor% == 30 (
-REM     set path=C:\Program Files ^(x86^)\Java\jre1.8.0_161\bin;%path%
-REM ) else (
-REM     set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
-REM )
 
 if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
     goto PathProlac
@@ -37,12 +20,6 @@ if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
     echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
     exit
 )
-
-REM if %idFornecedor% == 30 (
-REM     goto PathProlac
-REM ) else (
-REM     goto PathOutros
-REM )
 
 :PathProlac
 set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
@@ -76,9 +53,9 @@ REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor
 REM e o caminho do outro JRE está na primeira posição no PATH de DOS:
 
 if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
-    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
+    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.Desinstalador >> Desinstalador.log
 ) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
-    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.Desinstalador %idFornecedor% >> Desinstalador.log
+    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.6.1.jar pcronos.integracao.fornecedor.Desinstalador >> Desinstalador.log
 ) else (
     echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
     exit
