@@ -5,7 +5,9 @@ public class FornecedorRepositorio {
 	public FornecedorRepositorio() {
 	}
 
-	Integer getIdFornecedorByCnpj(String cnpj) throws Exception {
+	// O método getIdFornecedorByCnpj(String cnpj) nunca fica chamado se siglaSistema == "PCronos", 
+	// então não precisa retornar um objeto Integer (nullable):
+	int getIdFornecedorByCnpj(String cnpj) throws Exception {
 		if (cnpj.equals("02870737000190"))
 			return 13;
 		else if (cnpj.equals("00680755000265"))
@@ -22,8 +24,10 @@ public class FornecedorRepositorio {
 			return 33;
 		else if (cnpj.equals("11799763000160"))
 			return 51;
+		else if (cnpj.equals("11222333444455"))
+			throw new Exception("Erro! O CNPJ da empresa fornecedora não foi informado no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + "!");
 		else {
-			throw new Exception("Erro! CNPJ " + cnpj + " não cadastrado no FornecedorRepository!");
+			throw new Exception("Erro! O CNPJ da empresa fornecedora " + cnpj + " no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + " está errado!");
 		}
 	}
 	
