@@ -6,7 +6,9 @@ public class FornecedorRepositorio {
 	}
 
 	// O método getIdFornecedorByCnpj(String cnpj) nunca fica chamado se siglaSistema == "PCronos", 
-	// então não precisa retornar um objeto Integer (nullable):
+	// então não precisa retornar um objeto Integer (nullable). 
+	// observação: se um dia precisar trocar "int" por "Integer", tem que tomar providencias para  
+	// continuar funcionando com valor -1, veja https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
 	int getIdFornecedorByCnpj(String cnpj) throws Exception {
 		if (cnpj.equals("02870737000190"))
 			return 13;

@@ -1,8 +1,7 @@
 Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
 ==================================================================================================
-    1. Atualizar o único /conf/.properties file no diretório da instalação 
+    1. NÃO atualizar o único /conf/.properties file no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
-        Executar Maven para atualizar integr-fornecedor-x.y.z.jar.
 
 	2. Conectar no Team Viewer. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
@@ -91,7 +90,7 @@ Como vai ser?
         e preencher TODOS os campos sem falta, antes de continuar, pois sem isso a instalação do 
         Manual de Manutenção para a TI não vai funcionar corretamente.
         
-    5d. Compilar e atualizar integr-fornecedor-x.y.z.jar 
+    5d. Executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
           
     6. NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
@@ -100,13 +99,13 @@ Como vai ser?
     7. O instalador deve ser copiado para exatamente o diretório C:\temp\ no servidor do fornecedor.
        Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.
     
-    8. Antes da instalação :
-       					        
+    
+    8a. Antes da instalação:       					       
           0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
                 (i)  do variável de ambiente do sistema "Path" de Windows: 
                 (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
                 
-             e verificar :
+             e verificar:
               
        	  1. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
        	       (i)   no variável de ambiente do usuário administrador
@@ -127,8 +126,13 @@ Como vai ser?
        No caso que no servidor do fornecedor já tinha outra versão mais nova do JRE instalada na mesma maquina, 
        após a instalação voltar os atalhos em C:\ProgramData\Oracle\Java\javapath\ para como estava antes.
 
+
+    8b. Durante a instalação: 
+            - No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos: 
+              na pergunta do idFornecedor preencher -1. 
+
  
-    9. Após a instalação :
+    9.  Após a instalação:
     
     9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
@@ -300,9 +304,17 @@ Como vai ser?
 			1. No Eclipse: .............. 
 			2. Já foi feito automaticamente pelo pom.xml na geração do .jar. 
 
-   16. (i)  Verificar se "debug" = "true" no arquivo de configuração para facilitar atendimento imediato no futuro, 
-            exceto no caso que "SiglaSistema" = "PCronos" (fornecedor "Monitoramento").
-       (ii) Verificar se o default de "QtdDiasArquivosXmlGuardados" = "100"
+   16. Atualizar o arquivo /conf/.properties no servidor do  fornecedor  
+       C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\:
+       (i)   No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos 
+       		 apenas preencher as seguintes chaves e deixar o resto como o default do instalador: 
+       			- SiglaSistema: PCronos
+       			- Todas as chaves da seção "Base de Dados do sistema do fornecedor"
+       			- Todas as chaves "xxxxxxxxEmailAutomatico"
+       (ii)  Verificar se "debug" = "true" no arquivo de configuração para facilitar atendimento imediato no futuro, 
+             exceto no caso que "SiglaSistema" = "PCronos" (fornecedor "Monitoramento").
+       (iii) Verificar se o default de "QtdDiasArquivosXmlGuardados" = "100" para servidores dos fornecedores
+             e "30" para o servidor de monitoramento automático
  
    17. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
        na procedure [dbo].[monitorarIntegracaoFornecedores]
