@@ -41,6 +41,7 @@ import java.io.File;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import javax.activation.*    ;
 //
@@ -228,7 +229,7 @@ public static void enviar( java.lang.String p_De
                           , java.lang.String SenhaCriptografadaEmailAutomatico
                           , String diretorioArquivosXmlSemBarraNoFinal
                           , LocalDateTime horaInicio
-                          , String nomeArquivoEnv
+                          , String diretorioArquivosXml
                           , String nmFornecedor
                           ) {
 javax.mail.internet.MimeMessage       mmsg                     ; 
@@ -256,7 +257,7 @@ File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCr
 	       qtdEmailsEnviadosHojeTotal += 1;
 	    }
 	    
-	    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().replace(".env", "").equals(nmFornecedor)) 
+	    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().startsWith(nmFornecedor)) 
 	    {
 	       qtdEmailsEnviadosHojeFornecedor += 1;
 	    }
@@ -338,6 +339,9 @@ try
     
     javax.mail.Transport.send( mmsg ) ;    
 
+    LocalDateTime horaEnv = LocalDateTime.now();
+	DateTimeFormatter Envformatter = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
+	String nomeArquivoEnv = diretorioArquivosXml + nmFornecedor + "." + horaEnv.format(Envformatter) + ".env";
     File fileEnviado = new File(nomeArquivoEnv);
 	boolean isFileEnvCriado = fileEnviado.createNewFile();
 } 
