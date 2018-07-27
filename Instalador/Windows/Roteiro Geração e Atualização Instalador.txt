@@ -304,6 +304,7 @@ Como vai ser?
 			1. No Eclipse: .............. 
 			2. Já foi feito automaticamente pelo pom.xml na geração do .jar. 
 
+
    16. Atualizar o arquivo /conf/.properties no servidor do  fornecedor  
        C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\:
        (i)   No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos 
@@ -316,10 +317,17 @@ Como vai ser?
        (iii) Verificar se o default de "QtdDiasArquivosXmlGuardados" = "100" para servidores dos fornecedores
              e "30" para o servidor de monitoramento automático
  
-   17. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
+
+   17. Apenas no caso de instalação no servidor do monitoramento:
+		  (i)  No Windows Explorer alterar a opção para não exibir arquivos de sistema, 
+		       porém pode exibir hidden files, para todos os usuários inclusive cronostech 
+		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
+
+
+   18. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
        na procedure [dbo].[monitorarIntegracaoFornecedores]
    
-   18. update [dbo].[Usuario_Sistema]  
+   19. update [dbo].[Usuario_Sistema]  
           set id_fornecedor_fornec = .....
         where cd_usuario_sistema_ususis = 'ericcoringa'
    
@@ -327,7 +335,7 @@ Como vai ser?
        um texto padrão do fornecedor para todas as cotações de todos os compradores 
        e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema". 
     
-   19. Enviar Email/ Skype: 
+   20. Enviar Email/ Skype: 
    
        Vocês têm apenas UMA base de dados WinThor/Oracle? Ou talvez tem uma base de produção e outra base de teste, por exemplo?
 
@@ -373,13 +381,13 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        ANTIGO: Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
 
-   20. No caso que você precisa atualizar a versão de Java um dia no futuro, 
+   21. No caso que você precisa atualizar a versão de Java um dia no futuro, 
        no servidor que está hospedando a integração WinThor / PCronos, 
        favor não se esquecer para me avisar com alguns dias de antecedência! 
        Caso contrário, o serviço será interrompido indevidamente alguns dias 
        depois de uma atualização de Java!
        
-   21. Verificar, e no caso, enviar o seguinte email: 
+   22. Verificar, e no caso, enviar o seguinte email: 
    
 Leão,
   
@@ -393,7 +401,7 @@ sem nenhum registro de log deste erro...
  
 Eric
    
-   22. Na sp dbo.monitorarIntegracaoFornecedores: 
+   23. Na sp dbo.monitorarIntegracaoFornecedores: 
       (i)  adicionar: 
 	       		--and f.id_fornecedor_fornec <> xxx -- AAAAAAAAAA
 	       depois de: 
@@ -405,7 +413,7 @@ Eric
 				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
 
       
-   23. Scripts para troubleshooting se não funcionar:
+   24. Scripts para troubleshooting se não funcionar:
    
 declare @fornecedor_id  int
 set @fornecedor_id = 

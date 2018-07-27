@@ -3,10 +3,15 @@ Manual Upgrade dos Ambientes de Produção de outra versão para outra versão que n
 na lista de manuais para upgrade
 ================================
 
+1. Apenas no servidor do monitoramento:
+	 - Conectar como cronostech
+     - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
 
-1. Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor
+2. Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor
  
 
-2. Atualizar a chamada de integr-fornecedor-x.y.z.jar no Job15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-x.y.z.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
+4. Apenas no servidor do monitoramento: 
+     - No Windows Explorer voltar a opção para não exibir arquivos de sistema 

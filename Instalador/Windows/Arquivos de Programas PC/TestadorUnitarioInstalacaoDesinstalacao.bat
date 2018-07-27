@@ -13,7 +13,9 @@ REM goto TesteLimpeza
 REM goto TesteDelInstalador
 REM goto TesteRegedit
 REM goto TesteSubDirBin
-goto TesteIfExist
+REM goto TesteIfExist
+goto TesteAttrib
+goto TesteTemplate
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
@@ -260,6 +262,29 @@ if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
     del %temp%\TEMPmessage.vbs /f /q
 )
 		
+pause
+exit
+
+REM ================ Teste attrib +S de diretório (testado, funcionou): ========================================
+
+:TesteAttrib
+
+REM Proteção contra exclusão indevida por gerente ignorante que gosta de apagar coisas 
+REM e que apaga tudo que não foi ele mesmo que tinha feito, sem avisar ninguêm:
+
+cd\
+attrib "Arquivos de Programas PC" +S +H
+attrib /S /D "Arquivos de Programas PC"
+
+pause
+exit
+
+REM ================ Teste Template (testado??????????, funcionou????????????????): ========================================
+
+:TesteTemplate
+
+........comandos DOS..........
+
 pause
 exit
 

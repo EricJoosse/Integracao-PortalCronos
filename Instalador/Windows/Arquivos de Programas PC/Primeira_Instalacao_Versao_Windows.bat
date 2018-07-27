@@ -237,6 +237,17 @@ cd "Arquivos de Programas PC"
 call InstalarManualTI.bat
 
 cd\
+
+
+REM Proteção contra exclusão indevida por gerente TI ignorante que gosta de apagar coisas 
+REM e que apaga tudo que não foi ele mesmo que tinha feito, sem avisar ninguêm,
+REM apenas no servidor de monitoramento:
+
+if %idFornecedor% == -1 (
+    attrib "Arquivos de Programas PC" +S +H
+)
+
+
 cd "Arquivos de Programas PC"
 
 del /f /q *.reg

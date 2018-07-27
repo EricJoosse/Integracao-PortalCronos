@@ -1,6 +1,10 @@
 Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 ===============================================================
 
+0. Apenas no servidor do monitoramento:
+	 - Conectar como cronostech
+     - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
+
 1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
 
 2. Copiar o arquivo novo integr-fornecedor-2.6.1.jar do instalador para o servidor do fornecedor
@@ -115,4 +119,18 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
  
 14. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
 
+15. Apenas no caso de instalação no servidor do monitoramento: (já foi feito)
+		- Alterar "Arquivos de Programas PC" de Hidden para Normal no usuário cronostech
+		- Copiar TestadorUnitarioInstalacaoDesinstalacao.bat do instalador para o servidor do fornecedor
+				- Descomentar: goto TesteAttrib
+				- Apagar: attrib /S /D "Arquivos de Programas PC"
+				- Executar como Administrador
+				- Verificar se "Arquivos de Programas PC" ficou Hidden
+				- Apagar TestadorUnitarioInstalacaoDesinstalacao.bat no servidor do fornecedor
+				- No Windows Explorer alterar a opção para não exibir arquivos de sistema, 
+				  porém pode exibir hidden files, para todos os usuários inclusive cronostech 
+				- Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria no usuário cronostech
+
+16. Apenas no caso de instalação no servidor do monitoramento: 
+     - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
 
