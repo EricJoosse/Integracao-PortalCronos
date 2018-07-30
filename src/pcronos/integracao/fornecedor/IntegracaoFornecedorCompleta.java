@@ -987,22 +987,6 @@ public final class IntegracaoFornecedorCompleta {
 		           	     else 
 			           	       ateQuando = rSet.getTimestamp(10).toLocalDateTime().format(formatter);
 		           	     
-		           	     
-		           	     
-		            	 body += rSet.getString(3) + "\r\n\r\n" 
-		              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
-		              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação!\r\n\r\n"
-		              		     )                                
-		              		  +  "Só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
-		              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
-		              		  +  ((rSet.getInt(5) > 0) ? ( "Favor verificar o percentual de ocupação da memória RAM ou verificar a comunicação com o servidor de banco.\r\n"
-		              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
-		              				                     )
-    		                                           : ""
-		              			 )                                
-		            	      +  "Erro: " + rSet.getString(6) + "\r\n" 
-		            		  +  "\r\n\r\n\r\n\r\n";
-		            	 
 		            	 String strParteDoDia = null;
 		            	 if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY || horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY)
 			            	    strParteDoDia = "bom dia"; // o email será enviado na próxima segunda-feira por enquanto
@@ -1013,133 +997,182 @@ public final class IntegracaoFornecedorCompleta {
 		            	 else
 			            	    strParteDoDia = "bom dia"; //"boa noite"; o email será enviado no próximo dia por enquanto
 		            	 
-		            	 body += "LIGAR O SKYPE!!!!!!\r\n";
-		            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
-		            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n\r\n\r\n\r\n";
-		            	 body += "Para: leao@cronos-tech.com.br\r\n";
-		            	 body += "Leão, \r\n";
-		            	 body += "    \r\n";
-		            	 body += "   a integração da " + nmFornecedor + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
-		            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
-+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
-+ " " + "\r\n"
-+ "<i>Este email foi enviado automaticamente pelo sistema Portal Cronos</i>\r\n"
-+ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + nmFornecedor + "." + "\r\n"
-+ " " + "\r\n"
-+ "<b>Isso é urgente e importante para resolver logo para evitar que a " + nmFornecedor + " perde muitas oportunidades de venda!</b>" + "\r\n"
-+ " " + "\r\n"
-+ "OU:  " + "\r\n"
-+ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
-+ "É urgente pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
-+ " " + "\r\n"
-+ "OU:" + "\r\n"
-+ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + nmFornecedor + " (164) nesta cotação!" + "\r\n"
-+ "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
-+ " " + "\r\n"
-+ "OU:" + "\r\n"
-+ "No momento já tem 3 cotações esperando e esta quantidade vai crescer rapidamente!" + "\r\n"
-+ " " + "\r\n"
-+ "OU:  " + "\r\n"
-+ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n" 
-+ " " + "\r\n"
-+ "OU:" + "\r\n"
-+ "Favor solicitar os vendedores ofertar as cotações ...... manualmente, pois não vai dar mais tempo suficiente" + "\r\n" 
-+ "para ofertar estas cotações automaticamente. " + "\r\n"
-+ " " + "\r\n"
-+ "OU:" + "\r\n"
-+ "Se não conseguir resolver antes de " + ateQuando + " horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
-+ "pois a cotação que vence primeiro e que não está ofertada vence " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + ","   + "\r\n"
-+ "e tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
-+ " " + "\r\n"
-+ "OU:" + "\r\n"
-+ "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
-+ "pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
-+ " " + "\r\n"
-+ "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
-+ "Se você não tem nenhuma ideia da causa, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
-+ " " + "\r\n"
-+ "OU:" + "\r\n"
-+ "Se você não tem nenhuma ideia da causa, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
-+ "Após a solução da causa, veja no manual em anexo como verificar se o serviço realmente voltou a funcionar.\r\n"
-+ " " + "\r\n"
-;
 
-//		     		    String sqlVerificacaoCadastros = 
-//		     		    		  "select distinct ds_ocorrencia_logeint "
-//		     		    		+ "  from dbo.Log_Erro_Integracao "
-//		     		    		+ " where id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
-//		     		    		+ "   and dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
-//		     		    		+ "   and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' ";
-		     		    
-		     		    String sqlVerificacaoCadastros = 
-		     		   "select max(SUBSTRING(lei.ds_ocorrencia_logeint, 32, LEN(lei.ds_ocorrencia_logeint))) "
-		     	+ "     , comp.nm_pessoa  as nm_comprador "
-		     	+ " 	     , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32) "
-		     	+ " 	  from dbo.Log_Erro_Integracao lei "
-		     	+ " 	       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot "
-		     	+ " 	       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr "
-		     	+ " 	       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa  "
-		     	+ " 	 where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
-		     	+ " 	   and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
-		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' "
-		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '')     like '%O CNPJ%' "
-		     	+ " 	group by comp.nm_pessoa "
-		     	+ "         , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32) "  
-		     	+ " 	UNION "
-		     	+ " 	select distinct lei.ds_ocorrencia_logeint "
-		     	+ " 	     , comp.nm_pessoa  as nm_comprador "
-		     	+ " 	     , lei.ds_ocorrencia_logeint "
-		     	+ " 	  from dbo.Log_Erro_Integracao lei "
-		     	+ " 	       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot "
-		     	+ " 	       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr "
-		     	+ " 	       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa  "
-		     	+ " 	 where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
-		     	+ " 	   and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
-		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' "
-		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%O CNPJ%' "
-		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%informada no XML das ofertas não pode ser diferente da condição%' "
-		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like 'Já existe outra oferta ativa da mesma empresa fornecedora%' "
-		     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está bloqueada no sistema " + f.SiglaSistemaFornecedor + " do fornecedor%' ";
-
-		     		   Statement statVerificacaoCadastros = conn.createStatement();
-		     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
-		     		    int qtdVerificacaoCadastros = 0;
-		     		    while (rSetVerificacaoCadastros.next()) {
-		     		    	qtdVerificacaoCadastros += 1;
-		     		    	if (qtdVerificacaoCadastros == 1) {
-		     		    		body += " " + "\r\n"
-		     		    	         + "<b>Aproveitando: após a solução do problema, favor informar ao gerente de vendas que o motivo porque nos últimos 7 dias diversas cotações não foram ofertadas automaticamente, é a falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
-		     		    			 ;
-		     		    	}
-							body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
-							
-						} 
-
-		     		    sqlVerificacaoCadastros = "select distinct lei.ds_ocorrencia_logeint "
-		     			     	+ "   from dbo.Log_Erro_Integracao lei "
-		     			     	+ "  where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
-		     			     	+ "    and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -21, getdate()) "
-		     	                + "    and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'";
-   		
-		     		    rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
-		     		    qtdVerificacaoCadastros = 0;
-		     		    while (rSetVerificacaoCadastros.next()) {
-		     		    	qtdVerificacaoCadastros += 1;
-		     		    	if (qtdVerificacaoCadastros == 1) {
-		 		     		   body += " " + "\r\n"
-		 				     			+ "Outra coisa, nos últimos 20 dias os seguintes produtos não foram ofertados em nenhuma cotação por causa de falta ou erro de cadastro: " + "\r\n";
-		     		    	}
-							body += rSetVerificacaoCadastros.getString(1) + "\r\n";
-							
-						} 
-
-		     		    body += " " + "\r\n"
-			     			+ "Atc," + "\r\n"
-		     				+ "O email automático do Portal Cronos " + "\r\n"
-		     				+  "\r\n\r\n\r\n\r\n";
-
+		            	 // O seguinte vale pelo menos para o seguinte erro: 
+		            	 //       "No Portal Cronos não tem nenhum DE/PARA cadastrado para o Código ou Descrição 
+		            	 //        da condição de pagamento 2 do fornecedor informado no arquivo XML da oferta 
+		            	 //        para a cotação 105-0553"
+		            	 // Ficar acomanhando se isso vale para todos os outros casos que Erro == null ou Empty????????
+		            	 //???????????????????????????????
+		            	 if (!Utils.isNullOrBlank(rSet.getString(6))) {
+			            	 body += "Assunto: Erro integração " + nmFornecedor + " - " + rSet.getString(6) + "\r\n"
+		            			  + "Para: leao@cronos-tech.com.br"+ "\r\n"
+		            			  + "Leão, " + strParteDoDia + "!" + "\r\n"
+ 	            				  + " " + "\r\n"
+ 	            				  + "Recebi um email automático (provisório) com o seguinte erro: " + "\r\n"
+ 	            				  + "      \"<i>" + rSet.getString(6) + "</i>\"" + "\r\n"
+ 	            				  + " " + "\r\n"
+ 	            				  + rSet.getString(3) + "\r\n\r\n" 
+			              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
+        		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação \r\n\r\n"
+			              			)
+			              		  +  "e só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
+ 	            				  + " " + "\r\n"
+ 	            				  + "<b>Depois disso favor resettar a qtd. tentativas de ofertamento para zero com o seguinte script:<b> " + "\r\n"
+ 	            				  + " " + "\r\n"
+ 	            				  + "delete" + "\r\n"
+ 	            				  + "   from [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]" + "\r\n"
+ 	            				  + "  where id_cotacao_cot in (........)  " + "\r\n"
+ 	            				  + "    and id_fornecedor_fornec = " + Integer.toString(rSet.getInt(1)) + "\r\n"
+ 	            				  + " " + "\r\n"
+ 	            				  + "Atc, " + "\r\n"
+ 	            				  + "Eric " + "\r\n"
+ 	            				  ;
+		           	     }
+		           	     else {
+		           	     
+			            	 body += rSet.getString(3) + "\r\n\r\n" 
+			              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
+			              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação!\r\n\r\n"
+			              		     )                                
+			              		  +  "Só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
+			              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
+			              		  +  ((rSet.getInt(5) > 0) ? ( "Favor verificar o percentual de ocupação da memória RAM ou verificar a comunicação com o servidor de banco.\r\n"
+			              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
+			              				                     )
+	    		                                           : ""
+			              			 )                                
+			            	      +  "Erro: " + rSet.getString(6) + "\r\n" 
+			            		  +  "\r\n\r\n\r\n\r\n";
+			            	 
+			            	 body += "LIGAR O SKYPE!!!!!!\r\n";
+			            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
+			            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n\r\n\r\n\r\n";
+			            	 body += "Para: leao@cronos-tech.com.br\r\n";
+			            	 body += "Leão, \r\n";
+			            	 body += "    \r\n";
+			            	 body += "   a integração da " + nmFornecedor + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
+			            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
+	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
+	+ " " + "\r\n"
+	+ "<i>Este email foi enviado automaticamente pelo sistema Portal Cronos</i>\r\n"
+	+ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + nmFornecedor + "." + "\r\n"
+	+ " " + "\r\n"
+	+ "<b>Isso é urgente e importante para resolver logo para evitar que a " + nmFornecedor + " perde muitas oportunidades de venda!</b>" + "\r\n"
+	+ " " + "\r\n"
+	+ "OU:  " + "\r\n"
+	+ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
+	+ "É urgente pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
+	+ " " + "\r\n"
+	+ "OU:" + "\r\n"
+	+ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + nmFornecedor + " (164) nesta cotação!" + "\r\n"
+	+ "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
+	+ " " + "\r\n"
+	+ "OU:" + "\r\n"
+	+ "No momento já tem 3 cotações esperando e esta quantidade vai crescer rapidamente!" + "\r\n"
+	+ " " + "\r\n"
+	+ "OU:  " + "\r\n"
+	+ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n" 
+	+ " " + "\r\n"
+	+ "OU:" + "\r\n"
+	+ "Favor solicitar os vendedores ofertar as cotações ...... manualmente, pois não vai dar mais tempo suficiente" + "\r\n" 
+	+ "para ofertar estas cotações automaticamente. " + "\r\n"
+	+ " " + "\r\n"
+	+ "OU:" + "\r\n"
+	+ "Se não conseguir resolver antes de " + ateQuando + " horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
+	+ "pois a cotação que vence primeiro e que não está ofertada vence " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + ","   + "\r\n"
+	+ "e tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
+	+ " " + "\r\n"
+	+ "OU:" + "\r\n"
+	+ "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
+	+ "pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
+	+ " " + "\r\n"
+	+ "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
+	+ "Se você não tem nenhuma ideia da causa, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
+	+ " " + "\r\n"
+	+ "OU:" + "\r\n"
+	+ "Se você não tem nenhuma ideia da causa, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
+	+ "Após a solução da causa, veja no manual em anexo como verificar se o serviço realmente voltou a funcionar.\r\n"
+	+ " " + "\r\n"
+	;
+	
+	//		     		    String sqlVerificacaoCadastros = 
+	//		     		    		  "select distinct ds_ocorrencia_logeint "
+	//		     		    		+ "  from dbo.Log_Erro_Integracao "
+	//		     		    		+ " where id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+	//		     		    		+ "   and dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
+	//		     		    		+ "   and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' ";
+			     		    
+			     		    String sqlVerificacaoCadastros = 
+			     		   "select max(SUBSTRING(lei.ds_ocorrencia_logeint, 32, LEN(lei.ds_ocorrencia_logeint))) "
+			     	+ "     , comp.nm_pessoa  as nm_comprador "
+			     	+ " 	     , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32) "
+			     	+ " 	  from dbo.Log_Erro_Integracao lei "
+			     	+ " 	       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot "
+			     	+ " 	       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr "
+			     	+ " 	       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa  "
+			     	+ " 	 where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+			     	+ " 	   and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' "
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '')     like '%O CNPJ%' "
+			     	+ " 	group by comp.nm_pessoa "
+			     	+ "         , SUBSTRING(lei.ds_ocorrencia_logeint, 0, 32) "  
+			     	+ " 	UNION "
+			     	+ " 	select distinct lei.ds_ocorrencia_logeint "
+			     	+ " 	     , comp.nm_pessoa  as nm_comprador "
+			     	+ " 	     , lei.ds_ocorrencia_logeint "
+			     	+ " 	  from dbo.Log_Erro_Integracao lei "
+			     	+ " 	       INNER JOIN      dbo.Cotacao            as c    on lei.cd_cotacao_logeint   = c.cd_cotacao_cot "
+			     	+ " 	       INNER JOIN      dbo.Comprador          as co   on co.id_comprador_compr = c.id_comprador_compr "
+			     	+ " 	       INNER JOIN      dbo.pessoa             as comp on comp.id_pessoa = co.id_pessoa  "
+			     	+ " 	 where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+			     	+ " 	   and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -8, getdate()) "
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.' "
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%O CNPJ%' "
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%informada no XML das ofertas não pode ser diferente da condição%' "
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like 'Já existe outra oferta ativa da mesma empresa fornecedora%' "
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está bloqueada no sistema " + f.SiglaSistemaFornecedor + " do fornecedor%' ";
+	
+			     		   Statement statVerificacaoCadastros = conn.createStatement();
+			     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
+			     		    int qtdVerificacaoCadastros = 0;
+			     		    while (rSetVerificacaoCadastros.next()) {
+			     		    	qtdVerificacaoCadastros += 1;
+			     		    	if (qtdVerificacaoCadastros == 1) {
+			     		    		body += " " + "\r\n"
+			     		    	         + "<b>Aproveitando, tem outra coisa também: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque nos últimos 7 dias diversas cotações não foram ofertadas automaticamente, é a falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
+			     		    			 ;
+			     		    	}
+								body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
+								
+							} 
+	
+			     		    sqlVerificacaoCadastros = "select distinct lei.ds_ocorrencia_logeint "
+			     			     	+ "   from dbo.Log_Erro_Integracao lei "
+			     			     	+ "  where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+			     			     	+ "    and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -21, getdate()) "
+			     	                + "    and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'";
+	   		
+			     		    rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
+			     		    qtdVerificacaoCadastros = 0;
+			     		    while (rSetVerificacaoCadastros.next()) {
+			     		    	qtdVerificacaoCadastros += 1;
+			     		    	if (qtdVerificacaoCadastros == 1) {
+			 		     		   body += " " + "\r\n"
+			 				     			+ "<b>Mais outra coisa, nos últimos 20 dias os seguintes produtos não foram ofertados automaticamente em nenhuma cotação por causa de falta ou erro de cadastro: <b>" + "\r\n";
+			     		    	}
+								body += rSetVerificacaoCadastros.getString(1) + "\r\n";
+								
+							} 
+	
+			     		    body += " " + "\r\n"
+				     			+ "Atc," + "\r\n"
+			     				+ "O email automático do Portal Cronos " + "\r\n"
+			     				+  "\r\n\r\n\r\n\r\n";
+		           	    } // if (Utils.isNullOrBlank(rSet.getString(6)))
+		           	     
 		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
-		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
+		            	dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
 	            	 } // if (!nmFornecedor.equals("INI")) 
 	            	 else {
 		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
