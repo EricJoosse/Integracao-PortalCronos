@@ -1,0 +1,14 @@
+Versões dos Manuais Manutenção TI instaladados no menu de Windows
+=================================================================
+
+    (antes da versão 2.5 do .jar os manuais foram enviados por email a cada parada da integração)
+
+
+Versão .jar		Versão Manual TI
+-----------		-------------------
+2.5					  -
+2.5.1			v1.4.2 (18.05.2018)
+2.5.2			v1.4.2 (18.05.2018)
+2.6				v1.4.2 (18.05.2018)
+2.6.1			v1.4.3 (12.07.2018)
+
