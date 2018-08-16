@@ -1,0 +1,26 @@
+Roteiro upgrade versão .jar no Eclipse
+======================================
+
+- Editar pom.xml (4 lugares)
+	- Cuidado para não alterar versões de dependências de outros jars por engano
+
+- Editar Job15a15minOfertamentoJava_Windows.bat (2 lugares)
+
+- Editar InstalarManualTI.bat (2 lugares)
+
+- Editar DesinstalarManualTI.bat (2 lugares)
+
+- Editar TestadorUnitario.bat (2 lugares) 
+
+- Verificar se TestadorUnitarioInstalacaoDesinstalacao.bat precisa ser editado
+
+- Compilar .jar
+
+- Mover .jar anterior para \Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos - Versões anteriores\
+
+- Registrar pendência nova para criar um tag novo mais tarde e colocar a pendência na posição correta da fila de commits, 
+  no lugar mais adiantado possível, no último momento possível. Preparar logo a descrição do tag. 
+
+- Se precisar, criar novo "Manual Upgrade Ambientes de Produção de x.y(.z) para a.b(.c).txt"
+
+- Se precisar, atualizar o instalador
