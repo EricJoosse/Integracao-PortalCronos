@@ -1,0 +1,10 @@
+Roteiro upgrade servidor fornecedor
+===================================
+
+- Após finalização e testes definitivos de uma versão nova em algum servidor, 
+  que ainda não está em nenhum outro servidor, 
+  aumentar logo a versão do .jar no projeto Eclipse
+  
+- Apenas criar um tag novo na hora que vai precisar aumentar a versão do .jar, após a conclusão 
+  definitiva da instalação de um upgrade de um fornecedor
+  
