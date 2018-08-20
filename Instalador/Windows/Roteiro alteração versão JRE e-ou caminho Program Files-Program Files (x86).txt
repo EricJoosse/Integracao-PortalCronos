@@ -1,0 +1,55 @@
+Roteiro alteração versão JRE e/ou caminho Program Files/Program Files (x86)
+===========================================================================
+
+Observação: este roteiro serve apenas no caso de alterações nos servidores dos fornecedores, 
+			e não serve para alterações no projeto Eclipse
+			
+- TestadorUnitario.bat: 
+	- Adicionar "else if" no path
+	- Adicionar "else if" na chamada jre
+	- Testar se os parenteses entre aspas funcionam usando um snippet de uma mensagem
+
+- Job15a15minOfertamentoJava_Windows.bat:
+	- Adicionar "else if" no path
+	- Adicionar "else if" na chamada jre
+
+- InstalarManualTI.bat: 
+	- Adicionar "else if" no path
+	- Adicionar "else if" na chamada jre
+
+- DesinstalarManualTI.bat: 
+	- Adicionar "else if" no path
+	- Adicionar "else if" na chamada jre
+
+- FornecedorRepository.cs: alterar:
+		f.dirProgramFiles = "Program Files (x86)"; ou:
+		f.dirProgramFiles = "Program Files";
+
+- FornecedorReposity.cs: alterar:
+        f.versaoJRE = "jre1.8.0_xxxxxxxxxxxxxxxxx";
+
+- Upgrade .jar por motivo da alteracao no FornecedorRepository (veja "Roteiro upgrade versão .jar no Eclipse.txt")
+
+- Re-gerar o Manual TI no raiz do projeto Eclipse para acompanhamento dos setores TI dos forneceores
+  (usando GeradorNaHoraManualTI_COM_PARAMETRO_IdFornecedor.launch e passando o idFornecedor como parâmetro - default = 947). 
+  	- Apagar versões anteriores no raiz do projeto Eclipse apenas se não estão 
+	  usadas mais em nenhum servidor de nenhum fornecedor
+
+- Adicionar novo "Manual Upgrade Ambientes de Produção de x.y.z para x.y.a.txt"
+	- No caso do fornecedor com JRE diferente: 
+		- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
+		- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
+	- Job15a15minOfertamentoJava_Windows.bat: 
+		- Adicionar "else if" no path
+		- Adicionar "else if" na chamada jre
+	- Copiar DesinstalarManualTI.bat do instalador para o servidor do fornecedor
+	- Copiar TestadorUnitario.bat do instalador para o servidor do fornecedor
+	- Não copiar InstalarManualTI.bat do instalador para o servidor do fornecedor, 
+	  pois o instalador remove isso também automaticamente no final da instalação
+	- No caso do fornecedor com JRE diferente: 
+		- executar TestadorUnitario.bat e verificar se funcionou: veja TestadorUnitario.log
+		- depois do teste, apagar TestadorUnitario.log
+		- Ajustar Manual Manutenção TI manualmente: 
+			- editar "Program Files" / "Program Files (x86)"
+			- editar versão JRE
+			
