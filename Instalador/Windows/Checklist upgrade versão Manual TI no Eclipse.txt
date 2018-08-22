@@ -1,7 +1,7 @@
-Roteiro upgrade versão Manual TI no Eclipse
-===========================================
+Checklist upgrade versão Manual TI no Eclipse
+=============================================
 
-- Aumentar a versão do .jar também, veja "Roteiro mudança de versão do .jar.txt"
+- Aumentar a versão do .jar também, veja "Checklist upgrade versão .jar no Eclipse.txt"
 
 - Editar o conteúdo do manual em ManualManutencao.java
 	- aumentar a versão no título

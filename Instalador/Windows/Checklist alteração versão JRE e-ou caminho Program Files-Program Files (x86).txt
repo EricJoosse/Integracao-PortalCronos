@@ -1,7 +1,7 @@
-Roteiro alteração versão JRE e/ou caminho Program Files/Program Files (x86)
-===========================================================================
+Checklist alteração versão JRE e/ou caminho Program Files/Program Files (x86)
+=============================================================================
 
-Observação: este roteiro serve apenas no caso de alterações nos servidores dos fornecedores, 
+Observação: este checklist serve apenas no caso de alterações nos servidores dos fornecedores, 
 			e não serve para alterações no projeto Eclipse
 			
 - TestadorUnitario.bat: 
@@ -28,7 +28,7 @@ Observação: este roteiro serve apenas no caso de alterações nos servidores dos f
 - FornecedorReposity.cs: alterar:
         f.versaoJRE = "jre1.8.0_xxxxxxxxxxxxxxxxx";
 
-- Upgrade .jar por motivo da alteracao no FornecedorRepository (veja "Roteiro upgrade versão .jar no Eclipse.txt")
+- Upgrade .jar por motivo da alteracao no FornecedorRepository (veja "Checklist upgrade versão .jar no Eclipse.txt")
 
 - Re-gerar o Manual TI no raiz do projeto Eclipse para acompanhamento dos setores TI dos forneceores
   (usando GeradorNaHoraManualTI_COM_PARAMETRO_IdFornecedor.launch e passando o idFornecedor como parâmetro - default = 947). 

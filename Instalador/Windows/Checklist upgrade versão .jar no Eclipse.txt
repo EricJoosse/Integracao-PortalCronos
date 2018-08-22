@@ -1,5 +1,5 @@
-Roteiro upgrade versão .jar no Eclipse
-======================================
+Checklist upgrade versão .jar no Eclipse
+========================================
 
 - Editar pom.xml (4 lugares)
 	- Cuidado para não alterar versões de dependências de outros jars por engano

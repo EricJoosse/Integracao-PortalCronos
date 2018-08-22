@@ -1,5 +1,6 @@
-Roteiro Geração e Atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
-==================================================================================================
+Passo a passo geração e atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
+=======================================================================================================
+ 
     1. NÃO atualizar o único /conf/.properties file no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
 

@@ -1,5 +1,5 @@
-Roteiro upgrade servidor fornecedor
-===================================
+Checklist upgrade servidores dos fornecedores
+=============================================
 
 - Após finalização e testes definitivos de uma versão nova em algum servidor, 
   que ainda não está em nenhum outro servidor, 
