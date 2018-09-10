@@ -1131,7 +1131,8 @@ public final class IntegracaoFornecedorCompleta {
 			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%O CNPJ%' "
 			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%informada no XML das ofertas não pode ser diferente da condição%' "
 			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like 'Já existe outra oferta ativa da mesma empresa fornecedora%' "
-			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está bloqueada no sistema " + f.SiglaSistemaFornecedor + " do fornecedor%' ";
+			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está bloqueada no sistema " + f.SiglaSistemaFornecedor + " do fornecedor%' "
+    	            + "        and isnull(lei.ds_ocorrencia_logeint, '') not like 'O Código de Produto %'";
 	
 			     		   Statement statVerificacaoCadastros = conn.createStatement();
 			     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
