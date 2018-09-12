@@ -974,7 +974,7 @@ public final class IntegracaoFornecedorCompleta {
 	            	 }
 	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) {
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
-		            	 assunto = "URGENTE! " + nmFornecedor + " - Parada integração PCronos/" + f.SiglaSistemaFornecedor;
+		            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		           	     DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm");
 		           	     
@@ -1048,10 +1048,6 @@ public final class IntegracaoFornecedorCompleta {
 			            	 body += "LIGAR O SKYPE!!!!!!\r\n";
 			            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
 			            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n\r\n\r\n\r\n";
-			            	 body += "Para: leao@cronos-tech.com.br\r\n";
-			            	 body += "Leão, \r\n";
-			            	 body += "    \r\n";
-			            	 body += "   a integração da " + nmFornecedor + " está parada, e os vendedores estão confiando na integração automática sem saber que ela parou... Não é melhor pelo menos avisar o TI e enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\"? Isso leva apenas 5 minutos. \r\n\r\n\r\n\r\n\r\n\r\n";
 			            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 	+ " " + "\r\n"
@@ -1137,11 +1133,12 @@ public final class IntegracaoFornecedorCompleta {
 			     		   Statement statVerificacaoCadastros = conn.createStatement();
 			     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
 			     		    int qtdVerificacaoCadastros = 0;
+
 			     		    while (rSetVerificacaoCadastros.next()) {
 			     		    	qtdVerificacaoCadastros += 1;
 			     		    	if (qtdVerificacaoCadastros == 1) {
 			     		    		body += " " + "\r\n"
-			     		    	         + "<b>Aproveitando, tem outra coisa também: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque nos últimos 7 dias diversas cotações não foram ofertadas automaticamente, é a falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
+			     		    	         + "<b>Aproveitando, tem mais um problema para resolver: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque diversas cotações não foram ofertadas automaticamente nos últimos 7 dias, é por causa de falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
 			     		    			 ;
 			     		    	}
 								body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
@@ -1155,12 +1152,17 @@ public final class IntegracaoFornecedorCompleta {
 			     	                + "    and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'";
 	   		
 			     		    rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
-			     		    qtdVerificacaoCadastros = 0;
+			     		    int qtdVerificacaoProdutos = 0;
+
 			     		    while (rSetVerificacaoCadastros.next()) {
-			     		    	qtdVerificacaoCadastros += 1;
-			     		    	if (qtdVerificacaoCadastros == 1) {
-			 		     		   body += " " + "\r\n"
-			 				     			+ "<b>Mais outra coisa, nos últimos 20 dias os seguintes produtos não foram ofertados automaticamente em nenhuma cotação por causa de falta ou erro de cadastro: <b>" + "\r\n";
+			     		    	qtdVerificacaoProdutos += 1;
+			     		    	if (qtdVerificacaoProdutos == 1 && qtdVerificacaoCadastros == 0) {
+				 		     		   body += " " + "\r\n"
+				 				     			+ "<b>Aproveitando, tem mais um problema para resolver: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque os seguintes produtos não foram ofertados automaticamente em nenhuma cotação nos últimos 20 dias, é por causa de falta ou erro de cadastro: <b>" + "\r\n";
+				     		    }
+			     		    	else if (qtdVerificacaoProdutos == 1 && qtdVerificacaoCadastros > 0) {
+				 		     		   body += " " + "\r\n"
+				 				     			+ "<b>Tem mais um problema para encaminhar para o gerente de vendas: nos últimos 20 dias os seguintes produtos não foram ofertados automaticamente em nenhuma cotação por causa de falta ou erro de cadastro: <b>" + "\r\n";
 			     		    	}
 								body += rSetVerificacaoCadastros.getString(1) + "\r\n";
 								
