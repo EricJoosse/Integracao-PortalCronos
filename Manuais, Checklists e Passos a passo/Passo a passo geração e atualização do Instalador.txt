@@ -1,7 +1,22 @@
 Passo a passo geração e atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
 =======================================================================================================
  
-    1. NÃO atualizar o único /conf/.properties file no diretório da instalação 
+    0. No caso que o instalador estiver desatualizado, 
+       atualizar a versão do instalador de x1.y1.z1 para x4.y4.z4: 
+    	- Atualizar o arquivo .properties dentro do instalador, verificando todos os manuais 
+    	  "Manual Upgrade Ambientes de Produção de x1.y1.z1 para x2.y2.z2.txt"
+    	  "Manual Upgrade Ambientes de Produção de x2.y2.z2 para x3.y3.z3.txt"
+    	  "Manual Upgrade Ambientes de Produção de x3.y3.z3 para x4.y4.z4.txt"
+    	  ...
+ 
+    	- Verificar o impacto no instalador de todos os outros itens nos manuais  
+    	  "Manual Upgrade Ambientes de Produção de x1.y1.z1 para x2.y2.z2.txt"
+    	  "Manual Upgrade Ambientes de Produção de x2.y2.z2 para x3.y3.z3.txt"
+    	  "Manual Upgrade Ambientes de Produção de x3.y3.z3 para x4.y4.z4.txt"
+    	  ...
+ 
+      
+    1. NÃO colocar os dados do fornecedor novo no único /conf/.properties file no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
 
 	2. Conectar no Team Viewer. 
@@ -432,14 +447,17 @@ select *
    
    
          
-Manual para a geração do instalador Setup.exe:
-==============================================
+Manual para a geração e/ou atualização do instalador Setup.exe:
+===============================================================
 
-1. No Windows Explorer (não no Eclipse) navegar na máquina de desenvolvimento para o diretório 
+1. No Windows Explorer (não no Eclipse), no painel esquerdo do Windows Explorer, 
+   na máquina de desenvolvimento, clicar no diretório 
    C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
-   e ordenar os arquivos por nome alfabético.
+   e ordenar os arquivos no painel direito por nome alfabético.
     
-2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.2.4.1.Win2008.R2.SP1.exe".
+2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.2.6.1.Win2008.R2.SP1.exe" 
+   pelo Eclipse (não pelo Windows Explorer!). Primeiro verificar se este arquivo bate com o arquivo a ser excluido 
+   no GitHub.
      
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
    que cria /"Arquivos de Programas PC"/* no servidor do fornecedor, da seguinte forma :
@@ -447,11 +465,11 @@ Manual para a geração do instalador Setup.exe:
             - selecionar apenas UM dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
             - selecionar apenas UM dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
             - selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.
-            - NÃO selecionar    Instalador*.exe                   
+            - NÃO selecionar nenhum arquivo  Instalador*.exe                   
       - WinRAR                   : Mudar .rar para .zip
       - WinRAR                   : Método de compressão : Ótimo
       - WinRAR                   : marcar checkbox SFX
-      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.2.6.Win2008.R2.SP1.exe
+      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.2.6.1.Win2008.R2.SP1.exe
                                    Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe", 
                                          ajustar o mesmo no final de Primeira_Instalacao_Versao_Windows.bat.
 
