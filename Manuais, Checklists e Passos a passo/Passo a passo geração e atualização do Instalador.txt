@@ -335,8 +335,10 @@ Como vai ser?
  
 
    17. Apenas no caso de instalação no servidor do monitoramento:
-		  (i)  No Windows Explorer alterar a opção para não exibir arquivos de sistema, 
+		  (i)  No Windows Explorer alterar a opção para NÃO exibir arquivos de sistema operacional protegidos, 
+		       (marcar "Hide protected operating system files")  
 		       porém pode exibir hidden files, para todos os usuários inclusive cronostech 
+		       (marcar "Show hidden files, folders, and drives")
 		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
 
 

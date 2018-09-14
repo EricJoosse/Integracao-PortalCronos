@@ -1,7 +1,7 @@
 Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 ===============================================================
 
-0. Apenas no servidor do monitoramento:
+0. Apenas no caso de instalação no servidor do monitoramento:
 	 - Conectar como cronostech
      - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
 
@@ -13,16 +13,15 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
    no servidor do fornecedor
  
  
-4. Apenas no servidor da JR Distribuição: 
+4. Apenas no caso de instalação no servidor da JR Distribuição: 
 			- Editar /config/xxx.properties:             JR Embalagem -> JR Distribuição
 			- Editar conteúdo manual TI manualmente:     JR Embalagem -> JR Distribuição
 			- Copiar o conteúdo do .properties para o arquivo "Eclipse - Integração Fornecedor - Portal Cronos.2.6.1.properties.WinThor.JR_Distribuição.Producao"
 			- Remover .properties antigos da JR Embalagem
 			
 			
-5. Apenas no servidor da Prolac:
+5. Apenas no caso de instalação no servidor da Prolac:
 		- Corrigir Manual TI manualmente: substituir "Program Files" por "Program Files (x86)" 
-		- Não precisa aumentar a versão do manual na Prolac pois na Prolac ainda não tem versão 2.6.1 do .jar instalado
 
 
 6. Em todos os servidores de todos os fornecedores: 
@@ -46,7 +45,7 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 		  pois o instalador remove isso também automaticamente no final da instalação
 
 
-10. No caso do Prolac: 
+10. No caso de instalação no servidor do Prolac: 
 			- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
 			- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
 
@@ -113,7 +112,7 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
 :PularPathOutros
 
 
-13. Apenas no caso do Prolac: 
+13. Apenas no caso de instalação no servidor do Prolac: 
     	- Executar TestadorUnitario.bat e verificar se o snippet qualquer funcionou: veja TestadorUnitario.log
 		- Depois do teste, apagar TestadorUnitario.log
  
@@ -126,10 +125,10 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
 				- Apagar: attrib /S /D "Arquivos de Programas PC"
 				- Executar como Administrador
 				- Verificar se "Arquivos de Programas PC" ficou Hidden
-				- Apagar TestadorUnitarioInstalacaoDesinstalacao.bat no servidor do fornecedor
-				- No Windows Explorer alterar a opção para não exibir arquivos de sistema, 
-				  porém pode exibir hidden files, para todos os usuários inclusive cronostech 
-				- Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria no usuário cronostech
+		- Apagar TestadorUnitarioInstalacaoDesinstalacao.bat no servidor do fornecedor
+		- No Windows Explorer alterar a opção para não exibir arquivos de sistema, 
+		  porém pode exibir hidden files, para todos os usuários inclusive cronostech 
+		- Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria no usuário cronostech
 
 16. Apenas no caso de instalação no servidor do monitoramento: 
      - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
