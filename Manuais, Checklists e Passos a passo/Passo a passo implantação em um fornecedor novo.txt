@@ -1,23 +1,18 @@
-Passo a passo geração e atualização do Instalador + checklist ANTES da instalação em um fornecedor novo 
-=======================================================================================================
+Checklist instalação em um fornecedor novo 
+==========================================
  
-    0. No caso que o instalador estiver desatualizado, 
-       atualizar a versão do instalador de x1.y1.z1 para x4.y4.z4: 
-    	- Atualizar o arquivo .properties dentro do instalador, verificando todos os manuais 
-    	  "Manual Upgrade Ambientes de Produção de x1.y1.z1 para x2.y2.z2.txt"
-    	  "Manual Upgrade Ambientes de Produção de x2.y2.z2 para x3.y3.z3.txt"
-    	  "Manual Upgrade Ambientes de Produção de x3.y3.z3 para x4.y4.z4.txt"
-    	  ...
+IMPORTANTE !!!!!!!!
+===================
+Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor de DOS 
+e não com o Notepad para evitar problemas com cedilhas e acentos !
  
-    	- Verificar o impacto no instalador de todos os outros itens nos manuais  
-    	  "Manual Upgrade Ambientes de Produção de x1.y1.z1 para x2.y2.z2.txt"
-    	  "Manual Upgrade Ambientes de Produção de x2.y2.z2 para x3.y3.z3.txt"
-    	  "Manual Upgrade Ambientes de Produção de x3.y3.z3 para x4.y4.z4.txt"
-    	  ...
- 
-      
-    1. NÃO colocar os dados do fornecedor novo no único /conf/.properties file no diretório da instalação 
+
+    1. NÃO colocar os dados do fornecedor novo no arquivo único /conf/.properties no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
+       
+       Porém colocar os dados do fornecedor novo no diretório de backup 
+       C:\PCronos\Integração Fornecedor - Portal Cronos\conf\
+            \Integração Fornecedor - Portal Cronos.x.y.z.properties.WinThor/APS.NomeFornecedor.Homolog
 
 	2. Conectar no Team Viewer. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
@@ -110,7 +105,8 @@ Como vai ser?
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
           
     6. NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
-       Regerar o instalador, veja o "Manual para a geração do instalador Setup.exe" abaixo.
+       Regerar o instalador, veja o arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt"  
+       no diretório C:\PCronos\Integração Fornecedor - Portal Cronos\Manuais, Checklists e Passos a passo\.
     
     7. O instalador deve ser copiado para exatamente o diretório C:\temp\ no servidor do fornecedor.
        Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.

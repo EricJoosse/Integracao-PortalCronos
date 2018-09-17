@@ -1,0 +1,60 @@
+Manual para a geração e/ou atualização do instalador Setup.exe:
+===============================================================
+
+0. No caso que a versão do .jar no instalador estiver desatualizado, 
+   atualizar a versão do instalador de x1.y1.z1 para x4.y4.z4: 
+    	- Atualizar o arquivo .properties dentro do instalador, verificando todos os manuais 
+    	  "Manual Upgrade Ambientes de Produção de x1.y1.z1 para x2.y2.z2.txt"
+    	  "Manual Upgrade Ambientes de Produção de x2.y2.z2 para x3.y3.z3.txt"
+    	  "Manual Upgrade Ambientes de Produção de x3.y3.z3 para x4.y4.z4.txt"
+    	  ...
+ 
+    	- Verificar o impacto no instalador de todos os outros itens nos manuais  
+    	  "Manual Upgrade Ambientes de Produção de x1.y1.z1 para x2.y2.z2.txt"
+    	  "Manual Upgrade Ambientes de Produção de x2.y2.z2 para x3.y3.z3.txt"
+    	  "Manual Upgrade Ambientes de Produção de x3.y3.z3 para x4.y4.z4.txt"
+    	  ...
+ 
+               
+1. No Windows Explorer (não no Eclipse), no painel esquerdo do Windows Explorer, 
+   na máquina de desenvolvimento, clicar no diretório 
+   C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
+   e ordenar os arquivos no painel direito por nome alfabético.
+    
+2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.2.6.1.Win2008.R2.SP1.exe" 
+   pelo Eclipse (não pelo Windows Explorer!). Primeiro verificar se este arquivo bate com o arquivo a ser excluido 
+   no GitHub.
+     
+3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
+   que cria /"Arquivos de Programas PC"/* no servidor do fornecedor, da seguinte forma :
+      - Selecionar todos os arquivos porém apenas um (1) dos subdiretórios no raiz do diretório navegado no Windows Explorer:
+            - selecionar apenas UM dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
+            - selecionar apenas UM dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
+            - selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.
+            - NÃO selecionar nenhum arquivo  Instalador*.exe                   
+      - WinRAR                   : Mudar .rar para .zip
+      - WinRAR                   : Método de compressão : Ótimo
+      - WinRAR                   : marcar checkbox SFX
+      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.2.6.1.Win2008.R2.SP1.exe
+                                   Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe", 
+                                         ajustar o mesmo no final de Primeira_Instalacao_Versao_Windows.bat.
+
+   Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
+      - Sub-aba "Geral"          : Apenas na primeira vez em uma máquina de desenvolvimento nova 
+                                   ou em outra máquina diferente: clicar botão "Salvar configurações SFX" 
+                                   e fazer as configurações abaixo: 
+                                       (na segunda vez tudo já está salvo, apenas precisa abrir 
+                                        a aba "Avancado" > botão "Opções SFX..." e clicar OK, 
+                                        e não precisa fazer o resto abaixo.)
+      - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
+      - Marcar                   : Absolute path
+      - Marcar ou deixar marcado : Checkbox "Salvar e restaurar caminho"
+      - Executar após a extração : Primeira_Instalacao_Versao_Windows.bat 
+                                   (pelo menos o Winrar 4.01 tem este After Extraction Trigger)
+      - Sub-aba "Avançado"       : Marcar checkbox "Pedido de acesso administrativo"
+      - Sub-aba "Métodos"        : Selecionar "Modo silencioso" > "Ocultar tudo"     
+      - Sub-aba "Atualizar"      : Marcar "substituir todos os arquivos"
+
+
+
+ 
