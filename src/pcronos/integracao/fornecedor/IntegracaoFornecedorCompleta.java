@@ -177,6 +177,48 @@ public final class IntegracaoFornecedorCompleta {
       Properties config = new Properties();
       config.load(new FileInputStream(NOME_ARQUIVO_PROPERTIES));
 
+
+      
+      
+      diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
+      
+      if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
+    	  String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " não existe! Favor contatar o setor TI.";
+    	  diretorioArquivosXml = "C:/";
+    	  throw new ConfiguracaoException(msgErroDiretorio);
+      }
+      
+      try {
+  	    // O seguinte tem apenas efeito em Linux, e nenhum efeito em Windows, 
+    	// pois com Windows >= XP não é possível alterar diretórios para read-only (apenas arquivos)
+    	  
+        File testDir = new File(diretorioArquivosXml);
+        if (!testDir.canWrite()) 
+        { 
+           String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " é protegido contra gravação de arquivos ! Favor contatar o setor TI.";
+      	   diretorioArquivosXml = "C:/";
+           throw new ConfiguracaoException(msgErroDiretorio);
+        }
+
+    	  // O seguinte tb não funciona com Windows : 
+          // AccessController.checkPermission(new FilePermission(diretorioArquivosXml, "write"));
+        
+          // A única maneira para verificar os priviêgios necessários em Java 8 é : 
+          File.createTempFile("check", null, testDir).delete();
+
+          diretorioArquivosXmlSemBarraNoFinal = diretorioArquivosXml;
+          diretorioArquivosXml = diretorioArquivosXml + "/" ;
+      }
+      catch (SecurityException | IOException se_io_ex)
+      {
+   	     String msgErroDiretorio = "Erro! Não tem permissões suficientes para gravar arquivos no diretório " + diretorioArquivosXml + " ! Favor contatar o setor TI.";
+   	     diretorioArquivosXml = "C:/";
+      	 throw new ConfiguracaoException(msgErroDiretorio);
+      }
+
+
+
+      
       siglaSistema  = config.getProperty("SiglaSistema");
 
       if ( !( siglaSistema.equals("SAP") || siglaSistema.equals("APS") || siglaSistema.equals("WinThor") || siglaSistema.equals("PCronos") ) ) {
@@ -276,43 +318,6 @@ public final class IntegracaoFornecedorCompleta {
       }
 	
       
-      diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
-      
-      if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
-    	  String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " não existe! Favor contatar o setor TI.";
-    	  diretorioArquivosXml = "C:/";
-    	  throw new ConfiguracaoException(msgErroDiretorio);
-      }
-      
-      try {
-  	    // O seguinte tem apenas efeito em Linux, e nenhum efeito em Windows, 
-    	// pois com Windows >= XP não é possível alterar diretórios para read-only (apenas arquivos)
-    	  
-        File testDir = new File(diretorioArquivosXml);
-        if (!testDir.canWrite()) 
-        { 
-           String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " é protegido contra gravação de arquivos ! Favor contatar o setor TI.";
-      	   diretorioArquivosXml = "C:/";
-           throw new ConfiguracaoException(msgErroDiretorio);
-        }
-
-    	  // O seguinte tb não funciona com Windows : 
-          // AccessController.checkPermission(new FilePermission(diretorioArquivosXml, "write"));
-        
-          // A única maneira para verificar os priviêgios necessários em Java 8 é : 
-          File.createTempFile("check", null, testDir).delete();
-
-          diretorioArquivosXmlSemBarraNoFinal = diretorioArquivosXml;
-          diretorioArquivosXml = diretorioArquivosXml + "/" ;
-      }
-      catch (SecurityException | IOException se_io_ex)
-      {
-   	     String msgErroDiretorio = "Erro! Não tem permissões suficientes para gravar arquivos no diretório " + diretorioArquivosXml + " ! Favor contatar o setor TI.";
-   	     diretorioArquivosXml = "C:/";
-      	 throw new ConfiguracaoException(msgErroDiretorio);
-      }
-
-
       // Para não impossibilitar o limite de 11 emails por dia, no caso do Bol:
       if (siglaSistema.equals("PCronos") && qtdDiasArquivosXmlGuardados < 1) {
     	     String msgErro = "Erro! QtdDiasArquivosXmlGuardados não pode ser menor que 1 no caso que SiglaSistema = PCronos! (para não impossibilitar o limite de 11 emails por dia, no caso do Bol)";
