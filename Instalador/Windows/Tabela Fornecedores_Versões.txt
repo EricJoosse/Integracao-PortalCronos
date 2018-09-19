@@ -1,5 +1,5 @@
-Fornecedor   IdForn	Sistema		Versão .jar	 Tipo JRE	 Em produção		IP Público 		Porta IP Aberta	Frequência	Debug	Esp.Livre	Qtd.Dias	Fornecedor   	Skype					
-----------	 ------	-------     -----------  ----------	 ------------	    ---------- 		---------------	----------	-----	---------	--------	----------	 	---------------------
+Fornecedor   IdForn	Sistema		Versão .jar	 Tipo JRE	 Em produção		IP Público 		Porta IP Aberta	Frequência	Debug	Esp.Livre	Qtd.Dias	Fornecedor   	Skype					Telefone TI	
+----------	 ------	-------     -----------  ----------	 ------------	    ---------- 		---------------	----------	-----	---------	--------	----------	 	---------------------	------------
 Formaggio 		 13	APS			2.6			 (.. bit)    	Sim				187.113.120.97	    80			15 min		true	  9 GB		100			Formaggio 		1. live:projetosti_1 = "Geymison Lima - TI Formaggio"	
 											  			    																											2. Braytner Vasconcelos	
 JR Distribuição	947	WinThor		2.6			 (.. bit)    	Sim				186.215.200.205	Não precisa		15 min		true	902 GB		100			JR Distribuição	ivan barros				
@@ -7,7 +7,7 @@ Prolac 			 30	WinThor		2.5.1		 (32 bit)    	Sim				....revisar....					15 min		t
 											  			    																											2. Marcelo Bezerra
 Marítimos		 21	WinThor		1.2.3		 (.. bit)    	Não	  											15 min		true	 48 GB		100			Marítimos		Felipe Lolaia			
 Karne Keijo		 60	SAP			2.4.1		 (.. bit)    	Não												15 min		true	 62 GB		100			Karne Keijo		Timon Dourado			
-Comal 			 33	WinThor			 		 (.. bit)    	Não																							Comal					
+Comal 			 33	WinThor		2.6.1 		 (.. bit)    	Não				187.1.168.74		80			15 min		true	 69 GB		100			Comal			Rildson Carlos			98609-4887
 Master Commerce  51	WinThor			 		 (.. bit)    	Não																							Master Commerce			
 Monitoramento    -- PCronos     2.6.1        (.. bit)    	Sim				Não se aplica	Não se aplica	15 min		false	 90 GB		 30			Monitoramento
 SOST (BA)		170 WinThor     2.3.1		 (.. bit)    	Sim												15 min		true	0.6 GB		 15			SOST (BA)		1. Cleijonatas S Silva 	

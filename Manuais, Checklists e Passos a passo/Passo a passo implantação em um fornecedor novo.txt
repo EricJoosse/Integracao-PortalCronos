@@ -14,13 +14,16 @@ e não com o Notepad para evitar problemas com cedilhas e acentos !
        C:\PCronos\Integração Fornecedor - Portal Cronos\conf\
             \Integração Fornecedor - Portal Cronos.x.y.z.properties.WinThor/APS.NomeFornecedor.Homolog
 
-	2. Conectar no Team Viewer. 
+	2. Conectar no AnyDesk. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
 	         na máquina no Cabo:                      verificar;
 	         na máquina de desenvolvimento no Azure:  o Team Viewer dá mensagem de suspeita de uso comercial;
 	         na máquina de desenvolvimento no Amazon: verificar;
 	         no servidor de teste:                    verificar.
 	
+	   Skype:
+       Não temos a licença do Team Viewer. O AnyDesk é de graça e é ainda mais fácil do que o Team Viewer. Pode ser?
+
 	   Skype:
 	   Existem 2 tipos de instalação do Team Viewer: "free" (pessoal) e "trial"/pago (empresarial). 
 Meu Team Viewer é "free" e pessoal então não consigo conectar com seu Team Viewer empresarial. 
@@ -39,8 +42,8 @@ Como vai ser?
 	      (Formaggio: user "techcorp")
 	      
 	   b. Nas opções do Windows Explorer marcar "Exibir Arquivos do Sistema e Arquivos Ocultos". 
-	      Fechar e re-abrir o Windows Explorer. Senão, vai pensar indevidamente que não existe o dir 
-	      C:\ProgramData\ por exemplo............. 
+	      Fechar e re-abrir o Windows Explorer. Senão re-abrir o Windows Explorer, 
+	      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
 	
 	4. No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
 		- Verificar a versão de Windows no servidor do fornecedor 
@@ -101,6 +104,12 @@ Como vai ser?
         e preencher TODOS os campos sem falta, antes de continuar, pois sem isso a instalação do 
         Manual de Manutenção para a TI não vai funcionar corretamente.
         
+        Skype:
+        Qual é seu endereço de email. É necessário para receber avisos automáticos um dia no futuro 
+        quando o servidor ficará desligado ou travado, ou o disco estiver cheio, 
+        ou no caso de todas as outras causas de paradas da integração automática.
+        
+        
     5d. Executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
           
@@ -111,6 +120,9 @@ Como vai ser?
     7. O instalador deve ser copiado para exatamente o diretório C:\temp\ no servidor do fornecedor.
        Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.
     
+       Skype:
+       Não estou conseguindo copiar arquivos para o diretório C:\Temp\ devido ao erro "Access denied"
+       
     
     8a. Antes da instalação:       					       
           0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
@@ -222,6 +234,10 @@ Como vai ser?
              "Executar como Administrador". 
 
        
+   9f. No caso que foi copiado para outro diretório, apagar o instalador manualmente após a instalação!
+       No caso do Comal: copado para a Área de Trabalho do usuário FusionDMC.
+
+
    10. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 10,
        após a instalação, fazer um export de teste das chaves do regedit no servidor
 	   e comparar com os arquivos .reg no instalador para verificar se tiver diferenças 
