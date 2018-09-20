@@ -42,3 +42,13 @@
           	depois:		C:\ProgramData\Oracle\Java\javapath;C:\Windows;C:\Windows\system32;
           	            C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;c:\InstantClient
           					        
+       
+       Propão antes:	D:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;%SystemRoot%;
+       					%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+       					
+       					
+       		depois: 	C:\ProgramData\Oracle\Java\javapath;D:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;%SystemRoot%;
+       					%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+       					
+       					
+       		

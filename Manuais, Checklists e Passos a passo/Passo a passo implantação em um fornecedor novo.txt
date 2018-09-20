@@ -1,11 +1,39 @@
 Checklist instalação em um fornecedor novo 
 ==========================================
  
+
 IMPORTANTE !!!!!!!!
 ===================
 Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor de DOS 
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
+ 
+    0. Criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
+       Descobrir o idFornecedor editando e executando os seguintes selects:
+
+select id_fornecedor_fornec, id_pessoa
+  from dbo.Fornecedor 
+ where id_pessoa in (select  id_pessoa
+                      from  dbo.Pessoa
+                     where  nm_pessoa like '%Propão%')
+
+select  id_pessoa, nm_pessoa, *
+                      from  dbo.Pessoa
+                     where  nm_pessoa like '%Propão%'
+
+
+    0. Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
+
+Elthon, boa tarde!
+ 
+    sou da TI do Portal Cronos. Vou instalar a integração WinThor / PCronos hoje.
+Qual é o nome do seu contato no Skype?
+ 
+Obrigado,
+Eric
+     
+    0. No FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo. 
+    
 
     1. NÃO colocar os dados do fornecedor novo no arquivo único /conf/.properties no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
@@ -13,6 +41,9 @@ e não com o Notepad para evitar problemas com cedilhas e acentos !
        Porém colocar os dados do fornecedor novo no diretório de backup 
        C:\PCronos\Integração Fornecedor - Portal Cronos\conf\
             \Integração Fornecedor - Portal Cronos.x.y.z.properties.WinThor/APS.NomeFornecedor.Homolog
+            
+       Descobrir o CNPJ do fornecedor usando o mesmo select acima. 
+       
 
 	2. Conectar no AnyDesk. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
@@ -22,7 +53,11 @@ e não com o Notepad para evitar problemas com cedilhas e acentos !
 	         no servidor de teste:                    verificar.
 	
 	   Skype:
-       Não temos a licença do Team Viewer. O AnyDesk é de graça e é ainda mais fácil do que o Team Viewer. Pode ser?
+	   Bom dia, sou Eric da TI do Portal Cronos. Leão me pediu instalar a integração WinThor / PCronos. Tem o AnyDesk instalado?
+	   
+	   
+	   Skype:
+       Nossa licença do Team Viewer expirou. O AnyDesk é gratuito e é ainda mais fácil do que o Team Viewer. Pode ser?
 
 	   Skype:
 	   Existem 2 tipos de instalação do Team Viewer: "free" (pessoal) e "trial"/pago (empresarial). 
@@ -100,11 +135,11 @@ Como vai ser?
                 
     5b. Preencher todas as outras colunas no arquivo Tabela Fornecedores_Versões.txt.
     
-    5c. No FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo 
-        e preencher TODOS os campos sem falta, antes de continuar, pois sem isso a instalação do 
+    5c. No FornecedorRepositorio.java, método getFornecedor(), preencher o resto de TODOS 
+        os outros campos do fornecedor sem falta, antes de continuar, pois sem isso a instalação do 
         Manual de Manutenção para a TI não vai funcionar corretamente.
         
-        Skype:
+        Se ainda não saber o endereço de email da TI, copiar o seguinte para o Skype:
         Qual é seu endereço de email. É necessário para receber avisos automáticos um dia no futuro 
         quando o servidor ficará desligado ou travado, ou o disco estiver cheio, 
         ou no caso de todas as outras causas de paradas da integração automática.
@@ -161,8 +196,7 @@ Como vai ser?
     9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
     9b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
-     
-     
+          
     9c. Nos seguintes casos:
              1. no caso de versões de Windows que ainda não estão em nenhuma das duas listas abaixo dentro deste item 9c;
              2. no caso de versões de Windows que estão com o bug abaixo: 
@@ -235,7 +269,8 @@ Como vai ser?
 
        
    9f. No caso que foi copiado para outro diretório, apagar o instalador manualmente após a instalação!
-       No caso do Comal: copado para a Área de Trabalho do usuário FusionDMC.
+       No caso do Comal:  copiado para a Área de Trabalho do usuário FusionDMC.
+       No caso do Propão: copiado para C:\eric_temp\ e outra cópia parcial para a Área de Trabalho do usuário Administrador.
 
 
    10. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 10,
@@ -354,9 +389,20 @@ Como vai ser?
 		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
 
 
-   18. Adicionar " and f.id_fornecedor_fornec <> xxx -- NNNNNN ainda não está em produção"
-       na procedure [dbo].[monitorarIntegracaoFornecedores]
+   18. Na sp dbo.monitorarIntegracaoFornecedores: 
+      (i)  adicionar: 
+			      and (                           f.id_fornecedor_fornec <> xxx) -- AAAAAAAAAA
+	       depois de: 
+			    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 385) -- Walmart
    
+      (ii) adicionar:
+				  or @fornecedor_id = xxx -- AAAAAAAAA ainda não está em produção 
+	       depois de: 
+				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
+
+           (Dica: pesquisar o texto "Para facilitar a manutenção deste if" nesta sp).
+
+      
    19. update [dbo].[Usuario_Sistema]  
           set id_fornecedor_fornec = .....
         where cd_usuario_sistema_ususis = 'ericcoringa'
@@ -369,32 +415,25 @@ Como vai ser?
    
        Vocês têm apenas UMA base de dados WinThor/Oracle? Ou talvez tem uma base de produção e outra base de teste, por exemplo?
 
-
+       É melhor usar logo a base de produção
 
        Qual é o endereço IP, porta, SID, usuário e senha do banco Oracle de produção? A porta é a porta "default" (1521) ?
-       Pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhum salvamento no WinThor.
+       Pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado no WinThor.
+
+       Se precisar: você tem um arquivo "tnsnames.ora" em alguma máquina que está com o WinThor instalado? Coloca o conteúdo no Skype: neste arquivo dá para ver se o SID é WINT ou PROD
 
        Se o DBA demorar demais para criar um usuário novo, não podemos usar um dos usuários Oracle que já existe? Com certeza deve existir pelo menos um. Eu posso até colocar a senha deste usuário no arquivo de parâmetros do Portal Cronos de forma criptografada. 
 
-
-       Dúvida: na versão atual do Portal Cronos normalmente a senha fica registrada de forma NÃO criptografada no arquivo de configuração no diretório C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\. Pode ser assim? Ou esta senha deve aparecer de forma criptografada neste arquivo?
+	   Criptografei a senha do usuário do banco Oracle/Firebird/etc no arquivo de configuração da integração para evitar problemas de segurança.
        
-Leão, 
-   
-  a SOST vai usar um usuário Oracle existente com mais privilêgios do que consulta, 
-porém eles preferem que a gente vai registrar a senha no arquivo de configuração de forma criptografada.
-Eu posso fazer uma versão nova do serviço de ofertas automáticas com esta funcionalidade nova. 
-Previsão: 4 horas no máximo. Vou fazer hoje?
- 
-Atc,
-Eric         
-       No caso (falar primeiro com Leão): então vou desenvolver uma versão nova do Portal Cronos, eu faço isso em 4 horas.
-
 
 Este usuário está dando erro "ORA-00942: a tabela ou view não existe" então este usuário não tem privilégios suficientes.
 Sugiro conectar no SQL Navigator ou outra ferramenta com este usuário para ver se este usuário consegue visualizar pelo menos uma tabela ou nenhuma
 
 
+Leão explicou os parâmetros no arquivco de configuração? (por exemplo "UsarValorMinimoSistemaFornecedor" = "true"/"false", "CriterioVerificacaoEstoque" = "QtdEstoqueMaiorZero"/""QtdEstoqueMaiorOuIgualQtdSolicitada", etc)
+
+OK, a parte técnica da instalação está concluída. Vou falar com Leão para continuar os próximos passos
        
 Outra dúvida: os vendedores querem qual das seguintes opções?
 1. que o WinThor envia automaticamente os preços ofertados de TODOS os produtos solicitados para o Portal Cronos mesmo no caso que o estoque de alguns produtos estiver zerado no WinThor? 
@@ -411,13 +450,16 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        ANTIGO: Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
 
-   21. No caso que você precisa atualizar a versão de Java um dia no futuro, 
+   21. Criptografar a senha do usuário do banco Oracle/Firebird/etc no arquivo de configuração
+       e alterar SenhaBancoDeDadosCriptografada = false -> true.
+   
+   22. No caso que você precisa atualizar a versão de Java um dia no futuro, 
        no servidor que está hospedando a integração WinThor / PCronos, 
        favor não se esquecer para me avisar com alguns dias de antecedência! 
        Caso contrário, o serviço será interrompido indevidamente alguns dias 
        depois de uma atualização de Java!
        
-   22. Verificar, e no caso, enviar o seguinte email: 
+   23. Verificar, e no caso, enviar o seguinte email: 
    
 Leão,
   
@@ -431,18 +473,6 @@ sem nenhum registro de log deste erro...
  
 Eric
    
-   23. Na sp dbo.monitorarIntegracaoFornecedores: 
-      (i)  adicionar: 
-	       		--and f.id_fornecedor_fornec <> xxx -- AAAAAAAAAA
-	       depois de: 
-	       		--and f.id_fornecedor_fornec <> 385 -- Walmart
-   
-      (ii) adicionar:
-				  or @fornecedor_id = xxx -- AAAAAAAAA ainda não está em produção 
-	       depois de: 
-				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
-
-      
    24. Scripts para troubleshooting se não funcionar:
    
 declare @fornecedor_id  int
@@ -461,53 +491,5 @@ select *
    
    
          
-Manual para a geração e/ou atualização do instalador Setup.exe:
-===============================================================
-
-1. No Windows Explorer (não no Eclipse), no painel esquerdo do Windows Explorer, 
-   na máquina de desenvolvimento, clicar no diretório 
-   C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
-   e ordenar os arquivos no painel direito por nome alfabético.
-    
-2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.2.6.1.Win2008.R2.SP1.exe" 
-   pelo Eclipse (não pelo Windows Explorer!). Primeiro verificar se este arquivo bate com o arquivo a ser excluido 
-   no GitHub.
-     
-3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
-   que cria /"Arquivos de Programas PC"/* no servidor do fornecedor, da seguinte forma :
-      - Selecionar todos os arquivos porém apenas um (1) dos subdiretórios no raiz do diretório navegado no Windows Explorer:
-            - selecionar apenas UM dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
-            - selecionar apenas UM dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
-            - selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.
-            - NÃO selecionar nenhum arquivo  Instalador*.exe                   
-      - WinRAR                   : Mudar .rar para .zip
-      - WinRAR                   : Método de compressão : Ótimo
-      - WinRAR                   : marcar checkbox SFX
-      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.2.6.1.Win2008.R2.SP1.exe
-                                   Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe", 
-                                         ajustar o mesmo no final de Primeira_Instalacao_Versao_Windows.bat.
-
-   Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
-      - Sub-aba "Geral"          : Apenas na primeira vez em uma máquina de desenvolvimento nova 
-                                   ou em outra máquina diferente: clicar botão "Salvar configurações SFX" 
-                                   e fazer as configurações abaixo: 
-                                       (na segunda vez tudo já está salvo, apenas precisa abrir 
-                                        a aba "Avancado" > botão "Opções SFX..." e clicar OK, 
-                                        e não precisa fazer o resto abaixo.)
-      - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
-      - Marcar                   : Absolute path
-      - Marcar ou deixar marcado : Checkbox "Salvar e restaurar caminho"
-      - Executar após a extração : Primeira_Instalacao_Versao_Windows.bat 
-                                   (pelo menos o Winrar 4.01 tem este After Extraction Trigger)
-      - Sub-aba "Avançado"       : Marcar checkbox "Pedido de acesso administrativo"
-      - Sub-aba "Métodos"        : Selecionar "Modo silencioso" > "Ocultar tudo"     
-      - Sub-aba "Atualizar"      : Marcar "substituir todos os arquivos"
-
-
-IMPORTANTE !!!!!!!!
-===================
-Ao alterar o arquivo .bat do job, editar com o editor de DOS 
-e não com o Notepad para evitar problemas com cedilhas e acentos !
- 
 
  
