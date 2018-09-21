@@ -102,10 +102,10 @@ if %tamanhoArqLog% GTR 0 (
     start notepad Instalador.log
 ) ELSE (
     echo.
-    echo          Instalação concluida!
+    echo          Primeira fase da instalação concluida!
     echo.
     
-    echo MSGBOX "Instalação concluida!" > %temp%\TEMPmessage.vbs
+    echo MSGBOX "Primeira fase da instalação concluida!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
 )

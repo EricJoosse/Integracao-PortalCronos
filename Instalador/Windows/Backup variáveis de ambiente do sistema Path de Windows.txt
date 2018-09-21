@@ -51,4 +51,21 @@
        					%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
        					
        					
+Comal - antes: 
+		User variable "Path" Administrador =  %USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
+		
+		System variable "path"             =  ;C:\Users\administrador\AppData\Local\Microsoft\WindowsApps;
+											  C:\Windows;C:\Windows\system32;C:\Windows\System32\Wbem;
+											  C:\Windows\System32\WindowsPowerShell\v1.0\;c:\InstantClient
+
+Comal - depois: 
+		User variable "Path" Administrador =  %USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
+		
+		System variable "path"             =  C:\ProgramData\Oracle\Java\javapath;;C:\Users\administrador\AppData\Local\Microsoft\WindowsApps;
+											  C:\Windows;C:\Windows\system32;C:\Windows\System32\Wbem;
+											  C:\Windows\System32\WindowsPowerShell\v1.0\;c:\InstantClient
+											  
+
+
+       					
        		

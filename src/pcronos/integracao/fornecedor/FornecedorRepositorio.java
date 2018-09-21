@@ -26,6 +26,8 @@ public class FornecedorRepositorio {
 			return 33;
 		else if (cnpj.equals("11799763000160"))
 			return 51;
+		else if (cnpj.equals("24407389000233"))
+			return 171;
 		else if (cnpj.equals("11222333444455"))
 			throw new Exception("Erro! O CNPJ da empresa fornecedora não foi informado no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + "!");
 		else {
@@ -149,14 +151,16 @@ public class FornecedorRepositorio {
 		else if (idFornecedor == 33) {
 			f.NomeFantasiaEmpresa = "Comal";
 			f.SiglaSistemaFornecedor = "WinThor";
-			f.EmailResponsavelTI = "";
+			f.EmailResponsavelTI = "ti@comalcomercio.com.br";
 			f.EmailResponsavelTIAlternativo = "";
-			f.ApelidoResponsavelTI = "";
+			f.ApelidoResponsavelTI = "Rildson"; 
+							// Tem vontade para ajudara, porém é muito incompetente 
+							// e muito burro, tem que explicar tudo detalhadamente
 			f.ApelidoResponsavelTIAlternativo = "";
-			f.AplicativoDesktopRemoto = "Team Viewer";
+			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-comal";
 			f.versaoJRE = "jre1.8.0_92";
-			f.tipoSO = "?????????????????????";
+			f.tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 51) {
@@ -170,6 +174,20 @@ public class FornecedorRepositorio {
 			f.usuarioWebservice = "ws-mcommerce";
 			f.versaoJRE = "jre1.8.0_92";
 			f.tipoSO = "?????????????????????";
+			f.dirProgramFiles = "Program Files";
+		}			   
+		else if (idFornecedor == 171) {
+			f.NomeFantasiaEmpresa = "Propão";
+			f.SiglaSistemaFornecedor = "WinThor";
+			f.EmailResponsavelTI = "ti@propao.com.br";
+			f.EmailResponsavelTIAlternativo = "";
+			f.ApelidoResponsavelTI = "Elthon"; 
+							// Desenrolado, responsável para o cadastro de De-Para´s
+			f.ApelidoResponsavelTIAlternativo = "";
+			f.AplicativoDesktopRemoto = "AnyDesk";
+			f.usuarioWebservice = "ws-propao";
+			f.versaoJRE = "jre1.8.0_92";
+			f.tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else { 
