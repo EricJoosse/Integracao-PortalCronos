@@ -969,11 +969,14 @@ public final class IntegracaoFornecedorCompleta {
 	            	 
 	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
 	            		 Fornecedor f = fRep.getFornecedor(Integer.parseInt(rSet.getString(1)));
-		            	 assunto = "Integração ofertas colocada em produção!";
-		            	 body += "Começou a integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " em produção!\r\n";
-		            	 body += "1. Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores.\r\n";
-		            	 body += "    Dica: procura \"" + rSet.getString(1) + "\" nesta sp.\r\n";
-		            	 body += "2. Enviar o manual \"Manual solucionamento paradas integração Portal Cronos - v1.4 (24.04.2018).txt\" para o TI (" + f.EmailResponsavelTI + ".). \r\n\r\n\r\n\r\n";
+		            	 assunto = "Integração " + nmFornecedor + " colocada em produção!";
+		            	 body += "A integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " foi colocada em produção!\r\n\r\n";
+		            	 body += "Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores.\r\n";
+		            	 body += "Dica: procura \"" + rSet.getString(1) + "\" nesta sp." + "\r\n";
+			     		    body += " " + "\r\n"
+				     			+ "Atc," + "\r\n"
+			     				+ "O email automático do Portal Cronos " + "\r\n"
+			     				+  "\r\n\r\n\r\n\r\n";
 		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	            	 }

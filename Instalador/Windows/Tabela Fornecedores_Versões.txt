@@ -13,7 +13,7 @@ Monitoramento    -- PCronos     2.6.1        (.. bit)    	Sim				Não se aplica	N
 SOST (BA)		170 WinThor     2.3.1		 (.. bit)    	Sim												15 min		true	0.6 GB		 15			SOST (BA)		1. Cleijonatas S Silva 	
 															   																											2. Sena Junior			
 Walmart         385 PCronos					 (.. bit) 	 	  																							Walmart
-Propão 			171	WinThor		2.6.1 		 (.. bit)    	Não				187.113.65.138	Não precisa		15 min		true	167 GB		100			Propão			Apoio.propao@hotmail.com	99535-1999
+Propão 			171	WinThor		2.6.1 		 (.. bit)    	Sim				187.113.65.138	Não precisa		15 min		true	167 GB		100			Propão			Apoio.propao@hotmail.com	99535-1999
 
 
 Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
