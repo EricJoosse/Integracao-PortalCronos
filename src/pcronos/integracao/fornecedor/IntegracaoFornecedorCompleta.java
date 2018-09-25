@@ -970,10 +970,17 @@ public final class IntegracaoFornecedorCompleta {
 	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
 	            		 Fornecedor f = fRep.getFornecedor(Integer.parseInt(rSet.getString(1)));
 		            	 assunto = "Integração " + nmFornecedor + " colocada em produção!";
+				         body += "Ao setor Desenvolvimento do Portal Cronos," + "\r\n";
+				         body += " " + "\r\n";
 		            	 body += "A integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " foi colocada em produção!\r\n\r\n";
-		            	 body += "Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores.\r\n";
+				         body += " " + "\r\n";
+		            	 body += "1. Provisoriamente (enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
+				         body += "   Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores. ";
 		            	 body += "Dica: procura \"" + rSet.getString(1) + "\" nesta sp." + "\r\n";
-			     		    body += " " + "\r\n"
+				         body += " " + "\r\n";
+		            	 body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
+				         body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo Tabela Fornecedores_Versões.txt" + "\r\n\r\n";
+				         body += " " + "\r\n"
 				     			+ "Atc," + "\r\n"
 			     				+ "O email automático do Portal Cronos " + "\r\n"
 			     				+  "\r\n\r\n\r\n\r\n";

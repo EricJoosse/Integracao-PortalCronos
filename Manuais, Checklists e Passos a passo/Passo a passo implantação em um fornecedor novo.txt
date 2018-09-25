@@ -8,7 +8,8 @@ Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor d
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
  
-   -3. Criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
+   -3. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+       criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
        Descobrir o idFornecedor editando e executando os seguintes selects:
 
 select id_fornecedor_fornec, id_pessoa
@@ -32,7 +33,8 @@ Qual é o nome do seu contato no Skype?
 Obrigado,
 Eric
      
-   -1. No FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo. 
+   -1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+       no FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo. 
     
 
     0. NÃO colocar os dados do fornecedor novo no arquivo único /conf/.properties no diretório da instalação 
@@ -61,7 +63,8 @@ Eric
              e "30" para o servidor de monitoramento automático
 
 
-    1. No FornecedorRepositorio.java, no OUTRO método getIdFornecedorByCnpj(), 
+    1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+       no FornecedorRepositorio.java, no OUTRO método getIdFornecedorByCnpj(), 
        adicionar o fornecedor novo também. 
 
 
@@ -96,7 +99,12 @@ Como vai ser?
 	      local ou da rede (como administrador da rede ainda não foi testado).
 	      (Formaggio: user "techcorp")
 	      
-	   b. Nas opções do Windows Explorer marcar "Exibir Arquivos do Sistema e Arquivos Ocultos". 
+	   b. Verificar se o usuário logado consegue abrir o botão "Environment Variables" 
+	      no Control Panel > System > Advanced System Settings > "Environment Variables".
+	      Caso contrário, provavelmente o usuário logado é de uma máquina virtual. 
+	      Pedir a TI conectar com um usuário administrador na máquina real debaixo da máquina virtual.
+	      
+	   c. Nas opções do Windows Explorer marcar "Exibir Arquivos do Sistema e Arquivos Ocultos". 
 	      Fechar e re-abrir o Windows Explorer. Senão re-abrir o Windows Explorer, 
 	      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
 	
@@ -151,11 +159,15 @@ Como vai ser?
         No IE, Chrome ou Firefox acessar http://ip4.me/
         Testar ping primeiro (sem porta). Se isso não funcionar, procurar uma porta IP que está aberta e usar 
         C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat para testar isso. 
-        Atualizar o endereço IP e a porta IP aberta no arquivo Tabela Fornecedores_Versões.txt.
+        
+        Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+        atualizar o endereço IP e a porta IP aberta no arquivo Tabela Fornecedores_Versões.txt.
                 
-    5b. Preencher todas as outras colunas no arquivo Tabela Fornecedores_Versões.txt.
+    5b. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+        preencher todas as outras colunas no arquivo Tabela Fornecedores_Versões.txt.
     
-    5c. No FornecedorRepositorio.java, método getFornecedor(), preencher o resto de TODOS 
+    5c. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+        no FornecedorRepositorio.java, método getFornecedor(), preencher o resto de TODOS 
         os outros campos do fornecedor sem falta, antes de continuar, pois sem isso a instalação do 
         Manual de Manutenção para a TI não vai funcionar corretamente.
         
@@ -165,10 +177,12 @@ Como vai ser?
         ou no caso de todas as outras causas de paradas da integração automática.
         
         
-    5d. Executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
+    5d. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+        executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
           
-    6. NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
+    6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+       NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
        Regerar o instalador, veja o arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt"  
        no diretório C:\PCronos\Integração Fornecedor - Portal Cronos\Manuais, Checklists e Passos a passo\.
     
@@ -430,9 +444,18 @@ Como vai ser?
         where cd_usuario_sistema_ususis = 'ericcoringa'
    
    
-   20. Conectar nas telas do Portal Cronos (produção - 80) logado como ericcoringa e verificar se eles usam 
-       um texto padrão do fornecedor para todas as cotações de todos os compradores 
-       e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema". 
+   20. (i) Conectar nas telas do Portal Cronos (produção - 80) logado como ericcoringa e verificar se eles usam 
+           um texto padrão do fornecedor para todas as cotações de todos os compradores 
+           e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema".
+           
+       (ii) Depois disso voltar ericcoringa APENAS na base de produção: 
+
+		update [dbo].[Usuario_Sistema]  
+		   set id_fornecedor_fornec = null
+		     , id_perfil_acesso_perace = 1
+		     , id_central_compra_ctrcom = 1
+		     , id_comprador_compr = null
+		 where cd_usuario_sistema_ususis = 'ericcoringa'
     
     
    21. Enviar Email/ Skype: 
@@ -477,18 +500,37 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
    22. Criptografar a senha do usuário do banco Oracle/Firebird/etc no arquivo de configuração
        e alterar SenhaBancoDeDadosCriptografada = false -> true.
    
-   23. No caso que você precisa atualizar a versão de Java um dia no futuro, 
+   23. Apenas no caso que já tem outro Java instalado no mesmo servidor para outro sistema,
+       colocar o seguinte no Skype: 
+       No caso que você precisa atualizar a versão de Java um dia no futuro, 
        no servidor que está hospedando a integração WinThor / PCronos, 
        favor não se esquecer para me avisar com alguns dias de antecedência! 
-       Caso contrário, o serviço será interrompido indevidamente alguns dias 
-       depois de uma atualização de Java!
+       Caso contrário, o Integrador WinThor/PCronos vai parar de funcionar alguns dias! 
        
    24. Copiar o arquivo /conf/xxx.properties do diretório de backups no projeto Eclipse para o servidor
        do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
  
-   25. Testar as ofertas automáticas conectando nas telas do Portal Cronos (homologação - 81) logado como ericcoringa
+   25. No caso que a TI do fornecedor geralmente usa uma máquina virtual para dar acesso remoto etc 
+       (exemplo: Comal), pedir a TI conectar com um usuário desta máquina virtual para ver: 
+       		- se o manual aparece no menu de Windows
+       		- se consegue editar o arquivo de configuração
+       		
+   26. Testar as ofertas automáticas conectando nas telas do Portal Cronos (homologação - 81) logado como ericcoringa
    
-   26. Verificar, e no caso, enviar o seguinte email: 
+       - Se acontecer o seguinte erro: 
+       		"Cotação 101-0249 não ofertada! O Valor Mínimo para Entrega para a empresa compradora 
+       		 XXXXXXXX não pode ser nulo ou em branco no sistema WinThor do fornecedor Propão, 
+       		 pois a configuração "UsarValorMinimoSistemaFornecedor" = "true". Valores permitidos: 
+       		 (R$) 0,00 ou um valor > 0."
+       	 fazer o seguinte: 	 
+             (i)   alterar "UsarValorMinimoSistemaFornecedor" logo para "false" para testar logo novamente
+             (ii)  executar item 28 abaixo 
+	         (iii) e confirmar com Leão se isso estava correto:
+	                   "Leão, alterei a chave "UsarValorMinimoSistemaFornecedor" para "false" 
+	                    para o fornecedor XXXXX. Favor confirmar se isso está correto no caso deste fornecedor"
+       		
+   
+   27. Verificar, e no caso, enviar o seguinte email: 
    
 Leão,
   
@@ -503,7 +545,7 @@ sem nenhum registro de log deste erro...
 Eric
    
    
-   27. No caso se precisar de re-processamento de cotações ofertadas erradamente, 
+   28. No caso se precisar de re-processamento de cotações ofertadas erradamente, 
        ou não ofertadas indevidamente, executar o seguinte na base de homologação:
 
 		delete from dbo.Log_Erro_Integracao
