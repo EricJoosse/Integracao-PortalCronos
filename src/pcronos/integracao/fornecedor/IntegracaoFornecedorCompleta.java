@@ -2174,6 +2174,35 @@ public final class IntegracaoFornecedorCompleta {
 	   }
 	   
 	   
+	   
+	  // Limpeza seletiva dos arquivos ws-karnekeijo.Erro.Homologacao.*.log no dir ...\Logs\Remoto\Integracao\
+	  // pois estão atrapalhando muito, deixando apenas o último destes arquivos:
+	  if (siglaSistema.equals("PCronos")) {
+		  dir = new File("C:\\ProgramData\\PortalCronos\\Logs\\Remoto\\Integracao");
+
+		  int qtdArqsRepetidos = 0;
+		  for (final File file : dir.listFiles()) 
+		  {
+			    if (file.getName().startsWith("ws-karnekeijo.Erro.Homologacao.") && file.getName().endsWith(".log"))
+			           qtdArqsRepetidos++; 
+			    
+		  }
+		  
+		  if (qtdArqsRepetidos > 1) {
+			  for (final File file : dir.listFiles()) 
+			  {
+				    if (file.getName().startsWith("ws-karnekeijo.Erro.Homologacao.") && file.getName().endsWith(".log"))
+				    {
+						   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+				    	
+						   if (datahoraArquivo.isBefore(horaInicio.minusMinutes(20))) 
+						   {
+						      file.delete();
+						   }
+				    }
+			  }
+		  }
+	  }
    }
 
    
