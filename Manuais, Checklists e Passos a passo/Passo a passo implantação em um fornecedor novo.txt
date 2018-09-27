@@ -545,11 +545,50 @@ sem nenhum registro de log deste erro...
 Eric
    
    
-   28. No caso se precisar de re-processamento de cotações ofertadas erradamente, 
-       ou não ofertadas indevidamente, executar o seguinte na base de homologação:
+28. No caso se precisar de re-processamento de cotações ofertadas erradamente, 
+    ou não ofertadas indevidamente, executar o seguinte na base de homologação:
 
 		delete from dbo.Log_Erro_Integracao
 		delete from dbo.Integracao_Cotacao_Fornecedor
+    
          
+29. Apenas no caso que o servidor é de tipo Windows 10 Pro: 
+    registrar as seguintes atividades daqui há 3 meses para ver se o JRE trava com todos os servidores Windows 10 
+    ou apenas na JR Distribuição: 
+       
+    (i) Dependendo dos resultados, substituir no Integrador - método main() o seguinte:
+          if (     fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).tipoSO.equals("Windows 10 Pro")
+        		&& fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).IdFornecedor == 947
+             )
+
+        por:
+          if (     fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).tipoSO.equals("Windows 10 Pro")
+             )
+       
+        ou por:
+          if (     fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).IdFornecedor == 947
+             )
+             
+             
+    (ii) Dependendo dos resultados, substituir no ManualManutencao.java - constructor ManualManutencao(Fornecedor f) o seguinte:
+		if ( !(    f.tipoSO.equals("Windows 10 Pro")
+			    && f.IdFornecedor == 947
+      		)
+   		)
+
+        por:
+             ........
+
+        ou por:
+             ........
+
+
+   (iii) No caso que travamento acontece com todos os servidores Windows 10:
+           - No Instalador criar o novo arquivo Integração Portal Cronos - Fornecedor.Windows.10_Pro.TaskSchedule.xml: 
+             	- no Windows Task Scheduler > Propriedades > Configurações: alterar o último combobox 
+             	  de "Interromper a instância existente" para "Não iniciar uma nova instância"
+             	   
+           - Parametrizar "Windows 10 Pro" no Instalador
+       
 
  

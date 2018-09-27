@@ -2206,68 +2206,93 @@ public final class IntegracaoFornecedorCompleta {
    }
 
    
-   public static void main(String[] args)
-   {    
-	  LocalDateTime horaInicio = LocalDateTime.now();
+   public static void Executar() {
+		  LocalDateTime horaInicio = LocalDateTime.now();
 
-	  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-	  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-	  excluirArquivos(horaInicio);
-	   
-   // criarTabelasTeste();
+		  excluirArquivos(horaInicio);
+		   
+	   // criarTabelasTeste();
 
-	  if (siglaSistema.equals("PCronos")) {
-		  if (erroStaticConstructor == null && toEnviarEmailAutomatico)
-	      {
-		     monitorarPendencias(horaInicio);
-	      }  
-	  }
-	  else
-		  downloadCotacoes(horaInicio, enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
+		  if (siglaSistema.equals("PCronos")) {
+			  if (erroStaticConstructor == null && toEnviarEmailAutomatico)
+		      {
+			     monitorarPendencias(horaInicio);
+		      }  
+		  }
+		  else
+			  downloadCotacoes(horaInicio, enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
 
 
-	  nf.setMinimumIntegerDigits(2);
-  	  nf.setMaximumFractionDigits(0);
-	  LocalDateTime horaFim = LocalDateTime.now();
-	  long HorasExecucao = Duration.between(horaInicio, horaFim).toHours(); // inclui os dias em horas
-	  long MinutosExecucao = Duration.between(horaInicio, horaFim).toMinutes() % 60;
-	  long MinutosTotalExecucao = Duration.between(horaInicio, horaFim).toMinutes();
-	  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
-	  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
-	  
+		  nf.setMinimumIntegerDigits(2);
+	  	  nf.setMaximumFractionDigits(0);
+		  LocalDateTime horaFim = LocalDateTime.now();
+		  long HorasExecucao = Duration.between(horaInicio, horaFim).toHours(); // inclui os dias em horas
+		  long MinutosExecucao = Duration.between(horaInicio, horaFim).toMinutes() % 60;
+		  long MinutosTotalExecucao = Duration.between(horaInicio, horaFim).toMinutes();
+		  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
+		  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
+		  
 
-	  if (siglaSistema.equals("PCronos") && MinutosTotalExecucao > 12) {
-		  String msgLimite13Min = "Erro! O monitoramento parou de vez pois o processamento passou o limite de 13 minutos e demorou " + nf.format(MinutosTotalExecucao) + " minutos. O monitoramento continuará parado até a exclusão do arquivo de log de erro e após a solução da causa. A última opção seria diminuir a frequência de execução de 15 minutos para 30 minutos.";
-	      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, msgLimite13Min, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento");
-	      // Logar o erro APÓS o envio de email, pois o sistema não envia nenhum email se existir qualquer arquivo de log de erro:
-	      IntegracaoFornecedorCompleta.logarErro(msgLimite13Min);
-	  }
+		  if (siglaSistema.equals("PCronos") && MinutosTotalExecucao > 12) {
+			  String msgLimite13Min = "Erro! O monitoramento parou de vez pois o processamento passou o limite de 13 minutos e demorou " + nf.format(MinutosTotalExecucao) + " minutos. O monitoramento continuará parado até a exclusão do arquivo de log de erro e após a solução da causa. A última opção seria diminuir a frequência de execução de 15 minutos para 30 minutos.";
+		      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, msgLimite13Min, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento");
+		      // Logar o erro APÓS o envio de email, pois o sistema não envia nenhum email se existir qualquer arquivo de log de erro:
+		      IntegracaoFornecedorCompleta.logarErro(msgLimite13Min);
+		  }
 
-	  
-	  if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {
-		  try
-		  {
-		      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
-		      String strHorarioComTempoExecucao = horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao; 
-		      bWriter.append(strHorarioComTempoExecucao);
-		      
-		      if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
+		  
+		  if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {
+			  try
 			  {
-				  bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
+			      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
+			      String strHorarioComTempoExecucao = horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao; 
+			      bWriter.append(strHorarioComTempoExecucao);
+			      
+			      if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
+				  {
+					  bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
+				  }
+			      bWriter.newLine();
+			      bWriter.flush();
+			      bWriter.close();
+		
+			      if (!siglaSistema.equals("PCronos"))
+			          performPostCall(strHorarioComTempoExecucao, "TemposExecução");
 			  }
-		      bWriter.newLine();
-		      bWriter.flush();
-		      bWriter.close();
-	
-		      if (!siglaSistema.equals("PCronos"))
-		          performPostCall(strHorarioComTempoExecucao, "TemposExecução");
-		  }
-	  	  catch (IOException ioe)
-		  {
-	  		  ioe.printStackTrace();
-		  }
-      } // if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) 
+		  	  catch (IOException ioe)
+			  {
+		  		  ioe.printStackTrace();
+			  }
+	      } // if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) 
+   }
+   
+   
+   public static void main(String[] args) 
+   {    
+	   Executar();
+	   
+	   try {
+		   FornecedorRepositorio fRep = new FornecedorRepositorio();
+	       if (     fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).tipoSO.equals("Windows 10 Pro")
+	    	 	 && fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).IdFornecedor == 947
+	          ) {
+	    	   while (true) {
+	    		   Thread.sleep(15 * 60 * 1000); // 15 min
+	    		   Executar();
+	    	   }
+	       }
+	   }
+  	   catch (InterruptedException iex)
+	   {
+  		 logarErro("main() - InterruptedException: " + iex.getMessage());
+	   }
+  	   catch (Exception ex)
+	   {
+    		 logarErro("main() - Exception: " + ex.getMessage());
+	   }
     }
 
 }

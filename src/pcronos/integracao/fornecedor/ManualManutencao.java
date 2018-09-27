@@ -219,7 +219,14 @@ this.conteudo += "" +
 "  - A senha do usuário " + f.usuarioWebservice + " do site do Portal Cronos foi alterada no site? " + "\r\n" + 
 "    Neste caso verifica se a mesma foi atualizada também no seguinte arquivo de configuração: " + "\r\n" +
 "    C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\conf\\Integração Fornecedor - Portal Cronos.properties" + "\r\n" + 
-"" + "\r\n" +
+"" + "\r\n";
+
+	
+if ( !(    f.tipoSO.equals("Windows 10 Pro")
+	    && f.IdFornecedor == 947
+      )
+   )
+    this.conteudo += "" +
 "  - No \"Gerenciador de Tarefas\" (\"Task Manager\") ordenar por nome do processo, e procurar" + "\r\n" + 
 "    \"Java(TM) Platform SE binary\". " + "\r\n" +
 "    Se não tiver nenhum processo com este nome, tudo está certo." + "\r\n" +   
@@ -230,7 +237,10 @@ this.conteudo += "" +
 "    este processo está travado. Neste caso, com o botão a direita do mouse clicar em \"Finalizar tarefa\".  " + "\r\n" +
 "    Se tiver um processo com este \"Local\" enquanto que as ofertas automáticas estão processando " + "\r\n" +
 "    normalmente, tudo está certo e não mexe com este processo.   " + "\r\n" +
-"        " + "\r\n" +
+"        " + "\r\n";
+
+	
+this.conteudo += "" +
 "  - Outras ideias suas (Firewall, proxy, portas, Internet, etc)." + "\r\n" + 
 "" + "\r\n" +
 "  - No último caso, se não conseguir resolver, " + "\r\n" +
