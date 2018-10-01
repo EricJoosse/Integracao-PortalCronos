@@ -1,11 +1,17 @@
 Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 ===============================================================
 
-0. Apenas no caso de instalação no servidor do monitoramento:
+
+-2. Abrir o AnyDesk dentro da máquina virtual no Azure para agilizar as cópias dos arquivos.
+
+-1. Apenas no caso de instalação no servidor do monitoramento:
 	 - Conectar como cronostech
      - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
 
-1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+0. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+
+1. Apenas no caso de instalação no servidor da JR Distribuição:
+	 - Matar o processo travado do JRE 
 
 2. Copiar o arquivo novo integr-fornecedor-2.6.1.jar do instalador para o servidor do fornecedor
  
@@ -116,9 +122,29 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
     	- Executar TestadorUnitario.bat e verificar se o snippet qualquer funcionou: veja TestadorUnitario.log
 		- Depois do teste, apagar TestadorUnitario.log
  
-14. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
 
-15. Apenas no caso de instalação no servidor do monitoramento: (já foi feito)
+14. Apenas no caso de instalação no servidor da JR Distribuição:
+     	- no Windows Task Scheduler > Propriedades > Configurações: alterar o último combobox 
+       	  de "Interromper a instância existente" para "Não iniciar uma nova instância"
+
+
+15. Apenas no caso de instalação no servidor da JR Distribuição:
+		- No Manual TI apagar o seguinte manualmente: 
+			  - No "Gerenciador de Tarefas" ("Task Manager") ordenar por nome do processo, e procurar 
+			    "Java(TM) Platform SE binary". 
+			    Se não tiver nenhum processo com este nome, tudo está certo.   
+			    Se tiver um ou mais processos na lista, verifica com o botão á direita do mouse, 
+			    na aba "Geral" se o "Local" de cada processo for igual a "C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe". 
+			    Se não tiver nenhum processo com este "Local", tudo está certo.   
+			    Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão paradas, 
+			    este processo está travado. Neste caso, com o botão a direita do mouse clicar em "Finalizar tarefa".  
+			    Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão processando 
+			    normalmente, tudo está certo e não mexe com este processo.   
+
+
+16. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+
+17. Apenas no caso de instalação no servidor do monitoramento: (já foi feito)
 		- Alterar "Arquivos de Programas PC" de Hidden para Normal no usuário cronostech
 		- Copiar TestadorUnitarioInstalacaoDesinstalacao.bat do instalador para o servidor do fornecedor
 				- Descomentar: goto TesteAttrib
@@ -130,6 +156,12 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
 		  porém pode exibir hidden files, para todos os usuários inclusive cronostech 
 		- Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria no usuário cronostech
 
-16. Apenas no caso de instalação no servidor do monitoramento: 
+18. Apenas no caso de instalação no servidor do monitoramento: 
      - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
 
+19. Apenas no caso de instalação no servidor da JR Distribuição:
+		- Re-habilitar a JR Distribuição nos envios de emais automáticos no Monitorador
+ 
+20. Atualizar a versão do .jar no arquivo "Tabela Versão .jar X Versão Manual TI.txt"
+    para o fornecedor que foi atualizado
+ 

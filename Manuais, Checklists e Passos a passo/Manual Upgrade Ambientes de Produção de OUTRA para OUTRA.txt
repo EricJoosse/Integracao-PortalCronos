@@ -15,3 +15,6 @@ na lista de manuais para upgrade
  
 4. Apenas no servidor do monitoramento: 
      - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
+
+5. Atualizar a versão do .jar no arquivo "Tabela Versão .jar X Versão Manual TI.txt"
+   para o fornecedor que foi atualizado

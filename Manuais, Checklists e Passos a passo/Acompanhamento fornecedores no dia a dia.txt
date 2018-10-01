@@ -74,10 +74,6 @@ Quando você desocupar o servidor, me avise
 
 
 Skype:
-Bom dia! Favor colocar o  AnyDesk no ar 5 minutos para uma atualização de versão. Agora vai ser a última vez de verdade por um bom tempo.
-
-
-Skype:
 Felipe, bom dia! Vocês têm um servidor Linux no Marítimos Pescados? 
 Se quiser, posso instalar a integração WinThor/Portal Cronos no servidor Linux, 
 pois com o servidor atual, desde muito tempo, o Portal Cronos nunca mais está recebendo ofertas automáticas do Marítimos Pescados...
@@ -203,8 +199,12 @@ Eric
   
   
 Skype:
-Geymison, bom dia! Favor ativar o Team Viewer e informar o ID / senha no Skype, pois preciso atualizar a versão da integração PCronos / WinThor.
+Ivan, boa tarde! Favor ativar o AnyDesk e informar o ID no Skype, pois preciso atualizar a versão do Integrador PCronos/WinThor para resolver definitivamente os travamentos que estão acontecendo no caso de Windows 10.
   
+Skype:
+Bom dia! Favor colocar o  AnyDesk no ar 5 minutos para uma atualização de versão. Agora vai ser a última vez de verdade por um bom tempo.
+
+
   
 Ivan, no tipo de Windows "Windows 10 Pro" está acontecendo um bug que está impedindo o funcionamento da integração WinThor/PCronos. 
 Para resolver este bug eu precisaria investir algumas horas, então isso tem que valer a pena. 

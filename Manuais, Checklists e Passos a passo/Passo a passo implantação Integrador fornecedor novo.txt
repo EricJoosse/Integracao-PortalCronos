@@ -590,5 +590,26 @@ Eric
              	   
            - Parametrizar "Windows 10 Pro" no Instalador
        
+       
+    (iv) No caso que travamento acontece com todos os servidores Windows 10:
+    		- Fazer o seguinte manualmente no servidor que também está sofrendo travamentos, 
+    		  ou colocar o seguinte no "Manual Upgrade Ambientes de Produção de x1.y1.z1 para x2.y2.z2.txt":
 
+			x1. Apenas no caso de instalação no servidor da <Nome_Fornecedor>:
+	     			- no Windows Task Scheduler > Propriedades > Configurações: alterar o último combobox 
+	       	  		  de "Interromper a instância existente" para "Não iniciar uma nova instância"
+
+
+			x2. Apenas no caso de instalação no servidor da <Nome_Fornecedor>:
+					- No Manual TI apagar o seguinte manualmente: 
+						  - No "Gerenciador de Tarefas" ("Task Manager") ordenar por nome do processo, e procurar 
+						    "Java(TM) Platform SE binary". 
+						    Se não tiver nenhum processo com este nome, tudo está certo.   
+						    Se tiver um ou mais processos na lista, verifica com o botão á direita do mouse, 
+						    na aba "Geral" se o "Local" de cada processo for igual a "C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe". 
+						    Se não tiver nenhum processo com este "Local", tudo está certo.   
+						    Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão paradas, 
+						    este processo está travado. Neste caso, com o botão a direita do mouse clicar em "Finalizar tarefa".  
+						    Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão processando 
+						    normalmente, tudo está certo e não mexe com este processo.   
  
