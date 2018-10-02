@@ -1,11 +1,13 @@
 Manual Upgrade dos Ambientes de Produção de 2.4 para 2.5.1
 ==========================================================
 
-1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+1. Adicionar "exit" seguida por uma linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor. Não renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+   possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados
 
 2. Copiar o arquivo novo integr-fornecedor-2.5.1.jar do instalador para o servidor do fornecedor
  
-3. Atualizar a chamada de integr-fornecedor-2.5.1.jar no xJob15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.5.1.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 
@@ -52,4 +54,6 @@ CodigoFilial                      = 1
  
 10. Apagar /Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/Instalador.log no servidor do fornecedor
   
-11. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+11. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor
+   

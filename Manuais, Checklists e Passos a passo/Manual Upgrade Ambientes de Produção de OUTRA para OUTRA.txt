@@ -7,14 +7,20 @@ na lista de manuais para upgrade
 	 - Conectar como cronostech
      - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
 
-2. Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor
+2. Adicionar "exit" seguida por uma linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor. Não renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+   possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travado
+			   
+3. Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor
  
-
-3. Atualizar a chamada de integr-fornecedor-x.y.z.jar no Job15a15minOfertamentoJava_Windows.bat 
+4. Atualizar a chamada de integr-fornecedor-x.y.z.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
-4. Apenas no servidor do monitoramento: 
+5. Apenas no servidor do monitoramento: 
      - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
 
-5. Atualizar a versão do .jar no arquivo "Tabela Versão .jar X Versão Manual TI.txt"
+6. Atualizar a versão do .jar no arquivo "Tabela Versão .jar X Versão Manual TI.txt"
    para o fornecedor que foi atualizado
+   
+7. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor

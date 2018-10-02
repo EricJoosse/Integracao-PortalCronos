@@ -1,13 +1,15 @@
 Manual Upgrade dos Ambientes de Produção de 2.3.x para 2.4
 ==========================================================
 
-1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+1. Adicionar "exit" seguida por uma linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor. Não renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+   possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados
 
    
 2. Copiar o arquivo novo integr-fornecedor-2.4.jar do instalador para o servidor do fornecedor
  
 
-3. Atualizar a chamada de integr-fornecedor-2.4.jar no xJob15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.4.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 
@@ -30,4 +32,5 @@ DiretorioArquivosXml              = C:/ProgramData/PortalCronos/Logs/Local
 #                                              - no caso de Windows : C:/ProgramData/PortalCronos/Logs/Local
 #                                              - no caso de Linux   : /var/PortalCronos/Logs/Local
 
-5. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor

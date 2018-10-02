@@ -8,14 +8,16 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 	 - Conectar como cronostech
      - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
 
-0. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+0. Adicionar "exit" seguida por uma linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor. Não renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+   possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados
 
 1. Apenas no caso de instalação no servidor da JR Distribuição:
 	 - Matar o processo travado do JRE 
 
 2. Copiar o arquivo novo integr-fornecedor-2.6.1.jar do instalador para o servidor do fornecedor
  
-3. Atualizar a chamada de integr-fornecedor-2.6.1.jar no xJob15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.6.1.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
  
@@ -60,7 +62,7 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 			- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/ por completo
 
 
-11. xJob15a15minOfertamentoJava_Windows.bat: 
+11. Job15a15minOfertamentoJava_Windows.bat: 
      Substituir: 
 
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor,
@@ -83,7 +85,7 @@ if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
 )
 
 
-12. xJob15a15minOfertamentoJava_Windows.bat: 
+12. Job15a15minOfertamentoJava_Windows.bat: 
      Substituir: 
 
 SETLOCAL
@@ -142,7 +144,12 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
 			    normalmente, tudo está certo e não mexe com este processo.   
 
 
-16. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+16. Apenas no caso de instalação no servidor da JR Distribuição:
+	renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+	
+	Nos outros casos: remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+    no servidor do fornecedor
+
 
 17. Apenas no caso de instalação no servidor do monitoramento: (já foi feito)
 		- Alterar "Arquivos de Programas PC" de Hidden para Normal no usuário cronostech

@@ -1,11 +1,13 @@
 Manual Upgrade dos Ambientes de Produção de 2.5.1 para 2.5.2
 ============================================================
 
-1. Renomear Job15a15minOfertamentoJava_Windows.bat para xJob15a15minOfertamentoJava_Windows.bat
+1. Adicionar "exit" seguida por uma linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor. Não renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+   possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados
 
 2. Copiar o arquivo novo integr-fornecedor-2.5.2.jar do instalador para o servidor do fornecedor
  
-3. Atualizar a chamada de integr-fornecedor-2.5.2.jar no xJob15a15minOfertamentoJava_Windows.bat 
+3. Atualizar a chamada de integr-fornecedor-2.5.2.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 4. Descobrir o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 
@@ -15,4 +17,5 @@ Manual Upgrade dos Ambientes de Produção de 2.5.1 para 2.5.2
    C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat. 
    Atualizar isso no arquivo Tabela Fornecedores_Versões.txt.
   
-5. Renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor
