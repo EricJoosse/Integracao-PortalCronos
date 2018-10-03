@@ -5,6 +5,7 @@ import pcronos.integracao.Criptografia;
 import pcronos.integracao.EmailAutomatico;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.DayOfWeek;
@@ -2209,7 +2210,20 @@ public final class IntegracaoFornecedorCompleta {
    public static void Executar() {
 		  LocalDateTime horaInicio = LocalDateTime.now();
 
-		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		  // O web service /cotacao/ObtemCotacoesGET/ faz paradas automáticas 
+		  // exatamente no mesmo horário:
+		  if (siglaSistema.equals("PCronos")) {
+			  final LocalTime time1 = LocalTime.parse("10:40:00") ;
+			  final LocalTime time2 = LocalTime.parse("12:40:00") ;
+			  LocalTime nowUtcTime = LocalTime.now();
+
+			  if (horaInicio.getDayOfWeek() == DayOfWeek.TUESDAY && nowUtcTime.isAfter(time1) && nowUtcTime.isBefore(time2)) { 
+				  return;
+			  }
+		  }
+
+		  
+	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 		  excluirArquivos(horaInicio);
