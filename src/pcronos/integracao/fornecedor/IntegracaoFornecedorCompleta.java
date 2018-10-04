@@ -2207,18 +2207,23 @@ public final class IntegracaoFornecedorCompleta {
    }
 
    
-   public static void Executar() {
-		  LocalDateTime horaInicio = LocalDateTime.now();
+   public static long Executar() {
+       LocalDateTime horaIniCiclo = LocalDateTime.now();
 
-		  // O web service /cotacao/ObtemCotacoesGET/ faz paradas automáticas 
-		  // exatamente no mesmo horário:
+	   try 
+	   {
+		   LocalDateTime horaInicio = LocalDateTime.now();
+
+		   // O web service /cotacao/ObtemCotacoesGET/ faz paradas automáticas para todos os fornecedores
+		  // de uma vez, exatamente no mesmo horário:
 		  if (siglaSistema.equals("PCronos")) {
 			  final LocalTime time1 = LocalTime.parse("10:40:00") ;
 			  final LocalTime time2 = LocalTime.parse("12:40:00") ;
 			  LocalTime nowUtcTime = LocalTime.now();
 
 			  if (horaInicio.getDayOfWeek() == DayOfWeek.TUESDAY && nowUtcTime.isAfter(time1) && nowUtcTime.isBefore(time2)) { 
-				  return;
+			 	  LocalDateTime horaFimCiclo = LocalDateTime.now();
+			 	  return Duration.between(horaIniCiclo,  horaFimCiclo).toMillis();
 			  }
 		  }
 
@@ -2281,21 +2286,31 @@ public final class IntegracaoFornecedorCompleta {
 		  		  ioe.printStackTrace();
 			  }
 	      } // if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) 
+	   }
+  	   catch (Exception ex)
+	   {
+    		 logarErro("Executar() - erro: " + ex.getMessage());
+	   }
+
+	   LocalDateTime horaFimCiclo = LocalDateTime.now();
+	   return Duration.between(horaIniCiclo,  horaFimCiclo).toMillis();
    }
    
    
    public static void main(String[] args) 
    {    
-	   Executar();
+	   long qtdMilliSegCiclo = 0;
+	   qtdMilliSegCiclo = Executar();
 	   
 	   try {
 		   FornecedorRepositorio fRep = new FornecedorRepositorio();
-	       if (     fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).tipoSO.equals("Windows 10 Pro")
+	       if (     !siglaSistema.equals("PCronos")
+	    		 && fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).tipoSO.equals("Windows 10 Pro")
 	    	 	 && fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).IdFornecedor == 947
 	          ) {
 	    	   while (true) {
-	    		   Thread.sleep(15 * 60 * 1000); // 15 min
-	    		   Executar();
+	    		   Thread.sleep( (15 * 60 * 1000) - qtdMilliSegCiclo); // 15 min
+	    		   qtdMilliSegCiclo = Executar();
 	    	   }
 	       }
 	   }
@@ -2305,7 +2320,7 @@ public final class IntegracaoFornecedorCompleta {
 	   }
   	   catch (Exception ex)
 	   {
-    		 logarErro("main() - Exception: " + ex.getMessage());
+    		 logarErro("main() - erro: " + ex.getMessage());
 	   }
     }
 
