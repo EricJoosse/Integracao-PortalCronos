@@ -165,228 +165,234 @@ public final class IntegracaoFornecedorCompleta {
 
   static 
   {
-    try {
-      Date hoje = new Date();
-      nomeArquivoDebug = "Debug" + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm ").format(hoje) + ".log";
-      transformerFactory = TransformerFactory.newInstance();
- 
-      erroStaticConstructor = null;
-
-      locale = new Locale("pt", "BR");
-      nf = NumberFormat.getInstance(locale);
-
-      Properties config = new Properties();
-      config.load(new FileInputStream(NOME_ARQUIVO_PROPERTIES));
-
-
-      
-      
-      diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
-      
-      if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
-    	  String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " não existe! Favor contatar o setor TI.";
-    	  diretorioArquivosXml = "C:/";
-    	  throw new ConfiguracaoException(msgErroDiretorio);
-      }
-      
-      try {
-  	    // O seguinte tem apenas efeito em Linux, e nenhum efeito em Windows, 
-    	// pois com Windows >= XP não é possível alterar diretórios para read-only (apenas arquivos)
-    	  
-        File testDir = new File(diretorioArquivosXml);
-        if (!testDir.canWrite()) 
-        { 
-           String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " é protegido contra gravação de arquivos ! Favor contatar o setor TI.";
-      	   diretorioArquivosXml = "C:/";
-           throw new ConfiguracaoException(msgErroDiretorio);
-        }
-
-    	  // O seguinte tb não funciona com Windows : 
-          // AccessController.checkPermission(new FilePermission(diretorioArquivosXml, "write"));
-        
-          // A única maneira para verificar os priviêgios necessários em Java 8 é : 
-          File.createTempFile("check", null, testDir).delete();
-
-          diretorioArquivosXmlSemBarraNoFinal = diretorioArquivosXml;
-          diretorioArquivosXml = diretorioArquivosXml + "/" ;
-      }
-      catch (SecurityException | IOException se_io_ex)
-      {
-   	     String msgErroDiretorio = "Erro! Não tem permissões suficientes para gravar arquivos no diretório " + diretorioArquivosXml + " ! Favor contatar o setor TI.";
-   	     diretorioArquivosXml = "C:/";
-      	 throw new ConfiguracaoException(msgErroDiretorio);
-      }
-
-
-
-      
-      siglaSistema  = config.getProperty("SiglaSistema");
-
-      if ( !( siglaSistema.equals("SAP") || siglaSistema.equals("APS") || siglaSistema.equals("WinThor") || siglaSistema.equals("PCronos") ) ) {
-    	  String msgErro = "O sistema " + siglaSistema + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
-    	  throw new ConfiguracaoException(msgErro);
-      }
-      
-
-      if (siglaSistema.equals("PCronos"))
-	  {
-          toEnviarEmailAutomatico = Boolean.parseBoolean(config.getProperty("EnviarEmailAutomatico"));
-          // Foi debugado que toEnviarEmailAutomatico fica false corretamente no caso que a configuração NÃO existe no arq .config
-
-          
-          if (toEnviarEmailAutomatico) 
-          {
-         	 provedorEmailAutomatico = config.getProperty("ProvedorEmailAutomatico");
-        	 portaEmailAutomatico = config.getProperty("PortaEmailAutomatico");
-        	 remetenteEmailAutomatico = config.getProperty("RemetenteEmailAutomatico");
-        	 destinoEmailAutomatico = config.getProperty("DestinoEmailAutomatico");
-        	 ccEmailAutomatico = (config.getProperty("CcEmailAutomatico").equals("") ? null : config.getProperty("CcEmailAutomatico"));
-             usuarioEmailAutomatico = config.getProperty("UsuarioEmailAutomatico");
-             senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"), toDebugar);
-          }
-	  }
-      
-      if (!siglaSistema.equals("SAP"))
-	  {
-         toVerificarEstoque                = Boolean.parseBoolean(config.getProperty("VerificarEstoque"));
-         criterioVerificacaoEstoque        = config.getProperty("CriterioVerificacaoEstoque");
-	    
-         if (    !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada")
-		      && !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero")
-		    )
-		 {
-         	 String msgErro = "Erro : configuração \"CriterioVerificacaoEstoque\" inválida! Opções permitidas: \"QtdEstoqueMaiorOuIgualQtdSolicitada\" ou \"QtdEstoqueMaiorZero\".";
-         	 throw new ConfiguracaoException(msgErro);
-		 }
-			
-         ObsOfertasPadraoSeNaoTemNoSistema = config.getProperty("ObsOfertasPadraoSeNaoTemNoSistema");
-         tipoBancoDeDados                  = config.getProperty("TipoBancoDeDados");
-         
-         if ( !( tipoBancoDeDados.equals("Firebird") || tipoBancoDeDados.equals("Oracle") || tipoBancoDeDados.equals("SQL Server") ) ) {
-       	  String msgErro = "O banco de dados " + tipoBancoDeDados + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
-       	  throw new ConfiguracaoException(msgErro);
-         }
-         usernameBancoDeDados              = config.getProperty("UsuarioBancoDeDados");
-         senhaBancoDeDadosCriptografada    = Boolean.parseBoolean(config.getProperty("SenhaBancoDeDadosCriptografada"));
-
-         if (senhaBancoDeDadosCriptografada)
-             senhaBancoDeDados             = Criptografia.decrypt(config.getProperty("SenhaBancoDeDados"), toDebugar);
-         else
-             senhaBancoDeDados             = config.getProperty("SenhaBancoDeDados");
-        	 
-         enderecoIpServidorBancoDeDados    = config.getProperty("EnderecoIpServidorBancoDeDados");
-         portaServidorBancoDeDados         = config.getProperty("PortaServidorBancoDeDados");
-         instanciaBancoDeDados             = config.getProperty("InstanciaBancoDeDados");
-         
-         if (config.getProperty("UsarValorMinimoSistemaFornecedor") == null) // Se esta chave não existir no *.properties
-             toUsarValorMinimoSistemaFornecedor = true;
-         else 
-             toUsarValorMinimoSistemaFornecedor = Boolean.parseBoolean(config.getProperty("UsarValorMinimoSistemaFornecedor"));
-         
-         if (siglaSistema.equals("WinThor"))
-        	 codigoFilialWinThor = Integer.parseInt(config.getProperty("CodigoFilial"));
-	  }
-      username                          = config.getProperty("UsuarioWebService");
-      senhaCriptografada                = Boolean.parseBoolean(config.getProperty("SenhaWebServiceCriptografada"));
-      
-      if (senhaCriptografada)
-          senha                         = Criptografia.decrypt(config.getProperty("SenhaWebService"), toDebugar);
-      else
-          senha                         = config.getProperty("SenhaWebService");
-    	  
-      cnpjFornecedor                    = config.getProperty("CnpjFornecedor");
-      nomeFantasiaFornecedor            = config.getProperty("NomeFantasiaFornecedor");
-      toDebugar                         = Boolean.parseBoolean(config.getProperty("Debugar"));
-      tipoAmbiente                      = config.getProperty("TipoAmbiente");
-
-      if (tipoAmbiente.equals("P"))
-          enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceProducao");
-      else if (tipoAmbiente.equals("H"))
-          enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceHomologacao");
-      else if (tipoAmbiente.equals("T"))
-          enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceTeste");
-      else {
-    	  String msgErro = "O tipo de ambiente " + tipoAmbiente + " não existe. Opções permitidas: P (= Produção), H (= Homologação), T (= Teste)";
-    	  throw new ConfiguracaoException(msgErro);
-      }
-      
-      
-      try {
-          qtdDiasArquivosXmlGuardados = Integer.parseInt(config.getProperty("QtdDiasArquivosXmlGuardados"));
-      }
-      catch (NumberFormatException nfex) {
-    	  throw new ConfiguracaoException("Parâmetro \"QtdDiasArquivosXmlGuardados\" inválido. Deve ser um número inteiro igual a zero ou maior.");
-      }
-	
-      
-      // Para não impossibilitar o limite de 11 emails por dia, no caso do Bol:
-      if (siglaSistema.equals("PCronos") && qtdDiasArquivosXmlGuardados < 1) {
-    	     String msgErro = "Erro! QtdDiasArquivosXmlGuardados não pode ser menor que 1 no caso que SiglaSistema = PCronos! (para não impossibilitar o limite de 11 emails por dia, no caso do Bol)";
-          	 throw new ConfiguracaoException(msgErro);
-      }
-
-    	  
-      debugar("sun.boot.class.path = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
-
-	  debugar("CnpjFornecedor                    = " + cnpjFornecedor);
-	  debugar("NomeFantasiaFornecedor            = " + nomeFantasiaFornecedor);
-	  debugar("SiglaSistema                      = " + siglaSistema);
-
-	  if (!siglaSistema.equals("SAP"))
-	  {
-	      debugar("VerificarEstoque                  = " + toVerificarEstoque);
-	      debugar("CriterioVerificacaoEstoque        = " + criterioVerificacaoEstoque);
-		  debugar("ObsOfertasPadraoSeNaoTemNoSistema = " + ObsOfertasPadraoSeNaoTemNoSistema);
-		  
-		  if (siglaSistema.equals("WinThor")) {
-			  debugar("UsarValorMinimoSistemaFornecedor  = " + toUsarValorMinimoSistemaFornecedor);
-			  debugar("CodigoFilial                      = " + codigoFilialWinThor);
-		  }
-
-		  debugar("TipoBancoDeDados                  = " + tipoBancoDeDados);
-		  debugar("EnderecoIpServidorBancoDeDados    = " + enderecoIpServidorBancoDeDados);
-		  debugar("InstanciaBancoDeDados             = " + instanciaBancoDeDados);
-		  debugar("PortaServidorBancoDeDados         = " + portaServidorBancoDeDados);
-		  debugar("UsuarioBancoDeDados               = " + usernameBancoDeDados);
-		  debugar("SenhaBancoDeDados                 = " + config.getProperty("SenhaBancoDeDados"));
-		  debugar("SenhaBancoDeDadosCriptografada    = " + senhaBancoDeDadosCriptografada);
-	  }
-	  debugar("EnderecoBaseWebService            = " + enderecoBaseWebService);
-	  debugar("TipoAmbiente                      = " + tipoAmbiente);
-	  debugar("UsuarioWebService                 = " + username);
-	  debugar("SenhaWebService                   = " + config.getProperty("SenhaWebService"));
-	  debugar("SenhaWebServiceCriptografada      = " + senhaCriptografada);
-	  debugar("DiretorioArquivosXml              = " + diretorioArquivosXml);
-      debugar("QtdDiasArquivosXmlGuardados       = " + qtdDiasArquivosXmlGuardados);
-	  debugar("Debugar                           = " + toDebugar);
-         
-      // throw new Exception("teste exception static constructor");
-    } 
-    catch (ConfiguracaoException cex) {
-        try
-        {
-          erroStaticConstructor = cex.getMessage(); 
-          logarErro(cex.getMessage());
-        }
-        catch (Exception ex2)
-        {
-          throw new ExceptionInInitializerError(ex2);
-        }
-    }
-    catch (Exception ex) {
-      try
-      {
-        erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex); 
-        logarErro(ex, true);
-      }
-      catch (Exception ex2)
-      {
-        throw new ExceptionInInitializerError(ex2);
-      }
-    }
+	  Inicializar();
   }
 
 
+  private static void Inicializar()
+  {
+	    try {
+	        Date hoje = new Date();
+	        nomeArquivoDebug = "Debug" + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm ").format(hoje) + ".log";
+	        transformerFactory = TransformerFactory.newInstance();
+	   
+	        erroStaticConstructor = null;
+
+	        locale = new Locale("pt", "BR");
+	        nf = NumberFormat.getInstance(locale);
+
+	        Properties config = new Properties();
+	        config.load(new FileInputStream(NOME_ARQUIVO_PROPERTIES));
+
+
+	        
+	        
+	        diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
+	        
+	        if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
+	      	  String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " não existe! Favor contatar o setor TI.";
+	      	  diretorioArquivosXml = "C:/";
+	      	  throw new ConfiguracaoException(msgErroDiretorio);
+	        }
+	        
+	        try {
+	    	    // O seguinte tem apenas efeito em Linux, e nenhum efeito em Windows, 
+	      	// pois com Windows >= XP não é possível alterar diretórios para read-only (apenas arquivos)
+	      	  
+	          File testDir = new File(diretorioArquivosXml);
+	          if (!testDir.canWrite()) 
+	          { 
+	             String msgErroDiretorio = "Erro! O diretório " + diretorioArquivosXml + " é protegido contra gravação de arquivos ! Favor contatar o setor TI.";
+	        	   diretorioArquivosXml = "C:/";
+	             throw new ConfiguracaoException(msgErroDiretorio);
+	          }
+
+	      	  // O seguinte tb não funciona com Windows : 
+	            // AccessController.checkPermission(new FilePermission(diretorioArquivosXml, "write"));
+	          
+	            // A única maneira para verificar os priviêgios necessários em Java 8 é : 
+	            File.createTempFile("check", null, testDir).delete();
+
+	            diretorioArquivosXmlSemBarraNoFinal = diretorioArquivosXml;
+	            diretorioArquivosXml = diretorioArquivosXml + "/" ;
+	        }
+	        catch (SecurityException | IOException se_io_ex)
+	        {
+	     	     String msgErroDiretorio = "Erro! Não tem permissões suficientes para gravar arquivos no diretório " + diretorioArquivosXml + " ! Favor contatar o setor TI.";
+	     	     diretorioArquivosXml = "C:/";
+	        	 throw new ConfiguracaoException(msgErroDiretorio);
+	        }
+
+
+
+	        
+	        siglaSistema  = config.getProperty("SiglaSistema");
+
+	        if ( !( siglaSistema.equals("SAP") || siglaSistema.equals("APS") || siglaSistema.equals("WinThor") || siglaSistema.equals("PCronos") ) ) {
+	      	  String msgErro = "O sistema " + siglaSistema + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
+	      	  throw new ConfiguracaoException(msgErro);
+	        }
+	        
+
+	        if (siglaSistema.equals("PCronos"))
+	  	  {
+	            toEnviarEmailAutomatico = Boolean.parseBoolean(config.getProperty("EnviarEmailAutomatico"));
+	            // Foi debugado que toEnviarEmailAutomatico fica false corretamente no caso que a configuração NÃO existe no arq .config
+
+	            
+	            if (toEnviarEmailAutomatico) 
+	            {
+	           	 provedorEmailAutomatico = config.getProperty("ProvedorEmailAutomatico");
+	          	 portaEmailAutomatico = config.getProperty("PortaEmailAutomatico");
+	          	 remetenteEmailAutomatico = config.getProperty("RemetenteEmailAutomatico");
+	          	 destinoEmailAutomatico = config.getProperty("DestinoEmailAutomatico");
+	          	 ccEmailAutomatico = (config.getProperty("CcEmailAutomatico").equals("") ? null : config.getProperty("CcEmailAutomatico"));
+	               usuarioEmailAutomatico = config.getProperty("UsuarioEmailAutomatico");
+	               senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"), toDebugar);
+	            }
+	  	  }
+	        
+	        if (!siglaSistema.equals("SAP"))
+	  	  {
+	           toVerificarEstoque                = Boolean.parseBoolean(config.getProperty("VerificarEstoque"));
+	           criterioVerificacaoEstoque        = config.getProperty("CriterioVerificacaoEstoque");
+	  	    
+	           if (    !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada")
+	  		      && !criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero")
+	  		    )
+	  		 {
+	           	 String msgErro = "Erro : configuração \"CriterioVerificacaoEstoque\" inválida! Opções permitidas: \"QtdEstoqueMaiorOuIgualQtdSolicitada\" ou \"QtdEstoqueMaiorZero\".";
+	           	 throw new ConfiguracaoException(msgErro);
+	  		 }
+	  			
+	           ObsOfertasPadraoSeNaoTemNoSistema = config.getProperty("ObsOfertasPadraoSeNaoTemNoSistema");
+	           tipoBancoDeDados                  = config.getProperty("TipoBancoDeDados");
+	           
+	           if ( !( tipoBancoDeDados.equals("Firebird") || tipoBancoDeDados.equals("Oracle") || tipoBancoDeDados.equals("SQL Server") ) ) {
+	         	  String msgErro = "O banco de dados " + tipoBancoDeDados + " ainda não está homologado. Favor entrar em contato com o Suporte do Portal Cronos.";
+	         	  throw new ConfiguracaoException(msgErro);
+	           }
+	           usernameBancoDeDados              = config.getProperty("UsuarioBancoDeDados");
+	           senhaBancoDeDadosCriptografada    = Boolean.parseBoolean(config.getProperty("SenhaBancoDeDadosCriptografada"));
+
+	           if (senhaBancoDeDadosCriptografada)
+	               senhaBancoDeDados             = Criptografia.decrypt(config.getProperty("SenhaBancoDeDados"), toDebugar);
+	           else
+	               senhaBancoDeDados             = config.getProperty("SenhaBancoDeDados");
+	          	 
+	           enderecoIpServidorBancoDeDados    = config.getProperty("EnderecoIpServidorBancoDeDados");
+	           portaServidorBancoDeDados         = config.getProperty("PortaServidorBancoDeDados");
+	           instanciaBancoDeDados             = config.getProperty("InstanciaBancoDeDados");
+	           
+	           if (config.getProperty("UsarValorMinimoSistemaFornecedor") == null) // Se esta chave não existir no *.properties
+	               toUsarValorMinimoSistemaFornecedor = true;
+	           else 
+	               toUsarValorMinimoSistemaFornecedor = Boolean.parseBoolean(config.getProperty("UsarValorMinimoSistemaFornecedor"));
+	           
+	           if (siglaSistema.equals("WinThor"))
+	          	 codigoFilialWinThor = Integer.parseInt(config.getProperty("CodigoFilial"));
+	  	  }
+	        username                          = config.getProperty("UsuarioWebService");
+	        senhaCriptografada                = Boolean.parseBoolean(config.getProperty("SenhaWebServiceCriptografada"));
+	        
+	        if (senhaCriptografada)
+	            senha                         = Criptografia.decrypt(config.getProperty("SenhaWebService"), toDebugar);
+	        else
+	            senha                         = config.getProperty("SenhaWebService");
+	      	  
+	        cnpjFornecedor                    = config.getProperty("CnpjFornecedor");
+	        nomeFantasiaFornecedor            = config.getProperty("NomeFantasiaFornecedor");
+	        toDebugar                         = Boolean.parseBoolean(config.getProperty("Debugar"));
+	        tipoAmbiente                      = config.getProperty("TipoAmbiente");
+
+	        if (tipoAmbiente.equals("P"))
+	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceProducao");
+	        else if (tipoAmbiente.equals("H"))
+	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceHomologacao");
+	        else if (tipoAmbiente.equals("T"))
+	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceTeste");
+	        else {
+	      	  String msgErro = "O tipo de ambiente " + tipoAmbiente + " não existe. Opções permitidas: P (= Produção), H (= Homologação), T (= Teste)";
+	      	  throw new ConfiguracaoException(msgErro);
+	        }
+	        
+	        
+	        try {
+	            qtdDiasArquivosXmlGuardados = Integer.parseInt(config.getProperty("QtdDiasArquivosXmlGuardados"));
+	        }
+	        catch (NumberFormatException nfex) {
+	      	  throw new ConfiguracaoException("Parâmetro \"QtdDiasArquivosXmlGuardados\" inválido. Deve ser um número inteiro igual a zero ou maior.");
+	        }
+	  	
+	        
+	        // Para não impossibilitar o limite de 11 emails por dia, no caso do Bol:
+	        if (siglaSistema.equals("PCronos") && qtdDiasArquivosXmlGuardados < 1) {
+	      	     String msgErro = "Erro! QtdDiasArquivosXmlGuardados não pode ser menor que 1 no caso que SiglaSistema = PCronos! (para não impossibilitar o limite de 11 emails por dia, no caso do Bol)";
+	            	 throw new ConfiguracaoException(msgErro);
+	        }
+
+	      	  
+	        debugar("sun.boot.class.path = " + java.lang.management.ManagementFactory.getRuntimeMXBean().getBootClassPath());
+
+	  	  debugar("CnpjFornecedor                    = " + cnpjFornecedor);
+	  	  debugar("NomeFantasiaFornecedor            = " + nomeFantasiaFornecedor);
+	  	  debugar("SiglaSistema                      = " + siglaSistema);
+
+	  	  if (!siglaSistema.equals("SAP"))
+	  	  {
+	  	      debugar("VerificarEstoque                  = " + toVerificarEstoque);
+	  	      debugar("CriterioVerificacaoEstoque        = " + criterioVerificacaoEstoque);
+	  		  debugar("ObsOfertasPadraoSeNaoTemNoSistema = " + ObsOfertasPadraoSeNaoTemNoSistema);
+	  		  
+	  		  if (siglaSistema.equals("WinThor")) {
+	  			  debugar("UsarValorMinimoSistemaFornecedor  = " + toUsarValorMinimoSistemaFornecedor);
+	  			  debugar("CodigoFilial                      = " + codigoFilialWinThor);
+	  		  }
+
+	  		  debugar("TipoBancoDeDados                  = " + tipoBancoDeDados);
+	  		  debugar("EnderecoIpServidorBancoDeDados    = " + enderecoIpServidorBancoDeDados);
+	  		  debugar("InstanciaBancoDeDados             = " + instanciaBancoDeDados);
+	  		  debugar("PortaServidorBancoDeDados         = " + portaServidorBancoDeDados);
+	  		  debugar("UsuarioBancoDeDados               = " + usernameBancoDeDados);
+	  		  debugar("SenhaBancoDeDados                 = " + config.getProperty("SenhaBancoDeDados"));
+	  		  debugar("SenhaBancoDeDadosCriptografada    = " + senhaBancoDeDadosCriptografada);
+	  	  }
+	  	  debugar("EnderecoBaseWebService            = " + enderecoBaseWebService);
+	  	  debugar("TipoAmbiente                      = " + tipoAmbiente);
+	  	  debugar("UsuarioWebService                 = " + username);
+	  	  debugar("SenhaWebService                   = " + config.getProperty("SenhaWebService"));
+	  	  debugar("SenhaWebServiceCriptografada      = " + senhaCriptografada);
+	  	  debugar("DiretorioArquivosXml              = " + diretorioArquivosXml);
+	        debugar("QtdDiasArquivosXmlGuardados       = " + qtdDiasArquivosXmlGuardados);
+	  	  debugar("Debugar                           = " + toDebugar);
+	           
+	        // throw new Exception("teste exception static constructor");
+	      } 
+	      catch (ConfiguracaoException cex) {
+	          try
+	          {
+	            erroStaticConstructor = cex.getMessage(); 
+	            logarErro(cex.getMessage());
+	          }
+	          catch (Exception ex2)
+	          {
+	            throw new ExceptionInInitializerError(ex2);
+	          }
+	      }
+	      catch (Exception ex) {
+	        try
+	        {
+	          erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex); 
+	          logarErro(ex, true);
+	        }
+	        catch (Exception ex2)
+	        {
+	          throw new ExceptionInInitializerError(ex2);
+	        }
+	      }
+  }
+  
+  
   private static void criarTabelasTeste() 
   {
 	  try
@@ -2207,11 +2213,14 @@ public final class IntegracaoFornecedorCompleta {
    }
 
    
-   public static long Executar() {
+   public static long Executar(boolean isPrimeiraVez) {
        LocalDateTime horaIniCiclo = LocalDateTime.now();
 
 	   try 
 	   {
+	       if (!isPrimeiraVez)
+	    	   Inicializar();
+	       
 		   LocalDateTime horaInicio = LocalDateTime.now();
 
 		   // O web service /cotacao/ObtemCotacoesGET/ faz paradas automáticas para todos os fornecedores
@@ -2289,7 +2298,7 @@ public final class IntegracaoFornecedorCompleta {
 	   }
   	   catch (Exception ex)
 	   {
-    		 logarErro("Executar() - erro: " + ex.getMessage());
+    		 logarErro("Executar(): Erro: " + ex.getMessage());
 	   }
 
 	   LocalDateTime horaFimCiclo = LocalDateTime.now();
@@ -2300,7 +2309,7 @@ public final class IntegracaoFornecedorCompleta {
    public static void main(String[] args) 
    {    
 	   long qtdMilliSegCiclo = 0;
-	   qtdMilliSegCiclo = Executar();
+	   qtdMilliSegCiclo = Executar(true);
 	   
 	   try {
 		   FornecedorRepositorio fRep = new FornecedorRepositorio();
@@ -2310,7 +2319,7 @@ public final class IntegracaoFornecedorCompleta {
 	          ) {
 	    	   while (true) {
 	    		   Thread.sleep( (15 * 60 * 1000) - qtdMilliSegCiclo); // 15 min
-	    		   qtdMilliSegCiclo = Executar();
+	    		   qtdMilliSegCiclo = Executar(false);
 	    	   }
 	       }
 	   }
@@ -2320,7 +2329,7 @@ public final class IntegracaoFornecedorCompleta {
 	   }
   	   catch (Exception ex)
 	   {
-    		 logarErro("main() - erro: " + ex.getMessage());
+    		 logarErro("main(): Erro: " + ex.getMessage());
 	   }
     }
 
