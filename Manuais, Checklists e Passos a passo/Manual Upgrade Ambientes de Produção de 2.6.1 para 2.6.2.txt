@@ -1,7 +1,5 @@
-Manual Upgrade dos Ambientes de Produção de outra versão para outra versão que não se encontra 
-==============================================================================================
-na lista de manuais para upgrade
-================================
+Manual para upgrade dos ambientes de produção de 2.6.1 para 2.6.2 
+=================================================================
 
 1. Apenas no caso do servidor do monitoramento:
 	 - Conectar como cronostech
@@ -16,11 +14,11 @@ na lista de manuais para upgrade
 
 	(ii) Apenas no caso de instalação no servidor da JR Distribuição (Windows 10):
 		 - Matar o processo JRE 1.8.0_92
-
 		   
-3. Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor
+			   
+3. Copiar o arquivo novo integr-fornecedor-2.6.2.jar do instalador para o servidor do fornecedor
  
-4. Atualizar a chamada de integr-fornecedor-x.y.z.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
+4. Atualizar a chamada de integr-fornecedor-2.6.2.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
 5. Atualizar a versão do .jar no arquivo "Tabela Versão .jar X Versão Manual TI.txt"
@@ -34,4 +32,4 @@ na lista de manuais para upgrade
      
 8. Apenas no caso do servidor do monitoramento: 
      - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
-
+   

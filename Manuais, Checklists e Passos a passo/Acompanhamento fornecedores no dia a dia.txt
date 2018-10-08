@@ -200,6 +200,7 @@ Eric
   
 Skype:
 Ivan, boa tarde! Favor ativar o AnyDesk e informar o ID no Skype, pois preciso atualizar a versão do Integrador PCronos/WinThor para resolver definitivamente os travamentos que estão acontecendo no caso de Windows 10.
+Ivan, boa tarde! Favor ativar o AnyDesk e informar o ID no Skype, pois preciso resolver mais um bug no caso de Windows 10 (de forma definitiva).
   
 Skype:
 Bom dia! Favor colocar o  AnyDesk no ar 5 minutos para uma atualização de versão. Agora vai ser a última vez de verdade por um bom tempo.
