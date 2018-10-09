@@ -149,6 +149,7 @@ public final class IntegracaoFornecedorCompleta {
   public static String       ObsOfertasPadraoSeNaoTemNoSistema;
   public static int          qtdDiasArquivosXmlGuardados;
   public static boolean      toDebugar;
+  public static boolean      toExecutarHorarioPico;
   public static boolean      toEnviarEmailAutomatico;
   public static String       provedorEmailAutomatico;
   public static String       portaEmailAutomatico;
@@ -235,25 +236,26 @@ public final class IntegracaoFornecedorCompleta {
 	        
 
 	        if (siglaSistema.equals("PCronos"))
-	  	  {
+	  	    {
+	        	toExecutarHorarioPico = Boolean.parseBoolean(config.getProperty("ExecutarHorarioPico"));
 	            toEnviarEmailAutomatico = Boolean.parseBoolean(config.getProperty("EnviarEmailAutomatico"));
 	            // Foi debugado que toEnviarEmailAutomatico fica false corretamente no caso que a configuração NÃO existe no arq .config
 
 	            
 	            if (toEnviarEmailAutomatico) 
 	            {
-	           	 provedorEmailAutomatico = config.getProperty("ProvedorEmailAutomatico");
-	          	 portaEmailAutomatico = config.getProperty("PortaEmailAutomatico");
-	          	 remetenteEmailAutomatico = config.getProperty("RemetenteEmailAutomatico");
-	          	 destinoEmailAutomatico = config.getProperty("DestinoEmailAutomatico");
-	          	 ccEmailAutomatico = (config.getProperty("CcEmailAutomatico").equals("") ? null : config.getProperty("CcEmailAutomatico"));
+	           	   provedorEmailAutomatico = config.getProperty("ProvedorEmailAutomatico");
+	          	   portaEmailAutomatico = config.getProperty("PortaEmailAutomatico");
+	          	   remetenteEmailAutomatico = config.getProperty("RemetenteEmailAutomatico");
+	          	   destinoEmailAutomatico = config.getProperty("DestinoEmailAutomatico");
+	          	   ccEmailAutomatico = (config.getProperty("CcEmailAutomatico").equals("") ? null : config.getProperty("CcEmailAutomatico"));
 	               usuarioEmailAutomatico = config.getProperty("UsuarioEmailAutomatico");
 	               senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"), toDebugar);
 	            }
-	  	  }
+	  	    }
 	        
 	        if (!siglaSistema.equals("SAP"))
-	  	  {
+	  	    {
 	           toVerificarEstoque                = Boolean.parseBoolean(config.getProperty("VerificarEstoque"));
 	           criterioVerificacaoEstoque        = config.getProperty("CriterioVerificacaoEstoque");
 	  	    
@@ -2218,14 +2220,15 @@ public final class IntegracaoFornecedorCompleta {
 
 	   try 
 	   {
-	       if (!isPrimeiraVez)
-	    	   Inicializar();
+	      if (!isPrimeiraVez)
+	         Inicializar();
 	       
-		   LocalDateTime horaInicio = LocalDateTime.now();
+		  LocalDateTime horaInicio = LocalDateTime.now();
 
-		   // O web service /cotacao/ObtemCotacoesGET/ faz paradas automáticas para todos os fornecedores
-		  // de uma vez, exatamente no mesmo horário:
-		  if (siglaSistema.equals("PCronos")) {
+		  // Não executar o ciclo de 15 a 15 minutos durante horário de pico:		   
+		  //      Observação: O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
+		  //                  para todos os fornecedores de uma vez, exatamente no mesmo horário:
+		  if (siglaSistema.equals("PCronos") && !toExecutarHorarioPico) {
 			  final LocalTime time1 = LocalTime.parse("10:40:00") ;
 			  final LocalTime time2 = LocalTime.parse("12:40:00") ;
 			  LocalTime nowUtcTime = LocalTime.now();
