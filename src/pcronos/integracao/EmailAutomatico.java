@@ -231,6 +231,7 @@ public static void enviar( java.lang.String p_De
                           , LocalDateTime horaInicio
                           , String diretorioArquivosXml
                           , String nmFornecedor
+                          , String cdCotacao
                           ) {
 javax.mail.internet.MimeMessage       mmsg                     ; 
 javax.mail.internet.MimeBodyPart      mbp1, mbp2               ;
@@ -240,6 +241,7 @@ javax.activation.FileDataSource       fds                      ;
 javax.mail.Session                    session                  ;
 int                                   qtdEmailsEnviadosHojeTotal      = 0;
 int                                   qtdEmailsEnviadosHojeFornecedor = 0;
+boolean                              isEnviadoJa = false; 
 
 //SIV.setBooleanDebug( EmailAutomatico.bDebug ) ; 
 
@@ -261,6 +263,11 @@ File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCr
 	    {
 	       qtdEmailsEnviadosHojeFornecedor += 1;
 	    }
+	    
+	    if (file.getName().startsWith(nmFornecedor) && file.getName().indexOf(cdCotacao) > 0)
+	    {
+	    	isEnviadoJa = true;
+	    }
    }
    
    // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email por motivo de abuso: 
@@ -270,6 +277,8 @@ File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCr
    if (qtdEmailsEnviadosHojeFornecedor >= 3)
 	   	return;
 	   
+   if (isEnviadoJa)
+	   	return;
 
 
    if ( ( p_Assunto == null ) && ( p_Anexo == null ) && ( p_Mensagem == null ) ) {
@@ -341,7 +350,14 @@ try
 
     LocalDateTime horaEnv = LocalDateTime.now();
 	DateTimeFormatter Envformatter = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
-	String nomeArquivoEnv = diretorioArquivosXml + nmFornecedor + "." + horaEnv.format(Envformatter) + ".env";
+	
+	String nomeArquivoEnv = diretorioArquivosXml + nmFornecedor + ".";
+	
+	if (cdCotacao != null)
+		nomeArquivoEnv += cdCotacao + ".";
+	
+	nomeArquivoEnv += horaEnv.format(Envformatter) + ".env";
+	
     File fileEnviado = new File(nomeArquivoEnv);
 	boolean isFileEnvCriado = fileEnviado.createNewFile();
 } 

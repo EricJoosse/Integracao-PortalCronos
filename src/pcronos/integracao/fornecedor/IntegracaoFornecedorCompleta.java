@@ -932,7 +932,7 @@ public final class IntegracaoFornecedorCompleta {
 			    	// Aguardar 54 horas para o reset do limite diária ou semanal de emails,  
 			    	// e tentar enviar um email automaticamente avisando do erro: 
 			    	if (datahoraArquivo.isAfter(horaInicio.minusHours(54).minusMinutes(25)) && datahoraArquivo.isBefore(horaInicio.minusHours(54))) {
-			  	        EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, "Erro! Monitoramento parado! Aconteceu um erro fatal 54 horas atrás. Veja a causa no arquivo de log " + file.getName() + ". O monitoramento automático continuará parado até a verificação e a exclusão manual deste arquivo de log de erro! ", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento");
+			  	        EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, "Erro! Monitoramento parado! Aconteceu um erro fatal 54 horas atrás. Veja a causa no arquivo de log " + file.getName() + ". O monitoramento automático continuará parado até a verificação e a exclusão manual deste arquivo de log de erro! ", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 			    	}
 			    	// Se existir um arquivo de log com erro pelo email do Bol de qualquer data, 
 					// automaticamente nunca mais enviar nenhum email (nem sobre fornecedores nem sobre o monitoramento) 
@@ -971,6 +971,7 @@ public final class IntegracaoFornecedorCompleta {
 	             String body = "";
 	             String assunto = "";
             	 String nmFornecedor = null;
+            	 String cdCotacao = null;
 	             
 	             while (rSet.next()) {
 	            	 nmFornecedor = rSet.getString(2);
@@ -997,6 +998,7 @@ public final class IntegracaoFornecedorCompleta {
 		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	            	 }
 	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) {
+	            		 cdCotacao = rSet.getString(11);
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
 		            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -1208,7 +1210,7 @@ public final class IntegracaoFornecedorCompleta {
 	             } // while (rSet.next())
 	             
 	             if (!Utils.isNullOrBlank(nmFornecedor)) {
-	 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor);
+	 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
 	             }
 
 	 	         rSet.close();
@@ -1217,7 +1219,7 @@ public final class IntegracaoFornecedorCompleta {
 	    }
 	    catch (java.lang.Exception ex) { 
 	       logarErro(ex, false);	      
- 	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento");
+ 	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 	    }
 	    finally { 
 	      if (cstat != null) {
@@ -2269,7 +2271,7 @@ public final class IntegracaoFornecedorCompleta {
 
 		  if (siglaSistema.equals("PCronos") && MinutosTotalExecucao > 12) {
 			  String msgLimite13Min = "Erro! O monitoramento parou de vez pois o processamento passou o limite de 13 minutos e demorou " + nf.format(MinutosTotalExecucao) + " minutos. O monitoramento continuará parado até a exclusão do arquivo de log de erro e após a solução da causa. A última opção seria diminuir a frequência de execução de 15 minutos para 30 minutos.";
-		      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, msgLimite13Min, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento");
+		      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, msgLimite13Min, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 		      // Logar o erro APÓS o envio de email, pois o sistema não envia nenhum email se existir qualquer arquivo de log de erro:
 		      IntegracaoFornecedorCompleta.logarErro(msgLimite13Min);
 		  }
