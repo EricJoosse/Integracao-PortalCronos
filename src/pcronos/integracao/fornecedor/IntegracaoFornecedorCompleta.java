@@ -966,7 +966,8 @@ public final class IntegracaoFornecedorCompleta {
 	        boolean results = cstat.execute();
 	        int rsCount = 0;
 
-	       while (results) {
+	       while (results) 
+	       {
 	             rSet = cstat.getResultSet();
 	             String body = "";
 	             String assunto = "";
@@ -997,7 +998,8 @@ public final class IntegracaoFornecedorCompleta {
 		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
 	            	 }
-	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) {
+	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) 
+	            	 {
 	            		 cdCotacao = rSet.getString(11);
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
 		            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
@@ -1030,7 +1032,8 @@ public final class IntegracaoFornecedorCompleta {
 		            	 //        para a cotação 105-0553"
 		            	 // Ficar acomanhando se isso vale para todos os outros casos que Erro == null ou Empty????????
 		            	 //???????????????????????????????
-		            	 if (!Utils.isNullOrBlank(rSet.getString(6))) {
+		            	 if (!Utils.isNullOrBlank(rSet.getString(6))) 
+		            	 {
 			            	 body += "Assunto: Erro integração " + nmFornecedor + " - " + rSet.getString(6) + "\r\n"
 		            			  + "Para: leao@cronos-tech.com.br"+ "\r\n"
 		            			  + "Leão, " + strParteDoDia + "!" + "\r\n"
@@ -1055,26 +1058,47 @@ public final class IntegracaoFornecedorCompleta {
  	            				  + "Eric " + "\r\n"
  	            				  ;
 		           	     }
-		           	     else {
-		           	     
-			            	 body += rSet.getString(3) + "\r\n\r\n" 
-			              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
-			              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação!\r\n\r\n"
-			              		     )                                
-			              		  +  "Só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
-			              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
-			              		  +  ((rSet.getInt(5) > 0) ? ( "Favor verificar o percentual de ocupação da memória RAM ou verificar a comunicação com o servidor de banco.\r\n"
-			              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
-			              				                     )
-	    		                                           : ""
-			              			 )                                
-			            	      +  "Erro: " + rSet.getString(6) + "\r\n" 
-			            		  +  "\r\n\r\n\r\n\r\n";
-			            	 
-			            	 body += "LIGAR O SKYPE!!!!!!\r\n";
-			            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
-			            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n\r\n\r\n\r\n";
-			            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
+		           	     else 
+		           	     {
+		           	    	 if (f.IdFornecedor == 171) // Propão
+		           	    	 {
+				            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
+	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
+	+ " " + "\r\n"
+	+ "Recebi um email automático que o Integrador WinThor / PCronos da " + nmFornecedor + " está parado desde sábado (22/09/2018) às 19:25, indevidamente." + "\r\n" 
+	+ "Talvez o adaptador de rede do servidor local está com problemas novamente? Ou talvez tem um conflito de endereços IP novamente? " + "\r\n"
+	+ "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor 187.113.65.138, " + "\r\n"
+	+ "no menu <b>Iniciar > Portal Cronos > Manual Manutenção TI</b>, a última versão da lista de possíveis causas e outras dicas. " + "\r\n"
+	+ " " + "\r\n"
+	+ "Após a solução da causa, veja neste mesmo manual como verificar se o serviço realmente voltou a funcionar." + "\r\n"
+	+ " " + "\r\n"
+	+ "É urgente pois tem muitas cotações com prazo de ofertamento expirando hoje de manhã!" + "\r\n"
+	;
+					     		    body += " " + "\r\n"
+							     			+ "Atc," + "\r\n"
+						     				+ "O email automático do Portal Cronos " + "\r\n"
+						     				+  "\r\n\r\n\r\n\r\n";		           	    		 
+		           	    	 }
+		           	    	 else 
+		           	    	 {
+				            	 body += rSet.getString(3) + "\r\n\r\n" 
+				              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
+				              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação!\r\n\r\n"
+				              		     )                                
+				              		  +  "Só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
+				              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
+				              		  +  ((rSet.getInt(5) > 0) ? ( "Favor verificar o percentual de ocupação da memória RAM ou verificar a comunicação com o servidor de banco.\r\n"
+				              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
+				              				                     )
+		    		                                           : ""
+				              			 )                                
+				            	      +  "Erro: " + rSet.getString(6) + "\r\n" 
+				            		  +  "\r\n\r\n\r\n\r\n";
+				            	 
+				            	 body += "LIGAR O SKYPE!!!!!!\r\n";
+				            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
+				            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n\r\n\r\n\r\n";
+				            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 	+ " " + "\r\n"
 	+ "<i>Este email foi enviado automaticamente pelo sistema Portal Cronos</i>\r\n"
@@ -1156,54 +1180,56 @@ public final class IntegracaoFornecedorCompleta {
 			     	+ " 	   and isnull(lei.ds_ocorrencia_logeint, '') not like '%está bloqueada no sistema " + f.SiglaSistemaFornecedor + " do fornecedor%' "
     	            + "        and isnull(lei.ds_ocorrencia_logeint, '') not like 'O Código de Produto %'";
 	
-			     		   Statement statVerificacaoCadastros = conn.createStatement();
-			     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
-			     		    int qtdVerificacaoCadastros = 0;
-
-			     		    while (rSetVerificacaoCadastros.next()) {
-			     		    	qtdVerificacaoCadastros += 1;
-			     		    	if (qtdVerificacaoCadastros == 1) {
-			     		    		body += " " + "\r\n"
-			     		    	         + "<b>Aproveitando, tem mais um problema para resolver: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque diversas cotações não foram ofertadas automaticamente nos últimos 7 dias, é por causa de falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
-			     		    			 ;
-			     		    	}
-								body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
-								
-							} 
+				     		   Statement statVerificacaoCadastros = conn.createStatement();
+				     		    ResultSet rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
+				     		    int qtdVerificacaoCadastros = 0;
 	
-			     		    sqlVerificacaoCadastros = "select distinct lei.ds_ocorrencia_logeint "
-			     			     	+ "   from dbo.Log_Erro_Integracao lei "
-			     			     	+ "  where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
-			     			     	+ "    and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -21, getdate()) "
-			     	                + "    and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'";
-	   		
-			     		    rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
-			     		    int qtdVerificacaoProdutos = 0;
-
-			     		    while (rSetVerificacaoCadastros.next()) {
-			     		    	qtdVerificacaoProdutos += 1;
-			     		    	if (qtdVerificacaoProdutos == 1 && qtdVerificacaoCadastros == 0) {
-				 		     		   body += " " + "\r\n"
-				 				     			+ "<b>Aproveitando, tem mais um problema para resolver: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque os seguintes produtos não foram ofertados automaticamente em nenhuma cotação nos últimos 20 dias, é por causa de falta ou erro de cadastro: <b>" + "\r\n";
-				     		    }
-			     		    	else if (qtdVerificacaoProdutos == 1 && qtdVerificacaoCadastros > 0) {
-				 		     		   body += " " + "\r\n"
-				 				     			+ "<b>Tem mais um problema para encaminhar para o gerente de vendas: nos últimos 20 dias os seguintes produtos não foram ofertados automaticamente em nenhuma cotação por causa de falta ou erro de cadastro: <b>" + "\r\n";
-			     		    	}
-								body += rSetVerificacaoCadastros.getString(1) + "\r\n";
-								
-							} 
+				     		    while (rSetVerificacaoCadastros.next()) {
+				     		    	qtdVerificacaoCadastros += 1;
+				     		    	if (qtdVerificacaoCadastros == 1) {
+				     		    		body += " " + "\r\n"
+				     		    	         + "<b>Aproveitando, tem mais um problema para resolver: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque diversas cotações não foram ofertadas automaticamente nos últimos 7 dias, é por causa de falta de cadastro dos seguintes clientes no " + f.SiglaSistemaFornecedor +": " + "<b>\r\n"
+				     		    			 ;
+				     		    	}
+									body += rSetVerificacaoCadastros.getString(1).replace("da empresa compradora não foi encontrado no sistema", "da empresa compradora " + rSetVerificacaoCadastros.getString(2) + " não foi encontrado no sistema") + "\r\n";
+									
+								} 
+		
+				     		    sqlVerificacaoCadastros = "select distinct lei.ds_ocorrencia_logeint "
+				     			     	+ "   from dbo.Log_Erro_Integracao lei "
+				     			     	+ "  where lei.id_fornecedor_fornec = " + Integer.toString(f.IdFornecedor)
+				     			     	+ "    and lei.dt_hr_ocorrencia_logeint > DATEADD(\"DAY\", -21, getdate()) "
+				     	                + "    and isnull(lei.ds_ocorrencia_logeint, '') like 'O Código de Produto %'";
+		   		
+				     		    rSetVerificacaoCadastros = statVerificacaoCadastros.executeQuery(sqlVerificacaoCadastros);
+				     		    int qtdVerificacaoProdutos = 0;
 	
-			     		    body += " " + "\r\n"
-				     			+ "Atc," + "\r\n"
-			     				+ "O email automático do Portal Cronos " + "\r\n"
-			     				+  "\r\n\r\n\r\n\r\n";
-		           	    } // if (Utils.isNullOrBlank(rSet.getString(6)))
+				     		    while (rSetVerificacaoCadastros.next()) {
+				     		    	qtdVerificacaoProdutos += 1;
+				     		    	if (qtdVerificacaoProdutos == 1 && qtdVerificacaoCadastros == 0) {
+					 		     		   body += " " + "\r\n"
+					 				     			+ "<b>Aproveitando, tem mais um problema para resolver: favor informar ao gerente de vendas, ou ao vendedor responsável pelo Portal Cronos, que o motivo porque os seguintes produtos não foram ofertados automaticamente em nenhuma cotação nos últimos 20 dias, é por causa de falta ou erro de cadastro: <b>" + "\r\n";
+					     		    }
+				     		    	else if (qtdVerificacaoProdutos == 1 && qtdVerificacaoCadastros > 0) {
+					 		     		   body += " " + "\r\n"
+					 				     			+ "<b>Tem mais um problema para encaminhar para o gerente de vendas: nos últimos 20 dias os seguintes produtos não foram ofertados automaticamente em nenhuma cotação por causa de falta ou erro de cadastro: <b>" + "\r\n";
+				     		    	}
+									body += rSetVerificacaoCadastros.getString(1) + "\r\n";
+									
+								} 
+		
+				     		    body += " " + "\r\n"
+					     			+ "Atc," + "\r\n"
+				     				+ "O email automático do Portal Cronos " + "\r\n"
+				     				+  "\r\n\r\n\r\n\r\n";
+		           	       } // else if (f.IdFornecedor != 171) 
+		           	    } // else if (Utils.isNullOrBlank(rSet.getString(6)))
 		           	     
 		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 		            	dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
-	            	 } // if (!nmFornecedor.equals("INI")) 
-	            	 else {
+	            	 } // if (Utils.isNullOrBlank(nmFornecedor)) 
+	            	 else 
+	            	 {
 		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
 	            	 }
