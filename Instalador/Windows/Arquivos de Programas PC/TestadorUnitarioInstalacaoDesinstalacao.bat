@@ -14,7 +14,7 @@ REM goto TesteDelInstalador
 REM goto TesteRegedit
 REM goto TesteSubDirBin
 REM goto TesteIfExist
-goto TesteAttrib
+REM goto TesteAttrib
 goto TesteTemplate
 
 

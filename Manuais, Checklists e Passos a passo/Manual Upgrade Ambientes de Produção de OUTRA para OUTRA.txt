@@ -5,7 +5,8 @@ na lista de manuais para upgrade
 
 1. Apenas no caso do servidor do monitoramento:
 	 - Conectar como cronostech
-     - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
+     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
+       ("protected operating system files") temporariamente
 
 
 2. (i)  Em todos os casos (incluindo no caso JR Distribuição / Windows 10):
@@ -33,5 +34,5 @@ na lista de manuais para upgrade
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
 8. Apenas no caso do servidor do monitoramento: 
-     - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
+     - No Windows Explorer voltar a opção para não exibir arquivos de sistema ("protected operating system files")
 

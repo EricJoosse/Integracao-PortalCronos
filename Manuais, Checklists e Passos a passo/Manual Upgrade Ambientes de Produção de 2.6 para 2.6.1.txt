@@ -6,7 +6,8 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 
 -1. Apenas no caso de instalação no servidor do monitoramento:
 	 - Conectar como cronostech
-     - No Windows Explorer alterar a opção para exibir arquivos de sistema temporariamente
+     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
+       ("protected operating system files") temporariamente
 
 0. Adicionar "exit" seguida por uma linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
    no servidor do fornecedor. Não renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
@@ -144,11 +145,11 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
 			    normalmente, tudo está certo e não mexe com este processo.   
 
 
-16. Apenas no caso de instalação no servidor da JR Distribuição:
-	renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
+16a. Apenas no caso de instalação no servidor da JR Distribuição:
+	 renomear xJob15a15minOfertamentoJava_Windows.bat de volta para Job15a15minOfertamentoJava_Windows.bat
 	
-	Nos outros casos: remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
-    no servidor do fornecedor
+16b. Nos outros servidores: remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+     no servidor do fornecedor
 
 
 17. Apenas no caso de instalação no servidor do monitoramento: (já foi feito)
@@ -164,7 +165,7 @@ REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jr
 		- Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria no usuário cronostech
 
 18. Apenas no caso de instalação no servidor do monitoramento: 
-     - No Windows Explorer voltar a opção para não exibir arquivos de sistema 
+     - No Windows Explorer voltar a opção para não exibir arquivos de sistema ("protected operating system files")
 
 19. Apenas no caso de instalação no servidor da JR Distribuição:
 		- Re-habilitar a JR Distribuição nos envios de emais automáticos no Monitorador

@@ -9,7 +9,7 @@ Marítimos		 21	WinThor		1.2.3		 (.. bit)    	Não	  											15 min		true	 48 G
 Karne Keijo		 60	SAP			2.4.1		 (.. bit)    	Não												15 min		true	 62 GB		100			Karne Keijo		Timon Dourado			
 Comal 			 33	WinThor		2.6.1 		 (.. bit)    	Não				187.1.168.74		80			15 min		true	 69 GB		100			Comal			Rildson Carlos				98609-4887
 Master Commerce  51	WinThor			 		 (.. bit)    	Não																							Master Commerce			
-Monitoramento    -- PCronos     2.6.1        (.. bit)    	Sim				Não se aplica	Não se aplica	15 min		false	 90 GB		 30			Monitoramento
+Monitoramento    -- PCronos     2.7.0        (.. bit)    	Sim				Não se aplica	Não se aplica	15 min		false	 90 GB		 30			Monitoramento
 SOST (BA)		170 WinThor     2.3.1		 (.. bit)    	Sim												15 min		true	0.6 GB		 15			SOST (BA)		1. Cleijonatas S Silva 	
 															   																											2. Sena Junior			
 Walmart         385 PCronos					 (.. bit) 	 	  																							Walmart
