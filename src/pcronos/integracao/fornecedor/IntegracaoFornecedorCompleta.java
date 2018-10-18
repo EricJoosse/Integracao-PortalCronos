@@ -1680,10 +1680,12 @@ public final class IntegracaoFornecedorCompleta {
 		
 		    if (!temErroGeralCotacao)
 		    {	
-		      for (int j = 0; j < produtos.getLength(); j++) 
-		      {
-		        readProduto(produtos, j, docOfertas, elmProdutos, elmErros, stat, rSet, tipoPrecoComprador, numRegiaoWinThor);
-		      }
+		    	int qtdProdutosComEstoque = 0;
+		        for (int j = 0; j < produtos.getLength(); j++) 
+		        {
+		           readProduto(produtos, j, docOfertas, elmProdutos, elmErros, stat, rSet, tipoPrecoComprador, numRegiaoWinThor, qtdProdutosComEstoque);
+		        }
+		        debugar("Cotação " + cdCotacao + ": QtdProdutosComEstoque = " + Integer.toString(qtdProdutosComEstoque));
 		    }
 		
 		    elmOfertasCotacao.appendChild(elmErros);  // Para pelo menos gerar o tag vazio "<Erros/>" no caso que o arquivo XML for gravado
@@ -1743,7 +1745,7 @@ public final class IntegracaoFornecedorCompleta {
   }
 
 	    
-  private static void readProduto(NodeList produtos, int i, Document docOfertas, Element elmProdutos, Element elmErros, java.sql.Statement stat, java.sql.ResultSet rSet, String tipoPrecoComprador, Integer numRegiaoWinThor) throws SQLException
+  private static void readProduto(NodeList produtos, int i, Document docOfertas, Element elmProdutos, Element elmErros, java.sql.Statement stat, java.sql.ResultSet rSet, String tipoPrecoComprador, Integer numRegiaoWinThor, int qtdProdutosComEstoque) throws SQLException
   {
     String mensagemErro;
 
@@ -1812,6 +1814,27 @@ public final class IntegracaoFornecedorCompleta {
       return; // Obs.: o produto pode ser abortado via return, porém a cotação nunca, para poder enviar o erro para o Portal Cronos
     }
 
+    // =============================================================================
+    //
+    // Auditoria estoque :
+    //
+    // =============================================================================
+
+    rSet = null;
+    sqlString = null;
+
+    if (siglaSistema.equals("APS"))
+    {
+    	 sqlString = "select count(*) " 
+                   + "  from estoqueempresa "
+                   + " where estoqueempresa.codprodfilho = " + cdProdutoFornecedor;
+
+		 if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
+            	sqlString += "                        and estoqueempresa.estoque >= " + qtSolicitada;
+         else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
+            	sqlString += "                        and estoqueempresa.estoque > 0 ";
+    }
+    
     // =============================================================================
     //
     // Ofertar :
