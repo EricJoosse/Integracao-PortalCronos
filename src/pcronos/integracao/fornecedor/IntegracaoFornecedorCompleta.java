@@ -1823,16 +1823,39 @@ public final class IntegracaoFornecedorCompleta {
     rSet = null;
     sqlString = null;
 
-    if (siglaSistema.equals("APS"))
-    {
-    	 sqlString = "select count(*) " 
-                   + "  from estoqueempresa "
-                   + " where estoqueempresa.codprodfilho = " + cdProdutoFornecedor;
-
-		 if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-            	sqlString += "                        and estoqueempresa.estoque >= " + qtSolicitada;
-         else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-            	sqlString += "                        and estoqueempresa.estoque > 0 ";
+    try {
+	    if (siglaSistema.equals("APS"))
+	    {
+	    	 sqlString = "select 'abc' " 
+	                   + "  from estoqueempresa "
+	                   + " where estoqueempresa.codprodfilho = " + cdProdutoFornecedor;
+	
+			 if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
+	            	sqlString += "                        and estoqueempresa.estoque >= " + qtSolicitada;
+	         else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
+	            	sqlString += "                        and estoqueempresa.estoque > 0 ";
+	    }
+	    else if (siglaSistema.equals("WinThor"))
+	    {
+	    	 sqlString = "select 'abc' " 
+	                   + "  from PCEST "
+	                   + " where PCEST.CODPROD   = " + cdProdutoFornecedor
+                       +  "  and PCEST.CODFILIAL = " + Integer.toString(codigoFilialWinThor) + " ";
+	
+		        if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
+			          sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) >= " + qtSolicitada;
+			        else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
+			          sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) > 0 ";
+	    	
+	    }
+	    
+	    rSet = stat.executeQuery( sqlString ) ;
+	
+	    if (rSet != null && rSet.next() && rSet.getString(1).equals("abc"))
+	    	++qtdProdutosComEstoque;
+    }
+    catch (Exception ex) {
+    	
     }
     
     // =============================================================================
