@@ -11,10 +11,12 @@ import java.time.format.DateTimeFormatter;
 import java.text.NumberFormat;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -92,10 +94,58 @@ public class TestadorSnippets {
 			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript, true));
 			
 			
-			System.out.println("");
+		    System.out.println("");
+	        if (1 == 1) return;
+
+	        
+		    LocalDateTime horaInicio = LocalDateTime.now();
+  	    	Integer qtdProdutosComEstoque = null;
+          	File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
+          	for (final File file : dirLogRemoto.listFiles()) 
+          	{
+          	     if (       file.getName().startsWith("ws-formaggio" + ".") 
+          	    		 && file.getName().endsWith("." + horaInicio.getYear() + "." + String.format("%02d", horaInicio.getMonthValue()) + ".log") 
+          	    		 && file.getName().indexOf("." + "Homologacao" + ".")  == -1 
+          	    		 && file.getName().indexOf("." + "Apresentacao" + ".") == -1 
+          	    		 && file.getName().indexOf("." + "Teste" + ".")        == -1 
+          	    		 && file.getName().indexOf("." + "Debug" + ".") > 0) 
+          	     {
+          	    	BufferedReader br = new BufferedReader(new FileReader(dirLogRemoto + "/" + file.getName()));
+          	    	try 
+          	    	{
+          	    	    String linha = br.readLine();
+          	    	    String prefix = "Cotacao " + "163-0235" + ": QtdProdutosComEstoque = ";
+
+          	    	    while (linha != null && !linha.startsWith(prefix))
+          	    	    {
+          	    	        linha = br.readLine();
+          	    	    }
+
+           	    	    if (linha != null && linha.startsWith(prefix))
+         	    	    	qtdProdutosComEstoque = Integer.parseInt(linha.replace(prefix, ""));
+          	    	} 
+          	    	finally 
+          	    	{
+          	    	    br.close();
+          	    	}
+          	    }
+        	}
+          	// Adicionar no .log: Cotacao 163-0235: QtdProdutosComEstoque = 354
+   		    System.out.println("");
+          	if (qtdProdutosComEstoque == null)
+    	    	  System.out.println("qtdProdutosComEstoque não encontrado");
+          	else
+  	    	      System.out.println("qtdProdutosComEstoque = " + qtdProdutosComEstoque.toString());
+          	
+
+          	
+          	
+          	System.out.println("");
             if (1 == 1) return;
 
-			LocalDateTime horaInicio = LocalDateTime.now();
+
+            
+            horaInicio = LocalDateTime.now();
        	    if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY)
 				System.out.println("Hoje é sábado");
        	    else if (horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY)
@@ -104,9 +154,12 @@ public class TestadorSnippets {
 				System.out.println("Hoje é dia útil");
 				
 
-   		    System.out.println("");
+   		    
+       	    System.out.println("");
             if (1 == 1) return;
 
+            
+            
    		 // FornecedorRepositorio fRep = new FornecedorRepositorio();
    		    int iForn = 60;
 			FornecedorRepositorio fRep = new FornecedorRepositorio();

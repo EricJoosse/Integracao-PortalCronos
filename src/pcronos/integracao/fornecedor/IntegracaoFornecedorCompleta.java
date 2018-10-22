@@ -81,6 +81,7 @@ import com.sap.conn.jco.AbapException;
 //          JDBC Oracle :        Não existe..........?????????????????????????
 
 import java.io.FilePermission;
+import java.io.FileReader;
 import java.security.AccessController;
  
 import java.io.BufferedReader;
@@ -1060,7 +1061,41 @@ public final class IntegracaoFornecedorCompleta {
 		           	     }
 		           	     else 
 		           	     {
-		           	    	 if (f.IdFornecedor == 171) // Propão
+		           	    	 Integer qtdProdutosComEstoque = null;
+				           	 File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
+				           	 for (final File file : dirLogRemoto.listFiles()) 
+				           	 {
+				           	     if (       file.getName().startsWith(f.usuarioWebservice + ".") 
+				           	    		 && file.getName().endsWith("." + horaInicio.getYear() + "." + String.format("%02d", horaInicio.getMonthValue()) + ".log") 
+				           	    		 && file.getName().indexOf("." + "Homologacao" + ".")  == -1 
+				           	    		 && file.getName().indexOf("." + "Apresentacao" + ".") == -1 
+				           	    		 && file.getName().indexOf("." + "Teste" + ".")        == -1 
+				           	    		 && file.getName().indexOf("." + "Debug" + ".") > 0) 
+				           	     {
+				           	    	BufferedReader br = new BufferedReader(new FileReader(dirLogRemoto + "/" + file.getName()));
+				           	    	try 
+				           	    	{
+				           	    	    String linha = br.readLine();
+				           	    	    String prefix = "Cotacao " + cdCotacao + ": QtdProdutosComEstoque = ";
+
+				           	    	    while (linha != null && !linha.startsWith(prefix))
+				           	    	    {
+				           	    	        linha = br.readLine();
+				           	    	    }
+				           	    	    
+				           	    	    if (linha != null && linha.startsWith(prefix))
+  			           	    	    	    qtdProdutosComEstoque = Integer.parseInt(linha.replace(prefix, ""));
+				           	    	} 
+				           	    	finally 
+				           	    	{
+				           	    	    br.close();
+				           	    	}
+				           	     } // if
+				           	 } // for
+				           	 
+
+				           	 
+		           	         if (f.IdFornecedor == 171) // Propão
 		           	    	 {
 				            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
@@ -1685,7 +1720,7 @@ public final class IntegracaoFornecedorCompleta {
 		        {
 		           readProduto(produtos, j, docOfertas, elmProdutos, elmErros, stat, rSet, tipoPrecoComprador, numRegiaoWinThor, qtdProdutosComEstoque);
 		        }
-		        debugar("Cotação " + cdCotacao + ": QtdProdutosComEstoque = " + Integer.toString(qtdProdutosComEstoque));
+		        debugar("Cotacao " + cdCotacao + ": QtdProdutosComEstoque = " + Integer.toString(qtdProdutosComEstoque));
 		    }
 		
 		    elmOfertasCotacao.appendChild(elmErros);  // Para pelo menos gerar o tag vazio "<Erros/>" no caso que o arquivo XML for gravado
@@ -2338,7 +2373,8 @@ public final class IntegracaoFornecedorCompleta {
 		   
 	   // criarTabelasTeste();
 
-		  if (siglaSistema.equals("PCronos")) {
+		  if (siglaSistema.equals("PCronos")) 
+		  {
 			  if (erroStaticConstructor == null && toEnviarEmailAutomatico)
 		      {
 			     monitorarPendencias(horaInicio);
