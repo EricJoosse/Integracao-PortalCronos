@@ -50,6 +50,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "";
 			f.usuarioWebservice = "";
 			f.versaoJRE = "";
+			f.versaoIntegrador = "";
 			f.tipoSO = "Windows Server 2016";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -62,6 +63,7 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "mstsc";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "2.7.0";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -77,6 +79,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-formaggio";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "2.6";
 			f.tipoSO = "Windows Server 2012 R2";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -91,6 +94,7 @@ public class FornecedorRepositorio {
 			f.IdAplicativoDesktopRemoto = "734228115";
 			f.usuarioWebservice = "ws-jrembalagem";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "2.6.1";
 			f.tipoSO = "Windows 10 Pro";
 			f.SO32ou64bit = "64bit";
 			f.dirProgramFiles = "Program Files";
@@ -106,6 +110,7 @@ public class FornecedorRepositorio {
 			f.IdAplicativoDesktopRemoto = "servidormaxima@ad";
 			f.usuarioWebservice = "ws-prolac";
 			f.versaoJRE = "jre1.8.0_161";
+			f.versaoIntegrador = "2.5.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files (x86)";
 		}			   
@@ -119,6 +124,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-mpescados";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "1.2.3";
 			f.tipoSO = "?????????????????????";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -132,6 +138,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-sost";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "2.3.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -145,6 +152,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-karnekeijo";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "2.4.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -160,6 +168,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-comal";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "2.6.1";
 			f.tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -173,6 +182,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-mcommerce";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "";
 			f.tipoSO = "?????????????????????";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -187,6 +197,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-propao";
 			f.versaoJRE = "jre1.8.0_92";
+			f.versaoIntegrador = "2.6.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 			f.dirProgramFiles = "Program Files";
 		}			   
