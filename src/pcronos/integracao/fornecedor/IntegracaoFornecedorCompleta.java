@@ -919,7 +919,9 @@ public final class IntegracaoFornecedorCompleta {
 		java.sql.CallableStatement cstat = null;
 		java.sql.ResultSet rSet = null;
 
-				
+			
+		debugar("monitorarPendencias() entrado");
+		
 		try
 	    {  
 		    // Para evitar que o Bol talvez vai cancelar a conta de email por motivo de abuso: 
@@ -938,10 +940,12 @@ public final class IntegracaoFornecedorCompleta {
 			    	// Se existir um arquivo de log com erro pelo email do Bol de qualquer data, 
 					// automaticamente nunca mais enviar nenhum email (nem sobre fornecedores nem sobre o monitoramento) 
 			    	// até este arquivo de log de erro será excluido: 
+					debugar("monitorarPendencias(): o monitoramento foi abortado pois um dos processamentos anteriores deu erro!");
 			    	return;
 			    }
 			}
 		    	
+			debugar("monitorarPendencias(): verificação dos arquivos de erro passado");
 		    			    
 
 	        
@@ -969,6 +973,8 @@ public final class IntegracaoFornecedorCompleta {
 
 	       while (results) 
 	       {
+     	   		 debugar("monitorarPendencias(): while (results) entrado");
+     	   		 
 	             rSet = cstat.getResultSet();
 	             String body = "";
 	             String assunto = "";
@@ -976,7 +982,9 @@ public final class IntegracaoFornecedorCompleta {
             	 String cdCotacao = null;
 	             
 	             while (rSet.next()) {
-	            	 nmFornecedor = rSet.getString(2);
+	     	   		 debugar("monitorarPendencias(): while (rSet.next()) entrado");
+
+	     	   		 nmFornecedor = rSet.getString(2);
             		 FornecedorRepositorio fRep = new FornecedorRepositorio();
 	            	 
 	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
@@ -1001,7 +1009,9 @@ public final class IntegracaoFornecedorCompleta {
 	            	 }
 	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) 
 	            	 {
-	            		 cdCotacao = rSet.getString(11);
+		     	   		 debugar("monitorarPendencias(): else if (!Utils.isNullOrBlank(nmFornecedor)) entrado");
+
+		     	   		 cdCotacao = rSet.getString(11);
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
 		            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -1061,7 +1071,9 @@ public final class IntegracaoFornecedorCompleta {
 		           	     }
 		           	     else 
 		           	     {
-		           	    	 Integer qtdProdutosComEstoque = null;
+			     	   		 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque entrado");
+
+			     	   		 Integer qtdProdutosComEstoque = null;
 				           	 File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
 				           	 for (final File file : dirLogRemoto.listFiles()) 
 				           	 {
@@ -1093,7 +1105,7 @@ public final class IntegracaoFornecedorCompleta {
 				           	     } // if
 				           	 } // for
 				           	 
-
+			     	   		 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque passado");
 				           	 
 		           	         if (f.IdFornecedor == 171) // Propão
 		           	    	 {
@@ -1277,8 +1289,10 @@ public final class IntegracaoFornecedorCompleta {
 	 	         rSet.close();
   	             results = cstat.getMoreResults();
 	        } // while (results)
+			debugar("monitorarPendencias() finalizado");
 	    }
 	    catch (java.lang.Exception ex) { 
+			debugar("monitorarPendencias() - catch ex entrado");
 	       logarErro(ex, false);	      
  	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 	    }
@@ -2384,7 +2398,9 @@ public final class IntegracaoFornecedorCompleta {
 			  downloadCotacoes(horaInicio, enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
 
 
-		  nf.setMinimumIntegerDigits(2);
+		  debugar("Executar(): monitorarPendencias() / downloadCotacoes() passado");
+
+	      nf.setMinimumIntegerDigits(2);
 	  	  nf.setMaximumFractionDigits(0);
 		  LocalDateTime horaFim = LocalDateTime.now();
 		  long HorasExecucao = Duration.between(horaInicio, horaFim).toHours(); // inclui os dias em horas
@@ -2393,13 +2409,17 @@ public final class IntegracaoFornecedorCompleta {
 		  long SegundosExecucao = Duration.between(horaInicio, horaFim).getSeconds() % 60;
 		  String tempoExecucao = nf.format(HorasExecucao) + ":" + nf.format(MinutosExecucao) + ":" + nf.format(SegundosExecucao);
 		  
+		  debugar("Executar(): String tempoExecucao passado");
+
 
 		  if (siglaSistema.equals("PCronos") && MinutosTotalExecucao > 12) {
 			  String msgLimite13Min = "Erro! O monitoramento parou de vez pois o processamento passou o limite de 13 minutos e demorou " + nf.format(MinutosTotalExecucao) + " minutos. O monitoramento continuará parado até a exclusão do arquivo de log de erro e após a solução da causa. A última opção seria diminuir a frequência de execução de 15 minutos para 30 minutos.";
 		      EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, msgLimite13Min, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 		      // Logar o erro APÓS o envio de email, pois o sistema não envia nenhum email se existir qualquer arquivo de log de erro:
-		      IntegracaoFornecedorCompleta.logarErro(msgLimite13Min);
+		      logarErro(msgLimite13Min);
 		  }
+
+		  debugar("Executar(): if (MinutosTotalExecucao > 12) passado");
 
 		  
 		  if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {
@@ -2409,22 +2429,35 @@ public final class IntegracaoFornecedorCompleta {
 			      String strHorarioComTempoExecucao = horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao; 
 			      bWriter.append(strHorarioComTempoExecucao);
 			      
-			      if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
+				  debugar("Executar(): bWriter.append(strHorarioComTempoExecucao) passado");
+
+				  if (siglaSistema.equals("PCronos") && erroStaticConstructor == null && toEnviarEmailAutomatico)
 				  {
-					  bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
+					  if (dtCadastroIni == null || dtCadastroFim == null)
+   					        bWriter.append(" - Intervalo de Cotações: nenhum");
+					  else
+						    bWriter.append(" - Intervalo de Cotações: de " + dtCadastroIni.format(formatterIntervalo) + " até " + dtCadastroFim.format(formatterIntervalo));
 				  }
 			      bWriter.newLine();
 			      bWriter.flush();
 			      bWriter.close();
 		
-			      if (!siglaSistema.equals("PCronos"))
+				  debugar("Executar(): bWriter.close() passado");
+
+				  if (!siglaSistema.equals("PCronos"))
 			          performPostCall(strHorarioComTempoExecucao, "TemposExecução");
 			  }
 		  	  catch (IOException ioe)
 			  {
-		  		  ioe.printStackTrace();
+		  		  // ioe.printStackTrace();
+		    		 logarErro("Executar(): Erro (IOException) na gravação de TemposExecução.log: " + ioe.getMessage());
+			  }
+		  	  catch (Exception ex)
+			  {
+		    		 logarErro("Executar(): Erro na gravação de TemposExecução.log: " + ex.getMessage());
 			  }
 	      } // if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) 
+		  debugar("Executar() finalizado");
 	   }
   	   catch (Exception ex)
 	   {
