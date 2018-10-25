@@ -1011,6 +1011,41 @@ public final class IntegracaoFornecedorCompleta {
 	            	 {
 		     	   		 debugar("monitorarPendencias(): else if (!Utils.isNullOrBlank(nmFornecedor)) entrado");
 
+		     	   		 
+		     			  // Não enviar APENAS os tipos de emails de paradas dos servidores dos fornecedores durante horários de pico:		   
+		     			  //      Observação: O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
+		     			  //                  para todos os fornecedores de uma vez, exatamente no mesmo horário:
+		     			  if (siglaSistema.equals("PCronos") && !toExecutarHorarioPico) 
+		     			  {
+		     				  final LocalTime time1 = LocalTime.parse("10:40:00") ;
+		     				  final LocalTime time2 = LocalTime.parse("12:40:00") ;
+		     				  LocalTime nowUtcTime = LocalTime.now();
+
+		     				  if (horaInicio.getDayOfWeek() == DayOfWeek.TUESDAY && nowUtcTime.isAfter(time1) && nowUtcTime.isBefore(time2)) { 
+		     				 	  return;
+		     				  }
+		     			  }
+		     			  
+
+		     			  // Segurar e adiar estes tipos de emails automáticos durante horários fora do expediente:
+		     			  if (siglaSistema.equals("PCronos")) 
+		     			  {
+		     				  final LocalTime time1 = LocalTime.parse("07:00:00") ;
+		     				  final LocalTime time2 = LocalTime.parse("17:50:00") ;
+		     				  LocalTime nowUtcTime = LocalTime.now();
+
+		     				  if (       horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY 
+		     						  || horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY
+		     						  || nowUtcTime.isBefore(time1)
+		     						  || nowUtcTime.isAfter(time2)
+		     				     ) { 
+		     				 	  return;
+		     				  }
+		     			  }
+
+		     			  
+		     	   		 
+		     	   		 
 		     	   		 cdCotacao = rSet.getString(11);
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
 		            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
@@ -2348,38 +2383,6 @@ public final class IntegracaoFornecedorCompleta {
 	       
 		  LocalDateTime horaInicio = LocalDateTime.now();
 
-		  // Não executar o ciclo de 15 a 15 minutos durante horário de pico:		   
-		  //      Observação: O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
-		  //                  para todos os fornecedores de uma vez, exatamente no mesmo horário:
-		  if (siglaSistema.equals("PCronos") && !toExecutarHorarioPico) {
-			  final LocalTime time1 = LocalTime.parse("10:40:00") ;
-			  final LocalTime time2 = LocalTime.parse("12:40:00") ;
-			  LocalTime nowUtcTime = LocalTime.now();
-
-			  if (horaInicio.getDayOfWeek() == DayOfWeek.TUESDAY && nowUtcTime.isAfter(time1) && nowUtcTime.isBefore(time2)) { 
-			 	  LocalDateTime horaFimCiclo = LocalDateTime.now();
-			 	  return Duration.between(horaIniCiclo,  horaFimCiclo).toMillis();
-			  }
-		  }
-		  
-
-		  // Segurar os emails automáticos durante horários fora do expediente:
-		  if (siglaSistema.equals("PCronos")) {
-			  final LocalTime time1 = LocalTime.parse("07:00:00") ;
-			  final LocalTime time2 = LocalTime.parse("17:50:00") ;
-			  LocalTime nowUtcTime = LocalTime.now();
-
-			  if (       horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY 
-					  || horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY
-					  || nowUtcTime.isBefore(time1)
-					  || nowUtcTime.isAfter(time2)
-			     ) { 
-			 	  LocalDateTime horaFimCiclo = LocalDateTime.now();
-			 	  return Duration.between(horaIniCiclo,  horaFimCiclo).toMillis();
-			  }
-		  }
-
-		  
 	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
