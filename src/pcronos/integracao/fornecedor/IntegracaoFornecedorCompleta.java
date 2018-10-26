@@ -971,20 +971,23 @@ public final class IntegracaoFornecedorCompleta {
 	        boolean results = cstat.execute();
 	        int rsCount = 0;
 
-	       while (results) 
-	       {
+	        // results: 1 result por fornecedor
+	        // rSet:    diversas cotações não ofertadas para o mesmo fornecedor
+	        while (results) 
+	        {
      	   		 debugar("monitorarPendencias(): while (results) entrado");
      	   		 
 	             rSet = cstat.getResultSet();
-	             String body = "";
-	             String assunto = "";
-            	 String nmFornecedor = null;
-            	 String cdCotacao = null;
 	             
 	             while (rSet.next()) {
 	     	   		 debugar("monitorarPendencias(): while (rSet.next()) entrado");
 
-	     	   		 nmFornecedor = rSet.getString(2);
+		             String body = "";
+		             String assunto = "";
+	            	 String nmFornecedor = null;
+	            	 String cdCotacao = null;
+
+	            	 nmFornecedor = rSet.getString(2);
             		 FornecedorRepositorio fRep = new FornecedorRepositorio();
 	            	 
 	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
@@ -1309,21 +1312,26 @@ public final class IntegracaoFornecedorCompleta {
 		           	     
 		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 		            	dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
-	            	 } // if (Utils.isNullOrBlank(nmFornecedor)) 
+	            	 } 
 	            	 else 
 	            	 {
 		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
-	            	 }
+	            	 } // else if (Utils.isNullOrBlank(nmFornecedor)) 
+
+
+	            	 if (!Utils.isNullOrBlank(nmFornecedor)) {
+		 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+		             }  // if (!Utils.isNullOrBlank(nmFornecedor))
+	            	 
 	             } // while (rSet.next())
 	             
-	             if (!Utils.isNullOrBlank(nmFornecedor)) {
-	 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
-	             }
 
 	 	         rSet.close();
   	             results = cstat.getMoreResults();
+  	             
 	        } // while (results)
+	        
 			debugar("monitorarPendencias() finalizado");
 	    }
 	    catch (java.lang.Exception ex) { 
