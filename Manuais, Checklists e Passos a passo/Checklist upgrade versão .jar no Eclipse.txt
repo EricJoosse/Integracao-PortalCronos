@@ -26,7 +26,10 @@ Checklist upgrade versão .jar no Eclipse
   Já registrar logo agora a descrição do tag futuro. 
 
 - Se precisar, criar novo "Manual Upgrade Ambientes de Produção de x.y.z para a.b.c.txt"
-
+ 
+- Atualizar o arquivo "Tabela Versão .jar X Versão Manual TI.txt" repetindo a última linha 
+  se não houve alteração no Manual TI
+ 
 - Se precisar, atualizar o instalador, ou registrar uma pendência. 
   Geralmente não precisa, pois a atualização do instalador já é um dos passos na instalação do Integrador 
   em um servidor novo, (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado). 

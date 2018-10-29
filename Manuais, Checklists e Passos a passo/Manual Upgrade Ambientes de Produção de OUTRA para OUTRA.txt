@@ -16,6 +16,10 @@ na lista de manuais para upgrade
             possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travado)
 
 	(ii) Apenas no caso de instalação no servidor da JR Distribuição (Windows 10):
+	     - Primeiro verificar no diretório C:\ProgramData\PortalCronos\Logs\Local\ 
+	       se o Integrador está ofertando no momento e ficar esperando até ele terminar 
+	       o último passo (a atualização do arquivo TemposExecução.log)
+ 
 		 - Matar o processo JRE 1.8.0_92
 
 		   
@@ -24,8 +28,7 @@ na lista de manuais para upgrade
 4. Atualizar a chamada de integr-fornecedor-x.y.z.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
-5. Atualizar a versão do .jar no arquivo "Tabela Versão .jar X Versão Manual TI.txt"
-   para o fornecedor que foi atualizado
+5. Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
    
 6. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
    no servidor do fornecedor

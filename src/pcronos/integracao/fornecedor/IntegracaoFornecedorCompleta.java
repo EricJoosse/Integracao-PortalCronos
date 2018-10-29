@@ -2136,6 +2136,8 @@ public final class IntegracaoFornecedorCompleta {
  
     try 
     {
+		debugar("downloadCotacoes() entrado");
+
 		Client client = Client.create();
 	
 		WebResource webResource = client.resource(url);
@@ -2396,6 +2398,8 @@ public final class IntegracaoFornecedorCompleta {
 
 		  excluirArquivos(horaInicio);
 		   
+		  debugar("Executar(): excluirArquivos(horaInicio) passado");
+
 	   // criarTabelasTeste();
 
 		  if (siglaSistema.equals("PCronos")) 
