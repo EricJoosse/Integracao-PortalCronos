@@ -2136,7 +2136,7 @@ public final class IntegracaoFornecedorCompleta {
  
     try 
     {
-		debugar("downloadCotacoes() entrado");
+		debugar("downloadCotacoes() entrado"); 
 
 		Client client = Client.create();
 	
@@ -2398,7 +2398,7 @@ public final class IntegracaoFornecedorCompleta {
 
 		  excluirArquivos(horaInicio);
 		   
-		  debugar("Executar(): excluirArquivos(horaInicio) passado");
+		  debugar("Executar(): excluirArquivos(horaInicio) passado"); 
 
 	   // criarTabelasTeste();
 
