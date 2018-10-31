@@ -1775,7 +1775,7 @@ public final class IntegracaoFornecedorCompleta {
 		    	int qtdProdutosComEstoque = 0;
 		        for (int j = 0; j < produtos.getLength(); j++) 
 		        {
-		           readProduto(produtos, j, docOfertas, elmProdutos, elmErros, stat, rSet, tipoPrecoComprador, numRegiaoWinThor, qtdProdutosComEstoque);
+		        	qtdProdutosComEstoque = readProduto(produtos, j, docOfertas, elmProdutos, elmErros, stat, rSet, tipoPrecoComprador, numRegiaoWinThor, qtdProdutosComEstoque);
 		        }
 		        debugar("Cotacao " + cdCotacao + ": QtdProdutosComEstoque = " + Integer.toString(qtdProdutosComEstoque));
 		    }
@@ -1837,7 +1837,7 @@ public final class IntegracaoFornecedorCompleta {
   }
 
 	    
-  private static void readProduto(NodeList produtos, int i, Document docOfertas, Element elmProdutos, Element elmErros, java.sql.Statement stat, java.sql.ResultSet rSet, String tipoPrecoComprador, Integer numRegiaoWinThor, int qtdProdutosComEstoque) throws SQLException
+  private static int readProduto(NodeList produtos, int i, Document docOfertas, Element elmProdutos, Element elmErros, java.sql.Statement stat, java.sql.ResultSet rSet, String tipoPrecoComprador, Integer numRegiaoWinThor, int qtdProdutosComEstoque) throws SQLException
   {
     String mensagemErro;
 
@@ -1903,12 +1903,12 @@ public final class IntegracaoFornecedorCompleta {
     if (rSet == null || !rSet.next()) 
     {
       enviarErroParaPortalCronos(docOfertas, elmErros, cdProdutoFornecedor, "O Código de Produto " + cdProdutoFornecedor + " do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
-      return; // Obs.: o produto pode ser abortado via return, porém a cotação nunca, para poder enviar o erro para o Portal Cronos
+      return qtdProdutosComEstoque; // Obs.: o produto pode ser abortado via return, porém a cotação nunca, para poder enviar o erro para o Portal Cronos
     }
 
     // =============================================================================
     //
-    // Auditoria estoque :
+    // Auditoria estoque:
     //
     // =============================================================================
 
@@ -1929,25 +1929,35 @@ public final class IntegracaoFornecedorCompleta {
 	    }
 	    else if (siglaSistema.equals("WinThor"))
 	    {
-	    	 sqlString = "select 'abc' " 
+	    	 sqlString = "select 'abc' AS x" 
 	                   + "  from PCEST "
 	                   + " where PCEST.CODPROD   = " + cdProdutoFornecedor
                        +  "  and PCEST.CODFILIAL = " + Integer.toString(codigoFilialWinThor) + " ";
 	
-		        if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-			          sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) >= " + qtSolicitada;
-			        else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-			          sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) > 0 ";
+		     if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
+			        sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) >= " + qtSolicitada;
+			 else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
+			        sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) > 0 ";
 	    	
 	    }
 	    
 	    rSet = stat.executeQuery( sqlString ) ;
 	
-	    if (rSet != null && rSet.next() && rSet.getString(1).equals("abc"))
-	    	++qtdProdutosComEstoque;
+	    if (rSet != null && rSet.next())
+	    {
+	    	debugar("Auditoria estoque: rSet.getString(1) = " + rSet.getString(1));
+	    	if (rSet.getString(1).equals("abc"))
+	    	    ++qtdProdutosComEstoque;
+		    else
+	            debugar("Auditoria estoque: estoque não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+	    }
+	    else
+            debugar("Auditoria estoque: estoque não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+
     }
-    catch (Exception ex) {
-    	
+    catch (Exception ex) 
+    {
+    	debugar("Auditoria estoque: Erro interno: " + ex.getMessage());
     }
     
     // =============================================================================
@@ -2078,7 +2088,7 @@ public final class IntegracaoFornecedorCompleta {
     {
     	if (toVerificarEstoque) {
     		if (temCadastroPreco) {
-                 debugar("Estoque não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+                 debugar("Estoque ou produto ativo não encontrado para produto " + cdProdutoFornecedor + " no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
     		}
     	}
     	else {
@@ -2088,7 +2098,7 @@ public final class IntegracaoFornecedorCompleta {
 
     	debugar(toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque);
     	// se não tiver preço ou estoque, não ofertar o produto e continuar com o próximo produto:
-        return;
+        return qtdProdutosComEstoque;
     }
     else if (preco.compareTo(BigDecimal.ZERO) == 0) {
     	// Não debugar a mesma coisa duas vezes:
@@ -2127,6 +2137,8 @@ public final class IntegracaoFornecedorCompleta {
     Element elmDsObservacaoProduto = docOfertas.createElement("Ds_Obs_Oferta_Fornecedor");
     elmDsObservacaoProduto.appendChild(docOfertas.createTextNode(dsObservacaoProduto));
     elmProduto.appendChild(elmDsObservacaoProduto);
+    
+    return qtdProdutosComEstoque;
   }
 
 

@@ -81,6 +81,19 @@ public class TestadorSnippets {
 		    	System.out.println("file == null, txt = " + txt);
 		  }
 		  
+	  private static void readProduto(int qtdProdutosComEstoque) 
+	  {
+  	       ++qtdProdutosComEstoque;
+	  }
+
+	  private static int readProdutoNovo(int qtdProdutosComEstoque) 
+	  {
+  	       ++qtdProdutosComEstoque;
+	    // qtdProdutosComEstoque++;
+
+  	       return qtdProdutosComEstoque;
+	  }
+
 	  public static void main(String[] args) throws Exception {
 		java.sql.Connection conn = null;
 		java.sql.Statement stat = null;
@@ -95,11 +108,29 @@ public class TestadorSnippets {
 			
 			
 		    System.out.println("");
+	     //   if (1 == 1) return;
+
+
+	    	int qtdProdutosComEstoqueNovo = 0;
+	    	qtdProdutosComEstoqueNovo = readProdutoNovo(qtdProdutosComEstoqueNovo);
+	        System.out.println("QtdProdutosComEstoqueNovo = " + Integer.toString(qtdProdutosComEstoqueNovo));
+	        
+	        
+		    System.out.println("");
+	        if (1 == 1) return;
+
+	        
+	    	int qtdProdutosComEstoque = 0;
+	        readProduto(qtdProdutosComEstoque);
+	        System.out.println("QtdProdutosComEstoque = " + Integer.toString(qtdProdutosComEstoque));
+	        
+	        
+		    System.out.println("");
 	        if (1 == 1) return;
 
 	        
 		    LocalDateTime horaInicio = LocalDateTime.now();
-  	    	Integer qtdProdutosComEstoque = null;
+  	    	Integer qtdProdutosComEstoque2 = null;
           	File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
           	for (final File file : dirLogRemoto.listFiles()) 
           	{
@@ -122,7 +153,7 @@ public class TestadorSnippets {
           	    	    }
 
            	    	    if (linha != null && linha.startsWith(prefix))
-         	    	    	qtdProdutosComEstoque = Integer.parseInt(linha.replace(prefix, ""));
+         	    	    	qtdProdutosComEstoque2 = Integer.parseInt(linha.replace(prefix, ""));
           	    	} 
           	    	finally 
           	    	{
@@ -132,10 +163,10 @@ public class TestadorSnippets {
         	}
           	// Adicionar no .log: Cotacao 163-0235: QtdProdutosComEstoque = 354
    		    System.out.println("");
-          	if (qtdProdutosComEstoque == null)
-    	    	  System.out.println("qtdProdutosComEstoque não encontrado");
+          	if (qtdProdutosComEstoque2 == null)
+    	    	  System.out.println("qtdProdutosComEstoque2 não encontrado");
           	else
-  	    	      System.out.println("qtdProdutosComEstoque = " + qtdProdutosComEstoque.toString());
+  	    	      System.out.println("qtdProdutosComEstoque2 = " + qtdProdutosComEstoque2.toString());
           	
 
           	
