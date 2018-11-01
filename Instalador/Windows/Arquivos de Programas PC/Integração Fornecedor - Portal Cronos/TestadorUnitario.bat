@@ -63,9 +63,9 @@ REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor
 REM e o caminho do outro JRE está na primeira posição no PATH de DOS:
 
 if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
-    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.7.0.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
+    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.8.0.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
 ) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
-    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.7.0.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
+    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.8.0.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
 ) else (
     echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
     exit
