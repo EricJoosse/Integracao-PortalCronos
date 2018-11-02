@@ -28,14 +28,17 @@ na lista de manuais para upgrade
 4. Atualizar a chamada de integr-fornecedor-x.y.z.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor
  
-5. Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
-   
-6. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
    no servidor do fornecedor
 
-7. Em todos os casos: 
+6. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
-8. Apenas no caso do servidor do monitoramento: 
+7. Apenas no caso do servidor do monitoramento: 
      - No Windows Explorer voltar a opção para não exibir arquivos de sistema ("protected operating system files")
 
+8. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+   (ii)  Compilar o arquivo .jar
+   (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+   
+   
