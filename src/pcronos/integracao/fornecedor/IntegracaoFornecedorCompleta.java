@@ -2151,6 +2151,13 @@ public final class IntegracaoFornecedorCompleta {
 		debugar("downloadCotacoes() entrado"); 
 
 		Client client = Client.create();
+		
+		// webResource.accept().get() executa síncronamente, então o seguinte timeout é imprescindível
+		// para evitar travamento no caso que o Portal Cronos ou a Internet cai no meio do processamento das ofertas:
+		// isso trava o processamento tanto que até o derrubamento automático pelo próximo processamento 
+		// após 15 min não derruba estes travamentos. Os seguintes timeouts evitam isso:
+		client.setConnectTimeout(600000); 
+		client.setReadTimeout(600000); // = 10 min: tem que ser menos da frequência do processamento de 15 min
 	
 		WebResource webResource = client.resource(url);
 	    client.addFilter(new HTTPBasicAuthFilter(username, senha));
