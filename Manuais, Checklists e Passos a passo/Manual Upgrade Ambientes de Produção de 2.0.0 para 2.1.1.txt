@@ -2,6 +2,7 @@ Manual Upgrade dos Ambientes de Produção de 2.0.0 para 2.1.1
 ============================================================
 
 1. Copiar arquivo novo integr-fornecedor-2.1.1.jar do instalador para o servidor do fornecedor
+   Apagar a versão anterior.
  
 2. Atualizar a chamada de integr-fornecedor-2.1.1.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor

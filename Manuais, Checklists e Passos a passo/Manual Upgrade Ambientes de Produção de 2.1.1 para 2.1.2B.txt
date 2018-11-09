@@ -2,6 +2,7 @@ Manual Upgrade dos Ambientes de Produção de 2.1.1 para 2.1.2B
 =============================================================
 
 1. Copiar arquivo novo integr-fornecedor-2.1.2.jar do instalador para o servidor do fornecedor
+   Apagar a versão anterior.
  
 2. Atualizar a chamada de integr-fornecedor-2.1.2.jar no Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor

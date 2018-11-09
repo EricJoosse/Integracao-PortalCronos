@@ -63,7 +63,7 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "mstsc";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.7.0";
+			f.versaoIntegrador = "2.8.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -94,7 +94,7 @@ public class FornecedorRepositorio {
 			f.IdAplicativoDesktopRemoto = "734228115";
 			f.usuarioWebservice = "ws-jrembalagem";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.6.1";
+			f.versaoIntegrador = "2.8.1";
 			f.tipoSO = "Windows 10 Pro";
 			f.SO32ou64bit = "64bit";
 			f.dirProgramFiles = "Program Files";

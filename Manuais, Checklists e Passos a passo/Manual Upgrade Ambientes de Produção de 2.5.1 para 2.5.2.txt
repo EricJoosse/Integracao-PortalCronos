@@ -1,11 +1,29 @@
 Manual Upgrade dos Ambientes de Produção de 2.5.1 para 2.5.2
 ============================================================
 
-1. Adicionar "exit" seguida por uma linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
-   no servidor do fornecedor. Não renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
-   possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados
+1. Fazer exatamente na seguinte sequência:
+   (i)   Em todos os casos exceto JR Distribuição / Windows 10:
+         Verificar se o arquivo .bat e o .jar atual estão em uso: 
+         verificar o horário da última e da próxima execução no Task Scheduler 
+         e verificar no taskmgr.exe se o JRE está rodando ainda. 
+         Esperar até o JRE terminou.
+   
+   (ii)  Em todos os casos (incluindo no caso JR Distribuição / Windows 10):
+ 		   - Adicionar "exit" seguida por uma linha em branco no início do arquivo 
+ 		     Job15a15minOfertamentoJava_Windows.bat no servidor do fornecedor. 
+ 		     (NÃO renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+              possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados)
 
+   (iii) Apenas no caso de instalação no servidor da JR Distribuição (Windows 10):
+	        a. Primeiro verificar no diretório C:\ProgramData\PortalCronos\Logs\Local\ 
+	           se o Integrador está ofertando no momento e ficar esperando até ele terminar 
+	           o último passo (a atualização do arquivo TemposExecução.log)
+ 
+		    b. Matar o processo JRE 1.8.0_92
+		 		 
+		   
 2. Copiar o arquivo novo integr-fornecedor-2.5.2.jar do instalador para o servidor do fornecedor
+   Apagar a versão anterior.
  
 3. Atualizar a chamada de integr-fornecedor-2.5.2.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor

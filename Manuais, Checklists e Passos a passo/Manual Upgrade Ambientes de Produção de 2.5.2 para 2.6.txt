@@ -14,6 +14,7 @@ Manual Upgrade dos Ambientes de Produção de 2.5.2 para 2.6
    possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados
 
 3. Copiar o arquivo novo integr-fornecedor-2.6.jar do instalador para o servidor do fornecedor
+   Apagar a versão anterior.
  
 4. Atualizar a chamada de integr-fornecedor-2.6.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor

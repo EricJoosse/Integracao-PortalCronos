@@ -2,6 +2,7 @@ Manual Upgrade dos Ambientes de Produção de 2.1.2B para 2.3.0
 =============================================================
 
 1. Copiar o arquivo novo integr-fornecedor-2.3.0.jar do instalador para o servidor do fornecedor
+   Apagar a versão anterior.
  
 
 2. Atualizar a chamada de integr-fornecedor-2.3.0.jar no Job15a15minOfertamentoJava_Windows.bat 
