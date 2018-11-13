@@ -28,6 +28,8 @@ public class FornecedorRepositorio {
 			return 51;
 		else if (cnpj.equals("24407389000233"))
 			return 171;
+		else if (cnpj.equals("03042263000151"))
+			return 14;
 		else if (cnpj.equals("11222333444455"))
 			throw new Exception("Erro! O CNPJ da empresa fornecedora não foi informado no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + "!");
 		else {
@@ -199,6 +201,20 @@ public class FornecedorRepositorio {
 			f.versaoJRE = "jre1.8.0_92";
 			f.versaoIntegrador = "2.6.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
+			f.dirProgramFiles = "Program Files";
+		}			   
+		else if (idFornecedor == 14) {
+			f.NomeFantasiaEmpresa = "Padeirão";
+			f.SiglaSistemaFornecedor = "WinThor";
+			f.EmailResponsavelTI = "tiagoautran@padeirao.com";
+			f.EmailResponsavelTIAlternativo = "";
+			f.ApelidoResponsavelTI = "Tiago"; 
+			f.ApelidoResponsavelTIAlternativo = "";
+			f.AplicativoDesktopRemoto = "AnyDesk";
+			f.usuarioWebservice = "ws-padeirao";
+			f.versaoJRE = "jre1.8.0_111";
+			f.versaoIntegrador = "2.8.2";
+			f.tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else { 

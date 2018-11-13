@@ -7,13 +7,13 @@ Checklist upgrade versão .jar no Eclipse
 - Editar pom.xml (4 lugares)
 	- Cuidado para não alterar versões de dependências de outros jars por engano
 
-- Editar Job15a15minOfertamentoJava_Windows.bat (2 lugares)
+- Editar Job15a15minOfertamentoJava_Windows.bat (3 lugares)
 
-- Editar InstalarManualTI.bat (2 lugares)
+- Editar InstalarManualTI.bat (3 lugares)
 
-- Editar DesinstalarManualTI.bat (2 lugares)
+- Editar DesinstalarManualTI.bat (3 lugares)
 
-- Editar TestadorUnitario.bat (2 lugares) 
+- Editar TestadorUnitario.bat (3 lugares) 
 
 - Verificar se TestadorUnitarioInstalacaoDesinstalacao.bat precisa ser editado
 

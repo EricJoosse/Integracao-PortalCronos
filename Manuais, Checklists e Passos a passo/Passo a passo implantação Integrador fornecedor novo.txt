@@ -8,7 +8,7 @@ Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor d
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
  
-   -3. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+   -4. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
        Descobrir o idFornecedor editando e executando os seguintes selects:
 
@@ -16,26 +16,47 @@ select id_fornecedor_fornec, id_pessoa
   from dbo.Fornecedor 
  where id_pessoa in (select  id_pessoa
                       from  dbo.Pessoa
-                     where  nm_pessoa like '%Propão%')
+                     where  nm_pessoa like '%Padeirão%')
 
 select  id_pessoa, nm_pessoa, *
                       from  dbo.Pessoa
-                     where  nm_pessoa like '%Propão%'
+                     where  nm_pessoa like '%Padeirão%'
 
 
-   -2. Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
+   -3. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
 
 Elthon, boa tarde!
  
     sou da TI do Portal Cronos. Vou instalar a integração WinThor / PCronos hoje.
 Qual é o nome do seu contato no Skype?
  
-Obrigado,
+Atc,
 Eric
+
+	(ii) Se já sabe o contato no Skype, editar e enviar o seguinte email:
      
-   -1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+Tiago, boa tarde!
+ 
+  sou Eric da TI do Portal Cronos.  Leão me pediu instalar o Integrador WinThor / PCronos.
+Favor me aceitar no Skype (contato "Eric Jo") e ativar o AnyDesk e informar o ID no Skype,
+ 
+Atc,
+Eric 
+     
+     
+     
+   -2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        no FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo. 
     
+   -1. Leão, 
+   
+	   	VerificarEstoque                  = true / false?
+		CriterioVerificacaoEstoque        = QtdEstoqueMaiorZero / QtdEstoqueMaiorOuIgualQtdSolicitada?
+		ObsOfertasPadraoSeNaoTemNoSistema = ?
+		UsarValorMinimoSistemaFornecedor  = true / false?
+		 
+	   Eric
+   
 
     0. NÃO colocar os dados do fornecedor novo no arquivo único /conf/.properties no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
@@ -43,7 +64,11 @@ Eric
        Porém colocar os dados do fornecedor novo no arquivo no diretório de backup neste projeto Eclipse:
          diretório: C:\PCronos\Integração Fornecedor - Portal Cronos\conf\
          arquivo  : Integração Fornecedor - Portal Cronos.x.y.z.properties.WinThor(APS).NomeFornecedor.Homolog
+       
+       Não comittar este arquivo no GitHub pois contêm senhas!!! Adcionar no .gitignore.  
+       
             
+       Neste momento apenas preencher os seguintes dados (os outros dados estão explicados no final da instalação): 
        (i)   Descobrir o CNPJ do fornecedor usando o mesmo select acima.
        
        (ii)  No caso do WinThor, "pfv me dá a lista de filiais que têm no WinThor" 
@@ -76,7 +101,7 @@ Eric
 	         no servidor de teste:                    verificar.
 	
 	   Skype:
-	   Bom dia, sou Eric da TI do Portal Cronos. Leão me pediu instalar a integração WinThor / PCronos. Tem o AnyDesk instalado?
+	   Bom dia, sou Eric da TI do Portal Cronos. Leão me pediu instalar o Integrador WinThor / PCronos. Tem o AnyDesk instalado?
 	   
 	   
 	   Skype:
@@ -104,7 +129,8 @@ Como vai ser?
 	      Caso contrário, provavelmente o usuário logado é de uma máquina virtual. 
 	      Pedir a TI conectar com um usuário administrador na máquina real debaixo da máquina virtual.
 	      
-	   c. Nas opções do Windows Explorer marcar "Exibir Arquivos do Sistema e Arquivos Ocultos". 
+	   c. Nas opções do Windows Explorer marcar "Mostrar arquivos, pastas e unidades ocultas"  
+	      (foi testado no fornecedor Padeirão que não precisa desmarcar "Hide protected operating system files").
 	      Fechar e re-abrir o Windows Explorer. Senão re-abrir o Windows Explorer, 
 	      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
 	
@@ -189,7 +215,10 @@ Como vai ser?
     7. O instalador deve ser copiado para exatamente o diretório C:\temp\ no servidor do fornecedor.
        Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.
     
-       Skype (no caso):
+       Se dasr erro "Access denied", a solução que funcionou no Padeirão é para criar um diretório novo C:\xxx_temp\ 
+       e depois copiar de lá para C:\temp\. Apagar C:\xxx_temp\ depois disso.
+       
+       Skype (se precisar ainda):
        Não estou conseguindo copiar arquivos para o diretório C:\Temp\ devido ao erro "Access denied"
        
     
@@ -200,11 +229,22 @@ Como vai ser?
                 
              e verificar:
               
-          1. Verificar se já tem outra ionstalação de Java nos diretórios	;
+          1. Verificar se já tem outra instalação de Java nos diretórios:
           			- C:\Program Files\
           			- C:\Program Files (x86)\
           			- C:\Arquivos de Programas\
           			- C:\Arquivos de Programas (x86)\
+          			
+             No caso que tem muitas outras versões do JRE mais antigas e mais novas instaladas:  
+             Skype: No servidor onde estou estou vendo 2 versões diferentes de Java instaladas (1.8- 101 e 1.8 - 111). 
+             		Java está usado por que programas no servidor?
+             
+             No caso: 
+             Skype: Vou tomar cuidado para deixar as versões atuais do mesmo jeito como está para evitar que algum sistema 
+             ou aplicativo para de funcionar. 
+             
+             No arquivo Primeira_Instalacao_Versao_Windows.bat descomentar REM goto SKIP_JRE (feito assim no Padeirão)
+             
        	  2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
        	       (i)   no variável de ambiente do usuário administrador
        	       (ii)  no variável de ambiente do sistema
@@ -226,12 +266,18 @@ Como vai ser?
 
 
     8b. Durante a instalação: 
+            - Mouse sobre o instalador, botão direito do mouse "Executar como Administrador"
+            
             - No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos: 
               na pergunta do idFornecedor preencher -1. 
 
  
     9.  Após a instalação:
     
+    9a. Apagar Instalador.log e .gitignore no servidor do fornecedor
+    
+    9a. No caso: no arquivo Primeira_Instalacao_Versao_Windows.bat re-comentar REM goto SKIP_JRE 
+
     9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
     9b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
