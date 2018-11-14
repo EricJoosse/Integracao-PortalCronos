@@ -189,6 +189,7 @@ public final class IntegracaoFornecedorCompleta {
 
 	        
 	        
+	        // Definir diretorioArquivosXml primeiro para poder debugar o static constructor pelo menos localmente: 
 	        diretorioArquivosXml = config.getProperty("DiretorioArquivosXml");
 	        
 	        if (!Files.isDirectory(Paths.get(diretorioArquivosXml))) {
@@ -196,6 +197,22 @@ public final class IntegracaoFornecedorCompleta {
 	      	  diretorioArquivosXml = "C:/";
 	      	  throw new ConfiguracaoException(msgErroDiretorio);
 	        }
+	        
+
+	        // Definir enderecoBaseWebService também primeiro para poder debugar o static constructor remotamente: 
+	        tipoAmbiente                      = config.getProperty("TipoAmbiente");
+
+	        if (tipoAmbiente.equals("P"))
+	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceProducao");
+	        else if (tipoAmbiente.equals("H"))
+	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceHomologacao");
+	        else if (tipoAmbiente.equals("T"))
+	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceTeste");
+	        else {
+	      	  String msgErro = "O tipo de ambiente " + tipoAmbiente + " não existe. Opções permitidas: P (= Produção), H (= Homologação), T (= Teste)";
+	      	  throw new ConfiguracaoException(msgErro);
+	        }
+	        
 	        
 	        try {
 	    	    // O seguinte tem apenas efeito em Linux, e nenhum efeito em Windows, 
@@ -306,19 +323,7 @@ public final class IntegracaoFornecedorCompleta {
 	        cnpjFornecedor                    = config.getProperty("CnpjFornecedor");
 	        nomeFantasiaFornecedor            = config.getProperty("NomeFantasiaFornecedor");
 	        toDebugar                         = Boolean.parseBoolean(config.getProperty("Debugar"));
-	        tipoAmbiente                      = config.getProperty("TipoAmbiente");
 
-	        if (tipoAmbiente.equals("P"))
-	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceProducao");
-	        else if (tipoAmbiente.equals("H"))
-	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceHomologacao");
-	        else if (tipoAmbiente.equals("T"))
-	            enderecoBaseWebService          = config.getProperty("EnderecoBaseWebServiceTeste");
-	        else {
-	      	  String msgErro = "O tipo de ambiente " + tipoAmbiente + " não existe. Opções permitidas: P (= Produção), H (= Homologação), T (= Teste)";
-	      	  throw new ConfiguracaoException(msgErro);
-	        }
-	        
 	        
 	        try {
 	            qtdDiasArquivosXmlGuardados = Integer.parseInt(config.getProperty("QtdDiasArquivosXmlGuardados"));
@@ -370,29 +375,29 @@ public final class IntegracaoFornecedorCompleta {
 	  	  debugar("Debugar                           = " + toDebugar);
 	           
 	        // throw new Exception("teste exception static constructor");
-	      } 
-	      catch (ConfiguracaoException cex) {
-	          try
-	          {
-	            erroStaticConstructor = cex.getMessage(); 
-	            logarErro(cex.getMessage());
-	          }
-	          catch (Exception ex2)
-	          {
-	            throw new ExceptionInInitializerError(ex2);
-	          }
-	      }
-	      catch (Exception ex) {
-	        try
-	        {
-	          erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex); 
-	          logarErro(ex, true);
-	        }
-	        catch (Exception ex2)
-	        {
-	          throw new ExceptionInInitializerError(ex2);
-	        }
-	      }
+      } 
+      catch (ConfiguracaoException cex) {
+          try
+          {
+            erroStaticConstructor = cex.getMessage(); 
+            logarErro(cex.getMessage());
+          }
+          catch (Exception ex2)
+          {
+            throw new ExceptionInInitializerError(ex2);
+          }
+      }
+      catch (Exception ex) {
+        try
+        {
+          erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex); 
+          logarErro(ex, true);
+        }
+        catch (Exception ex2)
+        {
+          throw new ExceptionInInitializerError(ex2);
+        }
+      }
   }
   
   
