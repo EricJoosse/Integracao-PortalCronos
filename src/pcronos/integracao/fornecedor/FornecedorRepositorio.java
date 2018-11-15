@@ -164,7 +164,7 @@ public class FornecedorRepositorio {
 			f.EmailResponsavelTI = "ti@comalcomercio.com.br";
 			f.EmailResponsavelTIAlternativo = "";
 			f.ApelidoResponsavelTI = "Rildson"; 
-							// Tem vontade para ajudara, porém é muito incompetente 
+							// Tem vontade para ajudar, porém é muito incompetente 
 							// e muito burro, tem que explicar tudo detalhadamente
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "AnyDesk";

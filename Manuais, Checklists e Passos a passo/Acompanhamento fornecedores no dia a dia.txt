@@ -187,6 +187,14 @@ Atc,
 Eric
 
 
+ti@comalcomercio.com.br
+Assunto: AnyDesk
+Rildson, bom dia!
+ 
+   favor ativar o AnyDesk e informar o ID no Skype (contato "Eric Jo"), pois preciso atualizar a versão da Integrador WinThor / PCronos.
+É necessário para migração de HTTP para HTTPS,
+ 
+Eric
 
 Assunto: Favor ativar o AnyDesk - Versão nova 2.3.1 da integração PCronos / WinThor
 Marcelo,

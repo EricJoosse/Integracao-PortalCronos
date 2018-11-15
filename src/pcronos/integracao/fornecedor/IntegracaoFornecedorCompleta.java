@@ -107,6 +107,13 @@ import org.json.JSONObject;
  */
 public final class IntegracaoFornecedorCompleta {
 
+   public static final String WEBSERVICE_GET_COTACOES = "cotacao/ObtemCotacoesGET";
+   public static final String WEBSERVICE_POST_CONFIRM_RECEB_COTACAO = "cotacao/EnviaArquivosRecebimentoCotacao";
+   public static final String WEBSERVICE_POST_OFERTAS = "FornecedorCotacao/EnviaArquivosOfertasCotacao";
+   public static final String CONTROLLER_LOG_REMOTO = "LogRemoto";
+   public static final String CONTROLLER_LOG_ERRO_REMOTO = "LogErroRemoto";
+   public static final String CONTROLLER_LOG_TEMPO_EXEC = "LogTempoExecucaoRemoto";
+   
    public static final String NOME_ARQUIVO_PROPERTIES = "conf/Integração Fornecedor - Portal Cronos.properties";
                               // Using an absolute path (one that starts WITH '/') means that the current 
                               // package is ignored.
@@ -530,12 +537,13 @@ public final class IntegracaoFornecedorCompleta {
 
 */
 
-  public static String performPostCall(String txt, String tipoArquivo) {
-
+  public static String performPostCall(String txt, String tipoArquivo) 
+  {
       URL url = null;
       String response = "";
       
-      try {
+      try 
+      {
           JSONObject tokenJSON = new JSONObject();
           tokenJSON.put("userName", username);
        // tokenJSON.put("nomeFantasiaFornecedor", nomeFantasiaFornecedor);
@@ -544,43 +552,79 @@ public final class IntegracaoFornecedorCompleta {
           String payload = tokenJSON.toString();
           String contentType = "application/json";
           String requestMethod = "POST";
-
+          
           if (tipoArquivo.equals("Debug"))
-              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogRemoto");
+              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + CONTROLLER_LOG_REMOTO);
           else if (tipoArquivo.equals("Erro"))
-              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogErroRemoto");
+              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + CONTROLLER_LOG_ERRO_REMOTO);
           else if (tipoArquivo.equals("TemposExecução"))
-              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + "LogTempoExecucaoRemoto");
+              url = new URL(enderecoBaseWebService.replace("api", "ControloAcesso") + CONTROLLER_LOG_TEMPO_EXEC);
 
-          HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-          conn.setReadTimeout(30000);
-          conn.setConnectTimeout(30000);
-          conn.setRequestMethod(requestMethod);
-          conn.setDoInput(true);
-          conn.setDoOutput(true);
-          conn.setRequestProperty("content-type", contentType);
-
-
-          byte[] outputBytes = payload.getBytes("UTF-8");
-          OutputStream os = conn.getOutputStream();
-          os.write(outputBytes);
-
-          int responseCode = conn.getResponseCode();
-
-          if (responseCode == HttpsURLConnection.HTTP_OK) {
-              String line;
-              BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-              while ((line=br.readLine()) != null) {
-                  response += line;
-              }
-          // debugarApenasLocalmente("COOKIE: " + conn.getHeaderField("Set-Cookie"));
-                // -> deu "COOKIE: NULL"
-          //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
+          if (enderecoBaseWebService.indexOf("http://") > -1)
+          {
+	          HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	          conn.setReadTimeout(30000);
+	          conn.setConnectTimeout(30000);
+	          conn.setRequestMethod(requestMethod);
+	          conn.setDoInput(true);
+	          conn.setDoOutput(true);
+	          conn.setRequestProperty("content-type", contentType);
+	
+	
+	          byte[] outputBytes = payload.getBytes("UTF-8");
+	          OutputStream os = conn.getOutputStream();
+	          os.write(outputBytes);
+	
+	          int responseCode = conn.getResponseCode();
+	
+	          if (responseCode == HttpURLConnection.HTTP_OK) {
+	              String line;
+	              BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	              while ((line=br.readLine()) != null) {
+	                  response += line;
+	              }
+	          // debugarApenasLocalmente("COOKIE: " + conn.getHeaderField("Set-Cookie"));
+	                // -> deu "COOKIE: NULL"
+	          //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
+	          }
+	          else {
+	              response = "";
+	              // Para evitar laços infinitos:
+	              debugarApenasLocalmente("Response Message: " + conn.getResponseMessage());
+	          }
           }
-          else {
-              response = "";
-              // Para evitar laços infinitos:
-              debugarApenasLocalmente("Response Message: " + conn.getResponseMessage());
+          else if (enderecoBaseWebService.indexOf("https://") > -1)
+          {
+	          HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+	          conn.setReadTimeout(30000);
+	          conn.setConnectTimeout(30000);
+	          conn.setRequestMethod(requestMethod);
+	          conn.setDoInput(true);
+	          conn.setDoOutput(true);
+	          conn.setRequestProperty("content-type", contentType);
+	
+	
+	          byte[] outputBytes = payload.getBytes("UTF-8");
+	          OutputStream os = conn.getOutputStream();
+	          os.write(outputBytes);
+	
+	          int responseCode = conn.getResponseCode();
+	
+	          if (responseCode == HttpsURLConnection.HTTP_OK) {
+	              String line;
+	              BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	              while ((line=br.readLine()) != null) {
+	                  response += line;
+	              }
+	          // debugarApenasLocalmente("COOKIE: " + conn.getHeaderField("Set-Cookie"));
+	                // -> deu "COOKIE: NULL"
+	          //    this.cookieManager.setCookie(this.server, conn.getHeaderField("Set-Cookie"));
+	          }
+	          else {
+	              response = "";
+	              // Para evitar laços infinitos:
+	              debugarApenasLocalmente("Response Message: " + conn.getResponseMessage());
+	          }
           }
       } 
       catch (JSONException jsonex) {
@@ -811,8 +855,8 @@ public final class IntegracaoFornecedorCompleta {
 	 // StreamResult result = new StreamResult(System.out);
 	
 	    transformer.transform(source, result);
-	
-	    upload_File(enderecoBaseWebService + "cotacao/EnviaArquivosRecebimentoCotacao", new File(filenameConfirmReceb), "form1", username, senha) ;
+	    
+	    upload_File(enderecoBaseWebService + WEBSERVICE_POST_CONFIRM_RECEB_COTACAO, new File(filenameConfirmReceb), "form1", username, senha) ;
 	    
 	//  =====================================================================================
 	//
@@ -820,8 +864,10 @@ public final class IntegracaoFornecedorCompleta {
 	//
 	//  =====================================================================================
 		    
-        if (siglaSistema.equals("SAP")) {
-
+       if (!siglaSistema.equals("SAP")) 
+            montarXmlOfertas(transformer, docOfertas, produtos, elmErros, cdCotacao, cdComprador, tpFrete, docBuilder);
+       else  
+       {
         // No caso do SAP, quebrar as cotações em pedaços e enviar de uma por uma para o SAP, 
         // transformando Element element para string:
 
@@ -908,9 +954,7 @@ public final class IntegracaoFornecedorCompleta {
            catch (Exception ex) { // Exemplo: xml invalido retornado pela function do SAP, ou erro SQL na function do SAP
               logarErro("Exception ex entrado: Erro ao chamar a função do SAP: " + ex.getMessage());
            }
-        }
-        else  // (!siglaSistema.equals("SAP"))
-           montarXmlOfertas(transformer, docOfertas, produtos, elmErros, cdCotacao, cdComprador, tpFrete, docBuilder);
+        } // else if (siglaSistema.equals("SAP"))
     }
     catch (java.lang.Exception ex) { 
       logarErro(ex, false);
@@ -1836,7 +1880,8 @@ public final class IntegracaoFornecedorCompleta {
 	    final StreamResult resultOfertas = new StreamResult(new File(filenameOfertas));
 	    transformer.transform(sourceOfertas, resultOfertas);
 	
-	    upload_File(enderecoBaseWebService + "FornecedorCotacao/EnviaArquivosOfertasCotacao", new File(filenameOfertas), "form1", username, senha) ;
+	    
+	    upload_File(enderecoBaseWebService + WEBSERVICE_POST_OFERTAS, new File(filenameOfertas), "form1", username, senha) ;
 	 // Funcionou : uploadOfertas_File(enderecoBaseWebService + "cotacao/EnviaArquivosRecebimentoCotacao", new File(diretorioArquivosXml + "TesteWebServiceConfirmRecebCotacoes.xml"), "form1", username, senha) ;
 	 // uploadOfertas_BodyXML(enderecoBaseWebService + "cotacao/EnviaArquivosRecebimentoCotacao", (diretorioArquivosXml + "TesteWebServiceConfirmRecebCotacoes.xml"), username, senha) ;
   }
@@ -2434,7 +2479,7 @@ public final class IntegracaoFornecedorCompleta {
 		      }  
 		  }
 		  else
-			  downloadCotacoes(horaInicio, enderecoBaseWebService + "cotacao/ObtemCotacoesGET?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
+			  downloadCotacoes(horaInicio, enderecoBaseWebService + WEBSERVICE_GET_COTACOES + "?cdFornecedor=" + cnpjFornecedor + "&dataInicio=", cnpjFornecedor, username, senha);
 
 
 		  debugar("Executar(): monitorarPendencias() / downloadCotacoes() passado");
