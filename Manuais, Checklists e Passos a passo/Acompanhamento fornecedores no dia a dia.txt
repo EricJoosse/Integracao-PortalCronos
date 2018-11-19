@@ -174,10 +174,12 @@ Eric
 
 
 
-Assunto: URGENTE! - Comercial Prolac - Parada integração PCronos/WinThor  
-Marcelo, bom dia!
+mscomprolac@gmail.com
+Assunto: URGENTE! - Parada integração WinThor / PCronos - Comercial Prolac
+Marcos, bom dia!
 
-desde sábado (14/04/2018) 00:40 o Portal Cronos não está mais recebendo ofertas automáticas da Prolac.
+   favor ativar o AnyDesk e informar o ID no Skype (contato "Eric Jo"), 
+pois desde quinta-feira (01/11/2018) 16:20 o Portal Cronos não está mais recebendo ofertas automáticas da Prolac.
 Esta vez a causa não é apenas a placa de rede do servidor de banco, porém esta vez também o servidor
 que está hospedando o serviço das ofertas automáticas não está "pingando"!
 

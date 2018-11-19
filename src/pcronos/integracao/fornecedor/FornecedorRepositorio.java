@@ -109,10 +109,10 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTI = "Marcos";
 			f.ApelidoResponsavelTIAlternativo = "Marcelo";
 			f.AplicativoDesktopRemoto = "AnyDesk";
-			f.IdAplicativoDesktopRemoto = "servidormaxima@ad";
+			f.IdAplicativoDesktopRemoto = "425769045";
 			f.usuarioWebservice = "ws-prolac";
-			f.versaoJRE = "jre1.8.0_161";
-			f.versaoIntegrador = "2.5.1";
+			f.versaoJRE = "jre1.8.0_191";
+			f.versaoIntegrador = "2.8.2.BETA";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files (x86)";
 		}			   

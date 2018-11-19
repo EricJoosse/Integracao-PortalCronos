@@ -17,9 +17,9 @@ set path=%path%;C:\Program Files\Java\jre1.8.0_92\bin
    
 SETLOCAL
 set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
-REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
-REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_161\bin
-REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_161\bin
+REM Prolac: set path=C:\Program Files (x86)\Java\jre1.8.0_191\bin;%path%
+REM         Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_191\bin
+REM Prolac: Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_191\bin
 
 
 b. Substituir:

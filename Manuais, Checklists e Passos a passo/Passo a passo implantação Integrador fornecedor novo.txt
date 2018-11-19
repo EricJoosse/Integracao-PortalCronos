@@ -8,7 +8,7 @@ Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor d
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
  
-   -4. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+   -5. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
        Descobrir o idFornecedor editando e executando os seguintes selects:
 
@@ -23,7 +23,7 @@ select  id_pessoa, nm_pessoa, *
                      where  nm_pessoa like '%Padeirão%'
 
 
-   -3. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
+   -4. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
 
 Elthon, boa tarde!
  
@@ -42,13 +42,21 @@ Favor me aceitar no Skype (contato "Eric Jo") e ativar o AnyDesk e informar o ID
  
 Atc,
 Eric 
+
+   (iii) No caso de re-instalação:
+   
+Marcos, bom dia!   
+     
+Favor ativar o AnyDesk e informar o ID no Skype. Pretendo re-instalar o Integrador WinThor / PCronos hoje, 
+ 
+Atc,
+Eric 
      
      
-     
-   -2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+   -3. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        no FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo. 
     
-   -1. Leão, 
+   -2. Leão, 
    
 	   	VerificarEstoque                  = true / false?
 		CriterioVerificacaoEstoque        = QtdEstoqueMaiorZero / QtdEstoqueMaiorOuIgualQtdSolicitada?
@@ -58,7 +66,7 @@ Eric
 	   Eric
    
 
-    0. NÃO colocar os dados do fornecedor novo no arquivo único /conf/.properties no diretório da instalação 
+   -1. NÃO colocar os dados do fornecedor novo no arquivo único /conf/.properties no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
        
        Porém colocar os dados do fornecedor novo no arquivo no diretório de backup neste projeto Eclipse:
@@ -79,7 +87,7 @@ Eric
        		 apenas preencher as seguintes chaves e deixar o resto como o default do instalador: 
        			- SiglaSistema: PCronos
        			- Todas as chaves da seção "Base de Dados do sistema do fornecedor"
-       			- Todas as chaves "xxxxxxxxEmailAutomatico"
+       			- Todas as chaves "******EmailAutomatico"
 
        (iv)  Verificar se "debug" = "true" no arquivo de configuração para facilitar atendimento imediato no futuro, 
              exceto no caso que "SiglaSistema" = "PCronos" (fornecedor "Monitoramento").
@@ -88,12 +96,12 @@ Eric
              e "30" para o servidor de monitoramento automático
 
 
-    1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        no FornecedorRepositorio.java, no OUTRO método getIdFornecedorByCnpj(), 
        adicionar o fornecedor novo também. 
 
 
-	2. Conectar no AnyDesk. 
+	1. Conectar no AnyDesk. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
 	         na máquina no Cabo:                      verificar;
 	         na máquina de desenvolvimento no Azure:  o Team Viewer dá mensagem de suspeita de uso comercial;
@@ -120,7 +128,7 @@ Como vai ser?
 		Quando você desocupar o servidor, me avise
 
 
-	3. a. Verificar se o usuário logado é administrador ou administrator, 
+	2. a. Verificar se o usuário logado é administrador ou administrator, 
 	      local ou da rede (como administrador da rede ainda não foi testado).
 	      (Formaggio: user "techcorp")
 	      
@@ -134,7 +142,7 @@ Como vai ser?
 	      Fechar e re-abrir o Windows Explorer. Senão re-abrir o Windows Explorer, 
 	      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
 	
-	4. No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
+	3. No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
 		- Verificar a versão de Windows no servidor do fornecedor 
 		  e descomentar a variável "osVersion" correta no início do .bat. 
 		  CMD: winver
@@ -180,6 +188,50 @@ Como vai ser?
 		  e verificar eventuais outros goto´s 
  
  
+    4. Antes da instalação:       					       
+          0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
+                (i)  do variável de ambiente do sistema "Path" de Windows: 
+                (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
+                
+             e verificar:
+              
+          1. Verificar se já tem outra instalação de Java nos diretórios:
+          			- C:\Program Files\
+          			- C:\Program Files (x86)\
+          			- C:\Arquivos de Programas\
+          			- C:\Arquivos de Programas (x86)\
+          			- C:\pcsist\programas\
+          			
+             No caso que tem muitas outras versões do JRE mais antigas e mais novas instaladas:  
+             Skype: No servidor onde estou estou vendo 2 versões diferentes de Java instaladas (1.8- 101 e 1.8 - 111). 
+             		Java está usado por que programas no servidor?
+             
+             No caso: 
+             Skype: Vou tomar cuidado para deixar as versões atuais do mesmo jeito como está para evitar que algum sistema 
+             ou aplicativo para de funcionar. 
+             
+             No arquivo Primeira_Instalacao_Versao_Windows.bat descomentar REM goto SKIP_JRE (feito assim no Padeirão e na Prolac)
+             
+       	  2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
+       	       (i)   no variável de ambiente do usuário administrador
+       	       (ii)  no variável de ambiente do sistema
+     	  3. se tem outro caminho de java no PATH e se java.exe se encontra em um dos caminhos do PATH, 
+     	     por exemplo em C:\WINDOWS\System\
+       	       (i)   no variável de ambiente do usuário administrador
+       	       (ii)  no variável de ambiente do sistema
+     	  4. No caso que já tinha um C:\ProgramData\Oracle\Java\javapath\ no servidor, fazer backup dos atalhos atuais 
+     	     antes da instalação.
+       	       (i)   do variável de ambiente do usuário administrador
+       	       (ii)  do variável de ambiente do sistema
+
+       No caso que no servidor do fornecedor já tem outra versão mais antiga do JRE instalada na mesma maquina, 
+       depois da instalação remover C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH, se não tinha antes. 
+       Isso é para evitar que programas de terceiros param de funcionar corretamente.
+
+       No caso que no servidor do fornecedor já tinha outra versão mais nova do JRE instalada na mesma maquina, 
+       após a instalação voltar os atalhos em C:\ProgramData\Oracle\Java\javapath\ para como estava antes.
+
+
     5a. Descobrir o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 
         para poder fazer ping ou TNSping de fora para o servidor do fornecedor na hora que precisar. 
         No IE, Chrome ou Firefox acessar http://ip4.me/
@@ -215,57 +267,14 @@ Como vai ser?
     7. O instalador deve ser copiado para exatamente o diretório C:\temp\ no servidor do fornecedor.
        Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.
     
-       Se dasr erro "Access denied", a solução que funcionou no Padeirão é para criar um diretório novo C:\xxx_temp\ 
+       Se dar erro "Access denied", a solução que funcionou no Padeirão é para criar um diretório novo C:\xxx_temp\ 
        e depois copiar de lá para C:\temp\. Apagar C:\xxx_temp\ depois disso.
        
        Skype (se precisar ainda):
        Não estou conseguindo copiar arquivos para o diretório C:\Temp\ devido ao erro "Access denied"
        
     
-    8a. Antes da instalação:       					       
-          0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
-                (i)  do variável de ambiente do sistema "Path" de Windows: 
-                (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
-                
-             e verificar:
-              
-          1. Verificar se já tem outra instalação de Java nos diretórios:
-          			- C:\Program Files\
-          			- C:\Program Files (x86)\
-          			- C:\Arquivos de Programas\
-          			- C:\Arquivos de Programas (x86)\
-          			
-             No caso que tem muitas outras versões do JRE mais antigas e mais novas instaladas:  
-             Skype: No servidor onde estou estou vendo 2 versões diferentes de Java instaladas (1.8- 101 e 1.8 - 111). 
-             		Java está usado por que programas no servidor?
-             
-             No caso: 
-             Skype: Vou tomar cuidado para deixar as versões atuais do mesmo jeito como está para evitar que algum sistema 
-             ou aplicativo para de funcionar. 
-             
-             No arquivo Primeira_Instalacao_Versao_Windows.bat descomentar REM goto SKIP_JRE (feito assim no Padeirão)
-             
-       	  2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
-       	       (i)   no variável de ambiente do usuário administrador
-       	       (ii)  no variável de ambiente do sistema
-     	  3. se tem outro caminho de java no PATH e se java.exe se encontra em um dos caminhos do PATH, 
-     	     por exemplo em C:\WINDOWS\System\
-       	       (i)   no variável de ambiente do usuário administrador
-       	       (ii)  no variável de ambiente do sistema
-     	  4. No caso que já tinha um C:\ProgramData\Oracle\Java\javapath\ no servidor, fazer backup dos atalhos atuais 
-     	     antes da instalação.
-       	       (i)   do variável de ambiente do usuário administrador
-       	       (ii)  do variável de ambiente do sistema
-
-       No caso que no servidor do fornecedor já tem outra versão mais antiga do JRE instalada na mesma maquina, 
-       depois da instalação remover C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH, se não tinha antes. 
-       Isso é para evitar que programas de terceiros param de funcionar corretamente.
-
-       No caso que no servidor do fornecedor já tinha outra versão mais nova do JRE instalada na mesma maquina, 
-       após a instalação voltar os atalhos em C:\ProgramData\Oracle\Java\javapath\ para como estava antes.
-
-
-    8b. Durante a instalação: 
+    8. Durante a instalação: 
             - Mouse sobre o instalador, botão direito do mouse "Executar como Administrador"
             
             - No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos: 

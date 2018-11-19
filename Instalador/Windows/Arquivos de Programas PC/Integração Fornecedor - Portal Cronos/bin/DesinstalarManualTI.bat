@@ -12,7 +12,7 @@ SETLOCAL
 
 REM Se tiver um parentese dentro do path, o seguinte não funciona:
 
-if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe (
     goto PathProlac
 ) else if exist C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe (
     goto PathPadeirao
@@ -24,7 +24,7 @@ if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
 )
 
 :PathProlac
-set path=C:\Program Files (x86)\Java\jre1.8.0_161\bin;%path%
+set path=C:\Program Files (x86)\Java\jre1.8.0_191\bin;%path%
 goto PularPathOutros
 :PathPadeirao
 set path=C:\Program Files (x86)\Java\jre1.8.0_111\bin;%path%
@@ -57,8 +57,8 @@ if exist Desinstalador.log del /f /q Desinstalador.log
 REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor 
 REM e o caminho do outro JRE está na primeira posição no PATH de DOS:
 
-if exist C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe (
-    C:/"Program Files (x86)"/Java/jre1.8.0_161/bin/java.exe -cp integr-fornecedor-2.8.2.jar pcronos.integracao.fornecedor.Desinstalador >> Desinstalador.log
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe (
+    C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe -cp integr-fornecedor-2.8.2.jar pcronos.integracao.fornecedor.Desinstalador >> Desinstalador.log
 ) else if exist C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe (
     C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe -cp integr-fornecedor-2.8.2.jar pcronos.integracao.fornecedor.Desinstalador >> Desinstalador.log
 ) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
