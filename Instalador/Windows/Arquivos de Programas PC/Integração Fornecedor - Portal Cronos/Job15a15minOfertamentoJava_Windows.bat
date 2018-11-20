@@ -52,11 +52,11 @@ REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor
 REM e o caminho do outro JRE está na primeira posição no PATH de DOS:
 
 if exist C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe (
-    C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe -cp integr-fornecedor-2.8.2.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+    C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe -cp integr-fornecedor-2.8.3.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
 ) else if exist C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe (
-    C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe -cp integr-fornecedor-2.8.2.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+    C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe -cp integr-fornecedor-2.8.3.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
 ) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
-    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.8.2.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
+    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.8.3.jar pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta >> Job15a15minOfertamentoJava.log
 ) else (
     echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
     exit

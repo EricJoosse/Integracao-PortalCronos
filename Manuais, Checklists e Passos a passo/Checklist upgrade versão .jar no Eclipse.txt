@@ -17,9 +17,11 @@ Checklist upgrade versão .jar no Eclipse
 
 - Verificar se TestadorUnitarioInstalacaoDesinstalacao.bat precisa ser editado
 
+- Maven > Update Project
+
 - Compilar .jar
 
-- Mover .jar anterior para \Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos - Versões anteriores\
+- Mover o .jar anterior para \Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos - Versões anteriores\
 
 - Registrar pendência nova para criar o próximo tag novo no futuro e colocar esta pendência 
   na posição correta da fila de commits, no lugar mais adiantado possível, no último momento possível. 

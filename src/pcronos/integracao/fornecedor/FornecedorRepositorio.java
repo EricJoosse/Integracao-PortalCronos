@@ -65,7 +65,7 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "mstsc";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.8.1";
+			f.versaoIntegrador = "2.8.2";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -112,7 +112,7 @@ public class FornecedorRepositorio {
 			f.IdAplicativoDesktopRemoto = "425769045";
 			f.usuarioWebservice = "ws-prolac";
 			f.versaoJRE = "jre1.8.0_191";
-			f.versaoIntegrador = "2.8.2.BETA";
+			f.versaoIntegrador = "2.8.2";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files (x86)";
 		}			   
@@ -170,7 +170,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-comal";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.6.1";
+			f.versaoIntegrador = "2.8.2";
 			f.tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 			f.dirProgramFiles = "Program Files";
 		}			   
@@ -184,7 +184,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-mcommerce";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "";
+			f.versaoIntegrador = "???????";
 			f.tipoSO = "?????????????????????";
 			f.dirProgramFiles = "Program Files";
 		}			   
