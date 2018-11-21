@@ -66,10 +66,22 @@ if NOT exist "Remoto" (
 )
 cd\
 
+REM Nunca mais remover o JRE, mesmo no caso o JRE foi instalado pela primeira vez pelo Portal Cronos, 
+REM pois pode ser que depois disso outro sistema foi instalado que passou a usar o mesmo JRE:
+goto SKIP_JRE
+
 REM ================ Remover JRE: ========================================
+
+REM Mais tarde parametrizar no Desinstalador se o usuário quiser desinstalar o JRE também sim/não, 
+REM perguntando sem ele tem certeza, pois outros sistemas podem parar de funcionar. 
+REM Não dar nem esta opção no caso que o JRE (1.8.0_92) não foi instalado pelo Portal Cronos 
+REM porém o Portal Cronos tinha usado um JRE já existente instalado anteriormente por terceiros.
+REM 
+REM No caso, também parametrizar 'Java 8 Update 92, 111, 191, etc.'
 
 wmic product where "name like 'Java 8 Update 92%%'" call uninstall /nointeractive
 
+:SKIP_JRE
 
 :FIM
 

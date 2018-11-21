@@ -210,7 +210,10 @@ Como vai ser?
              Skype: Vou tomar cuidado para deixar as versões atuais do mesmo jeito como está para evitar que algum sistema 
              ou aplicativo para de funcionar. 
              
-             No arquivo Primeira_Instalacao_Versao_Windows.bat descomentar REM goto SKIP_JRE (feito assim no Padeirão e na Prolac)
+             No caso: 
+             Descomentar "REM goto SKIP_JRE"no arquivo "Primeira_Instalacao_Versao_Windows.bat"              
+             (feito assim no Padeirão e na Prolac)
+                
              
        	  2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
        	       (i)   no variável de ambiente do usuário administrador
