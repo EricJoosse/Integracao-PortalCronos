@@ -26,8 +26,8 @@ Manual Upgrade dos Ambientes de Produção de 2.3.x para 2.4
    Apagar a versão anterior.
  
 
-3. Atualizar a chamada de integr-fornecedor-2.4.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
-   no servidor do fornecedor
+3. Atualizar as chamadas de integr-fornecedor-2.4.jar dentro do arquivo Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor (2 ou 3 lugares).
  
 
 4. - criar o diretório novo C:/ProgramData/PortalCronos/Logs/Local (não precisa dar acesso a ninguêm)

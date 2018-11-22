@@ -5,8 +5,8 @@ Manual Upgrade dos Ambientes de Produção de 2.1.2B para 2.3.0
    Apagar a versão anterior.
  
 
-2. Atualizar a chamada de integr-fornecedor-2.3.0.jar no Job15a15minOfertamentoJava_Windows.bat 
-   no servidor do fornecedor
+2. Atualizar as chamadas de integr-fornecedor-2.3.0.jar dentro do Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor (2 ou 3 lugares).
  
 
 3. Adicionar no arquivo  /conf/Integração Fornecedor - Portal Cronos.properties 

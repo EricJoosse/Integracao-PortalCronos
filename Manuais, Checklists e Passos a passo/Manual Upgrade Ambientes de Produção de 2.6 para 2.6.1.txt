@@ -33,8 +33,8 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 2. Copiar o arquivo novo integr-fornecedor-2.6.1.jar do instalador para o servidor do fornecedor
    Apagar a versão anterior.
  
-3. Atualizar a chamada de integr-fornecedor-2.6.1.jar no arquivo Job15a15minOfertamentoJava_Windows.bat 
-   no servidor do fornecedor
+3. Atualizar as chamadas de integr-fornecedor-2.6.1.jar dentro do arquivo Job15a15minOfertamentoJava_Windows.bat 
+   no servidor do fornecedor (2 ou 3 lugares).
  
  
 4. Apenas no caso de instalação no servidor da JR Distribuição: 
