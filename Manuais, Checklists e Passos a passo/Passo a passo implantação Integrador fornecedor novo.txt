@@ -214,6 +214,16 @@ Como vai ser?
              Descomentar "REM goto SKIP_JRE"no arquivo "Primeira_Instalacao_Versao_Windows.bat"              
              (feito assim no Padeirão e na Prolac)
                 
+	    	 No caso se decidir não instalar uma JRE nova porém usar uma JRE existente já instalado no servidor:
+	     		- primeiro fazer um teste rápido se o seguinte funciona: 
+					C:/"Program Files (xxxxxxxxxxxx)"/Java/jre1.8.0_xxxxx/bin/java.exe -version
+					
+             	  caso contrário, não adianta instalar o Integrador usando o JRE existente: 
+	     			- verificar se tem processos Java funcionando no taskmgr.exe
+	     			- decidir: 
+						- Skype: quem instalou Java? 
+	        			- ou talvez instalar Java nova em paralelo????
+
              
        	  2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
        	       (i)   no variável de ambiente do usuário administrador
@@ -294,7 +304,12 @@ Como vai ser?
     
     9b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
           
-    9c. Nos seguintes casos:
+    9c. No caso que este instalador não instalou o JRE:
+        no regedit.exe deshabilitar java update automático de todos os jre´s em todas as 
+        chaves que existem no regedit 
+
+    9d. No caso que este instalador instalou o JRE: 
+        Nos seguintes casos:
              1. no caso de versões de Windows que ainda não estão em nenhuma das duas listas abaixo dentro deste item 9c;
              2. no caso de versões de Windows que estão com o bug abaixo: 
              
@@ -328,7 +343,7 @@ Como vai ser?
        
        
        
-   9d. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9d, 
+   9e. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9d, 
        fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarDirLog
@@ -344,7 +359,7 @@ Como vai ser?
        Fazer isso ainda em todos os outros tipos de Windows. 
 
        
-   9e. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9e, 
+   9f. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9e, 
        fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarManualTI
@@ -365,7 +380,7 @@ Como vai ser?
              "Executar como Administrador". 
 
        
-   9f. No caso que foi copiado para outro diretório, apagar o instalador manualmente após a instalação!
+   9g. No caso que foi copiado para outro diretório, apagar o instalador manualmente após a instalação!
        No caso do Comal:  copiado para a Área de Trabalho do usuário FusionDMC.
        No caso do Propão: copiado para C:\eric_temp\ e outra cópia parcial para a Área de Trabalho do usuário Administrador.
 
