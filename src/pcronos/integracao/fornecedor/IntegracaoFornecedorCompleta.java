@@ -1047,7 +1047,7 @@ public final class IntegracaoFornecedorCompleta {
 		            	 body += "A integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " foi colocada em produção!\r\n\r\n";
 				         body += " " + "\r\n";
 		            	 body += "1. Provisoriamente (enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
-				         body += "   Favor excluir o \"OR\" deste id_fornecedor na sp dbo.monitorarIntegracaoFornecedores. ";
+				         body += "   Favor excluir o \"OR\" deste id_fornecedor no arquivo \"/scripts/sp_monitorarIntegracaoFornecedores.sql\" no projeto Eclipse e executar o script na base de produção. ";
 		            	 body += "Dica: procura \"" + rSet.getString(1) + "\" nesta sp." + "\r\n";
 				         body += " " + "\r\n";
 		            	 body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 

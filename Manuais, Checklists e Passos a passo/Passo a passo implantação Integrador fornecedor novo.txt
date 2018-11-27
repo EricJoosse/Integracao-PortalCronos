@@ -8,9 +8,9 @@ Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor d
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
  
-   -5. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
-       criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
-       Descobrir o idFornecedor editando e executando os seguintes selects:
+-6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
+    Descobrir o idFornecedor editando e executando os seguintes selects:
 
 select id_fornecedor_fornec, id_pessoa
   from dbo.Fornecedor 
@@ -23,7 +23,13 @@ select  id_pessoa, nm_pessoa, *
                      where  nm_pessoa like '%Padeirão%'
 
 
-   -4. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
+
+-5. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
+    "/scripts/Monitoramento_Integração_Fornecedor.sql" no projeto Eclipse 
+	informando Nome + ID do fornecedor novo
+
+
+-4. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
 
 Elthon, boa tarde!
  
@@ -488,7 +494,7 @@ Como vai ser?
 		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
 
 
-   17. Na sp dbo.monitorarIntegracaoFornecedores: 
+   17. No arquivo /scripts/sp_monitorarIntegracaoFornecedores.sql no projeto Eclipse: 
       (i)  adicionar: 
                 --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> xxx) -- AAAAAAAAAA
 	       depois de: 
@@ -500,6 +506,8 @@ Como vai ser?
 				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
 
            (Dica: pesquisar o texto "Para facilitar a manutenção deste if" nesta sp).
+            
+      (iii) executar o script na base de produção
 
       
    18. Atualizar o arquivo integr-fornecedor-x.y.z.jar no servidor que está hospedando 
