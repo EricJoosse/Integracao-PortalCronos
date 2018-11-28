@@ -14,6 +14,7 @@ Master Commerce 51
 SOST (BA)		170
 Walmart        	385
 Propão			171
+Padeirão		14
 
 /*
 select id_fornecedor_fornec, *

@@ -213,7 +213,7 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-padeirao";
 			f.versaoJRE = "jre1.8.0_111";
-			f.versaoIntegrador = "2.8.2";
+			f.versaoIntegrador = "2.8.3";
 			f.tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 			f.dirProgramFiles = "Program Files";
 		}			   

@@ -62,8 +62,8 @@ wmic product where "name like 'Java 8 Update 92%%'" call uninstall /nointeractiv
 		    b. Matar o processo JRE 1.8.0_92
 		 		 
 		   
-3. Copiar o arquivo novo integr-fornecedor-2.8.3.jar do instalador para o servidor do fornecedor.
-   Apagar a versão anterior.
+3. (i)  Copiar o arquivo novo integr-fornecedor-2.8.3.jar do instalador para o servidor do fornecedor.
+   (ii) Apagar a(s) versão(ões) anterior(es) integr-fornecedor-*.*.*.jar.
  
 4. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor (2 ou 3 lugares).

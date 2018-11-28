@@ -30,8 +30,8 @@ na lista de manuais para upgrade
 		    b. Matar o processo JRE 1.8.0_92
 		 		 
 		   
-3. Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor.
-   Apagar a versão anterior.
+3. (i)  Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor.
+   (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
 4. Atualizar as chamadas de integr-fornecedor-x.y.z.jar dentro do arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor (2 ou 3 lugares).
