@@ -15,6 +15,7 @@ REM goto TesteRegedit
 REM goto TesteSubDirBin
 REM goto TesteIfExist
 REM goto TesteAttrib
+REM goto TesteVersao
 goto TesteTemplate
 
 
@@ -279,11 +280,27 @@ attrib /S /D "Arquivos de Programas PC"
 pause
 exit
 
+REM ================ Teste Versão (testado, funcionou): ========================================
+
+:TesteVersao
+
+SETLOCAL
+
+call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
+echo integr-fornecedor-%versaoIntegrador%.jar
+
+
+ENDLOCAL
+
+pause
+exit
+
 REM ================ Teste Template (testado??????????, funcionou????????????????): ========================================
 
 :TesteTemplate
 
 ........comandos DOS..........
+
 
 pause
 exit

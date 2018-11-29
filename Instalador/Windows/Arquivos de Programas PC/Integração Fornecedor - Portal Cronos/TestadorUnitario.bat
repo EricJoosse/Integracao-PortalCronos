@@ -1,5 +1,6 @@
 
-goto OutrosTestes
+REM goto OutrosTestes
+goto TesteVersao
 
 REM ================ Teste de chamada de arqs .bat em subdirs (testado, funcionou): ========================================
 
@@ -21,6 +22,8 @@ REM Limpar CLASSPATH :
 REM set CLASSPATH=
 
 SETLOCAL
+
+call bin\Versao.bat
 
 if exist C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe (
     goto PathProlac
@@ -68,11 +71,11 @@ REM Caminho completo para o caso que tiver 2 JRE´s no mesmo servidor
 REM e o caminho do outro JRE está na primeira posição no PATH de DOS:
 
 if exist C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe (
-    C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe -cp integr-fornecedor-2.8.3.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
+    C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
 ) else if exist C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe (
-    C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe -cp integr-fornecedor-2.8.3.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
+    C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
 ) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
-    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-2.8.3.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
+    C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
 ) else (
     echo MSGBOX "Erro! O JRE não foi encontrado!" > %temp%\TEMPmessage.vbs
     exit
@@ -82,4 +85,17 @@ ENDLOCAL
 pause
 exit
 
+
+REM ==================== Teste Variável Versão: ===============================================================
+
+:TesteVersao
+
+SETLOCAL
+
+call bin\Versao.bat
+C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.TestadorSnippets >> TestadorUnitario.log
+
+ENDLOCAL
+pause
+exit
 
