@@ -1,8 +1,11 @@
-Manual Upgrade dos Ambientes de Produção de outra versão para outra versão que não se encontra 
-==============================================================================================
-na lista de manuais para upgrade
-================================
+Manual Upgrade dos Ambientes de Produção de 2.8.3 para 2.8.4
+============================================================
 
+0. Copiar os seguintes arquivos do projeto Eclipse para o servidor do fornecedor:
+	- bin\Versao.bat
+	- bin\DesinstalarManualTI.bat
+	- TestadorUnitario.bat
+	
 1. Apenas no caso do servidor do monitoramento:
 	 - Conectar como cronostech
      - No Windows Explorer alterar a opção para exibir arquivos de sistema 
@@ -30,11 +33,18 @@ na lista de manuais para upgrade
 		    b. Matar o processo JRE 1.8.0_92
 		 		 
 		   
-3. (i)  Copiar o arquivo novo integr-fornecedor-x.y.z.jar do instalador para o servidor do fornecedor.
-   (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
+3. (i)  Copiar o arquivo novo integr-fornecedor-2.8.4.jar do instalador para o servidor do fornecedor.
+   (ii) Apagar a(s) versão(ões) anterior(es) integr-fornecedor-*.*.*.jar.
  
-4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
  
+4. Editar o arquivo Job15a15minOfertamentoJava_Windows.bat:
+	(i)  Depois de "SETLOCAL" adicionar:
+	
+call bin\Versao.bat
+
+	(ii) Substituir integr-fornecedor-2.8.3.jar por integr-fornecedor-%versaoIntegrador%.jar (em 3 lugares)
+	
+	
 5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 

@@ -68,18 +68,19 @@ wmic product where "name like 'Java 8 Update 92%%'" call uninstall /nointeractiv
 4. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor (2 ou 3 lugares).
  
-5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
-   no servidor do fornecedor
+5. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo DesinstalarManualTI.bat
+   no servidor do fornecedor (2 ou 3 lugares).
 
-6. Em todos os casos: 
+6. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo TestadorUnitario.bat
+   no servidor do fornecedor (2 ou 3 lugares).
+
+7. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor. (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade). 
+   
+
+8. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
-7. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo DesinstalarManualTI.bat
-   no servidor do fornecedor (2 ou 3 lugares).
-
-8. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo TestadorUnitario.bat
-   no servidor do fornecedor (2 ou 3 lugares).
-
 9. Apenas no caso do servidor do monitoramento: 
      - No Windows Explorer voltar a opção para não exibir arquivos de sistema (marcar "Hide protected operating system files")
 
