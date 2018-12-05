@@ -3,6 +3,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.3 para 2.8.4
 
 0. Copiar os seguintes arquivos do projeto Eclipse para o servidor do fornecedor:
 	- bin\Versao.bat
+	- bin\CaminhoJRE.bat
 	- bin\DesinstalarManualTI.bat
 	- TestadorUnitario.bat
 	
