@@ -1,5 +1,3 @@
-REM Limpar CLASSPATH:
-REM set CLASSPATH=
 
 
 REM By default, variables are global to your entire command prompt session. 
@@ -10,9 +8,14 @@ REM The setlocal command sets the ERRORLEVEL variable to 1.
 REM "SETLOCAL" é necessário aqui para poder usar ERRORLEVEL corretamente:   
 SETLOCAL
 
+
 REM call bin\Versao.bat
 REM call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
 call Versao.bat
+
+
+REM Limpar CLASSPATH:
+REM set CLASSPATH=
 
 REM http://stackoverflow.com/questions/23730887/why-is-rt-jar-not-part-of-the-class-path-system-property: 
 REM 	"rt.jar doesn't need to be in the classpath, since it is already in the bootclasspath. 

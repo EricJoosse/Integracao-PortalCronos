@@ -16,6 +16,7 @@ REM goto TesteSubDirBin
 REM goto TesteIfExist
 REM goto TesteAttrib
 REM goto TesteVersao
+goto TesteTresParam
 goto TesteTemplate
 
 
@@ -291,6 +292,32 @@ echo integr-fornecedor-%versaoIntegrador%.jar
 
 
 ENDLOCAL
+
+pause
+exit
+
+REM ================ Teste Passagem 3 parâmetros (testado??????????, funcionou????????????????): ========================================
+
+:TesteTresParam
+
+echo.
+echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
+echo.
+
+SET /P idFornecedor=Favor digitar o ID da empresa fornecedora: 
+IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
+GOTO PularErro
+:ErroIdFornecedor
+echo MSGBOX "Erro: ID do fornecedor não informado! Instalação não concluída!!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:PularErro
+
+
+call "Integração Fornecedor - Portal Cronos\bin\ComponenteTestador.bat" TesteTresParam.log TestadorSnippets %idFornecedor%
+
 
 pause
 exit
