@@ -6,6 +6,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.3 para 2.8.4
 	- bin\CaminhoJRE.bat
 	- bin\DesinstalarManualTI.bat
 	- bin\ComponenteTestador.bat
+	- bin\Inicializacoes.bat
 	- TestadorUnitario.bat
 	
 1. Apenas no caso do servidor do monitoramento:

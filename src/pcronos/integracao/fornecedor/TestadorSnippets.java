@@ -108,7 +108,7 @@ public class TestadorSnippets {
 			
 			
 		    System.out.println("");
-	     //   if (1 == 1) return;
+	        if (1 == 1) return;
 
 			int idFornecedor = Integer.parseInt(args[0]);		 
 	        System.out.println("idFornecedor = " + Integer.toString(idFornecedor));

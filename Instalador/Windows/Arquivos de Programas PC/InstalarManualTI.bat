@@ -1,6 +1,8 @@
 cls
 @echo off
 
+chcp 1252>nul
+
 echo.
 echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
 echo.
@@ -25,6 +27,8 @@ REM     goto PathOutros
 REM )
 
 
+call "Integração Fornecedor - Portal Cronos\bin\Inicializacoes.bat"
+call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
 call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" Instalador.log Instalador %idFornecedor%
 
 

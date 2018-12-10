@@ -4,6 +4,9 @@ cls
 REM Resettar ERRORLEVEL para 0 (não existe valor default):
 call (exit /b 0)
 
+
+call Inicializacoes.bat
+call Versao.bat
 call CaminhoJRE.bat Desinstalador.log Desinstalador
 
 

@@ -296,9 +296,11 @@ ENDLOCAL
 pause
 exit
 
-REM ================ Teste Passagem 3 parâmetros (testado??????????, funcionou????????????????): ========================================
+REM ================ Teste Passagem 3 parâmetros (testado, funcionou): ========================================
 
 :TesteTresParam
+
+chcp 1252>nul
 
 echo.
 echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
@@ -316,6 +318,7 @@ exit
 :PularErro
 
 
+call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
 call "Integração Fornecedor - Portal Cronos\bin\ComponenteTestador.bat" TesteTresParam.log TestadorSnippets %idFornecedor%
 
 

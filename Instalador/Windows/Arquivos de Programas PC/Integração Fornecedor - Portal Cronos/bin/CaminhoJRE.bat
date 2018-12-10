@@ -1,18 +1,5 @@
 
 
-REM By default, variables are global to your entire command prompt session. 
-REM Call the SETLOCAL command to make variables local to the scope of your script. 
-REM After calling SETLOCAL, any variable assignments revert upon calling ENDLOCAL, 
-REM calling EXIT, or when execution reaches the end of file (EOF) in your script.
-REM The setlocal command sets the ERRORLEVEL variable to 1.
-REM "SETLOCAL" é necessário aqui para poder usar ERRORLEVEL corretamente:   
-SETLOCAL
-
-
-REM call bin\Versao.bat
-REM call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
-call Versao.bat
-
 
 REM Limpar CLASSPATH:
 REM set CLASSPATH=
@@ -31,7 +18,6 @@ REM set CLASSPATH=%CLASSPATH%;.
 
 REM echo %classpath%
 
-chcp 1252>nul
 cd\
 cd "Arquivos de Programas PC"
 cd "Integração Fornecedor - Portal Cronos"

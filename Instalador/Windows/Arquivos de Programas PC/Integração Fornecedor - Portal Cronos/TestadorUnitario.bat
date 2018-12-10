@@ -18,6 +18,8 @@ REM ==================== Outros testes: ========================================
 cls
 @echo off
 
+call bin\Inicializacoes.bat
+call bin\Versao.bat
 call bin\CaminhoJRE.bat TestadorUnitario.log TestadorSnippets
 
 ENDLOCAL

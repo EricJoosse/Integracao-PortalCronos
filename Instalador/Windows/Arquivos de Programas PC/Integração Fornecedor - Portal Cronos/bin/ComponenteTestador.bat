@@ -1,16 +1,34 @@
 SETLOCAL
 
-echo ComponenteTestador.bat entrado
+chcp 1252>nul
 
-call Versao.bat
+echo.
+echo ComponenteTestador.bat entrado: 
+echo Param 1 = %1
+echo Param 2 = %2
+echo Param 3 = %3
+echo Versão = %versaoIntegrador%
 
 pause
 
-chcp 1252>nul
 cd\
-cd "Arquivos de Programas PC"
-cd "Integração Fornecedor - Portal Cronos"
 
+REM Se testar dentro do Eclipse ao invés de nos servidores:
+if exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/InstalarManualTI.bat (
+  cd PCronos
+  cd "Integração Fornecedor - Portal Cronos"
+  cd Instalador
+  cd Windows
+  cd "Arquivos de Programas PC"
+  cd "Integração Fornecedor - Portal Cronos"
+) else (  
+  cd "Arquivos de Programas PC"
+  cd "Integração Fornecedor - Portal Cronos"
+)
+
+REM "pwd" em Linux = "%cd% em DOS:
+echo %cd%
+pause
 
 if "%1"=="Desinstalador.log" (
   if exist Desinstalador.log del /f /q Desinstalador.log 
@@ -26,3 +44,6 @@ if "%1"=="Desinstalador.log" (
 
 set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
 C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.%2 %3 >> %1
+
+pause
+
