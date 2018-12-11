@@ -1,5 +1,6 @@
 
 REM goto OutrosTestes
+goto TesteParamDosOptional
 goto TesteVersao
 
 REM ================ Teste de chamada de arqs .bat em subdirs (testado, funcionou): ========================================
@@ -12,7 +13,10 @@ pause
 exit
 
 REM ==================== Outros testes: ===============================================================
+REM ==================== 1. Teste Parâmetro optional CaminhoJRE.bat (testado, funcionou): ===============================================================
+REM ==================== 2. ............... ===============================================================
 
+:TesteParamDosOptional
 :OutrosTestes
 
 cls
@@ -20,7 +24,7 @@ cls
 
 call bin\Inicializacoes.bat
 call bin\Versao.bat
-call bin\CaminhoJRE.bat TestadorUnitario.log TestadorSnippets
+call bin\ComponenteTestador.bat TestadorUnitario.log TestadorSnippets
 
 ENDLOCAL
 pause
