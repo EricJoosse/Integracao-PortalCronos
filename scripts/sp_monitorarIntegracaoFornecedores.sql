@@ -72,19 +72,18 @@ declare c cursor for
       and (                          f.id_fornecedor_fornec <>  21) -- Marítimos
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  13) -- Formaggio
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 947) -- JR Distribuição
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  30) -- Prolac
+      and (                          f.id_fornecedor_fornec <>  30) -- Prolac
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  60) -- Karne Keijo
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  51) -- Master Commerce
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 170) -- SOST (BA)
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 385) -- Walmart
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  33) -- Comal
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 171) -- Propão
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  14) -- Padeirão
 
--- 1. DESCOMENTAR OS f.id_fornecedor_fornec´S ACIMA APENAS PARA SUPRIMIR QUANTIDADES GRANDES DE EMAILS TEMPORARIAMENTE, 
+-- 1. DESCOMENTAR OS "and"´S DOS f.id_fornecedor_fornec´S ACIMA APENAS PARA SUPRIMIR QUANTIDADES GRANDES DE EMAILS TEMPORARIAMENTE, 
 --    NO CASO QUE JÁ SABEMOS QUE FORNECEDOR X NÃO ESTÁ FUNCIONANDO MAIS POR ENQUANTO; 
 -- 
--- 2. REMOVER "@incremental_15min = 0 OR " SE POR ENQUANTO NEM QUER VER MAIS NO SQL SERVER MANAGEMENT STUDIO.
+-- 2. REMOVER "@incremental_15min = 0 OR " SE TEMPORARIAMENTE NEM QUER VER O FORNECEDOR MAIS NO SQL SERVER MANAGEMENT STUDIO.
 
 
 
@@ -102,8 +101,6 @@ while @@fetch_status = 0
 
   if @fornecedor_id = 0   -- Para facilitar a manutenção deste if 
   or @fornecedor_id = 385 -- Walmart  ainda não está em produção 
-  or @fornecedor_id =  33 -- Comal    ainda não está em produção 
-  or @fornecedor_id =  14 -- Padeirão ainda não está em produção 
     begin
       if (
          --  ((select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))

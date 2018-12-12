@@ -7,14 +7,13 @@ Prolac 			 30	WinThor		(32 bit)    	Sim				187.103.76.53	Não precisa		15 min		tr
 								  			    																													2. Marcelo Bezerra
 Marítimos		 21	WinThor		(.. bit)    	Não	  											15 min		true	C	  	 48 GB		100			Marítimos		Felipe Lolaia			
 Karne Keijo		 60	SAP			(.. bit)    	Não												15 min		true	C	  	 62 GB		100			Karne Keijo		Timon Dourado			
-Comal 			 33	WinThor		(.. bit)    	Não				187.1.168.74		80			15 min		true	C	  	 69 GB		100			Comal			Rildson Carlos				98609-4887
-Master Commerce  51	WinThor		(.. bit)    	Não																									Master Commerce			
+Comal 			 33	WinThor		(.. bit)    	Sim				187.1.168.74		80			15 min		true	C	  	 69 GB		100			Comal			Rildson Carlos				98609-4887
 Monitoramento    -- PCronos     (.. bit)    	Sim				Não se aplica	Não se aplica	15 min		false	C	  	 90 GB		 30			Monitoramento
 SOST (BA)		170 WinThor     (.. bit)    	Sim												15 min		true	C	  	0.6 GB		 15			SOST (BA)		1. Cleijonatas S Silva 	
 												   																													2. Sena Junior			
 Walmart         385 PCronos		(.. bit) 	 	  																									Walmart
 Propão 			171	WinThor		(.. bit)    	Sim				187.113.65.138	Não precisa		15 min		true	C	  	167 GB		100			Propão			Apoio.propao@hotmail.com	99535-1999
-Padeirão 		 14	WinThor		(.. bit)    	Não				192.141.110.189	Não precisa		15 min		true	C	  	703 GB		100			Padeirão		tiagoautran					99116-8070 ou 3073-4551	
+Padeirão 		 14	WinThor		(.. bit)    	Sim				192.141.110.189	Não precisa		15 min		true	C	  	703 GB		100			Padeirão		tiagoautran					99116-8070 ou 3073-4551	
 
 
 Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 

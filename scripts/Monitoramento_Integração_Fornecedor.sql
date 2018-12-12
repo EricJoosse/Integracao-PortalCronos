@@ -10,7 +10,6 @@ Prolac 			30
 Marítimos		21
 Karne Keijo		60
 Comal 			33
-Master Commerce 51
 SOST (BA)		170
 Walmart        	385
 Propão			171

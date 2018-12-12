@@ -7,7 +7,7 @@ public class FornecedorRepositorio {
 
 	// O método getIdFornecedorByCnpj(String cnpj) nunca fica chamado se siglaSistema == "PCronos", 
 	// então não precisa retornar um objeto Integer (nullable). 
-	// observação: se um dia precisar trocar "int" por "Integer", tem que tomar providencias para  
+	// Observação: se um dia precisar trocar "int" por "Integer", tem que tomar providencias para  
 	// continuar funcionando com valor -1, veja https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
 	int getIdFornecedorByCnpj(String cnpj) throws Exception {
 		if (cnpj.equals("02870737000190"))
@@ -24,8 +24,6 @@ public class FornecedorRepositorio {
 			return 60;
 		else if (cnpj.equals("07534303000133"))
 			return 33;
-		else if (cnpj.equals("11799763000160"))
-			return 51;
 		else if (cnpj.equals("24407389000233"))
 			return 171;
 		else if (cnpj.equals("03042263000151"))
@@ -172,20 +170,6 @@ public class FornecedorRepositorio {
 			f.versaoJRE = "jre1.8.0_92";
 			f.versaoIntegrador = "2.8.2";
 			f.tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
-			f.dirProgramFiles = "Program Files";
-		}			   
-		else if (idFornecedor == 51) {
-			f.NomeFantasiaEmpresa = "Master Commerce";
-			f.SiglaSistemaFornecedor = "WinThor";
-			f.EmailResponsavelTI = "";
-			f.EmailResponsavelTIAlternativo = "";
-			f.ApelidoResponsavelTI = "";
-			f.ApelidoResponsavelTIAlternativo = "";
-			f.AplicativoDesktopRemoto = "Team Viewer";
-			f.usuarioWebservice = "ws-mcommerce";
-			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "???????";
-			f.tipoSO = "?????????????????????";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 171) {
