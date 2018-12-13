@@ -55,10 +55,14 @@ call bin\Versao.bat
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
 7. Apenas no caso do servidor do monitoramento: 
-     - No Windows Explorer voltar a opção para não exibir arquivos de sistema (marcar "Hide protected operating system files")
+     (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
+          (marcar "Hide protected operating system files")
+     (ii) Fechar o Windows Explorer e abrir novamente
+     
 
 8. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
    (ii)  Compilar o arquivo .jar
    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+         esperando o processamento atual terminar primeiro
    
    

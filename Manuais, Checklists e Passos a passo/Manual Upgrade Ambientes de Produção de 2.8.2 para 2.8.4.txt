@@ -1,7 +1,22 @@
-Manual Upgrade dos Ambientes de Produção de 2.8.2 para 2.8.3
+Manual Upgrade dos Ambientes de Produção de 2.8.2 para 2.8.4
 ============================================================
 
-0. No arquivo "Desinstalar_Integração_Fornecedor_PortalCronos.bat":
+1. Apenas no caso do servidor do monitoramento:
+	 - Conectar como cronostech
+     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
+       (desmarcar "Hide protected operating system files") temporariamente
+
+
+2. Copiar os seguintes arquivos do projeto Eclipse para o servidor do fornecedor:
+	- bin\Versao.bat
+	- bin\CaminhoJRE.bat
+	- bin\DesinstalarManualTI.bat
+	- bin\ComponenteTestador.bat
+	- bin\Inicializacoes.bat
+	- TestadorUnitario.bat
+	
+
+3. No arquivo "Desinstalar_Integração_Fornecedor_PortalCronos.bat":
 
    Substituir:
    
@@ -35,13 +50,7 @@ wmic product where "name like 'Java 8 Update 92%%'" call uninstall /nointeractiv
 :FIM
 
 
-1. Apenas no caso do servidor do monitoramento:
-	 - Conectar como cronostech
-     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
-       (desmarcar "Hide protected operating system files") temporariamente
-
-
-2. Fazer exatamente na seguinte sequência:
+4. Fazer exatamente na seguinte sequência:
    (i)   Em todos os casos exceto JR Distribuição / Windows 10:
          Verificar se o arquivo .bat e o .jar atual estão em uso: 
          verificar o horário da última e da próxima execução no Task Scheduler 
@@ -62,30 +71,33 @@ wmic product where "name like 'Java 8 Update 92%%'" call uninstall /nointeractiv
 		    b. Matar o processo JRE 1.8.0_92
 		 		 
 		   
-3. (i)  Copiar o arquivo novo integr-fornecedor-2.8.3.jar do instalador para o servidor do fornecedor.
+5. (i)  Copiar o arquivo novo integr-fornecedor-2.8.4.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a(s) versão(ões) anterior(es) integr-fornecedor-*.*.*.jar.
  
-4. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo Job15a15minOfertamentoJava_Windows.bat 
-   no servidor do fornecedor (2 ou 3 lugares).
  
-5. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo DesinstalarManualTI.bat
-   no servidor do fornecedor (2 ou 3 lugares).
+6. Editar o arquivo Job15a15minOfertamentoJava_Windows.bat:
+	(i)  Depois de "SETLOCAL" adicionar:
+	
+call bin\Versao.bat
 
-6. Atualizar as chamadas de integr-fornecedor-2.8.3.jar dentro do arquivo TestadorUnitario.bat
-   no servidor do fornecedor (2 ou 3 lugares).
-
+	(ii) Substituir integr-fornecedor-2.8.2.jar por integr-fornecedor-%versaoIntegrador%.jar (em 3 lugares)
+	
+	
 7. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
-   no servidor do fornecedor. (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade). 
-   
+   no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
 8. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
 9. Apenas no caso do servidor do monitoramento: 
-     - No Windows Explorer voltar a opção para não exibir arquivos de sistema (marcar "Hide protected operating system files")
+     (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
+          (marcar "Hide protected operating system files")       
+     (ii) Fechar o Windows Explorer e abrir novamente
+     
 
 10. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
     (ii)  Compilar o arquivo .jar
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+          esperando o processamento atual terminar primeiro
    
    

@@ -63,7 +63,7 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "mstsc";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.8.2";
+			f.versaoIntegrador = "2.8.4";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
