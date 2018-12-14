@@ -16,7 +16,7 @@ REM goto TesteSubDirBin
 REM goto TesteIfExist
 REM goto TesteAttrib
 REM goto TesteVersao
-goto TesteTresParam
+REM goto TesteTresParam
 goto TesteTemplate
 
 

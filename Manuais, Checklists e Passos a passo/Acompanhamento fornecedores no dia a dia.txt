@@ -198,12 +198,14 @@ Rildson, bom dia!
  
 Eric
 
-Assunto: Favor ativar o AnyDesk - Versão nova 2.3.1 da integração PCronos / WinThor
-Marcelo,
+
+
+ti@propao.com.br
+Assunto: AnyDesk
+Elthon, bom dia!
  
-   favor ativar o AnyDesk e informar o ID no Skype (contato "Eric Jo"), pois preciso atualizar a versão da integração PCronos / WinThor.
-É necessário para melhorar a lentidão pois o ofertamento não pode demorar mais de 15 minutos,
-visto que o serviço roda de 15 a 15 minutos,
+   favor ativar o AnyDesk e informar o ID no Skype (contato "Eric Jo"), pois preciso atualizar a versão da Integrador WinThor / PCronos.
+É necessário para ajuste dos emails automáticos disparados por paradas do Integrador,
  
 Eric
   

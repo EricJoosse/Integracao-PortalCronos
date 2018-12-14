@@ -4,6 +4,7 @@ chcp 1252>nul
 
 echo.
 echo ComponenteTestador.bat entrado: 
+echo Param 0 = %0
 echo Param 1 = %1
 echo Param 2 = %2
 echo Param 3 = %3

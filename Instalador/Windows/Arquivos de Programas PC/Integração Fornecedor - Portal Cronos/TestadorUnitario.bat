@@ -1,7 +1,7 @@
 
-REM goto OutrosTestes
-goto TesteParamDosOptional
-goto TesteVersao
+REM goto TesteVersao
+REM goto TesteParamDosOptional
+goto OutrosTestes
 
 REM ================ Teste de chamada de arqs .bat em subdirs (testado, funcionou): ========================================
 
