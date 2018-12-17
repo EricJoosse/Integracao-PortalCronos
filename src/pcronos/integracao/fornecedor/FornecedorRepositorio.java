@@ -1,9 +1,75 @@
 package pcronos.integracao.fornecedor;
 
+import java.util.HashMap;
+
 public class FornecedorRepositorio {
 
+	protected static HashMap hashMap;
+
+    static {
+		HashMap<Integer, Fornecedor> hashMap = new HashMap<Integer, Fornecedor>() ; 
+		Fornecedor f = new Fornecedor();
+    	
+		f.IdFornecedor = 2016;
+		f.NomeFantasiaEmpresa = "Teste Windows Server 2016";
+		f.versaoIntegrador = "";
+		hashMap.put(1, f);
+
+		f.IdFornecedor = null;
+		f.NomeFantasiaEmpresa = "Monitoramento";
+		f.versaoIntegrador = "2.8.4";
+		hashMap.put(2, f);
+
+		f.IdFornecedor = 13;
+		f.NomeFantasiaEmpresa = "Formaggio";
+		f.versaoIntegrador = "2.6";
+		hashMap.put(3, f);
+
+		f.IdFornecedor = 947;
+		f.NomeFantasiaEmpresa = "JR Distribuição";
+		f.versaoIntegrador = "2.8.1";
+		hashMap.put(4, f);
+
+		f.IdFornecedor = 30;
+		f.NomeFantasiaEmpresa = "Prolac";
+		f.versaoIntegrador = "2.8.2";
+		hashMap.put(5, f);
+
+		f.IdFornecedor = 21;
+		f.NomeFantasiaEmpresa = "Marítimos";
+		f.versaoIntegrador = "1.2.3";
+		hashMap.put(6, f);
+
+		f.IdFornecedor = 170;
+		f.NomeFantasiaEmpresa = "SOST";
+		f.versaoIntegrador = "2.3.1";
+		hashMap.put(7, f);
+
+		f.IdFornecedor = 60;
+		f.NomeFantasiaEmpresa = "Karne Keijo";
+		f.versaoIntegrador = "2.4.1";
+		hashMap.put(8, f);
+
+		f.IdFornecedor = 33;
+		f.NomeFantasiaEmpresa = "Comal";
+		f.versaoIntegrador = "2.8.2";
+		hashMap.put(9, f);
+
+		f.IdFornecedor = 171;
+		f.NomeFantasiaEmpresa = "Propão";
+		f.versaoIntegrador = "2.6.1";
+		hashMap.put(10, f);
+
+		f.IdFornecedor = 14;
+		f.NomeFantasiaEmpresa = "Padeirão";
+		f.versaoIntegrador = "2.8.3";
+		hashMap.put(11, f);
+
+    }
+	
 	public FornecedorRepositorio() {
 	}
+	
 
 	// O método getIdFornecedorByCnpj(String cnpj) nunca fica chamado se siglaSistema == "PCronos", 
 	// então não precisa retornar um objeto Integer (nullable). 
@@ -42,6 +108,7 @@ public class FornecedorRepositorio {
 
 		if (idFornecedor == 2016) {
 			f.NomeFantasiaEmpresa = "Teste Windows Server 2016";
+			f.versaoIntegrador = "";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "";
 			f.EmailResponsavelTIAlternativo = "";
@@ -50,12 +117,12 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "";
 			f.usuarioWebservice = "";
 			f.versaoJRE = "";
-			f.versaoIntegrador = "";
 			f.tipoSO = "Windows Server 2016";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == null) {
 			f.NomeFantasiaEmpresa = "Monitoramento";
+			f.versaoIntegrador = "2.8.4";
 			f.SiglaSistemaFornecedor = "PCronos";
 			f.EmailResponsavelTI = "";
 			f.EmailResponsavelTIAlternativo = "";
@@ -63,12 +130,12 @@ public class FornecedorRepositorio {
 			f.ApelidoResponsavelTIAlternativo = "";
 			f.AplicativoDesktopRemoto = "mstsc";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.8.4";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 13) {
 			f.NomeFantasiaEmpresa = "Formaggio";
+			f.versaoIntegrador = "2.6";
 			f.SiglaSistemaFornecedor = "APS";
 			f.EmailResponsavelTI = "projetosti@formaggio.com.br";  
 			f.EmailResponsavelTIAlternativo = "ti@formaggio.com.br??????"; 
@@ -79,12 +146,12 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-formaggio";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.6";
 			f.tipoSO = "Windows Server 2012 R2";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 947) {
 			f.NomeFantasiaEmpresa = "JR Distribuição";
+			f.versaoIntegrador = "2.8.1";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "jrembalagem.ti@gmail.com"; 
 			f.EmailResponsavelTIAlternativo = "";
@@ -94,13 +161,13 @@ public class FornecedorRepositorio {
 			f.IdAplicativoDesktopRemoto = "734228115";
 			f.usuarioWebservice = "ws-jrembalagem";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.8.1";
 			f.tipoSO = "Windows 10 Pro";
 			f.SO32ou64bit = "64bit";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 30) {
 			f.NomeFantasiaEmpresa = "Prolac";
+			f.versaoIntegrador = "2.8.2";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "mscomprolac@gmail.com"; 
 			f.EmailResponsavelTIAlternativo = "marcelo@casadoqueijo.net.br";
@@ -110,12 +177,12 @@ public class FornecedorRepositorio {
 			f.IdAplicativoDesktopRemoto = "425769045";
 			f.usuarioWebservice = "ws-prolac";
 			f.versaoJRE = "jre1.8.0_191";
-			f.versaoIntegrador = "2.8.2";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files (x86)";
 		}			   
 		else if (idFornecedor == 21) {
 			f.NomeFantasiaEmpresa = "Marítimos";
+			f.versaoIntegrador = "1.2.3";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "felipe.lolaia@maritimospescados.com.br"; 
 			f.EmailResponsavelTIAlternativo = "";
@@ -124,12 +191,12 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-mpescados";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "1.2.3";
 			f.tipoSO = "?????????????????????";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 170) {
 			f.NomeFantasiaEmpresa = "SOST";
+			f.versaoIntegrador = "2.3.1";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "informatica@sost.com.br OU cleijonatassilva@sost.com.br"; 
 			f.EmailResponsavelTIAlternativo = "informatica@sost.com.br OU carlossena@sost.com.br";
@@ -138,12 +205,12 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-sost";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.3.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 60) {
 			f.NomeFantasiaEmpresa = "Karne Keijo";
+			f.versaoIntegrador = "2.4.1";
 			f.SiglaSistemaFornecedor = "SAP";
 			f.EmailResponsavelTI = "timons@kk.com.br";
 			f.EmailResponsavelTIAlternativo = "";
@@ -152,12 +219,12 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "Team Viewer";
 			f.usuarioWebservice = "ws-karnekeijo";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.4.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1";
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 33) {
 			f.NomeFantasiaEmpresa = "Comal";
+			f.versaoIntegrador = "2.8.2";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "ti@comalcomercio.com.br";
 			f.EmailResponsavelTIAlternativo = "";
@@ -168,12 +235,12 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-comal";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.8.2";
 			f.tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 171) {
 			f.NomeFantasiaEmpresa = "Propão";
+			f.versaoIntegrador = "2.6.1";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "ti@propao.com.br";
 			f.EmailResponsavelTIAlternativo = "";
@@ -183,12 +250,12 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-propao";
 			f.versaoJRE = "jre1.8.0_92";
-			f.versaoIntegrador = "2.6.1";
 			f.tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 			f.dirProgramFiles = "Program Files";
 		}			   
 		else if (idFornecedor == 14) {
 			f.NomeFantasiaEmpresa = "Padeirão";
+			f.versaoIntegrador = "2.8.3";
 			f.SiglaSistemaFornecedor = "WinThor";
 			f.EmailResponsavelTI = "tiagoautran@padeirao.com";
 			f.EmailResponsavelTIAlternativo = "";
@@ -197,7 +264,6 @@ public class FornecedorRepositorio {
 			f.AplicativoDesktopRemoto = "AnyDesk";
 			f.usuarioWebservice = "ws-padeirao";
 			f.versaoJRE = "jre1.8.0_111";
-			f.versaoIntegrador = "2.8.3";
 			f.tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 			f.dirProgramFiles = "Program Files";
 		}			   

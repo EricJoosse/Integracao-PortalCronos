@@ -5,7 +5,7 @@ public class Fornecedor {
 	public Fornecedor() {		
 	}
 	
-	int IdFornecedor;
+	Integer IdFornecedor;
 	String NomeFantasiaEmpresa;
 	String SiglaSistemaFornecedor;
 	String EmailResponsavelTI;
