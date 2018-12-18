@@ -4,67 +4,77 @@ import java.util.HashMap;
 
 public class FornecedorRepositorio {
 
-	protected static HashMap hashMap;
+	public static HashMap<Integer, Fornecedor> hashMap;
 
     static {
-		HashMap<Integer, Fornecedor> hashMap = new HashMap<Integer, Fornecedor>() ; 
-		Fornecedor f = new Fornecedor();
+		hashMap = new HashMap<Integer, Fornecedor>(); 
+		Fornecedor f1 = new Fornecedor();
+		Fornecedor f2 = new Fornecedor();
+		Fornecedor f3 = new Fornecedor();
+		Fornecedor f4 = new Fornecedor();
+		Fornecedor f5 = new Fornecedor();
+		Fornecedor f6 = new Fornecedor();
+		Fornecedor f7 = new Fornecedor();
+		Fornecedor f8 = new Fornecedor();
+		Fornecedor f9 = new Fornecedor();
+		Fornecedor f10 = new Fornecedor();
+		Fornecedor f11 = new Fornecedor();
     	
-		f.IdFornecedor = 2016;
-		f.NomeFantasiaEmpresa = "Teste Windows Server 2016";
-		f.versaoIntegrador = "";
-		hashMap.put(1, f);
+		f1.IdFornecedor = 2016;
+		f1.NomeFantasiaEmpresa = "Teste Windows Server 2016";
+		f1.versaoIntegrador = "";
+		hashMap.put(1, f1);
 
-		f.IdFornecedor = null;
-		f.NomeFantasiaEmpresa = "Monitoramento";
-		f.versaoIntegrador = "2.8.4";
-		hashMap.put(2, f);
+		f2.IdFornecedor = null;
+		f2.NomeFantasiaEmpresa = "Monitoramento";
+		f2.versaoIntegrador = "2.8.4";
+		hashMap.put(2, f2);
 
-		f.IdFornecedor = 13;
-		f.NomeFantasiaEmpresa = "Formaggio";
-		f.versaoIntegrador = "2.6";
-		hashMap.put(3, f);
+		f3.IdFornecedor = 13;
+		f3.NomeFantasiaEmpresa = "Formaggio";
+		f3.versaoIntegrador = "2.6";
+		hashMap.put(3, f3);
 
-		f.IdFornecedor = 947;
-		f.NomeFantasiaEmpresa = "JR Distribuição";
-		f.versaoIntegrador = "2.8.1";
-		hashMap.put(4, f);
+		f4.IdFornecedor = 947;
+		f4.NomeFantasiaEmpresa = "JR Distribuição";
+		f4.versaoIntegrador = "2.8.1";
+		hashMap.put(4, f4);
 
-		f.IdFornecedor = 30;
-		f.NomeFantasiaEmpresa = "Prolac";
-		f.versaoIntegrador = "2.8.2";
-		hashMap.put(5, f);
+		f5.IdFornecedor = 30;
+		f5.NomeFantasiaEmpresa = "Prolac";
+		f5.versaoIntegrador = "2.8.2";
+		hashMap.put(5, f5);
 
-		f.IdFornecedor = 21;
-		f.NomeFantasiaEmpresa = "Marítimos";
-		f.versaoIntegrador = "1.2.3";
-		hashMap.put(6, f);
+		f6.IdFornecedor = 21;
+		f6.NomeFantasiaEmpresa = "Marítimos";
+		f6.versaoIntegrador = "1.2.3";
+		hashMap.put(6, f6);
 
-		f.IdFornecedor = 170;
-		f.NomeFantasiaEmpresa = "SOST";
-		f.versaoIntegrador = "2.3.1";
-		hashMap.put(7, f);
+		f7.IdFornecedor = 170;
+		f7.NomeFantasiaEmpresa = "SOST";
+		f7.versaoIntegrador = "2.3.1";
+		hashMap.put(7, f7);
 
-		f.IdFornecedor = 60;
-		f.NomeFantasiaEmpresa = "Karne Keijo";
-		f.versaoIntegrador = "2.4.1";
-		hashMap.put(8, f);
+		f8.IdFornecedor = 60;
+		f8.NomeFantasiaEmpresa = "Karne Keijo";
+		f8.versaoIntegrador = "2.4.1";
+		hashMap.put(8, f8);
 
-		f.IdFornecedor = 33;
-		f.NomeFantasiaEmpresa = "Comal";
-		f.versaoIntegrador = "2.8.2";
-		hashMap.put(9, f);
+		f9.IdFornecedor = 33;
+		f9.NomeFantasiaEmpresa = "Comal";
+		f9.versaoIntegrador = "2.8.2";
+		hashMap.put(9, f9);
 
-		f.IdFornecedor = 171;
-		f.NomeFantasiaEmpresa = "Propão";
-		f.versaoIntegrador = "2.6.1";
-		hashMap.put(10, f);
+		f10.IdFornecedor = 171;
+		f10.NomeFantasiaEmpresa = "Propão";
+		f10.versaoIntegrador = "2.6.1";
+		hashMap.put(10, f10);
 
-		f.IdFornecedor = 14;
-		f.NomeFantasiaEmpresa = "Padeirão";
-		f.versaoIntegrador = "2.8.3";
-		hashMap.put(11, f);
-
+		f11.IdFornecedor = 14;
+		f11.NomeFantasiaEmpresa = "Padeirão";
+		f11.versaoIntegrador = "2.8.3";
+		hashMap.put(11, f11);
+		
     }
 	
 	public FornecedorRepositorio() {

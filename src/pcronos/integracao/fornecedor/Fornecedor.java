@@ -5,8 +5,8 @@ public class Fornecedor {
 	public Fornecedor() {		
 	}
 	
-	Integer IdFornecedor;
-	String NomeFantasiaEmpresa;
+	public Integer IdFornecedor;
+	public String NomeFantasiaEmpresa;
 	String SiglaSistemaFornecedor;
 	String EmailResponsavelTI;
 	String EmailResponsavelTIAlternativo;
@@ -18,7 +18,7 @@ public class Fornecedor {
 	String IdAplicativoDesktopRemoto;
 	String usuarioWebservice;
 	String versaoJRE;
-	String versaoIntegrador;
+	public String versaoIntegrador;
 	String tipoSO;
 	String SO32ou64bit;
 	String dirProgramFiles;
