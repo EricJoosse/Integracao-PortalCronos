@@ -93,6 +93,26 @@ public class TestadorSnippets {
 
   	       return qtdProdutosComEstoque;
 	  }
+	  
+	  
+	  private static void testarGetFornecedor() 
+	  {
+			try {
+				FornecedorRepositorio fRep = new FornecedorRepositorio();
+				System.out.println("getFornecedor(13).NomeFantasiaEmpresa = " + fRep.getFornecedor(13).NomeFantasiaEmpresa); 
+					// -> Formaggio
+				System.out.println("getFornecedor(33).NomeFantasiaEmpresa = " + fRep.getFornecedor(33).NomeFantasiaEmpresa); 
+					// -> Comal
+				System.out.println("getFornecedor(null).NomeFantasiaEmpresa = " + fRep.getFornecedor(null).NomeFantasiaEmpresa); 
+					// -> Monitoramento
+				System.out.println("getFornecedor(9999).NomeFantasiaEmpresa = " + fRep.getFornecedor(9999).NomeFantasiaEmpresa);
+					// -> new Exception("Erro: idFornecedor " + idFornecedor.toString() + " não existe") // não existe
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 		  
+	  }
+	  
 
 	  public static void main(String[] args) throws Exception {
 		java.sql.Connection conn = null;
@@ -106,8 +126,12 @@ public class TestadorSnippets {
 			System.out.println("cript de " + strToCript + " = " + Criptografia.encrypt(strToCript));
 			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript, true));
 			
-			
-		    System.out.println("");
+			System.out.println("");
+	    // if (1 == 1) return;
+
+			testarGetFornecedor();
+
+			System.out.println("");
 	        if (1 == 1) return;
 
 			int idFornecedor = Integer.parseInt(args[0]);		 
