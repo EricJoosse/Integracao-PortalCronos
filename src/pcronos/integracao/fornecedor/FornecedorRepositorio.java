@@ -33,7 +33,7 @@ public class FornecedorRepositorio {
 		f1.versaoJRE = "";
 		f1.tipoSO = "Windows Server 2016";
 		f1.dirProgramFiles = "Program Files";
-		hashMap.put(1, f1);
+		hashMap.put(2016, f1);
 
 		f2.IdFornecedor = null;
 		f2.NomeFantasiaEmpresa = "Monitoramento";
@@ -47,7 +47,7 @@ public class FornecedorRepositorio {
 		f2.versaoJRE = "jre1.8.0_92";
 		f2.tipoSO = "Windows Server 2008 R2 SP1";
 		f2.dirProgramFiles = "Program Files";
-		hashMap.put(2, f2);
+		hashMap.put(null, f2);
 
 		f3.IdFornecedor = 13;
 		f3.NomeFantasiaEmpresa = "Formaggio";
@@ -64,7 +64,7 @@ public class FornecedorRepositorio {
 		f3.versaoJRE = "jre1.8.0_92";
 		f3.tipoSO = "Windows Server 2012 R2";
 		f3.dirProgramFiles = "Program Files";
-		hashMap.put(3, f3);
+		hashMap.put(13, f3);
 
 		f4.IdFornecedor = 947;
 		f4.NomeFantasiaEmpresa = "JR Distribuição";
@@ -81,7 +81,7 @@ public class FornecedorRepositorio {
 		f4.tipoSO = "Windows 10 Pro";
 		f4.SO32ou64bit = "64bit";
 		f4.dirProgramFiles = "Program Files";
-		hashMap.put(4, f4);
+		hashMap.put(947, f4);
 
 		f5.IdFornecedor = 30;
 		f5.NomeFantasiaEmpresa = "Prolac";
@@ -97,7 +97,7 @@ public class FornecedorRepositorio {
 		f5.versaoJRE = "jre1.8.0_191";
 		f5.tipoSO = "Windows Server 2008 R2 SP1";
 		f5.dirProgramFiles = "Program Files (x86)";
-		hashMap.put(5, f5);
+		hashMap.put(30, f5);
 
 		f6.IdFornecedor = 21;
 		f6.NomeFantasiaEmpresa = "Marítimos";
@@ -112,7 +112,7 @@ public class FornecedorRepositorio {
 		f6.versaoJRE = "jre1.8.0_92";
 		f6.tipoSO = "?????????????????????";
 		f6.dirProgramFiles = "Program Files";
-		hashMap.put(6, f6);
+		hashMap.put(21, f6);
 
 		f7.IdFornecedor = 170;
 		f7.NomeFantasiaEmpresa = "SOST";
@@ -127,7 +127,7 @@ public class FornecedorRepositorio {
 		f7.versaoJRE = "jre1.8.0_92";
 		f7.tipoSO = "Windows Server 2008 R2 SP1";
 		f7.dirProgramFiles = "Program Files";
-		hashMap.put(7, f7);
+		hashMap.put(170, f7);
 
 		f8.IdFornecedor = 60;
 		f8.NomeFantasiaEmpresa = "Karne Keijo";
@@ -142,7 +142,7 @@ public class FornecedorRepositorio {
 		f8.versaoJRE = "jre1.8.0_92";
 		f8.tipoSO = "Windows Server 2008 R2 SP1";
 		f8.dirProgramFiles = "Program Files";
-		hashMap.put(8, f8);
+		hashMap.put(60, f8);
 
 		f9.IdFornecedor = 33;
 		f9.NomeFantasiaEmpresa = "Comal";
@@ -159,7 +159,7 @@ public class FornecedorRepositorio {
 		f9.versaoJRE = "jre1.8.0_92";
 		f9.tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 		f9.dirProgramFiles = "Program Files";
-		hashMap.put(9, f9);
+		hashMap.put(33, f9);
 
 		f10.IdFornecedor = 171;
 		f10.NomeFantasiaEmpresa = "Propão";
@@ -175,7 +175,7 @@ public class FornecedorRepositorio {
 		f10.versaoJRE = "jre1.8.0_92";
 		f10.tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 		f10.dirProgramFiles = "Program Files";
-		hashMap.put(10, f10);
+		hashMap.put(171, f10);
 
 		f11.IdFornecedor = 14;
 		f11.NomeFantasiaEmpresa = "Padeirão";
@@ -190,7 +190,7 @@ public class FornecedorRepositorio {
 		f11.versaoJRE = "jre1.8.0_111";
 		f11.tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 		f11.dirProgramFiles = "Program Files";
-		hashMap.put(11, f11);
+		hashMap.put(14, f11);
 		
     }
 	
