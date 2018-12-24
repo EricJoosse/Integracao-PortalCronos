@@ -92,13 +92,26 @@ public class TestadorSnippets {
 	    // qtdProdutosComEstoque++;
 
   	       return qtdProdutosComEstoque;
-	  }
+	  }	  
 	  
-	  
-	  private static void testarGetFornecedor() 
+	  private static void testarParamIntegerInt() throws Exception 
 	  {
+	   		 // FornecedorRepositorio fRep = new FornecedorRepositorio();
+ 		    int iForn = 60;
+			FornecedorRepositorio fRep = new FornecedorRepositorio();
+ 		    Fornecedor f = fRep.getFornecedor(iForn);
+			System.out.println("fRep.getFornecedor(60) = " + f.NomeFantasiaEmpresa);
+	  }
+
+	  private static void testarGetFornecedor() throws Exception 
+	  {
+	   		 // FornecedorRepositorio fRep = new FornecedorRepositorio();
+ 		    int iForn = 60;
+			FornecedorRepositorio fRep = new FornecedorRepositorio();
+ 		    Fornecedor f = fRep.getFornecedor(iForn);
+			System.out.println("fRep.getFornecedor(60) = " + f.NomeFantasiaEmpresa);
+			
 			try {
-				FornecedorRepositorio fRep = new FornecedorRepositorio();
 				System.out.println("getFornecedor(13).NomeFantasiaEmpresa = " + fRep.getFornecedor(13).NomeFantasiaEmpresa); 
 					// -> Formaggio
 				System.out.println("getFornecedor(33).NomeFantasiaEmpresa = " + fRep.getFornecedor(33).NomeFantasiaEmpresa); 
@@ -113,53 +126,35 @@ public class TestadorSnippets {
 			} 		  
 	  }
 	  
-
-	  public static void main(String[] args) throws Exception {
-		java.sql.Connection conn = null;
-		java.sql.Statement stat = null;
-		java.sql.ResultSet rSet = null;
-
-		try
-        {
-			String strToCript = "aaa"; // "ab$AB@12";
-			String strToDecript = "ST+o/6W2VnE=";
-			System.out.println("cript de " + strToCript + " = " + Criptografia.encrypt(strToCript));
-			System.out.println("decript de " + strToDecript + " = " + Criptografia.decrypt(strToDecript, true));
-			
-			System.out.println("");
-	    // if (1 == 1) return;
-
-			testarGetFornecedor();
-
-			System.out.println("");
-	        if (1 == 1) return;
-
-			int idFornecedor = Integer.parseInt(args[0]);		 
-	        System.out.println("TestadorSnippets.java: idFornecedor = " + Integer.toString(idFornecedor));
-
-			
-		    System.out.println("");
-	        if (1 == 1) return;
-
-
+	  private static void testarMainArgs(String[] args2)
+	  {
+			int idFornecedor = Integer.parseInt(args2[0]);		 
+	        System.out.println("TestadorSnippets.java: idFornecedor = " + Integer.toString(idFornecedor));		  
+	  }
+	  
+	  private static void testarIncrementOperator()
+	  {
 	    	int qtdProdutosComEstoqueNovo = 0;
 	    	qtdProdutosComEstoqueNovo = readProdutoNovo(qtdProdutosComEstoqueNovo);
-	        System.out.println("QtdProdutosComEstoqueNovo = " + Integer.toString(qtdProdutosComEstoqueNovo));
-	        
-	        
-		    System.out.println("");
-	        if (1 == 1) return;
-
+	        System.out.println("QtdProdutosComEstoqueNovo = " + Integer.toString(qtdProdutosComEstoqueNovo));	        
 	        
 	    	int qtdProdutosComEstoque = 0;
 	        readProduto(qtdProdutosComEstoque);
-	        System.out.println("QtdProdutosComEstoque = " + Integer.toString(qtdProdutosComEstoque));
-	        
-	        
-		    System.out.println("");
-	        if (1 == 1) return;
-
-	        
+	        System.out.println("QtdProdutosComEstoque = " + Integer.toString(qtdProdutosComEstoque));		  
+	  }	  
+	  
+	  private static void testarIncrementOperatorString()
+	  {
+	      String a = "abc";
+	      String b = "xyz";
+	
+	      String c = a;
+	
+	      c += b; 		  
+	  }
+	  
+	  private static void testarGetQtdProdutosComEstoqueDeArquivoLog() throws Exception
+	  {
 		    LocalDateTime horaInicio = LocalDateTime.now();
   	    	Integer qtdProdutosComEstoque2 = null;
           	File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
@@ -197,78 +192,37 @@ public class TestadorSnippets {
           	if (qtdProdutosComEstoque2 == null)
     	    	  System.out.println("qtdProdutosComEstoque2 não encontrado");
           	else
-  	    	      System.out.println("qtdProdutosComEstoque2 = " + qtdProdutosComEstoque2.toString());
-          	
-
-          	
-          	
-          	System.out.println("");
-            if (1 == 1) return;
-
-
-            
-            horaInicio = LocalDateTime.now();
-       	    if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY)
+  	    	      System.out.println("qtdProdutosComEstoque2 = " + qtdProdutosComEstoque2.toString());		  
+	  }
+	  	  
+	  private static void testarDayOfWeek()
+	  {
+		    LocalDateTime horaInicio = LocalDateTime.now();
+			horaInicio = LocalDateTime.now();
+     	    if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY)
 				System.out.println("Hoje é sábado");
-       	    else if (horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY)
+     	    else if (horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY)
 				System.out.println("Hoje é domingo");
-       	    else 
-				System.out.println("Hoje é dia útil");
-				
+     	    else 
+				System.out.println("Hoje é dia útil");		  
+	  }
+	  	  
+	  private static void testarDateFormatComParenteses()
+	  {
+   	    DateTimeFormatter formatterParenteses = DateTimeFormatter.ofPattern("'('dd/MM/yyyy')' HH:mm");
+  	    System.out.println(LocalDateTime.now().format(formatterParenteses));		  
+	  }
+	  
+	  private static void diversosTestesBigDecimal()
+	  {
+ 	      // BigDecimal bigDec = new BigDecimal(0);
+		  BigDecimal bigDec = new BigDecimal("0.00");
+		  if (bigDec.compareTo(BigDecimal.ZERO) == 0)
+		  	 System.out.println("bigDec == 0");
+		  else
+		  	 System.out.println("bigDec != 0, bigDec = " + bigDec.toString());		  
 
-   		    
-       	    System.out.println("");
-            if (1 == 1) return;
-
-            
-            
-   		 // FornecedorRepositorio fRep = new FornecedorRepositorio();
-   		    int iForn = 60;
-			FornecedorRepositorio fRep = new FornecedorRepositorio();
-   		    Fornecedor f = fRep.getFornecedor(iForn);
-			System.out.println("fRep.getFornecedor(60) = " + f.NomeFantasiaEmpresa);
-
-     	    DateTimeFormatter formatterParenteses = DateTimeFormatter.ofPattern("'('dd/MM/yyyy')' HH:mm");
-      	    System.out.println(LocalDateTime.now().format(formatterParenteses));
-
-       	    // BigDecimal bigDec = new BigDecimal(0);
-			BigDecimal bigDec = new BigDecimal("0.00");
-			if (bigDec.compareTo(BigDecimal.ZERO) == 0)
-				System.out.println("bigDec == 0");
-			else
-				System.out.println("bigDec != 0, bigDec = " + bigDec.toString());
-
-
-			
-			testNullParam(null, "abc");
-			testNullParam(null, "abc", true);
 		  
-          File dir = new File("C:/temp/a/b/c/log");
-          dir.mkdirs();
-
-	      if (1 == 1) return;
-
-		  System.out.println("Teste jar -cp .jar class");
-		  if (1 == 1) return;
-			 
-	      String a = "abc";
-	      String b = "xyz";
-	
-	      String c = a;
-	
-	      c += b; 
-	
-	      System.out.println("Teste Scheduler - " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
-	
-	
-	
-	   // Float vlMinimoPedido = null;
-	   // System.out.println(   vlMinimoPedido == null ? "" : Float.toString(vlMinimoPedido)   );
-	
-	   // vlMinimoPedido = 1.0f;
-	   // System.out.println(   vlMinimoPedido == null ? "" : Float.toString(vlMinimoPedido)   );
-	
-	
 	      Locale locale = new Locale("pt", "BR");
 	      NumberFormat nf = NumberFormat.getInstance(locale);
 	      nf.setGroupingUsed(false);
@@ -276,22 +230,32 @@ public class TestadorSnippets {
 	      nf.setMinimumFractionDigits(2);
 	
 	      BigDecimal vlMinimoPedido = null;
-	   // System.out.println( "nf.format(vlMinimoPedido) = " + (vlMinimoPedido == null ? "null" : nf.format(vlMinimoPedido)) );
+	      System.out.println( "nf.format(vlMinimoPedido) = " + (vlMinimoPedido == null ? "null" : nf.format(vlMinimoPedido)) );
 	
 	      vlMinimoPedido = new BigDecimal(0);
-	   // System.out.println( "vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP) = " + vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP));
-	   // System.out.println( "nf.format(vlMinimoPedido) = " + (vlMinimoPedido == null ? "null" : nf.format(vlMinimoPedido)) );
+	      System.out.println( "vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP) = " + vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP));
+	      System.out.println( "nf.format(vlMinimoPedido) = " + (vlMinimoPedido == null ? "null" : nf.format(vlMinimoPedido)) );
 	
 	
 	      vlMinimoPedido = new BigDecimal(0.1);
-	   // System.out.println( "vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP) = " + vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP));
-	   // System.out.println( "nf.format(vlMinimoPedido) = " + (vlMinimoPedido == null ? "null" : nf.format(vlMinimoPedido)) );
+	      System.out.println( "vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP) = " + vlMinimoPedido.setScale(2, BigDecimal.ROUND_HALF_UP));
+	      System.out.println( "nf.format(vlMinimoPedido) = " + (vlMinimoPedido == null ? "null" : nf.format(vlMinimoPedido)) );
 	
-	
-	      Integer numRegiaoWinThor = null;
-	   // System.out.println( "Integer.toString(((int)numRegiaoWinThor)) = " + Integer.toString(((int)numRegiaoWinThor)));
+	  }
 
-         FBDriver fbDriver = new FBDriver();
+	  private static void testar_mkdirs()
+	  {
+          File dir = new File("C:/temp/a/b/c/log");
+          dir.mkdirs();		  
+	  }
+	  
+	  private static void testarFBDriver() throws Exception
+	  {
+		java.sql.Connection conn = null;
+		java.sql.Statement stat = null;
+		java.sql.ResultSet rSet = null;
+
+		FBDriver fbDriver = new FBDriver();
          DriverManager.registerDriver(fbDriver); // Antigamente: Class.forName("org.firebirdsql.jdbc.FBDriver"); 
          String connectionString = "jdbc:firebirdsql://" + "52.10.223.6" + ":" + "3050" + "/" + instanciaBancoDeDados;
          System.out.println("connectionString = " + connectionString);
@@ -304,9 +268,64 @@ public class TestadorSnippets {
   	     while (rSet.next()) 
   	     {
   	    	System.out.println("cpfcgc = " + rSet.getString(1));
-  	     }
+  	     }		  
+	  }
+	  	  
+	  private static void testarNullParam()
+	  {
+			testNullParam(null, "abc");
+			testNullParam(null, "abc", true);		  
+	  }
+	  
+	  private static void testarFloats()
+	  {
+		   Float vlMinimoPedido = null;
+		   System.out.println(   vlMinimoPedido == null ? "" : Float.toString(vlMinimoPedido)   );
+		
+		   vlMinimoPedido = 1.0f;
+		   System.out.println(   vlMinimoPedido == null ? "" : Float.toString(vlMinimoPedido)   );
+	  }
+	  
+	  private static void testarNullInteger()
+	  {
+	      Integer numRegiaoWinThor = null;
+	      System.out.println( "Integer.toString(((int)numRegiaoWinThor)) = " + Integer.toString((numRegiaoWinThor)));
+	  }
+	  
+	  private static void testarSimpleDateFormat()
+	  {
+	      System.out.println("Teste Scheduler - " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
+	  }
+	  
+	  private static void testar_jar_cp()
+	  {
+ 		  System.out.println("Teste jar -cp .jar class");
+	  }
+	  
+	  
+	  public static void main(String[] args) throws Exception {
 
-      // throw new Exception("try");
+		try
+        {			
+		 // testarGetFornecedor();
+	     // testarMainArgs(args);
+	     // testarIncrementOperator();
+		 // testarIncrementOperatorString();
+	     // testarGetQtdProdutosComEstoqueDeArquivoLog();
+		 // testarDayOfWeek();
+		 // testarDateFormatComParenteses();
+		 // testarParamIntegerInt();
+		 // diversosTestesBigDecimal();
+		 // testarNullParam();
+		 // testar_mkdirs();
+		 // testarFBDriver();
+		 // testarFloats();
+		 // testarNullInteger();
+		 // testarSimpleDateFormat();
+		 // testar_jar_cp();
+
+
+         // throw new Exception("try");
         }
 	    catch (java.lang.Exception ex) { 
          // throw new Exception("catch");
