@@ -5,12 +5,12 @@ import pcronos.integracao.Criptografia;
 public class Criptografador {
 
 	public static void main(String[] args) throws Exception {
-		String strToCript = "aaa"; 
-		String strCriptografado = Criptografia.encrypt(strToCript);
+		String strToCrypt = "aaa"; 
+		String strCriptografado = Criptografia.encrypt(strToCrypt);
 		
-		System.out.println("O criptografado de \"" + strToCript + "\" = \"" + strCriptografado + "\"");
+		System.out.println("A senha criptografada de \"" + strToCrypt + "\" = \"" + strCriptografado + "\"");
 		System.out.println();
-		System.out.println("O decriptografado de \"" + strCriptografado + "\" = \"" + Criptografia.decrypt(strCriptografado, true) + "\"");
+		System.out.println("A senha descriptografada de \"" + strCriptografado + "\" = \"" + Criptografia.decrypt(strCriptografado, true) + "\"");
 
 	}
 
