@@ -29,6 +29,10 @@ public class Utils {
 	  return (s == null || s.trim().equals(""));
 	}
 
+	public static String rpad(String txt, int tamanho)
+	{
+		return String.format("%-" + Integer.toString(tamanho) + "s", txt);
+	}
 	
 	public static String transformarXmlParaLegivel(Document xmlIlegivel) throws TransformerException
 	{
