@@ -1,6 +1,7 @@
 package pcronos.integracao.fornecedor;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class FornecedorRepositorio {
 
@@ -64,6 +65,7 @@ public class FornecedorRepositorio {
 		f3.versaoJRE = "jre1.8.0_92";
 		f3.tipoSO = "Windows Server 2012 R2";
 		f3.dirProgramFiles = "Program Files";
+		f3.cnpjFornecedor = "02870737000190";
 		hashMap.put(13, f3);
 
 		f4.IdFornecedor = 947;
@@ -81,6 +83,7 @@ public class FornecedorRepositorio {
 		f4.tipoSO = "Windows 10 Pro";
 		f4.SO32ou64bit = "64bit";
 		f4.dirProgramFiles = "Program Files";
+		f4.cnpjFornecedor = "00680755000265";
 		hashMap.put(947, f4);
 
 		f5.IdFornecedor = 30;
@@ -97,6 +100,7 @@ public class FornecedorRepositorio {
 		f5.versaoJRE = "jre1.8.0_191";
 		f5.tipoSO = "Windows Server 2008 R2 SP1";
 		f5.dirProgramFiles = "Program Files (x86)";
+		f5.cnpjFornecedor = "07182763000140";
 		hashMap.put(30, f5);
 
 		f6.IdFornecedor = 21;
@@ -112,6 +116,7 @@ public class FornecedorRepositorio {
 		f6.versaoJRE = "jre1.8.0_92";
 		f6.tipoSO = "?????????????????????";
 		f6.dirProgramFiles = "Program Files";
+		f6.cnpjFornecedor = "04666316000178";
 		hashMap.put(21, f6);
 
 		f7.IdFornecedor = 170;
@@ -127,6 +132,7 @@ public class FornecedorRepositorio {
 		f7.versaoJRE = "jre1.8.0_92";
 		f7.tipoSO = "Windows Server 2008 R2 SP1";
 		f7.dirProgramFiles = "Program Files";
+		f7.cnpjFornecedor = "07041307000180";
 		hashMap.put(170, f7);
 
 		f8.IdFornecedor = 60;
@@ -142,6 +148,7 @@ public class FornecedorRepositorio {
 		f8.versaoJRE = "jre1.8.0_92";
 		f8.tipoSO = "Windows Server 2008 R2 SP1";
 		f8.dirProgramFiles = "Program Files";
+		f8.cnpjFornecedor = "24150377000195";
 		hashMap.put(60, f8);
 
 		f9.IdFornecedor = 33;
@@ -159,6 +166,7 @@ public class FornecedorRepositorio {
 		f9.versaoJRE = "jre1.8.0_92";
 		f9.tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 		f9.dirProgramFiles = "Program Files";
+		f9.cnpjFornecedor = "07534303000133";
 		hashMap.put(33, f9);
 
 		f10.IdFornecedor = 171;
@@ -175,6 +183,7 @@ public class FornecedorRepositorio {
 		f10.versaoJRE = "jre1.8.0_92";
 		f10.tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 		f10.dirProgramFiles = "Program Files";
+		f10.cnpjFornecedor = "24407389000233";
 		hashMap.put(171, f10);
 
 		f11.IdFornecedor = 14;
@@ -190,6 +199,7 @@ public class FornecedorRepositorio {
 		f11.versaoJRE = "jre1.8.0_111";
 		f11.tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 		f11.dirProgramFiles = "Program Files";
+		f11.cnpjFornecedor = "03042263000151";
 		hashMap.put(14, f11);
 		
     }
@@ -202,31 +212,30 @@ public class FornecedorRepositorio {
 	// então não precisa retornar um objeto Integer (nullable). 
 	// Observação: se um dia precisar trocar "int" por "Integer", tem que tomar providencias para  
 	// continuar funcionando com valor -1, veja https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
-	int getIdFornecedorByCnpj(String cnpj) throws Exception {
-		if (cnpj.equals("02870737000190"))
-			return 13;
-		else if (cnpj.equals("00680755000265"))
-			return 947;
-		else if (cnpj.equals("07182763000140"))
-			return 30;
-		else if (cnpj.equals("04666316000178"))
-			return 21;
-		else if (cnpj.equals("07041307000180"))
-			return 170;
-		else if (cnpj.equals("24150377000195"))
-			return 60;
-		else if (cnpj.equals("07534303000133"))
-			return 33;
-		else if (cnpj.equals("24407389000233"))
-			return 171;
-		else if (cnpj.equals("03042263000151"))
-			return 14;
-		else if (cnpj.equals("11222333444455"))
+	int getIdFornecedorByCnpj(String cnpj) throws Exception 
+	{
+		if (cnpj == null || cnpj.equals("11222333444455"))
 			throw new Exception("Erro! O CNPJ da empresa fornecedora não foi informado no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + "!");
-		else {
-			throw new Exception("Erro! O CNPJ da empresa fornecedora " + cnpj + " no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + " está errado!");
+		else 
+		{
+			Fornecedor f = null;
+			
+	        for (Entry<Integer, Fornecedor> entry : hashMap.entrySet()) {
+		        Object value = entry.getValue();
+		        
+		        if ( !Utils.isNullOrBlank(((Fornecedor)value).cnpjFornecedor) && ((Fornecedor)value).cnpjFornecedor.equals(cnpj)) 
+		        {
+		        	f = ((Fornecedor)value);
+		        }
+		    }
+
+			if (f == null)
+				throw new Exception("Erro! O CNPJ da empresa fornecedora " + cnpj + " no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + " está errado!");
+			else
+	            return f.IdFornecedor;
 		}
 	}
+
 	
 	
 	Fornecedor getFornecedor(Integer idFornecedor) throws Exception {		

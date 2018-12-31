@@ -22,6 +22,7 @@ public class Fornecedor {
 	String tipoSO;
 	String SO32ou64bit;
 	String dirProgramFiles;
+	String cnpjFornecedor;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {
