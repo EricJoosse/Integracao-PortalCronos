@@ -124,6 +124,56 @@ public class TestadorSnippets {
 			} 		  
 	  }
 	  
+
+	  private static void testarGetIdFornecedorByCnpj() 
+	  {
+			FornecedorRepositorio fRep = new FornecedorRepositorio();
+			
+			try {
+				System.out.println("getIdFornecedorByCnpj(00680755000265) = " + fRep.getIdFornecedorByCnpj("00680755000265")); 
+				// -> 947
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 		  
+			try {
+				System.out.println("getIdFornecedorByCnpj(24150377000195) = " + fRep.getIdFornecedorByCnpj("24150377000195")); 
+				// -> 60
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 		  
+			try {
+				System.out.println("getIdFornecedorByCnpj(11222333444455) = " + fRep.getIdFornecedorByCnpj("11222333444455")); 
+				// -> Exception que não foi informado
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 		  
+			try {
+				System.out.println("fRep.getIdFornecedorByCnpj(null) = " + fRep.getIdFornecedorByCnpj(null)); 
+				// -> Exception que não foi informado
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 		  
+			try {
+				System.out.println("getIdFornecedorByCnpj('') = " + fRep.getIdFornecedorByCnpj("")); 
+				// -> Exception que está errado
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 		  
+			try {
+				System.out.println("getIdFornecedorByCnpj(680755000265) = " + fRep.getIdFornecedorByCnpj("680755000265")); 
+				// -> Exception que está errado
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 		  
+	  }
+	  
+
 	  private static void testarMainArgs(String[] args2)
 	  {
 			int idFornecedor = Integer.parseInt(args2[0]);		 
@@ -305,6 +355,7 @@ public class TestadorSnippets {
 
 		try
         {			
+			testarGetIdFornecedorByCnpj();
 		 // testarGetFornecedor();
 	     // testarMainArgs(args);
 	     // testarIncrementOperator();

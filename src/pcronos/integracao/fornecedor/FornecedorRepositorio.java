@@ -230,7 +230,7 @@ public class FornecedorRepositorio {
 		    }
 
 			if (f == null)
-				throw new Exception("Erro! O CNPJ da empresa fornecedora " + cnpj + " no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + " está errado!");
+				throw new Exception("Erro! O CNPJ da empresa fornecedora \"" + cnpj + "\" no arquivo C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + IntegracaoFornecedorCompleta.NOME_ARQUIVO_PROPERTIES + " está errado!");
 			else
 	            return f.IdFornecedor;
 		}
