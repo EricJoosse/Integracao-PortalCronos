@@ -355,7 +355,7 @@ public class TestadorSnippets {
 
 		try
         {			
-			testarGetIdFornecedorByCnpj();
+		 // testarGetIdFornecedorByCnpj();
 		 // testarGetFornecedor();
 	     // testarMainArgs(args);
 	     // testarIncrementOperator();
