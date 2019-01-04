@@ -8,7 +8,7 @@ Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor d
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
  
--6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+-5. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
     criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
     Descobrir o idFornecedor editando e executando os seguintes selects:
 
@@ -24,12 +24,12 @@ select  id_pessoa, nm_pessoa, *
 
 
 
--5. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
+-4. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
     "/scripts/Monitoramento_Integração_Fornecedor.sql" no projeto Eclipse 
 	informando Nome + ID do fornecedor novo
 
 
--4. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
+-3. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
 
 Elthon, boa tarde!
  
@@ -59,9 +59,6 @@ Atc,
 Eric 
      
      
-   -3. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
-       no FornecedorRepositorio.java, método getFornecedor(), adicionar o fornecedor novo. 
-    
    -2. Leão, 
    
 	   	VerificarEstoque                  = true / false?
@@ -103,9 +100,8 @@ Eric
 
 
     0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
-       no FornecedorRepositorio.java, no OUTRO método getIdFornecedorByCnpj(), 
-       adicionar o fornecedor novo também. 
-
+       no FornecedorRepositorio.java, no static constructor, adicionar o fornecedor novo e o CNPJ dele. 
+    
 
 	1. Conectar no AnyDesk. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
@@ -264,7 +260,7 @@ Como vai ser?
         preencher todas as outras colunas no arquivo Tabela Fornecedores_Versões.txt.
     
     5c. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
-        no FornecedorRepositorio.java, método getFornecedor(), preencher o resto de TODOS 
+        no FornecedorRepositorio.java, no static constructor, preencher o resto de TODOS 
         os outros campos do fornecedor sem falta, antes de continuar, pois sem isso a instalação do 
         Manual de Manutenção para a TI não vai funcionar corretamente.
         
