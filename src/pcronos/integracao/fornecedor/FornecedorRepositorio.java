@@ -56,6 +56,8 @@ public class FornecedorRepositorio {
 		f3.SiglaSistemaFornecedor = "APS";
 		f3.EmailResponsavelTI = "projetosti@formaggio.com.br";  
 		f3.EmailResponsavelTIAlternativo = "ti@formaggio.com.br??????"; 
+		f3.SkypeResponsavelTI = "live:projetosti_1 = Geymison Lima - TI Formaggio";
+		f3.SkypeResponsavelTIAlternativo = "Braytner Vasconcelos";
 		f3.ApelidoResponsavelTI = "Geymison";
 		f3.ApelidoResponsavelTIAlternativo = "";
 		f3.FuncaoResponsavelTI = "Coordenador de Projetos de TI";
@@ -74,6 +76,7 @@ public class FornecedorRepositorio {
 		f4.SiglaSistemaFornecedor = "WinThor";
 		f4.EmailResponsavelTI = "jrembalagem.ti@gmail.com"; 
 		f4.EmailResponsavelTIAlternativo = "";
+		f4.SkypeResponsavelTI = "ivan barros";
 		f4.ApelidoResponsavelTI = "Ivan";
 		f4.ApelidoResponsavelTIAlternativo = "";
 		f4.AplicativoDesktopRemoto = "AnyDesk";
@@ -92,6 +95,8 @@ public class FornecedorRepositorio {
 		f5.SiglaSistemaFornecedor = "WinThor";
 		f5.EmailResponsavelTI = "mscomprolac@gmail.com"; 
 		f5.EmailResponsavelTIAlternativo = "marcelo@casadoqueijo.net.br";
+		f5.SkypeResponsavelTI = "marcos.scognamiglio";
+		f5.SkypeResponsavelTIAlternativo = "Marcelo Bezerra";
 		f5.ApelidoResponsavelTI = "Marcos";
 		f5.ApelidoResponsavelTIAlternativo = "Marcelo";
 		f5.AplicativoDesktopRemoto = "AnyDesk";
@@ -109,6 +114,7 @@ public class FornecedorRepositorio {
 		f6.SiglaSistemaFornecedor = "WinThor";
 		f6.EmailResponsavelTI = "felipe.lolaia@maritimospescados.com.br"; 
 		f6.EmailResponsavelTIAlternativo = "";
+		f6.SkypeResponsavelTI = "Felipe Lolaia";
 		f6.ApelidoResponsavelTI = "Felipe";
 		f6.ApelidoResponsavelTIAlternativo = "";
 		f6.AplicativoDesktopRemoto = "Team Viewer";
@@ -125,6 +131,8 @@ public class FornecedorRepositorio {
 		f7.SiglaSistemaFornecedor = "WinThor";
 		f7.EmailResponsavelTI = "informatica@sost.com.br OU cleijonatassilva@sost.com.br"; 
 		f7.EmailResponsavelTIAlternativo = "informatica@sost.com.br OU carlossena@sost.com.br";
+		f7.SkypeResponsavelTI = "Cleijonatas S Silva";
+		f7.SkypeResponsavelTIAlternativo = "Sena Junior";
 		f7.ApelidoResponsavelTI = "Cleijonatas";
 		f7.ApelidoResponsavelTIAlternativo = "Sena";
 		f7.AplicativoDesktopRemoto = "AnyDesk";
@@ -141,6 +149,7 @@ public class FornecedorRepositorio {
 		f8.SiglaSistemaFornecedor = "SAP";
 		f8.EmailResponsavelTI = "timons@kk.com.br";
 		f8.EmailResponsavelTIAlternativo = "";
+		f8.SkypeResponsavelTI = "Timon Dourado";
 		f8.ApelidoResponsavelTI = "Timon";
 		f8.ApelidoResponsavelTIAlternativo = "";
 		f8.AplicativoDesktopRemoto = "Team Viewer";
@@ -157,6 +166,7 @@ public class FornecedorRepositorio {
 		f9.SiglaSistemaFornecedor = "WinThor";
 		f9.EmailResponsavelTI = "ti@comalcomercio.com.br";
 		f9.EmailResponsavelTIAlternativo = "";
+		f9.SkypeResponsavelTI = "Rildson Carlos";
 		f9.ApelidoResponsavelTI = "Rildson"; 
 						// Tem vontade para ajudar, porém é muito incompetente 
 						// e muito burro, tem que explicar tudo detalhadamente
@@ -175,6 +185,7 @@ public class FornecedorRepositorio {
 		f10.SiglaSistemaFornecedor = "WinThor";
 		f10.EmailResponsavelTI = "ti@propao.com.br";
 		f10.EmailResponsavelTIAlternativo = "";
+		f10.SkypeResponsavelTI = "Apoio.propao@hotmail.com";
 		f10.ApelidoResponsavelTI = "Elthon"; 
 						// Desenrolado, responsável para o cadastro de De-Para´s
 		f10.ApelidoResponsavelTIAlternativo = "";
@@ -192,6 +203,7 @@ public class FornecedorRepositorio {
 		f11.SiglaSistemaFornecedor = "WinThor";
 		f11.EmailResponsavelTI = "tiagoautran@padeirao.com";
 		f11.EmailResponsavelTIAlternativo = "";
+		f11.SkypeResponsavelTI = "tiagoautran";
 		f11.ApelidoResponsavelTI = "Tiago"; 
 		f11.ApelidoResponsavelTIAlternativo = "";
 		f11.AplicativoDesktopRemoto = "AnyDesk";

@@ -10,6 +10,8 @@ public class Fornecedor {
 	String SiglaSistemaFornecedor;
 	String EmailResponsavelTI;
 	String EmailResponsavelTIAlternativo;
+	String SkypeResponsavelTI;
+	String SkypeResponsavelTIAlternativo;
 	String ApelidoResponsavelTI;
 	String ApelidoResponsavelTIAlternativo;
 	String FuncaoResponsavelTI;

@@ -1,19 +1,17 @@
-Fornecedor   IdForn	Sistema		Tipo JRE	 Em produção		IP Público 		Porta IP Aberta	Frequência	Debug	Disco	Esp.Livre	Qtd.Dias	Fornecedor   	Skype						Telefone TI	
-----------	 ------	-------     ----------	 ------------	    ---------- 		---------------	----------	-----	-----	---------	--------	----------	 	---------------------		------------
-Formaggio 		 13	APS			(.. bit)    	Sim				187.113.120.97	    80			15 min		true	C	  	  9 GB		100			Formaggio 		1. live:projetosti_1 = "Geymison Lima - TI Formaggio"	
-								 			    																													2. Braytner Vasconcelos	
-JR Distribuição	947	WinThor		(.. bit)    	Sim				186.215.200.205	Não precisa		15 min		true	C	  	902 GB		100			JR Distribuição	ivan barros				
-Prolac 			 30	WinThor		(32 bit)    	Sim				187.103.76.53	Não precisa		15 min		true	C	  	201 GB		100			Prolac 			1. marcos.scognamiglio			
-								  			    																													2. Marcelo Bezerra
-Marítimos		 21	WinThor		(.. bit)    	Não	  											15 min		true	C	  	 48 GB		100			Marítimos		Felipe Lolaia			
-Karne Keijo		 60	SAP			(.. bit)    	Não												15 min		true	C	  	 62 GB		100			Karne Keijo		Timon Dourado			
-Comal 			 33	WinThor		(.. bit)    	Sim				187.1.168.74		80			15 min		true	C	  	 69 GB		100			Comal			Rildson Carlos				98609-4887
+Fornecedor   IdForn	Sistema		Tipo JRE	 Em produção		IP Público 		Porta IP Aberta	Frequência	Debug	Disco	Esp.Livre	Qtd.Dias	Fornecedor   	Telefone TI	
+----------	 ------	-------     ----------	 ------------	    ---------- 		---------------	----------	-----	-----	---------	--------	----------	 	------------
+Formaggio 		 13	APS			(.. bit)    	Sim				187.113.120.97	    80			15 min		true	C	  	  9 GB		100			Formaggio 			
+								 			    																													
+JR Distribuição	947	WinThor		(.. bit)    	Sim				186.215.200.205	Não precisa		15 min		true	C	  	902 GB		100			JR Distribuição					
+Prolac 			 30	WinThor		(32 bit)    	Sim				187.103.76.53	Não precisa		15 min		true	C	  	201 GB		100			Prolac 						
+Marítimos		 21	WinThor		(.. bit)    	Não	  											15 min		true	C	  	 48 GB		100			Marítimos					
+Karne Keijo		 60	SAP			(.. bit)    	Não												15 min		true	C	  	 62 GB		100			Karne Keijo					
+Comal 			 33	WinThor		(.. bit)    	Sim				187.1.168.74		80			15 min		true	C	  	 69 GB		100			Comal			98609-4887
 Monitoramento    -- PCronos     (.. bit)    	Sim				Não se aplica	Não se aplica	15 min		false	C	  	 90 GB		 30			Monitoramento
-SOST (BA)		170 WinThor     (.. bit)    	Sim												15 min		true	C	  	0.6 GB		 15			SOST (BA)		1. Cleijonatas S Silva 	
-												   																													2. Sena Junior			
+SOST (BA)		170 WinThor     (.. bit)    	Sim												15 min		true	C	  	0.6 GB		 15			SOST (BA)		 	
 Walmart         385 PCronos		(.. bit) 	 	  																									Walmart
-Propão 			171	WinThor		(.. bit)    	Sim				187.113.65.138	Não precisa		15 min		true	C	  	167 GB		100			Propão			Apoio.propao@hotmail.com	99535-1999
-Padeirão 		 14	WinThor		(.. bit)    	Sim				192.141.110.189	Não precisa		15 min		true	C	  	703 GB		100			Padeirão		tiagoautran					99116-8070 ou 3073-4551	
+Propão 			171	WinThor		(.. bit)    	Sim				187.113.65.138	Não precisa		15 min		true	C	  	167 GB		100			Propão			99535-1999
+Padeirão 		 14	WinThor		(.. bit)    	Sim				192.141.110.189	Não precisa		15 min		true	C	  	703 GB		100			Padeirão		99116-8070 ou 3073-4551	
 
 
 Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
