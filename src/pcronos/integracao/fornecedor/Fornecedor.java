@@ -8,11 +8,11 @@ public class Fornecedor {
 	public Integer IdFornecedor;
 	public String NomeFantasiaEmpresa;
 	String SiglaSistemaFornecedor;
-	String EmailResponsavelTI;
+	public String EmailResponsavelTI;
 	String EmailResponsavelTIAlternativo;
-	String SkypeResponsavelTI;
+	public String SkypeResponsavelTI;
 	String SkypeResponsavelTIAlternativo;
-	String ApelidoResponsavelTI;
+	public String ApelidoResponsavelTI;
 	String ApelidoResponsavelTIAlternativo;
 	String FuncaoResponsavelTI;
 	String FuncaoResponsavelTIAlternativo;

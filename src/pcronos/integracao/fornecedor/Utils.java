@@ -29,6 +29,16 @@ public class Utils {
 	  return (s == null || s.trim().equals(""));
 	}
 
+	public static String replaceNull(String input) 
+	{
+		  return input == null ? "" : input;
+	}
+	
+	public static String replaceNull(Integer input) 
+	{
+		  return input == null ? "" : input.toString();
+	}
+	
 	public static String rpad(String txt, int tamanho)
 	{
 		return String.format("%-" + Integer.toString(tamanho) + "s", txt);
