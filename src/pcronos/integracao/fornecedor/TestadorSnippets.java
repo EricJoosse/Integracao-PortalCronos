@@ -350,6 +350,14 @@ public class TestadorSnippets {
  		  System.out.println("Teste jar -cp .jar class");
 	  }
 	  
+	  private static void testarForloop() {
+		int qtdFornecedores = 11;
+
+		for (int j=0; j < (qtdFornecedores); j++) {
+		    System.out.println("j = " + j);
+		}
+	  }
+	  
 	  
 	  public static void main(String[] args) throws Exception {
 
@@ -372,6 +380,7 @@ public class TestadorSnippets {
 		 // testarNullInteger();
 		 // testarSimpleDateFormat();
 		 // testar_jar_cp();
+			testarForloop();
 
 
          // throw new Exception("try");

@@ -100,7 +100,10 @@ Eric
 
 
     0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
-       no FornecedorRepositorio.java, no static constructor, adicionar o fornecedor novo e o CNPJ dele. 
+       no FornecedorRepositorio.java, no static constructor:
+       (i)   adicionar o fornecedor novo no final da lista de fornecedores, e preencher o CNPJ dele
+       (ii)  não se esquecer adicionar i++ antes do fornecedor novo
+       (iii) não se esquecer incremementar o variável constante "qtdFornecedores" mais 1
     
 
 	1. Conectar no AnyDesk. 
