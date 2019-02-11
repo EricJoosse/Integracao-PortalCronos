@@ -1082,14 +1082,17 @@ public final class IntegracaoFornecedorCompleta {
 		     			  // Segurar e adiar estes tipos de emails automáticos durante horários fora do expediente:
 		     			  if (siglaSistema.equals("PCronos")) 
 		     			  {
-		     				  final LocalTime time1 = LocalTime.parse("07:00:00") ;
-		     				  final LocalTime time2 = LocalTime.parse("17:50:00") ;
+		     				  final LocalTime timeIniManha = LocalTime.parse("07:00:00") ;
+		     				  final LocalTime timeIniAlmoco = LocalTime.parse("11:15:00") ;
+		     				  final LocalTime timeFimAlmoco = LocalTime.parse("12:40:00") ;
+		     				  final LocalTime timeFimTarde = LocalTime.parse("17:50:00") ;
 		     				  LocalTime nowUtcTime = LocalTime.now();
 
 		     				  if (       horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY 
 		     						  || horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY
-		     						  || nowUtcTime.isBefore(time1)
-		     						  || nowUtcTime.isAfter(time2)
+		     						  || nowUtcTime.isBefore(timeIniManha)
+		     						  || nowUtcTime.isAfter(timeFimTarde)
+		     						  || (nowUtcTime.isAfter(timeIniAlmoco) && nowUtcTime.isBefore(timeFimAlmoco))
 		     				     ) { 
 		     				 	  return;
 		     				  }

@@ -33,7 +33,6 @@ declare @fornecedor_id  int
 -- Frequência das ofertas de 15 minutos + 5 minutos (tempo máximo das ofertas automáticas) = 20 min.
 -- Mais tarde alterado de 20 min para 25 min para evitar "false alarms" que acontecem de vez em quanto. 
 -- ANTIGO: Overlap de 30 segundos dos intervalos para nunca perder nada.
--- Intervalo de 3 horas pois o monitoramento está parado 2 horas durante horários de pico.
 
 -- Não alterar o intervalo para infinito para evitar que o monitoramento envia email de uma cotação de ontem 
 -- que não foi enviada por causa do limite de 3 emails por dia por fornecedor!!!!
@@ -45,16 +44,19 @@ declare @fornecedor_id  int
 
 if (Datepart(weekday, getDate()) = 2 and Datepart(hour, getDate()) = 7)
   begin
-    -- Segunda-feira de 07:00 até 08:00 horas: 
+    -- Na hora de Segunda-feira de 07:00 até 08:00 horas: 
     set @ini = Dateadd("hour", -63, getDate()) -- 7 + 48 + 8 
   end
 else if (Datepart(weekday, getDate()) in (3, 4, 5, 6) and Datepart(hour, getDate()) = 7)
   begin
-    -- Terça-feira até sexta-feira de 07:00 até 08:00 horas: 
+    -- Na hora de terça-feira até sexta-feira de 07:00 até 08:00 horas: 
     set @ini = Dateadd("hour", -15, getDate()) -- 7 + 8 
   end
 else
   begin
+    -- Intervalo de 3 horas pois o 	web service das ofertas no site do Portal Cronos 
+    -- está parado 2 horas durante horários de pico todas as terça-feiras de 10:40 até 12:40,  
+    -- e também o monitoramento das ofertas está parado quase 2 horas durante os horários de almoço:
     set @ini = Dateadd("mi", -180, getDate())
   end
 
