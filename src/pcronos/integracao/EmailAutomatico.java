@@ -241,6 +241,7 @@ javax.activation.FileDataSource       fds                      ;
 javax.mail.Session                    session                  ;
 int                                   qtdEmailsEnviadosHojeTotal      = 0;
 int                                   qtdEmailsEnviadosHojeFornecedor = 0;
+int                                   qtdEmailsEnviadosFornecedorUltimos3horas = 0;
 boolean                              isEnviadoJa = false; 
 
 //SIV.setBooleanDebug( EmailAutomatico.bDebug ) ; 
@@ -264,19 +265,30 @@ File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCr
 	       qtdEmailsEnviadosHojeFornecedor += 1;
 	    }
 	    
+	    // Restringir emails para 1 por fornecedor por intervalo de 3 horas:
+	    if (file.getName().startsWith(nmFornecedor) && datahoraArquivo.isAfter(horaInicio.minusHours(3)))
+	    {
+	    	qtdEmailsEnviadosFornecedorUltimos3horas += 1;
+	    }
+	    
 	    if (file.getName().startsWith(nmFornecedor) && file.getName().indexOf(cdCotacao) > 0)
 	    {
 	    	isEnviadoJa = true;
 	    }
    }
+
    
-   // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email por motivo de abuso: 
+   // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email 
+   // por motivo de abuso/spam: 
    if (qtdEmailsEnviadosHojeTotal >= 11)
    	    return;
    
    if (qtdEmailsEnviadosHojeFornecedor >= 3)
 	   	return;
 	   
+   if (qtdEmailsEnviadosFornecedorUltimos3horas >= 1)
+	   	return;
+   
    if (isEnviadoJa)
 	   	return;
 
