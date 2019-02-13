@@ -1061,9 +1061,10 @@ public final class IntegracaoFornecedorCompleta {
 	            	 }
 	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) 
 	            	 {
-		     	   		 debugar("monitorarPendencias(): else if (!Utils.isNullOrBlank(nmFornecedor)) entrado");
+		     	   		  debugar("monitorarPendencias(): else if (!Utils.isNullOrBlank(nmFornecedor)) entrado");
 
-		     	   		 
+ 		            	  int qtdMeusProdutos = rSet.getInt(4);
+		     	   		  
 		     			  // Não enviar APENAS os tipos de emails de paradas dos servidores dos fornecedores durante horários de pico:		   
 		     			  //      Observação: O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
 		     			  //                  para todos os fornecedores de uma vez, exatamente no mesmo horário:
@@ -1143,8 +1144,8 @@ public final class IntegracaoFornecedorCompleta {
  	            				  + "      \"<i>" + rSet.getString(6) + "</i>\"" + "\r\n"
  	            				  + " " + "\r\n"
  	            				  + rSet.getString(3) + "\r\n\r\n" 
-			              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
-        		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação \r\n\r\n"
+			              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(qtdMeusProdutos) + "\r\n\r\n" 
+        		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(qtdMeusProdutos) + ") nesta cotação \r\n\r\n"
 			              			)
 			              		  +  "e só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
  	            				  + " " + "\r\n"
@@ -1219,8 +1220,8 @@ public final class IntegracaoFornecedorCompleta {
 		           	    	 else 
 		           	    	 {
 				            	 body += rSet.getString(3) + "\r\n\r\n" 
-				              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(rSet.getInt(4)) + "\r\n\r\n" 
-				              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(rSet.getInt(4)) + ") nesta cotação!\r\n\r\n"
+				              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(qtdMeusProdutos) + "\r\n\r\n" 
+				              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(qtdMeusProdutos) + ") nesta cotação!\r\n\r\n"
 				              		     )                                
 				              		  +  "Só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
 				              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
@@ -1245,10 +1246,10 @@ public final class IntegracaoFornecedorCompleta {
 	+ " " + "\r\n"
 	+ "OU:  " + "\r\n"
 	+ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
-	+ "É urgente pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
+	+ "É urgente pois tem muitos produtos vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + " \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
 	+ " " + "\r\n"
 	+ "OU:" + "\r\n"
-	+ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + nmFornecedor + " (164) nesta cotação!" + "\r\n"
+	+ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + ") nesta cotação!" + "\r\n"
 	+ "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
 	+ " " + "\r\n"
 	+ "OU:" + "\r\n"
@@ -1264,11 +1265,11 @@ public final class IntegracaoFornecedorCompleta {
 	+ "OU:" + "\r\n"
 	+ "Se não conseguir resolver antes de " + ateQuando + " horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
 	+ "pois a cotação que vence primeiro e que não está ofertada vence " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + ","   + "\r\n"
-	+ "e tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
+	+ "e tem muitos produtos vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + " \"Meus Produtos\") nesta cotação!" + "\r\n"
 	+ " " + "\r\n"
 	+ "OU:" + "\r\n"
 	+ "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
-	+ "pois tem muitos produtos vendidos pela " + nmFornecedor + " (200 \"Meus Produtos\") nesta cotação!" + "\r\n"
+	+ "pois tem muitos produtos vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + " \"Meus Produtos\") nesta cotação!" + "\r\n"
 	+ " " + "\r\n"
 	+ "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
 	+ "Se você não tem nenhuma ideia da causa, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
