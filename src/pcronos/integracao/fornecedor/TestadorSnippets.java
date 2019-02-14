@@ -358,6 +358,26 @@ public class TestadorSnippets {
 		}
 	  }
 	  
+	  private static void comparacaoVersoes(String versao) {
+	      if (versao.compareTo("2.7.0") >= 0 || versao.compareTo("2.7") >= 0)
+	    	 System.out.println("Versão " + versao + " >= 2.7.0");
+	      else
+	    	 System.out.println("Versão " + versao + " >= 2.7.0 não");
+	  }
+	  
+	  private static void testarComparacaoVersoes() {
+		  comparacaoVersoes("1.2.3");
+		  comparacaoVersoes("2");
+		  comparacaoVersoes("2.6");
+		  comparacaoVersoes("2.6.9");
+		  comparacaoVersoes("2.7");
+		  comparacaoVersoes("2.7.0");
+		  comparacaoVersoes("2.7.1");
+	      comparacaoVersoes("2.8");
+	      comparacaoVersoes("2.8.4");
+	      comparacaoVersoes("3");
+	  }
+	  
 	  
 	  public static void main(String[] args) throws Exception {
 
@@ -380,7 +400,8 @@ public class TestadorSnippets {
 		 // testarNullInteger();
 		 // testarSimpleDateFormat();
 		 // testar_jar_cp();
-			testarForloop();
+		 // testarForloop();
+			testarComparacaoVersoes();
 
 
          // throw new Exception("try");
