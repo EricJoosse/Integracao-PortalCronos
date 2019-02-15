@@ -551,6 +551,10 @@ SELECT  forn.nm_pessoa  as nm_fornecedor,
                                                     from Produto_Cotacao pc 
                                                    where pc.id_cotacao_cot = ct.id_cotacao_cot)
         ) = 0
+    -- ===================================================================================================
+    -- 
+    -- Versões antigas < 2.7.0: 
+    -- 
     -- No caso que não tiver NADA na tabela de log, a causa pode ser que a cotação inteira não foi ofertada 
     -- porque não tem estoque de nenhum dos meus produtos,
     -- neste caso somente tem suspeito de problema se tiver mais de 3 produtos,
@@ -561,6 +565,9 @@ SELECT  forn.nm_pessoa  as nm_fornecedor,
     -- Não interessa: 1. Tem mais  de 3 meus produtos e não foi ofertada e tem apenas registros na tabela de log que não são de interesse;  
     --                2. Tem menos de 3 meus produtos e não foi ofertada e não tem nenhum registro na tabela de log;
     --                3. Tem menos de 3 meus produtos e não foi ofertada e tem apenas registros na tabela de log que não são de interesse:
+    -- 
+    -- ===================================================================================================
+/*
     and (
           (    (select count(*) 
                   from dbo.Produto_Fornecedor pf
@@ -625,6 +632,39 @@ SELECT  forn.nm_pessoa  as nm_fornecedor,
                            and isnull(ds_ocorrencia_logeint, '') not like 'Cotação % não ofertada! A empresa compradora % foi desativada no sistema%'
         	       )
         ) 
+      )
+*/
+    and     (select count(*) 
+                  from dbo.Produto_Fornecedor pf
+                       join dbo.Produto_Marca pm on pf.id_produto_marca_prdmca = pm.id_produto_marca_prdmca
+                       join Produto_Cotacao   pc  on pc.id_cotacao_cot = ct.id_cotacao_cot
+                                                 and pm.id_produto_prod = pc.id_produto_prod 
+                 where pf.id_fornecedor_fornec = @idFornecedor
+                   and pf.cd_produto_fornecedor_prdfor is not null
+                   and pf.dt_desativacao_prdfor IS NULL
+                 ) > 0
+    and (
+          (not exists (select 1 
+                          from dbo.Log_Erro_Integracao
+        	         where replace(cd_cotacao_logeint, ' (2)','')   = c.cd_cotacao_cot
+		           and id_fornecedor_fornec = @idFornecedor
+        	       )
+          ) 
+        or
+          (  exists (select 1 
+                          from dbo.Log_Erro_Integracao
+        	         where replace(cd_cotacao_logeint, ' (2)','')   = c.cd_cotacao_cot
+		           and id_fornecedor_fornec = @idFornecedor
+                           and isnull(ds_ocorrencia_logeint, '') not like '%outra oferta ativa%'
+                           and isnull(ds_ocorrencia_logeint, '') not like '%está fora dos padrões do mercado.'
+                           and isnull(ds_ocorrencia_logeint, '') not like 'A Condição de Pagamento % informada no XML das ofertas não pode ser diferente da condição % definida obrigatoriamente na cotação%'
+                           and isnull(ds_ocorrencia_logeint, '') not like 'O prazo de entrega, informado no sistema % do fornecedor, somado com a data de término da cotação%'
+                           and isnull(ds_ocorrencia_logeint, '') not like 'Cotação % não ofertada! O CNPJ % da empresa compradora não foi encontrado no sistema%'
+                           and isnull(ds_ocorrencia_logeint, '') not like 'O Código de Produto % do Fornecedor, informado na tela De-Para de Produtos no Portal Cronos, não existe no sistema%'
+                           and isnull(ds_ocorrencia_logeint, '') not like 'Cotação % não ofertada! A empresa compradora % está bloqueada no sistema%'
+                           and isnull(ds_ocorrencia_logeint, '') not like 'Cotação % não ofertada! A empresa compradora % foi desativada no sistema%'
+        	       )
+          ) 
       )
         INNER JOIN      dbo.Fornecedor         as fo   on fo.id_fornecedor_fornec = @idFornecedor
         INNER JOIN      dbo.pessoa             as forn on forn.id_pessoa = fo.id_pessoa

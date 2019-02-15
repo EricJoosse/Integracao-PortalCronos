@@ -1197,6 +1197,31 @@ public final class IntegracaoFornecedorCompleta {
 				           	 } // for
 				           	 
 			     	   		 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque passado");
+			     	   		 
+			     	   		 
+			     	   		 
+			     	   		 // Se cair aqui no programa, em todos os casos, QtdOfertados == 0 
+			     	         if (f.versaoIntegrador.compareTo("2.7.0") >= 0 || f.versaoIntegrador.compareTo("2.7") >= 0)
+			     	         {
+			     	        	 if (qtdProdutosComEstoque == null)
+			     	        	 {
+			     	        		 // Enviar email de erro interno:
+ 			     	        		 body += "Erro interno: qtdProdutosComEstoque não encontrado para cotação " + cdCotacao + ", fornecedor " + nmFornecedor;
+					            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
+					            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
+					 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+			     	        		 continue;
+			     	        	 }
+			     	        	 else if (qtdProdutosComEstoque == 0)
+			     	        		 continue;
+			     	         }
+			     	         else 
+			     	         {
+			     	        	 if (qtdMeusProdutos <= 3)
+			     	        		 continue;
+			     	         }
+			     	         
+			     	         
 				           	 
 		           	         if (f.IdFornecedor == 171) // Propão
 		           	    	 {
