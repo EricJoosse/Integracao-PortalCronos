@@ -6,6 +6,7 @@ import pcronos.integracao.EmailAutomatico;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.DayOfWeek;
@@ -1094,6 +1095,19 @@ public final class IntegracaoFornecedorCompleta {
 		     						  || nowUtcTime.isBefore(timeIniManha)
 		     						  || nowUtcTime.isAfter(timeFimTarde)
 		     						  || (nowUtcTime.isAfter(timeIniAlmoco) && nowUtcTime.isBefore(timeFimAlmoco))
+		     						  || (horaInicio.getMonth() == Month.JANUARY && horaInicio.getDayOfMonth() == 1)
+		     						  || (horaInicio.getYear() == 2019 && horaInicio.getMonth() == Month.MARCH && horaInicio.getDayOfMonth() == 4)
+		     						  || (horaInicio.getYear() == 2019 && horaInicio.getMonth() == Month.MARCH && horaInicio.getDayOfMonth() == 5)
+		     						  || (horaInicio.getYear() == 2019 && horaInicio.getMonth() == Month.MARCH && horaInicio.getDayOfMonth() == 6 && nowUtcTime.isBefore(timeFimAlmoco))
+		     						  || (horaInicio.getYear() == 2019 && horaInicio.getMonth() == Month.APRIL && horaInicio.getDayOfMonth() == 19)
+		     						  || (horaInicio.getYear() == 2019 && horaInicio.getMonth() == Month.APRIL && horaInicio.getDayOfMonth() == 21)
+		     						  || (horaInicio.getMonth() == Month.MAY && horaInicio.getDayOfMonth() == 1)
+		     						  || (horaInicio.getMonth() == Month.SEPTEMBER && horaInicio.getDayOfMonth() == 7)
+		     						  || (horaInicio.getMonth() == Month.OCTOBER && horaInicio.getDayOfMonth() == 12)
+		     						  || (horaInicio.getMonth() == Month.NOVEMBER && horaInicio.getDayOfMonth() == 2)
+		     						  || (horaInicio.getMonth() == Month.NOVEMBER && horaInicio.getDayOfMonth() == 15)
+		     						  || (horaInicio.getMonth() == Month.DECEMBER && horaInicio.getDayOfMonth() == 25)
+		     						  || (horaInicio.getMonth() == Month.DECEMBER && horaInicio.getDayOfMonth() == 31 && nowUtcTime.isAfter(timeIniAlmoco))
 		     				     ) { 
 		     				 	  return;
 		     				  }

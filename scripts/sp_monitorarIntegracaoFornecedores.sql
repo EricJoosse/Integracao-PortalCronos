@@ -42,16 +42,54 @@ declare @fornecedor_id  int
 
 --set @ini = Dateadd("ss", -30, Dateadd("mi", -35, getDate()))
 
-if (Datepart(weekday, getDate()) = 2 and Datepart(hour, getDate()) = 7)
+if (Datepart(day, getDate()) = 2 and Datepart(month, getDate()) = 1 and Datepart(year, getDate()) = 2020 and Datepart(hour, getDate()) = 7)
   begin
-    -- Na hora de Segunda-feira de 07:00 até 08:00 horas: 
+    -- Na hora de 02/01/2020 de 07:00 até 08:00 horas: 
+    set @ini = Dateadd("hour", -44, getDate()) -- 1 feriado integral + meio expediente = 7 + 24 + 8 + 5
+  end
+  
+else if (Datepart(day, getDate()) = 6 and Datepart(month, getDate()) = 3 and Datepart(year, getDate()) = 2019 and Datepart(hour, getDate()) = 12)
+  begin
+    -- Carnaval: 
+    set @ini = Dateadd("hour", -116, getDate()) -- 4 feriados integrais + meio expediente = 12 + 96 + 8
+  end
+
+  else if (Datepart(day, getDate()) = 22 and Datepart(month, getDate()) = 4 and Datepart(year, getDate()) = 2019 and Datepart(hour, getDate()) = 7)
+  begin
+    -- Páscoa: 
+    set @ini = Dateadd("hour", -87, getDate()) -- 7 + 48 + 24 + 8 
+  end
+  
+  else if (Datepart(day, getDate()) = 2 and Datepart(month, getDate()) = 5 and Datepart(year, getDate()) = 2019 and Datepart(hour, getDate()) = 7)
+  begin
+    -- Dia do Trabalhador: 
+    set @ini = Dateadd("hour", -39, getDate()) -- 7 + 24 + 8 
+  end
+  
+  else if (Datepart(day, getDate()) = 18 and Datepart(month, getDate()) = 11 and Datepart(year, getDate()) = 2019 and Datepart(hour, getDate()) = 7)
+  begin
+    -- : 
+    set @ini = Dateadd("hour", -87, getDate()) -- 7 + 48 + 24 + 8 
+  end
+  
+  else if (Datepart(day, getDate()) = 26 and Datepart(month, getDate()) = 12 and Datepart(year, getDate()) = 2019 and Datepart(hour, getDate()) = 7)
+  begin
+    -- Natal: 
+    set @ini = Dateadd("hour", -39, getDate()) -- 7 + 24 + 8 
+  end
+  
+else if (Datepart(weekday, getDate()) = 2 and Datepart(hour, getDate()) = 7)
+  begin
+    -- Na hora de todas as outras Segunda-feiras de 07:00 até 08:00 horas: 
     set @ini = Dateadd("hour", -63, getDate()) -- 7 + 48 + 8 
   end
+  
 else if (Datepart(weekday, getDate()) in (3, 4, 5, 6) and Datepart(hour, getDate()) = 7)
   begin
-    -- Na hora de terça-feira até sexta-feira de 07:00 até 08:00 horas: 
+    -- Na hora de todas as outras terça-feiras até sexta-feiras de 07:00 até 08:00 horas: 
     set @ini = Dateadd("hour", -15, getDate()) -- 7 + 8 
   end
+  
 else
   begin
     -- Intervalo de 3 horas pois o 	web service das ofertas no site do Portal Cronos 
