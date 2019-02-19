@@ -40,27 +40,19 @@ Manual Upgrade dos Ambientes de Produção de 2.8.3 para 2.8.4
    (ii) Apagar a(s) versão(ões) anterior(es) integr-fornecedor-*.*.*.jar.
  
  
-4. Editar o arquivo Job15a15minOfertamentoJava_Windows.bat:
-	(i)  Depois de "SETLOCAL" adicionar:
-	
-call bin\Versao.bat
-
-	(ii) Substituir integr-fornecedor-2.8.3.jar por integr-fornecedor-%versaoIntegrador%.jar (em 3 lugares)
-	
-	
-5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
-   no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
-
-6. Em todos os casos: 
-     - Acompanhar 15 minutos se o Integrador começa executar automaticamente
+4. Copiar o seguinte arquivo do projeto Eclipse para o servidor do fornecedor:
+	- Job15a15minOfertamentoJava_Windows.bat
+		
+5. Em todos os casos: 
+     - Acompanhar 15 minutos se o Integrador começa executar automaticamente    
      
-7. Apenas no caso do servidor do monitoramento: 
+6. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
      
 
-8. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+7. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
    (ii)  Compilar o arquivo .jar
    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
          esperando o processamento atual terminar primeiro

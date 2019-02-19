@@ -75,29 +75,22 @@ wmic product where "name like 'Java 8 Update 92%%'" call uninstall /nointeractiv
    (ii) Apagar a(s) versão(ões) anterior(es) integr-fornecedor-*.*.*.jar.
  
  
-6. Editar o arquivo Job15a15minOfertamentoJava_Windows.bat:
-	(i)  Depois de "SETLOCAL" adicionar:
-	
-call bin\Versao.bat
+6. Copiar o seguinte arquivo do projeto Eclipse para o servidor do fornecedor:
+	- Job15a15minOfertamentoJava_Windows.bat
+		
 
-	(ii) Substituir integr-fornecedor-2.8.2.jar por integr-fornecedor-%versaoIntegrador%.jar (em 3 lugares)
-	
-	
-7. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
-   no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
-
-8. Em todos os casos: 
+7. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
-9. Apenas no caso do servidor do monitoramento: 
+8. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")       
      (ii) Fechar o Windows Explorer e abrir novamente
      
 
-10. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
-    (ii)  Compilar o arquivo .jar
-    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
-          esperando o processamento atual terminar primeiro
+9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+   (ii)  Compilar o arquivo .jar
+   (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+         esperando o processamento atual terminar primeiro
    
    
