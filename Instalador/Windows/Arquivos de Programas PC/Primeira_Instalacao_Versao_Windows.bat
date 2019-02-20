@@ -1,6 +1,9 @@
 cls
 @echo off
 
+REM "chcp 1252>nul" é necessário para evitar que DOS não reconhece acentos Portugueses no caminho 
+REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os servidores:
+
 chcp 1252>nul
 
 echo Tipos de Windows homologados: 
