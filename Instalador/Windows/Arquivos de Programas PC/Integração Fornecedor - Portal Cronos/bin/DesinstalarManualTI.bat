@@ -5,9 +5,9 @@ REM Resettar ERRORLEVEL para 0 (não existe valor default):
 call (exit /b 0)
 
 
-call Inicializacoes.bat
-call Versao.bat
-call CaminhoJRE.bat Desinstalador.log Desinstalador
+call "Integração Fornecedor - Portal Cronos\bin\Inicializacoes.bat"
+call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
+call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" Desinstalador.log Desinstalador
 
 
 set arquivoLog="Desinstalador.log"

@@ -259,6 +259,14 @@ del /f /q *.exe
 del /f /q InstalarManualTI.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 
+cd "Integração Fornecedor - Portal Cronos"
+del /f /q TestadorUnitario.log
+del /f /q TesteTresParam.log
+del /f /q .gitignore
+
+cd\
+cd "Arquivos de Programas PC"
+
 REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
 REM após o duplo-clique para executar a instalação:
 del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
