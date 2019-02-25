@@ -3,6 +3,7 @@ package pcronos.integracao.fornecedor;
 import pcronos.integracao.ConfiguracaoException;
 import pcronos.integracao.Criptografia;
 import pcronos.integracao.EmailAutomatico;
+import pcronos.integracao.fornecedor.Utils;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -178,6 +179,16 @@ public final class IntegracaoFornecedorCompleta {
 	  Inicializar();
   }
 
+
+  public static String printStackTraceToString(Exception ex)
+  {
+	
+	   // Writer writer = new StringWriter();
+	      StringWriter sWriter = new StringWriter();
+	      ex.printStackTrace(new PrintWriter(sWriter));
+	      return sWriter.toString();
+  
+  }
 
   private static void Inicializar()
   {
@@ -398,7 +409,7 @@ public final class IntegracaoFornecedorCompleta {
       catch (Exception ex) {
         try
         {
-          erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex); 
+          erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex);
           logarErro(ex, true);
         }
         catch (Exception ex2)
@@ -749,16 +760,6 @@ public final class IntegracaoFornecedorCompleta {
   }
   
   
-  public static String printStackTraceToString(Exception ex)
-  {
-
-   // Writer writer = new StringWriter();
-      StringWriter sWriter = new StringWriter();
-      ex.printStackTrace(new PrintWriter(sWriter));
-      return sWriter.toString();
-  }
-
-
   private static void  enviarErroParaPortalCronos(Document docOfertas, Element elmErros, String cdProdutoFornecedor, String mensagemErro) 
   {
       temErroGeralCotacao = true; 
