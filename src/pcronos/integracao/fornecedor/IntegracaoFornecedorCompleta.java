@@ -3,7 +3,7 @@ package pcronos.integracao.fornecedor;
 import pcronos.integracao.ConfiguracaoException;
 import pcronos.integracao.Criptografia;
 import pcronos.integracao.EmailAutomatico;
-import pcronos.integracao.fornecedor.Utils;
+import static pcronos.integracao.fornecedor.Utils.printStackTraceToString;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -116,20 +116,6 @@ public final class IntegracaoFornecedorCompleta {
    public static final String CONTROLLER_LOG_ERRO_REMOTO = "LogErroRemoto";
    public static final String CONTROLLER_LOG_TEMPO_EXEC = "LogTempoExecucaoRemoto";
    
-   public static final String NOME_ARQUIVO_PROPERTIES = "conf/Integração Fornecedor - Portal Cronos.properties";
-                              // Using an absolute path (one that starts WITH '/') means that the current 
-                              // package is ignored.
-
-	                         //  Relative paths (those WITHOUT a leading '/') mean that the resource 
-						     //  will be searched relative to the directory which represents the package 
-						     //  the class is in.
-                         	//  Quer dizer: in a stand-alone environment (production env. por exemplo, sem Eclipse).  
-	                        //  O comando "Run" in Eclipse searches however relative to the project root, and not relative to /src, 
-	                        //  and DOS also searches however relative to the current directory DOS is in.
-	                        //  No ambiiente de produção o Agendador de Tarefas de Windows executa um arquivo .bat 
-	                        //  então também searches relative to the current directory DOS is in, which happens to coincide 
-	                        //  with the directory the jar-file is in.	
-   
   public static final String NAO_OFERTADA_IMPACTO_SE_ALTERAR = "não ofertada";
   public static Locale       locale;
   public static NumberFormat nf;
@@ -180,15 +166,6 @@ public final class IntegracaoFornecedorCompleta {
   }
 
 
-  public static String printStackTraceToString(Exception ex)
-  {
-	
-	   // Writer writer = new StringWriter();
-	      StringWriter sWriter = new StringWriter();
-	      ex.printStackTrace(new PrintWriter(sWriter));
-	      return sWriter.toString();
-  
-  }
 
   private static void Inicializar()
   {
@@ -203,7 +180,7 @@ public final class IntegracaoFornecedorCompleta {
 	        nf = NumberFormat.getInstance(locale);
 
 	        Properties config = new Properties();
-	        config.load(new FileInputStream(NOME_ARQUIVO_PROPERTIES));
+	        config.load(new FileInputStream(Constants.NOME_ARQUIVO_PROPERTIES));
 
 
 	        
@@ -2266,7 +2243,7 @@ public final class IntegracaoFornecedorCompleta {
 		if (response.getStatus() != 200 && response.getStatus() != 202) {
 	        client.destroy();
 		   throw new Exception("\r\n  Erro! Favor verificar todas as configurações no  arquivo \"" 
-	                          + NOME_ARQUIVO_PROPERTIES 
+	                          + Constants.NOME_ARQUIVO_PROPERTIES 
 	                          + "\" ! \r\n    Erro: HTTP Status Code = " 
 	                          + response.getStatus() 
 	                          + " (" + response.getClientResponseStatus().getReasonPhrase() 

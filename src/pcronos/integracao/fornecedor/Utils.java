@@ -1,6 +1,7 @@
 package pcronos.integracao.fornecedor;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import javax.xml.transform.TransformerFactory;
@@ -96,4 +97,15 @@ public class Utils {
 
 	}
 
+	public static String printStackTraceToString(Exception ex)
+	{
+	
+	   // Writer writer = new StringWriter();
+	      StringWriter sWriter = new StringWriter();
+	      ex.printStackTrace(new PrintWriter(sWriter));
+	      return sWriter.toString();
+	}
+
+
+	
 }

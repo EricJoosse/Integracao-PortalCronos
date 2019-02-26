@@ -1,6 +1,5 @@
 package pcronos.integracao.fornecedor;
 
-import pcronos.integracao.fornecedor.Utils;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
@@ -14,29 +13,18 @@ public class Desinstalador {
 		  Inicializar();
 	  }
 
-	  public static final String NOME_ARQUIVO_PROPERTIES = "conf/Integração Fornecedor - Portal Cronos.properties";
 	  public static        String siglaSistema;
 	  public static        String cnpjFornecedor;
 	  public static        String erroStaticConstructor;
 
 	  
-	  public static String printStackTraceToString(Exception ex)
-	  {
-		
-		   // Writer writer = new StringWriter();
-		      StringWriter sWriter = new StringWriter();
-		      ex.printStackTrace(new PrintWriter(sWriter));
-		      return sWriter.toString();
-	  
-	  }
-
 	  private static void Inicializar()
 	  {
 		    try {
 		        erroStaticConstructor = null;
 
 		        Properties config = new Properties();
-		        config.load(new FileInputStream(NOME_ARQUIVO_PROPERTIES));
+		        config.load(new FileInputStream(Constants.NOME_ARQUIVO_PROPERTIES));
 
 		        siglaSistema   = config.getProperty("SiglaSistema");
 		        cnpjFornecedor = config.getProperty("CnpjFornecedor");
@@ -45,7 +33,7 @@ public class Desinstalador {
 	      catch (Exception ex) {
 	        try
 	        {
-	          erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex);
+	          erroStaticConstructor = "Erro imprevisto! " + Utils.printStackTraceToString(ex);
 	        }
 	        catch (Exception ex2)
 	        {
