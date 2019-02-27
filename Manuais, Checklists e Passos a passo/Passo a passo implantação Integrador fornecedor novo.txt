@@ -76,7 +76,7 @@ Eric
          diretório: C:\PCronos\Integração Fornecedor - Portal Cronos\conf\
          arquivo  : Integração Fornecedor - Portal Cronos.x.y.z.properties.WinThor(APS).NomeFornecedor.Homolog
        
-       Não comittar este arquivo no GitHub pois contêm senhas!!! Adcionar no .gitignore.  
+       Não comittar este arquivo no GitHub pois contêm senhas!!! Adicionar no .gitignore.  
        
             
        Neste momento apenas preencher os seguintes dados (os outros dados estão explicados no final da instalação): 

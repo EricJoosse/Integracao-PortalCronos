@@ -1,6 +1,5 @@
 package pcronos.integracao.fornecedor;
 
-import java.awt.List;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
