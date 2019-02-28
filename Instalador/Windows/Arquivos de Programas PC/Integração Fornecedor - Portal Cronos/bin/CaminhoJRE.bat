@@ -43,9 +43,7 @@ REM ) else (
 REM     set path=C:\Program Files\Java\jre1.8.0_92\bin;%path%
 REM )
 
-if exist C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe (
-    goto PathProlac
-) else if exist C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe (
+if exist C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe (
     goto PathPadeirao
 ) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
     goto PathOutros
@@ -54,14 +52,9 @@ if exist C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe (
     exit
 )
 
-:PathProlac
-set path=C:\Program Files (x86)\Java\jre1.8.0_191\bin;%path%
-REM Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_191\bin
-C:/"Program Files (x86)"/Java/jre1.8.0_191/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.%2 %3 >> %1
-goto PularPathOutros
-
 :PathPadeirao
 set path=C:\Program Files (x86)\Java\jre1.8.0_111\bin;%path%
+REM Errado em versões < 2.1.2B: set path=%path%;C:\Program Files (x86)\Java\jre1.8.0_111\bin
 C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.%2 %3 >> %1
 goto PularPathOutros
 

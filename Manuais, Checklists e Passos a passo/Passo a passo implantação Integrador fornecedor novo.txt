@@ -217,7 +217,7 @@ Como vai ser?
              
              No caso: 
              Descomentar "REM goto SKIP_JRE"no arquivo "Primeira_Instalacao_Versao_Windows.bat"              
-             (feito assim no Padeirão e na Prolac)
+             (feito assim no Padeirão)
                 
 	    	 No caso se decidir não instalar uma JRE nova porém usar uma JRE existente já instalado no servidor:
 	     		- primeiro fazer um teste rápido se o seguinte funciona: 
@@ -343,7 +343,7 @@ Como vai ser?
        
        
        Foi testado que este bug     acontece sim com Windows Server 2008 R2 SP 1.
-       Foi testado que este bug não acontece     com Windows Server 2012 R2 usando o Testador Unitário, porém acontece sim no teste integrado....
+       Foi testado que este bug não acontece     com Windows Server 2012 R2 usando o Testador Unitário, porém acontece sim no teste integrado.... Também não funcionou na Prolac 28.02.2019....
        Foi testado que este bug não acontece     com Windows Server 2016    usando o Testador Unitário, porém acontece sim no teste integrado....
        
        

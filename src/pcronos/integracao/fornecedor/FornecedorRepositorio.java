@@ -88,7 +88,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = 30;
 		f[i].NomeFantasiaEmpresa = "Prolac";
-		f[i].versaoIntegrador = "2.8.2";
+		f[i].versaoIntegrador = "2.8.4";
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].EmailResponsavelTI = "mscomprolac@gmail.com"; 
 		f[i].EmailResponsavelTIAlternativo = "marcelo@casadoqueijo.net.br";
@@ -97,12 +97,12 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTI = "Marcos";
 		f[i].ApelidoResponsavelTIAlternativo = "Marcelo";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
-		f[i].IdAplicativoDesktopRemoto = "425769045";
+		f[i].IdAplicativoDesktopRemoto = "685 885 292";
 		f[i].usuarioWebservice = "ws-prolac";
-		f[i].versaoJRE = "jre1.8.0_191";
-		f[i].tipoSO = "Windows Server 2008 R2 SP1";
-		f[i].dirProgramFiles = "Program Files (x86)";
-		f[i].cnpjFornecedor = "07182763000140";
+		f[i].versaoJRE = "jre1.8.0_92";
+		f[i].tipoSO = "Windows Server 2012 R2";
+		f[i].dirProgramFiles = "Program Files";
+		f[i].cnpjFornecedor = "07182763000140"; 
 
 		i++;
 		f[i].IdFornecedor = 21;

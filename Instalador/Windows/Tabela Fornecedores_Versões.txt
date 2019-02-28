@@ -3,7 +3,7 @@ Fornecedor   IdForn	Sistema		Tipo JRE	 Em produção		IP Público 		Porta IP Aberta
 Formaggio 		 13	APS			(.. bit)    	Sim				187.113.120.97	    80			15 min		true	C	  	  9 GB		100			Formaggio 			
 								 			    																													
 JR Distribuição	947	WinThor		(.. bit)    	Sim				186.215.200.205	Não precisa		15 min		true	C	  	902 GB		100			JR Distribuição					
-Prolac 			 30	WinThor		(32 bit)    	Sim				187.103.76.53	Não precisa		15 min		true	C	  	201 GB		100			Prolac 						
+Prolac 			 30	WinThor		(64 bit)    	Sim				187.103.76.53	Não precisa		15 min		true	C	  	422 GB		100			Prolac 						
 Marítimos		 21	WinThor		(.. bit)    	Não	  											15 min		true	C	  	 48 GB		100			Marítimos					
 Karne Keijo		 60	SAP			(.. bit)    	Não												15 min		true	C	  	 62 GB		100			Karne Keijo					
 Comal 			 33	WinThor		(.. bit)    	Sim				187.1.168.74		80			15 min		true	C	  	 69 GB		100			Comal			98609-4887

@@ -112,7 +112,7 @@ declare c cursor for
       and (                          f.id_fornecedor_fornec <>  21) -- Marítimos
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  13) -- Formaggio
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 947) -- JR Distribuição
-      and (                          f.id_fornecedor_fornec <>  30) -- Prolac
+    --and (                          f.id_fornecedor_fornec <>  30) -- Prolac
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  60) -- Karne Keijo
       and (                          f.id_fornecedor_fornec <> 170) -- SOST (BA)
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 385) -- Walmart
