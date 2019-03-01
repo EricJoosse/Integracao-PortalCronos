@@ -94,6 +94,7 @@ else
   begin
     -- Intervalo de 3 horas pois o 	web service das ofertas no site do Portal Cronos 
     -- está parado 2 horas durante horários de pico todas as terça-feiras de 10:40 até 12:40,  
+    -- (observação: está parada foi comentada no dia 28.02.2019 no web service /ObtemCotacoesGET) 
     -- e também o monitoramento das ofertas está parado quase 2 horas durante os horários de almoço:
     set @ini = Dateadd("mi", -180, getDate())
   end

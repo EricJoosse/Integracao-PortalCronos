@@ -1045,8 +1045,9 @@ public final class IntegracaoFornecedorCompleta {
  		            	  int qtdMeusProdutos = rSet.getInt(4);
 		     	   		  
 		     			  // Não enviar APENAS os tipos de emails de paradas dos servidores dos fornecedores durante horários de pico:		   
-		     			  //      Observação: O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
-		     			  //                  para todos os fornecedores de uma vez, exatamente no mesmo horário:
+		     			  //      Observações: 1. O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
+		     			  //                      para todos os fornecedores de uma vez, exatamente no mesmo horário:
+ 		            	  //                   2. Está parada foi comentada no dia 28.02.2019 no web service /ObtemCotacoesGET 
 		     			  if (siglaSistema.equals("PCronos") && !toExecutarHorarioPico) 
 		     			  {
 		     				  final LocalTime time1 = LocalTime.parse("10:40:00") ;
