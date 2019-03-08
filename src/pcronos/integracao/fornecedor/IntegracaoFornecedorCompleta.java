@@ -1174,13 +1174,13 @@ public final class IntegracaoFornecedorCompleta {
 				           	    	    String linha = br.readLine();
 				           	    	    String prefix = "Cotacao " + cdCotacao + ": QtdProdutosComEstoque = ";
 
-				           	    	    while (linha != null && !linha.startsWith(prefix))
+				           	    	    while (linha != null && !linha.startsWith(prefix, 21))
 				           	    	    {
 				           	    	        linha = br.readLine();
 				           	    	    }
 				           	    	    
-				           	    	    if (linha != null && linha.startsWith(prefix))
-  			           	    	    	    qtdProdutosComEstoque = Integer.parseInt(linha.replace(prefix, ""));
+				           	    	    if (linha != null && linha.startsWith(prefix, 21))
+  			           	    	    	    qtdProdutosComEstoque = Integer.parseInt(linha.substring(21).replace(prefix, ""));
 				           	    	} 
 				           	    	finally 
 				           	    	{
@@ -1202,7 +1202,7 @@ public final class IntegracaoFornecedorCompleta {
  			     	        		 body += "Erro interno: qtdProdutosComEstoque não encontrado para cotação " + cdCotacao + ", fornecedor " + nmFornecedor;
 					            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 					            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
-					 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+					 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
 			     	        		 continue;
 			     	        	 }
 			     	        	 else if (qtdProdutosComEstoque == 0)
@@ -1408,7 +1408,7 @@ public final class IntegracaoFornecedorCompleta {
 	    catch (java.lang.Exception ex) { 
 			debugar("monitorarPendencias() - catch ex entrado");
 	       logarErro(ex, false);	      
- 	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro! ", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+ 	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 	    }
 	    finally { 
 	      if (cstat != null) {

@@ -208,7 +208,7 @@ public class TestadorSnippets {
           	File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
           	for (final File file : dirLogRemoto.listFiles()) 
           	{
-          	     if (       file.getName().startsWith("ws-formaggio" + ".") 
+          	     if (       file.getName().startsWith("ws-jrembalagem" + ".") 
           	    		 && file.getName().endsWith("." + horaInicio.getYear() + "." + String.format("%02d", horaInicio.getMonthValue()) + ".log") 
           	    		 && file.getName().indexOf("." + "Homologacao" + ".")  == -1 
           	    		 && file.getName().indexOf("." + "Apresentacao" + ".") == -1 
@@ -219,15 +219,15 @@ public class TestadorSnippets {
           	    	try 
           	    	{
           	    	    String linha = br.readLine();
-          	    	    String prefix = "Cotacao " + "163-0235" + ": QtdProdutosComEstoque = ";
+          	    	    String prefix = "Cotacao " + "252-0164" + ": QtdProdutosComEstoque = ";
 
-          	    	    while (linha != null && !linha.startsWith(prefix))
+          	    	    while (linha != null && !linha.startsWith(prefix, 21))
           	    	    {
           	    	        linha = br.readLine();
           	    	    }
 
-           	    	    if (linha != null && linha.startsWith(prefix))
-         	    	    	qtdProdutosComEstoque2 = Integer.parseInt(linha.replace(prefix, ""));
+           	    	    if (linha != null && linha.startsWith(prefix, 21))
+     	    	    	    qtdProdutosComEstoque2 = Integer.parseInt(linha.substring(21).replace(prefix, ""));
           	    	} 
           	    	finally 
           	    	{
@@ -378,6 +378,14 @@ public class TestadorSnippets {
 	      comparacaoVersoes("3");
 	  }
 	  
+	  private static void testarOffset() {
+		  String linha = "01/03/2019 15:10:21: Cotacao 252-0164: QtdProdutosComEstoque = 23";
+		  String prefix = "Cotacao 252-0164: QtdProdutosComEstoque = ";
+	      Integer qtdProdutosComEstoque = Integer.parseInt(linha.substring(21).replace(prefix, ""));
+    	  System.out.println("qtdProdutosComEstoque = " + qtdProdutosComEstoque.toString());
+	  }
+	  
+
 	  
 	  public static void main(String[] args) throws Exception {
 
@@ -388,7 +396,7 @@ public class TestadorSnippets {
 	     // testarMainArgs(args);
 	     // testarIncrementOperator();
 		 // testarIncrementOperatorString();
-	     // testarGetQtdProdutosComEstoqueDeArquivoLog();
+	        testarGetQtdProdutosComEstoqueDeArquivoLog();
 		 // testarDayOfWeek();
 		 // testarDateFormatComParenteses();
 		 // testarParamIntegerInt();
@@ -401,7 +409,8 @@ public class TestadorSnippets {
 		 // testarSimpleDateFormat();
 		 // testar_jar_cp();
 		 // testarForloop();
-			testarComparacaoVersoes();
+		 // testarComparacaoVersoes();
+		 //	testarOffset();
 
 
          // throw new Exception("try");
