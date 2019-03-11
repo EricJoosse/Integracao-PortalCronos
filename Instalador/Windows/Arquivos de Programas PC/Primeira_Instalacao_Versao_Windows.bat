@@ -258,6 +258,7 @@ del /f /q *.xml
 del /f /q *.exe
 del /f /q InstalarManualTI.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
+del /f /q .gitignore
 
 cd "Integração Fornecedor - Portal Cronos"
 del /f /q TestadorUnitario.log
@@ -269,6 +270,7 @@ cd "Arquivos de Programas PC"
 
 REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
 REM após o duplo-clique para executar a instalação:
+REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
 del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
 
 REM Excluir este próprio arquivo apenas no final, 

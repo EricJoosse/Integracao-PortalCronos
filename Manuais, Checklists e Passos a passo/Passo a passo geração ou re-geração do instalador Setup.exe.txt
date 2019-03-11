@@ -21,17 +21,19 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
    C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\
    e ordenar os arquivos no painel direito por nome alfabético.
     
-2. Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.2.6.1.Win2008.R2.SP1.exe" 
-   pelo Eclipse (não pelo Windows Explorer!). Primeiro verificar se este arquivo bate com o arquivo a ser excluido 
-   no GitHub.
+2. (i)  Primeiro verificar se este arquivo bate com o arquivo a ser excluido 
+        no GitHub.
+   (ii) Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.2.8.4.Win2008.R2.SP1.exe" 
+        pelo Eclipse (não pelo Windows Explorer!). 
      
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
    que cria /"Arquivos de Programas PC"/* no servidor do fornecedor, da seguinte forma :
-      - Selecionar todos os arquivos porém apenas um (1) dos subdiretórios no raiz do diretório navegado no Windows Explorer:
-            - selecionar apenas UM (ou nenhum) dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
-            - selecionar apenas UM (ou nenhum) dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
-            - selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.
-            - NÃO selecionar nenhum arquivo  Instalador*.exe                   
+      - Selecionar todos os arquivos porém apenas um (1) dos subdiretórios no raiz do diretório navegado no Windows Explorer
+      - selecionar apenas UM (ou nenhum) dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
+      - selecionar apenas UM (ou nenhum) dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
+      - selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.
+      - NÃO selecionar nenhum arquivo  Instalador*.exe  
+                       
       - WinRAR                   : Mudar .rar para .zip
       - WinRAR                   : Método de compressão : Ótimo
       - WinRAR                   : marcar checkbox SFX

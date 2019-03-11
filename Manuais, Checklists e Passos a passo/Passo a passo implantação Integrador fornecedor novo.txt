@@ -276,13 +276,15 @@ Como vai ser?
     5d. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
         executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
+        
+    5e. Verificar e, no caso, ajustar o if no arquivo CaminhoJRE.bat.
           
     6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
        Regerar o instalador, veja o arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt"  
        no diretório C:\PCronos\Integração Fornecedor - Portal Cronos\Manuais, Checklists e Passos a passo\.
     
-    7. O instalador deve ser copiado para exatamente o diretório C:\temp\ no servidor do fornecedor.
+    7. O instalador deve ser copiado para exatamente o diretório C:\temp\ ou C:\Temp\ no servidor do fornecedor.
        Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.
     
        Se dar erro "Access denied", a solução que funcionou no Padeirão é para criar um diretório novo C:\xxx_temp\ 
@@ -301,9 +303,9 @@ Como vai ser?
  
     9.  Após a instalação:
     
-    9a. Apagar Instalador.log e .gitignore no servidor do fornecedor
+    9a. Apagar Instalador.log no servidor do fornecedor
     
-    9a. No caso: no arquivo Primeira_Instalacao_Versao_Windows.bat re-comentar REM goto SKIP_JRE 
+    9a. No caso: no arquivo Primeira_Instalacao_Versao_Windows.bat (no projeto Eclipse) re-comentar REM goto SKIP_JRE 
 
     9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
