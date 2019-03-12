@@ -35,7 +35,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = null;
 		f[i].NomeFantasiaEmpresa = "Monitoramento";
-		f[i].versaoIntegrador = "2.8.4";
+		f[i].versaoIntegrador = "2.8.5";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
