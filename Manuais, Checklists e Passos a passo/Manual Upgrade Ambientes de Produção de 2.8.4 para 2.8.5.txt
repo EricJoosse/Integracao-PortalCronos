@@ -1,6 +1,9 @@
 Manual Upgrade dos Ambientes de Produção de 2.8.4 para 2.8.5
 ============================================================
 
+0. Copiar o seguinte arquivo do projeto Eclipse para o servidor do fornecedor:
+	- TestadorUnitario.bat
+	
 1. Apenas no caso do servidor do monitoramento:
 	 - Conectar como cronostech
      - No Windows Explorer alterar a opção para exibir arquivos de sistema 

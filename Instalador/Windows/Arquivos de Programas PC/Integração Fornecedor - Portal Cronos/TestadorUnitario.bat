@@ -1,4 +1,18 @@
 
+REM Fazer o seguinte apenas nos servidores dos fornecedores e não dentro do Eclipse:
+REM O seguinte é necessário se executar o .bat usando "Executar como Administrador" ou se rodar 
+REM dentro do Task Scheduler: 
+REM "chcp 1252>nul" é necessário para evitar que DOS não reconhece acentos Portugueses no caminho 
+REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os servidores:
+
+chcp 1252>nul
+
+if not exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/InstalarManualTI.bat (
+  cd\
+  cd "Arquivos de Programas PC"
+  cd "Integração Fornecedor - Portal Cronos"
+)
+
 REM goto TesteVersao
 REM goto TesteParamDosOptional
 goto OutrosTestes
