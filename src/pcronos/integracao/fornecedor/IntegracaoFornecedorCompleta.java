@@ -997,17 +997,18 @@ public final class IntegracaoFornecedorCompleta {
 		    String sqlString = "{call dbo.monitorarIntegracaoFornecedores()}";
 		    cstat = conn.prepareCall(sqlString);
 	        boolean results = cstat.execute();
+			LocalDateTime horaInicioSelect = LocalDateTime.now();
 	        int rsCount = 0;
 
 	        // results: 1 result por fornecedor
 	        // rSet:    diversas cotações não ofertadas para o mesmo fornecedor
-	        while (results) 
+	        fornecedorloop: while (results) 
 	        {
      	   		 debugar("monitorarPendencias(): while (results) entrado");
      	   		 
 	             rSet = cstat.getResultSet();
 	             
-	             while (rSet.next()) {
+	             cotacoesloop: while (rSet.next()) {
 	     	   		 debugar("monitorarPendencias(): while (rSet.next()) entrado");
 
 		             String body = "";
@@ -1159,14 +1160,54 @@ public final class IntegracaoFornecedorCompleta {
 
 			     	   		 Integer qtdProdutosComEstoque = null;
 				           	 File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
+				           	 
 				           	 for (final File file : dirLogRemoto.listFiles()) 
 				           	 {
-				           	     if (       file.getName().startsWith(f.usuarioWebservice + ".") 
-				           	    		 && file.getName().endsWith("." + horaInicio.getYear() + "." + String.format("%02d", horaInicio.getMonthValue()) + ".log") 
-				           	    		 && file.getName().indexOf("." + "Homologacao" + ".")  == -1 
-				           	    		 && file.getName().indexOf("." + "Apresentacao" + ".") == -1 
-				           	    		 && file.getName().indexOf("." + "Teste" + ".")        == -1 
-				           	    		 && file.getName().indexOf("." + "Debug" + ".") > 0) 
+								 LocalDateTime datahoraArquivoLog = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+
+								 if (    file.getName().startsWith(f.usuarioWebservice + ".") 
+				           	    	  && file.getName().endsWith(".log") 
+				           	    	  && file.getName().indexOf("." + "Homologacao" + ".")  == -1 
+				           	    	  && file.getName().indexOf("." + "Apresentacao" + ".") == -1 
+				           	    	  && file.getName().indexOf("." + "Teste" + ".")        == -1 
+				           	    	  && file.getName().indexOf("." + "Erro" + ".") > 0 
+				           	    	  && datahoraArquivoLog.isAfter(horaInicioSelect.minusMinutes(15)) 
+				           	    	)
+				           	     {
+				           	    	BufferedReader br = new BufferedReader(new FileReader(dirLogRemoto + "/" + file.getName()));
+				           	    	try 
+				           	    	{
+				           	    	    String linha = br.readLine();
+
+				           	    	    while (linha != null)
+				           	    	    {
+				           	    	    	if (linha.indexOf("InnerException") > 0 && linha.indexOf("Execution Timeout Expired") > 0)
+				           	    	    	{
+						           	    	    br.close();
+				           	    	    		// Executar stored procedure para solucionar timeouts:
+						           	    	     .........
+				           	    	    		// Neste caso NÃO tem como verificar o estoque abaixo, então sair do loop atual, 
+						           	    	    // e nem faz sentido verificar as demais cotações no caso que aconteceu timeout, 
+				           	    	    		// então continuar com o próximo fornecedor:
+						           	    	    continue fornecedorloop;
+				           	    	    	}
+				           	    	    	else
+				           	    	           linha = br.readLine();
+				           	    	    }
+				           	    	    
+				           	    	} 
+				           	    	finally 
+				           	    	{
+				           	    	    br.close();
+				           	    	}
+				           	     } 
+				           	     else if (    file.getName().startsWith(f.usuarioWebservice + ".") 
+				           	    		    && file.getName().endsWith("." + horaInicio.getYear() + "." + String.format("%02d", horaInicio.getMonthValue()) + ".log") 
+				           	    		    && file.getName().indexOf("." + "Homologacao" + ".")  == -1 
+				           	    		    && file.getName().indexOf("." + "Apresentacao" + ".") == -1 
+				           	    		    && file.getName().indexOf("." + "Teste" + ".")        == -1 
+				           	    		    && file.getName().indexOf("." + "Debug" + ".") > 0
+				           	    		 ) 
 				           	     {
 				           	    	BufferedReader br = new BufferedReader(new FileReader(dirLogRemoto + "/" + file.getName()));
 				           	    	try 
@@ -1186,7 +1227,7 @@ public final class IntegracaoFornecedorCompleta {
 				           	    	{
 				           	    	    br.close();
 				           	    	}
-				           	     } // if
+				           	     } // if / else if
 				           	 } // for
 				           	 
 			     	   		 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque passado");
@@ -1203,15 +1244,15 @@ public final class IntegracaoFornecedorCompleta {
 					            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 					            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
 					 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
-			     	        		 continue;
+			     	        		 continue cotacoesloop;
 			     	        	 }
 			     	        	 else if (qtdProdutosComEstoque == 0)
-			     	        		 continue;
+			     	        		 continue cotacoesloop;
 			     	         }
 			     	         else 
 			     	         {
 			     	        	 if (qtdMeusProdutos <= 3)
-			     	        		 continue;
+			     	        		 continue cotacoesloop;
 			     	         }
 			     	         
 			     	         
