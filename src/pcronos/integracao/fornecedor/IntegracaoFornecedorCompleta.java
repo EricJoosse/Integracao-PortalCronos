@@ -1184,8 +1184,12 @@ public final class IntegracaoFornecedorCompleta {
 				           	    	    	if (linha.indexOf("InnerException") > 0 && linha.indexOf("Execution Timeout Expired") > 0)
 				           	    	    	{
 						           	    	    br.close();
-				           	    	    		// Executar stored procedure para solucionar timeouts:
-						           	    	     .........
+						           	    	    
+				           	    	    		// Executar stored procedure para solucionar timeouts provisoriamente:
+						           	    	    java.sql.CallableStatement stmtTimeout = conn.prepareCall("{call dbo.historicoErrosIntegracaoRadical(?)}");
+						           	    	    stmtTimeout.setInt(1, f.IdFornecedor);
+						           	    	    stmtTimeout.executeUpdate();
+						           	    	    
 				           	    	    		// Neste caso NÃO tem como verificar o estoque abaixo, então sair do loop atual, 
 						           	    	    // e nem faz sentido verificar as demais cotações no caso que aconteceu timeout, 
 				           	    	    		// então continuar com o próximo fornecedor:
