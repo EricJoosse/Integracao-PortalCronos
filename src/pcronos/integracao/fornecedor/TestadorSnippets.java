@@ -6,7 +6,9 @@ import java.util.Locale;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.text.NumberFormat;
 import java.io.File;
@@ -23,6 +25,8 @@ import java.io.PrintWriter;
 import java.io.PrintStream;
 import java.net.URI;
 import javax.ws.rs.core.MediaType;
+
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -385,7 +389,81 @@ public class TestadorSnippets {
     	  System.out.println("qtdProdutosComEstoque = " + qtdProdutosComEstoque.toString());
 	  }
 	  
+	  private static void testarSp_historicoErrosIntegracaoRadical() throws SQLException {
+    	  // Executar stored procedure para solucionar timeouts provisoriamente:
 
+		  // Antes ee depois rodar os seguintes selects: 
+		  // select count(*) from [dbo].[Log_Erro_Integracao] where id_fornecedor_fornec = 947 
+		  // select count(*) from [dbo].[Log_Erro_Integracao_Historico] where id_fornecedor_fornec = 947
+
+	      SQLServerDriver sqlsrvDriver = new SQLServerDriver() ; 
+	      DriverManager.registerDriver( sqlsrvDriver ) ; 	
+	      //connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+	    	//         "databaseName=AdventureWorks;user=UserName;password=*****";  
+	      String connectionString = "jdbc:sqlserver://" + IntegracaoFornecedorCompleta.enderecoIpServidorBancoDeDados + ":" + IntegracaoFornecedorCompleta.portaServidorBancoDeDados + ";databaseName=" + IntegracaoFornecedorCompleta.instanciaBancoDeDados; 
+	      java.sql.Connection conn = DriverManager.getConnection(connectionString, IntegracaoFornecedorCompleta.usernameBancoDeDados, IntegracaoFornecedorCompleta.senhaBancoDeDados ) ;	    
+
+    	  System.out.println("IntegracaoFornecedorCompleta.enderecoIpServidorBancoDeDados = " + IntegracaoFornecedorCompleta.enderecoIpServidorBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.portaServidorBancoDeDados = " + IntegracaoFornecedorCompleta.portaServidorBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.instanciaBancoDeDados = " + IntegracaoFornecedorCompleta.instanciaBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.usernameBancoDeDados = " + IntegracaoFornecedorCompleta.usernameBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.senhaBancoDeDados = " + IntegracaoFornecedorCompleta.senhaBancoDeDados);
+
+    	  java.sql.CallableStatement stmtTimeout = conn.prepareCall("{call dbo.historicoErrosIntegracaoRadical(?)}");
+    	  stmtTimeout.setInt(1, 947);
+    	  stmtTimeout.executeUpdate();
+		  
+	  }
+
+	  private static void testarProcuraTimeouts() throws IOException {
+        	 File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
+  			 LocalDateTime horaInicioSelect = LocalDateTime.now();
+           	 
+  	    	 for (final File file : dirLogRemoto.listFiles()) 
+        	 {
+				 LocalDateTime datahoraArquivoLog = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+
+				 if (    file.getName().startsWith("ws-jrembalagem" + ".") 
+        	    	  && file.getName().endsWith(".log") 
+        	    	  && file.getName().indexOf("." + "Homologacao" + ".")  == -1 
+        	    	  && file.getName().indexOf("." + "Apresentacao" + ".") == -1 
+        	    	  && file.getName().indexOf("." + "Teste" + ".")        == -1 
+        	    	  && file.getName().indexOf("." + "Erro" + ".") > 0 
+        	    	  && datahoraArquivoLog.isAfter(horaInicioSelect.minusMinutes(15)) 
+        	    	)
+        	     {
+	 	  	        System.out.println("if entrado ");
+	 	 	  	    System.out.println("file.getName() = " + file.getName());
+
+
+	 	  	        BufferedReader br = new BufferedReader(new FileReader(dirLogRemoto + "/" + file.getName()));
+        	    	try 
+        	    	{
+        	    	    String linha = br.readLine();
+
+        	    	    while (linha != null)
+        	    	    {
+        	 	 	  	    System.out.println("linha = " + linha);
+        	 	 	  	    
+        	 	 	  	if (linha.indexOf("InnerException") > 0 && linha.indexOf("timeout") > 0)
+        	    	    	{
+		           	    	    br.close();
+		           	    	    System.out.println("timeout encontrado com sucesso!");
+		           	    	    
+        	    	    		
+        	    	    	}
+        	    	    	else
+        	    	           linha = br.readLine();
+        	    	    }
+        	    	    
+        	    	} 
+        	    	finally 
+        	    	{
+        	    	    br.close();
+        	    	}
+        	     } 
+        	 } // for		  
+	  }
 	  
 	  public static void main(String[] args) throws Exception {
 
@@ -396,7 +474,7 @@ public class TestadorSnippets {
 	     // testarMainArgs(args);
 	     // testarIncrementOperator();
 		 // testarIncrementOperatorString();
-	        testarGetQtdProdutosComEstoqueDeArquivoLog();
+	     // testarGetQtdProdutosComEstoqueDeArquivoLog();
 		 // testarDayOfWeek();
 		 // testarDateFormatComParenteses();
 		 // testarParamIntegerInt();
@@ -411,7 +489,9 @@ public class TestadorSnippets {
 		 // testarForloop();
 		 // testarComparacaoVersoes();
 		 //	testarOffset();
-
+         // testarSp_historicoErrosIntegracaoRadical();
+         testarProcuraTimeouts();
+         
 
          // throw new Exception("try");
         }
