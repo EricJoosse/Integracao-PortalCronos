@@ -15,7 +15,7 @@ if not exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windo
 
 REM goto TesteVersao
 REM goto TesteParamDosOptional
-goto OutrosTestes
+goto TesteQualquerSnippetJava
 
 REM ================ Teste de chamada de arqs .bat em subdirs (testado, funcionou): ========================================
 
@@ -26,12 +26,12 @@ del %temp%\TEMPmessage.vbs /f /q
 pause
 exit
 
-REM ==================== Outros testes: ===============================================================
-REM ==================== 1. Teste Parâmetro optional CaminhoJRE.bat (testado, funcionou): ===============================================================
-REM ==================== 2. ............... ===============================================================
+REM ==================== Outros testes: =====================================================================================
+REM ==================== 1. Teste de qualquer snippet de Java ===============================================================
+REM ==================== 2. Teste Parâmetro optional CaminhoJRE.bat (testado, funcionou): ===================================
 
 :TesteParamDosOptional
-:OutrosTestes
+:TesteQualquerSnippetJava
 
 cls
 @echo off
@@ -39,6 +39,7 @@ cls
 call bin\Inicializacoes.bat
 call bin\Versao.bat
 call bin\ComponenteTestador.bat TestadorUnitario.log TestadorSnippets
+start notepad TestadorUnitario.log
 
 ENDLOCAL
 pause
