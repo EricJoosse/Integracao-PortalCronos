@@ -25,6 +25,9 @@ public class Fornecedor {
 	String SO32ou64bit;
 	String dirProgramFiles;
 	String cnpjFornecedor;
+	public String EmailResponsavelTI_Nuvem;
+	public String SkypeResponsavelTI_Nuvem;
+	public String ApelidoResponsavelTI_Nuvem;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

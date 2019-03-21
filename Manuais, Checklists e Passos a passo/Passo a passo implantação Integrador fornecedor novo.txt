@@ -8,7 +8,8 @@ Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor d
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
  
--5. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+
+-6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
     criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
     Descobrir o idFornecedor editando e executando os seguintes selects:
 
@@ -24,12 +25,12 @@ select  id_pessoa, nm_pessoa, *
 
 
 
--4. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
+-5. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
     "/scripts/Monitoramento_Integração_Fornecedor.sql" no projeto Eclipse 
 	informando Nome + ID do fornecedor novo
 
 
--3. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
+-4. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
 
 Elthon, boa tarde!
  
@@ -57,8 +58,26 @@ Favor ativar o AnyDesk e informar o ID no Skype. Pretendo re-instalar o Integrad
  
 Atc,
 Eric 
+
      
      
+-3. (i) Perguntar ao TI da APS no Skype:  
+     
+        Qual é o Skype ou email da TI da Marizpan? Pois 90 % da instalação é com vocês, quer dizer com a TI do APS, porém a outra 10 % da instalação é com a TI da Marizpan
+
+    (ii) Se o TI da APS não sabe, enviar o seguinte email para Leão:
+
+Assunto: Dúvida Marizpan
+
+Leão,
+  
+  qual é o Skype (ou pelo menos email) da TI da Marizpan? 
+Pois algumas coisas da instalação são com a TI da Marizpan e não com a TI do APS, 
+por exemplo a senha do usuário do Web service, 
+ 
+Eric
+
+
    -2. Leão, 
    
 	   	VerificarEstoque                  = true / false?
