@@ -110,16 +110,17 @@ declare c cursor for
           join dbo.Padrao_Sistema_Integrado psi  on psi.id_padrao_sistema_int_psisint = f.id_padrao_sistema_int_psisint
 	                                        and psi.dt_desativacao_psisint is null
     where f.id_padrao_sistema_int_psisint is not null
-      and (                          f.id_fornecedor_fornec <>  21) -- Marítimos
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  13) -- Formaggio
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 947) -- JR Distribuição
-    --and (                          f.id_fornecedor_fornec <>  30) -- Prolac
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  60) -- Karne Keijo
-      and (                          f.id_fornecedor_fornec <> 170) -- SOST (BA)
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 385) -- Walmart
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  33) -- Comal
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 171) -- Propão
-    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  14) -- Padeirão
+      and (                          f.id_fornecedor_fornec <>   21) -- Marítimos
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   13) -- Formaggio
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  947) -- JR Distribuição
+    --and (                          f.id_fornecedor_fornec <>   30) -- Prolac
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   60) -- Karne Keijo
+      and (                          f.id_fornecedor_fornec <>  170) -- SOST (BA)
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  385) -- Walmart
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   33) -- Comal
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  171) -- Propão
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   14) -- Padeirão
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 1995) -- Marizpan
 
 -- 1. DESCOMENTAR OS "and"´S DOS f.id_fornecedor_fornec´S ACIMA APENAS PARA SUPRIMIR QUANTIDADES GRANDES DE EMAILS TEMPORARIAMENTE, 
 --    NO CASO QUE JÁ SABEMOS QUE FORNECEDOR X NÃO ESTÁ FUNCIONANDO MAIS POR ENQUANTO; 
@@ -140,8 +141,9 @@ while @@fetch_status = 0
   -- NA BASE DE DADOS DE PRODUÇÃO DO PORTAL CRONOS, 
   -- PORÉM AINDA NÃO COLOCADAS EM PRODUÇÃO NO LADO DO SERVIDOR DO FORNECEDOR: 
 
-  if @fornecedor_id = 0   -- Para facilitar a manutenção deste if 
-  or @fornecedor_id = 385 -- Walmart  ainda não está em produção 
+  if @fornecedor_id =    0 -- Para facilitar a manutenção deste if 
+  or @fornecedor_id =  385 -- Walmart  ainda não está em produção 
+  or @fornecedor_id = 1995 -- Marizpan ainda não está em produção 
     begin
       if (
          --  ((select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))

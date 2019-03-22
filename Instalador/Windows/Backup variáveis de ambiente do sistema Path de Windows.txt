@@ -94,5 +94,24 @@ Prolac depois:
 		C:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;
 		%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
 		
+
+APS Cloud (Marizpan) antes: 
+		User variable "Path" Administrador: não existe
+		
+		System variable "path" = 
+        C:\Program Files (x86)\Common Files\Oracle\Java\javapath;%SystemRoot%\system32;
+        %SystemRoot%;%SystemRoot%\System32\Wbem;%systemroot%\System32\WindowsPowerShell\v1.0\;
+        %systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;
+        C:\Program Files\Amazon\cfn-bootstrap\
        
+APS Cloud (Marizpan) depois: 
+		User variable "Path" Administrador: não existe
+		
+		System variable "path" = 
+       	C:\Program Files (x86)\Common Files\Oracle\Java\javapath;%SystemRoot%\system32;
+       	%SystemRoot%;%SystemRoot%\System32\Wbem;%systemroot%\System32\WindowsPowerShell\v1.0\;
+       	%systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;
+       	C:\Program Files\Amazon\cfn-bootstrap\
+       	
+       	
        		

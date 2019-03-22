@@ -9,7 +9,7 @@ public class FornecedorRepositorio {
 
     static {
 		hashMap = new HashMap<Integer, Fornecedor>(); 
-		final int qtdFornecedores = 11;
+		final int qtdFornecedores = 12;
 		Fornecedor[] f = new Fornecedor[qtdFornecedores];
 
 		for (int j=0; j < (qtdFornecedores); j++) {
@@ -209,6 +209,29 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "03042263000151";
+
+		i++;
+		f[i].IdFornecedor = 1995;
+		f[i].NomeFantasiaEmpresa = "Marizpan";
+		f[i].versaoIntegrador = "2.8.5";
+		f[i].SiglaSistemaFornecedor = "APS";
+		f[i].FuncaoResponsavelTI = "Analista";
+		f[i].FuncaoResponsavelTIAlternativo = "Sócio do APS";
+		f[i].EmailResponsavelTI = "saulo@apsinformatica.com.br";
+		f[i].EmailResponsavelTIAlternativo = "";
+		f[i].SkypeResponsavelTI = "Saulo Gomes de Lima (saulo_analista)";
+		f[i].SkypeResponsavelTIAlternativo = "Bernardino Borba (live:berna31pe)";
+		f[i].ApelidoResponsavelTI = "Saulo"; 
+		f[i].ApelidoResponsavelTIAlternativo = "Bernardino";
+		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].usuarioWebservice = "ws-marizpan";
+		f[i].versaoJRE = "jre1.8.0_191";
+		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
+		f[i].dirProgramFiles = "Program Files (x86)";
+		f[i].cnpjFornecedor = "12286800000108";
+		f[i].EmailResponsavelTI_Nuvem = "saulo@apsinformatica.com.br";
+		f[i].SkypeResponsavelTI_Nuvem = "Saulo Gomes de Lima (saulo_analista)"; 
+		f[i].ApelidoResponsavelTI_Nuvem = "Saulo"; 
 
 		
 		for (int j=0; j < (qtdFornecedores); j++) {
