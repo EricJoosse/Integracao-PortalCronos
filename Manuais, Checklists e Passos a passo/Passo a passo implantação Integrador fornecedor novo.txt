@@ -8,8 +8,10 @@ Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor d
 e não com o Notepad para evitar problemas com cedilhas e acentos !
  
  
+JÁ ADIANTAR ANTES DO ACESSO VIA ANYDESK:
+======================================== 
 
--6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+-8. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
     criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
     Descobrir o idFornecedor editando e executando os seguintes selects:
 
@@ -25,12 +27,12 @@ select  id_pessoa, nm_pessoa, *
 
 
 
--5. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
+-7. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
     "/scripts/Monitoramento_Integração_Fornecedor.sql" no projeto Eclipse 
 	informando Nome + ID do fornecedor novo
 
 
--4. (i) Se ainda não saber o contato no Skype, editar e enviar o seguinte email:
+-6. (i) Se ainda não sabe o contato da TI no Skype, editar e já adiantar enviando o seguinte email:
 
 Elthon, boa tarde!
  
@@ -40,50 +42,56 @@ Qual é o nome do seu contato no Skype?
 Atc,
 Eric
 
-	(ii) Se já sabe o contato no Skype, editar e enviar o seguinte email:
-     
-Tiago, boa tarde!
- 
-  sou Eric da TI do Portal Cronos.  Leão me pediu instalar o Integrador WinThor / PCronos.
-Favor me aceitar no Skype (contato "Eric Jo") e ativar o AnyDesk e informar o ID no Skype,
- 
-Atc,
-Eric 
-
-   (iii) No caso de re-instalação:
+   17. No arquivo /scripts/sp_monitorarIntegracaoFornecedores.sql no projeto Eclipse: 
+      (i)  adicionar: 
+                --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> xxx) -- AAAAAAAAAA
+	       depois de: 
+			    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 385) -- Walmart
    
-Marcos, bom dia!   
-     
-Favor ativar o AnyDesk e informar o ID no Skype. Pretendo re-instalar o Integrador WinThor / PCronos hoje, 
- 
-Atc,
-Eric 
+      (ii) adicionar:
+				  or @fornecedor_id = xxx -- AAAAAAAAA ainda não está em produção 
+	       depois de: 
+				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
 
-     
-     
--3. (i) Perguntar ao TI da APS no Skype:  
-     
-        Qual é o Skype ou email da TI da Marizpan? Pois 90 % da instalação é com vocês, quer dizer com a TI do APS, porém a outra 10 % da instalação é com a TI da Marizpan
+           (Dica: pesquisar o texto "Para facilitar a manutenção deste if" nesta sp).
+            
+      (iii) executar o script na base de produção
 
-    (ii) Se o TI da APS não sabe, enviar o seguinte email para Leão:
+      
+   -4. Executar o seguinte em todas as bases de produção, homologação, e cópias da base de produção:
+   
+       update [dbo].[Usuario_Sistema]  
+          set id_fornecedor_fornec = .....
+	        , id_perfil_acesso_perace = 14
+	        , id_central_compra_ctrcom = null
+	        , id_comprador_compr = null
+        where cd_usuario_sistema_ususis = 'ericcoringa'
+   
+   
+   -3. (i) Conectar nas telas do Portal Cronos (produção - 80) logado como ericcoringa e verificar se eles usam 
+           um texto padrão do fornecedor para todas as cotações de todos os compradores 
+           e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema".
+           
+       (ii) Depois disso voltar ericcoringa APENAS na base de produção: 
 
-Assunto: Dúvida Marizpan
-
-Leão,
-  
-  qual é o Skype (ou pelo menos email) da TI da Marizpan? 
-Pois algumas coisas da instalação são com a TI da Marizpan e não com a TI do APS, 
-por exemplo a senha do usuário do Web service, 
- 
-Eric
-
-
+		update [dbo].[Usuario_Sistema]  
+		   set id_fornecedor_fornec = null
+		     , id_perfil_acesso_perace = 1
+		     , id_central_compra_ctrcom = 1
+		     , id_comprador_compr = null
+		 where cd_usuario_sistema_ususis = 'ericcoringa'
+    
+    
    -2. Leão, 
    
-	   	VerificarEstoque                  = true / false?
-		CriterioVerificacaoEstoque        = QtdEstoqueMaiorZero / QtdEstoqueMaiorOuIgualQtdSolicitada?
-		ObsOfertasPadraoSeNaoTemNoSistema = ?
-		UsarValorMinimoSistemaFornecedor  = true / false?
+	   		VerificarEstoque                  = true / false?
+			CriterioVerificacaoEstoque        = QtdEstoqueMaiorZero / QtdEstoqueMaiorOuIgualQtdSolicitada?
+		
+		Apenas se precisar confirmar um candidato encontrado no passo anterior:
+			ObsOfertasPadraoSeNaoTemNoSistema = ?              
+
+        Apenas no caso do WinThor: 
+			UsarValorMinimoSistemaFornecedor  = true / false?  
 		 
 	   Eric
    
@@ -101,29 +109,78 @@ Eric
        Neste momento apenas preencher os seguintes dados (os outros dados estão explicados no final da instalação): 
        (i)   Descobrir o CNPJ do fornecedor usando o mesmo select acima.
        
-       (ii)  No caso do WinThor, "pfv me dá a lista de filiais que têm no WinThor" 
-             para decidir se a filial do estoque é 1, 2, ou 3. 
-             Não podemos usar o estoque de uma loja de balçao pequena.   
-       
        (iii) No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos 
        		 apenas preencher as seguintes chaves e deixar o resto como o default do instalador: 
        			- SiglaSistema: PCronos
        			- Todas as chaves da seção "Base de Dados do sistema do fornecedor"
        			- Todas as chaves "******EmailAutomatico"
 
-       (iv)  Verificar se "debug" = "true" no arquivo de configuração para facilitar atendimento imediato no futuro, 
-             exceto no caso que "SiglaSistema" = "PCronos" (fornecedor "Monitoramento").
+       (iv)  (a) No arquivo de configuração, no caso que "SiglaSistema" = "PCronos" (servidor de monitoramento automático): 
+       				- "debug" = "false" 
+             		- "QtdDiasArquivosXmlGuardados" = "30"
+                 
 
-       (v)   Verificar se o default de "QtdDiasArquivosXmlGuardados" = "100" para servidores dos fornecedores
-             e "30" para o servidor de monitoramento automático
+             (b) No arquivo de configuração, no caso que "SiglaSistema" != "PCronos" ( servidores dos fornecedores): 
+             		- "debug" = "true" (para facilitar atendimento imediato no futuro) 
+             		- "QtdDiasArquivosXmlGuardados" = "100"
+
+			 (c) Preencher no arquivo "Tabela Fornecedores_Versões.txt":
+	    		- a coluna "Debug"       
+	    		- a coluna "Qtd.Dias"   
+
 
 
     0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        no FornecedorRepositorio.java, no static constructor:
-       (i)   adicionar o fornecedor novo no final da lista de fornecedores, e preencher o CNPJ dele
-       (ii)  não se esquecer adicionar i++ antes do fornecedor novo
-       (iii) não se esquecer incremementar o variável constante "qtdFornecedores" mais 1
+       (i)   adicionar o fornecedor novo no final da lista de fornecedores, 
+             copiando o fornecedor template vazio, e preencher o CNPJ dele
+       (ii)  não se esqueça adicionar i++ antes do fornecedor novo
+       (iii) não se esqueça incremementar o variável constante "qtdFornecedores" mais 1
     
+    
+
+DURANTE O ACESSO VIA ANYDESK:
+============================= 
+
+-6.	(i) Se já sabe o contato da TI no Skype, porém o Skype dele está off-line: 
+        editar e enviar o seguinte email:
+     
+Tiago, boa tarde!
+ 
+  sou Eric da TI do Portal Cronos.  Leão me pediu instalar o Integrador WinThor / PCronos.
+Favor me aceitar no Skype (contato "Eric Jo") e ativar o AnyDesk e informar o ID no Skype,
+ 
+Atc,
+Eric 
+
+   (iii) No caso de re-instalação, editar e enviar o seguinte email:
+   
+Marcos, bom dia!   
+     
+Favor ativar o AnyDesk e informar o ID no Skype. Pretendo re-instalar o Integrador WinThor / PCronos hoje, 
+ 
+Atc,
+Eric 
+
+     
+     
+-5. (i) Perguntar ao TI da APS no Skype:  
+     
+        Qual é o Skype ou email da TI da Marizpan? Pois 90 % da instalação é com vocês, quer dizer com a TI do APS, porém a outra 10 % da instalação é com a TI da Marizpan
+
+    (ii) Se o TI da APS não sabe, enviar o seguinte email para Leão:
+
+Assunto: Dúvida Marizpan
+
+Leão,
+  
+  qual é o Skype (ou pelo menos email) da TI da Marizpan? 
+Pois algumas coisas da instalação são com a TI da Marizpan e não com a TI do APS, 
+por exemplo a senha do usuário ws-marizpan, 
+ 
+Eric
+
+
 
 	1. Conectar no AnyDesk. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
@@ -152,6 +209,13 @@ Como vai ser?
 		Quando você desocupar o servidor, me avise
 
 
+    2. No caso do WinThor: "pfv me dá a lista de filiais que têm no WinThor" 
+       para decidir se a filial do estoque é 1, 2, ou 3. 
+       Não podemos usar o estoque de uma loja de balçao pequena.
+       
+       Registrar a filial no arquivo .properties neste projeto Eclipse, C:\PCronos\Integração Fornecedor - Portal Cronos\conf\ 
+       
+
 	2. a. Verificar se o usuário logado é administrador ou administrator, 
 	      local ou da rede (como administrador da rede ainda não foi testado).
 	      (Formaggio: user "techcorp")
@@ -166,7 +230,14 @@ Como vai ser?
 	      Fechar e re-abrir o Windows Explorer. Senão re-abrir o Windows Explorer, 
 	      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
 	
-	3. No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
+	
+	3. (i) Verificar a versão de Windows no servidor do fornecedor 
+	       
+	    - Preencher isso no f[i].tipoSO = "" no FornecedorRepository   
+	
+	
+	   (ii) No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
+	   
 		- Verificar a versão de Windows no servidor do fornecedor 
 		  e descomentar a variável "osVersion" correta no início do .bat. 
 		  CMD: winver
@@ -189,23 +260,37 @@ Como vai ser?
 			REM     exit
 			REM )
 			
-		  Observação ; depois de "REM" deve ter pelo menos UM espaço em branco !!!!!
+		  Observação: depois de "REM" deve ter pelo menos UM espaço em branco !!!!!
+
 
 		- Verificar a variável "set drive=C:"  ou "set drive=D:" no início de Primeira_Instalacao_Versao_Windows.bat 
 		  Verificar se tem espaço livre de 1 GB nos discos C:/, D:/, etc. :
-			- 303 MB: 
-				- C:\Arquivos de Programas PC\*
-				- C:\Program Files\Java\jre1.8.0_92\*
-				- C:\temp\Instalar Integração Fornecedores - Portal Cronos.exe
+			- 270 MB: 
+				-  20 MB: C:\Arquivos de Programas PC\*
+				- 180 MB: C:\Program Files\Java\jre1.8.0_92\*
+				-  70 MB: C:\temp\Instalar Integração Fornecedores - Portal Cronos.exe
 			- 250 MB: 
 			    - C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\hs_err_pidxxxx.mdmp
-			- 450 MB: (Prolac: 30 MB por mês)
+			- 450 MB: (Formaggio: 50 MB por mês, JR Distribuição: 170 MB por mês - no ano 2019)
 				- C:\ProgramData\PortalCronos\Logs\Local\*.xml  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
 				- C:\ProgramData\PortalCronos\Logs\Local\*.log  (estimativa inicial do tamanho de 1 ano de arquivos de XML)
 
+		  Observações: 
+		    - se Java já está instalado, somente precisa de 700 MB livre
+		    - Se precisar, diminuir "QtdDiasArquivosXmlGuardados" no arquivo .properties 
+		      e atualizar a coluna "Qtd.Dias" no arquivo "Tabela Fornecedores_Versões.txt"
 		  
-		- Verificar se precisa descomentar um dos seguintes skips no início de Primeira_Instalacao_Versao_Windows.bat :
+		  
+	    - No caso que o espaço livre é suficiente, preencher no arquivo "Tabela Fornecedores_Versões.txt":
+	    		- a coluna "Esp.Livre"   
+	    		- a coluna "Disco"       
+
+
+		- Se decidir não instalar Java porém usar uma versão existente, 
+		  descomentar o seguinte skip no início de Primeira_Instalacao_Versao_Windows.bat:
 						REM goto SKIP_JRE
+
+		- Verificar se precisa descomentar um dos seguintes skips no início de Primeira_Instalacao_Versao_Windows.bat :
 						REM goto SKIP_JRE_TEMPDIR
 						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
 						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
@@ -228,26 +313,31 @@ Como vai ser?
           			
              No caso que tem muitas outras versões do JRE mais antigas e mais novas instaladas:  
              Skype: No servidor onde estou estou vendo 2 versões diferentes de Java instaladas (1.8- 101 e 1.8 - 111). 
-             		Java está usado por que programas no servidor?
+             		O Java no servidor está usado por programas ou sistemas em produção?
              
-             No caso: 
-             Skype: Vou tomar cuidado para deixar as versões atuais do mesmo jeito como está para evitar que algum sistema 
-             ou aplicativo para de funcionar. 
-             
-             No caso: 
-             Descomentar "REM goto SKIP_JRE"no arquivo "Primeira_Instalacao_Versao_Windows.bat"              
-             (feito assim no Padeirão)
                 
 	    	 No caso se decidir não instalar uma JRE nova porém usar uma JRE existente já instalado no servidor:
-	     		- primeiro fazer um teste rápido se o seguinte funciona: 
+	     		- Primeiro fazer um teste rápido se o seguinte funciona: 
 					C:/"Program Files (xxxxxxxxxxxx)"/Java/jre1.8.0_xxxxx/bin/java.exe -version
 					
-             	  caso contrário, não adianta instalar o Integrador usando o JRE existente: 
+	        	- Atualização automática de Java sim ou não: não verificar isso neste momento pois isso não é motivo para instalar outro Java novo sim ou não
+
+             	- No caso que a JRE existente funciona: 
+             			- Descomentar "REM goto SKIP_JRE"no arquivo "Primeira_Instalacao_Versao_Windows.bat"              
+                  		  (feito assim no Padeirão)
+             
+    					- Verificar e, no caso, ajustar o if no arquivo CaminhoJRE.bat.
+    					
+    					- No FornecedorRepository, preencher:
+								- f[i].dirProgramFiles = ".......";
+								- f[i].versaoJRE = "......";
+          
+             	- Caso contrário, não adianta instalar o Integrador usando o JRE existente: 
 	     			- verificar se tem processos Java funcionando no taskmgr.exe
 	     			- decidir: 
 						- Skype: quem instalou Java? 
 	        			- ou talvez instalar Java nova em paralelo????
-
+	        			
              
        	  2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
        	       (i)   no variável de ambiente do usuário administrador
@@ -275,6 +365,9 @@ Como vai ser?
         Testar ping primeiro (sem porta). Se isso não funcionar, procurar uma porta IP que está aberta e usar 
         C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat para testar isso. 
         
+        Se não conseguir nada:
+        Skype: este servidor com IP público 18.214.93.120 tem alguma porta que pode ser pingado com psping -w 0 %enderecoIP%:%portaIP%? Tentei as portas 80 e 3389 porém o Amazon não deixa pingar. Meu programa só faz um psping automático quando as ofertas automáticas param de chegar no Portal Cronos, então é só uma vez por ano em média.
+        
         Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
         atualizar o endereço IP e a porta IP aberta no arquivo Tabela Fornecedores_Versões.txt.
                 
@@ -296,8 +389,6 @@ Como vai ser?
         executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
         
-    5e. Verificar e, no caso, ajustar o if no arquivo CaminhoJRE.bat.
-          
     6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
        Regerar o instalador, veja o arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt"  
@@ -330,11 +421,22 @@ Como vai ser?
     
     9b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
           
-    9c. No caso que este instalador não instalou o JRE:
-        no regedit.exe deshabilitar java update automático de todos os jre´s em todas as 
-        chaves que existem no regedit 
+    9c. No caso que este instalador não instalou um JRE novo porém usou um JRE pré-existente já instalado antes no servidor:
+ 			- No regedit.exe verificar todas as possíveis chaves que existem no regedit sobre update automático de java, de todos os jre´s 
 
-    9d. No caso que este instalador instalou o JRE: 
+	            No caso que Java é atualizado automaticamente:
+    	        	- Skype: Posso alterar a configuração de Java para não atualizar automaticamente? Pois meu plugin do Portal Cronos ainda não funciona com atualização automática. Se decidir um dia no futuro atualizar Java, pode ser manualmente, só que eu preciso ser avisado ANTES para testar meu plugin com a versão nova e para atualizar meu plugin no mesmo momento
+					- Skype: A vantagem de não atualizar automaticamente é que qualquer sistema sempre foi testado com uma versão específica de Java e sempre tem um risco que qualquer sistema vai dar uma bronca nova na versão nova de Java que não tinha na versão testada. Outra desvantagem é que durante a atualização, Java está indisponível temporariamente para os sistemas, o que não pode acontecer durante expediente. Pessoalmente acho melhor fazer isso manualmente de forma controlada uma vez por ano (se precisar atualizar mesmo), e fora do expediente.  
+
+				Se ele não concordar, convencer mais:
+					- Skype: Atualização automática de Java é bom apenas para celulares, notebooks computadores de tipo "client" por motivo de segurança, porém não é bom no caso de servidores.
+
+        		Se ele concordou: 
+        			- No regedit.exe deshabilitar java update automático de todos os jre´s em todas as 
+        		      chaves que existem no regedit 
+
+
+    9d. No caso que este instalador instalou o JRE novo: 
         Nos seguintes casos:
              1. no caso de versões de Windows que ainda não estão em nenhuma das duas listas abaixo dentro deste item 9c;
              2. no caso de versões de Windows que estão com o bug abaixo: 
@@ -514,60 +616,29 @@ Como vai ser?
 		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
 
 
-   17. No arquivo /scripts/sp_monitorarIntegracaoFornecedores.sql no projeto Eclipse: 
-      (i)  adicionar: 
-                --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> xxx) -- AAAAAAAAAA
-	       depois de: 
-			    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 385) -- Walmart
-   
-      (ii) adicionar:
-				  or @fornecedor_id = xxx -- AAAAAAAAA ainda não está em produção 
-	       depois de: 
-				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
-
-           (Dica: pesquisar o texto "Para facilitar a manutenção deste if" nesta sp).
-            
-      (iii) executar o script na base de produção
-
-      
    18. Atualizar o arquivo integr-fornecedor-x.y.z.jar no servidor que está hospedando 
        o serviço de monitoramento para evitar o erro que o idFornecedor novo não existe
        no FornecedorRepositorio.getFornecedor()
        
        
-   19. Executar o seguinte em todas as bases de produção, homologação, e cópias da base de produção:
-   
-       update [dbo].[Usuario_Sistema]  
-          set id_fornecedor_fornec = .....
-	        , id_perfil_acesso_perace = 14
-	        , id_central_compra_ctrcom = null
-	        , id_comprador_compr = null
-        where cd_usuario_sistema_ususis = 'ericcoringa'
-   
-   
-   20. (i) Conectar nas telas do Portal Cronos (produção - 80) logado como ericcoringa e verificar se eles usam 
-           um texto padrão do fornecedor para todas as cotações de todos os compradores 
-           e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema".
-           
-       (ii) Depois disso voltar ericcoringa APENAS na base de produção: 
-
-		update [dbo].[Usuario_Sistema]  
-		   set id_fornecedor_fornec = null
-		     , id_perfil_acesso_perace = 1
-		     , id_central_compra_ctrcom = 1
-		     , id_comprador_compr = null
-		 where cd_usuario_sistema_ususis = 'ericcoringa'
-    
-    
    21. Enviar Email/ Skype: 
    
        Vocês têm apenas UMA base de dados WinThor/Oracle? Ou talvez tem uma base de produção e outra base de teste, por exemplo?
 
        É melhor usar logo a base de produção
 
-       Qual é o endereço IP, porta, SID, usuário e senha do banco Oracle de produção? A porta é a porta "default" (1521) ?
-       Pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado no WinThor.
+	   No caso do Winthor:
+       		Qual é o endereço IP, porta, SID, usuário e senha do banco Oracle de produção? A porta é a porta "default" (1521) ?
+       		O usuário do banco Oracle pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado no WinThor.
 
+	   No caso do APS:
+       		Qual é o endereço IP, porta, usuário e senha do banco Firebird de produção? A porta é a porta "default" (3050)? Qual é o caminho completo + nome do arquivo.FDB do Firebird, exemplo: /home/usuario/banco.fdb (Linux) ou C:/diretorio/NomeBanco.FDB (Windows).
+       		O usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado no APS.
+
+       No caso que o DBA do fornecedor quer dar privilêgios apenas para as tabelas usadas: 
+       		APS:     cliente, produto, prodfilho, estoqueempresa, precoempresa
+       		WinThor: .......
+         
        Se precisar: você tem um arquivo "tnsnames.ora" em alguma máquina que está com o WinThor instalado? Coloca o conteúdo no Skype: neste arquivo dá para ver se o SID é WINT ou PROD
 
        Se o DBA demorar demais para criar um usuário novo, não podemos usar um dos usuários Oracle que já existe? Com certeza deve existir pelo menos um. Eu posso até colocar a senha deste usuário no arquivo de parâmetros do Portal Cronos de forma criptografada. 
@@ -606,7 +677,7 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        No caso que você precisa atualizar a versão de Java um dia no futuro, 
        no servidor que está hospedando a integração WinThor / PCronos, 
        favor não se esquecer para me avisar com alguns dias de antecedência! 
-       Caso contrário, o Integrador WinThor/PCronos vai parar de funcionar alguns dias! 
+       Caso contrário, o Integrador WinThor/PCronos de repente vai parar de funcionar alguns dias! 
        
    24. Copiar o arquivo /conf/xxx.properties do diretório de backups no projeto Eclipse para o servidor
        do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
@@ -714,3 +785,35 @@ Eric
 						    Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão processando 
 						    normalmente, tudo está certo e não mexe com este processo.   
  
+ 
+ 30. No caso de instalação como serviço nuvem: 
+
+     Skype: Ainda não entendi o APS Cloud muito bem: por exemplo quem cadastra usuários novos da Marizpan no APS Cloud? É a TI da Marizpan ou vocês da TI do APS Cloud?
+  	 Resposta de Saulo: 
+     	Usuários no ambiente nuvem somo nós da APS, usuário dentro do nosso ERP é a MArizpan
+		Por que a nossa nuvem passa por duas autenticações
+		A primeira é a autenticação para entrar no ambiente nuvem.
+		Uma vez que entrou o usuário vai escolher o sistema que vai usar, que no caso da Marizpan seria o nosso ERP. 
+		Então vem a segunda autenticação, para entrar no ERP.
+		Alguma dúvida?
+		
+     Skype: Quem fez os De-Para´s dos códigos dos produtos no APS/Portal Cronos? Foi Bernardino Borba do APS ou foi a TI da Marizpan ou um vendedor da Marizpan? No Portal Cronos tem a opção para cadastrar um email para receber alertas automáticas que certos produtos não foram ofertados por exemplo porque está faltando de De-Para´s.
+ 	 Resposta de Saulo: 
+		Isso fizemos nenhum de-para
+		
+		     
+     O seguinte select mostra apenas que Leão importou uma planilha no caso do APS Cloud / Marizpan, 
+     e que a TI da Propão faz a manutenção dos De-Para´s:
+     
+SELECT u.cd_usuario_sistema_ususis
+     , p.nm_pessoa
+     , pf.cd_produto_fornecedor_prdfor
+	 , pf.dt_alteracao_prdfor
+  FROM [dbo].[Usuario_Sistema] u
+       inner join dbo.Pessoa p on p.id_pessoa = u.id_pessoa
+       inner join dbo.Produto_Fornecedor pf on pf.user_id_ususis = u.user_id
+	                                        and pf.id_fornecedor_fornec = 1995
+											and cd_produto_fornecedor_prdfor is not null
+  order by pf.dt_alteracao_prdfor desc
+		
+		

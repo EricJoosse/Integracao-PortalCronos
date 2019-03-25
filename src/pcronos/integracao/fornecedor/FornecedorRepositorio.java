@@ -210,29 +210,64 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "03042263000151";
 
+		
 		i++;
 		f[i].IdFornecedor = 1995;
 		f[i].NomeFantasiaEmpresa = "Marizpan";
+		f[i].cnpjFornecedor = "12286800000108";
 		f[i].versaoIntegrador = "2.8.5";
 		f[i].SiglaSistemaFornecedor = "APS";
-		f[i].FuncaoResponsavelTI = "Analista";
-		f[i].FuncaoResponsavelTIAlternativo = "Sócio do APS";
-		f[i].EmailResponsavelTI = "saulo@apsinformatica.com.br";
-		f[i].EmailResponsavelTIAlternativo = "";
-		f[i].SkypeResponsavelTI = "Saulo Gomes de Lima (saulo_analista)";
-		f[i].SkypeResponsavelTIAlternativo = "Bernardino Borba (live:berna31pe)";
-		f[i].ApelidoResponsavelTI = "Saulo"; 
-		f[i].ApelidoResponsavelTIAlternativo = "Bernardino";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-marizpan";
-		f[i].versaoJRE = "jre1.8.0_191";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
 		f[i].dirProgramFiles = "Program Files (x86)";
-		f[i].cnpjFornecedor = "12286800000108";
+		f[i].versaoJRE = "jre1.8.0_191";
+
+		f[i].EmailResponsavelTI = "saulo@apsinformatica.com.br";
+		f[i].SkypeResponsavelTI = "Saulo Gomes de Lima (saulo_analista)";
+		f[i].ApelidoResponsavelTI = "Saulo"; 
+		f[i].FuncaoResponsavelTI = "Analista";
+		
+		f[i].EmailResponsavelTIAlternativo = "";		
+		f[i].SkypeResponsavelTIAlternativo = "Bernardino Borba (live:berna31pe)";		
+		f[i].ApelidoResponsavelTIAlternativo = "Bernardino";
+		f[i].FuncaoResponsavelTIAlternativo = "Sócio do APS";
+		
 		f[i].EmailResponsavelTI_Nuvem = "saulo@apsinformatica.com.br";
 		f[i].SkypeResponsavelTI_Nuvem = "Saulo Gomes de Lima (saulo_analista)"; 
 		f[i].ApelidoResponsavelTI_Nuvem = "Saulo"; 
 
+		
+/*  Template:
+    =========
+    !!!!!!!!! Não se esqueça incremementar o variável constante "qtdFornecedores" mais 1 !!!!!
+    
+		i++;
+		f[i].IdFornecedor = ;
+		f[i].NomeFantasiaEmpresa = "";
+		f[i].cnpjFornecedor = "";
+		f[i].versaoIntegrador = "";
+		f[i].SiglaSistemaFornecedor = "";
+		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].usuarioWebservice = "";
+		f[i].tipoSO = ""; 
+		f[i].dirProgramFiles = "";
+		f[i].versaoJRE = "";
+
+		f[i].EmailResponsavelTI = "";
+		f[i].SkypeResponsavelTI = "";
+		f[i].ApelidoResponsavelTI = ""; 
+		f[i].FuncaoResponsavelTI = "";
+		
+		f[i].EmailResponsavelTIAlternativo = "";		
+		f[i].SkypeResponsavelTIAlternativo = "";		
+		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].FuncaoResponsavelTIAlternativo = "";
+		
+		f[i].EmailResponsavelTI_Nuvem = "";
+		f[i].SkypeResponsavelTI_Nuvem = ""; 
+		f[i].ApelidoResponsavelTI_Nuvem = ""; 
+ */
 		
 		for (int j=0; j < (qtdFornecedores); j++) {
 			hashMap.put(f[j].IdFornecedor, f[j]);

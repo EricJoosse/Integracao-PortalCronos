@@ -29,8 +29,9 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
    que cria /"Arquivos de Programas PC"/* no servidor do fornecedor, da seguinte forma :
       - Selecionar todos os arquivos porém apenas um (1) dos subdiretórios no raiz do diretório navegado no Windows Explorer
-      - selecionar apenas UM (ou nenhum) dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
-      - selecionar apenas UM (ou nenhum) dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
+      - Apenas no caso que é para instalar Java:
+      		- selecionar apenas UM dos dois arquivos jre-8u92-windows-i586.exe ou jre-8u92-windows-x64.exe
+      		- selecionar apenas UM dos dois arquivos DeshabilitarJavaUpdates.i586.reg ou DeshabilitarJavaUpdates.x64.reg
       - selecionar o subdiretório \Integração Fornecedor - Portal Cronos\ com conteúdo completa.
       - NÃO selecionar nenhum arquivo  Instalador*.exe  
                        
