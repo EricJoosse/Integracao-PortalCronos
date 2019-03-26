@@ -1181,7 +1181,7 @@ public final class IntegracaoFornecedorCompleta {
 
 				           	    	    while (linha != null)
 				           	    	    {
-				           	    	    	if (linha.indexOf("InnerException") > 0 && linha.indexOf("Execution Timeout Expired") > 0)
+				           	    	    	if (linha.indexOf("InnerException") >= 0 && linha.indexOf("Execution Timeout Expired") > 0)
 				           	    	    	{
 						           	    	    br.close();
 						           	    	    

@@ -419,9 +419,11 @@ public class TestadorSnippets {
         	 File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
   			 LocalDateTime horaInicioSelect = LocalDateTime.now();
            	 
-  	    	 for (final File file : dirLogRemoto.listFiles()) 
+  	    	 arquivoloop: for (final File file : dirLogRemoto.listFiles()) 
         	 {
-				 LocalDateTime datahoraArquivoLog = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+  	     	     System.out.println("file.getName() = " + file.getName());
+
+     	     	 LocalDateTime datahoraArquivoLog = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
 
 				 if (    file.getName().startsWith("ws-jrembalagem" + ".") 
         	    	  && file.getName().endsWith(".log") 
@@ -432,24 +434,18 @@ public class TestadorSnippets {
         	    	  && datahoraArquivoLog.isAfter(horaInicioSelect.minusMinutes(15)) 
         	    	)
         	     {
-	 	  	        System.out.println("if entrado ");
-	 	 	  	    System.out.println("file.getName() = " + file.getName());
-
-
 	 	  	        BufferedReader br = new BufferedReader(new FileReader(dirLogRemoto + "/" + file.getName()));
         	    	try 
         	    	{
         	    	    String linha = br.readLine();
 
         	    	    while (linha != null)
-        	    	    {
-        	 	 	  	    System.out.println("linha = " + linha);
-        	 	 	  	    
-        	 	 	  	if (linha.indexOf("InnerException") > 0 && linha.indexOf("timeout") > 0)
+        	    	    {        	 	 	  	    
+        	 	 	  	    if (linha.indexOf("InnerException") >= 0 && linha.indexOf("Execution Timeout Expired") > 0)
         	    	    	{
 		           	    	    br.close();
 		           	    	    System.out.println("timeout encontrado com sucesso!");
-		           	    	    
+		           	    	    continue arquivoloop;
         	    	    		
         	    	    	}
         	    	    	else
