@@ -1190,7 +1190,9 @@ public final class IntegracaoFornecedorCompleta {
 						           	    	    stmtTimeout.setInt(1, f.IdFornecedor);
 						           	    	    stmtTimeout.executeUpdate();
 						           	    	    
-				           	    	    		// Neste caso NÃO tem como verificar o estoque abaixo, então sair do loop atual, 
+								 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa, null, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa + " resolvido automaticamente", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+
+								 	             // Neste caso NÃO tem como verificar o estoque abaixo, então sair do loop atual, 
 						           	    	    // e nem faz sentido verificar as demais cotações no caso que aconteceu timeout, 
 				           	    	    		// então continuar com o próximo fornecedor:
 						           	    	    continue fornecedorloop;
