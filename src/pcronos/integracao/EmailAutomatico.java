@@ -271,7 +271,7 @@ File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCr
 	    	qtdEmailsEnviadosFornecedorUltimos3horas += 1;
 	    }
 	    
-	    if (file.getName().startsWith(nmFornecedor) && file.getName().indexOf(cdCotacao) > 0)
+	    if (file.getName().startsWith(nmFornecedor) && cdCotacao != null && file.getName().indexOf(cdCotacao) > 0)
 	    {
 	    	isEnviadoJa = true;
 	    }
