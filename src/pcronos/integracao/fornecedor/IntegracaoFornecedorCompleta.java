@@ -946,8 +946,12 @@ public final class IntegracaoFornecedorCompleta {
 		java.sql.Connection conn = null;
 		java.sql.CallableStatement cstat = null;
 		java.sql.ResultSet rSet = null;
-
-			
+		
+		// No caso que tem arquivos de Erro interno no monitoramento, parar o envio de emails, exceto: 
+		//   1. Emails de tipo INI
+		//   2. Emails que timeout foi resolvido automaticamente
+		boolean toBloquearEnvioEmailsComuns = false;
+		
 		debugar("monitorarPendencias() entrado");
 		
 		try
@@ -969,7 +973,7 @@ public final class IntegracaoFornecedorCompleta {
 					// automaticamente nunca mais enviar nenhum email (nem sobre fornecedores nem sobre o monitoramento) 
 			    	// até este arquivo de log de erro será excluido: 
 					debugar("monitorarPendencias(): o monitoramento foi abortado pois um dos processamentos anteriores deu erro!");
-			    	return;
+			    	toBloquearEnvioEmailsComuns = true;
 			    }
 			}
 		    	
@@ -1008,7 +1012,8 @@ public final class IntegracaoFornecedorCompleta {
      	   		 
 	             rSet = cstat.getResultSet();
 	             
-	             cotacoesloop: while (rSet.next()) {
+	             cotacoesloop: while (rSet.next()) 
+	             {
 	     	   		 debugar("monitorarPendencias(): while (rSet.next()) entrado");
 
 		             String body = "";
@@ -1248,8 +1253,11 @@ public final class IntegracaoFornecedorCompleta {
 			     	        		 // Enviar email de erro interno:
  			     	        		 body += "Erro interno: qtdProdutosComEstoque não encontrado para cotação " + cdCotacao + ", fornecedor " + nmFornecedor;
 					            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
-					            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
-					 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+					            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	
+					            	 
+					 	             if (!toBloquearEnvioEmailsComuns)
+					 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+					 	             
 			     	        		 continue cotacoesloop;
 			     	        	 }
 			     	        	 else if (qtdProdutosComEstoque == 0)
@@ -1438,7 +1446,12 @@ public final class IntegracaoFornecedorCompleta {
 	            	 } // else if (Utils.isNullOrBlank(nmFornecedor)) 
 
 
-	            	 if (!Utils.isNullOrBlank(nmFornecedor)) {
+	            	 if (    !Utils.isNullOrBlank(nmFornecedor)  
+	            		  && (       nmFornecedor.equals("INI") 
+	            				  || (!nmFornecedor.equals("INI") && !toBloquearEnvioEmailsComuns)
+	            			 )
+	                    ) 
+	            	 {
 		 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
 		             }  // if (!Utils.isNullOrBlank(nmFornecedor))
 	            	 
@@ -1455,7 +1468,9 @@ public final class IntegracaoFornecedorCompleta {
 	    catch (java.lang.Exception ex) { 
 			debugar("monitorarPendencias() - catch ex entrado");
 	       logarErro(ex, false);	      
- 	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+
+            if (!toBloquearEnvioEmailsComuns)
+   	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 	    }
 	    finally { 
 	      if (cstat != null) {
