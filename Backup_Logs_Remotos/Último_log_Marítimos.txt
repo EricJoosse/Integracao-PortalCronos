@@ -1,0 +1,1 @@
+Ainda não tinha log remoto na versão 1.2.3 (só a partir de 2.1.0)

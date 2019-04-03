@@ -15,5 +15,9 @@ public class Constants {
        //  No ambiente de produção o Agendador de Tarefas de Windows executa um arquivo .bat 
        //  então também searches relative to the current directory DOS is in, which happens to coincide 
        //  with the directory the jar-file is in.	
+	   
+	   
+	   public static final String DIR_LOG_REMOTO = "C:/ProgramData/PortalCronos/Logs/Remoto/Integracao";
+	   // O seguinte funciona também em dir = new File(xxx): "C:\\ProgramData\\PortalCronos\\Logs\\Remoto\\Integracao"
 
 }

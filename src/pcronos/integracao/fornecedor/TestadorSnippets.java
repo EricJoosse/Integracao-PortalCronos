@@ -209,7 +209,7 @@ public class TestadorSnippets {
 	  {
 		    LocalDateTime horaInicio = LocalDateTime.now();
   	    	Integer qtdProdutosComEstoque2 = null;
-          	File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
+          	File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO); 
           	for (final File file : dirLogRemoto.listFiles()) 
           	{
           	     if (       file.getName().startsWith("ws-jrembalagem" + ".") 
@@ -416,7 +416,7 @@ public class TestadorSnippets {
 	  }
 
 	  private static void testarProcuraTimeouts() throws IOException {
-        	 File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
+        	 File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO); 
   			 LocalDateTime horaInicioSelect = LocalDateTime.now();
            	 
   	    	 arquivoloop: for (final File file : dirLogRemoto.listFiles()) 

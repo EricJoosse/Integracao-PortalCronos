@@ -1,0 +1,23 @@
+12/02/2019 17:19:41: sun.boot.class.path = C:\Program Files\Java\jre1.8.0_92\lib\resources.jar;C:\Program Files\Java\jre1.8.0_92\lib\rt.jar;C:\Program Files\Java\jre1.8.0_92\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_92\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_92\lib\jce.jar;C:\Program Files\Java\jre1.8.0_92\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_92\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_92\classes
+12/02/2019 17:19:41: CnpjFornecedor                    = 07041307000180
+12/02/2019 17:19:42: NomeFantasiaFornecedor            = SOST
+12/02/2019 17:19:42: SiglaSistema                      = WinThor
+12/02/2019 17:19:42: VerificarEstoque                  = true
+12/02/2019 17:19:42: CriterioVerificacaoEstoque        = QtdEstoqueMaiorZero
+12/02/2019 17:19:42: ObsOfertasPadraoSeNaoTemNoSistema = 
+12/02/2019 17:19:42: UsarValorMinimoSistemaFornecedor  = false
+12/02/2019 17:19:43: TipoBancoDeDados                  = Oracle
+12/02/2019 17:19:43: EnderecoIpServidorBancoDeDados    = 192.168.254.200
+12/02/2019 17:19:43: InstanciaBancoDeDados             = DBPROD
+12/02/2019 17:19:43: PortaServidorBancoDeDados         = 1521
+12/02/2019 17:19:43: UsuarioBancoDeDados               = usercronos
+12/02/2019 17:19:43: SenhaBancoDeDados                 = mz2+MvHsDAq/7EZTDlnZAQ==
+12/02/2019 17:19:44: SenhaBancoDeDadosCriptografada    = true
+12/02/2019 17:19:44: EnderecoBaseWebService            = http://www.portalcronos.com.br/v2/api/
+12/02/2019 17:19:44: TipoAmbiente                      = P
+12/02/2019 17:19:44: UsuarioWebService                 = ws-sost
+12/02/2019 17:19:44: SenhaWebService                   = sost@web204
+12/02/2019 17:19:44: SenhaWebServiceCriptografada      = false
+12/02/2019 17:19:45: DiretorioArquivosXml              = C:/temp/PortalCronos/XML/
+12/02/2019 17:19:45: QtdDiasArquivosXmlGuardados       = 15
+12/02/2019 17:19:45: Debugar                           = true

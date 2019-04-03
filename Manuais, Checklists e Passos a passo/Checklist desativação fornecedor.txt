@@ -1,0 +1,7 @@
+Checklist desativação fornecedor
+================================
+
+- Fazer backup das últimas configurações, copiando isso do último arquivo de log remoto 
+  para um arquivo novo  /Backup_Logs_Remotos/Último_log_<NomeEmpresa>.txt
+  
+- ........

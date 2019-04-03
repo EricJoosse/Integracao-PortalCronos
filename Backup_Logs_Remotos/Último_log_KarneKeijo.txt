@@ -1,0 +1,12 @@
+03/04/2019 08:19:47: sun.boot.class.path = C:\Program Files\Java\jre1.8.0_92\lib\resources.jar;C:\Program Files\Java\jre1.8.0_92\lib\rt.jar;C:\Program Files\Java\jre1.8.0_92\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_92\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_92\lib\jce.jar;C:\Program Files\Java\jre1.8.0_92\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_92\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_92\classes
+03/04/2019 08:19:47: CnpjFornecedor                    = 24150377000195
+03/04/2019 08:19:47: NomeFantasiaFornecedor            = Karne Keijo
+03/04/2019 08:19:47: SiglaSistema                      = SAP
+03/04/2019 08:19:48: EnderecoBaseWebService            = http://www.portalcronos.com.br:81/v2/api/
+03/04/2019 08:19:48: TipoAmbiente                      = H
+03/04/2019 08:19:48: UsuarioWebService                 = ws-karnekeijo
+03/04/2019 08:19:48: SenhaWebService                   = 123456
+03/04/2019 08:19:48: SenhaWebServiceCriptografada      = false
+03/04/2019 08:19:48: DiretorioArquivosXml              = C:/ProgramData/PortalCronos/Logs/Local/
+03/04/2019 08:19:49: QtdDiasArquivosXmlGuardados       = 100
+03/04/2019 08:19:49: Debugar                           = true

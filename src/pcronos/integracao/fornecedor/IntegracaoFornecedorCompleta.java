@@ -1164,7 +1164,7 @@ public final class IntegracaoFornecedorCompleta {
 			     	   		 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque entrado");
 
 			     	   		 Integer qtdProdutosComEstoque = null;
-				           	 File dirLogRemoto = new File("C:/ProgramData/PortalCronos/Logs/Remoto/Integracao"); 
+				           	 File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO); 
 				           	 
 				           	 for (final File file : dirLogRemoto.listFiles()) 
 				           	 {
@@ -2490,7 +2490,7 @@ public final class IntegracaoFornecedorCompleta {
 	   
 	   
 	   // Limpeza dos arquivos próprios deste serviço (arquivos .log e .xml):
-	   dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCronos\\XML"
+	   dir = new File(diretorioArquivosXmlSemBarraNoFinal); 
 	// System.out.println("dir = " + dir.getAbsolutePath());
 	   for (final File file : dir.listFiles()) 
 	   {
@@ -2504,14 +2504,29 @@ public final class IntegracaoFornecedorCompleta {
 	   }
 	   
 	   
-	   
+
+	  if (siglaSistema.equals("PCronos")) 
+	  {
+		   // Limpeza dos arquivos remotos deste serviço (arquivos .log):
+		   // É importante porque o monitorador pesquisa todos os arquivos de log com cada rodada.
+       	   File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO); 
+		   for (final File file : dirLogRemoto.listFiles()) 
+		   {
+			   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+			   
+			   if (datahoraArquivo.isBefore(horaInicio.minusDays(qtdDiasArquivosXmlGuardados))) 
+			   {
+			      file.delete();
+			   }
+		   }
+
+	  
+	  
 	  // Limpeza seletiva dos arquivos ws-karnekeijo.Erro.Homologacao.*.log no dir ...\Logs\Remoto\Integracao\
 	  // pois estão atrapalhando muito, deixando apenas o último destes arquivos:
-	  if (siglaSistema.equals("PCronos")) {
-		  dir = new File("C:\\ProgramData\\PortalCronos\\Logs\\Remoto\\Integracao");
 
 		  int qtdArqsRepetidos = 0;
-		  for (final File file : dir.listFiles()) 
+		  for (final File file : dirLogRemoto.listFiles()) 
 		  {
 			    if (file.getName().startsWith("ws-karnekeijo.Erro.Homologacao.") && file.getName().endsWith(".log"))
 			           qtdArqsRepetidos++; 
@@ -2519,7 +2534,7 @@ public final class IntegracaoFornecedorCompleta {
 		  }
 		  
 		  if (qtdArqsRepetidos > 1) {
-			  for (final File file : dir.listFiles()) 
+			  for (final File file : dirLogRemoto.listFiles()) 
 			  {
 				    if (file.getName().startsWith("ws-karnekeijo.Erro.Homologacao.") && file.getName().endsWith(".log"))
 				    {
@@ -2532,7 +2547,7 @@ public final class IntegracaoFornecedorCompleta {
 				    }
 			  }
 		  }
-	  }
+	  } // if (siglaSistema.equals("PCronos"))
    }
 
    
