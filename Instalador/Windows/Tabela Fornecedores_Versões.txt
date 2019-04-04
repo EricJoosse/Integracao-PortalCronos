@@ -7,7 +7,7 @@ Prolac 			 30	WinThor		(64 bit)    	Sim				187.103.76.53	Não precisa		15 min		tr
 Marítimos		 21	WinThor		(.. bit)    	Não	  											15 min		true	C	  	 48 GB		100			Marítimos					
 Karne Keijo		 60	SAP			(.. bit)    	Não												15 min		true	C	  	 62 GB		100			Karne Keijo					
 Comal 			 33	WinThor		(.. bit)    	Sim				187.1.168.74		80			15 min		true	C	  	 69 GB		100			Comal			98609-4887
-Monitoramento    -- PCronos     (.. bit)    	Sim				Não se aplica	Não se aplica	15 min		false	C	  	 90 GB		 30			Monitoramento
+Monitoramento    -- PCronos     (.. bit)    	Sim				Não se aplica	Não se aplica	15 min		false	C	  	 90 GB		 32			Monitoramento
 SOST (BA)		170 WinThor     (.. bit)    	Sim												15 min		true	C	  	0.6 GB		 15			SOST (BA)		 	
 Walmart         385 PCronos		(.. bit) 	 	  																									Walmart
 Propão 			171	WinThor		(.. bit)    	Sim				187.113.65.138	Não precisa		15 min		true	C	  	167 GB		100			Propão			99535-1999

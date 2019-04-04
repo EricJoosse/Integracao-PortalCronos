@@ -117,7 +117,7 @@ Eric
 
        (iv)  (a) No arquivo de configuração, no caso que "SiglaSistema" = "PCronos" (servidor de monitoramento automático): 
        				- "debug" = "false" 
-             		- "QtdDiasArquivosXmlGuardados" = "30"
+             		- "QtdDiasArquivosXmlGuardados" = "32" (para sempre ter arquivos de log de um mês completo)
                  
 
              (b) No arquivo de configuração, no caso que "SiglaSistema" != "PCronos" ( servidores dos fornecedores): 
@@ -127,6 +127,9 @@ Eric
 			 (c) Preencher no arquivo "Tabela Fornecedores_Versões.txt":
 	    		- a coluna "Debug"       
 	    		- a coluna "Qtd.Dias"   
+	    		
+	    	 (d) No caso de servidore s de fornecedores: 
+	    	       - Remover todas as referências ao monitorador (pesquisar o texto "monitor")
 
 
 
