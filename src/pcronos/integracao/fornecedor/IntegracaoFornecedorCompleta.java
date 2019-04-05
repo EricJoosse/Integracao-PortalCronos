@@ -1165,6 +1165,7 @@ public final class IntegracaoFornecedorCompleta {
 
 			     	   		 Integer qtdProdutosComEstoque = null;
 				           	 File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO); 
+				           	 boolean IsFornecedorPingou = true;
 				           	 
 				           	 for (final File file : dirLogRemoto.listFiles()) 
 				           	 {
@@ -1220,6 +1221,14 @@ public final class IntegracaoFornecedorCompleta {
 				           	    		    && file.getName().indexOf("." + "Debug" + ".") > 0
 				           	    		 ) 
 				           	     {
+				           	    	// Somente enviar o erro "Erro interno: qtdProdutosComEstoque não encontrado para cotação xxxx"
+				           	  	    // quando o serviço no servidor do fornecedor não esta parada, 
+				           		    // quer dizer quando o arquivo de debug está com data/hora recente:
+				           	    	if (!datahoraArquivoLog.isAfter(horaInicioSelect.minusMinutes(15)))
+				           	    	{
+				           	    		IsFornecedorPingou = false;
+				           	    	}
+				           	    	 
 				           	    	BufferedReader br = new BufferedReader(new FileReader(dirLogRemoto + "/" + file.getName()));
 				           	    	try 
 				           	    	{
@@ -1244,30 +1253,38 @@ public final class IntegracaoFornecedorCompleta {
 			     	   		 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque passado");
 			     	   		 
 			     	   		 
-			     	   		 
-			     	   		 // Se cair aqui no programa, em todos os casos, QtdOfertados == 0 
-			     	         if (f.versaoIntegrador.compareTo("2.7.0") >= 0 || f.versaoIntegrador.compareTo("2.7") >= 0)
-			     	         {
-			     	        	 if (qtdProdutosComEstoque == null)
-			     	        	 {
-			     	        		 // Enviar email de erro interno:
- 			     	        		 body += "Erro interno: qtdProdutosComEstoque não encontrado para cotação " + cdCotacao + ", fornecedor " + nmFornecedor;
-					            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
-					            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	
-					            	 
-					 	             if (!toBloquearEnvioEmailsComuns)
-					 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
-					 	             
-			     	        		 continue cotacoesloop;
-			     	        	 }
-			     	        	 else if (qtdProdutosComEstoque == 0)
-			     	        		 continue cotacoesloop;
-			     	         }
+			     	   		 if (IsFornecedorPingou)
+			     	   		 {			     	   		 
+				     	   		 // Se cair aqui no programa, em todos os casos, QtdOfertados == 0 
+				     	         if (f.versaoIntegrador.compareTo("2.7.0") >= 0 || f.versaoIntegrador.compareTo("2.7") >= 0)
+				     	         {
+				     	        	 if (qtdProdutosComEstoque == null)
+				     	        	 {
+				     	        		 // Enviar email de erro interno:
+	 			     	        		 body += "Erro interno: qtdProdutosComEstoque não encontrado para cotação " + cdCotacao + ", fornecedor " + nmFornecedor;
+						            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
+						            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	
+						            	 
+						 	             if (!toBloquearEnvioEmailsComuns)
+						 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+						 	             
+				     	        		 continue cotacoesloop;
+				     	        	 }
+				     	        	 else if (qtdProdutosComEstoque == 0)
+				     	        		 continue cotacoesloop;
+				     	         }
+				     	         else 
+				     	         {
+				     	        	 if (qtdMeusProdutos <= 3)
+				     	        		 continue cotacoesloop;
+				     	         }
+			     	   		 }
 			     	         else 
 			     	         {
 			     	        	 if (qtdMeusProdutos <= 3)
 			     	        		 continue cotacoesloop;
 			     	         }
+			     	   		 
 			     	         
 			     	         
 				           	 
