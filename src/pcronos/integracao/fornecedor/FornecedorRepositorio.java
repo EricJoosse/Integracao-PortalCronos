@@ -222,6 +222,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
 		f[i].dirProgramFiles = "Program Files (x86)";
 		f[i].versaoJRE = "jre1.8.0_191";
+		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
 
 		f[i].EmailResponsavelTI = "saulo@apsinformatica.com.br";
 		f[i].SkypeResponsavelTI = "Saulo Gomes de Lima (saulo_analista)";

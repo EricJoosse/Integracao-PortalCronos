@@ -28,6 +28,7 @@ public class Fornecedor {
 	public String EmailResponsavelTI_Nuvem;
 	public String SkypeResponsavelTI_Nuvem;
 	public String ApelidoResponsavelTI_Nuvem;
+	String ResponsavelDeParasProdutos;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

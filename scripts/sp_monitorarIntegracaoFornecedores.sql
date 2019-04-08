@@ -44,7 +44,7 @@ declare @fornecedor_id  int
 
 if (Datepart(day, getDate()) = 2 and Datepart(month, getDate()) = 1 and Datepart(year, getDate()) = 2020 and Datepart(hour, getDate()) = 7)
   begin
-    -- Na hora de 02/01/2020 de 07:00 até 08:00 horas: 
+    -- Ano novo: na hora de 02/01/2020 de 07:00 até 08:00 horas: 
     set @ini = Dateadd("hour", -44, getDate()) -- 1 feriado integral + meio expediente = 7 + 24 + 8 + 5
   end
   
@@ -68,7 +68,7 @@ else if (Datepart(day, getDate()) = 6 and Datepart(month, getDate()) = 3 and Dat
   
   else if (Datepart(day, getDate()) = 18 and Datepart(month, getDate()) = 11 and Datepart(year, getDate()) = 2019 and Datepart(hour, getDate()) = 7)
   begin
-    -- : 
+    -- Proclamação da República: 
     set @ini = Dateadd("hour", -87, getDate()) -- 7 + 48 + 24 + 8 
   end
   
@@ -143,7 +143,6 @@ while @@fetch_status = 0
 
   if @fornecedor_id =    0 -- Para facilitar a manutenção deste if 
   or @fornecedor_id =  385 -- Walmart  ainda não está em produção 
-  or @fornecedor_id = 1995 -- Marizpan ainda não está em produção 
     begin
       if (
          --  ((select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))

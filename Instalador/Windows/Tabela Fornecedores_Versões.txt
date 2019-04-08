@@ -12,7 +12,7 @@ SOST (BA)		170 WinThor     (.. bit)    	Sim												15 min		true	C	  	0.6 GB	
 Walmart         385 PCronos		(.. bit) 	 	  																									Walmart
 Propão 			171	WinThor		(.. bit)    	Sim				187.113.65.138	Não precisa		15 min		true	C	  	167 GB		100			Propão			99535-1999
 Padeirão 		 14	WinThor		(.. bit)    	Sim				192.141.110.189	Não precisa		15 min		true	C	  	703 GB		100			Padeirão		99116-8070 ou 3073-4551
-Marizpan	   1995	APS Cloud	(32 bit)		Não				18.214.93.120	2525			15 min		true	C		 20 GB		100			Marizpan		99780-1181																									
+Marizpan	   1995	APS Cloud	(32 bit)		Sim				18.214.93.120	2525			15 min		true	C		 20 GB		100			Marizpan		99780-1181																									
 
 
 Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
