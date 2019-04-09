@@ -1735,7 +1735,10 @@ public final class IntegracaoFornecedorCompleta {
 		
 		    if (cdCondicaoPagamento.equals("") && !toNaoVerificarDemaisErros)
 		    {
-		      enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + (dsComprador != "" ? dsComprador : cdComprador) + " (CNPJ " + cdComprador + ") não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+		    	if (!Utils.isNullOrBlank(dsComprador))
+		             enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + dsComprador + " (CNPJ " + cdComprador + ") não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
+		    	else
+			         enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora com CNPJ " + cdComprador + " não foi informada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");
 		    }
 		
 		
