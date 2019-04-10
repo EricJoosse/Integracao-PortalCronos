@@ -1103,7 +1103,6 @@ public final class IntegracaoFornecedorCompleta {
 		     	   		 
 		     	   		 cdCotacao = rSet.getString(11);
 	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
-		            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		           	     DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm");
 		           	     
@@ -1135,8 +1134,9 @@ public final class IntegracaoFornecedorCompleta {
 		            	 //???????????????????????????????
 		            	 if (!Utils.isNullOrBlank(rSet.getString(6))) 
 		            	 {
-			            	 body += "Assunto: Erro integração " + nmFornecedor + " - " + rSet.getString(6) + "\r\n"
-		            			  + "Para: leao@cronos-tech.com.br"+ "\r\n"
+		            		 assunto = "Cadastro incompleto integração " + nmFornecedor;
+		            		 
+			            	 body += "Para: leao@cronos-tech.com.br"+ "\r\n"
 		            			  + "Leão, " + strParteDoDia + "!" + "\r\n"
  	            				  + " " + "\r\n"
  	            				  + "Recebi um email automático (provisório) com o seguinte erro: " + "\r\n"
@@ -1161,7 +1161,9 @@ public final class IntegracaoFornecedorCompleta {
 		           	     }
 		           	     else 
 		           	     {
-			     	   		 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque entrado");
+			            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
+
+			            	 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque entrado");
 
 			     	   		 Integer qtdProdutosComEstoque = null;
 				           	 File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO); 
@@ -1320,7 +1322,6 @@ public final class IntegracaoFornecedorCompleta {
 				              				                     )
 		    		                                           : ""
 				              			 )                                
-				            	      +  "Erro: " + rSet.getString(6) + "\r\n" 
 				            		  +  "\r\n\r\n\r\n\r\n";
 				            	 
 				            	 body += "LIGAR O SKYPE!!!!!!\r\n";
