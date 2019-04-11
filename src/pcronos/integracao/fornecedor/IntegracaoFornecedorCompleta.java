@@ -1018,6 +1018,7 @@ public final class IntegracaoFornecedorCompleta {
 
 		             String body = "";
 		             String assunto = "";
+            	     boolean toSegurarEmail = false;
 	            	 String nmFornecedor = null;
 	            	 String cdCotacao = null;
 
@@ -1061,7 +1062,7 @@ public final class IntegracaoFornecedorCompleta {
 		     				  LocalTime nowUtcTime = LocalTime.now();
 
 		     				  if (horaInicio.getDayOfWeek() == DayOfWeek.TUESDAY && nowUtcTime.isAfter(time1) && nowUtcTime.isBefore(time2)) { 
-		     				 	  return;
+		     					 toSegurarEmail = true; // return;
 		     				  }
 		     			  }
 		     			  
@@ -1094,7 +1095,7 @@ public final class IntegracaoFornecedorCompleta {
 		     						  || (horaInicio.getMonth() == Month.DECEMBER && horaInicio.getDayOfMonth() == 25)
 		     						  || (horaInicio.getMonth() == Month.DECEMBER && horaInicio.getDayOfMonth() == 31 && nowUtcTime.isAfter(timeIniAlmoco))
 		     				     ) { 
-		     				 	  return;
+		     					 toSegurarEmail = true; // return;
 		     				  }
 		     			  }
 
@@ -1198,7 +1199,10 @@ public final class IntegracaoFornecedorCompleta {
 						           	    	    stmtTimeout.setInt(1, f.IdFornecedor);
 						           	    	    stmtTimeout.executeUpdate();
 						           	    	    
-								 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa, null, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa + " resolvido automaticamente", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+							            		// Independente de toSegurarEmail, em todos os casos, enviar 
+						           	    	    // este tipo de email dentro e fora do expediente, e durante horários de pico,
+						           	    	    // pois não tem como acumular isso:
+								 	            EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa, null, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa + " resolvido automaticamente", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
 
 								 	             // Neste caso NÃO tem como verificar o estoque abaixo, então sair do loop atual, 
 						           	    	    // e nem faz sentido verificar as demais cotações no caso que aconteceu timeout, 
@@ -1267,7 +1271,8 @@ public final class IntegracaoFornecedorCompleta {
 						            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 						            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	
 						            	 
-						 	             if (!toBloquearEnvioEmailsComuns)
+						            	 // !toSegurarEmail: não enviar fora do expediente:
+						 	             if (!toBloquearEnvioEmailsComuns && !toSegurarEmail)
 						 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
 						 	             
 				     	        		 continue cotacoesloop;
@@ -1464,7 +1469,10 @@ public final class IntegracaoFornecedorCompleta {
 	            	 } // else if (Utils.isNullOrBlank(nmFornecedor)) 
 
 
+	            	 // !toSegurarEmail:              não enviar fora do expediente; 
+	            	 // !toBloquearEnvioEmailsComuns: não enviar se o envio de meail está dando erro imprevisto:
 	            	 if (    !Utils.isNullOrBlank(nmFornecedor)  
+	            		  && !toSegurarEmail
 	            		  && (       nmFornecedor.equals("INI") 
 	            				  || (!nmFornecedor.equals("INI") && !toBloquearEnvioEmailsComuns)
 	            			 )
