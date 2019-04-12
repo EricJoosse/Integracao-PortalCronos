@@ -950,7 +950,7 @@ public final class IntegracaoFornecedorCompleta {
 		// No caso que tem arquivos de Erro interno no monitoramento, parar o envio de emails, exceto: 
 		//   1. Emails de tipo INI
 		//   2. Emails que timeout foi resolvido automaticamente
-		boolean toBloquearEnvioEmailsComuns = false;
+		boolean isEnvioEmailouMonitoramentoDandoErroInterno = false;
 		
 		debugar("monitorarPendencias() entrado");
 		
@@ -973,7 +973,7 @@ public final class IntegracaoFornecedorCompleta {
 					// automaticamente nunca mais enviar nenhum email (nem sobre fornecedores nem sobre o monitoramento) 
 			    	// até este arquivo de log de erro será excluido: 
 					debugar("monitorarPendencias(): o monitoramento foi abortado pois um dos processamentos anteriores deu erro!");
-			    	toBloquearEnvioEmailsComuns = true;
+					isEnvioEmailouMonitoramentoDandoErroInterno = true;
 			    }
 			}
 		    	
@@ -1018,7 +1018,7 @@ public final class IntegracaoFornecedorCompleta {
 
 		             String body = "";
 		             String assunto = "";
-            	     boolean toSegurarEmail = false;
+            	     boolean isForaExpedienteOuDurantePico = false;
 	            	 String nmFornecedor = null;
 	            	 String cdCotacao = null;
 
@@ -1062,7 +1062,7 @@ public final class IntegracaoFornecedorCompleta {
 		     				  LocalTime nowUtcTime = LocalTime.now();
 
 		     				  if (horaInicio.getDayOfWeek() == DayOfWeek.TUESDAY && nowUtcTime.isAfter(time1) && nowUtcTime.isBefore(time2)) { 
-		     					 toSegurarEmail = true; // return;
+		     					 isForaExpedienteOuDurantePico = true; // return;
 		     				  }
 		     			  }
 		     			  
@@ -1095,7 +1095,7 @@ public final class IntegracaoFornecedorCompleta {
 		     						  || (horaInicio.getMonth() == Month.DECEMBER && horaInicio.getDayOfMonth() == 25)
 		     						  || (horaInicio.getMonth() == Month.DECEMBER && horaInicio.getDayOfMonth() == 31 && nowUtcTime.isAfter(timeIniAlmoco))
 		     				     ) { 
-		     					 toSegurarEmail = true; // return;
+		     					 isForaExpedienteOuDurantePico = true; // return;
 		     				  }
 		     			  }
 
@@ -1199,7 +1199,7 @@ public final class IntegracaoFornecedorCompleta {
 						           	    	    stmtTimeout.setInt(1, f.IdFornecedor);
 						           	    	    stmtTimeout.executeUpdate();
 						           	    	    
-							            		// Independente de toSegurarEmail, em todos os casos, enviar 
+							            		// Independente de isForaExpedienteOuDurantePico, em todos os casos, enviar 
 						           	    	    // este tipo de email dentro e fora do expediente, e durante horários de pico,
 						           	    	    // pois não tem como acumular isso:
 								 	            EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa, null, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa + " resolvido automaticamente", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
@@ -1271,8 +1271,7 @@ public final class IntegracaoFornecedorCompleta {
 						            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
 						            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	
 						            	 
-						            	 // !toSegurarEmail: não enviar fora do expediente:
-						 	             if (!toBloquearEnvioEmailsComuns && !toSegurarEmail)
+						 	             if (!isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
 						 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
 						 	             
 				     	        		 continue cotacoesloop;
@@ -1469,12 +1468,15 @@ public final class IntegracaoFornecedorCompleta {
 	            	 } // else if (Utils.isNullOrBlank(nmFornecedor)) 
 
 
-	            	 // !toSegurarEmail:              não enviar fora do expediente; 
-	            	 // !toBloquearEnvioEmailsComuns: não enviar se o envio de meail está dando erro imprevisto:
+	            	 // 1. Não enviar emails de tipo Cadastro Incompleto nem emails de tipo Parada fora do expediente, 
+	            	 //    é melhor acumular estes tipos de emails em um único email por fornecedor;
+	            	 // 2. Sempre enviar emails de tipo "INI": fora do expediente também, e mesmo com qq erro interno:
+	            	 // 3. Outros tipos de email não chegam aqui no programa e já foram enviados acima:
+	            	 //         - emails de tipo Timeout
+	            	 //         - emails de tipo Erro interno no Monitorador ou no Envio de Emails
 	            	 if (    !Utils.isNullOrBlank(nmFornecedor)  
-	            		  && !toSegurarEmail
 	            		  && (       nmFornecedor.equals("INI") 
-	            				  || (!nmFornecedor.equals("INI") && !toBloquearEnvioEmailsComuns)
+	            				  || (!nmFornecedor.equals("INI") && !isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
 	            			 )
 	                    ) 
 	            	 {
@@ -1495,7 +1497,7 @@ public final class IntegracaoFornecedorCompleta {
 			debugar("monitorarPendencias() - catch ex entrado");
 	       logarErro(ex, false);	      
 
-            if (!toBloquearEnvioEmailsComuns)
+            if (!isEnvioEmailouMonitoramentoDandoErroInterno)
    	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 	    }
 	    finally { 
