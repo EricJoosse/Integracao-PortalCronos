@@ -3,6 +3,9 @@ package pcronos.integracao.fornecedor;
 import pcronos.integracao.ConfiguracaoException;
 import pcronos.integracao.Criptografia;
 import pcronos.integracao.EmailAutomatico;
+import pcronos.integracao.fornecedor.dto.CotacaoNaoOfertadaDTO;
+import pcronos.integracao.fornecedor.dto.ViradaFornecedorParaProducaoDTO;
+
 import static pcronos.integracao.fornecedor.Utils.printStackTraceToString;
 
 import java.time.LocalDateTime;
@@ -1019,22 +1022,27 @@ public final class IntegracaoFornecedorCompleta {
 		             String body = "";
 		             String assunto = "";
             	     boolean isForaExpedienteOuDurantePico = false;
-	            	 String nmFornecedor = null;
-	            	 String cdCotacao = null;
-
-	            	 nmFornecedor = rSet.getString(2);
+            	     String tipoDTO = rSet.getString(2);
+            	     	            	 
             		 FornecedorRepositorio fRep = new FornecedorRepositorio();
 	            	 
-	            	 if (nmFornecedor != null && nmFornecedor.equals("INI")) {
-	            		 Fornecedor f = fRep.getFornecedor(Integer.parseInt(rSet.getString(1)));
-		            	 assunto = "Integração " + nmFornecedor + " colocada em produção!";
+	            	 if (tipoDTO != null && tipoDTO.equals("INI")) 
+	            	 {
+		            	 ViradaFornecedorParaProducaoDTO dtoVirada = new ViradaFornecedorParaProducaoDTO();
+		            	 dtoVirada.IdFornecedor = Integer.parseInt(rSet.getString(1));
+		            	 dtoVirada.TipoDTO = rSet.getString(2);
+		            	 dtoVirada.IniIntervalo = rSet.getTimestamp(6).toLocalDateTime();
+		            	 dtoVirada.FimIntervalo = rSet.getTimestamp(7).toLocalDateTime();
+		            	 
+	            		 Fornecedor f = fRep.getFornecedor(dto.IdFornecedor);
+		            	 assunto = "Integração " + dto.Nmfornecedor + " colocada em produção!";
 				         body += "Ao setor Desenvolvimento do Portal Cronos," + "\r\n";
 				         body += " " + "\r\n";
-		            	 body += "A integração do fornecedor com id_fornecedor = " + rSet.getString(1) + " foi colocada em produção!\r\n\r\n";
+		            	 body += "A integração do fornecedor com id_fornecedor = " + dto.IdFornecedorString + " foi colocada em produção!\r\n\r\n";
 				         body += " " + "\r\n";
 		            	 body += "1. Provisoriamente (enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
 				         body += "   Favor excluir o \"OR\" deste id_fornecedor no arquivo \"/scripts/sp_monitorarIntegracaoFornecedores.sql\" no projeto Eclipse e executar o script na base de produção. ";
-		            	 body += "Dica: procura \"" + rSet.getString(1) + "\" nesta sp." + "\r\n";
+		            	 body += "Dica: procura \"" + dto.IdFornecedorString + "\" nesta sp." + "\r\n";
 				         body += " " + "\r\n";
 		            	 body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
 				         body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo Tabela Fornecedores_Versões.txt" + "\r\n\r\n";
@@ -1042,14 +1050,29 @@ public final class IntegracaoFornecedorCompleta {
 				     			+ "Atc," + "\r\n"
 			     				+ "O email automático do Portal Cronos " + "\r\n"
 			     				+  "\r\n\r\n\r\n\r\n";
-		            	 dtCadastroIni = rSet.getTimestamp(6).toLocalDateTime();
-		            	 dtCadastroFim = rSet.getTimestamp(7).toLocalDateTime();
+		            	 dtCadastroIni = dtoVirada.IniIntervalo;
+		            	 dtCadastroFim = dtoVirada.FimIntervalo;
 	            	 }
-	            	 else if (!Utils.isNullOrBlank(nmFornecedor)) 
+	            	 else if (!Utils.isNullOrBlank(tipoDTO)) 
 	            	 {
-		     	   		  debugar("monitorarPendencias(): else if (!Utils.isNullOrBlank(nmFornecedor)) entrado");
+		     	   		  debugar("monitorarPendencias(): else if (!Utils.isNullOrBlank(dto.Nmfornecedor)) entrado");
 
- 		            	  int qtdMeusProdutos = rSet.getInt(4);
+		            	  CotacaoNaoOfertadaDTO dto = new CotacaoNaoOfertadaDTO();
+		            	  dto.CdCotacao = null;
+		            	  dto.Nmfornecedor = null;
+
+		            	  dto.IdFornecedor = Integer.parseInt(rSet.getString(1));
+		            	  dto.IdFornecedorString = rSet.getString(1);  //  Integer.toString(rSet.getInt(1))?????			            	 
+		            	  dto.Nmfornecedor = rSet.getString(2);
+		     	   		  dto.Ocorrência = rSet.getString(3);
+		     	   		  dto.QtdMeusProdutos = rSet.getInt(4);
+		     	   		  dto.QtdTentativas = rSet.getInt(5);
+		     	   		  dto.Erro = rSet.getString(6);
+		     	   		  dto.IniIntervalo = rSet.getTimestamp(7).toLocalDateTime();
+		     	   		  dto.FimIntervalo = rSet.getTimestamp(8).toLocalDateTime();
+		     	   		  dto.DtCadastro = rSet.getTimestamp(9).toLocalDateTime();		     	   				  
+		     	   		  dto.DtFimVigencia = rSet.getTimestamp(10).toLocalDateTime();
+		     	   		  dto.CdCotacao = rSet.getString(11);
 		     	   		  
 		     			  // Não enviar APENAS os tipos de emails de paradas dos servidores dos fornecedores durante horários de pico:		   
 		     			  //      Observações: 1. O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
@@ -1102,19 +1125,18 @@ public final class IntegracaoFornecedorCompleta {
 		     			  
 		     	   		 
 		     	   		 
-		     	   		 cdCotacao = rSet.getString(11);
-	            		 Fornecedor f = fRep.getFornecedor(rSet.getInt(1));
+	            		 Fornecedor f = fRep.getFornecedor(dto.IdFornecedor);
 		           	     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		           	     DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm");
 		           	     
 		           	     DateTimeFormatter formatterParenteses = DateTimeFormatter.ofPattern("'('dd/MM/yyyy')' HH:mm");
 		           	     String ateQuando = "";
-		           	     if (rSet.getTimestamp(10).toLocalDateTime().getDayOfYear() == horaInicio.getDayOfYear())
-		           	       ateQuando = "hoje " + rSet.getTimestamp(10).toLocalDateTime().format(formatterParenteses);
-		           	     else if (rSet.getTimestamp(10).toLocalDateTime().getDayOfYear() == (horaInicio.getDayOfYear() + 1))
-			           	       ateQuando = "amanhã " + rSet.getTimestamp(10).toLocalDateTime().format(formatterParenteses);
+		           	     if (dto.DtFimVigencia.getDayOfYear() == horaInicio.getDayOfYear())
+		           	       ateQuando = "hoje " + dto.DtFimVigencia.format(formatterParenteses);
+		           	     else if (dto.DtFimVigencia.getDayOfYear() == (horaInicio.getDayOfYear() + 1))
+			           	       ateQuando = "amanhã " + dto.DtFimVigencia.format(formatterParenteses);
 		           	     else 
-			           	       ateQuando = rSet.getTimestamp(10).toLocalDateTime().format(formatter);
+			           	       ateQuando = dto.DtFimVigencia.format(formatter);
 		           	     
 		            	 String strParteDoDia = null;
 		            	 if (horaInicio.getDayOfWeek() == DayOfWeek.SATURDAY || horaInicio.getDayOfWeek() == DayOfWeek.SUNDAY)
@@ -1133,19 +1155,19 @@ public final class IntegracaoFornecedorCompleta {
 		            	 //        para a cotação 105-0553"
 		            	 // Ficar acomanhando se isso vale para todos os outros casos que Erro == null ou Empty????????
 		            	 //???????????????????????????????
-		            	 if (!Utils.isNullOrBlank(rSet.getString(6))) 
+		            	 if (!Utils.isNullOrBlank(dto.Erro)) 
 		            	 {
-		            		 assunto = "Cadastro incompleto integração " + nmFornecedor;
+		            		 assunto = "Cadastro incompleto integração " + dto.Nmfornecedor;
 		            		 
 			            	 body += "Para: leao@cronos-tech.com.br"+ "\r\n"
 		            			  + "Leão, " + strParteDoDia + "!" + "\r\n"
  	            				  + " " + "\r\n"
  	            				  + "Recebi um email automático (provisório) com o seguinte erro: " + "\r\n"
- 	            				  + "      \"<i>" + rSet.getString(6) + "</i>\"" + "\r\n"
+ 	            				  + "      \"<i>" + dto.Erro + "</i>\"" + "\r\n"
  	            				  + " " + "\r\n"
- 	            				  + rSet.getString(3) + "\r\n\r\n" 
-			              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(qtdMeusProdutos) + "\r\n\r\n" 
-        		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(qtdMeusProdutos) + ") nesta cotação \r\n\r\n"
+ 	            				  + dto.Ocorrência + "\r\n\r\n" 
+			              		  +  ((dto.QtdMeusProdutos < 30) ? "Qtd. Meus Produtos: " + Integer.toString(dto.QtdMeusProdutos) + "\r\n\r\n" 
+        		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(dto.QtdMeusProdutos) + ") nesta cotação \r\n\r\n"
 			              			)
 			              		  +  "e só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
  	            				  + " " + "\r\n"
@@ -1154,7 +1176,7 @@ public final class IntegracaoFornecedorCompleta {
  	            				  + "delete" + "\r\n"
  	            				  + "   from [PCronos_Producao].[dbo].[Integracao_Cotacao_Fornecedor]" + "\r\n"
  	            				  + "  where id_cotacao_cot in (........)  " + "\r\n"
- 	            				  + "    and id_fornecedor_fornec = " + Integer.toString(rSet.getInt(1)) + "\r\n"
+ 	            				  + "    and id_fornecedor_fornec = " + dto.IdFornecedorString + "\r\n"
  	            				  + " " + "\r\n"
  	            				  + "Atc, " + "\r\n"
  	            				  + "Eric " + "\r\n"
@@ -1162,7 +1184,7 @@ public final class IntegracaoFornecedorCompleta {
 		           	     }
 		           	     else 
 		           	     {
-			            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + nmFornecedor;
+			            	 assunto = "URGENTE! Parada integração PCronos / " + f.SiglaSistemaFornecedor + " - " + dto.Nmfornecedor;
 
 			            	 debugar("monitorarPendencias(): leitura qtdProdutosComEstoque entrado");
 
@@ -1202,7 +1224,7 @@ public final class IntegracaoFornecedorCompleta {
 							            		// Independente de isForaExpedienteOuDurantePico, em todos os casos, enviar 
 						           	    	    // este tipo de email dentro e fora do expediente, e durante horários de pico,
 						           	    	    // pois não tem como acumular isso:
-								 	            EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa, null, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa + " resolvido automaticamente", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+								 	            EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa, null, "Monitoramento integração - Info - timeout " + f.NomeFantasiaEmpresa + " resolvido automaticamente", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, dto.Nmfornecedor, dto.CdCotacao);
 
 								 	             // Neste caso NÃO tem como verificar o estoque abaixo, então sair do loop atual, 
 						           	    	    // e nem faz sentido verificar as demais cotações no caso que aconteceu timeout, 
@@ -1239,7 +1261,7 @@ public final class IntegracaoFornecedorCompleta {
 				           	    	try 
 				           	    	{
 				           	    	    String linha = br.readLine();
-				           	    	    String prefix = "Cotacao " + cdCotacao + ": QtdProdutosComEstoque = ";
+				           	    	    String prefix = "Cotacao " + dto.CdCotacao + ": QtdProdutosComEstoque = ";
 
 				           	    	    while (linha != null && !linha.startsWith(prefix, 21))
 				           	    	    {
@@ -1267,12 +1289,12 @@ public final class IntegracaoFornecedorCompleta {
 				     	        	 if (qtdProdutosComEstoque == null)
 				     	        	 {
 				     	        		 // Enviar email de erro interno:
-	 			     	        		 body += "Erro interno: qtdProdutosComEstoque não encontrado para cotação " + cdCotacao + ", fornecedor " + nmFornecedor;
-						            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
-						            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	
+	 			     	        		 body += "Erro interno: qtdProdutosComEstoque não encontrado para cotação " + dto.CdCotacao + ", fornecedor " + dto.Nmfornecedor;
+						            	 dtCadastroIni = dto.IniIntervalo;
+						            	 dtCadastroFim = dto.FimIntervalo;	
 						            	 
 						 	             if (!isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
-						 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+						 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, dto.Nmfornecedor, dto.CdCotacao);
 						 	             
 				     	        		 continue cotacoesloop;
 				     	        	 }
@@ -1281,13 +1303,13 @@ public final class IntegracaoFornecedorCompleta {
 				     	         }
 				     	         else 
 				     	         {
-				     	        	 if (qtdMeusProdutos <= 3)
+				     	        	 if (dto.QtdMeusProdutos <= 3)
 				     	        		 continue cotacoesloop;
 				     	         }
 			     	   		 }
 			     	         else 
 			     	         {
-			     	        	 if (qtdMeusProdutos <= 3)
+			     	        	 if (dto.QtdMeusProdutos <= 3)
 			     	        		 continue cotacoesloop;
 			     	         }
 			     	   		 
@@ -1299,7 +1321,7 @@ public final class IntegracaoFornecedorCompleta {
 				            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
 	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 	+ " " + "\r\n"
-	+ "Recebi um email automático que o Integrador WinThor / PCronos da " + nmFornecedor + " está parado desde sábado (22/09/2018) às 19:25, indevidamente." + "\r\n" 
+	+ "Recebi um email automático que o Integrador WinThor / PCronos da " + dto.Nmfornecedor + " está parado desde sábado (22/09/2018) às 19:25, indevidamente." + "\r\n" 
 	+ "Talvez o adaptador de rede do servidor local está com problemas novamente? Ou talvez tem um conflito de endereços IP novamente? " + "\r\n"
 	+ "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor 187.113.65.138, " + "\r\n"
 	+ "no menu <b>Iniciar > Portal Cronos > Manual Manutenção TI</b>, a última versão da lista de possíveis causas e outras dicas. " + "\r\n"
@@ -1315,16 +1337,16 @@ public final class IntegracaoFornecedorCompleta {
 		           	    	 }
 		           	    	 else 
 		           	    	 {
-				            	 body += rSet.getString(3) + "\r\n\r\n" 
-				              		  +  ((rSet.getInt(4) < 30) ? "Qtd. Meus Produtos: " + Integer.toString(qtdMeusProdutos) + "\r\n\r\n" 
-				              		                            : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(qtdMeusProdutos) + ") nesta cotação!\r\n\r\n"
+				            	 body += dto.Ocorrência + "\r\n\r\n" 
+				              		  +  ((dto.QtdMeusProdutos < 30) ? "Qtd. Meus Produtos: " + Integer.toString(dto.QtdMeusProdutos) + "\r\n\r\n" 
+				              		                                 : "Isso é importante para resolver logo pois tem muitos Meus Produtos (" + Integer.toString(dto.QtdMeusProdutos) + ") nesta cotação!\r\n\r\n"
 				              		     )                                
 				              		  +  "Só temos até " + ateQuando + " para resolver este problema (data fim da cotação). \r\n\r\n"
-				              		  + "Qtd. Tentativas: " + Integer.toString(rSet.getInt(5)) + "\r\n\r\n" 
-				              		  +  ((rSet.getInt(5) > 0) ? ( "Favor verificar o percentual de ocupação da memória RAM ou verificar a comunicação com o servidor de banco.\r\n"
-				              				                     + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
-				              				                     )
-		    		                                           : ""
+				              		  + "Qtd. Tentativas: " + Integer.toString(dto.QtdTentativas) + "\r\n\r\n" 
+				              		  +  ((dto.QtdTentativas > 0) ? ( "Favor verificar o percentual de ocupação da memória RAM ou verificar a comunicação com o servidor de banco.\r\n"
+				              				                        + "Enviar email para o TI: Favor habilitar o Team Viewer/AnyDesk pois preciso analisar os arquivos de log pois esta parada está fora do comum.\r\n\r\n"
+				              				                        )
+		    		                                                : ""
 				              			 )                                
 				            		  +  "\r\n\r\n\r\n\r\n";
 				            	 
@@ -1335,16 +1357,16 @@ public final class IntegracaoFornecedorCompleta {
 	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 	+ " " + "\r\n"
 	+ "<i>Este email foi enviado automaticamente pelo sistema Portal Cronos</i>\r\n"
-	+ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + nmFornecedor + "." + "\r\n"
+	+ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + dto.Nmfornecedor + "." + "\r\n"
 	+ " " + "\r\n"
-	+ "<b>Isso é urgente e importante para resolver logo para evitar que a " + nmFornecedor + " perde muitas oportunidades de venda!</b>" + "\r\n"
+	+ "<b>Isso é urgente e importante para resolver logo para evitar que a " + dto.Nmfornecedor + " perde muitas oportunidades de venda!</b>" + "\r\n"
 	+ " " + "\r\n"
 	+ "OU:  " + "\r\n"
 	+ "Só temos até " + ateQuando + " para resolver este problema (é a data fim da cotação que vence primeiro e que não está ofertada)." + "\r\n"
-	+ "É urgente pois tem muitos produtos vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + " \"Meus Produtos\") pendentes sem ofertas vencendo às " + rSet.getTimestamp(10).toLocalDateTime().format(formatterHora) + " horas!" + "\r\n"
+	+ "É urgente pois tem muitos produtos vendidos pela " + dto.Nmfornecedor + " (" + Integer.toString(dto.QtdMeusProdutos) + " \"Meus Produtos\") pendentes sem ofertas vencendo às " + dto.DtFimVigencia.format(formatterHora) + " horas!" + "\r\n"
 	+ " " + "\r\n"
 	+ "OU:" + "\r\n"
-	+ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + ") nesta cotação!" + "\r\n"
+	+ "É melhor resolver isso logo, pois já tem uma cotação grande pendente com muitos \"Meus Produtos\" vendidos pela " + dto.Nmfornecedor + " (" + Integer.toString(dto.QtdMeusProdutos) + ") nesta cotação!" + "\r\n"
 	+ "E a quantidade de cotações vai crescer rapidamente no final da semana!" + "\r\n"
 	+ " " + "\r\n"
 	+ "OU:" + "\r\n"
@@ -1359,12 +1381,12 @@ public final class IntegracaoFornecedorCompleta {
 	+ " " + "\r\n"
 	+ "OU:" + "\r\n"
 	+ "Se não conseguir resolver antes de " + ateQuando + " horas, favor solicitar os vendedores ofertar as cotações ...... manualmente," + "\r\n" 
-	+ "pois a cotação que vence primeiro e que não está ofertada vence " + rSet.getTimestamp(10).toLocalDateTime().format(formatter) + ","   + "\r\n"
-	+ "e tem muitos produtos vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + " \"Meus Produtos\") nesta cotação!" + "\r\n"
+	+ "pois a cotação que vence primeiro e que não está ofertada vence " + dto.DtFimVigencia.format(formatter) + ","   + "\r\n"
+	+ "e tem muitos produtos vendidos pela " + dto.Nmfornecedor + " (" + Integer.toString(dto.QtdMeusProdutos) + " \"Meus Produtos\") nesta cotação!" + "\r\n"
 	+ " " + "\r\n"
 	+ "OU:" + "\r\n"
 	+ "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
-	+ "pois tem muitos produtos vendidos pela " + nmFornecedor + " (" + Integer.toString(qtdMeusProdutos) + " \"Meus Produtos\") nesta cotação!" + "\r\n"
+	+ "pois tem muitos produtos vendidos pela " + dto.Nmfornecedor + " (" + Integer.toString(dto.QtdMeusProdutos) + " \"Meus Produtos\") nesta cotação!" + "\r\n"
 	+ " " + "\r\n"
 	+ "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
 	+ "Se você não tem nenhuma ideia da causa, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
@@ -1456,16 +1478,16 @@ public final class IntegracaoFornecedorCompleta {
 				     				+ "O email automático do Portal Cronos " + "\r\n"
 				     				+  "\r\n\r\n\r\n\r\n";
 		           	       } // else if (f.IdFornecedor != 171) 
-		           	    } // else if (Utils.isNullOrBlank(rSet.getString(6)))
+		           	    } // else if (Utils.isNullOrBlank(dto.Erro))
 		           	     
-		     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
-		            	dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
-	            	 } 
+		     		    dtCadastroIni = dto.IniIntervalo;
+		            	dtCadastroFim = dto.FimIntervalo;
+	            	 } // else if tipoDTO == ("INI" ou Fornecedor)
 	            	 else 
 	            	 {
-		            	 dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
-		            	 dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();	            		 
-	            	 } // else if (Utils.isNullOrBlank(nmFornecedor)) 
+		            	 dtCadastroIni = dto.IniIntervalo;
+		            	 dtCadastroFim = dto.FimIntervalo;	            		 
+	            	 }  
 
 
 	            	 // 1. Não enviar emails de tipo Cadastro Incompleto nem emails de tipo Parada fora do expediente, 
@@ -1474,13 +1496,13 @@ public final class IntegracaoFornecedorCompleta {
 	            	 // 3. Outros tipos de email não chegam aqui no programa e já foram enviados acima:
 	            	 //         - emails de tipo Timeout
 	            	 //         - emails de tipo Erro interno no Monitorador ou no Envio de Emails
-	            	 if (    !Utils.isNullOrBlank(nmFornecedor)  
-	            		  && (       nmFornecedor.equals("INI") 
-	            				  || (!nmFornecedor.equals("INI") && !isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
+	            	 if (    !Utils.isNullOrBlank(dto.Nmfornecedor)  
+	            		  && (       dto.Nmfornecedor.equals("INI") 
+	            				  || (!dto.Nmfornecedor.equals("INI") && !isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
 	            			 )
 	                    ) 
 	            	 {
-		 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nmFornecedor, cdCotacao);
+		 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, dto.Nmfornecedor, dto.CdCotacao);
 		             }  // if (!Utils.isNullOrBlank(nmFornecedor))
 	            	 
 	             } // while (rSet.next())
