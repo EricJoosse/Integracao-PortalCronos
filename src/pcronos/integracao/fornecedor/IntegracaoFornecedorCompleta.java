@@ -1022,27 +1022,28 @@ public final class IntegracaoFornecedorCompleta {
 		             String body = "";
 		             String assunto = "";
             	     boolean isForaExpedienteOuDurantePico = false;
-            	     String tipoDTO = rSet.getString(2);
+            	     String tipoDtoOuNmFornecedor = rSet.getString(2);
+            	     String cdCotacao = null;
             	     	            	 
             		 FornecedorRepositorio fRep = new FornecedorRepositorio();
 	            	 
-	            	 if (tipoDTO != null && tipoDTO.equals("INI")) 
+	            	 if (tipoDtoOuNmFornecedor != null && tipoDtoOuNmFornecedor.equals("INI")) 
 	            	 {
 		            	 ViradaFornecedorParaProducaoDTO dtoVirada = new ViradaFornecedorParaProducaoDTO();
-		            	 dtoVirada.IdFornecedor = Integer.parseInt(rSet.getString(1));
+		            	 dtoVirada.IdFornecedor = rSet.getString(1);
 		            	 dtoVirada.TipoDTO = rSet.getString(2);
 		            	 dtoVirada.IniIntervalo = rSet.getTimestamp(6).toLocalDateTime();
 		            	 dtoVirada.FimIntervalo = rSet.getTimestamp(7).toLocalDateTime();
 		            	 
-	            		 Fornecedor f = fRep.getFornecedor(dto.IdFornecedor);
-		            	 assunto = "Integração " + dto.Nmfornecedor + " colocada em produção!";
+	            		 Fornecedor f = fRep.getFornecedor(Integer.parseInt(dtoVirada.IdFornecedor));
+		            	 assunto = "Integração " + f.NomeFantasiaEmpresa + " colocada em produção!";
 				         body += "Ao setor Desenvolvimento do Portal Cronos," + "\r\n";
 				         body += " " + "\r\n";
-		            	 body += "A integração do fornecedor com id_fornecedor = " + dto.IdFornecedorString + " foi colocada em produção!\r\n\r\n";
+		            	 body += "A integração do fornecedor com id_fornecedor = " + dtoVirada.IdFornecedor + " foi colocada em produção!\r\n\r\n";
 				         body += " " + "\r\n";
 		            	 body += "1. Provisoriamente (enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
 				         body += "   Favor excluir o \"OR\" deste id_fornecedor no arquivo \"/scripts/sp_monitorarIntegracaoFornecedores.sql\" no projeto Eclipse e executar o script na base de produção. ";
-		            	 body += "Dica: procura \"" + dto.IdFornecedorString + "\" nesta sp." + "\r\n";
+		            	 body += "Dica: procura \"" + dtoVirada.IdFornecedor + "\" nesta sp." + "\r\n";
 				         body += " " + "\r\n";
 		            	 body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
 				         body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo Tabela Fornecedores_Versões.txt" + "\r\n\r\n";
@@ -1053,7 +1054,7 @@ public final class IntegracaoFornecedorCompleta {
 		            	 dtCadastroIni = dtoVirada.IniIntervalo;
 		            	 dtCadastroFim = dtoVirada.FimIntervalo;
 	            	 }
-	            	 else if (!Utils.isNullOrBlank(tipoDTO)) 
+	            	 else if (!Utils.isNullOrBlank(tipoDtoOuNmFornecedor)) 
 	            	 {
 		     	   		  debugar("monitorarPendencias(): else if (!Utils.isNullOrBlank(dto.Nmfornecedor)) entrado");
 
@@ -1061,8 +1062,8 @@ public final class IntegracaoFornecedorCompleta {
 		            	  dto.CdCotacao = null;
 		            	  dto.Nmfornecedor = null;
 
-		            	  dto.IdFornecedor = Integer.parseInt(rSet.getString(1));
-		            	  dto.IdFornecedorString = rSet.getString(1);  //  Integer.toString(rSet.getInt(1))?????			            	 
+		            	  dto.IdFornecedor = rSet.getInt(1);
+		            	  dto.IdFornecedorString = Integer.toString(dto.IdFornecedor);			            	 
 		            	  dto.Nmfornecedor = rSet.getString(2);
 		     	   		  dto.Ocorrência = rSet.getString(3);
 		     	   		  dto.QtdMeusProdutos = rSet.getInt(4);
@@ -1482,11 +1483,14 @@ public final class IntegracaoFornecedorCompleta {
 		           	     
 		     		    dtCadastroIni = dto.IniIntervalo;
 		            	dtCadastroFim = dto.FimIntervalo;
-	            	 } // else if tipoDTO == ("INI" ou Fornecedor)
+	            	 } // else if tipoDtoOuNmFornecedor == ("INI" ou Fornecedor)
 	            	 else 
 	            	 {
-		            	 dtCadastroIni = dto.IniIntervalo;
-		            	 dtCadastroFim = dto.FimIntervalo;	            		 
+	                     if (!isEnvioEmailouMonitoramentoDandoErroInterno)
+	                     {
+	             	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: tipoDtoOuNmFornecedor imprevisto!", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+	             	           return;
+	                     }
 	            	 }  
 
 
@@ -1496,9 +1500,9 @@ public final class IntegracaoFornecedorCompleta {
 	            	 // 3. Outros tipos de email não chegam aqui no programa e já foram enviados acima:
 	            	 //         - emails de tipo Timeout
 	            	 //         - emails de tipo Erro interno no Monitorador ou no Envio de Emails
-	            	 if (    !Utils.isNullOrBlank(dto.Nmfornecedor)  
-	            		  && (       dto.Nmfornecedor.equals("INI") 
-	            				  || (!dto.Nmfornecedor.equals("INI") && !isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
+	            	 if (    !Utils.isNullOrBlank(tipoDtoOuNmFornecedor)  
+	            		  && (       tipoDtoOuNmFornecedor.equals("INI") 
+	            				  || (!tipoDtoOuNmFornecedor.equals("INI") && !isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
 	            			 )
 	                    ) 
 	            	 {

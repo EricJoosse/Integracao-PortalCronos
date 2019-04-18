@@ -16,6 +16,6 @@ public class CotacaoNaoOfertadaDTO
 	public LocalDateTime DtFimVigencia;
 	public String CdCotacao;
     
-    
+    // Campo auxiliar:
 	public String IdFornecedorString;
 }
