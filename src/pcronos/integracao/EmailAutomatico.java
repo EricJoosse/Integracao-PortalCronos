@@ -244,53 +244,57 @@ int                                   qtdEmailsEnviadosHojeFornecedor = 0;
 int                                   qtdEmailsEnviadosFornecedorUltimos3horas = 0;
 boolean                              isEnviadoJa = false; 
 
-//SIV.setBooleanDebug( EmailAutomatico.bDebug ) ; 
+   //SIV.setBooleanDebug( EmailAutomatico.bDebug ) ; 
 
-IntegracaoFornecedorCompleta.debugar( "Método EmailAutomatico.enviar() entrado" ) ; 
+   IntegracaoFornecedorCompleta.debugar( "Método EmailAutomatico.enviar() entrado" ) ; 
 
-File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCronos\\XML"
-// System.out.println("dir = " + dir.getAbsolutePath());
-   for (final File file : dir.listFiles()) 
+   File dir = new File(diretorioArquivosXmlSemBarraNoFinal); // "C:\\temp\\PortalCronos\\XML"
+   // System.out.println("dir = " + dir.getAbsolutePath());
+
+   if (!nmFornecedor.equals("INI"))
    {
-	 // System.out.println("file = " + file.getName());
-	    LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+	   for (final File file : dir.listFiles()) 
+	   {
+		 // System.out.println("file = " + file.getName());
+		    LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+		   
+		    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().endsWith(".env")) 
+		    {
+		       qtdEmailsEnviadosHojeTotal += 1;
+		    }
+		    
+		    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().startsWith(nmFornecedor)) 
+		    {
+		       qtdEmailsEnviadosHojeFornecedor += 1;
+		    }
+		    
+		    // Restringir emails para 1 por fornecedor por intervalo de 3 horas:
+		    if (file.getName().startsWith(nmFornecedor) && datahoraArquivo.isAfter(horaInicio.minusHours(3)))
+		    {
+		    	qtdEmailsEnviadosFornecedorUltimos3horas += 1;
+		    }
+		    
+		    if (file.getName().startsWith(nmFornecedor) && cdCotacao != null && file.getName().indexOf(cdCotacao) > 0)
+		    {
+		    	isEnviadoJa = true;
+		    }
+	   }
+	
 	   
-	    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().endsWith(".env")) 
-	    {
-	       qtdEmailsEnviadosHojeTotal += 1;
-	    }
-	    
-	    if (datahoraArquivo.isAfter(horaInicio.minusHours(24)) && file.getName().startsWith(nmFornecedor)) 
-	    {
-	       qtdEmailsEnviadosHojeFornecedor += 1;
-	    }
-	    
-	    // Restringir emails para 1 por fornecedor por intervalo de 3 horas:
-	    if (file.getName().startsWith(nmFornecedor) && datahoraArquivo.isAfter(horaInicio.minusHours(3)))
-	    {
-	    	qtdEmailsEnviadosFornecedorUltimos3horas += 1;
-	    }
-	    
-	    if (file.getName().startsWith(nmFornecedor) && cdCotacao != null && file.getName().indexOf(cdCotacao) > 0)
-	    {
-	    	isEnviadoJa = true;
-	    }
+	   // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email 
+	   // por motivo de abuso/spam: 
+	   if (qtdEmailsEnviadosHojeTotal >= 11)
+	   	    return;
+	   
+	   if (qtdEmailsEnviadosHojeFornecedor >= 3)
+		   	return;
+		   
+	   if (qtdEmailsEnviadosFornecedorUltimos3horas >= 1)
+		   	return;
+	   
+	   if (isEnviadoJa)
+		   	return;
    }
-
-   
-   // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email 
-   // por motivo de abuso/spam: 
-   if (qtdEmailsEnviadosHojeTotal >= 11)
-   	    return;
-   
-   if (qtdEmailsEnviadosHojeFornecedor >= 3)
-	   	return;
-	   
-   if (qtdEmailsEnviadosFornecedorUltimos3horas >= 1)
-	   	return;
-   
-   if (isEnviadoJa)
-	   	return;
 
 
    if ( ( p_Assunto == null ) && ( p_Anexo == null ) && ( p_Mensagem == null ) ) {

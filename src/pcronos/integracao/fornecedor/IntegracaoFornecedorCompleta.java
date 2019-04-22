@@ -1075,6 +1075,8 @@ public final class IntegracaoFornecedorCompleta {
 		     	   		  dto.DtFimVigencia = rSet.getTimestamp(10).toLocalDateTime();
 		     	   		  dto.CdCotacao = rSet.getString(11);
 		     	   		  
+		     	   		  cdCotacao = dto.CdCotacao;
+		     	   		  
 		     			  // Não enviar APENAS os tipos de emails de paradas dos servidores dos fornecedores durante horários de pico:		   
 		     			  //      Observações: 1. O web service /cotacao/ObtemCotacoesGET/ também faz paradas automáticas,
 		     			  //                      para todos os fornecedores de uma vez, exatamente no mesmo horário:
@@ -1483,14 +1485,18 @@ public final class IntegracaoFornecedorCompleta {
 		           	     
 		     		    dtCadastroIni = dto.IniIntervalo;
 		            	dtCadastroFim = dto.FimIntervalo;
-	            	 } // else if tipoDtoOuNmFornecedor == ("INI" ou Fornecedor)
+	            	 } // else if tipoDtoOuNmFornecedor == ("INI" ou Fornecedor, ou seja !Utils.isNullOrBlank(tipoDtoOuNmFornecedor) )
 	            	 else 
 	            	 {
-	                     if (!isEnvioEmailouMonitoramentoDandoErroInterno)
-	                     {
-	             	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: tipoDtoOuNmFornecedor imprevisto!", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
-	             	           return;
-	                     }
+	            		 // Cai aqui neste "else" quando Utils.isNullOrBlank(tipoDtoOuNmFornecedor)
+	            		 
+	            		 // Para cada fornecedor tem pelo menos um registro default com todas as colunas em branco ou NULL  
+	            		 // exceto o idFornecedor e dtCadastroIni e dtCadastroFim 
+	            		 // para facilitar o resumo no SQL Server Management Studio.
+	                     // Neste caso não fazer nada.
+	            		 
+			     		    dtCadastroIni = rSet.getTimestamp(7).toLocalDateTime();
+			            	dtCadastroFim = rSet.getTimestamp(8).toLocalDateTime();
 	            	 }  
 
 
@@ -1506,7 +1512,7 @@ public final class IntegracaoFornecedorCompleta {
 	            			 )
 	                    ) 
 	            	 {
-		 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, dto.Nmfornecedor, dto.CdCotacao);
+		 	             EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assunto, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, tipoDtoOuNmFornecedor, (tipoDtoOuNmFornecedor.equals("INI") ? null : cdCotacao));
 		             }  // if (!Utils.isNullOrBlank(nmFornecedor))
 	            	 
 	             } // while (rSet.next())
