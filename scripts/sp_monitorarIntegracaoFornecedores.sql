@@ -163,7 +163,7 @@ while @@fetch_status = 0
          --     )
       )
       begin
-    select cast(@fornecedor_id as varchar)
+    select @fornecedor_id
          , 'INI'
          , null
          , null
