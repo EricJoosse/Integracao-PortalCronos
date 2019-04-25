@@ -51,6 +51,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.OutputKeys;
 import oracle.jdbc.driver.OracleDriver ; // http://www.java2s.com/Code/Jar/j/Downloadjdbcoraclejar.htm
+import pcronos.integracao.EmailAutomatico;
+import pcronos.integracao.fornecedor.dto.ViradaFornecedorParaProducaoDTO;
+
 import org.firebirdsql.jdbc.FBDriver   ;
 import java.sql.DriverManager          ;
 import java.sql.Connection             ; 
@@ -461,6 +464,42 @@ public class TestadorSnippets {
         	 } // for		  
 	  }
 	  
+	  private static void testarMontagemTemplateEmail() throws Exception 
+	  {
+		String tipoDtoOuNmFornecedor = "INI";
+     	ViradaFornecedorParaProducaoDTO dtoVirada = new ViradaFornecedorParaProducaoDTO();
+     	dtoVirada.IdFornecedor = 33;
+     	dtoVirada.IdFornecedorString = Integer.toString(dtoVirada.IdFornecedor);			            	      	
+	    FornecedorRepositorio fRep = new FornecedorRepositorio();
+ 		Fornecedor f = fRep.getFornecedor(dtoVirada.IdFornecedor);
+ 		LocalDateTime horaInicio = LocalDateTime.now();
+ 		
+ 		
+ 		String assunto = "Integração " + f.NomeFantasiaEmpresa + " colocada em produção! - TESTE COM TEMPLATE";
+ 		String body = Utils.getTemplateEmail("Email de tipo Virada fornecedor para produção.txt")
+     			           .replaceAll("[IdFornecedorString]", dtoVirada.IdFornecedorString);
+   	    System.out.println(body);
+        EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, tipoDtoOuNmFornecedor, (tipoDtoOuNmFornecedor.equals("INI") ? null : "ERRADO!!!"));
+
+         
+ 		assunto = "Integração " + f.NomeFantasiaEmpresa + " colocada em produção! - TESTE SEM TEMPLATE";
+	    body = "Ao setor Desenvolvimento do Portal Cronos," + "\r\n";
+	    body += " " + "\r\n";
+     	body += "A integração do fornecedor com id_fornecedor = " + dtoVirada.IdFornecedorString + " foi colocada em produção!\r\n\r\n";
+	    body += " " + "\r\n";
+     	body += "1. Provisoriamente (enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
+	    body += "   Favor excluir o \"OR\" deste id_fornecedor no arquivo \"/scripts/sp_monitorarIntegracaoFornecedores.sql\" no projeto Eclipse e executar o script na base de produção. ";
+     	body += "Dica: procura \"" + dtoVirada.IdFornecedorString + "\" nesta sp." + "\r\n";
+	    body += " " + "\r\n";
+     	body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
+	    body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo Tabela Fornecedores_Versões.txt" + "\r\n\r\n";
+	    body += " " + "\r\n"
+	    			+ "Atc," + "\r\n"
+	    			+ "O email automático do Portal Cronos " + "\r\n"
+	    			+  "\r\n\r\n\r\n\r\n";		
+        EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, tipoDtoOuNmFornecedor, (tipoDtoOuNmFornecedor.equals("INI") ? null : "ERRADO!!!"));
+	}
+	  
 	  public static void main(String[] args) throws Exception {
 
 		try
@@ -486,7 +525,8 @@ public class TestadorSnippets {
 		 // testarComparacaoVersoes();
 		 //	testarOffset();
          // testarSp_historicoErrosIntegracaoRadical();
-         testarProcuraTimeouts();
+         // testarProcuraTimeouts();
+			testarMontagemTemplateEmail();
          
 
          // throw new Exception("try");

@@ -1034,24 +1034,13 @@ public final class IntegracaoFornecedorCompleta {
 		            	 dtoVirada.IdFornecedorString = Integer.toString(dtoVirada.IdFornecedor);			            	 
 		            	 dtoVirada.TipoDTO = rSet.getString(2);
 		            	 dtoVirada.IniIntervalo = rSet.getTimestamp(6).toLocalDateTime();
-		            	 dtoVirada.FimIntervalo = rSet.getTimestamp(7).toLocalDateTime();
-		            	 
+		            	 dtoVirada.FimIntervalo = rSet.getTimestamp(7).toLocalDateTime();		            	 
 	            		 Fornecedor f = fRep.getFornecedor(dtoVirada.IdFornecedor);
+	            		 
 		            	 assunto = "Integração " + f.NomeFantasiaEmpresa + " colocada em produção!";
-				         body += "Ao setor Desenvolvimento do Portal Cronos," + "\r\n";
-				         body += " " + "\r\n";
-		            	 body += "A integração do fornecedor com id_fornecedor = " + dtoVirada.IdFornecedorString + " foi colocada em produção!\r\n\r\n";
-				         body += " " + "\r\n";
-		            	 body += "1. Provisoriamente (enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
-				         body += "   Favor excluir o \"OR\" deste id_fornecedor no arquivo \"/scripts/sp_monitorarIntegracaoFornecedores.sql\" no projeto Eclipse e executar o script na base de produção. ";
-		            	 body += "Dica: procura \"" + dtoVirada.IdFornecedorString + "\" nesta sp." + "\r\n";
-				         body += " " + "\r\n";
-		            	 body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
-				         body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo Tabela Fornecedores_Versões.txt" + "\r\n\r\n";
-				         body += " " + "\r\n"
-				     			+ "Atc," + "\r\n"
-			     				+ "O email automático do Portal Cronos " + "\r\n"
-			     				+  "\r\n\r\n\r\n\r\n";
+		            	 body = Utils.getTemplateEmail("Email de tipo Virada fornecedor para produção.txt")
+		            			     .replaceAll("[IdFornecedorString]", dtoVirada.IdFornecedorString);
+
 		            	 dtCadastroIni = dtoVirada.IniIntervalo;
 		            	 dtCadastroFim = dtoVirada.FimIntervalo;
 	            	 }

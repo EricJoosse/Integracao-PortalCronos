@@ -1,9 +1,17 @@
 package pcronos.integracao.fornecedor;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -17,6 +25,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import pcronos.integracao.EmailAutomatico;
 
 
 
@@ -105,7 +115,43 @@ public class Utils {
 	      ex.printStackTrace(new PrintWriter(sWriter));
 	      return sWriter.toString();
 	}
+ 
+	public static String getTemplateEmail(String tipoEmail) throws IOException
+	{
+      	String caminhoTemplate = Constants.DIR_TEMPLATES_EMAIL + tipoEmail;
+      	 
+      	// O seguinte não quer funcionar, com nenhum charset....
+      	// Testar novamente na versão futura de Java.
 
+      	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)), "Windows-1252");
+    //	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)));
+      	 
+      	// Também não dá certo:
+//    	BufferedReader br = new BufferedReader(new FileReader(caminhoTemplate));
+//    	String seq = "";
+//    	for (String line; (line = br.readLine()) != null; )
+//    	    seq += line;	    	
+//      return seq;
 
+//      	String body = "";
+//	    	BufferedReader br = new BufferedReader(new FileReader(caminhoTemplate));
+//	    	try 
+//	    	{
+//	    	    String linha = br.readLine();
+//
+//	    	    while (linha != null)
+//	    	    {
+//    	           linha = br.readLine();
+//    	           body += linha;
+//	    	    }
+//	    	    
+//	    	} 
+//	    	finally 
+//	    	{
+//	    	    br.close();
+//	    	}
+//	    	return body;
+	
+	}
 	
 }
