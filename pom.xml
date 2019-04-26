@@ -106,6 +106,32 @@
 
     <plugins>
 
+<!-- Copiar templates para o Instalador, de subdiretório /templates/ para /tpl/: -->
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+	          <outputDirectory>${project.basedir}/Instalador/Windows/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/tpl</outputDirectory>
+              <resources>          
+                <resource>
+<!--              <directory>src/non-packaged-resources</directory> -->
+                  <directory>${project.basedir}/templates</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+        </executions>
+      </plugin>
+
+
       <!-- O Integrador de Sistemas com o Portal Cronos só compila com compatibilidade configurada para JDK 1.7 ou mais : -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -170,6 +196,7 @@
         </configuration>
       </plugin>
         
+
 <!-- As seguintes 3 seções são necessárias para automatizar o deploy do nosso standalone Java Application (sem integração com Apache, Tomcat, etc) : -->
 <!-- Veja o tutorial excelente no link http://www.javacreed.com/how-to-use-maven-with-an-application/) -->
 
