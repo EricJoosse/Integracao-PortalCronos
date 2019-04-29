@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -120,13 +123,18 @@ public class Utils {
 	{
       	String caminhoTemplate = Constants.DIR_TEMPLATES_EMAIL + tipoEmail;
       	 
-      	// O seguinte não quer funcionar, com nenhum charset....
-      	// Testar novamente na versão futura de Java.
+     //	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)));
+       	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)), Charset.forName("windows-1252"));
 
-      	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)), "Windows-1252");
-    //	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)));
-      	 
-      	// Também não dá certo:
+       	
+       	// Alternativo: 
+     // ByteBuffer bb = ByteBuffer.wrap(Files.readAllBytes(Paths.get(caminhoTemplate)));
+     // CharBuffer cb = Charset.forName("windows-1252").decode(bb); // StandardCharsets.UTF_8
+     // return cb.toString();
+        
+      	
+      	
+      	// Usar o seguinte no caso que vai dar erro OutOfMemory um dia:
 //    	BufferedReader br = new BufferedReader(new FileReader(caminhoTemplate));
 //    	String seq = "";
 //    	for (String line; (line = br.readLine()) != null; )

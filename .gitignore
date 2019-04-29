@@ -17,7 +17,8 @@ hs_err_pid*
 
 # Maven (com Eclipse) :
 target/*
-.settings/*
+.settings/org.eclipse.jdt.core.prefs
+.settings/org.eclipse.m2e.core.prefs
 /res.out
 /Chamada_de_Localizar_String.bat
 /Localizar_String.bat
