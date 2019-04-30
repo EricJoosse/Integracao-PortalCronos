@@ -474,10 +474,14 @@ public class TestadorSnippets {
  		Fornecedor f = fRep.getFornecedor(dtoVirada.IdFornecedor);
  		LocalDateTime horaInicio = LocalDateTime.now();
  		
+ 		System.out.println("DefaultCharsetJVM = " + Utils.getDefaultCharsetJVM() + "\r\n");
  		
- 		String assunto = "Integração " + f.NomeFantasiaEmpresa + " colocada em produção! - TESTE COM TEMPLATE";
- 		String body = Utils.getTemplateEmail("Email de tipo Virada fornecedor para produção.txt")
-     			           .replaceAll("[IdFornecedorString]", dtoVirada.IdFornecedorString);
+   	    String assunto = "Integração " + f.NomeFantasiaEmpresa + " colocada em produção! - TESTE COM TEMPLATE";
+ 	    String body = Utils.getTemplateEmail("Email de tipo Virada fornecedor para produção.txt")
+                           .replace("[IdFornecedorString]", dtoVirada.IdFornecedorString);
+						   // Em Java e C# replace() já faz substituição de todas as ocorrências, aqui não é para fazer replaceAll() que em Java é outra coisa!!! 
+				           // Em JavaScript a função replace() apenas substitui somente a primeira ocorrência da string procurada.
+ 	    				   // replaceAll() em Java é confuso, o nome certo seria replaceViaRegex() ou como em C#: Regex.Replace().
    	    System.out.println(body);
         EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, tipoDtoOuNmFornecedor, (tipoDtoOuNmFornecedor.equals("INI") ? null : "ERRADO!!!"));
 

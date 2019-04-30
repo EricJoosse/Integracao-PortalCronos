@@ -1038,8 +1038,12 @@ public final class IntegracaoFornecedorCompleta {
 	            		 Fornecedor f = fRep.getFornecedor(dtoVirada.IdFornecedor);
 	            		 
 		            	 assunto = "Integração " + f.NomeFantasiaEmpresa + " colocada em produção!";
-		            	 body = Utils.getTemplateEmail("Email de tipo Virada fornecedor para produção.txt")
-		            			     .replaceAll("[IdFornecedorString]", dtoVirada.IdFornecedorString);
+		          	     body = Utils.getTemplateEmail("Email de tipo Virada fornecedor para produção.txt")
+		                             .replace("[IdFornecedorString]", dtoVirada.IdFornecedorString);
+		            	 			 // Em Java e C# replace() já faz substituição de todas as ocorrências, aqui não é para fazer replaceAll() que em Java é outra coisa!!! 
+		          	                 // Em JavaScript a função replace() apenas substitui somente a primeira ocorrência da string procurada.
+		          	     			 // replaceAll() em Java é confuso, o nome certo seria replaceViaRegex() ou como em C#: Regex.Replace().
+
 
 		            	 dtCadastroIni = dtoVirada.IniIntervalo;
 		            	 dtCadastroFim = dtoVirada.FimIntervalo;

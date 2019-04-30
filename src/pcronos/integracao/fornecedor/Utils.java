@@ -123,13 +123,12 @@ public class Utils {
 	{
       	String caminhoTemplate = Constants.DIR_TEMPLATES_EMAIL + tipoEmail;
       	 
-     //	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)));
-       	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)), Charset.forName("windows-1252"));
+     	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)), Charset.forName("windows-1252"));
 
        	
-       	// Alternativo: 
+      	 // Alternativo: 
      // ByteBuffer bb = ByteBuffer.wrap(Files.readAllBytes(Paths.get(caminhoTemplate)));
-     // CharBuffer cb = Charset.forName("windows-1252").decode(bb); // StandardCharsets.UTF_8
+     // CharBuffer cb = Charset.forName("windows-1252").decode(bb); // StandardCharsets.UTF_8 
      // return cb.toString();
         
       	
