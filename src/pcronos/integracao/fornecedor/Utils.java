@@ -29,6 +29,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import pcronos.integracao.DefaultCharsetException;
 import pcronos.integracao.EmailAutomatico;
 
 
@@ -119,8 +120,15 @@ public class Utils {
 	      return sWriter.toString();
 	}
  
-	public static String getTemplateEmail(String tipoEmail) throws IOException
+	public static String getDefaultCharsetJVM() {
+		return Charset.defaultCharset().displayName();
+	}
+
+	public static String getTemplateEmail(String tipoEmail) throws IOException, DefaultCharsetException
 	{
+		if (!getDefaultCharsetJVM().equals("windows-1252"))
+			throw new DefaultCharsetException(getDefaultCharsetJVM());
+		
       	String caminhoTemplate = Constants.DIR_TEMPLATES_EMAIL + tipoEmail;
       	 
      	return new String(Files.readAllBytes(Paths.get(caminhoTemplate)), Charset.forName("windows-1252"));

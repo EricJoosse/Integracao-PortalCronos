@@ -2,6 +2,7 @@ package pcronos.integracao.fornecedor;
 
 import pcronos.integracao.ConfiguracaoException;
 import pcronos.integracao.Criptografia;
+import pcronos.integracao.DefaultCharsetException;
 import pcronos.integracao.EmailAutomatico;
 import pcronos.integracao.fornecedor.dto.CotacaoNaoOfertadaDTO;
 import pcronos.integracao.fornecedor.dto.ViradaFornecedorParaProducaoDTO;
@@ -1519,12 +1520,19 @@ public final class IntegracaoFornecedorCompleta {
 	        
 			debugar("monitorarPendencias() finalizado");
 	    }
+		catch (DefaultCharsetException dex) {
+			debugar("monitorarPendencias() - catch dex entrado");
+		       logarErro(dex, false);	      
+
+	           if (!isEnvioEmailouMonitoramentoDandoErroInterno)
+	   	          EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + dex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+		}
 	    catch (java.lang.Exception ex) { 
 			debugar("monitorarPendencias() - catch ex entrado");
 	       logarErro(ex, false);	      
 
-            if (!isEnvioEmailouMonitoramentoDandoErroInterno)
-   	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+           if (!isEnvioEmailouMonitoramentoDandoErroInterno)
+   	          EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 	    }
 	    finally { 
 	      if (cstat != null) {
