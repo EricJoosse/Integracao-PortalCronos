@@ -126,8 +126,10 @@ public class Utils {
 
 	public static String getTemplateEmail(String tipoEmail) throws IOException, DefaultCharsetException
 	{
-		if (!getDefaultCharsetJVM().equals("windows-1252"))
+		if (getDefaultCharsetJVM().equals("windows-1252"))
+		{
 			throw new DefaultCharsetException(getDefaultCharsetJVM());
+		}
 		
       	String caminhoTemplate = Constants.DIR_TEMPLATES_EMAIL + tipoEmail;
       	 

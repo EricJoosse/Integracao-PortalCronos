@@ -51,6 +51,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.OutputKeys;
 import oracle.jdbc.driver.OracleDriver ; // http://www.java2s.com/Code/Jar/j/Downloadjdbcoraclejar.htm
+import pcronos.integracao.DefaultCharsetException;
 import pcronos.integracao.EmailAutomatico;
 import pcronos.integracao.fornecedor.dto.ViradaFornecedorParaProducaoDTO;
 
@@ -503,6 +504,20 @@ public class TestadorSnippets {
 	    			+  "\r\n\r\n\r\n\r\n";		
         EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, tipoDtoOuNmFornecedor, (tipoDtoOuNmFornecedor.equals("INI") ? null : "ERRADO!!!"));
 	}
+
+	  private static void testarDefaultCharsetException() throws IOException {
+ 		  LocalDateTime horaInicio = LocalDateTime.now();
+		  try {
+		 	    String testBody = Utils.getTemplateEmail("Email de tipo Virada fornecedor para produção.txt");
+				System.out.println("monitorarPendencias() - catch dex NÃO entrado, indevidamente!!!!!");
+		  }
+		  catch (DefaultCharsetException dex) 
+		  {
+				System.out.println("monitorarPendencias() - catch dex entrado");
+
+   	            EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + dex.getMessage(), IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "Monitoramento", null);
+		  }		
+	 }
 	  
 	  public static void main(String[] args) throws Exception {
 
@@ -530,7 +545,8 @@ public class TestadorSnippets {
 		 //	testarOffset();
          // testarSp_historicoErrosIntegracaoRadical();
          // testarProcuraTimeouts();
-			testarMontagemTemplateEmail();
+			testarDefaultCharsetException();
+		 // testarMontagemTemplateEmail();
          
 
          // throw new Exception("try");

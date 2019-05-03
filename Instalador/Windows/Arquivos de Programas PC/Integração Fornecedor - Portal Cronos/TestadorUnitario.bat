@@ -46,6 +46,7 @@ call bin\ComponenteTestador.bat TestadorUnitario.log TestadorSnippets
 start notepad TestadorUnitario.log
 
 ENDLOCAL
+REM !!!!!! Não pode comentar o pause abaixo, pois alguns eventuais erros aparecem na tela de DOS, e não no arquivo TestadorUnitario.log!
 pause
 exit
 

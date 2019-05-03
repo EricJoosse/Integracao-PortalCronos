@@ -339,12 +339,13 @@ try
       mmsg.setRecipients( MimeMessage.RecipientType.CC, EnderecoCC ) ;
     }
 
-    if ( p_Assunto != null ) mmsg.setSubject( p_Assunto ) ; 
+    if ( p_Assunto != null ) mmsg.setSubject( p_Assunto, "windows-1252") ; 
 
     mbp1 = new MimeBodyPart()  ;
     if ( p_Mensagem == null ) p_Mensagem = "" ;
     mbp1.setText( p_Mensagem 
-                + "\n\n\n\n\n\n\n\n\n\n\n\nEste email foi enviado automaticamente pelo sistema Portal Cronos\n" ) ;
+                + "\n\n\n\n\n\n\n\n\n\n\n\nEste email foi enviado automaticamente pelo sistema Portal Cronos\n" 
+                , "windows-1252") ;
 
     mbp2 = new MimeBodyPart() ;
 
