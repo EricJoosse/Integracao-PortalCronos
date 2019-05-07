@@ -503,7 +503,7 @@ public class TestadorSnippets {
 	    			+ "O email automático do Portal Cronos " + "\r\n"
 	    			+  "\r\n\r\n\r\n\r\n";		
         EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, tipoDtoOuNmFornecedor, (tipoDtoOuNmFornecedor.equals("INI") ? null : "ERRADO!!!"));
-	}
+	  }
 
 	  private static void testarDefaultCharsetException() throws IOException {
  		  LocalDateTime horaInicio = LocalDateTime.now();
@@ -518,6 +518,31 @@ public class TestadorSnippets {
    	            EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + dex.getMessage(), IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "Monitoramento", null);
 		  }		
 	 }
+	  
+	  private static void testarCriticas() {
+	    String cdComprador = "24407389000233";
+	    
+	    String dsComprador = "";		
+	    String cpfOuNomeComCpf = (!Utils.isNullOrBlank(dsComprador) ? (dsComprador + " (CNPJ " + cdComprador + ")") : ("com CNPJ " + cdComprador));
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " foi desativada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " está bloqueada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " está bloqueada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + cpfOuNomeComCpf + " não foi informada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + cpfOuNomeComCpf + " não pode ser nulo ou em branco no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O tipo de preço para a empresa compradora " + cpfOuNomeComCpf + " não foi informado no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A região da empresa compradora " + cpfOuNomeComCpf + " não foi informada no sistema ");
+
+	    dsComprador = "Austrália Buffet";		
+	    cpfOuNomeComCpf = (!Utils.isNullOrBlank(dsComprador) ? (dsComprador + " (CNPJ " + cdComprador + ")") : ("com CNPJ " + cdComprador));
+	    System.out.println(" ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " foi desativada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " está bloqueada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " está bloqueada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A Condição de Pagamento da empresa compradora " + cpfOuNomeComCpf + " não foi informada no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O Valor Mínimo para Entrega para a empresa compradora " + cpfOuNomeComCpf + " não pode ser nulo ou em branco no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! O tipo de preço para a empresa compradora " + cpfOuNomeComCpf + " não foi informado no sistema ");
+	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A região da empresa compradora " + cpfOuNomeComCpf + " não foi informada no sistema ");
+	  }
 	  
 	  public static void main(String[] args) throws Exception {
 
@@ -545,8 +570,9 @@ public class TestadorSnippets {
 		 //	testarOffset();
          // testarSp_historicoErrosIntegracaoRadical();
          // testarProcuraTimeouts();
-			testarDefaultCharsetException();
+		 // testarDefaultCharsetException();
 		 // testarMontagemTemplateEmail();
+			testarCriticas();
          
 
          // throw new Exception("try");
