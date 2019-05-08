@@ -1625,7 +1625,9 @@ public final class IntegracaoFornecedorCompleta {
 		    
 	        if (siglaSistema.equals("APS"))
 	        {
-	        	sqlString = "select cpfcgc   "
+	   	        // O Campo CLIENTE.NOME é a razão social, 
+	   	        // O campo CLIENTE.NOMEFANTAZIA é o nome fantasia.
+	        	sqlString = "select nomefantazia "
 	                      + "  from cliente  "
 	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
 	                      ;
