@@ -1620,7 +1620,8 @@ public final class IntegracaoFornecedorCompleta {
 		    String sqlString = null;
 		    boolean toNaoVerificarDemaisErros = false;
 		    boolean existeCompradora = true;
-		    String dsComprador = "";		
+		    String dsComprador = "";
+		    String cnpjFormatadoComprador = cdComprador; // Apenas para inicialização, não formatado, é melhor do que nada, em branco
 		    
 		    
 	        if (siglaSistema.equals("APS"))
@@ -1628,6 +1629,7 @@ public final class IntegracaoFornecedorCompleta {
 	   	        // O Campo CLIENTE.NOME é a razão social, 
 	   	        // O campo CLIENTE.NOMEFANTAZIA é o nome fantasia.
 	        	sqlString = "select nomefantazia "
+	                      + "     , cpfcgc "
 	                      + "  from cliente  "
 	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
 	                      ;
@@ -1635,7 +1637,8 @@ public final class IntegracaoFornecedorCompleta {
 	        else if (siglaSistema.equals("WinThor"))
 	        {
 			    sqlString = "select (PCCLIENT.CLIENTE || ' - ' || nvl(PCCLIENT.ESTCOB, '')) "
-			              + "  from PCCLIENT        "
+			              + "     , PCCLIENT.CGCENT "
+			              + "  from PCCLIENT "
 			              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
 			              ;
 	        }
@@ -1652,13 +1655,14 @@ public final class IntegracaoFornecedorCompleta {
 		    }
 		    else
 		    {
-			      if (siglaSistema.equals("WinThor")) 
+			      if (siglaSistema.equals("WinThor") || siglaSistema.equals("APS")) 
 			      {
 				      dsComprador = ( (rSet.getObject(1) == null) ? "" : rSet.getString(1) ) ; 
+				      cnpjFormatadoComprador = ( (rSet.getObject(2) == null) ? "" : rSet.getString(2) ) ;
 			      }	    	
 		    }
 
-		    String cpfOuNomeComCpf = (!Utils.isNullOrBlank(dsComprador) ? (dsComprador + " (CNPJ " + cdComprador + ")") : ("com CNPJ " + cdComprador));
+		    String cpfOuNomeComCpf = (!Utils.isNullOrBlank(dsComprador) ? (dsComprador + " (CNPJ " + cnpjFormatadoComprador + ")") : ("com CNPJ " + cnpjFormatadoComprador));
 		    
 		    
 		    rSet = null;
