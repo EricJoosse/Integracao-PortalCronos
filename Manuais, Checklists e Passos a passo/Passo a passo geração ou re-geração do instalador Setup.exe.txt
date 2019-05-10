@@ -38,7 +38,7 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
       - WinRAR                   : Mudar .rar para .zip
       - WinRAR                   : Método de compressão : Ótimo
       - WinRAR                   : marcar checkbox SFX
-      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.2.8.5.Win2008.R2.SP1.exe
+      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.3.0.0.Win2008.R2.SP1.exe
                                    Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe", 
                                          ajustar o mesmo no final de Primeira_Instalacao_Versao_Windows.bat.
 
