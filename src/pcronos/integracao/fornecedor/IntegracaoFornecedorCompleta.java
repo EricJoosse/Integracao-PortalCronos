@@ -162,16 +162,69 @@ public final class IntegracaoFornecedorCompleta {
   public static String       erroStaticConstructor;
   public static String       nomeArquivoDebug;
   public static TransformerFactory transformerFactory;
+  public static boolean IsSistemaFornecedorNuvem;
 
 
   static 
   {
-	  Inicializar();
+	 File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
+	 IsSistemaFornecedorNuvem = false;
+	 int qtdArquivosConfig = 0;
+	 int qtdArquivosConfigComNomeEspecifico = 0;
+	 
+	 for (final File file : dirConfig.listFiles()) 
+	 {
+		 if (file.getName().equals(Constants.NOME_ARQUIVO_PROPERTIES))
+	     {
+			 qtdArquivosConfigComNomeEspecifico += 1;
+	     }
+	 }
+	 
+	 for (final File file : dirConfig.listFiles()) 
+	 {
+		 if (    file.getName().toLowerCase().startsWith("Integração") 
+	    	  && file.getName().toLowerCase().endsWith(".properties") 
+	    	  && file.getName().toLowerCase().indexOf("." + "copy" + ".")  == -1 
+	    	  && file.getName().toLowerCase().indexOf("." + "cópia" + ".") == -1 
+	    	  && file.getName().toLowerCase().indexOf("." + "copia" + ".") == -1 
+	    	  && file.getName().toLowerCase().indexOf("." + "backup" + ".")  == -1 
+	    	  && file.getName().toLowerCase().indexOf("." + "bck" + ".") == -1 
+	    	)
+	     {
+			 qtdArquivosConfig += 1;
+	     }
+	 }
+
+
+	 // No caso de ambientes de tipo hospedagem local ("não-nuvem"):
+	 if (qtdArquivosConfigComNomeEspecifico == 1 && qtdArquivosConfig == 1)
+	 {
+         IsSistemaFornecedorNuvem = false;
+    	 Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES);
+	 }
+	 // No caso de ambientes de tipo nuvem:
+	 else if (qtdArquivosConfigComNomeEspecifico == 0 && qtdArquivosConfig > 1)
+	 {
+         IsSistemaFornecedorNuvem = true;
+	 }
+	 else
+	 {
+	        try
+	        {
+	          erroStaticConstructor = "Arquivos de configuração ambíguos! Mistura indevida de arquivos de tipo nuvem e de tipo hospedagem local.";
+	          logarErro(erroStaticConstructor);
+	        }
+	        catch (Exception ex2)
+	        {
+	          throw new ExceptionInInitializerError(ex2);
+	        }
+	 }
+		 
   }
 
 
 
-  private static void Inicializar()
+  private static void Inicializar(String nomeArquivoProperties)
   {
 	    try {
 	        Date hoje = new Date();
@@ -184,7 +237,7 @@ public final class IntegracaoFornecedorCompleta {
 	        nf = NumberFormat.getInstance(locale);
 
 	        Properties config = new Properties();
-	        config.load(new FileInputStream(Constants.NOME_ARQUIVO_PROPERTIES));
+	        config.load(new FileInputStream(nomeArquivoProperties));
 
 
 	        
@@ -640,7 +693,7 @@ public final class IntegracaoFornecedorCompleta {
      {
          try
     	 {
-	        BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + nomeArquivoDebug, true));
+	        BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + nomeArquivoDebug.replace(".log", (IsSistemaFornecedorNuvem ? ("." + nomeFantasiaFornecedor + ".log") : ".log")), true));
 	        bWriter.append(txt);
 	        bWriter.newLine();
 	     // bWriter.newLine();
@@ -675,7 +728,7 @@ public final class IntegracaoFornecedorCompleta {
 	      
 	 	 try
 	 	 {
-		        BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "Erro - " + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm.ss ").format(hoje) + ".log", true));
+		        BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "Erro - " + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm.ss ").format(hoje) + (IsSistemaFornecedorNuvem ? ("." + nomeFantasiaFornecedor) : "") + ".log", true));
 		        bWriter.append(erro);
 		        bWriter.newLine();
 		        bWriter.newLine();
@@ -699,7 +752,7 @@ public final class IntegracaoFornecedorCompleta {
 	  }
 
 	  Date hoje = new Date();
-      File file = new File(diretorioArquivosXml + "Erro - " + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm.ss ").format(hoje) + ".log");
+      File file = new File(diretorioArquivosXml + "Erro - " + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm.ss ").format(hoje) + (IsSistemaFornecedorNuvem ? ("." + nomeFantasiaFornecedor) : "") + ".log");
       
       try
       {
@@ -2619,13 +2672,15 @@ public final class IntegracaoFornecedorCompleta {
    }
 
    
-   public static long Executar(boolean isPrimeiraVez) {
+   public static long Executar(boolean isPrimeiraVez) 
+   {
        LocalDateTime horaIniCiclo = LocalDateTime.now();
 
 	   try 
 	   {
+  		  // No caso de tipoSO.equals("Windows 10 Pro") && IdFornecedor == 947:
 	      if (!isPrimeiraVez)
-	         Inicializar();
+	         Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES);
 	       
 		  LocalDateTime horaInicio = LocalDateTime.now();
 
@@ -2676,7 +2731,7 @@ public final class IntegracaoFornecedorCompleta {
 		  if (!siglaSistema.equals("PCronos") || (siglaSistema.equals("PCronos") && toDebugar)) {
 			  try
 			  {
-			      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução.log", true));
+			      BufferedWriter bWriter = new BufferedWriter(new FileWriter(diretorioArquivosXml + "TemposExecução" + (IsSistemaFornecedorNuvem ? ("." + nomeFantasiaFornecedor) : "") + ".log", true));
 			      String strHorarioComTempoExecucao = horaInicio.format(formatter) + " - Tempo de Execução: " + tempoExecucao; 
 			      bWriter.append(strHorarioComTempoExecucao);
 			      
@@ -2723,28 +2778,54 @@ public final class IntegracaoFornecedorCompleta {
    public static void main(String[] args) 
    {    
 	   long qtdMilliSegCiclo = 0;
-	   qtdMilliSegCiclo = Executar(true);
 	   
-	   try {
-		   FornecedorRepositorio fRep = new FornecedorRepositorio();
-	       if (     !siglaSistema.equals("PCronos")
-	    		 && fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).tipoSO.equals("Windows 10 Pro")
-	    	 	 && fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).IdFornecedor == 947
-	          ) {
-	    	   while (true) {
-	    		   Thread.sleep( (15 * 60 * 1000) - qtdMilliSegCiclo); // 15 min
-	    		   qtdMilliSegCiclo = Executar(false);
-	    	   }
-	       }
-	   }
-  	   catch (InterruptedException iex)
+	   System.out.println("args.length = " + args.length);
+	   System.out.println("args[0] = " + args[0]);
+	   
+	   // No caso de hospedagem local ("não-nuvem"):
+	   if (args.length == 0) 
 	   {
-  		 logarErro("main() - InterruptedException: " + iex.getMessage());
-	   }
-  	   catch (Exception ex)
+		  // Neste caso Inicializar() já foi executado no static constructor para carregar o arquivo de configuração.
+		   
+		  qtdMilliSegCiclo = Executar(true);
+
+		   try {
+			   FornecedorRepositorio fRep = new FornecedorRepositorio();
+		       if (     !siglaSistema.equals("PCronos")
+		    		 && fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).tipoSO.equals("Windows 10 Pro")
+		    	 	 && fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).IdFornecedor == 947
+		          ) {
+		    	   while (true) {
+		    		   Thread.sleep( (15 * 60 * 1000) - qtdMilliSegCiclo); // 15 min
+		    		   qtdMilliSegCiclo = Executar(false);
+		    	   }
+		       }
+		   }
+	  	   catch (InterruptedException iex)
+		   {
+	  		  logarErro("main() - InterruptedException: " + iex.getMessage());
+		   }
+	  	   catch (Exception ex)
+		   {
+	   		  logarErro("main(): Erro: " + ex.getMessage());
+		   }
+	   } // if (args.length == 0) 
+	   else // No caso de servidores Nuvem:
 	   {
-    		 logarErro("main(): Erro: " + ex.getMessage());
-	   }
+		  int idFornecedor = Integer.parseInt(args[0]);
+		  FornecedorRepositorio fRep = new FornecedorRepositorio();
+		  try 
+		  {
+			  Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES.replace("Fornecedor", "APS").replace(".properties", ("." + fRep.getFornecedor(idFornecedor).NomeFantasiaEmpresa + ".properties")));
+			  qtdMilliSegCiclo = Executar(true);
+		  } 
+		  catch (Exception ex) 
+		  {
+	   		 logarErro("main() - Inicializar(): Erro: " + ex.getMessage());
+		  }	   
+	   } // else no caso de servidores Nuvem
+	   
+	   
     }
 
 }

@@ -24,7 +24,7 @@ public class Desinstalador {
 		        erroStaticConstructor = null;
 
 		        Properties config = new Properties();
-		        config.load(new FileInputStream(Constants.NOME_ARQUIVO_PROPERTIES));
+		        config.load(new FileInputStream(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES));
 
 		        siglaSistema   = config.getProperty("SiglaSistema");
 		        cnpjFornecedor = config.getProperty("CnpjFornecedor");

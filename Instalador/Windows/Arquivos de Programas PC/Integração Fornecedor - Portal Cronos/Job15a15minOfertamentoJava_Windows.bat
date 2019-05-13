@@ -16,7 +16,7 @@ cd "Integração Fornecedor - Portal Cronos"
 
 call bin\Inicializacoes.bat
 call bin\Versao.bat
-call bin\CaminhoJRE.bat Job15a15minOfertamentoJava.log IntegracaoFornecedorCompleta
+call bin\CaminhoJRE.bat Job15a15minOfertamentoJava.log IntegracaoFornecedorCompleta %1
 
 ENDLOCAL
 exit
