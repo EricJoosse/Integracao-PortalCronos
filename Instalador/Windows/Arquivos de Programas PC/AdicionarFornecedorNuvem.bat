@@ -10,35 +10,70 @@ REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os 
 
 chcp 1252>nul
 
-echo.
-echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
-echo.
+cd\
+cd "Arquivos de Programas PC"
 
-SET /P idFornecedor=Favor digitar o ID da empresa fornecedora: 
-IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
-GOTO PularErro
-:ErroIdFornecedor
-echo MSGBOX "Erro: ID do fornecedor não informado! Instalação deste fornecedor não concluída!!" > %temp%\TEMPmessage.vbs
+
+SET /P nmFornecedor=Favor digitar um nome bem curto da empresa fornecedora SEM NENHUM ESPAÇO EM BRANCO: 
+IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
+if not "%VAR%"=="%VAR: =%" goto ErroEspacosNmFornecedor
+GOTO PularErroNmFornecedor
+:ErroEspacosNmFornecedor
+echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome do fornecedor! Adicionamento deste fornecedor não concluído!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
 exit
-:PularErro
-
-
-SET /P nmFornecedor=Favor digitar um nome bem curto da empresa fornecedora: 
-IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
-GOTO PularErroNmFornecedor
 :ErroNmFornecedor
-echo MSGBOX "Erro: nome do fornecedor não informado! Instalação deste fornecedor não concluída!!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: nome do fornecedor não informado! Adicionamento deste fornecedor não concluído!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
 exit
 :PularErroNmFornecedor
 
-SCHTASKS /Create /TN "Integração Portal Cronos - %nmFornecedor%" /XML "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml"
-SCHTASKS /Run /TN "Integração Portal Cronos - %nmFornecedor%"
+
+if exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties" (
+    echo.
+    echo          Este fornecedor já foi adicionado!
+    echo.
+    
+    echo MSGBOX "Este fornecedor já foi adicionado!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
+)
+
+if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml 
+
+copy "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/TemplateNuvemAPS.properties" "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
+
+
+call "Integração Fornecedor - Portal Cronos\bin\Inicializacoes.bat"
+call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
+call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" AdicionarFornecedorNuvem.log AdicionarFornecedorNuvem %nmFornecedor%
+
+set arquivoLog="AdicionarFornecedorNuvem.log"
+set tamanhoArqLog=0
+
+FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
+
+if %tamanhoArqLog% GTR 0 (
+    echo.
+    echo          O adicionamento do fornecedor novo falhou!
+    echo.
+    
+    echo MSGBOX "O adicionamento do fornecedor novo falhou!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    start notepad AdicionarFornecedorNuvem.log
+) ELSE (
+
+  SCHTASKS /Create /TN "Integração Portal Cronos - %nmFornecedor%" /XML "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml"
+  SCHTASKS /Run /TN "Integração Portal Cronos - %nmFornecedor%"
+
+  start notepad "conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
+)
 
 exit
 

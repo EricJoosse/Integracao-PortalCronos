@@ -1,0 +1,37 @@
+Manual para adicionamento de mais um fornecedor novo no Integrador PCronos/APS Cloud
+====================================================================================
+
+Leão, Bernardino,
+  
+A versão nuvem do Integrador APS-PCronos está pronta em homologação. 
+ 
+Nesta versão nova não existe mais o diretório C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/
+e não existe mais o arquivo de configuração "Integração Fornecedor - Portal Cronos.properties". 
+   
+Ao invés disso as configurações dos clientes Marizpan, Atacamax, e de todos os outros, se encontram agora no menu de Windows 
+   "Iniciar" > "Portal Cronos" > "Integração APS" > "Configurações Marizpan"
+   "Iniciar" > "Portal Cronos" > "Integração APS" > "Configurações Atacamax"
+   "Iniciar" > "Portal Cronos" > "Integração APS" > "Configurações ..."
+   "Iniciar" > "Portal Cronos" > "Integração APS" > "Adicionar Cliente novo"
+
+A telinha nova "Adicionar Cliente novo":
+ - solicita o nome fantasia do cliente;
+ - gera um processo novo asíncrono para cada cliente;
+ - cria configurações inicias. 
+ 
+ 
+Observações:
+------------
+1. Para evitar erros é recomendado clicar com o botão direita do mouse sobre esta opção 
+   "Adicionar Cliente" e clicar "Executar como Administrador". 
+ 
+2. Esta telinha nova é feia ainda porém funciona. Mais tarde vai ficar mais bonita. 
+
+(  ) AINDA NÃO ENVIADO PARA NINGUÈM: 
+3. A versão nuvem atual ocupa .... MB para cada cliente. No futuro vou desenvolver uma versão que ocupa 
+uma memória base de .... MB + acrescimento de ..... MB por cliente.
+ 
+ Eric
+  
+    
+     

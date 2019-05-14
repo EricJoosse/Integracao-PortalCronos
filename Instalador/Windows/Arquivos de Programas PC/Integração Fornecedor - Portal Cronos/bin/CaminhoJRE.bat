@@ -29,6 +29,8 @@ if "%1"=="Desinstalador.log" (
   if exist Instalador.log del /f /q Instalador.log 
 ) else if "%1"=="TestadorUnitario.log" (
   if exist TestadorUnitario.log del /f /q TestadorUnitario.log 
+) else if "%1"=="AdicionarFornecedorNuvem.log" (
+  if exist AdicionarFornecedorNuvem.log del /f /q AdicionarFornecedorNuvem.log 
 )
 
 REM Usar o caminho completo do JRE para o caso que tiver 2 JRE´s no mesmo servidor 

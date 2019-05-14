@@ -544,6 +544,12 @@ public class TestadorSnippets {
 	    System.out.println("Cotação 123-4567 " + IntegracaoFornecedorCompleta.NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A região da empresa compradora " + cpfOuNomeComCpf + " não foi informada no sistema ");
 	  }
 	  
+	  private static void testarGeracaoArquivoXmlTarefaWindows() throws IOException, Exception
+	  {
+		  TarefaWindows tarefaWindows = new TarefaWindows("Atacamax");
+		  tarefaWindows.gravarEmArquivoXML();
+	  }
+	  
 	  public static void main(String[] args) throws Exception {
 
 		try
@@ -572,7 +578,8 @@ public class TestadorSnippets {
          // testarProcuraTimeouts();
 		 // testarDefaultCharsetException();
 		 // testarMontagemTemplateEmail();
-			testarCriticas();
+		 // testarCriticas();
+			testarGeracaoArquivoXmlTarefaWindows();
          
 
          // throw new Exception("try");
