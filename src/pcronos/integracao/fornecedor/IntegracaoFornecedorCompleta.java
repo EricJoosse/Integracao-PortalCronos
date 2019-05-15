@@ -184,11 +184,12 @@ public final class IntegracaoFornecedorCompleta {
 	 {
 		 if (    file.getName().toLowerCase().startsWith("Integração") 
 	    	  && file.getName().toLowerCase().endsWith(".properties") 
-	    	  && file.getName().toLowerCase().indexOf("." + "copy" + ".")  == -1 
-	    	  && file.getName().toLowerCase().indexOf("." + "cópia" + ".") == -1 
-	    	  && file.getName().toLowerCase().indexOf("." + "copia" + ".") == -1 
-	    	  && file.getName().toLowerCase().indexOf("." + "backup" + ".")  == -1 
-	    	  && file.getName().toLowerCase().indexOf("." + "bck" + ".") == -1 
+	    	  && file.getName().toLowerCase().indexOf("copy")  == -1 
+	    	  && file.getName().toLowerCase().indexOf("cópia") == -1 
+	    	  && file.getName().toLowerCase().indexOf("copia") == -1 
+	    	  && file.getName().toLowerCase().indexOf("backup")  == -1 
+	    	  && file.getName().toLowerCase().indexOf("bck") == -1 
+	    	  && file.getName().toLowerCase().indexOf("template") == -1 
 	    	)
 	     {
 			 qtdArquivosConfig += 1;
@@ -2812,11 +2813,10 @@ public final class IntegracaoFornecedorCompleta {
 	   } // if (args.length == 0) 
 	   else // No caso de servidores Nuvem:
 	   {
-		  int idFornecedor = Integer.parseInt(args[0]);
-		  FornecedorRepositorio fRep = new FornecedorRepositorio();
+		  String nmFornecedor = args[0];
 		  try 
 		  {
-			  Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES.replace("Fornecedor", "APS").replace(".properties", ("." + fRep.getFornecedor(idFornecedor).NomeFantasiaEmpresa + ".properties")));
+			  Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES.replace("Fornecedor", "APS").replace(".properties", ("." + nmFornecedor + ".properties")));
 			  qtdMilliSegCiclo = Executar(true);
 		  } 
 		  catch (Exception ex) 

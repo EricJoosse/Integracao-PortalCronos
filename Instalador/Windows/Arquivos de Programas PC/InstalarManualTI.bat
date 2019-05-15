@@ -66,7 +66,7 @@ if %tamanhoArqLog% GTR 0 (
 
 
 ENDLOCAL
-REM /B para não fechar o script chamador:  
+REM /B para não fechar o script chamador (Primeira_Instalacao_Versao_Windows.bat):  
 exit /B 0
 
 

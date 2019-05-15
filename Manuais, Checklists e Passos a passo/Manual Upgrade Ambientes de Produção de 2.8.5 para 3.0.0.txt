@@ -33,19 +33,52 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
  
 4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
  
-5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+5. No caso do APS Cloud: 
+	- Copiar do projeto Eclipse para o servidor do APS Cloud:
+		- AdicionarFornecedorNuvem.bat
+		- /bin/CaminhoJRE.bat
+		- Job15a15minOfertamentoJava_Windows.bat 
+		- conf/TemplateNuvemAPS.properties
+	- Apagar o Task Schedule atual
+	- Backup do arquivo config .properties da Marizpan
+	- No menu de Windows "Iniciar" > "Portal Cronos" renomear o subdir "Integração Fornecedor" (?????
+	  para "Integração APS"
+	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integração APS":
+		- Criar o seguinte atalho:
+			- "C:\Arquivos de Programas PC\AdicionarFornecedorNuvem.bat"
+			- Renomear para "Adicionar Cliente novo"
+			- Ícone de pasta + maizinha verde, veja exemplo na máquina .181 no Azure
+		- Remover o atalho "Manual Manutenção TI" provisoriamente
+	- Remover o arquivo "C:\Arquivos de Programas PC\Manual TI.......... provisoriamente
+	- Adicionar cliente novo "Marizpan"
+	- Copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integração APS":
+		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Cliente novo":
+			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Marizpan.properties"
+			- Renomeado para "Configurações Marizpan"
+			- Ícone de Configurações, veja exemplo na máquina .181 no Azure
+	- Alterar o dir C:\Arquivos de Programas PC\ para Hidden e System File, executando o seguinte 
+	  na tela preta de DOS: 
+	    	cd\
+	    	attrib "Arquivos de Programas PC" +S +H	    
+	  (é necessário para evitar cópias hackeadas e erradas dos arquivos de configuração, 
+	   sem ter criado um Windows Task Schedule) 
+	- Adicionar cliente novo "Atacamax"
+
+
+6. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-6. Em todos os casos: 
+7. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
-7. Apenas no caso do servidor do monitoramento: 
+8. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
      
      
-8. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
    (ii)  Compilar o arquivo .jar
    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
          esperando o processamento atual terminar primeiro
