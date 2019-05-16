@@ -6,7 +6,12 @@
   <name>Integrador de Sistemas com o Portal Cronos - para Empresas Fornecedoras</name>
   
   <properties>
-<!--     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
+    
+<!-- O seguinte é necessário para evitar que Maven remove indevidamente "encoding/project=Cp1252" -->
+<!-- no arquivo "org.eclipse.core.resources.prefs" -->
+    <project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
+<!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
+
     <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
     <pcronos.jre.ambiente_producao>C:\Program Files\Java\jre1.8.0_92</pcronos.jre.ambiente_producao>
   </properties>

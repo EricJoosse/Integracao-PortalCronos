@@ -229,7 +229,7 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTI = "Saulo"; 
 		f[i].FuncaoResponsavelTI = "Analista";
 		
-		f[i].EmailResponsavelTIAlternativo = "";		
+		f[i].EmailResponsavelTIAlternativo = "bernardino@apsinformatica.com.br";		
 		f[i].SkypeResponsavelTIAlternativo = "Bernardino Borba (live:berna31pe)";		
 		f[i].ApelidoResponsavelTIAlternativo = "Bernardino";
 		f[i].FuncaoResponsavelTIAlternativo = "Sócio do APS";

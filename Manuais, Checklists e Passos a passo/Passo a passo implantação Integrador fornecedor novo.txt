@@ -128,8 +128,8 @@ Eric
 	    		- a coluna "Debug"       
 	    		- a coluna "Qtd.Dias"   
 	    		
-	    	 (d) No caso de servidore s de fornecedores: 
-	    	       - Remover todas as referências ao monitorador (pesquisar o texto "monitor")
+	    	 (d) No caso de servidores de fornecedores: 
+	    	       - Remover todas as referências ao monitorador (pesquisar o texto "monitor") no arquivo de configuração
 
 
 
@@ -184,6 +184,12 @@ por exemplo a senha do usuário ws-marizpan,
 Eric
 
 
+0. No caso que é a primeira instalação integrando um sistema novo diferente do APS ou WinThor, 
+   - substituir as variáveis <xxx> no seguinte, 
+   - e perguntar o seguinte no Skype/email pois a seguinte coluna não está no roteiro de Leão:
+     Skype/Email: <Nome funcionário TI>, boa tarde! Só uma dúvida pequena: qual é o nome da coluna na tabela "<cliente>" no <APS> que contem os nomes dos clientes? Com esta informação vou conseguir melhorar as diversas mensagens no plugin <APS>/PCronos, pois pela coluna "<cpfcgc>" é um pouquinho chato para saber de qual cliente se trata cada mensagem.
+
+
 
 	1. Conectar no AnyDesk. 
 	   Obs.: na máquina na Apply:                     o Team Viewer dá mensagem de suspeita de uso comercial; 
@@ -220,7 +226,7 @@ Como vai ser?
        
 
 	2. a. Verificar se o usuário logado é administrador ou administrator, 
-	      local ou da rede (como administrador da rede ainda não foi testado).
+	      local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
 	      (Formaggio: user "techcorp")
 	      
 	   b. Verificar se o usuário logado consegue abrir o botão "Environment Variables" 

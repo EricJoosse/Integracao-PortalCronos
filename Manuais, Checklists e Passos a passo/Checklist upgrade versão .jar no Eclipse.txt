@@ -7,20 +7,21 @@ Checklist upgrade versão .jar no Eclipse
 - Editar pom.xml (4 lugares)
 	- Cuidado para não alterar versões de dependências de outros jars por engano
 
-- Editar bin\Versao.bat
-
 - Project > Maven > Update Project
+
+- Editar bin\Versao.bat no Instalador
 
 - Compilar o .jar
 
 - Mover o .jar anterior para 
   \Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos - Versões anteriores\
 
-- Registrar pendência nova para criar o próximo tag novo no futuro e colocar esta pendência 
+- Registrar uma pendência nova para criar o próximo tag novo no futuro e colocar esta pendência 
   na posição correta da fila de commits, no lugar mais adiantado possível, no último momento possível. 
   Já registrar logo agora a descrição do tag futuro. 
 
-- Se precisar, criar novo "Manual Upgrade Ambientes de Produção de x.y.z para a.b.c.txt"
+- Se precisar, criar um novo arquivo "Manual Upgrade Ambientes de Produção de x.y.z para a.b.c.txt" 
+  copiando o arquivo "Manual Upgrade Ambientes de Produção de OUTRA para OUTRA.txt"
  
 - Atualizar o arquivo "Tabela Versão .jar X Versão Manual TI.txt" repetindo a última linha 
   se não houve alteração no Manual TI
@@ -29,6 +30,6 @@ Checklist upgrade versão .jar no Eclipse
   item 3, no campo "Nome":
   atualizar a versão dentro do nome do arquivo "Instalador do Integrador Fornecedores - Portal Cronos.*.exe". 
  
-- Se precisar, atualizar o instalador, ou registrar uma pendência. 
+- Se precisar: atualizar o instalador, ou registrar uma pendência. 
   Geralmente não precisa, pois a atualização do instalador já é um dos passos na instalação do Integrador 
   em um servidor novo, (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado). 
