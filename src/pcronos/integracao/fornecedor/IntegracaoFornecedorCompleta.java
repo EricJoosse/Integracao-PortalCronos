@@ -162,7 +162,8 @@ public final class IntegracaoFornecedorCompleta {
   public static String       erroStaticConstructor;
   public static String       nomeArquivoDebug;
   public static TransformerFactory transformerFactory;
-  public static boolean IsSistemaFornecedorNuvem;
+  public static boolean      IsSistemaFornecedorNuvem;
+  public static String        nomeArquivoConfigNuvemAtual;
 
 
   static 
@@ -2428,7 +2429,7 @@ public final class IntegracaoFornecedorCompleta {
 		if (response.getStatus() != 200 && response.getStatus() != 202) {
 	        client.destroy();
 		   throw new Exception("\r\n  Erro! Favor verificar todas as configurações no  arquivo \"" 
-	                          + Constants.NOME_ARQUIVO_PROPERTIES 
+	                          + (!IntegracaoFornecedorCompleta.IsSistemaFornecedorNuvem ? Constants.NOME_ARQUIVO_PROPERTIES : IntegracaoFornecedorCompleta.nomeArquivoConfigNuvemAtual) 
 	                          + "\" ! \r\n    Erro: HTTP Status Code = " 
 	                          + response.getStatus() 
 	                          + " (" + response.getClientResponseStatus().getReasonPhrase() 
@@ -2814,9 +2815,10 @@ public final class IntegracaoFornecedorCompleta {
 	   else // No caso de servidores Nuvem:
 	   {
 		  String nmFornecedor = args[0];
+		  nomeArquivoConfigNuvemAtual = Constants.NOME_ARQUIVO_PROPERTIES.replace("Fornecedor", "APS").replace(".properties", ("." + nmFornecedor + ".properties"));
 		  try 
 		  {
-			  Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES.replace("Fornecedor", "APS").replace(".properties", ("." + nmFornecedor + ".properties")));
+			  Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + nomeArquivoConfigNuvemAtual);
 			  qtdMilliSegCiclo = Executar(true);
 		  } 
 		  catch (Exception ex) 
