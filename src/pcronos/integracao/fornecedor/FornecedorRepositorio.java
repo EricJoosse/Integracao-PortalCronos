@@ -45,6 +45,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
 		f[i].dirProgramFiles = "Program Files";
+		f[i].MemoriaRamLivre = "1.4 - 1.9 GB";
 
 		i++;
 		f[i].IdFornecedor = 13;
@@ -65,6 +66,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "02870737000190";
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 947;
@@ -84,6 +86,7 @@ public class FornecedorRepositorio {
 		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "00680755000265";
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 30;
@@ -103,6 +106,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07182763000140"; 
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 21;
@@ -120,6 +124,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "?????????????????????";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "04666316000178";
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 170;
@@ -138,6 +143,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07041307000180";
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 60;
@@ -155,6 +161,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24150377000195";
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 33;
@@ -174,6 +181,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07534303000133";
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 171;
@@ -192,6 +200,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24407389000233";
+		f[i].MemoriaRamLivre = "";
 
 		i++;
 		f[i].IdFornecedor = 14;
@@ -209,6 +218,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "03042263000151";
+		f[i].MemoriaRamLivre = "";
 
 		
 		i++;
@@ -222,6 +232,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
 		f[i].dirProgramFiles = "Program Files (x86)";
 		f[i].versaoJRE = "jre1.8.0_191";
+		f[i].MemoriaRamLivre = "";
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
 
 		f[i].EmailResponsavelTI = "saulo@apsinformatica.com.br";
@@ -254,6 +265,8 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = ""; 
 		f[i].dirProgramFiles = "";
 		f[i].versaoJRE = "";
+		f[i].MemoriaRamLivre = "";
+		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
 
 		f[i].EmailResponsavelTI = "";
 		f[i].SkypeResponsavelTI = "";

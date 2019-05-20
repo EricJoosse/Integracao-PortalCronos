@@ -29,6 +29,7 @@ public class Fornecedor {
 	public String SkypeResponsavelTI_Nuvem;
 	public String ApelidoResponsavelTI_Nuvem;
 	String ResponsavelDeParasProdutos;
+	String MemoriaRamLivre;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

@@ -240,12 +240,17 @@ Como vai ser?
 	      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
 	
 	
-	3. (i) Verificar a versão de Windows no servidor do fornecedor 
-	       
-	    - Preencher isso no f[i].tipoSO = "" no FornecedorRepository   
+	3. (i) Verificar a versão de Windows no servidor do fornecedor 	       
+		    - Preencher isso no f[i].tipoSO = "" no FornecedorRepositorio   
 	
 	
-	   (ii) No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
+	   (ii) Verificar a memória RAM livre no servidor de Produção do fornecedor (sem contar meu JVM).
+		    - Preencher isso no f[i].MemoriaRamLivre = "" no FornecedorRepositorio
+		    - Não fazer no caso de servidores de Teste / Homologação (por exemplo o do APS Cloud)   
+			- Observação: no servidor de monitoramento o serviço + JVM ocupa 60 MB de memória
+	   
+	    
+	   (iii) No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
 	   
 		- Verificar a versão de Windows no servidor do fornecedor 
 		  e descomentar a variável "osVersion" correta no início do .bat. 
