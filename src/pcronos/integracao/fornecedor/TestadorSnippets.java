@@ -550,7 +550,44 @@ public class TestadorSnippets {
 		  tarefaWindows.gravarEmArquivoXML();
 	  }
 	  
-	  public static void main(String[] args) throws Exception {
+	  private static void testarIsSistemaFornecedorNuvem() {
+			 File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
+			 boolean IsSistemaFornecedorNuvem = false;
+			 int qtdArquivosConfig = 0;
+			 int qtdArquivosConfigComNomeEspecifico = 0;
+			 
+			 for (final File file : dirConfig.listFiles()) 
+			 {
+				 if (file.getName().equals(Constants.NOME_ARQUIVO_PROPERTIES))
+			     {
+					 qtdArquivosConfigComNomeEspecifico += 1;
+			     }
+			 }
+			 
+			 for (final File file : dirConfig.listFiles()) 
+			 {
+				 if (    file.getName().startsWith("Integração") 
+			    	  && file.getName().endsWith(".properties") 
+			    	  && file.getName().toLowerCase().indexOf("copy")  == -1 
+			    	  && file.getName().toLowerCase().indexOf("cópia") == -1 
+			    	  && file.getName().toLowerCase().indexOf("copia") == -1 
+			    	  && file.getName().toLowerCase().indexOf("backup")  == -1 
+			    	  && file.getName().toLowerCase().indexOf("bck") == -1 
+			    	  && file.getName().toLowerCase().indexOf("template") == -1 
+			    	)
+			     {
+					 qtdArquivosConfig += 1;
+			     }
+			 }
+			 
+			 // Aqui debugar() não pode ser usado pois as configurações para isso ainda não estão definidos:
+		 	 System.out.println("qtdArquivosConfig = " + qtdArquivosConfig);
+		 	 System.out.println("qtdArquivosConfigComNomeEspecifico = " + qtdArquivosConfigComNomeEspecifico);
+		  
+	  }
+	  
+	  
+ 	  public static void main(String[] args) throws Exception {
 
 		try
         {			
@@ -579,7 +616,8 @@ public class TestadorSnippets {
 		 // testarDefaultCharsetException();
 		 // testarMontagemTemplateEmail();
 		 // testarCriticas();
-			testarGeracaoArquivoXmlTarefaWindows();
+		 // testarGeracaoArquivoXmlTarefaWindows();
+			testarIsSistemaFornecedorNuvem();
          
 
          // throw new Exception("try");

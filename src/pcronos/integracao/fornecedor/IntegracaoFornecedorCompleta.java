@@ -34,6 +34,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.PrintStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.net.URI;
@@ -183,8 +184,8 @@ public final class IntegracaoFornecedorCompleta {
 	 
 	 for (final File file : dirConfig.listFiles()) 
 	 {
-		 if (    file.getName().toLowerCase().startsWith("Integração") 
-	    	  && file.getName().toLowerCase().endsWith(".properties") 
+		 if (    file.getName().startsWith("Integração") 
+	    	  && file.getName().endsWith(".properties") 
 	    	  && file.getName().toLowerCase().indexOf("copy")  == -1 
 	    	  && file.getName().toLowerCase().indexOf("cópia") == -1 
 	    	  && file.getName().toLowerCase().indexOf("copia") == -1 
@@ -197,6 +198,10 @@ public final class IntegracaoFornecedorCompleta {
 	     }
 	 }
 
+	 // Aqui debugar() não pode ser usado pois as configurações para isso ainda não estão definidos:
+ 	 System.out.println("qtdArquivosConfig = " + qtdArquivosConfig);
+ 	 System.out.println("qtdArquivosConfigComNomeEspecifico = " + qtdArquivosConfigComNomeEspecifico);
+
 
 	 // No caso de ambientes de tipo hospedagem local ("não-nuvem"):
 	 if (qtdArquivosConfigComNomeEspecifico == 1 && qtdArquivosConfig == 1)
@@ -208,6 +213,18 @@ public final class IntegracaoFornecedorCompleta {
 	 else if (qtdArquivosConfigComNomeEspecifico == 0 && qtdArquivosConfig > 1)
 	 {
          IsSistemaFornecedorNuvem = true;
+	 }
+	 else if (qtdArquivosConfigComNomeEspecifico == 0 && qtdArquivosConfig == 0)
+	 {
+	        try
+	        {
+	          erroStaticConstructor = "Nenhum arquivo de configuração encontrado!";
+	          logarErro(erroStaticConstructor);
+	        }
+	        catch (Exception ex2)
+	        {
+	          throw new ExceptionInInitializerError(ex2);
+	        }
 	 }
 	 else
 	 {
