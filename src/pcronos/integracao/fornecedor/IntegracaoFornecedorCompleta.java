@@ -2697,10 +2697,14 @@ public final class IntegracaoFornecedorCompleta {
 
 	   try 
 	   {
-  		  // No caso de tipoSO.equals("Windows 10 Pro") && IdFornecedor == 947:
+  		  // No caso que tipoSO.equals("Windows 10 Pro") && IdFornecedor == 947,
+		  // e em todos os outros casos que não usam o Agendador de Tarefas de Windows 
+		  // para controlar a repetição do serviço a cada 15 minutos, 
+		  // exceto na primeira execução na qual Inicializar() já foi executado no static constructor:
 	      if (!isPrimeiraVez)
-	         Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES);
+	         Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + (!IsSistemaFornecedorNuvem ? Constants.NOME_ARQUIVO_PROPERTIES : nomeArquivoConfigNuvemAtual));
 	       
+	      
 		  LocalDateTime horaInicio = LocalDateTime.now();
 
 	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -2837,6 +2841,25 @@ public final class IntegracaoFornecedorCompleta {
 		  {
 			  Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + nomeArquivoConfigNuvemAtual);
 			  qtdMilliSegCiclo = Executar(true);
+		  
+//			   try {
+//				   FornecedorRepositorio fRep = new FornecedorRepositorio();
+//			       if (fRep.getFornecedor(fRep.getIdFornecedorByCnpj(cnpjFornecedor)).usaAgendadorTarefasWindows) 
+//			       {
+//			    	   while (true) {
+//			    		   Thread.sleep( (15 * 60 * 1000) - qtdMilliSegCiclo); // 15 min
+//			    		   qtdMilliSegCiclo = Executar(false);
+//			    	   }
+//			       }
+//			   }
+//		  	   catch (InterruptedException iex)
+//			   {
+//		  		  logarErro("main() - InterruptedException: " + iex.getMessage());
+//			   }
+//		  	   catch (Exception ex)
+//			   {
+//		   		  logarErro("main(): Erro: " + ex.getMessage());
+//			   }
 		  } 
 		  catch (Exception ex) 
 		  {
