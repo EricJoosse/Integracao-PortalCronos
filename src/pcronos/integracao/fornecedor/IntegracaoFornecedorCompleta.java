@@ -1714,6 +1714,8 @@ public final class IntegracaoFornecedorCompleta {
 			              + " where replace(replace(replace(PCCLIENT.CGCENT, '.',''), '/',''), '-','') = '" + cdComprador + "'"
 			              ;
 	        }
+	        else sqlString = null;
+	        
 		    // Para executar o SELECT direto no banco de dados, se precisar :
 		    debugar(sqlString);
 		
@@ -1753,6 +1755,8 @@ public final class IntegracaoFornecedorCompleta {
 				              + "   and PCCLIENT.DTEXCLUSAO is not null "
 				              ;
 		        }
+		        else sqlString = null;
+				
 		
 		        if (sqlString != null)
 		        {
@@ -1789,6 +1793,8 @@ public final class IntegracaoFornecedorCompleta {
 				              + "   and PCCLIENT.BLOQUEIO = 'S'  "
 				              ;
 		        }
+		        else sqlString = null;
+				
 		
 		        if (sqlString != null && !toNaoVerificarDemaisErros)
 		        {
@@ -1838,6 +1844,8 @@ public final class IntegracaoFornecedorCompleta {
 			              + "   and PCCLIENT.DTEXCLUSAO is null "
 			              ;
 	        }
+	        else sqlString = null;
+		    
 		    // Para executar o SELECT direto no banco de dados, se precisar :
 		    debugar(sqlString);
 		
@@ -1967,6 +1975,7 @@ public final class IntegracaoFornecedorCompleta {
 			              + "   and PCCLIENT.DTEXCLUSAO is null "
 			              ;
 	        }
+	        else sqlString = null;
 		
 		    // Para executar o SELECT direto no banco de dados, se precisar :
 		    debugar(sqlString);
@@ -2168,6 +2177,7 @@ public final class IntegracaoFornecedorCompleta {
 	              + "   and PCPRODUT.REVENDA    = 'S' "
 	              + "   and PCPRODUT.DTEXCLUSAO is null  ";
     } // if (siglaSistema.equals("WinThor"))
+    else sqlString = null;
     
     // Para executar o SELECT direto no banco de dados, se precisar :
     if (i == 0) debugar(sqlString);
@@ -2214,6 +2224,7 @@ public final class IntegracaoFornecedorCompleta {
 			        sqlString += "   and (nvl(PCEST.QTESTGER,0) - nvl(PCEST.QTRESERV,0) - nvl(PCEST.QTPENDENTE,0) - nvl(PCEST.QTBLOQUEADA,0)) > 0 ";
 	    	
 	    }
+	    else sqlString = null;
 	    
 	    rSet = stat.executeQuery( sqlString ) ;
 	
@@ -2262,6 +2273,7 @@ public final class IntegracaoFornecedorCompleta {
 	              + "     , PCSECAO  "
 	              ;
     } // if (siglaSistema.equals("WinThor"))
+    else sqlString = null;
     
     String sqlStringSemEstoque = sqlString;
     String sqlStringComEstoque = sqlString;
