@@ -222,18 +222,19 @@ public class FornecedorRepositorio {
 
 		
 		i++;
-		f[i].IdFornecedor = 1995;
-		f[i].NomeFantasiaEmpresa = "Marizpan";
-		f[i].cnpjFornecedor = "12286800000108";
+		f[i].IsServicoNuvem = true;
+		f[i].IdFornecedor = 1995; // APS Cloud - primeiro fornecedor de muitos
+		f[i].NomeFantasiaEmpresa = "Marizpan";   // APS Cloud - primeiro fornecedor de muitos
+		f[i].cnpjFornecedor = "12286800000108";  // APS Cloud - primeiro fornecedor de muitos
 		f[i].versaoIntegrador = "2.8.5";
 		f[i].SiglaSistemaFornecedor = "APS";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
-		f[i].usuarioWebservice = "ws-marizpan";
+		f[i].usuarioWebservice = "ws-marizpan";  // APS Cloud - primeiro fornecedor de muitos
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
 		f[i].dirProgramFiles = "Program Files (x86)";
 		f[i].versaoJRE = "jre1.8.0_191";
 		f[i].MemoriaRamLivre = "";
-		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
+		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
 
 		f[i].EmailResponsavelTI = "saulo@apsinformatica.com.br";
 		f[i].SkypeResponsavelTI = "Saulo Gomes de Lima (saulo_analista)";

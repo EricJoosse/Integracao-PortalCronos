@@ -30,6 +30,7 @@ public class Fornecedor {
 	public String ApelidoResponsavelTI_Nuvem;
 	String ResponsavelDeParasProdutos;
 	String MemoriaRamLivre;
+	boolean IsServicoNuvem;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

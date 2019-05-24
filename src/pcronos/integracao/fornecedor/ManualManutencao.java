@@ -9,7 +9,7 @@ import mslinks.ShellLink;
 
 public class ManualManutencao {
 
-	private String nomeArquivo = null;
+	public String nomeArquivo = null;
 	private String nomeAtalho = null;
 	private String conteudo;
 	private Fornecedor fornecedor;
@@ -184,8 +184,15 @@ public class ManualManutencao {
 "            " + "\r\n" +
 "" + "\r\n" +
 "A. Possíveis causas de paradas da integração " + f.SiglaSistemaFornecedor + "/PCronos:" + "\r\n" +
-"=============================================================" + "\r\n" +  
-"  - O servidor da " + f.NomeFantasiaEmpresa + " que está hospedando este serviço está desligado?" + "\r\n" +
+"=============================================================" + "\r\n";
+        
+if (f.IsServicoNuvem)
+    this.conteudo += "  - O servidor nuvem da APS Cloud que está hospedando este serviço está desligado?" + "\r\n";
+else
+    this.conteudo += "  - O servidor da " + f.NomeFantasiaEmpresa + " que está hospedando este serviço está desligado?" + "\r\n";
+
+
+this.conteudo +=        
 "" + "\r\n" +
 "  - O disco rígido (\"HD\") C:\\ está cheio?" + "\r\n" +
 "" + "\r\n" +
@@ -215,10 +222,26 @@ if (f.SiglaSistemaFornecedor.equals("SAP"))
 	
 this.conteudo += "" +
 "  - O endereço IP, usuário ou senha da base de dados " + f.getTipoBaseDeDados() + " mudou?" + "\r\n" +
-"" + "\r\n" +
-"  - A senha do usuário " + f.usuarioWebservice + " do site do Portal Cronos foi alterada no site? " + "\r\n" + 
-"    Neste caso verifica se a mesma foi atualizada também no seguinte arquivo de configuração: " + "\r\n" +
-"    C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\conf\\Integração Fornecedor - Portal Cronos.properties" + "\r\n" + 
+"" + "\r\n";
+
+
+if (f.IsServicoNuvem)
+    this.conteudo += "  - A(s) senha(s) de um ou mais usuários ws-marizpan, ws-atacamax, etc, do site do Portal Cronos foi(foram) alterada(s) no site? " + "\r\n";
+else
+    this.conteudo += "  - A senha do usuário " + f.usuarioWebservice + " do site do Portal Cronos foi alterada no site? " + "\r\n";
+
+
+this.conteudo += "" +
+"    Neste caso verifica se a mesma foi atualizada também no seguinte arquivo de configuração: " + "\r\n";
+
+
+if (f.IsServicoNuvem)
+    this.conteudo += "    C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\conf\\Integração APS - Portal Cronos.<NomeFornecedor>.properties" + "\r\n" ;
+else
+    this.conteudo += "    C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\conf\\Integração Fornecedor - Portal Cronos.properties" + "\r\n" ;
+
+
+this.conteudo += "" +
 "" + "\r\n";
 
 	
@@ -252,8 +275,15 @@ this.conteudo += "" +
 "B. Como verificar se o serviço realmente voltou a funcionar:" + "\r\n" +
 "============================================================" + "\r\n" +
 "No caso que você mesmo consegue resolver o problema: " + "\r\n" +
-"  1. Favor verificar após 15 minutos se o serviço atualizou o arquivo" + "\r\n" + 
-"     \"C:/ProgramData/PortalCronos/Logs/Local/TemposExecução.log\" no final do arquivo." + "\r\n" +  
+"  1. Favor verificar após 15 minutos se o serviço atualizou o arquivo" + "\r\n";
+
+if (f.IsServicoNuvem)
+    this.conteudo += "     \"C:/ProgramData/PortalCronos/Logs/Local/TemposExecução.<NomeFornecedor>.log\" no final do arquivo." + "\r\n";
+else
+    this.conteudo += "     \"C:/ProgramData/PortalCronos/Logs/Local/TemposExecução.log\" no final do arquivo." + "\r\n";
+
+
+this.conteudo += "" +
 "      " + "\r\n" +
 "  2. Em seguida: " + "\r\n" +
 "     (i).  No caso de sucesso, favor verificar também se as cotações pendentes foram ofertadas automaticamente." + "\r\n" + 

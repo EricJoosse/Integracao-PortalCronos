@@ -21,9 +21,9 @@ Observação: este manual contem apenas a parte técnica da integração. Se precisar
             podem ser explicados pelo gerente de vendas ou por Leão do Portal Cronos.
             
 
-A. Possíveis causas de paradas da integração WinThor/PCronos:
+A. Possíveis causas de paradas da integração APS/PCronos:
 =============================================================
-  - O servidor da JR Distribuição que está hospedando este serviço está desligado?
+  - O servidor nuvem da APS Cloud que está hospedando este serviço está desligado?
 
   - O disco rígido ("HD") C:\ está cheio?
 
@@ -41,17 +41,17 @@ A. Possíveis causas de paradas da integração WinThor/PCronos:
 
   - Algum anti-virus está travando a máquina? (100 % memória RAM)
 
-  - O endereço IP, usuário ou senha da base de dados Oracle mudou?
+  - O endereço IP, usuário ou senha da base de dados Firebird mudou?
 
-  - A senha do usuário ws-jrembalagem do site do Portal Cronos foi alterada no site? 
+  - A(s) senha(s) de um ou mais usuários ws-marizpan, ws-atacamax, etc, do site do Portal Cronos foi(foram) alterada(s) no site? 
     Neste caso verifica se a mesma foi atualizada também no seguinte arquivo de configuração: 
-    C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração Fornecedor - Portal Cronos.properties
+    C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.<NomeFornecedor>.properties
 
   - No "Gerenciador de Tarefas" ("Task Manager") ordenar por nome do processo, e procurar
     "Java(TM) Platform SE binary". 
     Se não tiver nenhum processo com este nome, tudo está certo.
     Se tiver um ou mais processos na lista, verifica com o botão á direita do mouse,
-    na aba "Geral" se o "Local" de cada processo for igual a "C:/Program Files/Java/jre1.8.0_92/bin/java.exe".
+    na aba "Geral" se o "Local" de cada processo for igual a "C:/Program Files (x86)/Java/jre1.8.0_191/bin/java.exe".
     Se não tiver nenhum processo com este "Local", tudo está certo.   
     Se tiver um processo com este "Local" enquanto que as ofertas automáticas estão paradas,
     este processo está travado. Neste caso, com o botão a direita do mouse clicar em "Finalizar tarefa".  
@@ -70,7 +70,7 @@ B. Como verificar se o serviço realmente voltou a funcionar:
 ============================================================
 No caso que você mesmo consegue resolver o problema: 
   1. Favor verificar após 15 minutos se o serviço atualizou o arquivo
-     "C:/ProgramData/PortalCronos/Logs/Local/TemposExecução.log" no final do arquivo.
+     "C:/ProgramData/PortalCronos/Logs/Local/TemposExecução.<NomeFornecedor>.log" no final do arquivo.
       
   2. Em seguida: 
      (i).  No caso de sucesso, favor verificar também se as cotações pendentes foram ofertadas automaticamente.
