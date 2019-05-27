@@ -24,7 +24,8 @@ REM goto TesteIfExist
 REM goto TesteAttrib
 REM goto TesteVersao
 REM goto TesteTresParam
-goto TesteTemplate
+REM goto TesteTemplate
+goto TesteDelTpl
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
@@ -334,6 +335,27 @@ exit
 
 call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
 call "Integração Fornecedor - Portal Cronos\bin\ComponenteTestador.bat" TesteTresParam.log TestadorSnippets %idFornecedor%
+
+
+pause
+exit
+
+REM ================ Teste del tpl (testado, funcionou com -1 e com 33): ========================================
+
+:TesteDelTpl
+
+chcp 1252>nul
+
+cd\
+cd "Arquivos de Programas PC"
+call InstalarManualTI.bat
+cd\
+cd "Arquivos de Programas PC"
+cd "Integração Fornecedor - Portal Cronos"
+
+if %idFornecedor% NEQ -1 (
+    rmdir /s /q tpl
+)
 
 
 pause

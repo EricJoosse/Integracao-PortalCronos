@@ -269,6 +269,10 @@ del /f /q TestadorUnitario.log
 del /f /q TesteTresParam.log
 del /f /q .gitignore
 
+if %idFornecedor% NEQ -1 (
+    rmdir /s /q tpl
+)
+
 cd\
 cd "Arquivos de Programas PC"
 
