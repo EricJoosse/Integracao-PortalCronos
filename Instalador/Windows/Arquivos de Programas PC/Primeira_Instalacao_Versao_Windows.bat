@@ -29,6 +29,24 @@ exit
 :PularErroTipoWin
 
 
+echo Tipo de instalação: 
+echo.
+echo 1 = Hospedagem Local
+echo 2 = Nuvem
+echo.
+
+SET /P idOsVersion=Favor digitar o ID do tipo de instalação: 
+IF "%tipoInstalacao%"=="" GOTO ErroTipoInst
+GOTO PularErroTipoInst
+:ErroTipoInst
+echo MSGBOX "Erro: ID do tipo de instalação não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:PularErroTipoInst
+
+
 REM set osVersion=Windows_Server_2016
 REM set osVersion=Windows_Server_2012_R2
 REM set osVersion=Windows_Server_2012
@@ -204,6 +222,10 @@ REM cd "Arquivos de Programas PC"
 
 REM ================ Instalar Task no Windows Scheduler: ========================================
 
+if %tipoInstalacao% == 2 (
+    goto SKIP_TASK_WINDOWS_SCHEDULER
+)
+
 cd\
 cd "Arquivos de Programas PC"
 
@@ -234,6 +256,7 @@ REM Testado:
 
 SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
 
+:SKIP_TASK_WINDOWS_SCHEDULER
 :SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
 
 REM ================ Instalar Manual Manutenção TI do menu de Windows, DEPOIS da instalação dos programas de Java: ========================================
@@ -264,6 +287,10 @@ del /f /q InstalarManualTI.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 del /f /q .gitignore
 
+if %tipoInstalacao% == 1 (
+    del /f /q AdicionarFornecedorNuvem.bat
+)
+
 cd "Integração Fornecedor - Portal Cronos"
 del /f /q TestadorUnitario.log
 del /f /q TesteTresParam.log
@@ -273,8 +300,21 @@ if %idFornecedor% NEQ -1 (
     rmdir /s /q tpl
 )
 
+cd conf
+
+if %tipoInstalacao% == 1 (
+    del /f /q TemplateNuvemAPS.properties
+)
+else if %tipoInstalacao% == 2 (
+    del /f /q "Integração Fornecedor - Portal Cronos.properties"
+)
+
 cd\
 cd "Arquivos de Programas PC"
+
+if %tipoInstalacao% == 2 (
+     call AdicionarFornecedorNuvem.bat
+)
 
 REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
 REM após o duplo-clique para executar a instalação:
