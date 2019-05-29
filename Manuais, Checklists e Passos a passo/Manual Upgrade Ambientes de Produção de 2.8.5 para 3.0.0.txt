@@ -31,16 +31,19 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 3. (i)  Copiar o arquivo novo integr-fornecedor-3.0.0.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
-4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
+4. Em todos os casos:
+   Atualizar os seguintes arquivos no servidor do fornecedor:
+	- /bin/Versao.bat 
+	- /bin/CaminhoJRE.bat
+	- Job15a15minOfertamentoJava_Windows.bat 
  
-5. No caso do APS Cloud: 
+5. Apenas no caso do APS Cloud: 
 	- Copiar do projeto Eclipse para o servidor do APS Cloud:
 		- AdicionarFornecedorNuvem.bat
-		- /bin/CaminhoJRE.bat
-		- Job15a15minOfertamentoJava_Windows.bat 
 		- conf/TemplateNuvemAPS.properties
 	- Apagar o Task Schedule atual
 	- Backup do arquivo config .properties da Marizpan
+	- Apagar o arquivo "conf/Integração Fornecedor - Portal Cronos.properties"
 	- No menu de Windows "Iniciar" > "Portal Cronos" renomear o subdir "Integração Fornecedor" (?????
 	  para "Integração APS"
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integração APS":
@@ -79,7 +82,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integração APS":
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Cliente novo":
 			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Marizpan.properties"
-			- Renomeado para "Configurações Marizpan"
+			- Atalho renomeado para "Configurações Marizpan"
 			- Ícone de Configurações, veja exemplo na máquina .181 no Azure
 	- Alterar o dir C:\Arquivos de Programas PC\ para Hidden e System File, executando o seguinte 
 	  na tela preta de DOS: 

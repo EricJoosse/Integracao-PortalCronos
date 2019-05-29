@@ -14,6 +14,7 @@ __A integração tem as seguintes duas partes :__
 Os seguintes sistemas já foram integrados com o Portal Cronos : 
 * SAP	     
 * APS	     
+* APS Cloud	     
 * WinThor   
 * IFS       
 * 3LM       

@@ -35,7 +35,7 @@ echo 1 = Hospedagem Local
 echo 2 = Nuvem
 echo.
 
-SET /P idOsVersion=Favor digitar o ID do tipo de instalação: 
+SET /P tipoInstalacao=Favor digitar o ID do tipo de instalação: 
 IF "%tipoInstalacao%"=="" GOTO ErroTipoInst
 GOTO PularErroTipoInst
 :ErroTipoInst

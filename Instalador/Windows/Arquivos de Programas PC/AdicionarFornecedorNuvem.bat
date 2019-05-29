@@ -16,7 +16,7 @@ cd "Arquivos de Programas PC"
 
 SET /P nmFornecedor=Favor digitar um nome bem curto da empresa fornecedora SEM NENHUM ESPAÇO EM BRANCO: 
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
-if not "%VAR%"=="%VAR: =%" goto ErroEspacosNmFornecedor
+if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor
 :ErroEspacosNmFornecedor
 echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome do fornecedor! Adicionamento deste fornecedor não concluído!" > %temp%\TEMPmessage.vbs
@@ -46,12 +46,17 @@ if exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf
 
 if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml 
 
-copy "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/TemplateNuvemAPS.properties" "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
+
+cd "Integração Fornecedor - Portal Cronos"
+cd conf
+copy TemplateNuvemAPS.properties "Integração APS - Portal Cronos.%nmFornecedor%.properties"
 
 
+cd\
+cd "Arquivos de Programas PC"
 call "Integração Fornecedor - Portal Cronos\bin\Inicializacoes.bat"
 call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
-call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" AdicionarFornecedorNuvem.log AdicionarFornecedorNuvem %nmFornecedor%
+call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" AdicionadorFornecedorNuvem.log AdicionadorFornecedorNuvem %nmFornecedor%
 
 set arquivoLog="AdicionarFornecedorNuvem.log"
 set tamanhoArqLog=0

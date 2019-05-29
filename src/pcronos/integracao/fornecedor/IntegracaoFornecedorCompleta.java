@@ -199,8 +199,8 @@ public final class IntegracaoFornecedorCompleta {
 	 }
 
 	 // Aqui debugar() não pode ser usado pois as configurações para isso ainda não estão definidos:
- 	 System.out.println("qtdArquivosConfig = " + qtdArquivosConfig);
- 	 System.out.println("qtdArquivosConfigComNomeEspecifico = " + qtdArquivosConfigComNomeEspecifico);
+  // System.out.println("qtdArquivosConfig = " + qtdArquivosConfig);
+  // System.out.println("qtdArquivosConfigComNomeEspecifico = " + qtdArquivosConfigComNomeEspecifico);
 
 
 	 // No caso de ambientes de tipo hospedagem local ("não-nuvem"):
@@ -2814,8 +2814,8 @@ public final class IntegracaoFornecedorCompleta {
    {    
 	   long qtdMilliSegCiclo = 0;
 	   
-	   System.out.println("args.length = " + args.length);
-	   System.out.println("args[0] = " + args[0]);
+	// System.out.println("args.length = " + args.length);
+	// System.out.println("args[0] = " + args[0]);
 	   
 	   // No caso de hospedagem local ("não-nuvem"):
 	   if (args.length == 0) 
