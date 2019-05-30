@@ -18,7 +18,11 @@ public class ManualManutencao {
 	
 	
 	private void setCaminhoManualMaisCaminhoAtalho() throws Exception { 	
-	    if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
+		if (this.fornecedor.IsServicoNuvem) {
+	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
+		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integração " + this.fornecedor.SiglaSistemaFornecedor + "/";
+		}
+		else if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
 	    	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 	    }
 	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
@@ -73,14 +77,18 @@ public class ManualManutencao {
         
         
         
-        if (     this.fornecedor.tipoSO.equals("Windows Server 2016") 
+        if (     this.fornecedor.IsServicoNuvem
+        	  || this.fornecedor.tipoSO.equals("Windows Server 2016") 
               || this.fornecedor.tipoSO.equals("Windows 10 Pro")
               || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
             ) {
         	
         	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
         	if(!diretorioAtalhoManual.exists()) { 
-        		diretorioAtalhoManual.mkdir();
+        		if (this.fornecedor.IsServicoNuvem)
+        		   diretorioAtalhoManual.mkdirs();
+        		else
+         		   diretorioAtalhoManual.mkdir();
         	}
         	else {
         		// Excluir eventuais atalhos antigos:

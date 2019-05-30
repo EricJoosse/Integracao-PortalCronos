@@ -14,7 +14,7 @@ cd\
 cd "Arquivos de Programas PC"
 
 
-SET /P nmFornecedor=Favor digitar um nome bem curto da empresa fornecedora SEM NENHUM ESPAÇO EM BRANCO: 
+SET /P nmFornecedor=Digite um nome curto para a primeira empresa cliente: 
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor
@@ -77,7 +77,11 @@ if %tamanhoArqLog% GTR 0 (
   SCHTASKS /Create /TN "Integração Portal Cronos - %nmFornecedor%" /XML "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml"
   SCHTASKS /Run /TN "Integração Portal Cronos - %nmFornecedor%"
 
-  start notepad "conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
+  cd\
+  cd "Arquivos de Programas PC"
+  if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml 
+
+  start notepad "Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
 )
 
 REM /B para não fechar o script chamador (Primeira_Instalacao_Versao_Windows.bat):  

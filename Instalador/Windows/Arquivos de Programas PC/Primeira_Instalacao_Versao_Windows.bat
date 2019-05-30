@@ -313,7 +313,17 @@ cd\
 cd "Arquivos de Programas PC"
 
 if %tipoInstalacao% == 2 (
-     call AdicionarFornecedorNuvem.bat
+    call AdicionarFornecedorNuvem.bat
+
+    echo.
+    echo          Primeira fase da instalação concluida!
+    echo          Para complementar a instalação em qualquer momento,
+    echo          veja as diversas opções no menu de Windows Iniciar > Portal Cronos.
+    echo.
+    
+    echo MSGBOX "Primeira fase da instalação concluida! Para complementar a instalação em qualquer momento, veja as diversas opções no menu de Windows Iniciar > Portal Cronos." > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
 )
 
 REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 

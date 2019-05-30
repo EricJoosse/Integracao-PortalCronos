@@ -602,7 +602,6 @@ public class TestadorSnippets {
 		 // testarParamIntegerInt();
 		 // diversosTestesBigDecimal();
 		 // testarNullParam();
-		 // testar_mkdirs();
 		 // testarFBDriver();
 		 // testarFloats();
 		 // testarNullInteger();
@@ -617,7 +616,8 @@ public class TestadorSnippets {
 		 // testarMontagemTemplateEmail();
 		 // testarCriticas();
 		 // testarGeracaoArquivoXmlTarefaWindows();
-			testarIsSistemaFornecedorNuvem();
+		 // testarIsSistemaFornecedorNuvem();
+		    testar_mkdirs();
          
 
          // throw new Exception("try");
