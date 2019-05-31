@@ -10,6 +10,11 @@ REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os 
 
 chcp 1252>nul
 
+if %tipoInstalacao% == 2 (
+   set idFornecedor=1995
+   goto PularErro
+)
+
 echo.
 echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
 echo.

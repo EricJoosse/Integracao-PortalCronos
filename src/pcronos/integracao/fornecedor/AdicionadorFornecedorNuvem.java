@@ -15,7 +15,7 @@ public class AdicionadorFornecedorNuvem
 		  
 		  // Criar atalho no menu de Windows:
 		  String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos." + nmFornecedor + ".properties";
-		  String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Configurações " + nmFornecedor + ".lnk";		  
+		  String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integração APS/Configurações " + nmFornecedor + ".lnk";		  
        	  ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
 		  
 	}

@@ -14,6 +14,8 @@ cd\
 cd "Arquivos de Programas PC"
 
 
+echo.
+echo.
 SET /P nmFornecedor=Digite um nome curto para a primeira empresa cliente: 
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
@@ -58,7 +60,7 @@ call "Integração Fornecedor - Portal Cronos\bin\Inicializacoes.bat"
 call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
 call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" AdicionadorFornecedorNuvem.log AdicionadorFornecedorNuvem %nmFornecedor%
 
-set arquivoLog="AdicionarFornecedorNuvem.log"
+set arquivoLog="AdicionadorFornecedorNuvem.log"
 set tamanhoArqLog=0
 
 FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
@@ -71,15 +73,14 @@ if %tamanhoArqLog% GTR 0 (
     echo MSGBOX "O adicionamento do fornecedor novo falhou!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
-    start notepad AdicionarFornecedorNuvem.log
-) ELSE (
-
+    start notepad AdicionadorFornecedorNuvem.log
+) else (
   SCHTASKS /Create /TN "Integração Portal Cronos - %nmFornecedor%" /XML "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml"
   SCHTASKS /Run /TN "Integração Portal Cronos - %nmFornecedor%"
 
   cd\
   cd "Arquivos de Programas PC"
-  if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml 
+  if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml
 
   start notepad "Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
 )

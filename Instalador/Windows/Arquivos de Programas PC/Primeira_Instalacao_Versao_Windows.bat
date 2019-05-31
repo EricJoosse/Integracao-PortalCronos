@@ -10,6 +10,8 @@ REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os 
 
 chcp 1252>nul
 
+echo.
+echo.
 echo Tipos de Windows homologados: 
 echo.
 echo 1 = Windows Server 2008 R2 SP1
@@ -29,6 +31,8 @@ exit
 :PularErroTipoWin
 
 
+echo.
+echo.
 echo Tipo de instalação: 
 echo.
 echo 1 = Hospedagem Local
@@ -277,6 +281,9 @@ if %idFornecedor% == -1 (
     attrib "Arquivos de Programas PC" +S +H
 )
 
+if %tipoInstalacao% == 2 (
+    attrib "Arquivos de Programas PC" +S +H
+)
 
 cd "Arquivos de Programas PC"
 
