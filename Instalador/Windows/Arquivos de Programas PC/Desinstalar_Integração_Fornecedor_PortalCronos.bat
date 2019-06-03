@@ -18,7 +18,22 @@ REM del %temp%\TEMPmessage.vbs /f /q
     set drive=C:
 REM set drive=D:
 
+cd\
+cd "Arquivos de Programas PC"
+
+
+cd "Integração Fornecedor - Portal Cronos"
+set IsAmbienteNuvem=0
+if NOT exist "Integração Fornecedor - Portal Cronos.properties" (
+  if exist Integração APS - Portal Cronos.*.properties (
+     set IsAmbienteNuvem=1
+  )
+)
+
 REM ================ Remover Manual Manutenção TI do menu de Windows, ANTES da remoção dos programas de Java: ========================================
+
+cd\
+cd "Arquivos de Programas PC"
 
 call "Integração Fornecedor - Portal Cronos\bin\DesinstalarManualTI.bat"
 
@@ -29,8 +44,15 @@ IF %ERRORLEVEL% NEQ 0 (
 
 REM ================ Remover Task no Windows Scheduler: ========================================
 
-SCHTASKS /End /TN "Integração Portal Cronos - Fornecedor"
-SCHTASKS /Delete /TN "Integração Portal Cronos - Fornecedor" /F
+REM Ambiente Nuvem:
+if %IsAmbienteNuvem% == 1 (
+    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /End /F /TN "\%%x"
+    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /Delete /F /TN "\%%x"
+) else (
+    SCHTASKS /End /TN "Integração Portal Cronos - Fornecedor"
+    SCHTASKS /Delete /TN "Integração Portal Cronos - Fornecedor" /F
+)
+
 
 
 REM ================ Remover subdiretórios de "Arquivos de Programas PC": ========================================

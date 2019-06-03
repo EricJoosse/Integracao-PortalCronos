@@ -23,11 +23,16 @@ public class Desinstalador {
 		    try {
 		        erroStaticConstructor = null;
 
-		        Properties config = new Properties();
-		        config.load(new FileInputStream(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES));
-
-		        siglaSistema   = config.getProperty("SiglaSistema");
-		        cnpjFornecedor = config.getProperty("CnpjFornecedor");
+		        if (!IntegracaoFornecedorCompleta.IsSistemaFornecedorNuvem)
+		        {
+			        Properties config = new Properties();
+			        config.load(new FileInputStream(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES));
+	
+			        siglaSistema   = config.getProperty("SiglaSistema");
+			        cnpjFornecedor = config.getProperty("CnpjFornecedor");
+		        }
+		        else
+			        siglaSistema   = "APS";
 
 	      } 
 	      catch (Exception ex) {
@@ -50,8 +55,13 @@ public class Desinstalador {
 			// no servidor de aplicação do Portal Cronos:
     		if (!siglaSistema.equals("PCronos")) {
 			    FornecedorRepositorio fRep = new FornecedorRepositorio();
-             // int idFornecedor = Integer.parseInt(args[0]);
-		   	    int idFornecedor = fRep.getIdFornecedorByCnpj(cnpjFornecedor);
+
+			 // int idFornecedor = Integer.parseInt(args[0]);			    
+			    int idFornecedor = 0;
+			    if (IntegracaoFornecedorCompleta.IsSistemaFornecedorNuvem)
+   		   	       idFornecedor = 1995;
+			    else
+			   	   idFornecedor = fRep.getIdFornecedorByCnpj(cnpjFornecedor);
 			
 	            ManualManutencao m = new ManualManutencao(fRep.getFornecedor(idFornecedor));
 	            m.removerPCronosDoMenuWindows();

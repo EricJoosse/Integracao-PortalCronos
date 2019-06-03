@@ -15,12 +15,14 @@ public class ManualManutencao {
 	private Fornecedor fornecedor;
 	private String caminhoManual = null;
 	private String caminhoAtalhoManual = null;
+	private String caminhoAtalhoManualPai = null;
 	
 	
 	private void setCaminhoManualMaisCaminhoAtalho() throws Exception { 	
 		if (this.fornecedor.IsServicoNuvem) {
 	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
 		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integração " + this.fornecedor.SiglaSistemaFornecedor + "/";
+		  	this.caminhoAtalhoManualPai = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 		}
 		else if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
 	    	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
@@ -76,7 +78,6 @@ public class ManualManutencao {
         bWriter.close();
         
         
-        
         if (     this.fornecedor.IsServicoNuvem
         	  || this.fornecedor.tipoSO.equals("Windows Server 2016") 
               || this.fornecedor.tipoSO.equals("Windows 10 Pro")
@@ -122,28 +123,39 @@ public class ManualManutencao {
 	public void removerPCronosDoMenuWindows() throws Exception { 
         setCaminhoManualMaisCaminhoAtalho();
 		
-        if (       this.fornecedor.tipoSO.equals("Windows Server 2016") 
+        if (       this.fornecedor.IsServicoNuvem
+          	    || this.fornecedor.tipoSO.equals("Windows Server 2016") 
         		|| this.fornecedor.tipoSO.equals("Windows 10 Pro")
                 || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
            ) {
         	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
         	
         	if(diretorioAtalhoManual.exists()) { 
-        		boolean temOutrosAtalhos = false;
+        	    boolean temOutrosAtalhos = false;
         		
         		for (final File shortcut : diretorioAtalhoManual.listFiles()) 
         		{
-        			if (shortcut.getName().startsWith("Manual") && shortcut.getName().endsWith(".lnk"))
+           		 // if (shortcut.getName().startsWith("Manual") && shortcut.getName().endsWith(".lnk"))
+           		    if (shortcut.getName().endsWith(".lnk"))
         				shortcut.delete();
-        			else
-        			   temOutrosAtalhos = true;
+        		    else
+        		      temOutrosAtalhos = true;
         		}
-        		if (!temOutrosAtalhos) diretorioAtalhoManual.delete();
+        	    if (!temOutrosAtalhos) 
+        			diretorioAtalhoManual.delete();
+        	    
+        	    if (this.fornecedor.IsServicoNuvem)
+        	    {
+                	File diretorioAtalhoManualPai = new File(caminhoAtalhoManualPai);
+                	if(diretorioAtalhoManualPai.exists()) 
+            			diretorioAtalhoManualPai.delete();
+        	    }
         	}
         }
 
 
         
+        // Para o caso de Windows 2018 (não tem atalho no menu, o manual está no menu mesmo:
         File diretorioManual = new File(caminhoManual);
     	
     	if(diretorioManual.exists()) { 

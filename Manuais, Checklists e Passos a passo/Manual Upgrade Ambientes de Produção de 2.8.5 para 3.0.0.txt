@@ -36,6 +36,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 	- /bin/Versao.bat 
 	- /bin/CaminhoJRE.bat
 	- Job15a15minOfertamentoJava_Windows.bat 
+	- Desinstalar_Integração_Fornecedor_PortalCronos.bat
  
 5. Apenas no caso do APS Cloud: 
 	- Copiar do projeto Eclipse para o servidor do APS Cloud:
