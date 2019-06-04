@@ -586,6 +586,28 @@ public class TestadorSnippets {
 		  
 	  }
 	  
+	  private static void gravarIsAmbienteNuvem(int isAmbienteNuvem) {
+	      try
+	   	  {
+		        BufferedWriter bWriter = new BufferedWriter(new FileWriter("bin/IsAmbienteNuvem.bat", true));
+		        bWriter.append(Integer.toString(isAmbienteNuvem));
+		        bWriter.newLine();
+		     // bWriter.newLine();
+		        bWriter.flush();
+		        bWriter.close();
+	   	  }
+	   	  catch (IOException ioe)
+	   	  {
+	   	    System.out.println(Integer.toString(isAmbienteNuvem));
+	   	  }
+	  }
+			
+			
+	  private static void testarGravarIsAmbienteNuvem()
+	  {
+			gravarIsAmbienteNuvem(1);
+		 // gravarIsAmbienteNuvem(0);		  
+	  }
 	  
  	  public static void main(String[] args) throws Exception {
 
@@ -617,7 +639,8 @@ public class TestadorSnippets {
 		 // testarCriticas();
 		 // testarGeracaoArquivoXmlTarefaWindows();
 		 // testarIsSistemaFornecedorNuvem();
-		    testar_mkdirs();
+		 // testar_mkdirs();
+			testarGravarIsAmbienteNuvem();
          
 
          // throw new Exception("try");

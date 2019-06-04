@@ -13,7 +13,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- Adicionar "else if" no path
 	- Adicionar "else if" na chamada jre
 
-- InstalarManualTI.bat: 
+- Instalador.bat: 
 	- Adicionar "else if" no path
 	- Adicionar "else if" na chamada jre
 
@@ -44,7 +44,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 		- Adicionar "else if" na chamada jre
 	- Copiar DesinstalarManualTI.bat do instalador para o servidor do fornecedor
 	- Copiar TestadorUnitario.bat do instalador para o servidor do fornecedor
-	- Não copiar InstalarManualTI.bat do instalador para o servidor do fornecedor, 
+	- Não copiar Instalador.bat do instalador para o servidor do fornecedor, 
 	  pois o instalador remove isso também automaticamente no final da instalação
 	- No caso do fornecedor com JRE diferente: 
 		- executar TestadorUnitario.bat e verificar se funcionou: veja TestadorUnitario.log

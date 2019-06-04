@@ -51,6 +51,7 @@ exit
 :PularErroTipoInst
 
 
+
 REM set osVersion=Windows_Server_2016
 REM set osVersion=Windows_Server_2012_R2
 REM set osVersion=Windows_Server_2012
@@ -268,7 +269,7 @@ REM ================ Instalar Manual Manutenção TI do menu de Windows, DEPOIS da
 cd\
 cd "Arquivos de Programas PC"
 
-call InstalarManualTI.bat
+call Instalador.bat
 
 cd\
 
@@ -290,7 +291,7 @@ cd "Arquivos de Programas PC"
 del /f /q *.reg
 del /f /q *.xml
 del /f /q *.exe
-del /f /q InstalarManualTI.bat
+del /f /q Instalador.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
 del /f /q .gitignore
 
@@ -316,8 +317,15 @@ else if %tipoInstalacao% == 2 (
     del /f /q "Integração Fornecedor - Portal Cronos.properties"
 )
 
+
+
 cd\
 cd "Arquivos de Programas PC"
+
+REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
+REM após o duplo-clique para executar a instalação:
+REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
+del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
 
 if %tipoInstalacao% == 2 (
     call AdicionarFornecedorNuvem.bat
@@ -325,18 +333,13 @@ if %tipoInstalacao% == 2 (
     echo.
     echo          Primeira fase da instalação concluida!
     echo          Para complementar a instalação em qualquer momento,
-    echo          veja as diversas opções no menu de Windows Iniciar > Portal Cronos.
+    echo          veja as diversas opções no menu de Windows Iniciar ^> Portal Cronos.
     echo.
     
     echo MSGBOX "Primeira fase da instalação concluida! Para complementar a instalação em qualquer momento, veja as diversas opções no menu de Windows Iniciar > Portal Cronos." > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
 )
-
-REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
-REM após o duplo-clique para executar a instalação:
-REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
-del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
 
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:

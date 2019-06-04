@@ -517,8 +517,8 @@ Como vai ser?
        		- ......
        Fazer isso ainda em todos os outros tipos de Windows. 
        
-       Obs.: se a instalação do manual no menu de Windows não funcionou usando o instalador integral, 
-             fazer isso executando InstalarManualTI.bat solto com o botão a direita do mouse usando 
+       Obs.: se a instalação do manual no menu de Windows e outras coisas não funcionaram usando o instalador integral, 
+             fazer isso executando Instalador.bat solto com o botão a direita do mouse usando 
              "Executar como Administrador". 
 
        

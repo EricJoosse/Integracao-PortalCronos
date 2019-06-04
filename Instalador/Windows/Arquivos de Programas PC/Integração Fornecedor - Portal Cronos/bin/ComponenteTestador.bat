@@ -22,7 +22,7 @@ REM pause
 cd\
 
 REM Se testar dentro do Eclipse ao invés de nos servidores:
-if exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/InstalarManualTI.bat (
+if exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
   cd PCronos
   cd "Integração Fornecedor - Portal Cronos"
   cd Instalador

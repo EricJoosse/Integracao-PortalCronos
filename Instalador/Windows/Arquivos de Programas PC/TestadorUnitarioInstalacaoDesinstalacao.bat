@@ -25,7 +25,8 @@ REM goto TesteAttrib
 REM goto TesteVersao
 REM goto TesteTresParam
 REM goto TesteTemplate
-goto TesteDelTpl
+REM goto TesteDelTpl
+goto TesteIsAmbienteNuvem
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
@@ -35,7 +36,7 @@ REM ================  (testado com Windows Server 2016,        funcionou)       
 REM ================  (testado com Windows Server 2016,        funcionou)       ========================================
 REM ================  (testado com Windows 10 Pro - apenas testado no caso de um processador e SO 64 bit, funcionou)
 :InstalarManualTI
-call InstalarManualTI.bat
+call Instalador.bat
 exit
 
 REM ================ Testes Desinstalação Manual Manutenção TI do menu de Windows: ========================================
@@ -167,7 +168,7 @@ REM ================ Teste Limpeza com wildcards (testado, funcionou): =========
 del /f /q *.reg
 del /f /q *.xml
 del /f /q *.exe
-del /f /q InstalarManualTI.bat
+del /f /q Instalador.bat
 del /f /q Primeira_Instalacao_Versao_Windows.bat
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
@@ -348,7 +349,7 @@ chcp 1252>nul
 
 cd\
 cd "Arquivos de Programas PC"
-call InstalarManualTI.bat
+call Instalador.bat
 cd\
 cd "Arquivos de Programas PC"
 cd "Integração Fornecedor - Portal Cronos"
@@ -356,6 +357,16 @@ cd "Integração Fornecedor - Portal Cronos"
 if %idFornecedor% NEQ -1 (
     rmdir /s /q tpl
 )
+
+
+pause
+exit
+
+REM ================ Teste IsAmbienteNuvem (testado??????????, funcionou????????????????): ========================================
+
+:TesteIsAmbienteNuvem
+
+........comandos DOS..........
 
 
 pause
