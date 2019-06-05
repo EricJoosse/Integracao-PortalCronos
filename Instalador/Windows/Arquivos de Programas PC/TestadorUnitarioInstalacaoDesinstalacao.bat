@@ -26,7 +26,8 @@ REM goto TesteVersao
 REM goto TesteTresParam
 REM goto TesteTemplate
 REM goto TesteDelTpl
-goto TesteIsAmbienteNuvem
+REM goto TesteIsAmbienteNuvem
+goto TesteRemocaoMultiplasTarefasWindows
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
@@ -362,11 +363,61 @@ if %idFornecedor% NEQ -1 (
 pause
 exit
 
-REM ================ Teste IsAmbienteNuvem (testado??????????, funcionou????????????????): ========================================
+REM ================ Teste IsAmbienteNuvem (testado, funcionou): ========================================
 
 :TesteIsAmbienteNuvem
 
-........comandos DOS..........
+chcp 1252>nul
+
+cd\
+cd "Arquivos de Programas PC"
+
+call "Integração Fornecedor - Portal Cronos\bin\IsAmbienteNuvem.bat"
+
+REM Aspas duplas são necessárias porque se o variável for empty, este .bat vai falhar pois não entende o parentese direto após o ==
+if "%IsAmbienteNuvem%" == "1" (
+       echo IsAmbienteNuvem == 1
+) else if "%IsAmbienteNuvem%" == "0" (
+       echo IsAmbienteNuvem == 0
+) else (
+    echo.
+    echo          A desinstalação falhou! Variável IsAmbienteNuvem inválido!
+    echo.
+    
+    echo MSGBOX "A instalação falhou! Variável IsAmbienteNuvem inválido!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+REM start notepad Desinstalador.log
+)
+
+pause
+exit
+
+REM ================ Teste Remoção múltiplas tarefas Windows no caso de Integradores Cloud (testado, funcionou): ========================================
+
+:TesteRemocaoMultiplasTarefasWindows
+
+chcp 1252>nul
+cd\
+cd "Arquivos de Programas PC"
+call "Integração Fornecedor - Portal Cronos\bin\IsAmbienteNuvem.bat"
+
+for /f "tokens=* delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do echo "\%%x"
+
+REM Aspas duplas são necessárias porque se o variável for empty, este .bat vai falhar pois não entende o parentese direto após o ==
+if "%IsAmbienteNuvem%" == "1" (
+    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /End /TN "\%%x"
+    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /Delete /TN "\%%x" /F
+) else (
+    echo.
+    echo          A desinstalação falhou! Variável IsAmbienteNuvem inválido!
+    echo.
+    
+    echo MSGBOX "A instalação falhou! Variável IsAmbienteNuvem inválido!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+REM start notepad Desinstalador.log
+)
 
 
 pause

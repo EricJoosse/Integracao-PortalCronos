@@ -21,14 +21,8 @@ REM set drive=D:
 cd\
 cd "Arquivos de Programas PC"
 
+call "Integração Fornecedor - Portal Cronos\bin\IsAmbienteNuvem.bat"
 
-cd "Integração Fornecedor - Portal Cronos"
-set IsAmbienteNuvem=0
-if NOT exist "Integração Fornecedor - Portal Cronos.properties" (
-  if exist Integração APS - Portal Cronos.*.properties (
-     set IsAmbienteNuvem=1
-  )
-)
 
 REM ================ Remover Manual Manutenção TI do menu de Windows, ANTES da remoção dos programas de Java: ========================================
 
@@ -42,15 +36,25 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 
-REM ================ Remover Task no Windows Scheduler: ========================================
+REM ================ Remover Task(s) no Windows Scheduler: ========================================
 
 REM Ambiente Nuvem:
-if %IsAmbienteNuvem% == 1 (
-    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /End /F /TN "\%%x"
-    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /Delete /F /TN "\%%x"
-) else (
+REM Aspas duplas são necessárias porque se o variável for empty, este .bat vai falhar pois não entende o parentese direto após o ==
+if "%IsAmbienteNuvem%" == "1" (
+    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /End /TN "\%%x"
+    for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos."') do SCHTASKS /Delete /TN "\%%x" /F
+) else if "%IsAmbienteNuvem%" == "0" (
     SCHTASKS /End /TN "Integração Portal Cronos - Fornecedor"
     SCHTASKS /Delete /TN "Integração Portal Cronos - Fornecedor" /F
+) else (
+    echo.
+    echo          A desinstalação falhou! Variável IsAmbienteNuvem inválido!
+    echo.
+    
+    echo MSGBOX "A instalação falhou! Variável IsAmbienteNuvem inválido!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    start notepad Desinstalador.log
 )
 
 

@@ -41,7 +41,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 		- Desinstalar_Integração_Fornecedor_PortalCronos.bat
 		- TestadorUnitario.bat
 				
-   (ii) Gravar 0 ou 1 no arquivo /bin/IsAmbienteNuvem.bat	
+   (ii) Gravar 0 ou 1 no arquivo /bin/IsAmbienteNuvem.bat + linebreak depois do 0 / 1	
  
 5. Apenas no caso do APS Cloud: 
 	- Copiar do projeto Eclipse para o servidor do APS Cloud:
