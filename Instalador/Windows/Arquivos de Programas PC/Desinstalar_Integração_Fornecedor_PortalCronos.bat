@@ -29,7 +29,7 @@ REM ================ Remover Manual Manutenção TI do menu de Windows, ANTES da r
 cd\
 cd "Arquivos de Programas PC"
 
-call "Integração Fornecedor - Portal Cronos\bin\DesinstalarManualTI.bat"
+call "Integração Fornecedor - Portal Cronos\bin\Desinstalador.bat"
 
 IF %ERRORLEVEL% NEQ 0 (
     goto PULAR_MENSAGEM_SUCESSO

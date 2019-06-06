@@ -264,7 +264,7 @@ SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
 :SKIP_TASK_WINDOWS_SCHEDULER
 :SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
 
-REM ================ Instalar Manual Manutenção TI do menu de Windows, DEPOIS da instalação dos programas de Java: ========================================
+REM ================ Instalar as diversas opções no menu de Windows, e gravar IsAmbienteNuvem.bat, DEPOIS da instalação dos programas de Java: ========================================
 
 cd\
 cd "Arquivos de Programas PC"

@@ -3,6 +3,7 @@ package pcronos.integracao.fornecedor;
 public class Constants {
 
 	   public static final String DIR_ARQUIVOS_PROPERTIES = "conf/";
+	   public static final String NOME_TEMPLATE_CLOUD_PROPERTIES = "TemplateNuvemAPS.properties";
 	   public static final String NOME_ARQUIVO_PROPERTIES = "Integração Fornecedor - Portal Cronos.properties";
        // Using an absolute path (one that starts WITH '/') means that the current 
        // package is ignored.

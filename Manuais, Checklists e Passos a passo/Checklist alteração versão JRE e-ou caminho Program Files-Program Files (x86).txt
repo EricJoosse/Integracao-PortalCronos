@@ -17,7 +17,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- Adicionar "else if" no path
 	- Adicionar "else if" na chamada jre
 
-- DesinstalarManualTI.bat: 
+- Desinstalador.bat: 
 	- Adicionar "else if" no path
 	- Adicionar "else if" na chamada jre
 
@@ -42,7 +42,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- Job15a15minOfertamentoJava_Windows.bat: 
 		- Adicionar "else if" no path
 		- Adicionar "else if" na chamada jre
-	- Copiar DesinstalarManualTI.bat do instalador para o servidor do fornecedor
+	- Copiar Desinstalador.bat do instalador para o servidor do fornecedor
 	- Copiar TestadorUnitario.bat do instalador para o servidor do fornecedor
 	- Não copiar Instalador.bat do instalador para o servidor do fornecedor, 
 	  pois o instalador remove isso também automaticamente no final da instalação

@@ -147,15 +147,15 @@ public class ManualManutencao {
         	    if (this.fornecedor.IsServicoNuvem)
         	    {
                 	File diretorioAtalhoManualPai = new File(caminhoAtalhoManualPai);
-                	if(diretorioAtalhoManualPai.exists()) 
-            			diretorioAtalhoManualPai.delete();
+                	if (diretorioAtalhoManualPai.exists()) 
+            			 diretorioAtalhoManualPai.delete();
         	    }
         	}
         }
 
 
         
-        // Para o caso de Windows 2018 (não tem atalho no menu, o manual está no menu mesmo:
+        // Para o caso de Windows 2008 (não tem atalho no menu, o manual está no menu mesmo:
         File diretorioManual = new File(caminhoManual);
     	
     	if(diretorioManual.exists()) { 

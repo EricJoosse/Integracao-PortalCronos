@@ -172,15 +172,17 @@ public final class IntegracaoFornecedorCompleta {
 	 File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
 	 IsSistemaFornecedorNuvem = false;
 	 int qtdArquivosConfig = 0;
-	 int qtdArquivosConfigComNomeEspecifico = 0;
+	 int qtdArquivosConfigNaoNuvemComNomeFixo = 0;
+	 int qtdArquivosTemplateConfigNuvemFixo = 0;
 	 
 	 for (final File file : dirConfig.listFiles()) 
 	 {
 		 if (file.getName().equals(Constants.NOME_ARQUIVO_PROPERTIES))
 	     {
-			 qtdArquivosConfigComNomeEspecifico += 1;
+			 qtdArquivosConfigNaoNuvemComNomeFixo += 1;
 	     }
 	 }
+	 
 	 
 	 for (final File file : dirConfig.listFiles()) 
 	 {
@@ -197,24 +199,33 @@ public final class IntegracaoFornecedorCompleta {
 			 qtdArquivosConfig += 1;
 	     }
 	 }
+	 
 
+	 for (final File file : dirConfig.listFiles()) 
+	 {
+		 if (file.getName().equals(Constants.NOME_TEMPLATE_CLOUD_PROPERTIES))
+	     {
+			 qtdArquivosTemplateConfigNuvemFixo += 1;
+	     }
+	 }
+	 
 	 // Aqui debugar() não pode ser usado pois as configurações para isso ainda não estão definidos:
   // System.out.println("qtdArquivosConfig = " + qtdArquivosConfig);
   // System.out.println("qtdArquivosConfigComNomeEspecifico = " + qtdArquivosConfigComNomeEspecifico);
 
 
 	 // No caso de ambientes de tipo hospedagem local ("não-nuvem"):
-	 if (qtdArquivosConfigComNomeEspecifico == 1 && qtdArquivosConfig == 1)
+	 if (qtdArquivosConfigNaoNuvemComNomeFixo == 1 && qtdArquivosConfig == 1 && qtdArquivosTemplateConfigNuvemFixo == 0)
 	 {
          IsSistemaFornecedorNuvem = false;
     	 Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES);
 	 }
 	 // No caso de ambientes de tipo nuvem:
-	 else if (qtdArquivosConfigComNomeEspecifico == 0 && qtdArquivosConfig > 1)
+	 else if (qtdArquivosConfigNaoNuvemComNomeFixo == 0 && qtdArquivosTemplateConfigNuvemFixo == 1)
 	 {
          IsSistemaFornecedorNuvem = true;
 	 }
-	 else if (qtdArquivosConfigComNomeEspecifico == 0 && qtdArquivosConfig == 0)
+	 else if (qtdArquivosConfigNaoNuvemComNomeFixo == 0 && qtdArquivosTemplateConfigNuvemFixo == 0)
 	 {
 	        try
 	        {

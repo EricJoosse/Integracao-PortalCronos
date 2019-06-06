@@ -34,7 +34,7 @@ Manual Upgrade dos Ambientes de Produção de 2.6.1 para 2.8.2
 4. Atualizar as chamadas de integr-fornecedor-2.8.2.jar dentro do arquivo Job15a15minOfertamentoJava_Windows.bat 
    no servidor do fornecedor (2 ou 3 lugares). 
  
-5. Atualizar as chamadas de integr-fornecedor-2.8.2.jar dentro do arquivo DesinstalarManualTI.bat
+5. Atualizar as chamadas de integr-fornecedor-2.8.2.jar dentro do arquivo DesinstalarManualTI.bat (renomeado para Desinstalador.bat)
    no servidor do fornecedor (2 ou 3 lugares).
 
 6. Atualizar as chamadas de integr-fornecedor-2.8.2.jar dentro do arquivo TestadorUnitario.bat

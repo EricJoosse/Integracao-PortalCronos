@@ -47,9 +47,9 @@ REM ================  (testado com Windows Server 2016,        funcionou)       
 REM ================  (testado com Windows 10 Pro - apenas testado no caso de um processador e SO 64 bit, funcionou)
 
 :DesinstalarManualTI
-call "Integração Fornecedor - Portal Cronos\bin\DesinstalarManualTI.bat"
+call "Integração Fornecedor - Portal Cronos\bin\Desinstalador.bat"
 
-echo Passou DesinstalarManualTI.bat
+echo Passou Desinstalador.bat
 echo Testador.bat: ERRORLEVEL = %ERRORLEVEL%
 pause
 

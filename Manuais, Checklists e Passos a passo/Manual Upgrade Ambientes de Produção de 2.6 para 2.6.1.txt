@@ -54,14 +54,14 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 			- Se precisar (depende da versão de Windows), renomear o atalho manualmente
 
 
-7. Mover "DesinstalarManualTI.bat" de "Arquivos de Programas PC" 
+7. Mover "DesinstalarManualTI.bat" (renomeado para Desinstalador.bat) de "Arquivos de Programas PC" 
    para "Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/bin/"
    
 8. Apagar "Desinstalação_Versão_Windows.bat"
 
 9. Copiar do instalador para o servidor do fornecedor:
 		- Desinstalar_Integração_Fornecedor_PortalCronos.bat
-		- DesinstalarManualTI.bat
+		- DesinstalarManualTI.bat (renomeado para Desinstalador.bat)
 		- TestadorUnitario.bat
 
    Observação: 

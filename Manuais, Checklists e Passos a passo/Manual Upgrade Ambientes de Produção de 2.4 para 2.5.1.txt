@@ -44,7 +44,7 @@ CodigoFilial                      = 1
 
 6. Copiar do instalador para o servidor do fornecedor: 
      - /Arquivos de Programas PC/Desinstalação_Versão_Windows.bat (copiar por cima do atual)
-     - /Arquivos de Programas PC/DesinstalarManualTI.bat
+     - /Arquivos de Programas PC/DesinstalarManualTI.bat  (renomeado para Desinstalador.bat)
      - /Arquivos de Programas PC/InstalarManualTI.bat
      - /Arquivos de Programas PC/TestadorUnitarioInstalacaoDesinstalacao.bat
      - /Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/TestadorUnitario.bat

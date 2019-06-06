@@ -609,6 +609,18 @@ public class TestadorSnippets {
 		 // gravarIsAmbienteNuvem(0);		  
 	  }
 	  
+	  private static void testarRemocaoRaizMenuWindows()
+	  {
+		  String caminhoAtalhoManualPai = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
+      	  File diretorioAtalhoManualPai = new File(caminhoAtalhoManualPai);
+      	
+      	  if (diretorioAtalhoManualPai.exists())
+      	  {
+      		  System.out.println("if (diretorioAtalhoManualPai.exists()) entrado");
+  			  diretorioAtalhoManualPai.delete();
+      	  }
+	  }
+	  
  	  public static void main(String[] args) throws Exception {
 
 		try
@@ -640,7 +652,8 @@ public class TestadorSnippets {
 		 // testarGeracaoArquivoXmlTarefaWindows();
 		 // testarIsSistemaFornecedorNuvem();
 		 // testar_mkdirs();
-			testarGravarIsAmbienteNuvem();
+		 // testarGravarIsAmbienteNuvem();
+			testarRemocaoRaizMenuWindows();
          
 
          // throw new Exception("try");
