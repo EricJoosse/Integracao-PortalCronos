@@ -132,7 +132,6 @@ REM set drive=D:
 REM goto SKIP_JRE
 REM goto SKIP_JRE_TEMPDIR
 REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
-REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
 REM goto FIM
 
 REM !!!!!!!!!!!!!!! CUIDADO PARA NÃO CORROMPER O REGEDIT !!!!!!!!!
@@ -225,45 +224,6 @@ REM cd "Arquivos de Programas PC"
 
 :SKIP_JRE_TEMPDIR_PROGRAMDIR
 
-REM ================ Instalar Task no Windows Scheduler: ========================================
-
-if %tipoInstalacao% == 2 (
-    goto SKIP_TASK_WINDOWS_SCHEDULER
-)
-
-cd\
-cd "Arquivos de Programas PC"
-
-REM O seguinte não marca a opção "Run whether user is logged on or not" :
-REM SCHTASKS /Create /TN "Teste Automação SCHTASKS" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15
-
-REM O seguinte não cria automaticamente todas as configurações desejadas : 
-REM SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15 /RU SYSTEM /NP /RL HIGHEST
-
-REM O seguinte XML tem as configurações completas e foi criado criando a task manualmente,
-REM e em seguida exportada para XML : 
-
-if %osVersion% == Windows_Server_2008_R2_SP1 (
-REM Testado: 
-    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
-) else if %Windows_10_Pro_64bit% == 1 (
-REM Testado: 
-    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
-) else if %osVersion% == Windows_Server_2012_R2 (
-REM Testado: 
-    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
-) else if %osVersion% == Windows_Server_2016 (
-REM Testado: 
-    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
-) else (
-    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
-)
-
-SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
-
-:SKIP_TASK_WINDOWS_SCHEDULER
-:SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
-
 REM ================ Instalar as diversas opções no menu de Windows, e gravar IsAmbienteNuvem.bat, DEPOIS da instalação dos programas de Java: ========================================
 
 cd\
@@ -312,8 +272,7 @@ cd conf
 
 if %tipoInstalacao% == 1 (
     del /f /q TemplateNuvemAPS.properties
-)
-else if %tipoInstalacao% == 2 (
+) else if %tipoInstalacao% == 2 (
     del /f /q "Integração Fornecedor - Portal Cronos.properties"
 )
 
@@ -326,6 +285,51 @@ REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que 
 REM após o duplo-clique para executar a instalação:
 REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
 del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+
+
+
+REM ================ Instalar Task Não-Nuvem no Windows Scheduler: ========================================
+
+if %tipoInstalacao% == 2 (
+    goto SKIP_TASK_WINDOWS_SCHEDULER
+)
+
+cd\
+cd "Arquivos de Programas PC"
+
+REM O seguinte não marca a opção "Run whether user is logged on or not" :
+REM SCHTASKS /Create /TN "Teste Automação SCHTASKS" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15
+
+REM O seguinte não cria automaticamente todas as configurações desejadas : 
+REM SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15 /RU SYSTEM /NP /RL HIGHEST
+
+REM O seguinte XML tem as configurações completas e foi criado criando a task manualmente,
+REM e em seguida exportada para XML : 
+
+if %osVersion% == Windows_Server_2008_R2_SP1 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else if %Windows_10_Pro_64bit% == 1 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else if %osVersion% == Windows_Server_2012_R2 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else if %osVersion% == Windows_Server_2016 (
+REM Testado: 
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+) else (
+    SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
+)
+
+SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
+
+:SKIP_TASK_WINDOWS_SCHEDULER
+
+REM ================ Fim instalação Task Não-Nuvem no Windows Scheduler. ========================================
+
+cd\
+cd "Arquivos de Programas PC"
 
 if %tipoInstalacao% == 2 (
     call AdicionarFornecedorNuvem.bat

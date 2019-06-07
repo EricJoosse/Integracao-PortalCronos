@@ -621,6 +621,13 @@ public class TestadorSnippets {
       	  }
 	  }
 	  
+	  
+	  private static void testarGetIsAmbienteNuvem() throws Exception
+	  {
+	     String teste = Utils.getIsAmbienteNuvem();
+	     System.out.println("teste = " + teste);
+	  }
+	  
  	  public static void main(String[] args) throws Exception {
 
 		try
@@ -653,7 +660,8 @@ public class TestadorSnippets {
 		 // testarIsSistemaFornecedorNuvem();
 		 // testar_mkdirs();
 		 // testarGravarIsAmbienteNuvem();
-			testarRemocaoRaizMenuWindows();
+		 // testarRemocaoRaizMenuWindows();
+			testarGetIsAmbienteNuvem();
          
 
          // throw new Exception("try");

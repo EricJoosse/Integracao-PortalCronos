@@ -249,6 +249,24 @@ public final class IntegracaoFornecedorCompleta {
 	          throw new ExceptionInInitializerError(ex2);
 	        }
 	 }
+	 
+	 
+	 
+	 // Ler o arquivo /bin/IsAmbienteNuvem.bat e cruzar o conteúdo com a situação no diretório /conf/ :
+     try
+     {
+     	 if (    (Utils.getIsAmbienteNuvem().equals("0") &&  IsSistemaFornecedorNuvem)
+     		  || (Utils.getIsAmbienteNuvem().equals("1") && !IsSistemaFornecedorNuvem)
+     	     )
+	     {
+            erroStaticConstructor = "Erro interno! O arquivo /bin/IsAmbienteNuvem.bat não bate com a situação no diretório /conf/!";
+            logarErro(erroStaticConstructor);
+	     }
+     }
+     catch (Exception ex)
+     {
+        throw new ExceptionInInitializerError(ex);
+     }
 		 
   }
 

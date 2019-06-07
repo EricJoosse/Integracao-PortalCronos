@@ -1,8 +1,10 @@
 package pcronos.integracao.fornecedor;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
@@ -171,4 +173,25 @@ public class Utils {
 	
 	}
 	
+	public static String getIsAmbienteNuvem() throws Exception {
+		boolean toDebugar = false;
+		
+	    String conteudoArquivo = new String(Files.readAllBytes(Paths.get("bin/IsAmbienteNuvem.bat")), Charset.forName("windows-1252"));
+	    if (toDebugar) System.out.println("conteudoArquivo = " + conteudoArquivo);
+
+	    conteudoArquivo = conteudoArquivo.replace("\r\n", "");
+	    if (toDebugar) System.out.println("conteudoArquivo = " + conteudoArquivo);
+	    
+	    conteudoArquivo = conteudoArquivo.replace("SET IsAmbienteNuvem=", "");
+	    if (toDebugar) System.out.println("conteudoArquivo = " + conteudoArquivo);
+
+	    if (!conteudoArquivo.equals("0") && !conteudoArquivo.equals("1"))
+	       throw new Exception("Conteúdo inválido no arquivo bin/IsAmbienteNuvem.bat!");
+	  
+	    return conteudoArquivo;
+    }
+		
+		
+
+
 }
