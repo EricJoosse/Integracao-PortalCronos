@@ -169,6 +169,8 @@ public final class IntegracaoFornecedorCompleta {
 
   static 
   {
+      erroStaticConstructor = null;
+
 	 File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
 	 IsSistemaFornecedorNuvem = false;
 	 int qtdArquivosConfig = 0;
@@ -218,7 +220,6 @@ public final class IntegracaoFornecedorCompleta {
 	 if (qtdArquivosConfigNaoNuvemComNomeFixo == 1 && qtdArquivosConfig == 1 && qtdArquivosTemplateConfigNuvemFixo == 0)
 	 {
          IsSistemaFornecedorNuvem = false;
-    	 Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES);
 	 }
 	 // No caso de ambientes de tipo nuvem:
 	 else if (qtdArquivosConfigNaoNuvemComNomeFixo == 0 && qtdArquivosTemplateConfigNuvemFixo == 1)
@@ -227,51 +228,50 @@ public final class IntegracaoFornecedorCompleta {
 	 }
 	 else if (qtdArquivosConfigNaoNuvemComNomeFixo == 0 && qtdArquivosTemplateConfigNuvemFixo == 0)
 	 {
-	        try
-	        {
-	          erroStaticConstructor = "Nenhum arquivo de configuração encontrado!";
-	          logarErro(erroStaticConstructor);
-	        }
-	        catch (Exception ex2)
-	        {
-	          throw new ExceptionInInitializerError(ex2);
-	        }
+		 logarErroStaticConstructor("Nenhum arquivo de configuração encontrado!");
 	 }
 	 else
 	 {
-	        try
-	        {
-	          erroStaticConstructor = "Arquivos de configuração ambíguos! Mistura indevida de arquivos de tipo nuvem e de tipo hospedagem local.";
-	          logarErro(erroStaticConstructor);
-	        }
-	        catch (Exception ex2)
-	        {
-	          throw new ExceptionInInitializerError(ex2);
-	        }
+		 logarErroStaticConstructor("Arquivos de configuração ambíguos! Mistura indevida de arquivos de tipo nuvem e de tipo hospedagem local.");
 	 }
 	 
 	 
 	 
 	 // Ler o arquivo /bin/IsAmbienteNuvem.bat e cruzar o conteúdo com a situação no diretório /conf/ :
-     try
+	 String isAmbienteNuvemDefinidoNaInstalacao = "";
+	 try 
+	 {
+		 isAmbienteNuvemDefinidoNaInstalacao = Utils.getIsAmbienteNuvem();
+	 }
+	 catch (Exception ex)
+	 {
+		 logarErroStaticConstructor(ex.getMessage());
+	 }
+	 
+	 
+ 	 if (    (isAmbienteNuvemDefinidoNaInstalacao.equals("0") &&  IsSistemaFornecedorNuvem)
+ 		  || (isAmbienteNuvemDefinidoNaInstalacao.equals("1") && !IsSistemaFornecedorNuvem)
+ 	     )
      {
-     	 if (    (Utils.getIsAmbienteNuvem().equals("0") &&  IsSistemaFornecedorNuvem)
-     		  || (Utils.getIsAmbienteNuvem().equals("1") && !IsSistemaFornecedorNuvem)
-     	     )
-	     {
-            erroStaticConstructor = "Erro interno! O arquivo /bin/IsAmbienteNuvem.bat não bate com a situação no diretório /conf/!";
-            logarErro(erroStaticConstructor);
-	     }
+ 		logarErroStaticConstructor("O arquivo /bin/IsAmbienteNuvem.bat não bate com a situação no diretório /conf/!");
      }
-     catch (Exception ex)
-     {
-        throw new ExceptionInInitializerError(ex);
-     }
-		 
+ 	 
+ 	 
+ 	 
+ 	 if (!IsSistemaFornecedorNuvem && isAmbienteNuvemDefinidoNaInstalacao.equals("0"))
+    	 Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES);
   }
 
 
 
+  private static void logarErroStaticConstructor(String msg)
+  {
+	  erroStaticConstructor = msg;
+      System.out.println("Erro interno no static constructor! " + erroStaticConstructor);
+      throw new RuntimeException(erroStaticConstructor);
+  }
+  
+  
   private static void Inicializar(String nomeArquivoProperties)
   {
 	    try {
@@ -279,8 +279,6 @@ public final class IntegracaoFornecedorCompleta {
 	        nomeArquivoDebug = "Debug" + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm ").format(hoje) + ".log";
 	        transformerFactory = TransformerFactory.newInstance();
 	   
-	        erroStaticConstructor = null;
-
 	        locale = new Locale("pt", "BR");
 	        nf = NumberFormat.getInstance(locale);
 
@@ -483,20 +481,20 @@ public final class IntegracaoFornecedorCompleta {
             erroStaticConstructor = cex.getMessage(); 
             logarErro(cex.getMessage());
           }
-          catch (Exception ex2)
+          catch (Exception ex)
           {
-            throw new ExceptionInInitializerError(ex2);
+	          throw new RuntimeException(ex);
           }
       }
       catch (Exception ex) {
         try
         {
-          erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex);
-          logarErro(ex, true);
+        	erroStaticConstructor = "Erro imprevisto! " + printStackTraceToString(ex);
+            logarErro(ex, true);
         }
         catch (Exception ex2)
         {
-          throw new ExceptionInInitializerError(ex2);
+	          throw new RuntimeException(ex2);
         }
       }
   }
@@ -2841,6 +2839,9 @@ public final class IntegracaoFornecedorCompleta {
    
    public static void main(String[] args) 
    {    
+//	   if (erroStaticConstructor != null)
+//		   throw new RuntimeException(erroStaticConstructor);
+	   
 	   long qtdMilliSegCiclo = 0;
 	   
 	// System.out.println("args.length = " + args.length);
