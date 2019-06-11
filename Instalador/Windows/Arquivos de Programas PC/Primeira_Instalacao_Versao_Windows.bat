@@ -249,7 +249,6 @@ if %tipoInstalacao% == 2 (
 cd "Arquivos de Programas PC"
 
 del /f /q *.reg
-del /f /q *.xml
 del /f /q *.exe
 del /f /q Instalador.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
@@ -330,6 +329,8 @@ REM ================ Fim instalação Task Não-Nuvem no Windows Scheduler. =======
 
 cd\
 cd "Arquivos de Programas PC"
+
+del /f /q *.xml
 
 if %tipoInstalacao% == 2 (
     call AdicionarFornecedorNuvem.bat
