@@ -2652,8 +2652,39 @@ public final class IntegracaoFornecedorCompleta {
    }
   
   
-   public static void excluirArquivos(LocalDateTime horaInicio)
-   {
+  public static void purgeArqsLogRemotosRepetidos(String tipoArqsLog, LocalDateTime horaInicio, File dirLogRemoto)
+  {
+	  // Limpeza seletiva dos arquivos ws-karnekeijo.Erro.Homologacao.*.log e .Erro.Homologacao.*.log 
+	  // no dir ...\Logs\Remoto\Integracao\
+	  // pois estão atrapalhando muito, deixando apenas o último destes arquivos:
+		  int qtdArqsRepetidos = 0;
+
+		  for (final File file : dirLogRemoto.listFiles()) 
+		  {
+			    if (file.getName().startsWith(tipoArqsLog) && file.getName().endsWith(".log"))
+			           qtdArqsRepetidos++; 
+			    
+		  }
+		  
+		  if (qtdArqsRepetidos > 1) {
+			  for (final File file : dirLogRemoto.listFiles()) 
+			  {
+				    if (file.getName().startsWith(tipoArqsLog) && file.getName().endsWith(".log"))
+				    {
+						   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+				    	
+						   if (datahoraArquivo.isBefore(horaInicio.minusMinutes(20))) 
+						   {
+						      file.delete();
+						   }
+				    }
+			  }
+		  }	  
+  }
+  
+  
+  public static void excluirArquivos(LocalDateTime horaInicio)
+  {
 	   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm");
 	   
 	   // Limpeza dump files do JRE:
@@ -2699,33 +2730,11 @@ public final class IntegracaoFornecedorCompleta {
 			   }
 		   }
 
-	  
-	  
-	  // Limpeza seletiva dos arquivos ws-karnekeijo.Erro.Homologacao.*.log no dir ...\Logs\Remoto\Integracao\
-	  // pois estão atrapalhando muito, deixando apenas o último destes arquivos:
+	  	  
+		   purgeArqsLogRemotosRepetidos("ws-karnekeijo.Erro.Homologacao.", horaInicio, dirLogRemoto);
+		   purgeArqsLogRemotosRepetidos(".Erro.Homologacao.", horaInicio, dirLogRemoto);
+		   purgeArqsLogRemotosRepetidos("ws-empresa.Erro.Homologacao.", horaInicio, dirLogRemoto);
 
-		  int qtdArqsRepetidos = 0;
-		  for (final File file : dirLogRemoto.listFiles()) 
-		  {
-			    if (file.getName().startsWith("ws-karnekeijo.Erro.Homologacao.") && file.getName().endsWith(".log"))
-			           qtdArqsRepetidos++; 
-			    
-		  }
-		  
-		  if (qtdArqsRepetidos > 1) {
-			  for (final File file : dirLogRemoto.listFiles()) 
-			  {
-				    if (file.getName().startsWith("ws-karnekeijo.Erro.Homologacao.") && file.getName().endsWith(".log"))
-				    {
-						   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
-				    	
-						   if (datahoraArquivo.isBefore(horaInicio.minusMinutes(20))) 
-						   {
-						      file.delete();
-						   }
-				    }
-			  }
-		  }
 	  } // if (siglaSistema.equals("PCronos"))
    }
 
