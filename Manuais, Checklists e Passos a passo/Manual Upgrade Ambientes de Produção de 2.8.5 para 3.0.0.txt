@@ -46,6 +46,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 5. Apenas no caso do APS Cloud: 
 	- Copiar do projeto Eclipse para o servidor do APS Cloud:
 		- AdicionarFornecedorNuvem.bat
+		- RemoverFornecedorNuvem.bat
 		- conf/TemplateNuvemAPS.properties
 	- Apagar o Task Schedule atual
 	- Backup do arquivo config .properties da Marizpan
@@ -80,6 +81,10 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 		- Criar o seguinte atalho:
 			- "C:\Arquivos de Programas PC\AdicionarFornecedorNuvem.bat"
 			- Renomear para "Adicionar Cliente novo"
+			- Ícone de pasta + maizinha verde, veja exemplo na máquina .181 no Azure
+		- Criar o seguinte atalho:
+			- "C:\Arquivos de Programas PC\RemoverFornecedorNuvem.bat"
+			- Renomear para "Remover Cliente"
 			- Ícone de pasta + maizinha verde, veja exemplo na máquina .181 no Azure
 		- No caso qu o atalho "Manual Manutenção TI" foi removido provisoriamente, colocar de volta
 		- No caso qu o atalho "Manual Manutenção TI" NÃO foi removido e ainda está no menu, 

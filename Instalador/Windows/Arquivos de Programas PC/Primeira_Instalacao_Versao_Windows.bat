@@ -256,6 +256,7 @@ del /f /q .gitignore
 
 if %tipoInstalacao% == 1 (
     del /f /q AdicionarFornecedorNuvem.bat
+    del /f /q RemoverFornecedorNuvem.bat
 )
 
 cd "Integração Fornecedor - Portal Cronos"

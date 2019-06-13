@@ -133,6 +133,16 @@ public class ManualManutencao {
         	if(diretorioAtalhoManual.exists()) { 
         	    boolean temOutrosAtalhos = false;
         		
+        	    // O seguinte remove os seguintes atalhos no menu de Windows:
+        	    // (i)  Em todos os casos:
+        	    //         - Manual Manutenção TI
+        	    // 
+        	    // (ii) No caso de ambientes nuvem:
+        	    //         - Adicionar Cliente novo
+        	    //         - Remover Cliente
+        	    //         - Configurações Marizpan
+        	    //         - Configurações Atacamax
+        	    //         - Configurações ...etc.....
         		for (final File shortcut : diretorioAtalhoManual.listFiles()) 
         		{
            		 // if (shortcut.getName().startsWith("Manual") && shortcut.getName().endsWith(".lnk"))
@@ -141,9 +151,20 @@ public class ManualManutencao {
         		    else
         		      temOutrosAtalhos = true;
         		}
+
+        	    // Remover os seguintes menus de Windows: 
+        	    // (i)  No caso de ambientes não-nuvem:
+        	    //         - Start Menu/Programs/Portal Cronos/
+        	    // (ii) No caso de ambientes nuvem:
+        	    //         - Start Menu/Programs/Portal Cronos/Integração XXXXXXXX/
         	    if (!temOutrosAtalhos) 
         			diretorioAtalhoManual.delete();
         	    
+        	    // Remover os seguintes menus de Windows: 
+        	    // (i)  No caso de ambientes não-nuvem:
+        	    //         - nada
+        	    // (ii) No caso de ambientes nuvem:
+        	    //         - Start Menu/Programs/Portal Cronos/
         	    if (this.fornecedor.IsServicoNuvem)
         	    {
                 	File diretorioAtalhoManualPai = new File(caminhoAtalhoManualPai);
