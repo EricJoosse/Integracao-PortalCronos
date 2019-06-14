@@ -16,23 +16,65 @@ cd "Arquivos de Programas PC"
 
 echo.
 echo.
+echo Opções: 
+echo.
+echo 1 = Sim
+echo 2 = Não
+echo.
+echo IMPORTANTE: É recomendável primeiro fazer backup das configurações do cliente!
+echo.
+
+SET /P temCerteza=Tem certeza que deseja remover um cliente? 
+IF "%temCerteza%"=="" GOTO ErroTemCerteza
+if "%temCerteza%"=="1" (
+   GOTO PularErroTemCerteza
+) else (
+REM Fechar o script chamador também: 
+   exit
+)
+:ErroTemCerteza
+echo MSGBOX "Erro: confirmação não informada! Remoção de nenhum cliente efetuada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:PularErroTemCerteza
+
+
+echo.
+echo.
 SET /P nmFornecedor=Digite o nome fantasia da empresa cliente: 
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor
 :ErroEspacosNmFornecedor
-echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção deste cliente não concluída!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
 exit
 :ErroNmFornecedor
-echo MSGBOX "Erro: nome não informado! Remoção deste cliente não concluída!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: nome não informado! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
 exit
 :PularErroNmFornecedor
+
+
+
+set ClienteExiste=0
+for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos - %nmFornecedor%"') do set ClienteExiste=1
+if %ClienteExiste% == 0 (
+    echo.
+    echo          Nome inválido!
+    echo.
+    
+    echo MSGBOX "Nome inválido!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
+)
 
 
 if not exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties" (
@@ -46,12 +88,16 @@ if not exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/
     exit
 )
 
-if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml 
+
+REM Remover as coisas na seguinte ordem:
+REM  1. primeiro remover o Task Schedule,
+REM  2. em seguida remover a entrada no menu de Windows,
+REM  3. no final remover o arquivo de configuração .properties: 
 
 
-cd "Integração Fornecedor - Portal Cronos"
-cd conf
-copy TemplateNuvemAPS.properties "Integração APS - Portal Cronos.%nmFornecedor%.properties"
+SCHTASKS /End /TN "Integração Portal Cronos - %nmFornecedor%"
+SCHTASKS /Delete /TN "Integração Portal Cronos - %nmFornecedor%"
+
 
 
 cd\
@@ -75,15 +121,13 @@ if %tamanhoArqLog% GTR 0 (
     del %temp%\TEMPmessage.vbs /f /q
     start notepad RemovedorFornecedorNuvem.log
 ) else (
-  SCHTASKS /Create /TN "Integração Portal Cronos - %nmFornecedor%" /XML "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml"
-  SCHTASKS /Run /TN "Integração Portal Cronos - %nmFornecedor%"
-
   cd\
   cd "Arquivos de Programas PC"
-  if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml
-
-  start notepad "Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
+  cd "Integração Fornecedor - Portal Cronos"
+  cd conf
+  del /f /q "Integração APS - Portal Cronos.%nmFornecedor%.properties"
 )
+
 
 REM /B para não fechar o script chamador (Primeira_Instalacao_Versao_Windows.bat):  
 exit /B 0
