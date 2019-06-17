@@ -41,6 +41,8 @@ exit
 :PularErroTemCerteza
 
 
+cls
+
 echo.
 echo.
 SET /P nmFornecedor=Digite o nome fantasia da empresa cliente: 
@@ -63,18 +65,18 @@ exit
 
 
 
-set ClienteExiste=0
-for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos - %nmFornecedor%"') do set ClienteExiste=1
-if %ClienteExiste% == 0 (
-    echo.
-    echo          Nome inválido!
-    echo.
-    
-    echo MSGBOX "Nome inválido!" > %temp%\TEMPmessage.vbs
-    call %temp%\TEMPmessage.vbs
-    del %temp%\TEMPmessage.vbs /f /q
-    exit
-)
+REM set ClienteExiste=0
+REM for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos - %nmFornecedor%"') do set ClienteExiste=1
+REM if %ClienteExiste% == 0 (
+REM     echo.
+REM     echo          Nome inválido!
+REM     echo.
+REM     
+REM     echo MSGBOX "Nome inválido!" > %temp%\TEMPmessage.vbs
+REM     call %temp%\TEMPmessage.vbs
+REM     del %temp%\TEMPmessage.vbs /f /q
+REM     exit
+REM )
 
 
 if not exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties" (
@@ -96,7 +98,7 @@ REM  3. no final remover o arquivo de configuração .properties:
 
 
 SCHTASKS /End /TN "Integração Portal Cronos - %nmFornecedor%"
-SCHTASKS /Delete /TN "Integração Portal Cronos - %nmFornecedor%"
+SCHTASKS /Delete /TN "Integração Portal Cronos - %nmFornecedor%" /F
 
 
 

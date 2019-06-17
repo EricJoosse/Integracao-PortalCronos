@@ -27,7 +27,9 @@ REM goto TesteTresParam
 REM goto TesteTemplate
 REM goto TesteDelTpl
 REM goto TesteIsAmbienteNuvem
-goto TesteRemocaoMultiplasTarefasWindows
+REM goto TesteRemocaoMultiplasTarefasWindows
+REM goto TesteIfExistArqConfEspecifico
+goto TesteFindTarefaEspecifica
 
 
 REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
@@ -417,6 +419,114 @@ if "%IsAmbienteNuvem%" == "1" (
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
 REM start notepad Desinstalador.log
+)
+
+
+pause
+exit
+
+REM ================ Teste Find Tarefa Específica (testado??????????, funcionou????????????????): ========================================
+
+:TesteFindTarefaEspecifica
+
+chcp 1252>nul
+
+cd\
+cd "Arquivos de Programas PC"
+
+echo.
+echo.
+SET /P nmFornecedor=Digite o nome fantasia da empresa cliente: 
+IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
+if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
+GOTO PularErroNmFornecedor
+:ErroEspacosNmFornecedor
+echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:ErroNmFornecedor
+echo MSGBOX "Erro: nome não informado! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:PularErroNmFornecedor
+
+set ClienteExiste=0
+for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos - ^%nmFornecedor^%"') do set ClienteExiste=1
+for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos - ^%nmFornecedor^%"') do echo "\%%x"
+if %ClienteExiste% == 0 (
+    echo.
+    echo          Nome inválido!
+    echo.
+    
+    echo MSGBOX "Nome inválido!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
+) else (
+    echo.
+    echo          Tarefa de %nmFornecedor% encontrada!
+    echo.
+    
+    echo MSGBOX "Tarefa de %nmFornecedor% encontrada!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
+)
+
+pause
+exit
+
+REM ================ Teste If Exist Arq Conf Especifico (testado, funcionou): ========================================
+
+:TesteIfExistArqConfEspecifico
+
+chcp 1252>nul
+
+cd\
+cd "Arquivos de Programas PC"
+
+echo.
+echo.
+SET /P nmFornecedor=Digite o nome fantasia da empresa cliente: 
+IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
+if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
+GOTO PularErroNmFornecedor
+:ErroEspacosNmFornecedor
+echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:ErroNmFornecedor
+echo MSGBOX "Erro: nome não informado! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:PularErroNmFornecedor
+
+if not exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties" (
+    echo.
+    echo          Nome inválido!
+    echo.
+    
+    echo MSGBOX "Nome inválido!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
+) else (
+    echo.
+    echo          Arq config de %nmFornecedor% encontrado!
+    echo.
+    
+    echo MSGBOX "Arq config de %nmFornecedor% encontrado!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    exit
 )
 
 
