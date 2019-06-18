@@ -13,7 +13,7 @@ public class RemovedorFornecedorNuvem
 		  String nmFornecedor = args[0];
 		  
 		  // Remover atalho no menu de Windows:
-		  String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integração APS/Configurações " + nmFornecedor + ".lnk";		  
+		  String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/Configurações " + nmFornecedor + ".lnk";		  
      	  File fileAtalho = new File(nomeAtalho);
      	  fileAtalho.delete();		  
 	}

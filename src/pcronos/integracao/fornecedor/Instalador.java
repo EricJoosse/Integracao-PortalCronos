@@ -44,11 +44,11 @@ public class Instalador {
 					gravarIsAmbienteNuvem(1);
 
 					String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/AdicionarFornecedorNuvem.bat";
-					String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integração " + f.SiglaSistemaFornecedor + "/Adicionar Cliente novo.lnk";
+					String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + f.SiglaSistemaFornecedor + " Cloud/Adicionar Instância.lnk";
 			       	ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
 
 					caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/RemoverFornecedorNuvem.bat";
-					nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integração " + f.SiglaSistemaFornecedor + "/Remover Cliente.lnk";
+					nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + f.SiglaSistemaFornecedor + " Cloud/Remover Instância.lnk";
 			       	ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
 				}
 				else

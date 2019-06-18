@@ -21,7 +21,7 @@ public class ManualManutencao {
 	private void setCaminhoManualMaisCaminhoAtalho() throws Exception { 	
 		if (this.fornecedor.IsServicoNuvem) {
 	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
-		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integração " + this.fornecedor.SiglaSistemaFornecedor + "/";
+		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + this.fornecedor.SiglaSistemaFornecedor + " Cloud/";
 		  	this.caminhoAtalhoManualPai = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 		}
 		else if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
@@ -138,8 +138,8 @@ public class ManualManutencao {
         	    //         - Manual Manutenção TI
         	    // 
         	    // (ii) No caso de ambientes nuvem:
-        	    //         - Adicionar Cliente novo
-        	    //         - Remover Cliente
+        	    //         - Adicionar Instância
+        	    //         - Remover Instância
         	    //         - Configurações Marizpan
         	    //         - Configurações Atacamax
         	    //         - Configurações ...etc.....
@@ -156,7 +156,7 @@ public class ManualManutencao {
         	    // (i)  No caso de ambientes não-nuvem:
         	    //         - Start Menu/Programs/Portal Cronos/
         	    // (ii) No caso de ambientes nuvem:
-        	    //         - Start Menu/Programs/Portal Cronos/Integração XXXXXXXX/
+        	    //         - Start Menu/Programs/Portal Cronos/Integrador XXXXXXXX Cloud/
         	    if (!temOutrosAtalhos) 
         			diretorioAtalhoManual.delete();
         	    

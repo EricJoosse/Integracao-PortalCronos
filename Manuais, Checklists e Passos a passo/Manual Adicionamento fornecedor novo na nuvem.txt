@@ -9,12 +9,13 @@ Nesta versão nova não existe mais o diretório C:/Arquivos de Programas PC/Integr
 e não existe mais o arquivo de configuração "Integração Fornecedor - Portal Cronos.properties". 
    
 Ao invés disso as configurações dos clientes Marizpan, Atacamax, e de todos os outros, se encontram agora no menu de Windows 
-   "Iniciar" > "Portal Cronos" > "Integração APS" > "Configurações Marizpan"
-   "Iniciar" > "Portal Cronos" > "Integração APS" > "Configurações Atacamax"
-   "Iniciar" > "Portal Cronos" > "Integração APS" > "Configurações ..."
-   "Iniciar" > "Portal Cronos" > "Integração APS" > "Adicionar Cliente novo"
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Marizpan"
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Atacamax"
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações ..."
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Adicionar Instância"
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Remover Instância"
 
-A telinha nova "Adicionar Cliente novo":
+A telinha nova "Adicionar Instância":
  - solicita o nome fantasia do cliente;
  - gera um processo novo asíncrono para cada cliente;
  - cria configurações inicias. 
@@ -23,7 +24,7 @@ A telinha nova "Adicionar Cliente novo":
 Observações:
 ------------
 1. Para evitar erros é recomendado clicar com o botão direita do mouse sobre esta opção 
-   "Adicionar Cliente" e clicar "Executar como Administrador". 
+   "Adicionar Instância" e clicar "Executar como Administrador". 
  
 2. Esta telinha nova é feia ainda porém funciona. Mais tarde vai ficar mais bonita. 
 
