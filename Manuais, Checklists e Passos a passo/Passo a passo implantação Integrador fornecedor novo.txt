@@ -5,7 +5,14 @@ Checklist instalação em um fornecedor novo
 IMPORTANTE !!!!!!!!
 ===================
 Ao alterar o arquivo .bat do job, ou outros arquivos .bat, editar com o editor de DOS 
-e não com o Notepad para evitar problemas com cedilhas e acentos !
+e não com o Notepad para evitar problemas com cedilhas e acentos ! 
+Observação: o editor de DOS não existe no Windows 2008 nem no Windows 8. 
+            Ainda existe no Windows 7.
+            
+Alternativo: 1. abrir o arquivo .bat com Wordpad e "Save as " > "Text Document - MS-DOS-format" para um arquivo temporário xxx.txt, 
+             2. em seguida copiar as caratéres Portuguesas uma por uma de xxx.txt para xxx.bat, 
+                apenas nos "echo´s" e não nos scripts vbs; 
+             3. apagar o arquivo temporário xxx.txt
  
  
 JÁ ADIANTAR ANTES DO ACESSO VIA ANYDESK:

@@ -37,7 +37,7 @@ exit
 
 if exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties" (
     echo.
-    echo          Este fornecedor já foi adicionado!
+    echo          Este fornecedor j  foi adicionado!
     echo.
     
     echo MSGBOX "Este fornecedor já foi adicionado!" > %temp%\TEMPmessage.vbs

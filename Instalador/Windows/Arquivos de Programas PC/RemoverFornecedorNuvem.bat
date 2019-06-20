@@ -16,12 +16,12 @@ cd "Arquivos de Programas PC"
 
 echo.
 echo.
-echo Opções: 
+echo Op‡oes: 
 echo.
 echo 1 = Sim
-echo 2 = Não
+echo 2 = Nao
 echo.
-echo IMPORTANTE: É recomendável primeiro fazer backup das configurações do cliente!
+echo IMPORTANTE: É recomend vel primeiro fazer backup das configura‡oes do cliente!
 echo.
 
 SET /P temCerteza=Tem certeza que deseja remover um cliente? 
@@ -69,7 +69,7 @@ REM set ClienteExiste=0
 REM for /f "tokens=2 delims=\" %%x in ('SCHTASKS /QUERY /FO:LIST ^| FINDSTR "Integração Portal Cronos - %nmFornecedor%"') do set ClienteExiste=1
 REM if %ClienteExiste% == 0 (
 REM     echo.
-REM     echo          Nome inválido!
+REM     echo          Nome inv lido!
 REM     echo.
 REM     
 REM     echo MSGBOX "Nome inválido!" > %temp%\TEMPmessage.vbs
@@ -81,7 +81,7 @@ REM )
 
 if not exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties" (
     echo.
-    echo          Nome inválido!
+    echo          Nome inv lido!
     echo.
     
     echo MSGBOX "Nome inválido!" > %temp%\TEMPmessage.vbs
@@ -115,7 +115,7 @@ FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
 
 if %tamanhoArqLog% GTR 0 (
     echo.
-    echo          A remoção falhou!
+    echo          A remo‡ao falhou!
     echo.
     
     echo MSGBOX "A remoção falhou!" > %temp%\TEMPmessage.vbs
