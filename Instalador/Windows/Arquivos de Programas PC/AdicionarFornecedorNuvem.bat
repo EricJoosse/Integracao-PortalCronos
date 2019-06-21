@@ -16,18 +16,18 @@ cd "Arquivos de Programas PC"
 
 echo.
 echo.
-SET /P nmFornecedor=Digite um nome curto para a primeira empresa cliente: 
+SET /P nmFornecedor=Digite o nome fantasia da empresa cliente: 
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor
 :ErroEspacosNmFornecedor
-echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome do fornecedor! Adicionamento deste fornecedor não concluído!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Adicionamento da instância não efetuado!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
 exit
 :ErroNmFornecedor
-echo MSGBOX "Erro: nome do fornecedor não informado! Adicionamento deste fornecedor não concluído!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: nome não informado! Adicionamento da instância não efetuado!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
@@ -67,10 +67,10 @@ FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
 
 if %tamanhoArqLog% GTR 0 (
     echo.
-    echo          O adicionamento do fornecedor novo falhou!
+    echo          O adicionamento da inst ncia nova falhou!
     echo.
     
-    echo MSGBOX "O adicionamento do fornecedor novo falhou!" > %temp%\TEMPmessage.vbs
+    echo MSGBOX "O adicionamento da instância nova falhou!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     start notepad AdicionadorFornecedorNuvem.log

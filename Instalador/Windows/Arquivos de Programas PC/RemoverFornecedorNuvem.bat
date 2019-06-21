@@ -14,34 +14,30 @@ cd\
 cd "Arquivos de Programas PC"
 
 
-echo.
-echo.
-echo Op‡oes: 
-echo.
-echo 1 = Sim
-echo 2 = Nao
-echo.
-echo IMPORTANTE: É recomend vel primeiro fazer backup das configura‡oes do cliente!
-echo.
+REM echo.
+REM echo.
+REM echo Tem certeza que deseja remover a instância de um cliente?
+REM echo.
+REM echo IMPORTANTE: É recomend vel primeiro fazer backup das configura‡oes do cliente!
+REM echo.
+REM 
+REM SET /P temCerteza=Digite S (=Sim) ou N (=Nao):  
+REM IF "%temCerteza%"=="" GOTO ErroTemCerteza
+REM if "%temCerteza%"=="S" (
+REM GOTO PularErroTemCerteza
+REM ) else (
+REM REM Fechar o script chamador também: 
+REM    exit
+REM )
+REM :ErroTemCerteza
+REM echo MSGBOX "Erro: confirmação não informada! Remoção de nenhuma instância efetuada!" > %temp%\TEMPmessage.vbs
+REM call %temp%\TEMPmessage.vbs
+REM del %temp%\TEMPmessage.vbs /f /q
+REM REM Fechar o script chamador também: 
+REM exit
+REM :PularErroTemCerteza
 
-SET /P temCerteza=Tem certeza que deseja remover um cliente? 
-IF "%temCerteza%"=="" GOTO ErroTemCerteza
-if "%temCerteza%"=="1" (
-   GOTO PularErroTemCerteza
-) else (
-REM Fechar o script chamador também: 
-   exit
-)
-:ErroTemCerteza
-echo MSGBOX "Erro: confirmação não informada! Remoção de nenhum cliente efetuada!" > %temp%\TEMPmessage.vbs
-call %temp%\TEMPmessage.vbs
-del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
-:PularErroTemCerteza
-
-
-cls
+REM cls
 
 echo.
 echo.
@@ -50,13 +46,13 @@ IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor
 :ErroEspacosNmFornecedor
-echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção da instância não efetuada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
 exit
 :ErroNmFornecedor
-echo MSGBOX "Erro: nome não informado! Remoção deste cliente não efetuada!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: nome não informado! Remoção da instância não efetuada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
@@ -115,10 +111,10 @@ FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
 
 if %tamanhoArqLog% GTR 0 (
     echo.
-    echo          A remo‡ao falhou!
+    echo          A remo‡ao da inst ncia falhou!
     echo.
     
-    echo MSGBOX "A remoção falhou!" > %temp%\TEMPmessage.vbs
+    echo MSGBOX "A remoção da instância falhou!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     start notepad RemovedorFornecedorNuvem.log
