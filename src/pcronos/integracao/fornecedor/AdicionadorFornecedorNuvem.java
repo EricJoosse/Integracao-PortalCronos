@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 import mslinks.ShellLink;
 import pcronos.integracao.DefaultCharsetException;
+import pcronos.integracao.EmailAutomatico;
 
 
 public class AdicionadorFornecedorNuvem 
@@ -42,7 +44,14 @@ public class AdicionadorFornecedorNuvem
 	public static void main(String[] args) throws IOException, Exception 
 	{
 		String nmFornecedor = args[0];
-		TarefaWindows tarefaWindows = new TarefaWindows(nmFornecedor);
+
+	    LocalDateTime horaInicio = LocalDateTime.now();
+   	    IntegracaoFornecedorCompleta.Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES);
+		String assunto = "Fornecedor novo " + nmFornecedor + " adicionado na integração APS Cloud / PCronos!";
+		String body = assunto;
+        EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "INI", null);
+
+        TarefaWindows tarefaWindows = new TarefaWindows(nmFornecedor);
 		tarefaWindows.gravarEmArquivoXML();
 		  
 		String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos." + nmFornecedor + ".properties";
