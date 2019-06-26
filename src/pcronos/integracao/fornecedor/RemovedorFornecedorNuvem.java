@@ -17,7 +17,7 @@ public class RemovedorFornecedorNuvem
 		  LocalDateTime horaInicio = LocalDateTime.now();
 	   	  IntegracaoFornecedorCompleta.Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES);
 		  String assunto = "Fornecedor " + nmFornecedor + " removido da integração APS Cloud / PCronos!";
-		  String body = assunto;
+		  String body = "Favor remover, ou melhor comentar, este fornecedor (por enquanto manualmente) no Monitorador.";
 	      EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "INI", null);
 
 		  // Remover atalho no menu de Windows:

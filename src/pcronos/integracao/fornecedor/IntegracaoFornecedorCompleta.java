@@ -272,7 +272,7 @@ public final class IntegracaoFornecedorCompleta {
   }
   
   
-  private static void Inicializar(String nomeArquivoProperties)
+  public static void Inicializar(String nomeArquivoProperties)
   {
 	    try {
 	        Date hoje = new Date();
@@ -355,6 +355,10 @@ public final class IntegracaoFornecedorCompleta {
 	        if (siglaSistema.equals("PCronos"))
 	  	    {
 	        	toExecutarHorarioPico = Boolean.parseBoolean(config.getProperty("ExecutarHorarioPico"));
+	  	    }
+
+	        if (siglaSistema.equals("PCronos") || (IsSistemaFornecedorNuvem && nomeArquivoProperties.equals(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES)))
+	  	    {
 	            toEnviarEmailAutomatico = Boolean.parseBoolean(config.getProperty("EnviarEmailAutomatico"));
 	            // Foi debugado que toEnviarEmailAutomatico fica false corretamente no caso que a configuração NÃO existe no arq .config
 

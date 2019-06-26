@@ -32,8 +32,15 @@ public class AdicionadorFornecedorNuvem
      	conteudoArquivo = conteudoArquivo.replace("NomeEmpresa", nmFornecedor).replace("ws-empresa", "ws-" + nmFornecedor.toLowerCase());
      	
      	if (toDebugar) System.out.println("conteudoArquivo.length() = " + conteudoArquivo.length());
-     	if (toDebugar) System.out.println("conteudoArquivo = " + conteudoArquivo);
      	
+     	int tamanhoArqCortado = conteudoArquivo.indexOf("######### Configurações E-mail automático");
+     	
+     	if (toDebugar) System.out.println("tamanhoArqCortado = " + tamanhoArqCortado);
+     	
+     	conteudoArquivo = conteudoArquivo.substring(0, tamanhoArqCortado);
+
+     	if (toDebugar) System.out.println("conteudoArquivo = " + conteudoArquivo);
+
      	BufferedWriter bWriter = new BufferedWriter(new FileWriter(caminhoMaisNomeArquivo, false));
         bWriter.write(conteudoArquivo);
         bWriter.flush();
@@ -48,7 +55,7 @@ public class AdicionadorFornecedorNuvem
 	    LocalDateTime horaInicio = LocalDateTime.now();
    	    IntegracaoFornecedorCompleta.Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES);
 		String assunto = "Fornecedor novo " + nmFornecedor + " adicionado na integração APS Cloud / PCronos!";
-		String body = assunto;
+		String body = "Favor adicionar este fornecedor (por enquanto manualmente) no Monitorador.";
         EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "INI", null);
 
         TarefaWindows tarefaWindows = new TarefaWindows(nmFornecedor);
