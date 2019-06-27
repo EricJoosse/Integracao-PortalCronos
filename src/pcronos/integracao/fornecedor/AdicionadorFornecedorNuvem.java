@@ -52,11 +52,15 @@ public class AdicionadorFornecedorNuvem
 	{
 		String nmFornecedor = args[0];
 
-	    LocalDateTime horaInicio = LocalDateTime.now();
    	    IntegracaoFornecedorCompleta.Inicializar(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES);
-		String assunto = "Fornecedor novo " + nmFornecedor + " adicionado na integração APS Cloud / PCronos!";
-		String body = "Favor adicionar este fornecedor (por enquanto manualmente) no Monitorador.";
-        EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "INI", null);
+		
+		if (IntegracaoFornecedorCompleta.toEnviarEmailAutomatico)
+		{
+		    LocalDateTime horaInicio = LocalDateTime.now();
+			String assunto = "Fornecedor novo " + nmFornecedor + " adicionado na integração APS Cloud / PCronos!";
+			String body = "Favor adicionar este fornecedor (por enquanto manualmente) no Monitorador.";
+            EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "INI", null);
+		}
 
         TarefaWindows tarefaWindows = new TarefaWindows(nmFornecedor);
 		tarefaWindows.gravarEmArquivoXML();
