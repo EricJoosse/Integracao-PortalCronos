@@ -111,13 +111,14 @@
 
     <plugins>
 
-<!-- Copiar templates para o Instalador, de subdiretório /templates/ para /tpl/: -->
+<!-- 1. Copiar templates para o Instalador, do subdiretório /templates/ para /tpl/: 
+     2. Copiar resources para o Instalador, do subdiretório /res/       para /res/: -->
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.1.0</version>
         <executions>
           <execution>
-            <id>copy-resources</id>
+            <id>copia-templates</id>
             <phase>validate</phase>
             <goals>
               <goal>copy-resources</goal>
@@ -128,6 +129,23 @@
                 <resource>
 <!--              <directory>src/non-packaged-resources</directory> -->
                   <directory>${project.basedir}/templates</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+          <execution>
+            <id>copia-resources</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+	          <outputDirectory>${project.basedir}/Instalador/Windows/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res</outputDirectory>
+              <resources>          
+                <resource>
+<!--              <directory>src/non-packaged-resources</directory> -->
+                  <directory>${project.basedir}/res</directory>
                   <filtering>true</filtering>
                 </resource>
               </resources>              
