@@ -100,7 +100,8 @@ public class ManualManutencao {
         		}
         	}
 
-        	ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
+        	if (!this.fornecedor.IsServicoNuvem)
+        	  ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
         }
 	}
 	
