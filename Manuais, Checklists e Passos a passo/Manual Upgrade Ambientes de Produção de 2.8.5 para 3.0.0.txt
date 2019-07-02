@@ -48,6 +48,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 		- AdicionarFornecedorNuvem.bat
 		- RemoverFornecedorNuvem.bat
 		- conf/TemplateNuvemAPS.properties
+		- res/*.ico
 	- Apagar o Task Schedule atual
 	- Backup do arquivo config .properties da Marizpan
 	- Apagar o arquivo "conf/Integração Fornecedor - Portal Cronos.properties"
@@ -56,19 +57,20 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
 		- Criar o seguinte atalho:
 			- "C:\Arquivos de Programas PC\AdicionarFornecedorNuvem.bat"
-			- Renomear para "Adicionar Cliente novo"
-			- Ícone de um cliente + a maizinha verde, veja exemplo na máquina .181 no Azure no menu Iniciar > Test
+			- Renomear para "Adicionar Instância"
+			- Ícone ....../res/AdicionarInstancia.ico
 		- Criar o seguinte atalho:
 			- "C:\Arquivos de Programas PC\RemoverFornecedorNuvem.bat"
-			- Renomear para "Remover Cliente"
-			- Ícone de um cliente + com um X vermelho, veja exemplo na máquina .181 no Azure no menu Iniciar > Test
+			- Renomear para "Remover Instância"
+			- Ícone ....../res/RemoverInstancia.ico
 	- Adicionar cliente novo "Marizpan"
 	- Copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Cliente novo":
 			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Marizpan.properties"
 			- Atalho renomeado para "Configurações Marizpan"
-			- Ícone de Configurações, veja exemplo na máquina .181 no Azure
+			- Ícone alterado para ....../res/ConfiguraçõesInstância.ico
+		- Caso contrário, fazer isso na mão
 	- Alterar o dir C:\Arquivos de Programas PC\ para Hidden e System File, executando o seguinte 
 	  na tela preta de DOS: 
 	    	cd\

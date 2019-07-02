@@ -69,8 +69,9 @@ public class AdicionadorFornecedorNuvem
        	editarArquivoConfig(caminhoMaisNomeArquivo, nmFornecedor);
 
 	    // Criar atalho no menu de Windows:
-		String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/Configurações " + nmFornecedor + ".lnk";		  
-       	ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+		String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/Configurações " + nmFornecedor + ".lnk";
+       	ShellLink sLink = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+       	sLink.setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/ConfiguraçõesInstância.ico");
        	  
 		  
 	}

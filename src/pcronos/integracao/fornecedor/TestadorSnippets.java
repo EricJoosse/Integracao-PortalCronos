@@ -54,6 +54,7 @@ import oracle.jdbc.driver.OracleDriver ; // http://www.java2s.com/Code/Jar/j/Dow
 import pcronos.integracao.DefaultCharsetException;
 import pcronos.integracao.EmailAutomatico;
 import pcronos.integracao.fornecedor.dto.ViradaFornecedorParaProducaoDTO;
+import mslinks.ShellLink;
 
 import org.firebirdsql.jdbc.FBDriver   ;
 import java.sql.DriverManager          ;
@@ -601,7 +602,7 @@ public class TestadorSnippets {
 	   	    System.out.println(Integer.toString(isAmbienteNuvem));
 	   	  }
 	  }
-			
+
 			
 	  private static void testarGravarIsAmbienteNuvem()
 	  {
@@ -621,11 +622,22 @@ public class TestadorSnippets {
       	  }
 	  }
 	  
-	  
 	  private static void testarGetIsAmbienteNuvem() throws Exception
 	  {
 	     String teste = Utils.getIsAmbienteNuvem();
 	     System.out.println("teste = " + teste);
+	  }
+	  
+	  private static void testarSetIconLocation() throws IOException
+	  {
+		  String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/TesteIcone.lnk";
+     	  File fileAtalho = new File(nomeAtalho);
+     	  fileAtalho.delete();		  
+
+     	  String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/AdicionarFornecedorNuvem.bat";
+	  	  ShellLink slAdicionar = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+		  slAdicionar.setIconLocation("C:\\temp\\AdicionarInstancia.ico");		
+		  slAdicionar.getHeader().setIconIndex(0);
 	  }
 	  
  	  public static void main(String[] args) throws Exception {
@@ -661,7 +673,8 @@ public class TestadorSnippets {
 		 // testar_mkdirs();
 		 // testarGravarIsAmbienteNuvem();
 		 // testarRemocaoRaizMenuWindows();
-			testarGetIsAmbienteNuvem();
+		 // testarGetIsAmbienteNuvem();
+			testarSetIconLocation();
          
 
          // throw new Exception("try");

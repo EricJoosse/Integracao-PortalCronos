@@ -45,11 +45,13 @@ public class Instalador {
 
 					String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/AdicionarFornecedorNuvem.bat";
 					String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + f.SiglaSistemaFornecedor + " Cloud/Adicionar Instância.lnk";
-			       	ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+					ShellLink slAdicionar = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+					slAdicionar.setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/AdicionarInstancia.ico");
 
 					caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/RemoverFornecedorNuvem.bat";
 					nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + f.SiglaSistemaFornecedor + " Cloud/Remover Instância.lnk";
-			       	ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+					ShellLink slRemover = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+					slRemover.setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/RemoverInstancia.ico");
 				}
 				else
 				{
