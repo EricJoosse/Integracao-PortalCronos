@@ -211,10 +211,6 @@ public final class IntegracaoFornecedorCompleta {
 	     }
 	 }
 	 
-	 // Aqui debugar() não pode ser usado pois as configurações para isso ainda não estão definidos:
-  // System.out.println("qtdArquivosConfig = " + qtdArquivosConfig);
-  // System.out.println("qtdArquivosConfigComNomeEspecifico = " + qtdArquivosConfigComNomeEspecifico);
-
 
 	 // No caso de ambientes de tipo hospedagem local ("não-nuvem"):
 	 if (qtdArquivosConfigNaoNuvemComNomeFixo == 1 && qtdArquivosConfig == 1 && qtdArquivosTemplateConfigNuvemFixo == 0)
@@ -248,6 +244,13 @@ public final class IntegracaoFornecedorCompleta {
 		 logarErroStaticConstructor(ex.getMessage());
 	 }
 	 
+	 // Aqui o método debugar() não pode ser usado pois as configurações para isso ainda não estão definidos:
+//     System.out.println("qtdArquivosConfig                    = " + qtdArquivosConfig);
+//     System.out.println("qtdArquivosConfigNaoNuvemComNomeFixo = " + qtdArquivosConfigNaoNuvemComNomeFixo);
+//     System.out.println("qtdArquivosTemplateConfigNuvemFixo   = " + qtdArquivosTemplateConfigNuvemFixo);
+//     System.out.println("isAmbienteNuvemDefinidoNaInstalacao  = " + isAmbienteNuvemDefinidoNaInstalacao);
+
+
 	 
  	 if (    (isAmbienteNuvemDefinidoNaInstalacao.equals("0") &&  IsSistemaFornecedorNuvem)
  		  || (isAmbienteNuvemDefinidoNaInstalacao.equals("1") && !IsSistemaFornecedorNuvem)

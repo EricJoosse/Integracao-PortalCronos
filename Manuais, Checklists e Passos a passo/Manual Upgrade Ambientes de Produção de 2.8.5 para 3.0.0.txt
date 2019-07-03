@@ -38,6 +38,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 		- /bin/IsAmbienteNuvem.bat
 		- /bin/ComponenteTestador.bat
 		- Job15a15minOfertamentoJava_Windows.bat 
+			- Re-adicionar "exit" seguida por uma linha em branco no início do arquivo 
 		- Desinstalar_Integração_Fornecedor_PortalCronos.bat
 		- TestadorUnitario.bat
 				
@@ -66,7 +67,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 	- Adicionar cliente novo "Marizpan"
 	- Copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
-		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Cliente novo":
+		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
 			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Marizpan.properties"
 			- Atalho renomeado para "Configurações Marizpan"
 			- Ícone alterado para ....../res/ConfiguraçõesInstância.ico
@@ -83,7 +84,13 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 		       porém pode exibir hidden files, para todos os usuários inclusive cronostech 
 		       (marcar "Show hidden files, folders, and drives")
 		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
-	- Adicionar cliente novo "Atacamax"
+	- Adicionar instância nova "Atacamax"
+	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
+		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
+			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Atacamax.properties"
+			- Atalho renomeado para "Configurações Atacamax"
+			- Ícone alterado para ....../res/ConfiguraçõesInstância.ico
+		- Caso contrário, fazer isso na mão
 
 
 6. Em todos os casos de servidores de PRODUÇÃO (não no servidor de Homologação do APS Cloud): 

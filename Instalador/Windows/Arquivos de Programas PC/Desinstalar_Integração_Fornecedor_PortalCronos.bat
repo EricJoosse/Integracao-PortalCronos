@@ -24,7 +24,7 @@ cd "Arquivos de Programas PC"
 call "Integração Fornecedor - Portal Cronos\bin\IsAmbienteNuvem.bat"
 
 
-REM ================ Remover Manual Manutenção TI do menu de Windows, ANTES da remoção dos programas de Java: ========================================
+REM ================ Remover as diversas opções do menu de Windows, ANTES da remoção dos programas de Java: ========================================
 
 cd\
 cd "Arquivos de Programas PC"
