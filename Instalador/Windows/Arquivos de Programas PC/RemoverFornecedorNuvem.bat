@@ -13,6 +13,8 @@ chcp 1252>nul
 cd\
 cd "Arquivos de Programas PC"
 
+call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
+
 
 REM echo.
 REM echo.

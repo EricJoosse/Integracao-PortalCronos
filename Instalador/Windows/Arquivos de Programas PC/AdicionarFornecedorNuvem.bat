@@ -13,6 +13,7 @@ chcp 1252>nul
 cd\
 cd "Arquivos de Programas PC"
 
+call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
 echo.
 echo.
@@ -43,7 +44,7 @@ if exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf
     echo MSGBOX "Este fornecedor já foi adicionado!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
-    exit
+    exit /B 0
 )
 
 if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml 
