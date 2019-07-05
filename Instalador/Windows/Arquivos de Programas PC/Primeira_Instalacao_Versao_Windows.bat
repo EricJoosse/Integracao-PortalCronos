@@ -10,6 +10,10 @@ REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os 
 
 chcp 1252>nul
 
+cd\
+cd "Arquivos de Programas PC"
+call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
+
 echo.
 echo.
 echo Tipos de Windows homologados: 

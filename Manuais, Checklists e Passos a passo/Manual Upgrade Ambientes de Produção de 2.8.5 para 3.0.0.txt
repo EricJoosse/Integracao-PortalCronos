@@ -37,6 +37,7 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 		- /bin/CaminhoJRE.bat
 		- /bin/IsAmbienteNuvem.bat
 		- /bin/ComponenteTestador.bat
+		- /bin/VerificarUsuarioAdministrador.bat
 		- Job15a15minOfertamentoJava_Windows.bat 
 			- Re-adicionar "exit" seguida por uma linha em branco no início do arquivo 
 		- Desinstalar_Integração_Fornecedor_PortalCronos.bat
