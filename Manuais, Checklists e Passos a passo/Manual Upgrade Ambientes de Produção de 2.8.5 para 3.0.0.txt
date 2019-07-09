@@ -5,28 +5,48 @@ Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0
 A. Upgrade de forma automatizada:
 =================================
 
-1. Gerar o Instalador no Eclipse e copiar para o servidor do fornecedor.
+1. Gerar o Instalador no Eclipse.
  
-2. Backup do(s) arquivo(s) de configuração.
+2. a. Verificar se o usuário logado é administrador ou administrator, 
+      local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+      (Formaggio: user "techcorp")
+	      
+   b. Verificar se o usuário logado consegue abrir o botão "Environment Variables" 
+      no Control Panel > System > Advanced System Settings > "Environment Variables".
+      Caso contrário, provavelmente o usuário logado é de uma máquina virtual. 
+      Pedir a TI conectar com um usuário administrador na máquina real debaixo da máquina virtual.
+	      
+   c. Nas opções do Windows Explorer marcar "Mostrar arquivos, pastas e unidades ocultas"  
+      (foi testado no fornecedor Padeirão que não precisa desmarcar "Hide protected operating system files").
+      Fechar e re-abrir o Windows Explorer. Senão re-abrir o Windows Explorer, 
+      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
+	
+   d. Copiar o Instalador para o servidor do fornecedor.
+   
+	
+3. (i)   Esperar até o processo atual do Integrador terminou.
+   (ii)  Alterar o config da Marizpan de "P" para "H"
+   (iii) Backup do(s) arquivo(s) de configuração.
  
-3. Esperar até o processo atual do Integrador terminou.
  
 4. (i)   Primeiro verificar que o desinstalador não desinstala java!!!
          No caso, descomentar "goto SKIP_JRE"
-   (ii)  Desinstalar tudo   
-   (iii) Verificar se apagou menu de Windows, Task Schedule, Diretórios
+   (ii)  Executar o Desinstalador como Administrador   
+   (iii) Verificar se o Desinstalador apagou o menu de Windows, a Task Schedule, e os diretórios
+
 
 5. Re-instalar Marizpan: 
 	- Adicionar cliente novo "Marizpan"
-	- Copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
-
+	- !!!! AINDA NÃO copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+	       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
+	  
 	- Alterar os ícones no menu de Windows manualmente: 
 			- Ícone ....../res/AdicionarInstancia.ico
 			- Ícone ....../res/RemoverInstancia.ico
 			- Ícone ....../res/ConfiguraçõesInstância.ico
 
-	- Alterar o dir C:\Arquivos de Programas PC\ para Hidden e System File, executando o seguinte 
-	  na tela preta de DOS: ??????????????????automatizada não????????????????
+	- Verificar se o instalador já alterou automaticamente o dir C:\Arquivos de Programas PC\ para Hidden e System File.
+	  Caso contrário, executando o seguinte na tela preta de DOS: 
 	    	cd\
 	    	attrib "Arquivos de Programas PC" +S +H	    
 	  (é necessário para evitar cópias hackeadas e erradas dos arquivos de configuração, 
@@ -39,23 +59,38 @@ A. Upgrade de forma automatizada:
 		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
 
 6. Adicionar instância nova "Atacamax"
+		- !!!! AINDA NÃO configurar o .properties da Atacamax definitivamente
+		       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
+		- Já preparar um arquivo .properties de backup tudo pronto, apontando para o ambiente de Homologação
 		- Alterar o ícone do Atacamax no menu de Windows manualmente: 
 			- Ícone ....../res/ConfiguraçõesInstância.ico
 
-7. Em todos os casos de servidores de PRODUÇÃO (não no servidor de Homologação do APS Cloud): 
+
+7. (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java para java ficar no meio da tela  
+   (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar antes da próxima rodada automática
+   (iii) Copiar ao mesmo tempo os conteúdos dos 2 backups dos 2 configs da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+         e da Atacamax para "Integração APS - Portal Cronos.Atacamaxproperties"
+   (iv)  Ficar monitorando os 2 jvm´s da Marizpan e da Atacamax executando ao mesmo tempo
+   (v)   Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
+   (vi)  Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
+         pegando arqs .properties diferentes
+
+
+8. Em todos os casos de servidores de PRODUÇÃO (não no servidor de Homologação do APS Cloud): 
      - Verificar a memória RAM livre no servidor do fornecedor (sem contar meu JVM).
 		    - Preencher isso no f[i].MemoriaRamLivre = "" no FornecedorRepositorio   
 	 - Observação: no servidor de monitoramento o serviço + JVM ocupa 60 MB de memória
 	 
 
-8. Em todos os casos: 
+9. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
-9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
-   (ii)  Compilar o arquivo .jar
-   (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
-         esperando o processamento atual terminar primeiro
+10. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+    (ii)  Compilar o arquivo .jar
+    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+          esperando o processamento atual terminar primeiro
    
+11. Após todos os testes, alterar o config da Marizpan de volta de "H" para "P"
 
 
 B. Upgrade de forma manual:
@@ -126,6 +161,8 @@ B. Upgrade de forma manual:
 			- Renomear para "Remover Instância"
 			- Ícone ....../res/RemoverInstancia.ico
 	- Adicionar cliente novo "Marizpan"
+		- !!!! AINDA NÃO copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+		       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
 	- Copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
@@ -146,12 +183,25 @@ B. Upgrade de forma manual:
 		       (marcar "Show hidden files, folders, and drives")
 		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
 	- Adicionar instância nova "Atacamax"
+		- !!!! AINDA NÃO configurar o .properties da Atacamax definitivamente
+		       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
+		- Já preparar um arquivo .properties de backup tudo pronto, apontando para o ambiente de Homologação
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
 			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Atacamax.properties"
 			- Atalho renomeado para "Configurações Atacamax"
 			- Ícone alterado para ....../res/ConfiguraçõesInstância.ico
 		- Caso contrário, fazer isso na mão
+
+	- (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java para java ficar no meio da tela  
+      (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar antes da próxima rodada automática
+      (iii) Copiar ao mesmo tempo os conteúdos do 2 backups dos 2 configs da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+            e da Atacamax para "Integração APS - Portal Cronos.Atacamaxproperties"
+            para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
+      (iv)  Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
+      (v)   Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
+            pegando arqs .properties diferentes
+
 
 
 6. Em todos os casos de servidores de PRODUÇÃO (não no servidor de Homologação do APS Cloud): 
