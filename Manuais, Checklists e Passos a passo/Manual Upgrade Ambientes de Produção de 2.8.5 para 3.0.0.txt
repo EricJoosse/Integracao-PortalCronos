@@ -1,6 +1,14 @@
 Manual Upgrade dos Ambientes de Produção de 2.8.5 para 3.0.0 
 ============================================================
 
+No dia antes do upgrade:
+========================
+1. (i)  Perguntar Leão se tem uma cotação de teste pronta e preparada para testar a Marizpan amanhã pois 
+        amanhã a gente não pode parar a integração da Marizpan em produção muito tempo 
+        
+   (ii) Perguntar Leão se ele mudou a senha de ws-marizpan após a cópia da base de Produção para 
+        a base de Homologação
+
 
 A. Upgrade de forma automatizada:
 =================================
@@ -25,7 +33,8 @@ A. Upgrade de forma automatizada:
    
 	
 3. (i)   Esperar até o processo atual do Integrador terminou.
-   (ii)  Alterar o config da Marizpan de "P" para "H"
+   (ii)  Alterar o arquivo config da Marizpan de "P" para "H"
+         e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
    (iii) Backup do(s) arquivo(s) de configuração.
  
  
@@ -62,6 +71,7 @@ A. Upgrade de forma automatizada:
 		- !!!! AINDA NÃO configurar o .properties da Atacamax definitivamente
 		       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
 		- Já preparar um arquivo .properties de backup tudo pronto, apontando para o ambiente de Homologação
+		  ("H" e a senha de ws-atacamax)
 		- Alterar o ícone do Atacamax no menu de Windows manualmente: 
 			- Ícone ....../res/ConfiguraçõesInstância.ico
 
@@ -69,8 +79,9 @@ A. Upgrade de forma automatizada:
 7. (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java para java ficar no meio da tela  
    (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar antes da próxima rodada automática
    (iii) Copiar ao mesmo tempo os conteúdos dos 2 backups dos 2 configs da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
-         e da Atacamax para "Integração APS - Portal Cronos.Atacamaxproperties"
-   (iv)  Ficar monitorando os 2 jvm´s da Marizpan e da Atacamax executando ao mesmo tempo
+         e da Atacamax para "Integração APS - Portal Cronos.Atacamax.properties"
+   (iv)  Ficar monitorando os 2 jvm´s da Marizpan e da Atacamax na lista de processos de Windows 
+         para testar se os 2 jvm´s realmente processaram ao mesmo tempo e se funcionam processando ao mesmo tempo
    (v)   Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
    (vi)  Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
          pegando arqs .properties diferentes
@@ -90,7 +101,8 @@ A. Upgrade de forma automatizada:
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
    
-11. Após todos os testes, alterar o config da Marizpan de volta de "H" para "P"
+11. Após todos os testes, alterar o arquivo config da Marizpan de volta de "H" para "P"
+    e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 
 
 B. Upgrade de forma manual:
@@ -147,6 +159,8 @@ B. Upgrade de forma manual:
 		- conf/TemplateNuvemAPS.properties
 		- res/*.ico
 	- Apagar o Task Schedule atual
+	- Alterar o arquivo config da Marizpan de "P" para "H"
+	  e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 	- Backup do arquivo config .properties da Marizpan
 	- Apagar o arquivo "conf/Integração Fornecedor - Portal Cronos.properties"
 	- No menu de Windows "Iniciar" > "Portal Cronos" remover o atalho "Manual Manutenção TI" por enquanto
@@ -185,7 +199,8 @@ B. Upgrade de forma manual:
 	- Adicionar instância nova "Atacamax"
 		- !!!! AINDA NÃO configurar o .properties da Atacamax definitivamente
 		       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
-		- Já preparar um arquivo .properties de backup tudo pronto, apontando para o ambiente de Homologação
+		- Já preparar um arquivo .properties de backup tudo pronto, apontando para o ambiente de Homologação 
+		  ("H" e a senha de ws-atacamax)
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
 			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Atacamax.properties"
@@ -195,13 +210,16 @@ B. Upgrade de forma manual:
 
 	- (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java para java ficar no meio da tela  
       (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar antes da próxima rodada automática
-      (iii) Copiar ao mesmo tempo os conteúdos do 2 backups dos 2 configs da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
-            e da Atacamax para "Integração APS - Portal Cronos.Atacamaxproperties"
-            para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
-      (iv)  Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
-      (v)   Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
+      (iii) Copiar ao mesmo tempo os conteúdos dos 2 backups dos 2 configs da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+            e da Atacamax para "Integração APS - Portal Cronos.Atacamax.properties"
+      (iv)  Ficar monitorando os 2 jvm´s da Marizpan e da Atacamax na lista de processos de Windows 
+            para testar se os 2 jvm´s realmente processaram ao mesmo tempo e se funcionam processando ao mesmo tempo
+      (v)   Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
+      (vi)  Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
             pegando arqs .properties diferentes
 
+    - Após todos os testes, alterar o arquivo config da Marizpan de volta de "H" para "P"
+      e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 
 
 6. Em todos os casos de servidores de PRODUÇÃO (não no servidor de Homologação do APS Cloud): 
