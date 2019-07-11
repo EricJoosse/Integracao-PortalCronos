@@ -8,6 +8,20 @@ No dia antes do upgrade:
         
    (ii) Perguntar Leão se ele mudou a senha de ws-marizpan após a cópia da base de Produção para 
         a base de Homologação
+        
+   (iii) Perguntar Bernardino se já tem uma base da Atacamax; 
+         (a). No caso, solicitar os seguintes dados: 
+              Qual é o endereço IP, SID/alias, porta, usuário e senha do banco Firebird de produção? 
+              A porta é a porta "default" (3050)? 
+       		  O usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, 
+       		  pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos 
+       		  e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado na base do APS.
+         
+         (b). Caso contrário, dizer a Leão: 
+              "Bernardino disse que ele ainda não tem a base da Atacamax.
+               Assim não tem como instalar a versão Nuvem do Integrador, 
+               pois para terminar a versão Nuvem, primeiro preciso debugar algumas coisas 
+               com 2 fornecedores ofertando no mesmo servidor para saber como é que vou terminar a versão Nuvem."  
 
 
 A. Upgrade de forma automatizada:
@@ -104,7 +118,9 @@ A. Upgrade de forma automatizada:
 11. Após todos os testes, alterar o arquivo config da Marizpan de volta de "H" para "P"
     e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 
-
+12. Enviar o email no Appendix abaixo para Leão e Bernardino. 
+ 
+ 
 B. Upgrade de forma manual:
 ========--------===========
 
@@ -245,3 +261,40 @@ B. Upgrade de forma manual:
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
    
+11. Enviar o email no Appendix abaixo para Leão e Bernardino. 
+ 
+
+C. Appendix: Email de conclusão:
+================================
+
+Assunto: Orientações versão Nuvem do Integrador APS Cloud/PCronos
+ 
+Leão, Bernardino, 
+ 
+  a versão Nuvem do Integrador APS Cloud/PCronos foi instalada com sucesso. 
+Na versão nuvem não existe mais o diretório "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\" 
+e não existem mais os arquivos de configuração "xxxxx.properties",  
+pois simplesmente um "loop" sobre todos os arquivos de configuração no diretório não vai dar certo. 
+Então para adicionar um cliente do APS Cloud no Integrador (quer dizer um fornecedor do ponto de vista do Portal) 
+não é para copiar mais um arquivo de configuração.
+ 
+Ao invés disso tem instâncias do Integrador para cada empresa integrada. 
+Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
+Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
+Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows. 
+O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
+ 
+Se quiser saber porque um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo, veja abaixo os motivos: 
+   1. O Integrador roda de 15 a 15 minutos. No futuro a gente vai adicionar 50 ou mais fornecedores/clientes 
+      então um processo síncrono levaria mais de 15 minutos. Então para cada fornecedor/cliente deve ter 
+      um processo asíncrono, quer dizer uma "instância" do Integrador; 
+ 
+  2. Se tivesse um "loop" síncrono e se algum fornecedor/cliente travar o Integrador, 
+      este fornecedor/cliente travaria todos os outros fornecedores/clientes;
+ 
+  3. Se tivesse um "loop" síncrono, o risco de interferência indevida aumenta. 
+      Não pode acontecer por exemplo que o Integrador envia ofertas para a Marizpan no Portal Cronos 
+      usando os preços ou outros dados da Atacamax; 
+ 
+Atc,
+Eric

@@ -656,7 +656,7 @@ Como vai ser?
 
 	   No caso do APS:
        		Qual é o endereço IP, porta, usuário e senha do banco Firebird de produção? A porta é a porta "default" (3050)? Qual é o caminho completo + nome do arquivo.FDB do Firebird, exemplo: /home/usuario/banco.fdb (Linux) ou C:/diretorio/NomeBanco.FDB (Windows).
-       		O usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado no APS.
+       		O usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado na base do APS.
 
        No caso que o DBA do fornecedor quer dar privilêgios apenas para as tabelas usadas: 
        		APS:     cliente, produto, prodfilho, estoqueempresa, precoempresa
