@@ -4,10 +4,16 @@ Manual para upgrade dos ambientes de produção de 2.6 para 2.6.1
 
 -1. Abrir o AnyDesk dentro da máquina virtual no Azure para agilizar as cópias dos arquivos.
 
-0. Apenas no caso de instalação no servidor do monitoramento:
-	 - Conectar como cronostech
-     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
-       (desmarcar "Hide protected operating system files") temporariamente
+0. (i)  Apenas no caso do servidor do monitoramento:
+		 - Conectar como cronostech
+	     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
+	       (desmarcar "Hide protected operating system files") temporariamente
+
+	(ii) Em todos os servidores dos fornecedores:
+	      - Verificar se o usuário logado é administrador ou administrator, 
+	        local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+	        (Formaggio: user "techcorp")
+	      
 
 1. Fazer exatamente na seguinte sequência:
    (i)   Em todos os casos exceto JR Distribuição / Windows 10:

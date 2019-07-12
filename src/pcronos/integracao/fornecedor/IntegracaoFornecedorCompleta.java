@@ -186,6 +186,8 @@ public final class IntegracaoFornecedorCompleta {
 	 }
 	 
 	 
+	 // O seguinte conta o arquivo "Integração Fornecedor - Portal Cronos.properties" ( = NOME_ARQUIVO_PROPERTIES)
+	 //              + os arquivos "Integração APS - Portal Cronos.%nmFornecedor%.properties":
 	 for (final File file : dirConfig.listFiles()) 
 	 {
 		 if (    file.getName().startsWith("Integração") 
@@ -244,11 +246,13 @@ public final class IntegracaoFornecedorCompleta {
 		 logarErroStaticConstructor(ex.getMessage());
 	 }
 	 
+	 
 	 // Aqui o método debugar() não pode ser usado pois as configurações para isso ainda não estão definidos:
-//     System.out.println("qtdArquivosConfig                    = " + qtdArquivosConfig);
-//     System.out.println("qtdArquivosConfigNaoNuvemComNomeFixo = " + qtdArquivosConfigNaoNuvemComNomeFixo);
-//     System.out.println("qtdArquivosTemplateConfigNuvemFixo   = " + qtdArquivosTemplateConfigNuvemFixo);
-//     System.out.println("isAmbienteNuvemDefinidoNaInstalacao  = " + isAmbienteNuvemDefinidoNaInstalacao);
+  // System.out.println("qtdArquivosConfig                    = " + qtdArquivosConfig);
+  // System.out.println("qtdArquivosConfigNaoNuvemComNomeFixo = " + qtdArquivosConfigNaoNuvemComNomeFixo);
+  // System.out.println("qtdArquivosTemplateConfigNuvemFixo   = " + qtdArquivosTemplateConfigNuvemFixo);
+  // System.out.println("IsSistemaFornecedorNuvem             = " + IsSistemaFornecedorNuvem);
+  // System.out.println("isAmbienteNuvemDefinidoNaInstalacao  = " + isAmbienteNuvemDefinidoNaInstalacao);
 
 
 	 

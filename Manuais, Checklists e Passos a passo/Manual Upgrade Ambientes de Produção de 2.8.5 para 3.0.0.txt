@@ -122,13 +122,18 @@ A. Upgrade de forma automatizada:
  
  
 B. Upgrade de forma manual:
-========--------===========
+===========================
 
-1. Apenas no caso do servidor do monitoramento:
-	 - Conectar como cronostech
-     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
-       (desmarcar "Hide protected operating system files") temporariamente
+1. (i)  Apenas no caso do servidor do monitoramento:
+		 - Conectar como cronostech
+	     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
+	       (desmarcar "Hide protected operating system files") temporariamente
 
+	(ii) Em todos os servidores dos fornecedores:
+	      - Verificar se o usuário logado é administrador ou administrator, 
+	        local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+	        (Formaggio: user "techcorp")
+	      
 
 2. Fazer exatamente na seguinte sequência:
    (i)   Em todos os casos exceto JR Distribuição / Windows 10:
@@ -267,18 +272,20 @@ B. Upgrade de forma manual:
 C. Appendix: Email de conclusão:
 ================================
 
-Assunto: Orientações versão Nuvem do Integrador APS Cloud/PCronos
- 
+- Substituir <i> e </i> em 2 lugares
+- Assunto: Manualzinho versão Nuvem do Integrador APS Cloud/PCronos
+- Mensagem:
+  
 Leão, Bernardino, 
  
   a versão Nuvem do Integrador APS Cloud/PCronos foi instalada com sucesso. 
-Na versão nuvem não existe mais o diretório "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\" 
-e não existem mais os arquivos de configuração "xxxxx.properties",  
+Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
+e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"),  
 pois simplesmente um "loop" sobre todos os arquivos de configuração no diretório não vai dar certo. 
-Então para adicionar um cliente do APS Cloud no Integrador (quer dizer um fornecedor do ponto de vista do Portal) 
-não é para copiar mais um arquivo de configuração.
+Então para adicionar um fornecedor/cliente no Integrador não é para copiar mais um arquivo de configuração 
+(fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
  
-Ao invés disso tem instâncias do Integrador para cada empresa integrada. 
+Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
 Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
 Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
 Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows. 

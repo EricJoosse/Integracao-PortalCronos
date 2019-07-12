@@ -5,11 +5,16 @@ Manual Upgrade dos Ambientes de Produção de 2.8.4 para 2.8.5
 	- TestadorUnitario.bat
 	- ComponenteTestador.bat
 	
-1. Apenas no caso do servidor do monitoramento:
-	 - Conectar como cronostech
-     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
-       (desmarcar "Hide protected operating system files") temporariamente
+1. (i)  Apenas no caso do servidor do monitoramento:
+		 - Conectar como cronostech
+	     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
+	       (desmarcar "Hide protected operating system files") temporariamente
 
+	(ii) Em todos os servidores dos fornecedores:
+	      - Verificar se o usuário logado é administrador ou administrator, 
+	        local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+	        (Formaggio: user "techcorp")
+	      
 
 2. Fazer exatamente na seguinte sequência:
    (i)   Em todos os casos exceto JR Distribuição / Windows 10:
