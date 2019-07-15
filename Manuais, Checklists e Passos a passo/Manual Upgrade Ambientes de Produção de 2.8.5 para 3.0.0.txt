@@ -27,7 +27,9 @@ No dia antes do upgrade:
 A. Upgrade de forma automatizada:
 =================================
 
-1. Gerar o Instalador no Eclipse.
+1. (i)  Gerar o Instalador no Eclipse.
+   (ii) Zippar o Instalador para o arquivo PatchNuvem.zip 
+        colocando a senha cronos@2019 no arquivo .zip para evitar uso indevido e hackeado. 
  
 2. a. Verificar se o usuário logado é administrador ou administrator, 
       local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
@@ -63,7 +65,10 @@ A. Upgrade de forma automatizada:
 	- !!!! AINDA NÃO copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
 	       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
 	  
-	- Alterar os ícones no menu de Windows manualmente: 
+	- No Windows Explorer colar o seguinte endereço para o acompanhador da TI por enquanto não ver o menu de Windows: 
+	  C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/
+	   
+	- Alterar os seguintes ícones neste diretório manualmente: 
 			- Ícone ....../res/AdicionarInstancia.ico
 			- Ícone ....../res/RemoverInstancia.ico
 			- Ícone ....../res/ConfiguraçõesInstância.ico
@@ -86,7 +91,9 @@ A. Upgrade de forma automatizada:
 		       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
 		- Já preparar um arquivo .properties de backup tudo pronto, apontando para o ambiente de Homologação
 		  ("H" e a senha de ws-atacamax)
-		- Alterar o ícone do Atacamax no menu de Windows manualmente: 
+		- No Windows Explorer colar o seguinte endereço para o acompanhador da TI por enquanto não ver o menu de Windows: 
+		  C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/
+	   	- Alterar os ícones neste diretório manualmente: 
 			- Ícone ....../res/ConfiguraçõesInstância.ico
 
 
@@ -184,9 +191,14 @@ B. Upgrade de forma manual:
 	  e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 	- Backup do arquivo config .properties da Marizpan
 	- Apagar o arquivo "conf/Integração Fornecedor - Portal Cronos.properties"
-	- No menu de Windows "Iniciar" > "Portal Cronos" remover o atalho "Manual Manutenção TI" por enquanto
-	- No menu de Windows "Iniciar" > "Portal Cronos" adicionar o subdir novo "Integrador APS Cloud/WinThor Cloud/..."
-	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
+	- No Windows Explorer colar o seguinte endereço para o acompanhador da TI por enquanto 
+	  não ver o menu de Windows: 
+	      C:/ProgramData/Microsoft/Windows/Start Menu/Portal Cronos/
+	  Se não existir, usar o seguinte endereço:
+	      C:/ProgramData/Microsoft/Windows/Iniciar/Portal Cronos/
+	- Neste diretório remover o atalho "Manual Manutenção TI" por enquanto
+	- Neste diretório adicionar o subdir novo "Integrador APS Cloud/WinThor Cloud/..."
+	- Neste subdiretório:
 		- Criar o seguinte atalho:
 			- "C:\Arquivos de Programas PC\AdicionarFornecedorNuvem.bat"
 			- Renomear para "Adicionar Instância"
@@ -199,7 +211,7 @@ B. Upgrade de forma manual:
 		- !!!! AINDA NÃO copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
 		       para poder testar Marizpan e Atacamax ao mesmo tempo monitorando os 2 jvm´s executando ao mesmo tempo
 	- Copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
-	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
+	- No diretório C:/ProgramData/Microsoft/Windows/Start Menu/Portal Cronos/Integrador APS Cloud/:
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
 			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Marizpan.properties"
 			- Atalho renomeado para "Configurações Marizpan"
