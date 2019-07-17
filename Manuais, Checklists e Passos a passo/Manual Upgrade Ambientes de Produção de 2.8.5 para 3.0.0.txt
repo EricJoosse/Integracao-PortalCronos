@@ -176,6 +176,7 @@ B. Upgrade de forma manual:
 		- Job15a15minOfertamentoJava_Windows.bat 
 			- Re-adicionar "exit" seguida por uma linha em branco no início do arquivo 
 		- Desinstalar_Integração_Fornecedor_PortalCronos.bat
+		- AbrirConfigFornecedor.bat
 		- TestadorUnitario.bat
 				
    (ii) Gravar 0 ou 1 no arquivo /bin/IsAmbienteNuvem.bat + linebreak depois do 0 / 1	
