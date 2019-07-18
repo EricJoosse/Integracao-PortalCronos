@@ -214,7 +214,7 @@ B. Upgrade de forma manual:
 	- Copiar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
 	- No diretório C:/ProgramData/Microsoft/Windows/Start Menu/Portal Cronos/Integrador APS Cloud/:
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
-			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Marizpan.properties"
+		???????????????????????	- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Marizpan.properties"
 			- Atalho renomeado para "Configurações Marizpan"
 			- Ícone alterado para ....../res/ConfiguraçõesInstância.ico
 		- Caso contrário, fazer isso na mão
@@ -237,7 +237,7 @@ B. Upgrade de forma manual:
 		  ("H" e a senha de ws-atacamax)
 	- No menu de Windows "Iniciar" > "Portal Cronos" > "Integrador APS Cloud":
 		- Verificar se o seguinte atalho foi criado pela tela "Adicionar Instância":
-			- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Atacamax.properties"
+		???????????????	- "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\Integração APS - Portal Cronos.Atacamax.properties"
 			- Atalho renomeado para "Configurações Atacamax"
 			- Ícone alterado para ....../res/ConfiguraçõesInstância.ico
 		- Caso contrário, fazer isso na mão

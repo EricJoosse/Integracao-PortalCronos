@@ -65,12 +65,13 @@ public class AdicionadorFornecedorNuvem
         TarefaWindows tarefaWindows = new TarefaWindows(nmFornecedor);
 		tarefaWindows.gravarEmArquivoXML();
 		  
-		String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos." + nmFornecedor + ".properties";
+	    String atalho = "C:/Arquivos de Programas PC/AbrirConfigFornecedor.bat " + nmFornecedor;
+	    String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos." + nmFornecedor + ".properties";
        	editarArquivoConfig(caminhoMaisNomeArquivo, nmFornecedor);
 
 	    // Criar atalho no menu de Windows:
 		String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/Configurações " + nmFornecedor + ".lnk";
-       	ShellLink sLink = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
+       	ShellLink sLink = ShellLink.createLink(atalho, nomeAtalho);
        	sLink.setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/ConfiguraçõesInstância.ico");
        	  
 		  
