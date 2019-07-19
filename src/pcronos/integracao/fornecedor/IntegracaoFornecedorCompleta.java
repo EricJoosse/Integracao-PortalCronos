@@ -2752,6 +2752,19 @@ public final class IntegracaoFornecedorCompleta {
    
    public static long Executar(boolean isPrimeiraVez) 
    {
+	   
+	   if (!(     nomeFantasiaFornecedor.equals("ClienteTeste") 
+			   || nomeFantasiaFornecedor.equals("Marizpan") 
+			   || nomeFantasiaFornecedor.equals("Atacamax") 
+			 )
+		  )
+	   {
+		   // Não tem memória RAM suficiente (220 MB livre, 60 MB por fornecedor), 
+		   // primeiro tem que alterar o programa para não rodar todos os fornecedores ao mesmo tempo
+		   return 0;
+	   }
+	   
+	   
        LocalDateTime horaIniCiclo = LocalDateTime.now();
 
 	   try 

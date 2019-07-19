@@ -26,11 +26,11 @@ select id_fornecedor_fornec, id_pessoa
   from dbo.Fornecedor 
  where id_pessoa in (select  id_pessoa
                       from  dbo.Pessoa
-                     where  nm_pessoa like '%Padeirão%')
+                     where  nm_pessoa like '%Atacamax%')
 
 select  id_pessoa, nm_pessoa, *
                       from  dbo.Pessoa
-                     where  nm_pessoa like '%Padeirão%'
+                     where  nm_pessoa like '%Atacamax%'
 
 
 
@@ -123,12 +123,12 @@ Eric
        			- Todas as chaves "******EmailAutomatico"
 
        (iv)  (a) No arquivo de configuração, no caso que "SiglaSistema" = "PCronos" (servidor de monitoramento automático): 
-       				- "debug" = "false" 
+       				- "Debugar" = "false" 
              		- "QtdDiasArquivosXmlGuardados" = "32" (para sempre ter arquivos de log de um mês completo)
                  
 
              (b) No arquivo de configuração, no caso que "SiglaSistema" != "PCronos" ( servidores dos fornecedores): 
-             		- "debug" = "true" (para facilitar atendimento imediato no futuro) 
+             		- "Debugar" = "true" (para facilitar atendimento imediato no futuro) 
              		- "QtdDiasArquivosXmlGuardados" = "100"
 
 			 (c) Preencher no arquivo "Tabela Fornecedores_Versões.txt":

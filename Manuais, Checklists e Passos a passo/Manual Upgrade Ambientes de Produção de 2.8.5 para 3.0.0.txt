@@ -11,9 +11,10 @@ No dia antes do upgrade:
         
    (iii) Perguntar Bernardino se já tem uma base da Atacamax; 
          (a). No caso, solicitar os seguintes dados: 
-              Qual é o endereço IP, SID/alias, porta, usuário e senha do banco Firebird de produção? 
+              Qual é o endereço IP, SID/alias, porta, usuário e senha do banco Firebird de produção 
+              para a empresa Atacamax? 
               A porta é a porta "default" (3050)? 
-       		  O usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, 
+       		  Lembro que o usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, 
        		  pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos 
        		  e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado na base do APS.
          
@@ -27,8 +28,14 @@ No dia antes do upgrade:
 A. Upgrade de forma automatizada:
 =================================
 
+1. (i)   Atualizar f[i].MemoriaRamLivre = "" no FornecedorRepositorio
+   (ii)  Atualizar Espaço Livre no HD
+   (iii) Atualizar endereço IP público do servidor e a porta aberta para TNS Ping
+   (iv)  Executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar
+
+	
 1. (i)  Gerar o Instalador no Eclipse.
-   (ii) Zippar o Instalador para o arquivo PatchNuvem.zip 
+   (ii) Zippar o Instalador para o arquivo PatchNuvem.zip
         colocando a senha cronos@2019 no arquivo .zip para evitar uso indevido e hackeado. 
  
 2. a. Verificar se o usuário logado é administrador ou administrator, 
@@ -47,11 +54,26 @@ A. Upgrade de forma automatizada:
 	
    d. Copiar o Instalador para o servidor do fornecedor.
    
-	
+   e.
+	- No Windows Explorer colar o seguinte endereço para o acompanhador da TI por enquanto 
+	  não ver o menu de Windows: 
+	      C:/ProgramData/Microsoft/Windows/Start Menu/Portal Cronos/
+	  Se não existir, usar o seguinte endereço:
+	      C:/ProgramData/Microsoft/Windows/Iniciar/Portal Cronos/
+	- Neste diretório remover o atalho "Manual Manutenção TI" por enquanto
+ 
+   f. (i)   Backup do diretório "C:/Arquivos de Programas PC" para C:/Eric/Backup versão anterior/ 
+            no servidor do APS Cloud para poder voltar a versão
+      (ii)  Backup do arquivo de configuração da Marizpan para o diretório C:/Eric/ 
+            no servidor do APS Cloud para poder voltar a versão.
+      (iii) Zippar os seguintes arquivos para PatchNuvemComplemento.zip:
+      		  - Copiar o arquivo de configuração da Atacamax para este diretório.
+              - Copiar o arquivo 3.0.0.jar definitivo para este dir que permite ClienteTeste, Marizpan e Atacamax. 
+
+
 3. (i)   Esperar até o processo atual do Integrador terminou.
    (ii)  Alterar o arquivo config da Marizpan de "P" para "H"
          e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
-   (iii) Backup do(s) arquivo(s) de configuração.
  
  
 4. (i)   Primeiro verificar que o desinstalador não desinstala java!!!
@@ -97,21 +119,29 @@ A. Upgrade de forma automatizada:
 			- Ícone ....../res/ConfiguraçõesInstância.ico
 
 
-7. (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java para java ficar no meio da tela  
-   (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar antes da próxima rodada automática
-   (iii) Copiar ao mesmo tempo os conteúdos dos 2 backups dos 2 configs da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+7. (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java 
+         para java ficar no meio da tela  
+   (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar 
+         antes da próxima rodada automática
+   (iii) Copiar ao mesmo tempo os conteúdos dos 2 backups dos 2 configs 
+         da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
          e da Atacamax para "Integração APS - Portal Cronos.Atacamax.properties"
    (iv)  Ficar monitorando os 2 jvm´s da Marizpan e da Atacamax na lista de processos de Windows 
-         para testar se os 2 jvm´s realmente processaram ao mesmo tempo e se funcionam processando ao mesmo tempo
-   (v)   Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
-   (vi)  Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
+         para testar se os 2 jvm´s realmente processaram ao mesmo tempo 
+         e se funcionam processando ao mesmo tempo
+   (v)   Verificar se o JVM + Integrador ocupa 60 MB no servidor do APS Cloud, 
+         do mesmo jeito como o JVM + Monitorador no servidor de monitoramento,
+         e verificar a soma de memória RAM dos 2 processos ao mesmo tempo, 
+         deve ser 2 X 60 MB = 120 MB
+   (vi)  Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
+   (vii) Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
          pegando arqs .properties diferentes
 
 
 8. Em todos os casos de servidores de PRODUÇÃO (não no servidor de Homologação do APS Cloud): 
      - Verificar a memória RAM livre no servidor do fornecedor (sem contar meu JVM).
 		    - Preencher isso no f[i].MemoriaRamLivre = "" no FornecedorRepositorio   
-	 - Observação: no servidor de monitoramento o serviço + JVM ocupa 60 MB de memória
+	 - Observação: no servidor de monitoramento o JVM + Monitorador ocupa 60 MB de memória
 	 
 
 9. Em todos os casos: 
@@ -125,7 +155,7 @@ A. Upgrade de forma automatizada:
 11. Após todos os testes, alterar o arquivo config da Marizpan de volta de "H" para "P"
     e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 
-12. Enviar o email no Appendix abaixo para Leão e Bernardino. 
+12. Enviar os 2 emails no Appendix abaixo para Leão e Bernardino, separadamente. 
  
  
 B. Upgrade de forma manual:
@@ -242,14 +272,22 @@ B. Upgrade de forma manual:
 			- Ícone alterado para ....../res/ConfiguraçõesInstância.ico
 		- Caso contrário, fazer isso na mão
 
-	- (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java para java ficar no meio da tela  
-      (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar antes da próxima rodada automática
-      (iii) Copiar ao mesmo tempo os conteúdos dos 2 backups dos 2 configs da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+	- (i)   Abrir o taskmgr.exe primeiro e ordenar por nome e já scrollar para a letra "j" de java 
+            para java ficar no meio da tela  
+      (ii)  Esperar um momento quando o job executou recentemente para dar tempo mexer e terminar 
+            antes da próxima rodada automática
+      (iii) Copiar ao mesmo tempo os conteúdos dos 2 backups dos 2 configs 
+            da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
             e da Atacamax para "Integração APS - Portal Cronos.Atacamax.properties"
       (iv)  Ficar monitorando os 2 jvm´s da Marizpan e da Atacamax na lista de processos de Windows 
-            para testar se os 2 jvm´s realmente processaram ao mesmo tempo e se funcionam processando ao mesmo tempo
-      (v)   Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
-      (vi)  Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
+            para testar se os 2 jvm´s realmente processaram ao mesmo tempo 
+            e se funcionam processando ao mesmo tempo
+      (v)   Verificar se o JVM + Integrador ocupa 60 MB no servidor do APS Cloud, 
+            do mesmo jeito como o JVM + Monitorador no servidor de monitoramento,
+            e verificar a soma de memória RAM dos 2 processos ao mesmo tempo, 
+            deve ser 2 X 60 MB = 120 MB
+      (vi)  Testar se o Integrador oferta os 2 fornecedores, sem misturas e interferências indevidas
+      (vii) Confirmar nos Debug.nmFornecedor.log´s se os 2 static constructors nos 2 jvm´s separados são independentes 
             pegando arqs .properties diferentes
 
     - Após todos os testes, alterar o arquivo config da Marizpan de volta de "H" para "P"
@@ -259,7 +297,7 @@ B. Upgrade de forma manual:
 6. Em todos os casos de servidores de PRODUÇÃO (não no servidor de Homologação do APS Cloud): 
      - Verificar a memória RAM livre no servidor do fornecedor (sem contar meu JVM).
 		    - Preencher isso no f[i].MemoriaRamLivre = "" no FornecedorRepositorio   
-	 - Observação: no servidor de monitoramento o serviço + JVM ocupa 60 MB de memória
+	 - Observação: no servidor de monitoramento o JVM + Monitorador ocupa 60 MB de memória
 	 
  
 7. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
@@ -279,24 +317,26 @@ B. Upgrade de forma manual:
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
    
-11. Enviar o email no Appendix abaixo para Leão e Bernardino. 
+11. Enviar os 2 emails no Appendix abaixo para Leão e Bernardino, separadamente. 
  
 
-C. Appendix: Email de conclusão:
-================================
+C. Appendix: 2 emails de conclusão separados, uma para Leão, outro para Bernardino:
+===================================================================================
+
+1. 
 
 - Substituir <i> e </i> em 2 lugares
-- Assunto: Manualzinho versão Nuvem do Integrador APS Cloud/PCronos
+- Assunto: Orientações versão Nuvem do Integrador APS/PCronos
 - Mensagem:
   
-Leão, Bernardino, 
+Leão, 
  
-  a versão Nuvem do Integrador APS Cloud/PCronos foi instalada com sucesso. 
+  a versão Nuvem do Integrador APS/PCronos foi instalada com sucesso. 
 Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
 e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"),  
-pois simplesmente um "loop" sobre todos os arquivos de configuração no diretório não vai dar certo. 
-Então para adicionar um fornecedor/cliente no Integrador não é para copiar mais um arquivo de configuração 
-(fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
+pois um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo. 
+Então adicionamento de um fornecedor/cliente no Integrador não pode ser feito mais através de uma cópia 
+de um arquivo de configuração (fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
  
 Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
 Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
@@ -316,5 +356,29 @@ Se quiser saber porque um simples "loop" sobre todos os arquivos de configuração
       Não pode acontecer por exemplo que o Integrador envia ofertas para a Marizpan no Portal Cronos 
       usando os preços ou outros dados da Atacamax; 
  
+Atc,
+Eric
+
+
+2.
+
+- Substituir <i> e </i> em 2 lugares
+- Assunto: Manualzinho versão Nuvem do Integrador APS/PCronos
+- Mensagem:
+  
+Bernardino, 
+ 
+  a versão Nuvem do Integrador APS/PCronos foi instalada com sucesso. 
+Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
+e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"). 
+Então adicionamento de um fornecedor/cliente no Integrador não pode ser feito através de uma cópia 
+de um arquivo de configuração (fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
+ 
+Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
+Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
+Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
+Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows. 
+O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
+  
 Atc,
 Eric
