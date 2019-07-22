@@ -10,6 +10,17 @@ public class TarefaWindows {
 	private String tarefa = null;
 	
 	public TarefaWindows(String nmFornecedor) {
+		int horaIni = 19; // 04 em todos os fornecedores até a versão 3.0.0
+		
+		// Solução temporária e rápida:
+		if (nmFornecedor.equals("Marizpan") || nmFornecedor.toLowerCase().equals("varig"))
+			horaIni = horaIni + 0;
+		else if (nmFornecedor.equals("Atacamax") || nmFornecedor.toLowerCase().equals("vasp"))
+			horaIni = horaIni + 7;
+		else 
+			horaIni = horaIni + 12;
+
+		
 		this.tarefa = "" +
 "<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "\r\n" + 
 "<Task version=\"1.2\" xmlns=\"http://schemas.microsoft.com/windows/2004/02/mit/task\">" + "\r\n" + 
@@ -23,7 +34,7 @@ public class TarefaWindows {
 "        <Interval>PT15M</Interval>" + "\r\n" + 
 "        <StopAtDurationEnd>false</StopAtDurationEnd>" + "\r\n" + 
 "      </Repetition>" + "\r\n" + 
-"      <StartBoundary>2016-04-28T18:04:47.7016603</StartBoundary>" + "\r\n" + 
+"      <StartBoundary>2016-04-28T18:" + Integer.toString(horaIni) + ":47.7016603</StartBoundary>" + "\r\n" + 
 "      <Enabled>true</Enabled>" + "\r\n" + 
 "      <ScheduleByDay>" + "\r\n" + 
 "        <DaysInterval>1</DaysInterval>" + "\r\n" + 
