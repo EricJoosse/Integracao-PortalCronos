@@ -1,32 +1,95 @@
 Manual para adicionamento de mais um fornecedor novo no Integrador PCronos/APS Cloud
 ====================================================================================
 
-Leão, Bernardino,
+Enviar 2 emails de conclusão separados, uma para Leão, outro para Bernardino:
+=============================================================================
+
+1. 
+
+- Substituir <i> e </i> em 2 lugares
+- Assunto: Orientações versão Nuvem do Integrador APS/PCronos
+- Mensagem:
   
-A versão nuvem do Integrador APS-PCronos está pronta em homologação. 
+Leão, 
  
-Nesta versão nova não existe mais o diretório C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/
-e não existe mais o arquivo de configuração "Integração Fornecedor - Portal Cronos.properties". 
-   
-Ao invés disso as configurações dos clientes Marizpan, Atacamax, e de todos os outros, se encontram agora no menu de Windows 
+  a versão Nuvem do Integrador APS/PCronos foi instalada com sucesso. 
+Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
+e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"),  
+pois um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo. 
+Então adicionamento de um fornecedor/cliente no Integrador não pode ser feito mais através de uma cópia 
+de um arquivo de configuração (fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
+ 
+Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
+Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
+Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
+Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows: 
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Adicionar Instância"
    "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Marizpan"
    "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Atacamax"
    "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações ..."
-   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Adicionar Instância"
    "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Remover Instância"
 
 A telinha nova "Adicionar Instância":
- - solicita o nome fantasia do cliente;
- - gera um processo novo asíncrono para cada cliente;
- - cria configurações inicias. 
+  - solicita o nome fantasia do cliente;
+  - para cada fornecedor/cliente gera um processo novo asíncrono que executa de 15 a 15 min;
+  - cria configurações inicias no menu de Windows. 
+ 
+O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
+ 
+Se quiser saber porque um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo, veja abaixo os motivos: 
+   1. O Integrador roda de 15 a 15 minutos. No futuro a gente vai adicionar 50 ou mais fornecedores/clientes 
+      então um processo síncrono levaria mais de 15 minutos. Então para cada fornecedor/cliente deve ter 
+      um processo asíncrono, quer dizer uma "instância" do Integrador; 
+ 
+  2. Se tivesse um "loop" síncrono e se algum fornecedor/cliente travar o Integrador, 
+      este fornecedor/cliente travaria todos os outros fornecedores/clientes;
+ 
+  3. Se tivesse um "loop" síncrono, o risco de interferência indevida aumenta. 
+      Não pode acontecer por exemplo que o Integrador envia ofertas para a Marizpan no Portal Cronos 
+      usando os preços ou outros dados da Atacamax; 
+ 
+Atc,
+Eric
+
+
+2.
+
+- Substituir <i> e </i> em 2 lugares
+- Assunto: Manualzinho versão Nuvem do Integrador APS/PCronos
+- Mensagem:
+  
+Bernardino, 
+ 
+  a versão Nuvem do Integrador APS/PCronos foi instalada com sucesso. 
+Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
+e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"). 
+Então adicionamento de um fornecedor/cliente no Integrador não pode ser feito através de uma cópia 
+de um arquivo de configuração (fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
+ 
+Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
+Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
+Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
+Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows: 
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Adicionar Instância"
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Marizpan"
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Atacamax"
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações ..."
+   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Remover Instância"
+   
+A telinha nova "Adicionar Instância":
+  - solicita o nome fantasia do cliente;
+  - para cada fornecedor/cliente gera um processo novo asíncrono que executa de 15 a 15 min;
+  - cria configurações inicias no menu de Windows. 
+ 
+O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
+  
+
+Atc,
+Eric
  
  
 Observações:
 ------------
-1. Para evitar erros é recomendado clicar com o botão direita do mouse sobre esta opção 
-   "Adicionar Instância" e clicar "Executar como Administrador". 
- 
-2. Esta telinha nova é feia ainda porém funciona. Mais tarde vai ficar mais bonita. 
 
 (  ) AINDA NÃO ENVIADO PARA NINGUÈM: 
 3. A versão nuvem atual ocupa .... MB para cada cliente. No futuro vou desenvolver uma versão que ocupa 

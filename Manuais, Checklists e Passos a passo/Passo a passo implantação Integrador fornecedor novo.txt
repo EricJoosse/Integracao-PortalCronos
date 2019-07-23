@@ -809,7 +809,7 @@ Eric
 						    normalmente, tudo está certo e não mexe com este processo.   
  
  
- 30. No caso de instalação como serviço nuvem: 
+ 30. Apenas no caso de instalação como serviço nuvem: 
 
      Skype: Ainda não entendi o APS Cloud muito bem: por exemplo quem cadastra usuários novos da Marizpan no APS Cloud? É a TI da Marizpan ou vocês da TI do APS Cloud?
   	 Resposta de Saulo: 
@@ -840,3 +840,8 @@ SELECT u.cd_usuario_sistema_ususis
   order by pf.dt_alteracao_prdfor desc
 		
 		
+  31. Apenas no caso de instalação como serviço nuvem:
+  		- enviar os 2 emails no "Manual Adicionamento fornecedor novo na nuvem.txt" para Leão e a TI do fornecedor, 
+  		  separadamente.
+  		  
+  		

@@ -155,7 +155,7 @@ A. Upgrade de forma automatizada:
 11. Após todos os testes, alterar o arquivo config da Marizpan de volta de "H" para "P"
     e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 
-12. Enviar os 2 emails no Appendix abaixo para Leão e Bernardino, separadamente. 
+12. Enviar os 2 emails no "Manual Adicionamento fornecedor novo na nuvem.txt" para Leão e Bernardino, separadamente. 
  
  
 B. Upgrade de forma manual:
@@ -317,68 +317,6 @@ B. Upgrade de forma manual:
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
    
-11. Enviar os 2 emails no Appendix abaixo para Leão e Bernardino, separadamente. 
+11. Enviar os 2 emails no "Manual Adicionamento fornecedor novo na nuvem.txt" para Leão e Bernardino, separadamente. 
  
 
-C. Appendix: 2 emails de conclusão separados, uma para Leão, outro para Bernardino:
-===================================================================================
-
-1. 
-
-- Substituir <i> e </i> em 2 lugares
-- Assunto: Orientações versão Nuvem do Integrador APS/PCronos
-- Mensagem:
-  
-Leão, 
- 
-  a versão Nuvem do Integrador APS/PCronos foi instalada com sucesso. 
-Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
-e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"),  
-pois um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo. 
-Então adicionamento de um fornecedor/cliente no Integrador não pode ser feito mais através de uma cópia 
-de um arquivo de configuração (fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
- 
-Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
-Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
-Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
-Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows. 
-O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
- 
-Se quiser saber porque um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo, veja abaixo os motivos: 
-   1. O Integrador roda de 15 a 15 minutos. No futuro a gente vai adicionar 50 ou mais fornecedores/clientes 
-      então um processo síncrono levaria mais de 15 minutos. Então para cada fornecedor/cliente deve ter 
-      um processo asíncrono, quer dizer uma "instância" do Integrador; 
- 
-  2. Se tivesse um "loop" síncrono e se algum fornecedor/cliente travar o Integrador, 
-      este fornecedor/cliente travaria todos os outros fornecedores/clientes;
- 
-  3. Se tivesse um "loop" síncrono, o risco de interferência indevida aumenta. 
-      Não pode acontecer por exemplo que o Integrador envia ofertas para a Marizpan no Portal Cronos 
-      usando os preços ou outros dados da Atacamax; 
- 
-Atc,
-Eric
-
-
-2.
-
-- Substituir <i> e </i> em 2 lugares
-- Assunto: Manualzinho versão Nuvem do Integrador APS/PCronos
-- Mensagem:
-  
-Bernardino, 
- 
-  a versão Nuvem do Integrador APS/PCronos foi instalada com sucesso. 
-Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
-e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"). 
-Então adicionamento de um fornecedor/cliente no Integrador não pode ser feito através de uma cópia 
-de um arquivo de configuração (fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
- 
-Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
-Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
-Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
-Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows. 
-O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
-  
-Atc,
-Eric
