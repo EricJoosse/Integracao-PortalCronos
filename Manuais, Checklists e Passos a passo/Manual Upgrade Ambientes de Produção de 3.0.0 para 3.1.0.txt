@@ -1,0 +1,77 @@
+Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0 
+============================================================
+
+1. (i)  Apenas no caso do servidor do monitoramento:
+		 - Conectar como cronostech
+	     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
+	       (desmarcar "Hide protected operating system files") temporariamente
+
+	(ii) Em todos os servidores dos fornecedores:
+	      - Verificar se o usuário logado é administrador ou administrator, 
+	        local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+	        (Formaggio: user "techcorp")
+	      
+	      
+2. Fazer exatamente na seguinte sequência, exceto no APS Cloud:
+   (i)   Em todos os casos exceto JR Distribuição / Windows 10:
+         Verificar se o arquivo .bat e o .jar atual estão em uso: 
+         verificar o horário da última e da próxima execução no Task Scheduler 
+         e verificar no taskmgr.exe se o JRE está rodando ainda. 
+         Esperar até o JRE terminou.
+   
+   (ii)  Em todos os casos (incluindo no caso JR Distribuição / Windows 10):
+ 		   - Adicionar "exit" seguida por uma linha em branco no início do arquivo 
+ 		     Job15a15minOfertamentoJava_Windows.bat no servidor do fornecedor. 
+ 		     (NÃO renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+              possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados)
+
+   (iii) Apenas no caso de instalação no servidor da JR Distribuição (Windows 10):
+	        a. Primeiro verificar no diretório C:\ProgramData\PortalCronos\Logs\Local\ 
+	           se o Integrador está ofertando no momento e ficar esperando até ele terminar 
+	           o último passo (a atualização do arquivo TemposExecução.log)
+ 
+		    b. Matar o processo JRE 1.8.0_92
+		 		 
+		   
+3. Em todos exceto no APS Cloud:
+   (i)  Copiar o arquivo novo integr-fornecedor-3.1.0.jar do instalador para o servidor do fornecedor.
+   (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
+ 
+4. Em todos exceto no APS Cloud:
+   Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
+ 
+ 
+5. Apenas no servidor do APS Cloud (????????????????????):
+   a. Zippar os seguintes arquivos para o arquivo PatchNuvem.3.1.0.zip:
+          - bin\Versao.bat 
+          - integr-fornecedor-3.1.0.jar
+ 
+   b. Copiar o arquivo zip para o diretório C:\Eric\ no servidor do APS Cloud.
+   
+   c. Ajeitar os start-dates das Task Schedules da Marizpan e da Atacamax, etc, da seguinte forma: 
+   		  (i)   Backup dos configs da Marizpan, Atacamax, e de todos os outros fornecedores
+   		  (ii)  Remover todas as instâncias (primeiro esperar até o processo da instância terminoou)
+   		  (iii) Instalar os arquivos novos listados no item (a) acima 
+   		  (iv)  Clicar em "Adicionar instância" para todos os fornecedores
+   		  (v)   Verificar os Start Times de todos eles no Task Scheduler
+   		  (vi)  Ajeitar os ícones no menu de Windows manualmente (no caso que isso não foi automatizado ainda)
+   		  
+   
+6. Em todos exceto no APS Cloud:
+   Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+   no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
+
+7. Em todos os casos: 
+     - Acompanhar 15 minutos se o Integrador começa executar automaticamente
+     
+8. Apenas no caso do servidor do monitoramento: 
+     (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
+          (marcar "Hide protected operating system files")
+     (ii) Fechar o Windows Explorer e abrir novamente
+     
+     
+9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+   (ii)  Compilar o arquivo .jar
+   (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+         esperando o processamento atual terminar primeiro
+   
