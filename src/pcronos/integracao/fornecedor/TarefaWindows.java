@@ -9,17 +9,59 @@ public class TarefaWindows {
 
 	private String tarefa = null;
 	
-	public TarefaWindows(String nmFornecedor) {
-		int horaIni = 19; // 04 em todos os fornecedores até a versão 3.0.0
+	public TarefaWindows(String nmFornecedor) 
+	{
+		int minIni = 0; // 04 em todos os fornecedores até a versão 3.0.0
+		                // 19 na versão 3.0.0
+		int segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
 		
-		// Solução temporária e rápida:
-		if (nmFornecedor.equals("Marizpan") || nmFornecedor.toLowerCase().equals("varig"))
-			horaIni = horaIni + 0;
-		else if (nmFornecedor.equals("Atacamax") || nmFornecedor.toLowerCase().equals("vasp"))
-			horaIni = horaIni + 7;
-		else 
-			horaIni = horaIni + 12;
+		// Se startar 2 tarefas exatamente no mesmo segundo o Windows Scheduler starta apenas uma das duas 
+		// e ignora ou aborta a outra tarefa. 
+		// Se tiver apenas 1 segundo de diferença, tudo já funciona. 
+		// Talvez isso é porque MultipleInstancesPolicy = StopExisting (para derrubar jre´s travados) 
+		// ou talvez é um bug de Windows, isso não é claro ainda. 
+		// Então se incrementar 1 minuto + 1 segundo: assim vai ter espaço para 15 X 60 fornecedores
+		// Por enquanto incrementar apenas 1 minuto: assim vai ter espaço para 15 fornecedores
+		File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
+		int qtdFornecedores = 0;
+		for (final File file : dirConfig.listFiles()) 
+		{
+			 if (    file.getName().startsWith("Integração APS - Portal Cronos.") 
+		    	  && file.getName().endsWith(".properties") 
+		    	  && file.getName().toLowerCase().indexOf("copy")  == -1 
+		    	  && file.getName().toLowerCase().indexOf("cópia") == -1 
+		    	  && file.getName().toLowerCase().indexOf("copia") == -1 
+		    	  && file.getName().toLowerCase().indexOf("backup")  == -1 
+		    	  && file.getName().toLowerCase().indexOf("bck") == -1 
+		    	  && file.getName().toLowerCase().indexOf("template") == -1 
+		    	)
+		     {
+				 qtdFornecedores += 1;
+		     }
+		}
+		
+		
+		// Solução temporária e rápida feita na versão 3.0.0:
+//		if (nmFornecedor.equals("Marizpan") || nmFornecedor.toLowerCase().equals("varig"))
+//			minIni = minIni + 0;
+//		else if (nmFornecedor.equals("Atacamax") || nmFornecedor.toLowerCase().equals("vasp"))
+//			minIni = minIni + 7;
+//		else 
+//			minIni = minIni + 12;
 
+		minIni = qtdFornecedores + 1;
+		segIni = 0; // Por enquanto fixo. 
+                    // Quando a qtd fornecedor chegar perto de 15, 
+                    // tem que usar "mod"
+		
+		String strMinIni = Integer.toString(minIni);
+		String strSegIni = Integer.toString(segIni); 
+
+		if (minIni < 10)
+			strMinIni = "0" + strMinIni;
+		if (segIni < 10)
+			strSegIni = "0" + strSegIni;
+		
 		
 		this.tarefa = "" +
 "<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "\r\n" + 
@@ -34,7 +76,7 @@ public class TarefaWindows {
 "        <Interval>PT15M</Interval>" + "\r\n" + 
 "        <StopAtDurationEnd>false</StopAtDurationEnd>" + "\r\n" + 
 "      </Repetition>" + "\r\n" + 
-"      <StartBoundary>2016-04-28T18:" + Integer.toString(horaIni) + ":47.7016603</StartBoundary>" + "\r\n" + 
+"      <StartBoundary>2016-04-28T18:" + strMinIni + ":" + strSegIni + ".7016603</StartBoundary>" + "\r\n" + 
 "      <Enabled>true</Enabled>" + "\r\n" + 
 "      <ScheduleByDay>" + "\r\n" + 
 "        <DaysInterval>1</DaysInterval>" + "\r\n" + 
