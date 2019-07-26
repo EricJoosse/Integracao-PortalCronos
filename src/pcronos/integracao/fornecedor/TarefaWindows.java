@@ -9,19 +9,25 @@ public class TarefaWindows {
 
 	private String tarefa = null;
 	
-	public TarefaWindows(String nmFornecedor) 
+	public TarefaWindows(String nmFornecedor) throws Exception 
 	{
 		int minIni = 0; // 04 em todos os fornecedores até a versão 3.0.0
 		                // 19 na versão 3.0.0
 		int segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
 		
-		// Se startar 2 tarefas exatamente no mesmo segundo o Windows Scheduler starta apenas uma das duas 
-		// e ignora ou aborta a outra tarefa. 
-		// Se tiver apenas 1 segundo de diferença, tudo já funciona. 
+		// O Windows Scheduler não está rodando 2 java.exe ao mesmo tempo por motivo ainda desconhecido. 
+		// Foi testado que O Windows Scheduler ignora uma Task Schedule se outra Task com java.exe 
+		// já está processando...
+		// Foi testado que funciona sim se usar o seguinte ao inves de java.exe no Job.bat:
+		//       FOR /L %%y IN (1, 1, 100000) Do echo %%y >> %1.log
+		// Isso até funciona se startar a Task Schedule exatamente no mesmo segundo.
+		// Só não funciona com o seguinte no Job.bat: 
+		//       call bin\CaminhoJRE.bat Job15a15minOfertamentoJava.log IntegracaoFornecedorCompleta %1
+
 		// Talvez isso é porque MultipleInstancesPolicy = StopExisting (para derrubar jre´s travados) 
 		// ou talvez é um bug de Windows, isso não é claro ainda. 
-		// Então se incrementar 1 minuto + 1 segundo: assim vai ter espaço para 15 X 60 fornecedores
-		// Por enquanto incrementar apenas 1 minuto: assim vai ter espaço para 15 fornecedores
+		
+		// Então na versão 3.1.0 por enquanto incrementar 5 minutos: assim vai ter espaço para 3 fornecedores
 		File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
 		int qtdFornecedores = 0;
 		for (final File file : dirConfig.listFiles()) 
@@ -42,6 +48,7 @@ public class TarefaWindows {
 		
 		
 		// Solução temporária e rápida feita na versão 3.0.0:
+		
 //		if (nmFornecedor.equals("Marizpan") || nmFornecedor.toLowerCase().equals("varig"))
 //			minIni = minIni + 0;
 //		else if (nmFornecedor.equals("Atacamax") || nmFornecedor.toLowerCase().equals("vasp"))
@@ -49,16 +56,21 @@ public class TarefaWindows {
 //		else 
 //			minIni = minIni + 12;
 
-		minIni = qtdFornecedores + 1;
-		segIni = 0; // Por enquanto fixo. 
-                    // Quando a qtd fornecedor chegar perto de 15, 
-                    // tem que usar "mod"
+
+
+		// Solução temporária e rápida feita na versão 3.1.0:
+		if (qtdFornecedores > 3)
+			throw new Exception("Erro interno 4");
+		
+		minIni = qtdFornecedores * 5;
+		segIni = 0; 
 		
 		String strMinIni = Integer.toString(minIni);
 		String strSegIni = Integer.toString(segIni); 
 
 		if (minIni < 10)
 			strMinIni = "0" + strMinIni;
+		
 		if (segIni < 10)
 			strSegIni = "0" + strSegIni;
 		
