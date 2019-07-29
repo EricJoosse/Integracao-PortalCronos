@@ -33,18 +33,30 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
 		    b. Matar o processo JRE 1.8.0_92
 		 		 
 		   
-3. Em todos exceto no APS Cloud:
+3. Em todos os servidores exceto no APS Cloud:
    (i)  Copiar o arquivo novo integr-fornecedor-3.1.0.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
-4. Em todos exceto no APS Cloud:
-   Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
+ 
+4. Em todos os servidores:
+   Atualizar os seguintes arquivos no servidor do fornecedor:
+   		- bin\Versao.bat -> 3.1.0
+   		- bin\VerificarUsuarioAdministrador.bat
+   		- Job15a15minOfertamentoJava_Windows.bat
+   			- Adicionar "exit" novamente no início do arquivo
  
  
-5. Apenas no servidor do APS Cloud (????????????????????):
+5A. Em todos os casos: 
+      - substituir mslinks 1.0.4 por 1.0.5??????
+      - annotations.jar????
+       
+ 
+5B. Apenas no servidor do APS Cloud (????????????????????):
    a. Zippar os seguintes arquivos para o arquivo PatchNuvem.3.1.0.zip:
-          - bin\Versao.bat 
-          - integr-fornecedor-3.1.0.jar
+       	    - bin\Versao.bat 
+	   		- bin\VerificarUsuarioAdministrador.bat
+   			- Job15a15minOfertamentoJava_Windows.bat
+        	- integr-fornecedor-3.1.0.jar
  
    b. Copiar o arquivo zip para o diretório C:\Eric\ no servidor do APS Cloud.
    

@@ -15,19 +15,7 @@ public class TarefaWindows {
 		                // 19 na versão 3.0.0
 		int segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
 		
-		// O Windows Scheduler não está rodando 2 java.exe ao mesmo tempo por motivo ainda desconhecido. 
-		// Foi testado que O Windows Scheduler ignora uma Task Schedule se outra Task com java.exe 
-		// já está processando...
-		// Foi testado que funciona sim se usar o seguinte ao inves de java.exe no Job.bat:
-		//       FOR /L %%y IN (1, 1, 100000) Do echo %%y >> %1.log
-		// Isso até funciona se startar a Task Schedule exatamente no mesmo segundo.
-		// Só não funciona com o seguinte no Job.bat: 
-		//       call bin\CaminhoJRE.bat Job15a15minOfertamentoJava.log IntegracaoFornecedorCompleta %1
-
-		// Talvez isso é porque MultipleInstancesPolicy = StopExisting (para derrubar jre´s travados) 
-		// ou talvez é um bug de Windows, isso não é claro ainda. 
-		
-		// Então na versão 3.1.0 por enquanto incrementar 5 minutos: assim vai ter espaço para 3 fornecedores
+		// A partir da versão 3.1.0 incrementar 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
 		File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
 		int qtdFornecedores = 0;
 		for (final File file : dirConfig.listFiles()) 
@@ -58,11 +46,7 @@ public class TarefaWindows {
 
 
 
-		// Solução temporária e rápida feita na versão 3.1.0:
-		if (qtdFornecedores > 3)
-			throw new Exception("Erro interno 4");
-		
-		minIni = qtdFornecedores * 5;
+		minIni = qtdFornecedores * 1;
 		segIni = 0; 
 		
 		String strMinIni = Integer.toString(minIni);
