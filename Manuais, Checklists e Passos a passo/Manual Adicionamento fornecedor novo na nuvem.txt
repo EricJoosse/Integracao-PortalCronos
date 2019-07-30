@@ -6,13 +6,16 @@ Enviar 2 emails de conclusão separados, uma para Leão, outro para Bernardino:
 
 1. 
 
-- Substituir <i> e </i> em 2 lugares
-- Assunto: Orientações versão Nuvem do Integrador APS/PCronos
+- Substituir <i> e </i> e <u> e </u> e <b> e </b> em todos os lugares
+- Assunto: 1. Conclusão versão Nuvem do Integrador APS/PCronos; 2. Manualzinho
 - Mensagem:
   
 Leão, 
  
-  a versão Nuvem do Integrador APS/PCronos foi instalada com sucesso. 
+testei e corrigi todos os bugs nos botões novos Adicionar e Remover abaixo na versão Nuvem do Integrador APS/PCronos.  
+Enviei um manualzinho para Bernardino via email e também via Skype, solicitando confirmação de recebimento. 
+Se ele não confirmar o recebimento, vou ligar para ele. 
+  
 Na versão nuvem não existe mais o diretório de configuração ("<i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>") 
 e também não existem mais os arquivos de configuração ("<i>xxxxx.properties</i>"),  
 pois um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo. 
@@ -20,23 +23,23 @@ Então adicionamento de um fornecedor/cliente no Integrador não pode ser feito ma
 de um arquivo de configuração (fornecedor do ponto de vista do Portal, cliente do ponto de vista do APS Cloud).
  
 Ao invés disso tem agora "instâncias" do Integrador, uma para cada empresa integrada. 
-Estas instâncias se encontram no menu de Windows: "Iniciar" > "Portal Cronos" > "Integrador APS Cloud". 
+Estas instâncias se encontram no menu de Windows: <b>"Iniciar" > "Portal Cronos" > "Integrador APS Cloud"</b>. 
 Para editar as configurações de uma empresa cliente é só clicar na instância desejada.  
-Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo menu de Windows: 
-   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Adicionar Instância"
-   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Marizpan"
-   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Atacamax"
-   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações ..."
-   "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Remover Instância"
+Também tem os botões novos "<b>Adicionar Instância0</b>" e "<b>Remover Instância</b>" no mesmo menu de Windows: 
+     "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Adicionar Instância"
+     "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Marizpan"
+     "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações Atacamax"
+     "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Configurações ..."
+     "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Remover Instância"
 
-A telinha nova "Adicionar Instância":
-  - solicita o nome fantasia do cliente;
-  - para cada fornecedor/cliente gera um processo novo asíncrono que executa de 15 a 15 min;
-  - cria configurações inicias no menu de Windows. 
+<u>A telinha nova "Adicionar Instância"</u>:
+    - solicita o nome fantasia do cliente;
+    - para cada fornecedor/cliente gera um processo novo asíncrono que executa de 15 a 15 min;
+    - cria configurações inicias no menu de Windows. 
  
 O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
  
-Se quiser saber porque um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo, veja abaixo os motivos: 
+<u>Se quiser saber porque um simples "loop" sobre todos os arquivos de configuração no diretório não vai dar certo, veja abaixo os motivos:</u> 
    1. O Integrador roda de 15 a 15 minutos. No futuro a gente vai adicionar 50 ou mais fornecedores/clientes 
       então um processo síncrono levaria mais de 15 minutos. Então para cada fornecedor/cliente deve ter 
       um processo asíncrono, quer dizer uma "instância" do Integrador; 
@@ -77,12 +80,13 @@ Também tem os botões novos "Adicionar Instância" e "Remover Instância" no mesmo 
    "Iniciar" > "Portal Cronos" > "Integrador APS Cloud" > "Remover Instância"
    
 A telinha nova "Adicionar Instância":
-  - solicita o nome fantasia do cliente;
-  - para cada fornecedor/cliente gera um processo novo asíncrono que executa de 15 a 15 min;
-  - cria configurações inicias no menu de Windows. 
+    - solicita o nome fantasia do cliente;
+    - para cada fornecedor/cliente gera um processo novo asíncrono que executa de 15 a 15 min;
+    - cria configurações inicias no menu de Windows. 
  
 O uso do menu de Windows foi uma solução rápida e provisória que funciona 100 % pelo menos com o atual Windows Server 2008. 
   
+Favor confirmar o recebimento deste manualzinho. 
 
 Atc,
 Eric

@@ -169,7 +169,7 @@ public final class IntegracaoFornecedorCompleta {
 
   static 
   {
-      erroStaticConstructor = null;
+	 erroStaticConstructor = null;
 
 	 File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
 	 IsSistemaFornecedorNuvem = false;
@@ -281,7 +281,8 @@ public final class IntegracaoFornecedorCompleta {
   
   public static void Inicializar(String nomeArquivoProperties)
   {
-	    try {
+	    try 
+	    {
 	        Date hoje = new Date();
 	        nomeArquivoDebug = "Debug" + new SimpleDateFormat("yyyy.MM.dd - HH'h'mm ").format(hoje) + ".log";
 	        transformerFactory = TransformerFactory.newInstance();
@@ -2752,18 +2753,6 @@ public final class IntegracaoFornecedorCompleta {
    
    public static long Executar(boolean isPrimeiraVez) 
    {
-	   
-	   if (!(     nomeFantasiaFornecedor.equals("ClienteTeste") 
-			   || nomeFantasiaFornecedor.equals("Marizpan") 
-			   || nomeFantasiaFornecedor.equals("Atacamax") 
-			 )
-		  )
-	   {
-		   // Não tem memória RAM suficiente (220 MB livre, 60 MB por fornecedor), 
-		   // primeiro tem que alterar o programa para não rodar todos os fornecedores ao mesmo tempo
-		   return 0;
-	   }
-	   
 	   
        LocalDateTime horaIniCiclo = LocalDateTime.now();
 

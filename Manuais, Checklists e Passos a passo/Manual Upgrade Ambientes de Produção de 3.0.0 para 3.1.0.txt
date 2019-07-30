@@ -33,12 +33,12 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
 		    b. Matar o processo JRE 1.8.0_92
 		 		 
 		   
-3. Em todos os servidores exceto no APS Cloud:
+3. Em todos os servidores exceto no APS Cloud (pois para o APS Cloud será zippado mais tarde):
    (i)  Copiar o arquivo novo integr-fornecedor-3.1.0.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
  
-4. Em todos os servidores:
+4. Em todos os servidores exceto no APS Cloud (pois para o APS Cloud será zippado mais tarde):
    Atualizar os seguintes arquivos no servidor do fornecedor:
    		- bin\Versao.bat -> 3.1.0
    		- bin\VerificarUsuarioAdministrador.bat

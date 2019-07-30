@@ -1,6 +1,6 @@
 AT > NUL
 IF %ERRORLEVEL% EQU 0 (
-    ECHO you are Administrator
+REM    ECHO you are Administrator
 ) ELSE (
     echo.
     ECHO Favor conectar como Administrador, ou clicar em ^"Executar como Administrador^" com o botao direita do mouse!
