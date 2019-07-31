@@ -39,14 +39,16 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
  
  
 4. Em todos os servidores exceto no APS Cloud (pois para o APS Cloud será zippado mais tarde):
-   Atualizar os seguintes arquivos no servidor do fornecedor:
+   (i) Atualizar os seguintes arquivos no servidor do fornecedor:
    		- bin\Versao.bat -> 3.1.0
    		- bin\VerificarUsuarioAdministrador.bat
    		- Job15a15minOfertamentoJava_Windows.bat
    			- Adicionar "exit" novamente no início do arquivo
+
+   (ii) Remover o arquivo Job15a15minOfertamentoJava.log
+   
  
- 
-5A. Em todos os casos: 
+5A. Em todos os casos: (ainda não feito no servidor de monitoramento!!!!!) 
       - substituir mslinks 1.0.4 por 1.0.5??????
       - annotations.jar????
        
@@ -75,6 +77,9 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
 
 7. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
+     - Verificar se o Integrador gerou o novo arquivo:
+     		- Job15a15min.%1.log no caso do servidor do APS Cloud
+     		- Job15a15min.log    em todos os outros casos
      
 8. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
