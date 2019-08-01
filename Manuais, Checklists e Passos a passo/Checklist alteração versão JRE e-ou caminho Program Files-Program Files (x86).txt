@@ -9,7 +9,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- Adicionar "else if" na chamada jre
 	- Testar se os parenteses entre aspas funcionam usando um snippet de uma mensagem
 
-- Job15a15minOfertamentoJava_Windows.bat:
+- Job15a15min.bat:
 	- Adicionar "else if" no path
 	- Adicionar "else if" na chamada jre
 
@@ -39,7 +39,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- No caso do fornecedor com JRE diferente: 
 		- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
 		- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
-	- Job15a15minOfertamentoJava_Windows.bat: 
+	- Job15a15min.bat: 
 		- Adicionar "else if" no path
 		- Adicionar "else if" na chamada jre
 	- Copiar Desinstalador.bat do instalador para o servidor do fornecedor

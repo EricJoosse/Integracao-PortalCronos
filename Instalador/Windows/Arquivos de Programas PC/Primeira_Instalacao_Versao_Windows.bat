@@ -302,10 +302,10 @@ cd\
 cd "Arquivos de Programas PC"
 
 REM O seguinte não marca a opção "Run whether user is logged on or not" :
-REM SCHTASKS /Create /TN "Teste Automação SCHTASKS" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15
+REM SCHTASKS /Create /TN "Teste Automação SCHTASKS" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15min.bat" /SC MINUTE /MO 15
 
 REM O seguinte não cria automaticamente todas as configurações desejadas : 
-REM SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15minOfertamentoJava_Windows.bat" /SC MINUTE /MO 15 /RU SYSTEM /NP /RL HIGHEST
+REM SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /TR "C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\Job15a15min.bat" /SC MINUTE /MO 15 /RU SYSTEM /NP /RL HIGHEST
 
 REM O seguinte XML tem as configurações completas e foi criado criando a task manualmente,
 REM e em seguida exportada para XML : 
@@ -335,6 +335,7 @@ REM ================ Fim instalação Task Não-Nuvem no Windows Scheduler. =======
 cd\
 cd "Arquivos de Programas PC"
 
+REM Apagar o arquivo "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" e outros parecidos: 
 del /f /q *.xml
 
 if %tipoInstalacao% == 2 (

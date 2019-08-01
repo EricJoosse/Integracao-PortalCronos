@@ -111,7 +111,7 @@ public class TarefaWindows {
 "  </Settings>" + "\r\n" + 
 "  <Actions Context=\"Author\">" + "\r\n" + 
 "    <Exec>" + "\r\n" + 
-"      <Command>\"C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\Job15a15minOfertamentoJava_Windows.bat\"</Command>" + "\r\n" + 
+"      <Command>\"C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\Job15a15min.bat\"</Command>" + "\r\n" + 
 "      <Arguments>" + nmFornecedor + "</Arguments>" + "\r\n" + 
 "    </Exec>" + "\r\n" + 
 "  </Actions>" + "\r\n" + 

@@ -23,8 +23,8 @@ na lista de manuais para upgrade
    
    (ii)  Em todos os casos (incluindo no caso JR Distribuição / Windows 10):
  		   - Adicionar "exit" seguida por uma linha em branco no início do arquivo 
- 		     Job15a15minOfertamentoJava_Windows.bat no servidor do fornecedor. 
- 		     (NÃO renomear Job15a15minOfertamentoJava_Windows.bat para evitar que o Scheduler 
+ 		     Job15a15min.bat no servidor do fornecedor. 
+ 		     (NÃO renomear Job15a15min.bat para evitar que o Scheduler 
               possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados)
 
    (iii) Apenas no caso de instalação no servidor da JR Distribuição (Windows 10):
@@ -40,7 +40,7 @@ na lista de manuais para upgrade
  
 4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
  
-5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
+5. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
 6. Em todos os casos: 
