@@ -11,46 +11,13 @@ public class TarefaWindows {
 	
 	public TarefaWindows(String nmFornecedor) throws Exception 
 	{
-		int minIni = 0; // 04 em todos os fornecedores até a versão 3.0.0
-		                // 19 na versão 3.0.0
-		int segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
+		byte segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
 		
-		// A partir da versão 3.1.0 incrementar 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
-		File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
-		int qtdFornecedores = 0;
-		for (final File file : dirConfig.listFiles()) 
-		{
-			 if (    file.getName().startsWith("Integração APS - Portal Cronos.") 
-		    	  && file.getName().endsWith(".properties") 
-		    	  && file.getName().toLowerCase().indexOf("copy")  == -1 
-		    	  && file.getName().toLowerCase().indexOf("cópia") == -1 
-		    	  && file.getName().toLowerCase().indexOf("copia") == -1 
-		    	  && file.getName().toLowerCase().indexOf("backup")  == -1 
-		    	  && file.getName().toLowerCase().indexOf("bck") == -1 
-		    	  && file.getName().toLowerCase().indexOf("template") == -1 
-		    	)
-		     {
-				 qtdFornecedores += 1;
-		     }
-		}
-		
-		
-		// Solução temporária e rápida feita na versão 3.0.0:
-		
-//		if (nmFornecedor.equals("Marizpan") || nmFornecedor.toLowerCase().equals("varig"))
-//			minIni = minIni + 0;
-//		else if (nmFornecedor.equals("Atacamax") || nmFornecedor.toLowerCase().equals("vasp"))
-//			minIni = minIni + 7;
-//		else 
-//			minIni = minIni + 12;
-
-
-
-		minIni = qtdFornecedores * 1;
+		byte minIni = Utils.calcularMinutoAgendamento();
 		segIni = 0; 
 		
-		String strMinIni = Integer.toString(minIni);
-		String strSegIni = Integer.toString(segIni); 
+		String strSegIni = Byte.toString(segIni); 
+		String strMinIni = Byte.toString(minIni);
 
 		if (minIni < 10)
 			strMinIni = "0" + strMinIni;
