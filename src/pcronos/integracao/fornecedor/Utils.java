@@ -192,28 +192,13 @@ public class Utils {
     }
 		
 	
-	public static byte calcularMinutoAgendamento() {
+	public static byte calcularMinutoAgendamento(int idFornecedor) {
+		// Gerar minuto inteiro apenas de 1 até 15 pois "0" é a mesma coisa como "15"
+
+		
 		byte minIni = 0; // 04 em todos os fornecedores até a versão 3.0.0
 						 // 19 na versão 3.0.0
 
-		// A partir da versão 3.1.0 incrementar 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
-		File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
-		int qtdFornecedores = 0;
-		for (final File file : dirConfig.listFiles()) 
-		{
-			if (     file.getName().startsWith("Integração APS - Portal Cronos.") 
-				  && file.getName().endsWith(".properties") 
-				  && file.getName().toLowerCase().indexOf("copy")  == -1 
-				  && file.getName().toLowerCase().indexOf("cópia") == -1 
-				  && file.getName().toLowerCase().indexOf("copia") == -1 
-				  && file.getName().toLowerCase().indexOf("backup")  == -1 
-				  && file.getName().toLowerCase().indexOf("bck") == -1 
-				  && file.getName().toLowerCase().indexOf("template") == -1 
-			   ) 
-			{
-			   qtdFornecedores += 1;
-			}
-		}
 		
 		
 		// Solução temporária e rápida feita na versão 3.0.0:
@@ -225,7 +210,10 @@ public class Utils {
 		//else 
 		//minIni = minIni + 12;
 		
-		minIni = (byte)(qtdFornecedores * 1);
+		
+
+		// A partir da versão 3.1.0 usar intervalos de 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
+		minIni = (byte)(idFornecedor % 15);
 		
 		return minIni;
 		
