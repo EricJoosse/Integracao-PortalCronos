@@ -640,6 +640,41 @@ public class TestadorSnippets {
 		  slAdicionar.getHeader().setIconIndex(0);
 	  }
 	  
+	  private static void testarCalculoAgendamentos() throws Exception
+	  {
+		  // Testar se o intervalo é sempre de 0 até 14 em todos os casos:
+		  
+		  int idFornecedor = -1;
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 0; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 1; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 14; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 15; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 16; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 29; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 30; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 31; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+
+		  idFornecedor = 1995; 
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+	  }
+	  
  	  public static void main(String[] args) throws Exception {
 
 		try
@@ -674,7 +709,8 @@ public class TestadorSnippets {
 		 // testarGravarIsAmbienteNuvem();
 		 // testarRemocaoRaizMenuWindows();
 		 // testarGetIsAmbienteNuvem();
-			testarSetIconLocation();
+		 // testarSetIconLocation();
+			testarCalculoAgendamentos();
          
 
          // throw new Exception("try");

@@ -192,8 +192,8 @@ public class Utils {
     }
 		
 	
-	public static byte calcularMinutoAgendamento(int idFornecedor) {
-		// Gerar minuto inteiro apenas de 1 até 15 pois "0" é a mesma coisa como "15"
+	public static byte calcularMinutoAgendamento(int idFornecedor) throws Exception {
+		// Gerar minuto inteiro apenas de 0 até 14 pois "15" é a mesma coisa como "0"
 
 		
 		byte minIni = 0; // 04 em todos os fornecedores até a versão 3.0.0
@@ -213,8 +213,11 @@ public class Utils {
 		
 
 		// A partir da versão 3.1.0 usar intervalos de 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
-		minIni = (byte)(idFornecedor % 15);
+		minIni = (byte)Math.floorMod(idFornecedor, 15);
+	 // minIni = (byte)(idFornecedor % 15); // Não funciona com números negativos
 		
+		if (minIni < 0 || minIni > 14)
+			throw new Exception("Erro interno! O intervalo do minuto do agendamento só pode ser um número inteiro de 0 atá 14!");		
 		return minIni;
 		
 	}
