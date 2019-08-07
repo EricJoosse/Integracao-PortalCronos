@@ -213,6 +213,9 @@ public class Utils {
 		
 
 		// A partir da versão 3.1.0 usar intervalos de 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
+		
+		// A seguinte fórmula é uma forma para gerar o minuto semi-aleatoriamente 
+		// de forma que o mesmo pode ser reproduzido por relatórios e Unidades de Teste:
 		minIni = (byte)Math.floorMod(idFornecedor, 15);
 	 // minIni = (byte)(idFornecedor % 15); // Não funciona com números negativos
 		
