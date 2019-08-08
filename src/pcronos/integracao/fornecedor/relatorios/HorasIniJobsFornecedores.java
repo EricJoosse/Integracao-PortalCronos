@@ -7,36 +7,46 @@ import pcronos.integracao.fornecedor.Utils;
 
 public class HorasIniJobsFornecedores {
 
-	public static void main(String[] args)	{
-        for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) {
-		     // String key = entry.getKey().toString();
-		        Object value = entry.getValue();
-		     // System.out.println("key = " + key);
-		     // System.out.println("NomeFantasiaEmpresa = " + ((Fornecedor)value).NomeFantasiaEmpresa);
-		     // System.out.println("versaoIntegrador = " + ((Fornecedor)value).versaoIntegrador);
-		        
-		        Integer idFornecedor = ((Fornecedor)value).IdFornecedor;
-		        
-		        String minAgendamento = "";
-		        try 
-		        {
-		        	if (idFornecedor == null)
-   		               minAgendamento = "???";
-		        	else
-			           minAgendamento = Byte.toString(Utils.calcularMinutoAgendamento(idFornecedor));
-		        }
-		        catch (Exception ex)
-		        {
-		        	minAgendamento = ex.getMessage();
-		        }
-		        
-		        System.out.println(  		Utils.rpad(Utils.replaceNull(idFornecedor).toString(), 4) 
-    								+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).NomeFantasiaEmpresa), 26)
-    								+ " " + Utils.rpad(Utils.replaceNull(minAgendamento), 6)
-		        		          );
-	    }
-	}
-	    
+	public static void main(String[] args) {
+		System.out.println(Utils.rpad("ID", 4) + " " + Utils.rpad("Fornecedor", 26) + " "
+				+ Utils.rpad("Minuto Atual", 13) + " " + Utils.rpad("Minuto Futuro", 6));
+		System.out.println(Utils.rpad("==", 4) + " " + Utils.rpad("==========", 26) + " "
+				+ Utils.rpad("=============", 13) + " " + Utils.rpad("==================", 6));
+		System.out.println();
 
+		for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) {
+			// String key = entry.getKey().toString();
+			Object value = entry.getValue();
+			// System.out.println("key = " + key);
+			// System.out.println("NomeFantasiaEmpresa = " +
+			// ((Fornecedor)value).NomeFantasiaEmpresa);
+			// System.out.println("versaoIntegrador = " +
+			// ((Fornecedor)value).versaoIntegrador);
+
+			Integer idFornecedor = ((Fornecedor) value).IdFornecedor;
+
+			String minutoAgendamentoFuturo = "";
+			try {
+				if (idFornecedor == null)
+					minutoAgendamentoFuturo = "???";
+				else
+					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(idFornecedor));
+			} catch (Exception ex) {
+				minutoAgendamentoFuturo = ex.getMessage();
+			}
+
+			FornecedorRepositorio fRep = new FornecedorRepositorio();
+			Fornecedor f = fRep.getFornecedor(idFornecedor);
+			
+			String minutoAgendamentoAtual = "";
+            if (f.versaoIntegrador.compareTo("3.1.0") >= 0 || f.versaoIntegrador.compareTo("3.1") >= 0)
+				minutoAgendamentoAtual = minutoAgendamentoFuturo;
+
+				System.out.println(Utils.rpad(Utils.replaceNull(idFornecedor).toString(), 4) + " "
+						+ Utils.rpad(Utils.replaceNull(((Fornecedor) value).NomeFantasiaEmpresa), 26) + " "
+						+ Utils.rpad(Utils.replaceNull(minutoAgendamentoAtual), 13) + " "
+						+ Utils.rpad(Utils.replaceNull(minutoAgendamentoFuturo), 6));
+		}
+	}
 
 }

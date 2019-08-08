@@ -324,7 +324,7 @@ public class FornecedorRepositorio {
 
 	
 	
-	Fornecedor getFornecedor(Integer idFornecedor) throws Exception {		
+	public Fornecedor getFornecedor(Integer idFornecedor) throws Exception {		
 		Fornecedor f = hashMap.get(idFornecedor);
 		
 		if (f == null)
