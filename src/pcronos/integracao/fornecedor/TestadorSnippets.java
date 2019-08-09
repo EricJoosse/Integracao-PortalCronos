@@ -710,7 +710,7 @@ public class TestadorSnippets {
 		 // testarRemocaoRaizMenuWindows();
 		 // testarGetIsAmbienteNuvem();
 		 // testarSetIconLocation();
-			testarCalculoAgendamentos();
+		    testarCalculoAgendamentos();
          
 
          // throw new Exception("try");

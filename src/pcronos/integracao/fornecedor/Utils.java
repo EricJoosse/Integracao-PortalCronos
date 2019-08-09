@@ -196,8 +196,9 @@ public class Utils {
 		// Gerar minuto inteiro apenas de 0 até 14 pois "15" é a mesma coisa como "0"
 
 		
-		byte minIni = 0; // 04 em todos os fornecedores até a versão 3.0.0
-						 // 19 na versão 3.0.0
+		byte minIni = 0;  // 00 a partir da versão 3.1.0 
+		                   // 04 em todos os fornecedores até a versão 3.0.0
+						   // 19 na versão 3.0.0
 
 		
 		
@@ -214,10 +215,18 @@ public class Utils {
 
 		// A partir da versão 3.1.0 usar intervalos de 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
 		
-		// A seguinte fórmula é uma forma para gerar o minuto semi-aleatoriamente 
-		// de forma que o mesmo pode ser reproduzido por relatórios e Unidades de Teste:
-		minIni = (byte)Math.floorMod(idFornecedor, 15);
-	 // minIni = (byte)(idFornecedor % 15); // Não funciona com números negativos
+		if (idFornecedor == -1)
+		{
+		    minIni = 4; // Solicitado por Leão para espalhar os processamentos dos fornecedores 
+		                // mais tarde, depois da otimização de performance dos web services e do monitoramento.
+		}
+		else
+		{
+			// A seguinte fórmula é uma forma para gerar o minuto semi-aleatoriamente 
+			// de forma que o mesmo pode ser reproduzido por relatórios e Unidades de Teste:
+			minIni = (byte)Math.floorMod(idFornecedor, 15);
+		 // minIni = (byte)(idFornecedor % 15); // Não funciona com números negativos
+		}
 		
 		if (minIni < 0 || minIni > 14)
 			throw new Exception("Erro interno! O intervalo do minuto do agendamento só pode ser um número inteiro de 0 atá 14!");		
