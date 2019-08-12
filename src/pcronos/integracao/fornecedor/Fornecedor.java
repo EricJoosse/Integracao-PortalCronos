@@ -31,6 +31,7 @@ public class Fornecedor {
 	String ResponsavelDeParasProdutos;
 	String MemoriaRamLivre;
 	public boolean IsServicoNuvem;
+	int SequenciaInstanciaNuvem;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

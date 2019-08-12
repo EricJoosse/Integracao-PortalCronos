@@ -56,6 +56,9 @@ public class Instalador {
 				else
 				{
 					gravarIsAmbienteNuvem(0);
+
+			        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
+					tarefaWindows.gravarEmArquivoXML();
 				}
 			}
 			else

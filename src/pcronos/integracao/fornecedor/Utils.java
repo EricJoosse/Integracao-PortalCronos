@@ -192,7 +192,7 @@ public class Utils {
     }
 		
 	
-	public static byte calcularMinutoAgendamento(int idFornecedor) throws Exception {
+	public static byte calcularMinutoAgendamento(boolean isAmbienteNuvem, Integer idFornecedorNaoNuvem) throws Exception {
 		// Gerar minuto inteiro apenas de 0 até 14 pois "15" é a mesma coisa como "0"
 
 		
@@ -200,7 +200,6 @@ public class Utils {
 		                   // 04 em todos os fornecedores até a versão 3.0.0
 						   // 19 na versão 3.0.0
 
-		
 		
 		// Solução temporária e rápida feita na versão 3.0.0:
 		
@@ -212,26 +211,54 @@ public class Utils {
 		//minIni = minIni + 12;
 		
 		
+		if (isAmbienteNuvem)
+		{
+			// A partir da versão 3.1.0 incrementar 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
+			File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
+			int qtdFornecedores = 0;
+			for (final File file : dirConfig.listFiles()) 
+			{
+				if (     file.getName().startsWith("Integração APS - Portal Cronos.") 
+					  && file.getName().endsWith(".properties") 
+					  && file.getName().toLowerCase().indexOf("copy")  == -1 
+					  && file.getName().toLowerCase().indexOf("cópia") == -1 
+					  && file.getName().toLowerCase().indexOf("copia") == -1 
+					  && file.getName().toLowerCase().indexOf("backup")  == -1 
+					  && file.getName().toLowerCase().indexOf("bck") == -1 
+					  && file.getName().toLowerCase().indexOf("template") == -1 
+				   ) 
+				{
+				   qtdFornecedores += 1;
+				}
+			}			
 
-		// A partir da versão 3.1.0 usar intervalos de 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
-		
-		if (idFornecedor == -1)
+			minIni = (byte)Math.floorMod((qtdFornecedores * 1), 15);
+		} // if (isAmbienteNuvem)
+		else 
 		{
-		    minIni = 4; // Solicitado por Leão para espalhar os processamentos dos fornecedores 
-		                // mais tarde, depois da otimização de performance dos web services e do monitoramento.
+			// A partir da versão 3.1.0 usar intervalos de 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
+			
+			if (idFornecedorNaoNuvem == null)
+				throw new Exception("Erro interno! idFornecedor == null na chamada de calcularMinutoAgendamento()!");		
+			else if (idFornecedorNaoNuvem == -1)
+			{
+			    minIni = 4; // Solicitado por Leão para espalhar os processamentos dos fornecedores 
+			                // mais tarde, depois da otimização de performance dos web services e do monitoramento.
+			}
+			else
+			{
+				// A seguinte fórmula é uma forma para gerar o minuto semi-aleatoriamente 
+				// de forma que o mesmo pode ser reproduzido por relatórios e Unidades de Teste:
+				minIni = (byte)Math.floorMod(idFornecedorNaoNuvem, 15);
+			 // minIni = (byte)(idFornecedor % 15); // Não funciona com números negativos
+			}
 		}
-		else
-		{
-			// A seguinte fórmula é uma forma para gerar o minuto semi-aleatoriamente 
-			// de forma que o mesmo pode ser reproduzido por relatórios e Unidades de Teste:
-			minIni = (byte)Math.floorMod(idFornecedor, 15);
-		 // minIni = (byte)(idFornecedor % 15); // Não funciona com números negativos
-		}
+
 		
 		if (minIni < 0 || minIni > 14)
 			throw new Exception("Erro interno! O intervalo do minuto do agendamento só pode ser um número inteiro de 0 atá 14!");		
+
 		return minIni;
-		
 	}
 
 

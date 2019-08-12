@@ -8,13 +8,21 @@ import java.io.IOException;
 public class TarefaWindows {
 
 	private String tarefa = null;
+	private boolean IsAmbienteNuvem;
 	
-	public TarefaWindows(String nmFornecedor) throws Exception 
+	public TarefaWindows(boolean isAmbienteNuvem, String nmFornecedorNuvem, Integer idFornecedorNaoNuvem) throws Exception 
 	{
-		byte segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
+		this.IsAmbienteNuvem = isAmbienteNuvem;
 		
-		byte minIni = Utils.calcularMinutoAgendamento();
+		byte segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
+		Byte minIni = null;
 		segIni = 0; 
+		
+		if (isAmbienteNuvem)
+		      minIni = Utils.calcularMinutoAgendamento(isAmbienteNuvem, null);
+		else
+			  minIni = Utils.calcularMinutoAgendamento(isAmbienteNuvem, idFornecedorNaoNuvem);
+
 		
 		String strSegIni = Byte.toString(segIni); 
 		String strMinIni = Byte.toString(minIni);
@@ -78,8 +86,12 @@ public class TarefaWindows {
 "  </Settings>" + "\r\n" + 
 "  <Actions Context=\"Author\">" + "\r\n" + 
 "    <Exec>" + "\r\n" + 
-"      <Command>\"C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\Job15a15min.bat\"</Command>" + "\r\n" + 
-"      <Arguments>" + nmFornecedor + "</Arguments>" + "\r\n" + 
+"      <Command>\"C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos\\Job15a15min.bat\"</Command>" + "\r\n";
+		
+if (isAmbienteNuvem)	
+	this.tarefa += "      <Arguments>" + nmFornecedorNuvem + "</Arguments>" + "\r\n"; 
+
+this.tarefa += 
 "    </Exec>" + "\r\n" + 
 "  </Actions>" + "\r\n" + 
 "</Task>";
@@ -88,7 +100,13 @@ public class TarefaWindows {
 
 	public void gravarEmArquivoXML() throws IOException, Exception 
 	{
-		String nomeArquivoXML = "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml";
+		String nomeArquivoXML = null;
+		
+		if (this.IsAmbienteNuvem)
+		    nomeArquivoXML = "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml";
+		else
+		    nomeArquivoXML = "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml";
+			
 		File f = new File(nomeArquivoXML);
 		if(f.exists() && !f.isDirectory()) { 
 		    f.delete();

@@ -223,6 +223,8 @@ public class FornecedorRepositorio {
 		
 		i++;
 		f[i].IsServicoNuvem = true;
+		f[i].SequenciaInstanciaNuvem = 1;
+		
 		f[i].IdFornecedor = 1995; // APS Cloud - primeiro fornecedor de muitos
 		f[i].NomeFantasiaEmpresa = "Marizpan";   // APS Cloud - primeiro fornecedor de muitos
 		f[i].cnpjFornecedor = "12286800000108";  // APS Cloud - primeiro fornecedor de muitos
