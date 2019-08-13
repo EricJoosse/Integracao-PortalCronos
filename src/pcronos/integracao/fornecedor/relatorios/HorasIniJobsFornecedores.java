@@ -24,16 +24,17 @@ public class HorasIniJobsFornecedores {
 			// ((Fornecedor)value).versaoIntegrador);
 
 			Integer idFornecedor = ((Fornecedor) value).IdFornecedor;
-
+			FornecedorRepositorio fRep = new FornecedorRepositorio();
+			Fornecedor f = fRep.getFornecedor(idFornecedor);			
 			
 			
 			String minutoAgendamentoFuturo = "";
 			try {
 				// No caso do servidor de monitoramento:
 				if (idFornecedor == null)
-					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(-1));
+					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(false, -1));
 				else
-					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(idFornecedor));
+					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(f.IsServicoNuvem, idFornecedor));
 			} catch (Exception ex) {
 				minutoAgendamentoFuturo = ex.getMessage();
 			}
@@ -46,9 +47,6 @@ public class HorasIniJobsFornecedores {
 			catch (Exception ex) { }
 
 			
-			
-			FornecedorRepositorio fRep = new FornecedorRepositorio();
-			Fornecedor f = fRep.getFornecedor(idFornecedor);
 			
 			String minutoAgendamentoAtual = "";
             if (f.versaoIntegrador.compareTo("3.1.0") >= 0 || f.versaoIntegrador.compareTo("3.1") >= 0)

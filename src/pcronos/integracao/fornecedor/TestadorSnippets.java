@@ -547,7 +547,7 @@ public class TestadorSnippets {
 	  
 	  private static void testarGeracaoArquivoXmlTarefaWindows() throws IOException, Exception
 	  {
-		  TarefaWindows tarefaWindows = new TarefaWindows("Atacamax");
+		  TarefaWindows tarefaWindows = new TarefaWindows(true, "Atacamax", null);
 		  tarefaWindows.gravarEmArquivoXML();
 	  }
 	  
@@ -645,34 +645,34 @@ public class TestadorSnippets {
 		  // Testar se o intervalo é sempre de 0 até 14 em todos os casos:
 		  
 		  int idFornecedor = -1;
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 0; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 1; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 14; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 15; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 16; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 29; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 30; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 31; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 
 		  idFornecedor = 1995; 
-		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(idFornecedor));		  
+		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 	  }
 	  
  	  public static void main(String[] args) throws Exception {

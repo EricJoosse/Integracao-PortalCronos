@@ -22,6 +22,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Teste Windows Server 2016";
 		f[i].versaoIntegrador = "";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].ApelidoResponsavelTI = "";
@@ -37,6 +38,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Monitoramento";
 		f[i].versaoIntegrador = "3.1.0";
 		f[i].SiglaSistemaFornecedor = "PCronos";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].ApelidoResponsavelTI = "";
@@ -52,6 +54,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Formaggio";
 		f[i].versaoIntegrador = "2.6";
 		f[i].SiglaSistemaFornecedor = "APS";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "projetosti@formaggio.com.br";  
 		f[i].EmailResponsavelTIAlternativo = "ti@formaggio.com.br??????"; 
 		f[i].SkypeResponsavelTI = "live:projetosti_1 = Geymison Lima - TI Formaggio";
@@ -73,6 +76,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "JR Distribuição";
 		f[i].versaoIntegrador = "2.8.1";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "jrembalagem.ti@gmail.com"; 
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "ivan barros";
@@ -93,6 +97,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Prolac";
 		f[i].versaoIntegrador = "2.8.4";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "mscomprolac@gmail.com"; 
 		f[i].EmailResponsavelTIAlternativo = "marcelo@casadoqueijo.net.br";
 		f[i].SkypeResponsavelTI = "marcos.scognamiglio";
@@ -113,6 +118,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Marítimos";
 		f[i].versaoIntegrador = "1.2.3";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "felipe.lolaia@maritimospescados.com.br"; 
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Felipe Lolaia";
@@ -131,6 +137,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "SOST";
 		f[i].versaoIntegrador = "2.3.1";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "informatica@sost.com.br OU cleijonatassilva@sost.com.br"; 
 		f[i].EmailResponsavelTIAlternativo = "informatica@sost.com.br OU carlossena@sost.com.br";
 		f[i].SkypeResponsavelTI = "Cleijonatas S Silva";
@@ -150,6 +157,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Karne Keijo";
 		f[i].versaoIntegrador = "2.4.1";
 		f[i].SiglaSistemaFornecedor = "SAP";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "timons@kk.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Timon Dourado";
@@ -168,6 +176,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Comal";
 		f[i].versaoIntegrador = "2.8.2";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "ti@comalcomercio.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Rildson Carlos";
@@ -188,6 +197,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Propão";
 		f[i].versaoIntegrador = "2.6.1";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "ti@propao.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Apoio.propao@hotmail.com";
@@ -207,6 +217,7 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "Padeirão";
 		f[i].versaoIntegrador = "2.8.3";
 		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "tiagoautran@padeirao.com";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "tiagoautran";
@@ -221,15 +232,16 @@ public class FornecedorRepositorio {
 		f[i].MemoriaRamLivre = "";
 
 		
-		i++;
-		f[i].IsServicoNuvem = true;
-		f[i].SequenciaInstanciaNuvem = 1;
-		
+		i++;		
 		f[i].IdFornecedor = 1995; // APS Cloud - primeiro fornecedor de muitos
 		f[i].NomeFantasiaEmpresa = "Marizpan";   // APS Cloud - primeiro fornecedor de muitos
 		f[i].cnpjFornecedor = "12286800000108";  // APS Cloud - primeiro fornecedor de muitos
 		f[i].versaoIntegrador = "3.0.0";
 		f[i].SiglaSistemaFornecedor = "APS";
+
+		f[i].IsServicoNuvem = true;
+		f[i].SequenciaInstanciaNuvem = 1;
+
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-marizpan";  // APS Cloud - primeiro fornecedor de muitos
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 

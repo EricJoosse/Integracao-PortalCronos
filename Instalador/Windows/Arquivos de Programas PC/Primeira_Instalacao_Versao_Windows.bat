@@ -228,11 +228,14 @@ REM cd "Arquivos de Programas PC"
 
 :SKIP_JRE_TEMPDIR_PROGRAMDIR
 
-REM ================ Instalar as diversas opções no menu de Windows, e gravar IsAmbienteNuvem.bat, DEPOIS da instalação dos programas de Java: ========================================
+REM ================ Instalar as diversas opções no menu de Windows, 
+REM ================ e gravar IsAmbienteNuvem.bat,
+REM ================ e gerar o arquivo XML da tarefa do Agendador de Windows,   
+REM ================ DEPOIS da instalação dos programas de Java: ========================================
 
 cd\
 cd "Arquivos de Programas PC"
-
+if exist Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml del /f /q Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml
 call Instalador.bat
 
 cd\
@@ -335,7 +338,7 @@ REM ================ Fim instalação Task Não-Nuvem no Windows Scheduler. =======
 cd\
 cd "Arquivos de Programas PC"
 
-REM Apagar o arquivo "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" e outros parecidos: 
+REM Apagar o arquivo "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" e outros arquivos parecidos: 
 del /f /q *.xml
 
 if %tipoInstalacao% == 2 (
