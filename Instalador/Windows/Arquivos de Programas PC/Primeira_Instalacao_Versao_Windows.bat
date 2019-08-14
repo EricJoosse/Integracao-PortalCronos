@@ -259,6 +259,7 @@ del /f /q *.reg
 del /f /q *.exe
 del /f /q Instalador.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
+del /f /q UpgradeNaoNuvem3.1.0.bat
 del /f /q .gitignore
 
 if %tipoInstalacao% == 1 (

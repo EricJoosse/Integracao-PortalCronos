@@ -33,6 +33,8 @@ if "%1"=="Desinstalador.log" (
   if exist AdicionadorFornecedorNuvem.log del /f /q AdicionadorFornecedorNuvem.log 
 ) else if "%1"=="RemovedorFornecedorNuvem.log" (
   if exist RemovedorFornecedorNuvem.log del /f /q RemovedorFornecedorNuvem.log 
+) else if "%1"=="GeradorTarefaWindowsNaoNuvem.log" (
+  if exist GeradorTarefaWindowsNaoNuvem.log del /f /q GeradorTarefaWindowsNaoNuvem.log 
 )
 
 REM Usar o caminho completo do JRE para o caso que tiver 2 JRE´s no mesmo servidor 
