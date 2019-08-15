@@ -43,6 +43,7 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
    				- bin\Versao.bat -> 3.1.0
    				- bin\VerificarUsuarioAdministrador.bat
    				- bin\CaminhoJRE.bat
+   				- bin\Inicializacoes.bat
    				- UpgradeNaoNuvem3.1.0.bat
    				- Job15a15min.bat                          (ainda não feito no servidor de monitoramento!!!!!) 
    					- Adicionar "exit" novamente no início do arquivo
@@ -84,6 +85,7 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
        	    - bin\Versao.bat 
 	   		- bin\VerificarUsuarioAdministrador.bat
 			- bin\CaminhoJRE.bat
+			- bin\Inicializacoes.bat
    			- Job15a15min.bat
         	- integr-fornecedor-3.1.0.jar
         	- AdicionarFornecedorNuvem.bat

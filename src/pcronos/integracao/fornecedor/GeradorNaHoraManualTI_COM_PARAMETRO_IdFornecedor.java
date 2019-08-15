@@ -1,7 +1,5 @@
 package pcronos.integracao.fornecedor;
 
-import java.util.jar.JarException;
-import javax.lang.model.type.IntersectionType;
 
 
 public class GeradorNaHoraManualTI_COM_PARAMETRO_IdFornecedor {

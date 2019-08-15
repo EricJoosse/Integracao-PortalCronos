@@ -17,7 +17,7 @@ cd "Integração Fornecedor - Portal Cronos"
 call bin\Inicializacoes.bat
 call bin\Versao.bat
 
-REM Para evitar travamento deste Job.bat e ignoramento pelo Windows Scheduler 
+REM Para evitar travamento deste Job15a15min.bat e ignoramento pelo Windows Scheduler 
 REM devido a travamento do arquivo de log: 
 if "%1"=="" (
   call bin\CaminhoJRE.bat Job15a15min.log IntegracaoFornecedorCompleta %1

@@ -216,6 +216,7 @@ public class Utils {
 			// A partir da versão 3.1.0 incrementar 1 minuto, pois muitas vezes o processamento demora menos de 1 minuto:
 			File dirConfig = new File(Constants.DIR_ARQUIVOS_PROPERTIES); 
 			int qtdFornecedores = 0;
+			
 			for (final File file : dirConfig.listFiles()) 
 			{
 				if (     file.getName().startsWith("Integração APS - Portal Cronos.") 

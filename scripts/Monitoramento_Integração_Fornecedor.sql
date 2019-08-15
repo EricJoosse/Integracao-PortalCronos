@@ -29,7 +29,7 @@ select id_fornecedor_fornec, *
 
 
 update [dbo].[Usuario_Sistema]  
-    set id_fornecedor_fornec = 33
+    set id_fornecedor_fornec = 1995
       , id_perfil_acesso_perace = 14
       , id_central_compra_ctrcom = null
       , id_comprador_compr = null
