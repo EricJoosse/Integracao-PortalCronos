@@ -9,9 +9,9 @@ public class HorasIniJobsFornecedores {
 
 	public static void main(String[] args) throws Exception {
 		System.out.println(Utils.rpad("ID", 4) + " " + Utils.rpad("Fornecedor", 26) + " "
-				+ Utils.rpad("Minuto Atual", 13) + " " + Utils.rpad("Minuto Futuro", 6));
+				+ Utils.rpad("Minuto Atual", 13) + " " + Utils.rpad("Minuto v 3.1.0 e maior", 6));
 		System.out.println(Utils.rpad("==", 4) + " " + Utils.rpad("==========", 26) + " "
-				+ Utils.rpad("=============", 13) + " " + Utils.rpad("=============", 6));
+				+ Utils.rpad("============", 13) + " " + Utils.rpad("======================", 6));
 		System.out.println();
 
 		for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) {
@@ -29,13 +29,23 @@ public class HorasIniJobsFornecedores {
 			
 			
 			String minutoAgendamentoFuturo = "";
-			try {
+			try 
+			{
 				// No caso do servidor de monitoramento:
 				if (idFornecedor == null)
 					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(false, -1));
-				else
+
+				else if (f.IsServicoNuvem)
+					minutoAgendamentoFuturo = Integer.toString(f.SequenciaInstanciaNuvem);
+
+				else if (!f.IsServicoNuvem)
 					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(f.IsServicoNuvem, idFornecedor));
-			} catch (Exception ex) {
+
+				else
+					throw new Exception("Situação imprevista");
+			
+			} 
+			catch (Exception ex) {
 				minutoAgendamentoFuturo = ex.getMessage();
 			}
 
@@ -65,8 +75,8 @@ public class HorasIniJobsFornecedores {
 
             
 			System.out.println(Utils.rpad(Utils.replaceNull(idFornecedor).toString(), 4) + " "
-						+ Utils.rpad(Utils.replaceNull(((Fornecedor) value).NomeFantasiaEmpresa), 26) + " "
-						+ Utils.rpad(Utils.replaceNull(minutoAgendamentoAtual), 13) + " "
+						+ Utils.rpad(Utils.replaceNull(((Fornecedor) value).NomeFantasiaEmpresa), 31) + " "
+						+ Utils.rpad(Utils.replaceNull(minutoAgendamentoAtual), 16) + " "
 						+ Utils.rpad(Utils.replaceNull(minutoAgendamentoFuturo), 6));
 		}
 	}

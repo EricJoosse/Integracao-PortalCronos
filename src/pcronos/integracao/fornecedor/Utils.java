@@ -233,7 +233,9 @@ public class Utils {
 				}
 			}			
 
-			minIni = (byte)Math.floorMod((qtdFornecedores * 1), 15);
+			// Separar os fornecedores por intervalos de 1 minuto:
+			byte intervaloMinutos = 1;
+			minIni = (byte)Math.floorMod((qtdFornecedores * intervaloMinutos), 15);
 		} // if (isAmbienteNuvem)
 		else 
 		{
