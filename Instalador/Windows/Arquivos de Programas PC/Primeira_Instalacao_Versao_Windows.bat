@@ -235,7 +235,7 @@ REM ================ DEPOIS da instalação dos programas de Java: ===============
 
 cd\
 cd "Arquivos de Programas PC"
-if exist Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml del /f /q Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml
+if exist "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" del /f /q "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
 call Instalador.bat
 
 cd\

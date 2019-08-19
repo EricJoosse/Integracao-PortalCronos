@@ -66,13 +66,13 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
    		      e verificar se bate com o relatório RelatorioHorasIniJobsFornecedores.launch, 
    		      coluna "Minuto Atual"
    		 
-   		 	- Executar UpgradeNaoNuvem3.1.0.bat
+   		 	- Executar UpgradeNaoNuvem3.1.0.bat como Administrador
    		 	
  			- Depois disso abrir o Agendador de Tarefas de Windows e verificar:
  			    (a.) se o minuto do agendamento, 
  			         gerado por este patch automatizado acima, 
  			         bate com o relatório RelatorioHorasIniJobsFornecedores.launch, 
- 			         coluna "Minuto Futuro"
+ 			         coluna "Minuto v 3.1.0 e maior"
  			         
  			    (b.) Verificar se o novo renomeado "Job15a15min.bat" é chamado 
  			         ao invés do antigo "Job15a15minOfertamentoJava_Windows.bat"

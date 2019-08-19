@@ -26,7 +26,7 @@ exit
 
 cd\
 cd "Arquivos de Programas PC"
-if exist Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml del /f /q Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml
+if exist "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" del /f /q "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
 
 SCHTASKS /End /TN "Integração Portal Cronos - Fornecedor"
 SCHTASKS /Delete /TN "Integração Portal Cronos - Fornecedor" /F
@@ -57,6 +57,7 @@ if %tamanhoArqLog% GTR 0 (
     SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
 )
 
-if exist Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml del /f /q Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml
-
+cd\
+cd "Arquivos de Programas PC"
+if exist "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" del /f /q "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
 del /f /q UpgradeNaoNuvem3.1.0.bat
