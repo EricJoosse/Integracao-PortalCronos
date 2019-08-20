@@ -65,7 +65,8 @@ CodigoFilial                      = 1
 9. No final do upgrade, apagar os seguintes arquivos no diretório C:\Arquivos de Programas PC\ no servidor do fornecedor:
 		- InstalarManualTI.bat
 		- TestadorUnitarioInstalacaoDesinstalacao.bat
-		- Primeira_Instalacao_Versao_Windows.bat
+		- Instalador_Integrador.bat
+		- Instalador_MOnitorador.bat
 		- *.reg
 		- *.xml
 		- *.exe

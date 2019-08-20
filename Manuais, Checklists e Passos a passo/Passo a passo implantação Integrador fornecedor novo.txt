@@ -257,7 +257,7 @@ Como vai ser?
 			- Observação: no servidor de monitoramento o serviço + JVM ocupa 60 MB de memória
 	   
 	    
-	   (iii) No arquivo "Primeira_Instalacao_Versao_Windows.bat" : 
+	   (iii) No arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat": 
 	   
 		- Verificar a versão de Windows no servidor do fornecedor 
 		  e descomentar a variável "osVersion" correta no início do .bat. 
@@ -284,7 +284,7 @@ Como vai ser?
 		  Observação: depois de "REM" deve ter pelo menos UM espaço em branco !!!!!
 
 
-		- Verificar a variável "set drive=C:"  ou "set drive=D:" no início de Primeira_Instalacao_Versao_Windows.bat 
+		- Verificar a variável "set drive=C:"  ou "set drive=D:" no início de "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" 
 		  Verificar se tem espaço livre de 1 GB nos discos C:/, D:/, etc. :
 			- 270 MB: 
 				-  20 MB: C:\Arquivos de Programas PC\*
@@ -308,10 +308,10 @@ Como vai ser?
 
 
 		- Se decidir não instalar Java porém usar uma versão existente, 
-		  descomentar o seguinte skip no início de Primeira_Instalacao_Versao_Windows.bat:
+		  descomentar o seguinte skip no início de "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat":
 						REM goto SKIP_JRE
 
-		- Verificar se precisa descomentar um dos seguintes skips no início de Primeira_Instalacao_Versao_Windows.bat :
+		- Verificar se precisa descomentar um dos seguintes skips no início de "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat":
 						REM goto SKIP_JRE_TEMPDIR
 						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
 						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR_TASK
@@ -344,7 +344,7 @@ Como vai ser?
 	        	- Atualização automática de Java sim ou não: não verificar isso neste momento pois isso não é motivo para instalar outro Java novo sim ou não
 
              	- No caso que a JRE existente funciona: 
-             			- Descomentar "REM goto SKIP_JRE"no arquivo "Primeira_Instalacao_Versao_Windows.bat"              
+             			- Descomentar "REM goto SKIP_JRE"no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat"              
                   		  (feito assim no Padeirão)
              
     					- Verificar e, no caso, ajustar o if no arquivo CaminhoJRE.bat.
@@ -416,7 +416,7 @@ Como vai ser?
        no diretório C:\PCronos\Integração Fornecedor - Portal Cronos\Manuais, Checklists e Passos a passo\.
     
     7. O instalador deve ser copiado para exatamente o diretório C:\temp\ ou C:\Temp\ no servidor do fornecedor.
-       Se for outro diretório, ajustar este diretório no final de Primeira_Instalacao_Versao_Windows.bat.
+       Se for outro diretório, ajustar este diretório no final de "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat".
     
        Se dar erro "Access denied", a solução que funcionou no Padeirão é para criar um diretório novo C:\xxx_temp\ 
        e depois copiar de lá para C:\temp\. Apagar C:\xxx_temp\ depois disso.
@@ -436,7 +436,8 @@ Como vai ser?
     
     9a. Apagar Instalador.log no servidor do fornecedor
     
-    9a. No caso: no arquivo Primeira_Instalacao_Versao_Windows.bat (no projeto Eclipse) re-comentar REM goto SKIP_JRE 
+    9a. No caso: no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" (no projeto Eclipse) 
+        re-comentar REM goto SKIP_JRE 
 
     9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
@@ -469,9 +470,9 @@ Como vai ser?
            
        É melhor verificar também todas as outras chaves no regedit. Parece que tem um bug no DOS ou no Winrar:  
        foi testado com Windows Server 2012 R2 e com Windows Server 2016 que a automação do regedit funciona 
-       se rodar "Primeira_Instalacao_Versao_Windows.bat" na mão clicando 2 vezes neste .bat ou usando o botão a direita 
+       se rodar "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" na mão clicando 2 vezes neste .bat ou usando o botão a direita 
        usando "Executar como Administrador", 
-       porém não funciona se "Primeira_Instalacao_Versao_Windows.bat" for executado automaticamente pelo Winrar. 
+       porém não funciona se "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" for executado automaticamente pelo Winrar. 
        No teste unitário usando "TestadorUnitarioInstalacaoDesinstalacao.bat" também funcionou, porém no teste integrado não funcionou. 
        
        Isso é por causa do seguinte bug : 
@@ -548,7 +549,7 @@ Como vai ser?
        Fazer isso ainda em todos os outros tipos de Windows. 
 
 	   No caso que tiver alguma diferença no syntax, criar um novo arquivo DeshabilitarJavaUpdates.xxxxxxxxxxx.reg, 
-	   e adaptar Primeira_Instalacao_Versao_Windows.bat.
+	   e adaptar "Instalador_Integrador.bat" e "Instalador_Monitorador.bat".
 	   Depois disso executar "regedit.exe /s %arquivoRegedit%" em um arquivo .bat separado.
 	   
        Em todos os casos, adicionar o novo SO na lista acima.
@@ -568,15 +569,15 @@ Como vai ser?
        Fazer isso ainda em todos os outros tipos de Windows. 
 
        Se tiver alguma diferença, copiar Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml 
-       para outro arquivo novo, e adaptar Primeira_Instalacao_Versao_Windows.bat. 
-       No outro caso que funcionou, adicionar o novo SO no nome do arquivo e adaptar Primeira_Instalacao_Versao_Windows.bat.
+       para outro arquivo novo, e adaptar "Instalador_Integrador.bat" e "Instalador_Monitorador.bat". 
+       No outro caso que funcionou, adicionar o novo SO no nome do arquivo e adaptar "Instalador_Integrador.bat" e "Instalador_Monitorador.bat".
        
        Em todos os casos, adicionar o novo SO na lista acima.
 
 
    12. No final, no caso que a versão de Windows ainda não estava homologada,
        descomentar "REM regedit.exe /s %arquivoRegedit%"
-	   no arquivo Primeira_Instalacao_Versao_Windows.bat.
+	   no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat".
       
 	   Também descomentar :
 		  	) else (

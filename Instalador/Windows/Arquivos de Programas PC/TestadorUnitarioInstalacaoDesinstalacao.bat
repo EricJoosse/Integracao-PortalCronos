@@ -172,7 +172,8 @@ del /f /q *.reg
 del /f /q *.xml
 del /f /q *.exe
 del /f /q Instalador.bat
-del /f /q Primeira_Instalacao_Versao_Windows.bat
+del /f /q Instalador_Integrador.bat
+del /f /q Instalador_Monitorador.bat
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat

@@ -14,6 +14,7 @@ REM EXIT /B 1
 REM Sem /B para forçar fechar os scripts chamadores (AdicionarFornecedorNuvem.bat, 
 REM                                                  RemoverFornecedorNuvem.bat, 
 REM                                                  Desinstalar_Integração_Fornecedor_PortalCronos.bat,
-REM                                                  Primeira_Instalacao_Versao_Windows.bat):  
+REM                                                  Instalador_Integrador.bat,
+REM                                                  Instalador_Monitorador.bat):  
     exit
 )

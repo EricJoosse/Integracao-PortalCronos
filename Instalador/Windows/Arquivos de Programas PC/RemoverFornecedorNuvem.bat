@@ -129,7 +129,7 @@ if %tamanhoArqLog% GTR 0 (
 )
 
 
-REM /B para não fechar o script chamador (Primeira_Instalacao_Versao_Windows.bat):  
+REM /B para não fechar possíveis scripts chamadores no futuro:  
 exit /B 0
 
 

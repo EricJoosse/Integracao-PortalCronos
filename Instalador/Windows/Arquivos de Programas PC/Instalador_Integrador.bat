@@ -12,6 +12,7 @@ chcp 1252>nul
 
 cd\
 cd "Arquivos de Programas PC"
+del /f /q Instalador_Monitorador.bat
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
 echo.
@@ -358,7 +359,7 @@ if %tipoInstalacao% == 2 (
 
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
-del /f /q Primeira_Instalacao_Versao_Windows.bat
+del /f /q Instalador_Integrador.bat
 
 exit
 

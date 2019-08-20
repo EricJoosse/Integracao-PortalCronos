@@ -88,7 +88,7 @@ if %tamanhoArqLog% GTR 0 (
   start notepad "Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%nmFornecedor%.properties"
 )
 
-REM /B para não fechar o script chamador (Primeira_Instalacao_Versao_Windows.bat):  
+REM /B para não fechar os scripts chamadores (Instalador_Integrador.bat e Instalador_Monitorador.bat):  
 exit /B 0
 
 

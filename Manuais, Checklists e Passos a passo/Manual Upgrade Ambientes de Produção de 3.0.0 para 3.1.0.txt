@@ -45,6 +45,7 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
    				- bin\CaminhoJRE.bat
    				- bin\Inicializacoes.bat
    				- UpgradeNaoNuvem3.1.0.bat
+	        	- Desinstalar_Integração_Fornecedor_PortalCronos.bat
    				- Job15a15min.bat                          (ainda não feito no servidor de monitoramento!!!!!) 
    					- Adicionar "exit" novamente no início do arquivo
 
@@ -93,6 +94,8 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
    			- Job15a15min.bat
         	- integr-fornecedor-3.1.0.jar
         	- AdicionarFornecedorNuvem.bat
+        	- RemoverFornecedorNuvem.bat
+        	- Desinstalar_Integração_Fornecedor_PortalCronos.bat
  
    b. Copiar o arquivo zip para o diretório C:\Eric\ no servidor do APS Cloud.
    
