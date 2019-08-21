@@ -12,9 +12,27 @@ chcp 1252>nul
 
 if %tipoInstalacao% == 2 (
    set idFornecedor=1995
-   goto PularErro
+   goto PularPerguntaIdFornecedor
 )
 
+if "%1"=="m" (
+    set idFornecedor=-1
+    goto PularPerguntaIdFornecedor
+) else if "%1"=="i" (
+    goto PerguntaIdFornecedor
+) else (
+    echo.
+    ECHO Erro: apenas os tipos de instalação ^"i^" e ^"m^" estão permitidos!
+    echo.
+
+    echo MSGBOX "Erro: apenas os tipos de instalação ""i"" e ""m"" estão permitidos!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+    exit
+)
+
+:PerguntaIdFornecedor
 echo.
 echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
 echo.
@@ -29,6 +47,8 @@ del %temp%\TEMPmessage.vbs /f /q
 REM Fechar o script chamador também: 
 exit
 :PularErro
+:PularPerguntaIdFornecedor
+
 
 REM Alternativo antigo: 
 REM 

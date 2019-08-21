@@ -53,7 +53,7 @@ public class Instalador {
 					ShellLink slRemover = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
 					slRemover.setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/RemoverInstancia.ico");
 				}
-				else
+				else if (!f.IsServicoNuvem)
 				{
 					gravarIsAmbienteNuvem(0);
 
@@ -61,8 +61,9 @@ public class Instalador {
 					tarefaWindows.gravarEmArquivoXML();
 				}
 			}
-			else
+			else if (idFornecedor == -1)
 			{
+				// idFornecedor == -1 no caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos
 				gravarIsAmbienteNuvem(0);
 			}
 
