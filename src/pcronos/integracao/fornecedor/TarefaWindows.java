@@ -16,12 +16,25 @@ public class TarefaWindows {
 		
 		byte segIni = 0; // Não existe na versão 3.0.0 e versões mais antigas
 		Byte minIni = null;
-		segIni = 0; 
 		
+
 		if (isAmbienteNuvem)
 		      minIni = Utils.calcularMinutoAgendamento(isAmbienteNuvem, null);
 		else
 			  minIni = Utils.calcularMinutoAgendamento(isAmbienteNuvem, idFornecedorNaoNuvem);
+
+
+		if (idFornecedorNaoNuvem != null && idFornecedorNaoNuvem == -1)
+		{
+			segIni = 47; // Solicitado por Leão para espalhar os processamentos dos fornecedores 
+                         // mais tarde, depois da otimização de performance dos web services e do monitoramento.
+		}
+		else
+		{
+			// 47 em todos os fornecedores até a versão 3.0.0
+			//  0 em todos os fornecedores a partir da versão 3.1.0
+			segIni = 0;
+		}
 
 		
 		String strSegIni = Byte.toString(segIni); 

@@ -29,18 +29,26 @@ public class HorasIniJobsFornecedores {
 			
 			
 			String minutoAgendamentoFuturo = "";
+			String segundoAgendamentoFuturo = "";
+			
 			try 
 			{
 				// No caso do servidor de monitoramento:
-				if (idFornecedor == null)
+				if (idFornecedor == null || idFornecedor == -1)
+				{
 					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(false, -1));
-
+					segundoAgendamentoFuturo = "47";
+				}
 				else if (f.IsServicoNuvem)
+				{
 					minutoAgendamentoFuturo = Integer.toString(f.SequenciaInstanciaNuvem);
-
+					segundoAgendamentoFuturo = "0";
+				}
 				else if (!f.IsServicoNuvem)
+				{
 					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(f.IsServicoNuvem, idFornecedor));
-
+					segundoAgendamentoFuturo = "0";
+				}
 				else
 					throw new Exception("Situação imprevista");
 			
@@ -53,14 +61,24 @@ public class HorasIniJobsFornecedores {
 			{
 				if (Integer.parseInt(minutoAgendamentoFuturo) < 10)
 					minutoAgendamentoFuturo = "0" + minutoAgendamentoFuturo;
+
+				if (Integer.parseInt(segundoAgendamentoFuturo) < 10)
+					segundoAgendamentoFuturo = "0" + segundoAgendamentoFuturo;
 			}
 			catch (Exception ex) { }
 
+
+			
 			
 			
 			String minutoAgendamentoAtual = "";
+			String segundoAgendamentoAtual = "";
+			
             if (f.versaoIntegrador.compareTo("3.1.0") >= 0 || f.versaoIntegrador.compareTo("3.1") >= 0)
+            {
 				minutoAgendamentoAtual = minutoAgendamentoFuturo;
+				segundoAgendamentoAtual = segundoAgendamentoFuturo;
+            }
             else if (f.IsServicoNuvem)
             {
         		if (f.NomeFantasiaEmpresa.equals("Marizpan"))
@@ -69,15 +87,20 @@ public class HorasIniJobsFornecedores {
         			minutoAgendamentoAtual = "11";
         		else 
         			minutoAgendamentoAtual = "01";
+        		
+        		segundoAgendamentoAtual = "47";
             }
             else
+            {
 				minutoAgendamentoAtual = "04";
+        		segundoAgendamentoAtual = "47";
+            }
 
             
 			System.out.println(Utils.rpad(Utils.replaceNull(idFornecedor).toString(), 4) + " "
 						+ Utils.rpad(Utils.replaceNull(((Fornecedor) value).NomeFantasiaEmpresa), 31) + " "
-						+ Utils.rpad(Utils.replaceNull(minutoAgendamentoAtual), 16) + " "
-						+ Utils.rpad(Utils.replaceNull(minutoAgendamentoFuturo), 6));
+						+ Utils.rpad((Utils.replaceNull(minutoAgendamentoAtual) + ":" + segundoAgendamentoAtual), 16) + " "
+						+ Utils.rpad((Utils.replaceNull(minutoAgendamentoFuturo) + ":" + segundoAgendamentoFuturo), 6));
 		}
 	}
 
