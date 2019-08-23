@@ -11,8 +11,11 @@ public class GeradorTarefaWindowsNaoNuvem {
         try 
         {
 			// Primeiro testar se o idFornecedor digitado existe:
-			FornecedorRepositorio fRep = new FornecedorRepositorio();
-	        Fornecedor f = fRep.getFornecedor(idFornecedor);
+        	if (idFornecedor != -1)
+        	{
+				FornecedorRepositorio fRep = new FornecedorRepositorio();
+		        Fornecedor f = fRep.getFornecedor(idFornecedor);
+        	}
 	
 	        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 			tarefaWindows.gravarEmArquivoXML();

@@ -46,28 +46,22 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
    				- bin\Inicializacoes.bat
    				- UpgradeNaoNuvem3.1.0.bat
 	        	- Desinstalar_Integração_Fornecedor_PortalCronos.bat
-   				- Job15a15min.bat                          (ainda não feito no servidor de monitoramento!!!!!) 
+   				- Job15a15min.bat 
    					- Adicionar "exit" novamente no início do arquivo
 
-5. Em todos os servidores: (ainda não feito no servidor de monitoramento!!!!!) 
+5. Em todos os servidores: 
           - Remover os seguintes arquivos:
         		- Job15a15minOfertamentoJava_Windows.bat
         		- Job15a15minOfertamentoJava.log
    
-6. Apens no servidor de monitoramento (pois as tasks serão excluidas e refeitas de zero abaixo): 
-   (ainda não feito no servidor de monitoramento!!!!!)
-   		 
-   			- Dentro do Agendador de Tarefas / Task Scheduler de Windows, alterar a chamada do job  
-   			  de "Job15a15minOfertamentoJava_Windows.bat" para "Job15a15min.bat"
-
-
-7. Em todos os servidores exceto no APS Cloud: 
-   (ainda não feito no servidor de monitoramento!!!!!)
+   
+6. Em todos os servidores exceto no APS Cloud: 
    		    - Abrir o Agendador de Tarefas de Windows e verificar o minuto atual do agendamento, 
    		      e verificar se bate com o relatório RelatorioHorasIniJobsFornecedores.launch, 
    		      coluna "Minuto Atual"
    		 
    		 	- Executar UpgradeNaoNuvem3.1.0.bat como Administrador
+   		 		- No caso do servidor de monitoramento digitar -1 na pergunta do ID do fornecedor
    		 	
  			- Depois disso abrir o Agendador de Tarefas de Windows e verificar:
  			    (a.) se o minuto do agendamento, 
@@ -80,12 +74,12 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
 
  
  
-8. Em todos os casos: (ainda não feito no servidor de monitoramento!!!!!) 
+7. Em todos os casos: (ainda não feito no servidor de monitoramento!!!!!) 
       - substituir mslinks 1.0.4 por 1.0.5??????
       - annotations.jar????
        
  
-9. Apenas no servidor do APS Cloud (???????????????????? verificar todos os detalhes abaixo....................):
+8. Apenas no servidor do APS Cloud (???????????????????? verificar todos os detalhes abaixo....................):
    a. Zippar os seguintes arquivos para o arquivo PatchNuvem.3.1.0.zip:
        	    - bin\Versao.bat 
 	   		- bin\VerificarUsuarioAdministrador.bat
@@ -114,23 +108,23 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
    		  (viii) Ajeitar os ícones no menu de Windows manualmente (no caso que isso não foi automatizado ainda)
    		  
    
-10. Em todos exceto no APS Cloud:
-    Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
-    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
+9. Em todos exceto no APS Cloud:
+   Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
+   no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-11. Em todos os casos: 
+10. Em todos os casos: 
       - Acompanhar 15 minutos se o Integrador começa executar automaticamente
       - Verificar se o Integrador gerou o novo arquivo:
      		- Job15a15min.%1.log no caso do servidor do APS Cloud
      		- Job15a15min.log    em todos os outros casos
      
-12. Apenas no caso do servidor do monitoramento: 
+11. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
      
      
-13. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+12. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
     (ii)  Compilar o arquivo .jar
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
