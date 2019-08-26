@@ -58,8 +58,10 @@ import mslinks.ShellLink;
 
 import org.firebirdsql.jdbc.FBDriver   ;
 import java.sql.DriverManager          ;
+import java.sql.ResultSet;
 import java.sql.Connection             ; 
 import java.sql.SQLException           ;
+import java.sql.Types;
 
 public class TestadorSnippets {
 
@@ -675,6 +677,67 @@ public class TestadorSnippets {
 		  System.out.println("Utils.calcularMinutoAgendamento(" + Integer.toString(idFornecedor) + ") = " + Utils.calcularMinutoAgendamento(false, idFornecedor));		  
 	  }
 	  
+	  private static void testarMapaCotacao() throws SQLException {
+	      SQLServerDriver sqlsrvDriver = new SQLServerDriver() ; 
+	      DriverManager.registerDriver( sqlsrvDriver ) ; 	
+	      //connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+	    	//         "databaseName=AdventureWorks;user=UserName;password=*****";  
+	      String connectionString = "jdbc:sqlserver://" + IntegracaoFornecedorCompleta.enderecoIpServidorBancoDeDados + ":" + IntegracaoFornecedorCompleta.portaServidorBancoDeDados + ";databaseName=" + IntegracaoFornecedorCompleta.instanciaBancoDeDados; 
+	      java.sql.Connection conn = DriverManager.getConnection(connectionString, IntegracaoFornecedorCompleta.usernameBancoDeDados, IntegracaoFornecedorCompleta.senhaBancoDeDados ) ;	    
+
+    	  System.out.println("IntegracaoFornecedorCompleta.enderecoIpServidorBancoDeDados = " + IntegracaoFornecedorCompleta.enderecoIpServidorBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.portaServidorBancoDeDados = " + IntegracaoFornecedorCompleta.portaServidorBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.instanciaBancoDeDados = " + IntegracaoFornecedorCompleta.instanciaBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.usernameBancoDeDados = " + IntegracaoFornecedorCompleta.usernameBancoDeDados);
+    	  System.out.println("IntegracaoFornecedorCompleta.senhaBancoDeDados = " + IntegracaoFornecedorCompleta.senhaBancoDeDados);
+
+      // java.sql.Statement stmt = conn.createStatement();
+      //  stmt.execute("SET ARITHABORT OFF");
+      //  System.out.println("Passou SET ARITHABORT OFF");
+    	  
+    	  // ALTER PROCEDURE [dbo].[MapaFornecedorCotacao] ( @idPreOrdem int,  @idComprador int,  @take int = 50 ,  @skip int = 0, @txt varchar(50)) as
+    	  // ALTER PROCEDURE [dbo].[MapaCotacao] (@idCotacao int ,  @idComprador int = 1 ,  @take int = 20 ,  @skip int = 0, @ids_reqs varchar(1024) = null, @txt varchar(50)) as
+
+    	  java.sql.CallableStatement stmtMapa = conn.prepareCall("{call dbo.MapaCotacao(?,?,?,?,?,?)}");
+       // java.sql.CallableStatement stmtMapa = conn.prepareCall("{call dbo.MapaCotacao(?,?,?,?,?,?)}");
+    	  stmtMapa.setInt(1, 34256);
+    	  stmtMapa.setInt(2, 513);
+    	  stmtMapa.setInt(3, 20);
+    	  stmtMapa.setInt(4, 0);
+    	  stmtMapa.setNull(5, Types.VARCHAR);
+    	  stmtMapa.setNull(6, Types.VARCHAR);
+    	  boolean resultsExecute = stmtMapa.execute();
+    	  System.out.println("Passou call dbo.MapaCotacao");
+    	  
+		  System.out.println("resultsExecute = " + resultsExecute);
+		  
+          ResultSet rSetTotal = stmtMapa.getResultSet();
+          while (rSetTotal.next())
+          {
+         	  System.out.println("Total = " + rSetTotal.getString("total"));
+          }
+          // !!!!!!! O ACIMA NÃO FUNCIONOU!!!!!!!!!!!!!!!!!!!
+          // !!!!!!! O ACIMA NÃO FUNCIONOU!!!!!!!!!!!!!!!!!!!
+          // !!!!!!! O ACIMA NÃO FUNCIONOU!!!!!!!!!!!!!!!!!!!
+          // !!!!!!! O ACIMA NÃO FUNCIONOU!!!!!!!!!!!!!!!!!!!
+          // !!!!!!! O ACIMA NÃO FUNCIONOU!!!!!!!!!!!!!!!!!!!
+
+    	  boolean results = stmtMapa.getMoreResults();
+		  System.out.println("results = " + results);
+    	  ResultSet rSetMapa = stmtMapa.getResultSet();
+    	  
+    	  while (rSetMapa.next())
+    	  {
+    		  System.out.println("Marca = " + rSetMapa.getString("ds_marca"));
+    	  }
+    	  rSetMapa.close();
+      //  stmt.close();
+    	  stmtMapa.close();
+    	  conn.close();
+			
+	  }
+
+	  
  	  public static void main(String[] args) throws Exception {
 
 		try
@@ -710,7 +773,8 @@ public class TestadorSnippets {
 		 // testarRemocaoRaizMenuWindows();
 		 // testarGetIsAmbienteNuvem();
 		 // testarSetIconLocation();
-		    testarCalculoAgendamentos();
+		 // testarCalculoAgendamentos();
+			testarMapaCotacao();
          
 
          // throw new Exception("try");
