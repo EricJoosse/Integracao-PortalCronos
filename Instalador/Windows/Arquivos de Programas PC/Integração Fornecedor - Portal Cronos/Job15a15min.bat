@@ -21,8 +21,22 @@ REM Para evitar travamento deste Job15a15min.bat e ignoramento pelo Windows Sche
 REM devido a travamento do arquivo de log: 
 if "%1"=="" (
   call bin\CaminhoJRE.bat Job15a15min.log IntegracaoFornecedorCompleta %1
+  set arquivoLog="Job15a15min.log"
 ) else (
   call bin\CaminhoJRE.bat Job15a15min.%1.log IntegracaoFornecedorCompleta %1
+  set arquivoLog="Job15a15min.%1.log"
+)
+
+
+set tamanhoArqLog=0
+
+FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
+
+if %tamanhoArqLog% GTR 0 (
+    echo.
+) else (
+  if exist Job15a15min.log del /f /q Job15a15min.log
+  if exist Job15a15min.%1.log del /f /q Job15a15min.%1.log
 )
 
 ENDLOCAL
