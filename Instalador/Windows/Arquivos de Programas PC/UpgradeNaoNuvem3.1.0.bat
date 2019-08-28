@@ -55,6 +55,7 @@ if %tamanhoArqLog% GTR 0 (
 ) else (
     SCHTASKS /Create /TN "Integração Portal Cronos - Fornecedor" /XML "C:/Arquivos de Programas PC/Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
     SCHTASKS /Run /TN "Integração Portal Cronos - Fornecedor"
+    if exist GeradorTarefaWindowsNaoNuvem.log del /f /q GeradorTarefaWindowsNaoNuvem.log 
 )
 
 cd\

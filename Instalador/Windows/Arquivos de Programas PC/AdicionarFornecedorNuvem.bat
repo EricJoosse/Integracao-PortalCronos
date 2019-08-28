@@ -81,6 +81,7 @@ if %tamanhoArqLog% GTR 0 (
   SCHTASKS /Create /TN "Integração Portal Cronos - %nmFornecedor%" /XML "C:/Arquivos de Programas PC/FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml"
   SCHTASKS /Run /TN "Integração Portal Cronos - %nmFornecedor%"
 
+  if exist AdicionadorFornecedorNuvem.log del /f /q AdicionadorFornecedorNuvem.log 
   cd\
   cd "Arquivos de Programas PC"
   if exist FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml del /f /q FornecedorAdicionalNuvem.Windows2008_R2.TaskSchedule.xml

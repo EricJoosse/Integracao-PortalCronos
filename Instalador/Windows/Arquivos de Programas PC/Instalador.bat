@@ -80,6 +80,7 @@ if %tamanhoArqLog% GTR 0 (
     del %temp%\TEMPmessage.vbs /f /q
     start notepad Instalador.log
 ) else if %tipoInstalacao% == 1 (
+    if exist Instalador.log del /f /q Instalador.log 
     echo.
     echo          Primeira fase da instalação concluida!
     echo.
@@ -87,6 +88,8 @@ if %tamanhoArqLog% GTR 0 (
     echo MSGBOX "Primeira fase da instalação concluida!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
+) else (
+    if exist Instalador.log del /f /q Instalador.log 
 )
 
 

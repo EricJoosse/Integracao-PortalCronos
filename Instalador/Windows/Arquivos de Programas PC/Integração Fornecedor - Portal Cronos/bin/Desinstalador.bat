@@ -27,6 +27,7 @@ if %tamanhoArqLog% GTR 0 (
     ENDLOCAL
     exit /B 1
 ) else (
+    if exist Desinstalador.log del /f /q Desinstalador.log 
     ENDLOCAL
 REM /B para não fechar o script chamador:  
     exit /B 0

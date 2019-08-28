@@ -121,6 +121,7 @@ if %tamanhoArqLog% GTR 0 (
     del %temp%\TEMPmessage.vbs /f /q
     start notepad RemovedorFornecedorNuvem.log
 ) else (
+  if exist RemovedorFornecedorNuvem.log del /f /q RemovedorFornecedorNuvem.log 
   cd\
   cd "Arquivos de Programas PC"
   cd "Integração Fornecedor - Portal Cronos"

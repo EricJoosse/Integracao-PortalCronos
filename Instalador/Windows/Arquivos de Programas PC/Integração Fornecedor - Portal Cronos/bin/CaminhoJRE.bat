@@ -36,6 +36,8 @@ if "%1"=="Desinstalador.log" (
 ) else if "%1"=="GeradorTarefaWindowsNaoNuvem.log" (
   if exist GeradorTarefaWindowsNaoNuvem.log del /f /q GeradorTarefaWindowsNaoNuvem.log 
 )
+REM Não apagar o arquivo Job15a15min.log aqui, pois neste lugar não verificamos se o tamanho 
+REM deste arquivo é zero ou se tem conteúdo  
 
 REM Usar o caminho completo do JRE para o caso que tiver 2 JRE´s no mesmo servidor 
 REM e o caminho do outro JRE está na primeira posição no PATH de DOS:

@@ -44,6 +44,7 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
    				- bin\VerificarUsuarioAdministrador.bat
    				- bin\CaminhoJRE.bat
    				- bin\Inicializacoes.bat
+   				- bin\Desinstalador.bat
    				- UpgradeNaoNuvem3.1.0.bat
 	        	- Desinstalar_Integração_Fornecedor_PortalCronos.bat
    				- Job15a15min.bat 
@@ -85,6 +86,7 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
 	   		- bin\VerificarUsuarioAdministrador.bat
 			- bin\CaminhoJRE.bat
 			- bin\Inicializacoes.bat
+			- bin\Desinstalador.bat
    			- Job15a15min.bat
         	- integr-fornecedor-3.1.0.jar
         	- AdicionarFornecedorNuvem.bat
