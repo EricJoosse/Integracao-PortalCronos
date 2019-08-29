@@ -52,6 +52,7 @@ Manual Upgrade dos Ambientes de Produção de 3.0.0 para 3.1.0
 
 5. Em todos os servidores: 
           - Remover os seguintes arquivos:
+				- /bin/DesinstalarManualTI.bat (pois foi renomeado para /bin/Desinstalador.bat)
         		- Job15a15minOfertamentoJava_Windows.bat
         		- Job15a15minOfertamentoJava.log
    
