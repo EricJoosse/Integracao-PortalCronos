@@ -31,7 +31,13 @@ public class Instalador {
 			int idFornecedor = Integer.parseInt(args[0]);		 
 			
 			FornecedorRepositorio fRep = new FornecedorRepositorio();
-			Fornecedor f = fRep.getFornecedor(idFornecedor);
+			
+			Fornecedor f = null;
+			
+			if (idFornecedor == -1)
+   			    f = fRep.getFornecedor(null);
+			else
+				f = fRep.getFornecedor(idFornecedor);
 
 			// Observações: 
 			// 1. idFornecedor == -1 no caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos:

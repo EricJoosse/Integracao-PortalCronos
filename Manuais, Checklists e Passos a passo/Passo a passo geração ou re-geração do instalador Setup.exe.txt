@@ -23,7 +23,9 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
     
 2. (i)  Primeiro verificar se este arquivo bate com o arquivo a ser excluido 
         no GitHub.
-   (ii) Deletar ou renomear o arquivo "Instalador do Integrador Fornecedores - Portal Cronos.3.0.0.Win2008.R2.SP1.exe" 
+   (ii) Deletar ou renomear um dos seguintes arquivos:
+   			-     "Instalador do Integrador Fornecedores - Portal Cronos.3.1.0.Win2008.R2.SP1.exe"
+   			- ou  "Instalador do Monitorador.3.1.0.Win2008.R2.SP1.exe"
         pelo Eclipse (não pelo Windows Explorer!). 
      
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
@@ -38,30 +40,34 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
       - WinRAR                   : Mudar .rar para .zip
       - WinRAR                   : Método de compressão : Ótimo
       - WinRAR                   : marcar checkbox SFX
-      - Nome                     : Instalador do Integrador Fornecedores - Portal Cronos.3.1.0.Win2008.R2.SP1.exe
+      - Nome                     : (i)      Instalador do Integrador Fornecedores - Portal Cronos.3.1.0.Win2008.R2.SP1.exe
+                                   (ii) ou  Instalador do Monitorador.3.1.0.Win2008.R2.SP1.exe
                                    Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe", 
                                          ajustar o mesmo no final de Instalador_Integrador.bat e/ou Instalador_Monitorador.bat.
 
 	  - Em todos os casos pelo menos clicar no botão Aba "Avancado" do WinRAR > botão "Opções SFX..."
 	    pois se não fazer isso, WinRAR não gera um SFX, mesmo se marcou o checkbox SFX.
 	    
-	  - Apenas na primeira vez em uma máquina de desenvolvimento nova ou em outra máquina diferente:    
+	  - Apenas no caso da primeira vez em uma máquina de desenvolvimento nova ou em outra máquina diferente:    
    		Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
-	      - Sub-aba "Geral"          : clicar botão "Salvar configurações SFX" 
-    	                               e fazer as configurações abaixo: 
-        	                               (na segunda vez tudo já está salvo, apenas precisa abrir 
-            	                            a aba "Avancado" > botão "Opções SFX..." e clicar OK, 
-                	                        e não precisa fazer o resto abaixo.)
 	      - Caminho para extração    : C:\Arquivos de Programas PC (sem double quotes, e sem barra no final)
 	      - Marcar                   : Absolute path
 	      - Marcar ou deixar marcado : Checkbox "Salvar e restaurar caminho"
 	      - Executar após a extração :     Instalador_Integrador.bat
-	                                   OU: Instalador_Monitorador.bat
+	                                   ou  Instalador_Monitorador.bat
 	                                   (pelo menos o Winrar 4.01 tem este After Extraction Trigger)
 	      - Sub-aba "Avançado"       : Marcar checkbox "Pedido de acesso administrativo"
 	      - Sub-aba "Métodos"        : Selecionar "Modo silencioso" > "Ocultar tudo"     
 	      - Sub-aba "Atualizar"      : Marcar "substituir todos os arquivos"
+	      - Sub-aba "Geral"          : clicar botão "Salvar configurações SFX" 
+       	                               (na segunda vez tudo já está salvo, apenas precisa abrir 
+           	                            a aba "Avancado" > botão "Opções SFX..." e clicar OK, 
+               	                        e não precisa repetir os itens acima.)
 
-
+	  - Na segunda vez na mesma máquina de desenvolvimento: 
+   		Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
+	      - Executar após a extração : Escolher:
+	                                      Instalador_Integrador.bat
+	                                   ou Instalador_Monitorador.bat
 
  

@@ -36,26 +36,11 @@ exit
 :PularErroTipoWin
 
 
-echo.
-echo.
-echo Tipo de instalação: 
-echo.
-echo 1 = Hospedagem Local
-echo 2 = Nuvem
-echo.
+REM Tipo de instalação: 
+REM 	1 = Hospedagem Local
+REM 	2 = Nuvem
 
-SET /P tipoInstalacao=Favor digitar o ID do tipo de instalação: 
-IF "%tipoInstalacao%"=="" GOTO ErroTipoInst
-GOTO PularErroTipoInst
-:ErroTipoInst
-echo MSGBOX "Erro: ID do tipo de instalação não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
-call %temp%\TEMPmessage.vbs
-del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
-:PularErroTipoInst
-
-
+SET tipoInstalacao=1
 
 REM set osVersion=Windows_Server_2016
 REM set osVersion=Windows_Server_2012_R2
@@ -250,10 +235,6 @@ if %idFornecedor% == -1 (
     attrib "Arquivos de Programas PC" +S +H
 )
 
-if %tipoInstalacao% == 2 (
-    attrib "Arquivos de Programas PC" +S +H
-)
-
 cd "Arquivos de Programas PC"
 
 del /f /q *.reg
@@ -293,15 +274,11 @@ cd "Arquivos de Programas PC"
 REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
 REM após o duplo-clique para executar a instalação:
 REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
-del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+del /f /q C:\temp\"Instalador do Monitorador.*.exe"
 
 
 
 REM ================ Instalar Task Não-Nuvem no Windows Scheduler: ========================================
-
-if %tipoInstalacao% == 2 (
-    goto SKIP_TASK_WINDOWS_SCHEDULER
-)
 
 cd\
 cd "Arquivos de Programas PC"
@@ -342,20 +319,6 @@ cd "Arquivos de Programas PC"
 
 REM Apagar o arquivo "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" e outros arquivos parecidos: 
 del /f /q *.xml
-
-if %tipoInstalacao% == 2 (
-    call AdicionarFornecedorNuvem.bat
-
-    echo.
-    echo          Primeira fase da instalação concluida!
-    echo          Para complementar a instalação em qualquer momento,
-    echo          veja as diversas opções no menu de Windows Iniciar ^> Portal Cronos.
-    echo.
-    
-    echo MSGBOX "Primeira fase da instalação concluida! Para complementar a instalação em qualquer momento, veja as diversas opções no menu de Windows Iniciar > Portal Cronos." > %temp%\TEMPmessage.vbs
-    call %temp%\TEMPmessage.vbs
-    del %temp%\TEMPmessage.vbs /f /q
-)
 
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
