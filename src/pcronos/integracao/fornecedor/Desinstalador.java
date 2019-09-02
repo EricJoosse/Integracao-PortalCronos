@@ -53,7 +53,12 @@ public class Desinstalador {
 			
 			// siglaSistema == "PCronos" no caso de instalação do serviço de monitoramento automático 
 			// no servidor de aplicação do Portal Cronos:
-    		if (!siglaSistema.equals("PCronos")) {
+			if (siglaSistema.equals("XXX") && cnpjFornecedor.equals("11222333444455")) 
+			{
+				throw new Exception("Erro! Tipo de aplicativo (Integrador ou Monitorador) desconhecido! Favor preencher pelo menos uma das configurações \"SiglaSistema\" ou \"CnpjFornecedor\"!");
+		    }
+			else if (!siglaSistema.equals("PCronos")) 
+		    {
 			    FornecedorRepositorio fRep = new FornecedorRepositorio();
 
 			 // int idFornecedor = Integer.parseInt(args[0]);			    
