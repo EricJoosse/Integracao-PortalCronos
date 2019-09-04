@@ -1,0 +1,64 @@
+Manual como incluir um fornecedor nuvem novo no Monitorador
+===========================================================
+
+
+1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
+    Descobrir o idFornecedor editando e executando os seguintes selects:
+
+select id_fornecedor_fornec, id_pessoa
+  from dbo.Fornecedor 
+ where id_pessoa in (select  id_pessoa
+                      from  dbo.Pessoa
+                     where  nm_pessoa like '%Atacamax%')
+
+select  id_pessoa, nm_pessoa, *
+                      from  dbo.Pessoa
+                     where  nm_pessoa like '%Atacamax%'
+
+
+
+2. Adicionar uma linha na tabela de fornecedores auxiliar no início do arquivo 
+   "/scripts/Monitoramento_Integração_Fornecedor.sql" no projeto Eclipse 
+   informando Nome + ID do fornecedor novo
+
+
+3. No arquivo /scripts/sp_monitorarIntegracaoFornecedores.sql no projeto Eclipse: 
+      (i)  adicionar: 
+                --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> xxx) -- AAAAAAAAAA
+	       depois de: 
+			    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 385) -- Walmart
+   
+      (ii) adicionar:
+				  or @fornecedor_id = xxx -- AAAAAAAAA ainda não está em produção 
+	       depois de: 
+				  or @fornecedor_id = 385 -- Walmart ainda não está em produção 
+
+           (Dica: pesquisar o texto "Para facilitar a manutenção deste if" nesta sp).
+            
+      (iii) executar o script na base de produção
+
+      
+4. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+   no FornecedorRepositorio.java, no static constructor:
+       (i)   adicionar o fornecedor novo no final da lista de fornecedores, 
+             copiando outro fornecedor nuvem (por exemplo Marizpan, Atacamax), 
+       (ii)  preencher IdFornecedor, NomeFantasiaEmpresa, cnpjFornecedor, usuarioWebservice,
+             ResponsavelDeParasProdutos.
+       (iii) não se esqueça adicionar i++ antes do fornecedor novo
+       (iv)  não se esqueça incremementar o variável constante "qtdFornecedores" mais 1
+       (v)   verificar também qual é o max dos "f[i].SequenciaInstanciaNuvem" do conjunto de fornecedores nuvem
+             e aumentar +1 
+    
+      
+5. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+   preencher todas as outras colunas no arquivo Tabela Fornecedores_Versões.txt.
+    
+6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+   executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
+   (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
+        
+7. Atualizar o arquivo integr-fornecedor-x.y.z.jar no servidor que está hospedando 
+   o serviço de monitoramento para evitar o erro que o idFornecedor novo não existe
+   no FornecedorRepositorio.getFornecedor()
+       

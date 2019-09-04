@@ -58,7 +58,8 @@ public class AdicionadorFornecedorNuvem
 		{
 		    LocalDateTime horaInicio = LocalDateTime.now();
 			String assunto = "Fornecedor novo " + nmFornecedor + " adicionado na integração APS Cloud / PCronos!";
-			String body = "Favor adicionar este fornecedor (por enquanto manualmente) no Monitorador.";
+			String body = "Favor incluir este fornecedor (por enquanto manualmente) no Monitorador: " + "\r\n"
+						+ "veja o arquivo \"Passo a passo inclusão fornecedor nuvem no Monitorador.txt\" no projeto Eclipse." + "\r\n";
             EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "INI", null);
 		}
 
