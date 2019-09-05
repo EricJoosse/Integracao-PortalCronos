@@ -121,6 +121,7 @@ declare c cursor for
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  171) -- Propão
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   14) -- Padeirão
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 1995) -- Marizpan
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>    1) -- Atacamax
 
 -- 1. DESCOMENTAR OS "and"´S DOS f.id_fornecedor_fornec´S ACIMA APENAS PARA SUPRIMIR QUANTIDADES GRANDES DE EMAILS TEMPORARIAMENTE, 
 --    NO CASO QUE JÁ SABEMOS QUE FORNECEDOR X NÃO ESTÁ FUNCIONANDO MAIS POR ENQUANTO; 
@@ -143,6 +144,7 @@ while @@fetch_status = 0
 
   if @fornecedor_id =    0 -- Para facilitar a manutenção deste if 
   or @fornecedor_id =  385 -- Walmart  ainda não está em produção 
+  or @fornecedor_id =    1 -- Atacamax ainda não está em produção 
     begin
       if (
          --  ((select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))

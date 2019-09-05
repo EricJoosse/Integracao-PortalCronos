@@ -9,7 +9,7 @@ public class FornecedorRepositorio {
 
     static {
 		hashMap = new HashMap<Integer, Fornecedor>(); 
-		final int qtdFornecedores = 12;
+		final int qtdFornecedores = 13;
 		Fornecedor[] f = new Fornecedor[qtdFornecedores];
 
 		for (int j=0; j < (qtdFornecedores); j++) {
@@ -232,37 +232,98 @@ public class FornecedorRepositorio {
 		f[i].MemoriaRamLivre = "";
 
 		
-		i++;		
+		
+		
+		String versaoIntegradorApsCloud = "3.0.0";
+		String SiglaSistemaFornecedorApsCloud = "APS";
+		String AplicativoDesktopRemotoApsCloud = "AnyDesk";
+		String tipoSOApsCloud = "Windows Server 2008 R2 SP1"; 
+		String dirProgramFilesApsCloud = "Program Files (x86)";
+		String versaoJREApsCloud = "jre1.8.0_191";
+		String MemoriaRamLivreApsCloud = "0 - 200 MB";
+		
+		String EmailResponsavelTIApsCloud = "saulo@apsinformatica.com.br";
+		String SkypeResponsavelTIApsCloud = "Saulo Gomes de Lima (saulo_analista)";
+		String ApelidoResponsavelTIApsCloud = "Saulo"; 
+		String FuncaoResponsavelTIApsCloud = "Analista";
+		
+		String EmailResponsavelTIAlternativoApsCloud = "bernardino@apsinformatica.com.br";		
+		String SkypeResponsavelTIAlternativoApsCloud = "Bernardino Borba (live:berna31pe)";		
+		String ApelidoResponsavelTIAlternativoApsCloud = "Bernardino";
+		String FuncaoResponsavelTIAlternativoApsCloud = "Sócio do APS";
+		
+		String EmailResponsavelTI_NuvemApsCloud = "saulo@apsinformatica.com.br";
+		String SkypeResponsavelTI_NuvemApsCloud = "Saulo Gomes de Lima (saulo_analista)"; 
+		String ApelidoResponsavelTI_NuvemApsCloud = "Saulo"; 
+
+		
+		
+		i++;
 		f[i].IdFornecedor = 1995; // APS Cloud - primeiro fornecedor de muitos
 		f[i].NomeFantasiaEmpresa = "Marizpan";   // APS Cloud - primeiro fornecedor de muitos
 		f[i].cnpjFornecedor = "12286800000108";  // APS Cloud - primeiro fornecedor de muitos
-		f[i].versaoIntegrador = "3.0.0";
-		f[i].SiglaSistemaFornecedor = "APS";
+		f[i].versaoIntegrador = versaoIntegradorApsCloud;
+		f[i].SiglaSistemaFornecedor = SiglaSistemaFornecedorApsCloud;
 
 		f[i].IsServicoNuvem = true;
 		f[i].SequenciaInstanciaNuvem = 1;
 
-		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].AplicativoDesktopRemoto = AplicativoDesktopRemotoApsCloud;
 		f[i].usuarioWebservice = "ws-marizpan";  // APS Cloud - primeiro fornecedor de muitos
-		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
-		f[i].dirProgramFiles = "Program Files (x86)";
-		f[i].versaoJRE = "jre1.8.0_191";
-		f[i].MemoriaRamLivre = "0 - 200 MB";
+		f[i].tipoSO = tipoSOApsCloud; 
+		f[i].dirProgramFiles = dirProgramFilesApsCloud;
+		f[i].versaoJRE = versaoJREApsCloud;
+		f[i].MemoriaRamLivre = MemoriaRamLivreApsCloud;
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
 
-		f[i].EmailResponsavelTI = "saulo@apsinformatica.com.br";
-		f[i].SkypeResponsavelTI = "Saulo Gomes de Lima (saulo_analista)";
-		f[i].ApelidoResponsavelTI = "Saulo"; 
-		f[i].FuncaoResponsavelTI = "Analista";
+		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
+		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
+		f[i].ApelidoResponsavelTI = ApelidoResponsavelTIApsCloud; 
+		f[i].FuncaoResponsavelTI = FuncaoResponsavelTIApsCloud;
 		
-		f[i].EmailResponsavelTIAlternativo = "bernardino@apsinformatica.com.br";		
-		f[i].SkypeResponsavelTIAlternativo = "Bernardino Borba (live:berna31pe)";		
-		f[i].ApelidoResponsavelTIAlternativo = "Bernardino";
-		f[i].FuncaoResponsavelTIAlternativo = "Sócio do APS";
+		f[i].EmailResponsavelTIAlternativo = EmailResponsavelTIAlternativoApsCloud;		
+		f[i].SkypeResponsavelTIAlternativo = SkypeResponsavelTIAlternativoApsCloud;		
+		f[i].ApelidoResponsavelTIAlternativo = ApelidoResponsavelTIAlternativoApsCloud;
+		f[i].FuncaoResponsavelTIAlternativo = FuncaoResponsavelTIAlternativoApsCloud;
 		
-		f[i].EmailResponsavelTI_Nuvem = "saulo@apsinformatica.com.br";
-		f[i].SkypeResponsavelTI_Nuvem = "Saulo Gomes de Lima (saulo_analista)"; 
-		f[i].ApelidoResponsavelTI_Nuvem = "Saulo"; 
+		f[i].EmailResponsavelTI_Nuvem = EmailResponsavelTI_NuvemApsCloud;
+		f[i].SkypeResponsavelTI_Nuvem = SkypeResponsavelTI_NuvemApsCloud; 
+		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud; 
+
+		
+
+		
+		i++;
+		f[i].IdFornecedor = 1; // APS Cloud - primeiro fornecedor de muitos
+		f[i].NomeFantasiaEmpresa = "Atacamax";   // APS Cloud - primeiro fornecedor de muitos
+		f[i].cnpjFornecedor = "08305623000184";  // APS Cloud - primeiro fornecedor de muitos
+		f[i].versaoIntegrador = versaoIntegradorApsCloud;
+		f[i].SiglaSistemaFornecedor = SiglaSistemaFornecedorApsCloud;
+
+		f[i].IsServicoNuvem = true;
+		f[i].SequenciaInstanciaNuvem = 2;
+
+		f[i].AplicativoDesktopRemoto = AplicativoDesktopRemotoApsCloud;
+		f[i].usuarioWebservice = "ws-atacamax";  // APS Cloud - primeiro fornecedor de muitos
+		f[i].tipoSO = tipoSOApsCloud; 
+		f[i].dirProgramFiles = dirProgramFilesApsCloud;
+		f[i].versaoJRE = versaoJREApsCloud;
+		f[i].MemoriaRamLivre = MemoriaRamLivreApsCloud;
+		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
+
+		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
+		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
+		f[i].ApelidoResponsavelTI = ApelidoResponsavelTIApsCloud; 
+		f[i].FuncaoResponsavelTI = FuncaoResponsavelTIApsCloud;
+		
+		f[i].EmailResponsavelTIAlternativo = EmailResponsavelTIAlternativoApsCloud;		
+		f[i].SkypeResponsavelTIAlternativo = SkypeResponsavelTIAlternativoApsCloud;		
+		f[i].ApelidoResponsavelTIAlternativo = ApelidoResponsavelTIAlternativoApsCloud;
+		f[i].FuncaoResponsavelTIAlternativo = FuncaoResponsavelTIAlternativoApsCloud;
+		
+		f[i].EmailResponsavelTI_Nuvem = EmailResponsavelTI_NuvemApsCloud;
+		f[i].SkypeResponsavelTI_Nuvem = SkypeResponsavelTI_NuvemApsCloud; 
+		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud; 
 
 		
 /*  Template:

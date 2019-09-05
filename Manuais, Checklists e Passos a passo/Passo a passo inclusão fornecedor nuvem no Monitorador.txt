@@ -4,7 +4,7 @@ Manual como incluir um fornecedor nuvem novo no Monitorador
 
 1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
     criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
-    Descobrir o idFornecedor editando e executando os seguintes selects:
+    Descobrir o idFornecedor e o CNPJ editando e executando os seguintes selects:
 
 select id_fornecedor_fornec, id_pessoa
   from dbo.Fornecedor 
@@ -12,7 +12,7 @@ select id_fornecedor_fornec, id_pessoa
                       from  dbo.Pessoa
                      where  nm_pessoa like '%Atacamax%')
 
-select  id_pessoa, nm_pessoa, *
+select  id_pessoa, nm_pessoa, nr_cnpj_pessoa, *
                       from  dbo.Pessoa
                      where  nm_pessoa like '%Atacamax%'
 
@@ -47,6 +47,7 @@ select  id_pessoa, nm_pessoa, *
              ResponsavelDeParasProdutos.
        (iii) não se esqueça adicionar i++ antes do fornecedor novo
        (iv)  não se esqueça incremementar o variável constante "qtdFornecedores" mais 1
+             no início do static constructor
        (v)   verificar também qual é o max dos "f[i].SequenciaInstanciaNuvem" do conjunto de fornecedores nuvem
              e aumentar +1 
     

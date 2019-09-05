@@ -28,7 +28,7 @@ select id_fornecedor_fornec, id_pessoa
                       from  dbo.Pessoa
                      where  nm_pessoa like '%Atacamax%')
 
-select  id_pessoa, nm_pessoa, *
+select  id_pessoa, nm_pessoa, nr_cnpj_pessoa, *
                       from  dbo.Pessoa
                      where  nm_pessoa like '%Atacamax%'
 
