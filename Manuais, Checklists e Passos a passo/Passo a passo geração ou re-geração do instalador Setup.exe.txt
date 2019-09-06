@@ -42,7 +42,8 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
       - WinRAR                   : marcar checkbox SFX
       - Nome                     : (i)      Instalador do Integrador Fornecedores - Portal Cronos.3.1.0.Win2008.R2.SP1.exe
                                    (ii) ou  Instalador do Monitorador.3.1.0.Win2008.R2.SP1.exe
-                                   Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe", 
+                                   Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+                                         ou "Instalador do Monitorador.*.exe", 
                                          ajustar o mesmo no final de Instalador_Integrador.bat e/ou Instalador_Monitorador.bat.
 
 	  - Em todos os casos pelo menos clicar no botão Aba "Avancado" do WinRAR > botão "Opções SFX..."

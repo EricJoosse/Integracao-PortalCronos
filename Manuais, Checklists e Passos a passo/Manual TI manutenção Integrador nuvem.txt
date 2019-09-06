@@ -1,8 +1,8 @@
-Manual para adicionamento de mais um fornecedor novo no Integrador PCronos/APS Cloud
-====================================================================================
+Manual como adicionar mais um fornecedor novo no Integrador PCronos/APS Cloud, como editar, e como remover
+==========================================================================================================
 
-Enviar 2 emails de conclusão separados, uma para Leão, outro para Bernardino:
-=============================================================================
+Enviar 2 emails de conclusão separados, um email para Leão, outro para Bernardino:
+==================================================================================
 
 1. 
 

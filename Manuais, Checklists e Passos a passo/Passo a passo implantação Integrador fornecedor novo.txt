@@ -842,7 +842,7 @@ SELECT u.cd_usuario_sistema_ususis
 		
 		
   31. Apenas no caso de instalação como serviço nuvem:
-  		- enviar os 2 emails no "Manual Adicionamento fornecedor novo na nuvem.txt" para Leão e a TI do fornecedor, 
+  		- enviar os 2 emails no "Manual TI manutenção Integrador nuvem.txt" para Leão e a TI do fornecedor, 
   		  separadamente.
   		  
   		

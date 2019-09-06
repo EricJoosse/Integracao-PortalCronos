@@ -52,12 +52,13 @@ select c.id_comprador_compr
        inner join dbo.Pessoa pe on pe.id_pessoa = c.id_pessoa
  where c.id_pessoa in (select  id_pessoa
                         from  dbo.Pessoa
-                       where  nm_pessoa like '%Australia%')
--> 101
+                       where  nm_pessoa like '%Papacapim%')
+-> 513
 
 update [dbo].[Usuario_Sistema]  
     set id_fornecedor_fornec = null
       , id_perfil_acesso_perace = 4 -- Gerente Compras
       , id_central_compra_ctrcom = null
-      , id_comprador_compr = 101
+      , id_comprador_compr = 513
+	  , dt_desativacao_ususis = null
   where cd_usuario_sistema_ususis = 'ericcoringa'

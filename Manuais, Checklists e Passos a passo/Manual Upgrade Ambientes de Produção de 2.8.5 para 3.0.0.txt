@@ -155,7 +155,7 @@ A. Upgrade de forma automatizada:
 11. Após todos os testes, alterar o arquivo config da Marizpan de volta de "H" para "P"
     e a senha de ws-marizpan no caso que Leão tinha alterada esta senha
 
-12. Enviar os 2 emails no "Manual Adicionamento fornecedor novo na nuvem.txt" para Leão e Bernardino, separadamente. 
+12. Enviar os 2 emails no "Manual TI manutenção Integrador nuvem.txt" para Leão e Bernardino, separadamente. 
  
  
 B. Upgrade de forma manual:
@@ -317,6 +317,6 @@ B. Upgrade de forma manual:
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
    
-11. Enviar os 2 emails no "Manual Adicionamento fornecedor novo na nuvem.txt" para Leão e Bernardino, separadamente. 
+11. Enviar os 2 emails no "Manual TI manutenção Integrador nuvem.txt" para Leão e Bernardino, separadamente. 
  
 
