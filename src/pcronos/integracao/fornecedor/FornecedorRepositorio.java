@@ -294,22 +294,22 @@ public class FornecedorRepositorio {
 
 		
 		i++;
-		f[i].IdFornecedor = 1; // APS Cloud - primeiro fornecedor de muitos
-		f[i].NomeFantasiaEmpresa = "Atacamax";   // APS Cloud - primeiro fornecedor de muitos
-		f[i].cnpjFornecedor = "08305623000184";  // APS Cloud - primeiro fornecedor de muitos
-		f[i].versaoIntegrador = versaoIntegradorApsCloud;
+		f[i].IdFornecedor = 1; 
+		f[i].NomeFantasiaEmpresa = "Atacamax";   
+		f[i].cnpjFornecedor = "08305623000184";  
+		f[i].versaoIntegrador = "3.1.0"; // versaoIntegradorApsCloud;
 		f[i].SiglaSistemaFornecedor = SiglaSistemaFornecedorApsCloud;
 
-		f[i].IsServicoNuvem = true;
-		f[i].SequenciaInstanciaNuvem = 2;
+		f[i].IsServicoNuvem = false; // true;
+	 // f[i].SequenciaInstanciaNuvem = 2;
 
 		f[i].AplicativoDesktopRemoto = AplicativoDesktopRemotoApsCloud;
-		f[i].usuarioWebservice = "ws-atacamax";  // APS Cloud - primeiro fornecedor de muitos
-		f[i].tipoSO = tipoSOApsCloud; 
-		f[i].dirProgramFiles = dirProgramFilesApsCloud;
-		f[i].versaoJRE = versaoJREApsCloud;
-		f[i].MemoriaRamLivre = MemoriaRamLivreApsCloud;
-		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
+		f[i].usuarioWebservice = "ws-atacamax";  
+		f[i].tipoSO = "Windows Server 2012 R2"; //tipoSOApsCloud; 
+		f[i].dirProgramFiles = "Program Files (x86)"; // dirProgramFilesApsCloud;
+		f[i].versaoJRE = "jre1.8.0_211"; // versaoJREApsCloud;
+		f[i].MemoriaRamLivre = "17 GB"; // MemoriaRamLivreApsCloud;
+		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  
 
 		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
 		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
