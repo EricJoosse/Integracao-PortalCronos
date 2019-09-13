@@ -1,5 +1,5 @@
-Checklist instalação em um fornecedor novo 
-==========================================
+Checklist implantação Integrador em um fornecedor novo ou instalação Monitorador
+================================================================================
  
 
 IMPORTANTE !!!!!!!!
@@ -260,11 +260,19 @@ Como vai ser?
 	   (iii) No arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat": 
 	   
 		- Verificar a versão de Windows no servidor do fornecedor 
-		  e descomentar a variável "osVersion" correta no início do .bat. 
+		- No caso que a versão de Windows ainda não está na seguinte lista: 
+				echo Tipos de Windows homologados: 
+				echo.
+				echo 1 = Windows Server 2008 R2 SP1
+				echo 2 = Windows Server 2012 R2
+				echo 3 = Windows Server 2016
+		  descomentar a variável "osVersion" correta no início do Instalador_xxxxxxxx.bat. 
 		  CMD: winver
 		  ou:  systeminfo | findstr OS
 		  
-		- Verificar a variável "tipoOS=32" ou "tipoOS=64" no .bat
+		- No caso de Windows Server 2008 ou outros que têm a opção para escolher na instalação de Windows: 
+		  Verificar a variável "tipoOS=32" ou "tipoOS=64" no Instalador_xxxxxxxx.bat
+		  Obs: no caso de Windows Server 2012 ou 2016 não precisa.
 		
 		- Se a versão de Windows ainda não está homologada, 
 		  comentar "regedit.exe /s %arquivoRegedit%" no  "if %tipoOS% == 64" ou "32".		  
@@ -319,13 +327,13 @@ Como vai ser?
  
  
     4. Antes da instalação:       					       
-          0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
+        4.0. Primeiro fazer backup (no arquivo "Backup variáveis de ambiente do sistema Path de Windows.txt"):
                 (i)  do variável de ambiente do sistema "Path" de Windows: 
                 (ii) do diretório  C:\ProgramData\Oracle\Java\javapath\
                 
              e verificar:
               
-          1. Verificar se já tem outra instalação de Java nos diretórios:
+        4.1. Verificar se já tem outra instalação de Java nos diretórios:
           			- C:\Program Files\
           			- C:\Program Files (x86)\
           			- C:\Arquivos de Programas\
@@ -353,21 +361,21 @@ Como vai ser?
 								- f[i].dirProgramFiles = ".......";
 								- f[i].versaoJRE = "......";
           
-             	- Caso contrário, não adianta instalar o Integrador usando o JRE existente: 
+             	- Caso contrário,  que a JRE existente NÃO funciona, não adianta instalar o Integrador usando o JRE existente: 
 	     			- verificar se tem processos Java funcionando no taskmgr.exe
 	     			- decidir: 
 						- Skype: quem instalou Java? 
 	        			- ou talvez instalar Java nova em paralelo????
 	        			
              
-       	  2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
+       	4.2. se já tinha C:\ProgramData\Oracle\Java\javapath\ na primeira posição no PATH antes da minha instalação
        	       (i)   no variável de ambiente do usuário administrador
        	       (ii)  no variável de ambiente do sistema
-     	  3. se tem outro caminho de java no PATH e se java.exe se encontra em um dos caminhos do PATH, 
+     	4.3. se tem outro caminho de java no PATH e se java.exe se encontra em um dos caminhos do PATH, 
      	     por exemplo em C:\WINDOWS\System\
        	       (i)   no variável de ambiente do usuário administrador
        	       (ii)  no variável de ambiente do sistema
-     	  4. No caso que já tinha um C:\ProgramData\Oracle\Java\javapath\ no servidor, fazer backup dos atalhos atuais 
+     	4.4. No caso que já tinha um C:\ProgramData\Oracle\Java\javapath\ no servidor, fazer backup dos atalhos atuais 
      	     antes da instalação.
        	       (i)   do variável de ambiente do usuário administrador
        	       (ii)  do variável de ambiente do sistema
@@ -387,7 +395,7 @@ Como vai ser?
         C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat para testar isso. 
         
         Se não conseguir nada:
-        Skype: este servidor com IP público 18.214.93.120 tem alguma porta que pode ser pingado com psping -w 0 %enderecoIP%:%portaIP%? Tentei as portas 80 e 3389 porém o Amazon não deixa pingar. Meu programa só faz um psping automático quando as ofertas automáticas param de chegar no Portal Cronos, então é só uma vez por ano em média.
+        Skype: este servidor com IP público 18.214.93.120 tem alguma porta que pode ser pingada com psping -w 0 %enderecoIP%:%portaIP%? Tentei as portas 80 e 3389 porém o Amazon não deixa pingar. Meu programa só faz um psping automático quando as ofertas automáticas pararam de chegar no Portal Cronos, para saber automaticamente porque a integração parou.
         
         Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
         atualizar o endereço IP e a porta IP aberta no arquivo Tabela Fornecedores_Versões.txt.
@@ -433,8 +441,6 @@ Como vai ser?
 
  
     9.  Após a instalação:
-    
-    9a. Apagar Instalador.log no servidor do fornecedor
     
     9a. No caso: no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" (no projeto Eclipse) 
         re-comentar REM goto SKIP_JRE 
