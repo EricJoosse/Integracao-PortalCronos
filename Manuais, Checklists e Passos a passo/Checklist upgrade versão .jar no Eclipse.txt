@@ -27,8 +27,9 @@ Checklist upgrade versão .jar no Eclipse
   se não houve alteração no Manual TI
  
 - Dentro do arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt",  
-  item 3, no campo "Nome":
-  atualizar a versão dentro do nome do arquivo "Instalador do Integrador Fornecedores - Portal Cronos.*.exe". 
+  por exemplo item 3, no campo "Nome":
+  atualizar a versão dentro do nome do arquivo "Instalador do Integrador Fornecedores - Portal Cronos.*.exe" 
+  em 4 lugares. 
  
 - Se precisar: atualizar o instalador, ou registrar uma pendência. 
   Geralmente não precisa, pois a atualização do instalador já é um dos passos na instalação do Integrador 
