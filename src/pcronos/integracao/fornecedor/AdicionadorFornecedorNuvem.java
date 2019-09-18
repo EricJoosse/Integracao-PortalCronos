@@ -68,24 +68,22 @@ public class AdicionadorFornecedorNuvem
 		tarefaWindows.gravarEmArquivoXML();
 		  
 	    String atalho = "C:/Arquivos de Programas PC/AbrirConfigFornecedor.bat";
-	    // O seguinte não funciona: Windows pergunta indesejavelmente com qual programa é para abrir "x.bat + parametro"............
-	 // String atalho = "C:/Arquivos de Programas PC/AbrirConfigFornecedor.bat " + nmFornecedor;
-	 // String atalho = "\"C:/Arquivos de Programas PC/AbrirConfigFornecedor.bat\" " + nmFornecedor;
 	    String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos." + nmFornecedor + ".properties";
 	    
        	editarArquivoConfig(caminhoMaisNomeArquivo, nmFornecedor);
 
 	    // Criar atalho no menu de Windows:
 		String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador APS Cloud/Configurações " + nmFornecedor + ".lnk";
-     //	ShellLink sLink = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
-       	ShellLink sLink = ShellLink.createLink(atalho, nomeAtalho);
-     //	sLink.setCMDArgs(nmFornecedor); // Não funcionou, nem com mslinks vatbub 1.0.5, nem com com.erigir.mslinks
+   //	ShellLink sLink = ShellLink.createLink(caminhoMaisNomeArquivo, nomeAtalho);
        	
-     //	sLink.setIconLocation("%SystemRoot%\\System32\\shell32.dll"); // Não funcionou
-       	sLink.setIconLocation("C:\\Windows\\System32\\shell32.dll");
-       	sLink.getHeader().setIconIndex(5); // não existe no vatbub
-     //	sLink.setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/ConfiguraçõesInstância.ico");
-     //	sLink.getHeader().setIconIndex(0); // não existe no vatbub
+
+       	ShellLink sLink = ShellLink.createLink(atalho)
+       			                // .setWorkingDir("..")
+   		                           .setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/ConfiguraçõesInstância.ico")
+       		                    // .setIconLocation("%SystemRoot%\\system32\\SHELL32.dll")
+    		                       .setCMDArgs(nmFornecedor);
+       	sLink.getHeader().setIconIndex(0);
+       	sLink.saveTo(nomeAtalho);
        	  
 		  
 	}

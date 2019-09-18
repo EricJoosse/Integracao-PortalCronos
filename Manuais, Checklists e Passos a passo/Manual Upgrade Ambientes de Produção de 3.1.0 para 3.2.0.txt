@@ -38,19 +38,24 @@ Manual Upgrade dos Ambientes de Produção de 3.1.0 para 3.2.0
  
 4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
  
-5. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
+ 
+5. Apenas no servidor do APS Cloud:
+	- Verificar manualmente todos os ícones no menu de Windows criados com a versão anterior do Integrador
+   		  
+   
+6. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-6. Em todos os casos: 
+7. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
-7. Apenas no caso do servidor do monitoramento: 
+8. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
      
      
-8. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
    (ii)  Compilar o arquivo .jar
    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
          esperando o processamento atual terminar primeiro
