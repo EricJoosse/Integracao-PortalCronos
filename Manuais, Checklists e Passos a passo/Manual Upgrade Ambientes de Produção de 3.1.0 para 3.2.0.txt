@@ -33,14 +33,24 @@ Manual Upgrade dos Ambientes de Produção de 3.1.0 para 3.2.0
 		    b. Matar o processo JRE 1.8.0_92
 		 		 
 		   
-3. (i)  Copiar o arquivo novo integr-fornecedor-3.2.0.jar do instalador para o servidor do fornecedor.
+3. Em todos os servidores exceto no APS Cloud (pois para o APS Cloud será zippado abaixo):
+   (i)  Copiar o arquivo novo integr-fornecedor-3.2.0.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
 4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
  
  
 5. Apenas no servidor do APS Cloud:
-	- Verificar manualmente todos os ícones no menu de Windows criados com a versão anterior do Integrador
+   a. Zippar os seguintes arquivos para o arquivo PatchNuvem.3.2.0.zip:
+        	- integr-fornecedor-3.2.0.jar
+        	- AdicionarFornecedorNuvem.bat
+        	- RemoverFornecedorNuvem.bat
+ 
+   b. Copiar o arquivo zip para o diretório C:\Eric\ no servidor do APS Cloud.
+   
+   c. Instalar os arquivos novos listados no item (a) acima
+    
+   d. Verificar manualmente todos os ícones no menu de Windows criados com a versão anterior do Integrador
    		  
    
 6. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat

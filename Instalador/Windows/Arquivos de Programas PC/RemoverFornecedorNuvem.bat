@@ -16,6 +16,11 @@ cd "Arquivos de Programas PC"
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
 
+echo      =================================================
+echo    ^| TELA PROVISORIA PARA EXCLUSAO DE INSTANCIA NOVA ^|
+echo    ^| DO INTEGRADOR PCRONOS - APS CLOUD               ^|
+echo      =================================================
+echo. 
 REM echo.
 REM echo.
 REM echo Tem certeza que deseja remover a instância de um cliente?
@@ -42,8 +47,11 @@ REM :PularErroTemCerteza
 REM cls
 
 echo.
+echo Digite o nome fantasia da empresa cliente a ser excluida
+echo (para evitar exclusão da instância errada),
+echo e em seguida clique na tecla ^<Enter^>:
 echo.
-SET /P nmFornecedor=Digite o nome fantasia da empresa cliente: 
+SET /P nmFornecedor=Nome fantasia: 
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor

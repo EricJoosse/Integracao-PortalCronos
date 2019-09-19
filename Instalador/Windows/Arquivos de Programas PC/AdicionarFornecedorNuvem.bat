@@ -15,9 +15,16 @@ cd "Arquivos de Programas PC"
 
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
+echo      =================================================
+echo    ^| TELA PROVISORIA PARA INCLUSAO DE INSTANCIA NOVA ^|
+echo    ^| DO INTEGRADOR PCRONOS - APS CLOUD               ^|
+echo      =================================================
+echo. 
 echo.
+echo Digite o nome fantasia da empresa cliente a ser adicionada,
+echo e em seguida clique na tecla ^<Enter^>:
 echo.
-SET /P nmFornecedor=Digite o nome fantasia da empresa cliente: 
+SET /P nmFornecedor=Nome fantasia: 
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor
