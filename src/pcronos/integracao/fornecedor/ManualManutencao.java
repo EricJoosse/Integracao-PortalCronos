@@ -41,14 +41,14 @@ public class ManualManutencao {
 
 
 	private void setNomeArquivoMaisAtalho() throws Exception { 	
-		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.3 (12.07.2018).txt";
+		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.5.0 (20.09.2019).txt";
 		this.nomeAtalho = "Manual Manutenção.lnk";
 
 //		if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
-//			this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.4.3 (12.07.2018).txt";
+//			this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.5.0 (20.09.2019).txt";
 //	    }
 //	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
-//			this.nomeArquivo = "Portal Cronos - Manual solucionamento paradas da integração - v1.4.3 (12.07.2018).txt";
+//			this.nomeArquivo = "Portal Cronos - Manual solucionamento paradas da integração - v1.5.0 (20.09.2019).txt";
 //	    }
 //	    else
 //	    	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem nome definido para o arquivo do Manual de Manutenção para a TI.");
@@ -202,29 +202,6 @@ public class ManualManutencao {
 		
 
         this.conteudo = "" +
-"Introdução técnica:" + "\r\n" +
-"===================" + "\r\n" +
-"O \"serviço\" de integração é um \"serviço\" de Java portanto é independente de Windows," + "\r\n" + 
-"então não se encontra na lista de Serviços de Windows, nem aparece no \"Gerenciador de Tarefas\" (\"Task Manager\")" + "\r\n" + 
-"de Windows, e também nunca aparece no \"Visualizador de Eventos\" (\"Event Viewer\") de Windows. " + "\r\n" +
-"Nunca precisa reiniciar, parar ou iniciar este \"serviço\" e nem existem estas opções. " + "\r\n" +
-"Reiniciamento é coisa de Windows, não tem nada a ver com Java. " + "\r\n" +
-"Ao ligar ou reiniciar o servidor, o serviço starta automaticamente. " + "\r\n" +
-"Apenas existe uma opção para desinstalação do serviço que será disponibilizada no menu de Windows" + "\r\n" + 
-"em uma das próximas versões do serviço. " + "\r\n" +
-" " + "\r\n" +
-"Normalmente o serviço executa de 15 a 15 minutos." + "\r\n" + 
-"Se a integração parou de ofertar automaticamente:  " + "\r\n" +
-"  1. Se precisar, veja, opcionalmente, abaixo capítulo \"A\" com a lista de possíveis causas;" + "\r\n" + 
-"  2. Em todos os casos, após a solução, veja no capítulo \"B\" como verificar se o serviço " + "\r\n" +
-"     realmente voltou a funcionar." + "\r\n" +
-"      " + "\r\n" +
-"Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro." + "\r\n" + 
-"" + "\r\n" +
-"Observação: este manual contem apenas a parte técnica da integração. Se precisar, o objetivo e os conceitos " + "\r\n" + 
-"            podem ser explicados pelo gerente de vendas ou por Leão do Portal Cronos." + "\r\n" +
-"            " + "\r\n" +
-"" + "\r\n" +
 "A. Possíveis causas de paradas da integração " + f.SiglaSistemaFornecedor + "/PCronos:" + "\r\n" +
 "=============================================================" + "\r\n";
         

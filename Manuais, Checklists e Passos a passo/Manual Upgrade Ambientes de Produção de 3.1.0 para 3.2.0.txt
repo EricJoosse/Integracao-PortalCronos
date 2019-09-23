@@ -42,6 +42,13 @@ Manual Upgrade dos Ambientes de Produção de 3.1.0 para 3.2.0
          - Atualizar os seguintes arquivos no servidor do fornecedor:
    				- bin\Versao.bat -> 3.2.0
    				- bin\VerificarUsuarioAdministrador.bat
+   				
+	     - Manuais TI:
+	     		- É mais fácil fazer backup do arquivo .properties e desinstalar o Integrador
+	     		  e re-instalar de zero (sem mexer na instalação de Java)    			
+   		 		- Apagar o Manual Mantuenção TI + atalho no menu de Windows
+   		 		- Criar subdiretórios no menu de Windows 
+   		 		- Recriar os 2 manuais desmembrados + atalhos no menu de Windows
 
  
 5. Em todos os servidores:
