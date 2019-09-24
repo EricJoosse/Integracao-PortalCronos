@@ -101,7 +101,10 @@ public class ManualManutencao {
         	}
 
         	if (!this.fornecedor.IsServicoNuvem)
-        	  ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
+        	{
+        	    ShellLink.createLink(caminhoManual + "Info Geral v1.5.0 (20.09.2019).txt", caminhoAtalhoManual + "Info Geral.lnk");
+        	    ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
+        	}
         }
 	}
 	

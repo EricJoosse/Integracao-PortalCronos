@@ -9,6 +9,10 @@ Checklist upgrade versão Manual TI no Eclipse
 
 - Editar a geração do nome do arquivo do manual (a versão) em ManualManutencao.java (em 3 lugares)
 
+- Editar o nome do arquivo Info Geral (a versão) no projeto Eclipse
+
+- Editar o atalho no menu de Windows "Info Geral" (a versão) em ManualManutencao.java 
+
 - Compilar o novo .jar
 
 - Atualizar o arquivo "Tabela Versão .jar X Versão Manual TI.txt"
