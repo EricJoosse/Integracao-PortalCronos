@@ -61,7 +61,7 @@ REM )
 
 call "Integração Fornecedor - Portal Cronos\bin\Inicializacoes.bat"
 call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
-call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" Instalador.log Instalador %idFornecedor%
+call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" Instalador.log Instalador %idFornecedor% %2
 
 
 

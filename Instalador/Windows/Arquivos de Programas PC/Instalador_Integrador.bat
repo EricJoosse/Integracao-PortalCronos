@@ -57,6 +57,47 @@ exit
 
 
 
+REM Por enquanto não parametrizar a sigla nos ambientes nuvem:
+if %tipoInstalacao% == 2 (
+    GOTO PularErroSiglaSistema
+)
+
+echo.
+echo.
+echo Sigla do sistema: 
+echo.
+
+SET /P siglaSistema=Favor digitar a sigla (APS, WinThor ou SAP): 
+if "%siglaSistema%"=="" (
+    GOTO ErroSiglaSistema
+) else if "%siglaSistema%"=="APS" (
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="WinThor" (
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="SAP" (
+    GOTO PularErroSiglaSistema
+) else (
+    echo.
+    ECHO Erro: apenas as siglas ^"APS^", ^"WinThor^" ou ^"SAP^" estão permitidas!
+    echo.
+
+    echo MSGBOX "Erro: apenas as siglas ""APS"", ""WinThor"" ou ""SAP"" estão permitidas!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+    exit
+)
+:ErroSiglaSistema
+echo MSGBOX "Erro: sigla não informada! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM Fechar o script chamador também: 
+exit
+:PularErroSiglaSistema
+
+
+
+
 REM set osVersion=Windows_Server_2016
 REM set osVersion=Windows_Server_2012_R2
 REM set osVersion=Windows_Server_2012
@@ -237,8 +278,13 @@ REM ================ DEPOIS da instalação dos programas de Java: ===============
 cd\
 cd "Arquivos de Programas PC"
 if exist "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" del /f /q "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml"
-call Instalador.bat i
 
+REM Por enquanto não parametrizar a sigla nos ambientes nuvem:
+if %tipoInstalacao% == 2 (
+    call Instalador.bat i
+) else (
+    call Instalador.bat i %siglaSistema%
+)
 cd\
 
 
