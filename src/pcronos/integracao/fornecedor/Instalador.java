@@ -3,8 +3,12 @@ package pcronos.integracao.fornecedor;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import mslinks.ShellLink;
+import pcronos.integracao.DefaultCharsetException;
 
 public class Instalador {
 
@@ -24,6 +28,24 @@ public class Instalador {
    	  }
 	}
 	
+	
+	private static void editarArquivoConfig(String caminhoMaisNomeArquivo, String siglaSistema) throws IOException, DefaultCharsetException
+	{
+		if (!Utils.getDefaultCharsetJVM().equals("windows-1252"))
+		{
+			throw new DefaultCharsetException(Utils.getDefaultCharsetJVM());
+		}
+		
+     	String conteudoArquivo = new String(Files.readAllBytes(Paths.get(caminhoMaisNomeArquivo)), Charset.forName("windows-1252"));
+     	
+     	conteudoArquivo = conteudoArquivo.replace("SiglaSistema                      = XXX", "SiglaSistema                      = " + siglaSistema);
+     	
+     	BufferedWriter bWriter = new BufferedWriter(new FileWriter(caminhoMaisNomeArquivo, false));
+        bWriter.write(conteudoArquivo);
+        bWriter.flush();
+        bWriter.close();
+	}
+
 	
 	public static void main(String[] args) throws Exception 
 	{
@@ -70,7 +92,10 @@ public class Instalador {
 				{
 					gravarIsAmbienteNuvem(0);
 
-			        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
+					String siglaSistema = args[1];
+			       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES, siglaSistema);
+
+			       	TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 					tarefaWindows.gravarEmArquivoXML();
 				}
 			}
