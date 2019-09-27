@@ -88,6 +88,10 @@ if %tamanhoArqLog% GTR 0 (
     echo MSGBOX "Primeira fase da instalação concluida!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
+
+    cd\
+    cd "Arquivos de Programas PC"
+    start notepad "Integração Fornecedor - Portal Cronos/conf/Integração Fornecedor - Portal Cronos.properties"
 ) else (
     if exist Instalador.log del /f /q Instalador.log 
 )
