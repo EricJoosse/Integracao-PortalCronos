@@ -1741,7 +1741,7 @@ public final class IntegracaoFornecedorCompleta {
 	   	        // O campo CLIENTE.NOMEFANTAZIA é o nome fantasia.
 	        	sqlString = "select nomefantazia "
 	                      + "     , cpfcgc "
-	                      + "  from cliente  "
+	                      + "  from cronos_clientes  "
 	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
 	                      ;
 	        }
@@ -1784,7 +1784,11 @@ public final class IntegracaoFornecedorCompleta {
 		    {
 				if (siglaSistema.equals("APS"))
 		        {
-		        	sqlString = null;
+		        	sqlString = "select 1 "
+		                      + "  from cronos_clientes  "
+		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+				              + "   and ativo = 1 "
+		                      ;
 		        }
 		        else if (siglaSistema.equals("WinThor"))
 		        {
@@ -1808,8 +1812,15 @@ public final class IntegracaoFornecedorCompleta {
 				    {
 			    	   toNaoVerificarDemaisErros = true;
 			    	   try {
-					       Date dataExclusao = rSet.getDate(1);  
-			    	       enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao) + ".");
+					       Date dataExclusao = rSet.getDate(1);
+					       String strDataExclusao = "";
+
+					       if (siglaSistema.equals("APS"))
+								strDataExclusao = "....." ;
+					        else if (siglaSistema.equals("WinThor"))
+					        	strDataExclusao = new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao);
+
+					       enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + strDataExclusao + ".");
 			    	   }
 			    	   catch (java.lang.Exception ex) {
 				    	   debugar("Catch Exception entrado: não foi possível enviar a seguinte mensagem informando dataExclusao: Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + ".");			    	     
@@ -1868,9 +1879,10 @@ public final class IntegracaoFornecedorCompleta {
 
 		    if (siglaSistema.equals("APS"))
 	        {
-	        	sqlString = "select codtipopag "
-	                      + "  from cliente    "
+	        	sqlString = "select codtipopag       "
+	                      + "  from cronos_clientes  "
 	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+				          + "   and ativo = 2        "
 	                      ;
 	                   // + "   and codstatus = 1" // 1 = BLOQUEADO, no APS isso quer dizer apenas bloqueado para pagto. a prazo, e NÃO bloqueado para pagto. a vista !
 	        }
@@ -1987,8 +1999,9 @@ public final class IntegracaoFornecedorCompleta {
 		    if (siglaSistema.equals("APS"))
 	        {
 	        	sqlString = "select replace(precousado,'ç','c') "
-	                      + "  from cliente "
-	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'";
+	                      + "  from cronos_clientes             "
+	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+	        			  + "   and ativo = 2                   ";
 	        }
 	        else if (siglaSistema.equals("WinThor"))
 	        {
@@ -2199,9 +2212,10 @@ public final class IntegracaoFornecedorCompleta {
     if (siglaSistema.equals("APS"))
     {
     	sqlString = "select 1 "
-                  + "  from produto "
-                  + "       join prodfilho on produto.codproduto = prodfilho.codproduto "
-                  + " where prodfilho.codprodfilho = " + cdProdutoFornecedor
+                  + "  from cronos_produto "
+               // + "       join prodfilho on cronos_produto.codproduto = prodfilho.codproduto "
+               // + " where prodfilho.codprodfilho = " + cdProdutoFornecedor
+                  + " where cronos_produto.codprodfilho = " + cdProdutoFornecedor
                   + " ";
                   // No APS é normal que o produto pode ficar desativado temporariamente, 
                   // então neste momento não usar a condição + "   and produto.ativo          = 2 ".
@@ -2242,13 +2256,13 @@ public final class IntegracaoFornecedorCompleta {
 	    if (siglaSistema.equals("APS"))
 	    {
 	    	 sqlString = "select 'abc' " 
-	                   + "  from estoqueempresa "
-	                   + " where estoqueempresa.codprodfilho = " + cdProdutoFornecedor;
+	                   + "  from cronos_estoque "
+	                   + " where cronos_estoque.codprodfilho = " + cdProdutoFornecedor;
 	
 			 if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-	            	sqlString += "                        and estoqueempresa.estoque >= " + qtSolicitada;
+	            	sqlString += "                        and cronos_estoque.estoque >= " + qtSolicitada;
 	         else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-	            	sqlString += "                        and estoqueempresa.estoque > 0 ";
+	            	sqlString += "                        and cronos_estoque.estoque > 0 ";
 	    }
 	    else if (siglaSistema.equals("WinThor"))
 	    {
@@ -2295,10 +2309,11 @@ public final class IntegracaoFornecedorCompleta {
 
     if (siglaSistema.equals("APS"))
     {
-    	sqlString = "select precoempresa." + tipoPrecoComprador + " "
-                  + "  from precoempresa "
-                  + "       join prodfilho on prodfilho.codprodfilho = precoempresa.codprodfilho "
-                  + "       join produto   on produto.codproduto     = prodfilho.codproduto ";
+    	sqlString = "select cronos_preco." + tipoPrecoComprador + " "
+                  + "  from cronos_preco "
+               // + "       join        prodfilho on        prodfilho.codprodfilho = cronos_preco.codprodfilho "
+               // + "       join cronos_produto   on cronos_produto.codproduto     = prodfilho.codproduto ";
+                  + "       join cronos_produto   on cronos_produto.codprodfilho   = cronos_preco.codprodfilho ";
     }
     else if (siglaSistema.equals("WinThor"))
     {
@@ -2321,12 +2336,12 @@ public final class IntegracaoFornecedorCompleta {
     {
         if (siglaSistema.equals("APS"))
         {
-        	sqlStringComEstoque += "       join estoqueempresa  on estoqueempresa.codprodfilho = precoempresa.codprodfilho ";
+        	sqlStringComEstoque += "       join cronos_estoque  on cronos_estoque.codprodfilho = cronos_preco.codprodfilho ";
 
             if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-            	sqlStringComEstoque += "                        and estoqueempresa.estoque >= " + qtSolicitada;
+            	sqlStringComEstoque += "                        and cronos_estoque.estoque >= " + qtSolicitada;
             else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-            	sqlStringComEstoque += "                        and estoqueempresa.estoque > 0 ";
+            	sqlStringComEstoque += "                        and cronos_estoque.estoque > 0 ";
         }
         else if (siglaSistema.equals("WinThor"))
         {
@@ -2337,13 +2352,13 @@ public final class IntegracaoFornecedorCompleta {
     
     if (siglaSistema.equals("APS"))
     {
-    	sqlStringSemEstoque += " where precoempresa.codprodfilho = " + cdProdutoFornecedor
-                            +  "   and produto.ativo             = 2 "
-                            +  "   and produto.ativopesq         = 1 ";
+    	sqlStringSemEstoque += " where cronos_preco.codprodfilho = " + cdProdutoFornecedor
+                            +  "   and cronos_produto.ativo             = 2 "
+                            +  "   and cronos_produto.ativopesq         = 1 ";
         if (toVerificarEstoque) 
-        	sqlStringComEstoque += " where precoempresa.codprodfilho = " + cdProdutoFornecedor
-                                +  "   and produto.ativo             = 2 "
-                                +  "   and produto.ativopesq         = 1 ";
+        	sqlStringComEstoque += " where cronos_preco.codprodfilho = " + cdProdutoFornecedor
+                                +  "   and cronos_produto.ativo             = 2 "
+                                +  "   and cronos_produto.ativopesq         = 1 ";
     }
     else if (siglaSistema.equals("WinThor"))
     {
