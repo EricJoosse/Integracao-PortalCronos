@@ -2761,6 +2761,9 @@ public final class IntegracaoFornecedorCompleta {
 		   purgeArqsLogRemotosRepetidos("ws-karnekeijo.Erro.Homologacao.", horaInicio, dirLogRemoto);
 		   purgeArqsLogRemotosRepetidos(".Erro.Homologacao.", horaInicio, dirLogRemoto);
 		   purgeArqsLogRemotosRepetidos("ws-empresa.Erro.Homologacao.", horaInicio, dirLogRemoto);
+		   purgeArqsLogRemotosRepetidos("ws-varig.Erro.Homologacao.", horaInicio, dirLogRemoto);
+		   purgeArqsLogRemotosRepetidos("ws-vasp.Erro.Homologacao.", horaInicio, dirLogRemoto);
+		   purgeArqsLogRemotosRepetidos("ws-klm.Erro.Homologacao.", horaInicio, dirLogRemoto);
 
 	  } // if (siglaSistema.equals("PCronos"))
    }

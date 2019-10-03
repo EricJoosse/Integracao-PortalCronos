@@ -36,7 +36,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = null;
 		f[i].NomeFantasiaEmpresa = "Monitoramento";
-		f[i].versaoIntegrador = "3.1.0";
+		f[i].versaoIntegrador = "3.2.0";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "";
@@ -242,19 +242,19 @@ public class FornecedorRepositorio {
 		String versaoJREApsCloud = "jre1.8.0_191";
 		String MemoriaRamLivreApsCloud = "0 - 200 MB";
 		
-		String EmailResponsavelTIApsCloud = "saulo@apsinformatica.com.br";
-		String SkypeResponsavelTIApsCloud = "Saulo Gomes de Lima (saulo_analista)";
-		String ApelidoResponsavelTIApsCloud = "Saulo"; 
-		String FuncaoResponsavelTIApsCloud = "Analista";
+		String EmailResponsavelTIApsCloud = "bernardino@apsinformatica.com.br";
+		String SkypeResponsavelTIApsCloud = "Bernardino Borba (live:berna31pe)";
+		String ApelidoResponsavelTIApsCloud = "Bernardino"; 
+		String FuncaoResponsavelTIApsCloud = "Sócio do APS";
 		
-		String EmailResponsavelTIAlternativoApsCloud = "bernardino@apsinformatica.com.br";		
-		String SkypeResponsavelTIAlternativoApsCloud = "Bernardino Borba (live:berna31pe)";		
-		String ApelidoResponsavelTIAlternativoApsCloud = "Bernardino";
-		String FuncaoResponsavelTIAlternativoApsCloud = "Sócio do APS";
+		String EmailResponsavelTIAlternativoApsCloud = "saulo@apsinformatica.com.br";		
+		String SkypeResponsavelTIAlternativoApsCloud = "Saulo Gomes de Lima (saulo_analista)";		
+		String ApelidoResponsavelTIAlternativoApsCloud = "Saulo"; // Alguém foi demitido, provavelmente foi ele
+		String FuncaoResponsavelTIAlternativoApsCloud = "Analista";
 		
-		String EmailResponsavelTI_NuvemApsCloud = "saulo@apsinformatica.com.br";
-		String SkypeResponsavelTI_NuvemApsCloud = "Saulo Gomes de Lima (saulo_analista)"; 
-		String ApelidoResponsavelTI_NuvemApsCloud = "Saulo"; 
+		String EmailResponsavelTI_NuvemApsCloud = "bernardino@apsinformatica.com.br";
+		String SkypeResponsavelTI_NuvemApsCloud = "Bernardino Borba (live:berna31pe)"; 
+		String ApelidoResponsavelTI_NuvemApsCloud = "Bernardino"; 
 
 		
 		
@@ -297,7 +297,7 @@ public class FornecedorRepositorio {
 		f[i].IdFornecedor = 1; 
 		f[i].NomeFantasiaEmpresa = "Atacamax";   
 		f[i].cnpjFornecedor = "08305623000184";  
-		f[i].versaoIntegrador = "3.1.0"; // versaoIntegradorApsCloud;
+		f[i].versaoIntegrador = "3.2.0"; // versaoIntegradorApsCloud;
 		f[i].SiglaSistemaFornecedor = SiglaSistemaFornecedorApsCloud;
 
 		f[i].IsServicoNuvem = false; // true;

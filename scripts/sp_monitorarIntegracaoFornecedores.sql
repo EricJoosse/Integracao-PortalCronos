@@ -144,7 +144,6 @@ while @@fetch_status = 0
 
   if @fornecedor_id =    0 -- Para facilitar a manutenção deste if 
   or @fornecedor_id =  385 -- Walmart  ainda não está em produção 
-  or @fornecedor_id =    1 -- Atacamax ainda não está em produção 
     begin
       if (
          --  ((select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))

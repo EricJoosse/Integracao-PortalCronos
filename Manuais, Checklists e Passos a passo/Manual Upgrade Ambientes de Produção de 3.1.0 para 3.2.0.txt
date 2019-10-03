@@ -39,17 +39,13 @@ Manual Upgrade dos Ambientes de Produção de 3.1.0 para 3.2.0
  
 
 4. Em todos os servidores exceto no APS Cloud (pois para o APS Cloud será zippado abaixo):
-         - Atualizar os seguintes arquivos no servidor do fornecedor:
+         (i) Atualizar os seguintes arquivos no servidor do fornecedor:
    				- bin\Versao.bat -> 3.2.0
    				- bin\VerificarUsuarioAdministrador.bat
 				- bin\CaminhoJRE.bat
    				
-	     - Manuais TI:
-	     		- É mais fácil fazer backup do arquivo .properties e desinstalar o Integrador
-	     		  e re-instalar de zero (sem mexer na instalação de Java)    			
-   		 		- Apagar o Manual Mantuenção TI + atalho no menu de Windows
-   		 		- Criar subdiretórios no menu de Windows 
-   		 		- Recriar os 2 manuais desmembrados + atalhos no menu de Windows
+	     (ii) Manuais TI:
+	     		- Apagar atalho no menu de Windows por enquanto
 
  
 5. Em todos os servidores:
