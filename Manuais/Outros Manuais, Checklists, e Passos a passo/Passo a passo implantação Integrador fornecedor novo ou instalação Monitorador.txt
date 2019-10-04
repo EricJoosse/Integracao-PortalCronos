@@ -421,7 +421,7 @@ Como vai ser?
     6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
        NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
        Regerar o instalador, veja o arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt"  
-       no diretório C:\PCronos\Integração Fornecedor - Portal Cronos\Manuais, Checklists e Passos a passo\.
+       no diretório C:\PCronos\Integração Fornecedor - Portal Cronos\Manuais\Outros Manuais, Checklists, e Passos a passo\.
     
     7. O instalador deve ser copiado para exatamente o diretório C:\temp\ ou C:\Temp\ no servidor do fornecedor.
        Se for outro diretório, ajustar este diretório no final de "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat".
