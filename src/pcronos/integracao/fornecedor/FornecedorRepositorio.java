@@ -63,6 +63,7 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTIAlternativo = "";
 		f[i].FuncaoResponsavelTI = "Coordenador de Projetos de TI";
 		f[i].FuncaoResponsavelTIAlternativo = "";
+		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "Team Viewer";
 		f[i].usuarioWebservice = "ws-formaggio";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -82,6 +83,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI = "ivan barros";
 		f[i].ApelidoResponsavelTI = "Ivan";
 		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "734228115";
 		f[i].usuarioWebservice = "ws-jrembalagem";
@@ -104,6 +106,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTIAlternativo = "Marcelo Bezerra";
 		f[i].ApelidoResponsavelTI = "Marcos";
 		f[i].ApelidoResponsavelTIAlternativo = "Marcelo";
+		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "685 885 292";
 		f[i].usuarioWebservice = "ws-prolac";
@@ -124,6 +127,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI = "Felipe Lolaia";
 		f[i].ApelidoResponsavelTI = "Felipe";
 		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "Team Viewer";
 		f[i].usuarioWebservice = "ws-mpescados";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -144,6 +148,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTIAlternativo = "Sena Junior";
 		f[i].ApelidoResponsavelTI = "Cleijonatas";
 		f[i].ApelidoResponsavelTIAlternativo = "Sena";
+		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-sost";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -163,6 +168,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI = "Timon Dourado";
 		f[i].ApelidoResponsavelTI = "Timon";
 		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "Team Viewer";
 		f[i].usuarioWebservice = "ws-karnekeijo";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -184,6 +190,7 @@ public class FornecedorRepositorio {
 						// Tem vontade para ajudar, porém é muito incompetente 
 						// e muito burro, tem que explicar tudo detalhadamente
 		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].TelefoneResponsavelTI = "98609-4887";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-comal";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -204,6 +211,7 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTI = "Elthon"; 
 						// Desenrolado, responsável para o cadastro de De-Para´s
 		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].TelefoneResponsavelTI = "99535-1999";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-propao";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -223,6 +231,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI = "tiagoautran";
 		f[i].ApelidoResponsavelTI = "Tiago"; 
 		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].TelefoneResponsavelTI = "99116-8070 ou 3073-4551";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-padeirao";
 		f[i].versaoJRE = "jre1.8.0_111";
@@ -246,6 +255,7 @@ public class FornecedorRepositorio {
 		String SkypeResponsavelTIApsCloud = "Bernardino Borba (live:berna31pe)";
 		String ApelidoResponsavelTIApsCloud = "Bernardino"; 
 		String FuncaoResponsavelTIApsCloud = "Sócio do APS";
+		String TelefoneResponsavelTIApsCloud = "99780-1192";
 		
 		String EmailResponsavelTIAlternativoApsCloud = "saulo@apsinformatica.com.br";		
 		String SkypeResponsavelTIAlternativoApsCloud = "Saulo Gomes de Lima (saulo_analista)";		
@@ -255,6 +265,7 @@ public class FornecedorRepositorio {
 		String EmailResponsavelTI_NuvemApsCloud = "bernardino@apsinformatica.com.br";
 		String SkypeResponsavelTI_NuvemApsCloud = "Bernardino Borba (live:berna31pe)"; 
 		String ApelidoResponsavelTI_NuvemApsCloud = "Bernardino"; 
+		String TelefoneResponsavelTI_NuvemApsCloud = "99780-1192"; 
 
 		
 		
@@ -280,6 +291,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
 		f[i].ApelidoResponsavelTI = ApelidoResponsavelTIApsCloud; 
 		f[i].FuncaoResponsavelTI = FuncaoResponsavelTIApsCloud;
+		f[i].TelefoneResponsavelTI = TelefoneResponsavelTIApsCloud;
 		
 		f[i].EmailResponsavelTIAlternativo = EmailResponsavelTIAlternativoApsCloud;		
 		f[i].SkypeResponsavelTIAlternativo = SkypeResponsavelTIAlternativoApsCloud;		
@@ -288,7 +300,8 @@ public class FornecedorRepositorio {
 		
 		f[i].EmailResponsavelTI_Nuvem = EmailResponsavelTI_NuvemApsCloud;
 		f[i].SkypeResponsavelTI_Nuvem = SkypeResponsavelTI_NuvemApsCloud; 
-		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud; 
+		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud;
+		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
 		
 
@@ -315,6 +328,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
 		f[i].ApelidoResponsavelTI = ApelidoResponsavelTIApsCloud; 
 		f[i].FuncaoResponsavelTI = FuncaoResponsavelTIApsCloud;
+		f[i].TelefoneResponsavelTI = TelefoneResponsavelTIApsCloud;
 		
 		f[i].EmailResponsavelTIAlternativo = EmailResponsavelTIAlternativoApsCloud;		
 		f[i].SkypeResponsavelTIAlternativo = SkypeResponsavelTIAlternativoApsCloud;		
@@ -323,7 +337,8 @@ public class FornecedorRepositorio {
 		
 		f[i].EmailResponsavelTI_Nuvem = EmailResponsavelTI_NuvemApsCloud;
 		f[i].SkypeResponsavelTI_Nuvem = SkypeResponsavelTI_NuvemApsCloud; 
-		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud; 
+		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud;
+		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
 		
 /*  Template:
@@ -348,6 +363,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI = "";
 		f[i].ApelidoResponsavelTI = ""; 
 		f[i].FuncaoResponsavelTI = "";
+		f[i].TelefoneResponsavelTI = "";
 		
 		f[i].EmailResponsavelTIAlternativo = "";		
 		f[i].SkypeResponsavelTIAlternativo = "";		

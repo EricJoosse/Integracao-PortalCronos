@@ -16,6 +16,7 @@ public class Fornecedor {
 	String ApelidoResponsavelTIAlternativo;
 	String FuncaoResponsavelTI;
 	String FuncaoResponsavelTIAlternativo;
+	String TelefoneResponsavelTI;
 	String AplicativoDesktopRemoto;
 	String IdAplicativoDesktopRemoto;
 	String usuarioWebservice;
@@ -28,6 +29,7 @@ public class Fornecedor {
 	public String EmailResponsavelTI_Nuvem;
 	public String SkypeResponsavelTI_Nuvem;
 	public String ApelidoResponsavelTI_Nuvem;
+	public String TelefoneResponsavelTI_Nuvem;
 	String ResponsavelDeParasProdutos;
 	String MemoriaRamLivre;
 	public boolean IsServicoNuvem;

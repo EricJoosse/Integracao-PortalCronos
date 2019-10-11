@@ -1,20 +1,20 @@
-Fornecedor   IdForn	Sistema		Tipo JRE	 Em produção		IP Público 			Porta IP Aberta	Frequência	Debug	Disco	Esp.Livre	Qtd.Dias	Fornecedor   	Telefone TI	
-----------	 ------	-------     ----------	 ------------	    ---------- 			---------------	----------	-----	-----	---------	--------	----------	 	------------
+Fornecedor   IdForn	Sistema		Tipo JRE	 Em produção		IP Público 			Porta IP Aberta	Frequência	Debug	Disco	Esp.Livre	Qtd.Dias	Fornecedor   		
+----------	 ------	-------     ----------	 ------------	    ---------- 			---------------	----------	-----	-----	---------	--------	----------	 	
 Formaggio 		 13	APS			(.. bit)    	Sim				187.113.120.97	    	80			15 min		true	C	  	  9 GB		100			Formaggio 			
 								 			    																													
 JR Distribuição	947	WinThor		(.. bit)    	Sim				jrolinda.dyndns.org	Não precisa		15 min		true	C	  	902 GB		100			JR Distribuição					
 Prolac 			 30	WinThor		(64 bit)    	Sim				187.103.76.53		Não precisa		15 min		true	C	  	422 GB		100			Prolac 						
 Marítimos		 21	WinThor		(.. bit)    	Não	  												15 min		true	C	  	 48 GB		100			Marítimos					
 Karne Keijo		 60	SAP			(.. bit)    	Não													15 min		true	C	  	 62 GB		100			Karne Keijo					
-Comal 			 33	WinThor		(.. bit)    	Sim				187.1.168.74			80			15 min		true	C	  	 69 GB		100			Comal			98609-4887
+Comal 			 33	WinThor		(.. bit)    	Sim				187.1.168.74			80			15 min		true	C	  	 69 GB		100			Comal			
 Monitoramento    -- PCronos     (.. bit)    	Sim				Não se aplica		Não se aplica	15 min		false	C	  	 90 GB		 32			Monitoramento
 SOST (BA)		170 WinThor     (.. bit)    	Sim													15 min		true	C	  	0.6 GB		 15			SOST (BA)		 	
 Walmart         385 PCronos		(.. bit) 	 	  																										Walmart
-Propão 			171	WinThor		(.. bit)    	Sim				187.113.65.138		Não precisa		15 min		true	C	  	167 GB		100			Propão			99535-1999
-Padeirão 		 14	WinThor		(.. bit)    	Sim				192.141.110.189		Não precisa		15 min		true	C	  	703 GB		100			Padeirão		99116-8070 ou 3073-4551
-Marizpan	   1995	APS Cloud	(32 bit)		Sim				18.214.93.120			2525		15 min		true	C		 18 GB		100			Marizpan		99780-1192 (Bernardino)																									
-Atacamax	      1	APS			(32 bit)		Sim				179.180.145.146			???			15 min		true	C		 41 GB		100			Atacamax		99780-1192 (Bernardino)																									
-Atacamax	      1	APS Cloud	(32 bit)		Não				18.214.93.120			2525		15 min		true	C		 18 GB		100			Atacamax		99780-1192 (Bernardino)																									
+Propão 			171	WinThor		(.. bit)    	Sim				187.113.65.138		Não precisa		15 min		true	C	  	167 GB		100			Propão			
+Padeirão 		 14	WinThor		(.. bit)    	Sim				192.141.110.189		Não precisa		15 min		true	C	  	703 GB		100			Padeirão		
+Marizpan	   1995	APS Cloud	(32 bit)		Sim				18.214.93.120			2525		15 min		true	C		 18 GB		100			Marizpan																											
+Atacamax	      1	APS			(32 bit)		Sim				179.180.145.146			???			15 min		true	C		 41 GB		100			Atacamax																											
+Atacamax	      1	APS Cloud	(32 bit)		Não				18.214.93.120			2525		15 min		true	C		 18 GB		100			Atacamax																											
 
 
 Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
