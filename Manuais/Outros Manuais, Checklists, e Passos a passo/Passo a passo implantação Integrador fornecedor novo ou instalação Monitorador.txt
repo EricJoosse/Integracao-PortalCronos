@@ -360,6 +360,10 @@ Como vai ser?
     					- No FornecedorRepository, preencher:
 								- f[i].dirProgramFiles = ".......";
 								- f[i].versaoJRE = "......";
+								- f[i].tipoJRE = "(.. bit)";
+										Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
+   											    CMD> java -d32 -version
+   											    CMD> java -d64 -version
           
              	- Caso contrário,  que a JRE existente NÃO funciona, não adianta instalar o Integrador usando o JRE existente: 
 	     			- verificar se tem processos Java funcionando no taskmgr.exe
@@ -405,8 +409,8 @@ Como vai ser?
     
     5c. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
         no FornecedorRepositorio.java, no static constructor, preencher o resto de TODOS 
-        os outros campos do fornecedor sem falta, antes de continuar, pois sem isso a instalação do 
-        Manual de Manutenção para a TI não vai funcionar corretamente.
+        os outros campos do fornecedor sem falta, antes de continuar, exceto as colunas versaoJRE  
+        e tipoJRE, pois sem isso a instalação do Manual de Manutenção para a TI não vai funcionar corretamente.
         
         Se ainda não saber o endereço de email da TI, copiar o seguinte para o Skype:
         Qual é seu endereço de email. É necessário para receber avisos automáticos um dia no futuro 
@@ -465,7 +469,15 @@ Como vai ser?
 
 
     9d. No caso que este instalador instalou o JRE novo: 
-        Nos seguintes casos:
+		- No FornecedorRepository, preencher:
+				- f[i].dirProgramFiles = ".......";
+				- f[i].versaoJRE = "......";
+				- f[i].tipoJRE = "(.. bit)";
+						Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
+   							    CMD> java -d32 -version
+   							    CMD> java -d64 -version
+          
+        - Nos seguintes casos:
              1. no caso de versões de Windows que ainda não estão em nenhuma das duas listas abaixo dentro deste item 9c;
              2. no caso de versões de Windows que estão com o bug abaixo: 
              

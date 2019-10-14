@@ -21,6 +21,7 @@ public class Fornecedor {
 	String IdAplicativoDesktopRemoto;
 	String usuarioWebservice;
 	String versaoJRE;
+	String tipoJRE;
 	public String versaoIntegrador;
 	String tipoSO;
 	String SO32ou64bit;
