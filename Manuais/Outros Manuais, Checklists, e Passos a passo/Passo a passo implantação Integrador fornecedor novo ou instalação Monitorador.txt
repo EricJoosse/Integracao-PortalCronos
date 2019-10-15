@@ -312,6 +312,7 @@ Como vai ser?
 		  
 	    - No caso que o espaço livre é suficiente, preencher no arquivo "Tabela Fornecedores_Versões.txt":
 	    		- a coluna "Esp.Livre"   
+	    - No caso que o espaço livre é suficiente, preencher no FornecedorRepositorio:
 	    		- a coluna "Disco"       
 
 

@@ -26,6 +26,7 @@ public class Fornecedor {
 	String tipoSO;
 	String SO32ou64bit;
 	String dirProgramFiles;
+	String DiscoIntegrador;
 	String cnpjFornecedor;
 	public String EmailResponsavelTI_Nuvem;
 	public String SkypeResponsavelTI_Nuvem;

@@ -48,6 +48,7 @@ public class FornecedorRepositorio {
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
 		f[i].dirProgramFiles = "Program Files";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "1.4 - 1.9 GB";
 
 		i++;
@@ -72,6 +73,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "02870737000190";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -95,6 +97,7 @@ public class FornecedorRepositorio {
 		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "00680755000265";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -118,6 +121,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07182763000140"; 
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -139,6 +143,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "?????????????????????";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "04666316000178";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -161,6 +166,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07041307000180";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -182,6 +188,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24150377000195";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -205,6 +212,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07534303000133";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -227,6 +235,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24407389000233";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -248,6 +257,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "03042263000151";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 
 		
@@ -260,6 +270,7 @@ public class FornecedorRepositorio {
 		String dirProgramFilesApsCloud = "Program Files (x86)";
 		String versaoJREApsCloud = "jre1.8.0_191";
 		String tipoJREApsCloud = "(32 bit)";
+		String DiscoIntegradorApsCloud = "C";
 		String MemoriaRamLivreApsCloud = "0 - 200 MB";
 		
 		String EmailResponsavelTIApsCloud = "bernardino@apsinformatica.com.br";
@@ -296,6 +307,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = dirProgramFilesApsCloud;
 		f[i].versaoJRE = versaoJREApsCloud;
 		f[i].tipoJRE = tipoJREApsCloud;
+		f[i].DiscoIntegrador = DiscoIntegradorApsCloud;
 		f[i].MemoriaRamLivre = MemoriaRamLivreApsCloud;
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
 
@@ -333,7 +345,8 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2012 R2"; //tipoSOApsCloud; 
 		f[i].dirProgramFiles = "Program Files (x86)"; // dirProgramFilesApsCloud;
 		f[i].versaoJRE = "jre1.8.0_211"; // versaoJREApsCloud;
-		f[i].tipoJRE = "(32 bit)";
+		f[i].tipoJRE = "(32 bit)";  // tipoJREApsCloud
+		f[i].DiscoIntegrador = "C"; // DiscoIntegradorApsCloud;
 		f[i].MemoriaRamLivre = "17 GB"; // MemoriaRamLivreApsCloud;
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  
 
@@ -370,6 +383,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "";
 		f[i].versaoJRE = "";
 		f[i].tipoJRE = "(.. bit)";
+		f[i].DiscoIntegrador = "C";
 		f[i].MemoriaRamLivre = "";
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
 

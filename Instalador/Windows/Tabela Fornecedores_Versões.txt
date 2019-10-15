@@ -1,16 +1,16 @@
-Fornecedor   IdForn	Sistema		Em produção		IP Público 			Porta IP Aberta	Frequência	Debug	Disco	Esp.Livre	Qtd.Dias	Fornecedor   		
-----------	 ------	-------     -----------	    ---------- 			---------------	----------	-----	-----	---------	--------	----------	 	
-Formaggio 		 13	APS		    	Sim				187.113.120.97	    	80			15 min		true	C	  	  9 GB		100			Formaggio 			
-JR Distribuição	947	WinThor	    	Sim				jrolinda.dyndns.org	Não precisa		15 min		true	C	  	902 GB		100			JR Distribuição					
-Prolac 			 30	WinThor	    	Sim				187.103.76.53		Não precisa		15 min		true	C	  	422 GB		100			Prolac 						
-Marítimos		 21	WinThor	    	Não	  												15 min		true	C	  	 48 GB		100			Marítimos					
-Karne Keijo		 60	SAP		    	Não													15 min		true	C	  	 62 GB		100			Karne Keijo					
-Comal 			 33	WinThor	    	Sim				187.1.168.74			80			15 min		true	C	  	 69 GB		100			Comal			
-Monitoramento    -- PCronos     	Sim				Não se aplica		Não se aplica	15 min		false	C	  	 90 GB		 32			Monitoramento
-SOST (BA)		170 WinThor     	Sim													15 min		true	C	  	0.6 GB		 15			SOST (BA)		 	
-Walmart         385 PCronos	  		Sim																										Walmart
-Propão 			171	WinThor	    	Sim				187.113.65.138		Não precisa		15 min		true	C	  	167 GB		100			Propão			
-Padeirão 		 14	WinThor	    	Sim				192.141.110.189		Não precisa		15 min		true	C	  	703 GB		100			Padeirão		
-Marizpan	   1995	APS Cloud		Sim				18.214.93.120			2525		15 min		true	C		 18 GB		100			Marizpan																											
-Atacamax	      1	APS				Sim				179.180.145.146			???			15 min		true	C		 41 GB		100			Atacamax																											
-Atacamax	      1	APS Cloud		Não				18.214.93.120			2525		15 min		true	C		 18 GB		100			Atacamax																											
+Fornecedor   IdForn	Sistema		Em produção		IP Público 			Porta IP Aberta	Frequência	Debug	Esp.Livre	Qtd.Dias	Fornecedor   		
+----------	 ------	-------     -----------	    ---------- 			---------------	----------	-----	---------	--------	----------	 	
+Formaggio 		 13	APS		    Sim				187.113.120.97	    	80			15 min		true	  9 GB		100			Formaggio 			
+JR Distribuição	947	WinThor	    Sim				jrolinda.dyndns.org	Não precisa		15 min		true	902 GB		100			JR Distribuição					
+Prolac 			 30	WinThor	    Sim				187.103.76.53		Não precisa		15 min		true	422 GB		100			Prolac 						
+Marítimos		 21	WinThor	    Não	  												15 min		true	 48 GB		100			Marítimos					
+Karne Keijo		 60	SAP		    Não													15 min		true	 62 GB		100			Karne Keijo					
+Comal 			 33	WinThor	    Sim				187.1.168.74			80			15 min		true	 69 GB		100			Comal			
+Monitoramento    -- PCronos     Sim				Não se aplica		Não se aplica	15 min		false	 90 GB		 32			Monitoramento
+SOST (BA)		170 WinThor     Sim													15 min		true	0.6 GB		 15			SOST (BA)		 	
+Walmart         385 PCronos	  	Sim																										Walmart
+Propão 			171	WinThor	    Sim				187.113.65.138		Não precisa		15 min		true	167 GB		100			Propão			
+Padeirão 		 14	WinThor	    Sim				192.141.110.189		Não precisa		15 min		true	703 GB		100			Padeirão		
+Marizpan	   1995	APS Cloud	Sim				18.214.93.120			2525		15 min		true	 18 GB		100			Marizpan																											
+Atacamax	      1	APS			Sim				179.180.145.146			???			15 min		true	 41 GB		100			Atacamax																											
+Atacamax	      1	APS Cloud	Não				18.214.93.120			2525		15 min		true	 18 GB		100			Atacamax																											
