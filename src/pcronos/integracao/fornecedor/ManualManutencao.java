@@ -216,7 +216,7 @@ else
 
 this.conteudo +=        
 "" + "\r\n" +
-"  - O disco rígido (\"HD\") C:\\ está cheio?" + "\r\n" +
+"  - O disco rígido (\"HD\") " + f.DiscoIntegrador + ":\\ está cheio?" + "\r\n" +
 "" + "\r\n" +
 "  - Houve uma atualização de Windows?" + "\r\n" +
 "    Isso pode acabar com o serviço. Neste caso, entrar em contato com \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email)." + "\r\n" +
