@@ -310,10 +310,9 @@ Como vai ser?
 		      e atualizar a coluna "Qtd.Dias" no arquivo "Tabela Fornecedores_Versões.txt"
 		  
 		  
-	    - No caso que o espaço livre é suficiente, preencher no arquivo "Tabela Fornecedores_Versões.txt":
-	    		- a coluna "Esp.Livre"   
 	    - No caso que o espaço livre é suficiente, preencher no FornecedorRepositorio:
-	    		- a coluna "Disco"       
+	    		- a coluna "DiscoIntegrador"       
+	    		- a coluna "EspacoLivreDisco"   
 
 
 		- Se decidir não instalar Java porém usar uma versão existente, 

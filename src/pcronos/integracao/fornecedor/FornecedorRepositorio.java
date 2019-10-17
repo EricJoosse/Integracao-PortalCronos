@@ -49,6 +49,7 @@ public class FornecedorRepositorio {
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "90 GB";
 		f[i].MemoriaRamLivre = "1.4 - 1.9 GB";
 
 		i++;
@@ -74,6 +75,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "02870737000190";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "9 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -98,6 +100,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "00680755000265";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "902 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -122,6 +125,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07182763000140"; 
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "422 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -144,6 +148,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "04666316000178";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "48 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -167,6 +172,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07041307000180";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "0.6 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -189,6 +195,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24150377000195";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "62 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -213,6 +220,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07534303000133";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "69 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -236,6 +244,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24407389000233";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "167 GB";
 		f[i].MemoriaRamLivre = "";
 
 		i++;
@@ -258,6 +267,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "03042263000151";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "703 GB";
 		f[i].MemoriaRamLivre = "";
 
 		
@@ -271,6 +281,7 @@ public class FornecedorRepositorio {
 		String versaoJREApsCloud = "jre1.8.0_191";
 		String tipoJREApsCloud = "(32 bit)";
 		String DiscoIntegradorApsCloud = "C";
+		String EspacoLivreDiscoApsCloud = "18 GB";
 		String MemoriaRamLivreApsCloud = "0 - 200 MB";
 		
 		String EmailResponsavelTIApsCloud = "bernardino@apsinformatica.com.br";
@@ -308,6 +319,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = versaoJREApsCloud;
 		f[i].tipoJRE = tipoJREApsCloud;
 		f[i].DiscoIntegrador = DiscoIntegradorApsCloud;
+		f[i].EspacoLivreDisco = EspacoLivreDiscoApsCloud;
 		f[i].MemoriaRamLivre = MemoriaRamLivreApsCloud;
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
 
@@ -347,6 +359,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_211"; // versaoJREApsCloud;
 		f[i].tipoJRE = "(32 bit)";  // tipoJREApsCloud
 		f[i].DiscoIntegrador = "C"; // DiscoIntegradorApsCloud;
+		f[i].EspacoLivreDisco = "41 GB"; // EspacoLivreDiscoApsCloud;
 		f[i].MemoriaRamLivre = "17 GB"; // MemoriaRamLivreApsCloud;
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  
 
@@ -384,6 +397,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = " GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
 
