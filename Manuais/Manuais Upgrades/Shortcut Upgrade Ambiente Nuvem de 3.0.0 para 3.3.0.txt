@@ -1,0 +1,59 @@
+Shortcut Upgrade dos Ambiente Nuvem de 3.0.0 para 3.3.0 
+=======================================================
+
+1. Verificar se o usuário logado é administrador ou administrator, 
+   local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+	      
+	      
+2. Remover os seguintes arquivos:
+				- /bin/DesinstalarManualTI.bat (pois foi renomeado para /bin/Desinstalador.bat)
+        		- Job15a15minOfertamentoJava_Windows.bat
+        		- Job15a15minOfertamentoJava.log
+   
+   
+ 
+3. Apagar "Desinstalar_Integração_Fornecedor_PortalCronos.bat" 
+ 
+
+4. a. Zippar os seguintes arquivos para o arquivo PatchNuvem.3.3.0.zip:
+			- bin\CaminhoJRE.bat
+			- bin\Inicializacoes.bat
+			- bin\Desinstalador.bat
+			- bin\VerificarUsuarioAdministrador.bat
+       	    - bin\Versao.bat 
+        	- Integração Fornecedor - Portal Cronos\integr-fornecedor-3.3.0.jar
+   			- Integração Fornecedor - Portal Cronos\Job15a15min.bat
+        	- Arquivos de Programas PC\AdicionarFornecedorNuvem.bat
+        	- Arquivos de Programas PC\RemoverFornecedorNuvem.bat 
+        	- Arquivos de Programas PC\Desinstalador_Integrador_ou_Monitorador.bat
+ 
+   b. Copiar o arquivo zip para o diretório C:\Eric\ no servidor do APS Cloud.
+   
+   c. Ajeitar os start-dates das Task Schedules da Marizpan e da Atacamax, etc, da seguinte forma: 
+   		  (i)    Backup dos configs da Marizpan, Atacamax, e de todos os outros fornecedores
+          (ii)   Abrir o Agendador de Tarefas de Windows e verificar o minuto atual dos agendamentos, 
+   		         e verificar se batem com o relatório RelatorioHorasIniJobsFornecedores.launch, 
+   		         coluna "Minuto Atual"
+   		  (iii)  Remover todas as instâncias (primeiro esperar até o processo da instância terminoou)
+   		  (iv)   Instalar os arquivos novos listados no item (a) acima 
+   		  (v)    Clicar em "Adicionar instância" para todos os fornecedores
+   		  (vi)   Verificar os Start Times novos de todos eles no Task Scheduler: 
+   		         verificar se os minutos dos agendamentos novos batem com o relatório 
+   		         RelatorioHorasIniJobsFornecedores.launch, coluna "Minuto Futuro"
+   		  (vii)  Verificar se o novo renomeado Job15a15min.bat é chamado
+   		  (viii) Ajeitar os ícones no menu de Windows manualmente (no caso que isso não foi automatizado ainda)
+   		  
+   d. Verificar manualmente todos os ícones no menu de Windows criados com a versão anterior do Integrador
+   
+   
+5.   - Acompanhar 15 minutos se o Integrador começa executar automaticamente
+     - Verificar se o Integrador gerou o novo arquivo:
+     		- Job15a15min.%1.log no caso do servidor do APS Cloud
+     		- Job15a15min.log    em todos os outros casos
+     
+     
+6. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+   (ii)  Compilar o arquivo .jar
+   (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+         esperando o processamento atual terminar primeiro
+   

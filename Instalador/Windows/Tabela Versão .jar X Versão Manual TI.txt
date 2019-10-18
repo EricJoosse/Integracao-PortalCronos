@@ -18,4 +18,5 @@ Versão .jar		Versão Manual TI
 2.8.5			v1.4.3 (12.07.2018)
 3.0.0			v1.4.3 (12.07.2018) - na versão nuvem atalho no menu Windows exclúido automaticamente, pois ainda não existe uma versão nuvem do manual
 3.1.0			v1.4.3 (12.07.2018) - Atalho no menu Windows exclúido manualmente (para Bernardino não ver, Atacamax não-nuvem)
-3.2.0			v1.5.0 (20.09.2019)??? ou Nenhum ???????
+3.2.0			Nenhum atalho no menu de Windows
+3.3.0			v1.5.0 (20.09.2019)??? ou Nenhum ???????
