@@ -104,6 +104,9 @@ public class Instalador {
 				// idFornecedor == -1 no caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos
 				gravarIsAmbienteNuvem(0);
 
+				String siglaSistema = args[1];
+		       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES, siglaSistema);
+
 		        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 				tarefaWindows.gravarEmArquivoXML();
 			}
