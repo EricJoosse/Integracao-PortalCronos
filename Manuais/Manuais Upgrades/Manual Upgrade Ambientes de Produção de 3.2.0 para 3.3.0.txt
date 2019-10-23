@@ -38,12 +38,16 @@ Manual Upgrade dos Ambientes de Produção de 3.2.0 para 3.3.0
  
 4. (i)  Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
  
-   (ii) Manuais TI:
+   (ii) Apenas no caso de servidors não-nuvem e não no servidor do monitorador: 
+          - Manuais TI:
 	     		- É mais fácil fazer backup do arquivo .properties e desinstalar o Integrador
 	     		  e re-instalar de zero (sem mexer na instalação de Java)
-	     		_ Caso contrário:     			
+	     		_ Caso contrário: 
+	     			- No caso de Windows 2018:
+	     				- Mover o manual do menu de Windows para o diretório C:/Arquivos de Programas PC/
+	     				- No menu de Windows criar um atalho novo apontando para este arquivo    			
    		 			- Apagar o Manual Mantuenção TI + atalho no menu de Windows
-   		 			- Criar subdiretórios novos no menu de Windows 
+   		 			- Criar subdiretórios novos no menu de Windows: Start Menu/Programs/Portal Cronos/Integrador " + this.fornecedor.SiglaSistemaFornecedor + "/
    		 			- Recriar os 2 manuais desmembrados 
    		 				+ 2 atalhos no menu de Windows 
    		 				+ ícones 

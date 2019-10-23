@@ -13,27 +13,25 @@ public class ManualManutencao {
 	private String nomeAtalho = null;
 	private String conteudo;
 	private Fornecedor fornecedor;
+	private String siglaSistemaFornecedor;
 	private String caminhoManual = null;
 	private String caminhoAtalhoManual = null;
 	private String caminhoAtalhoManualPai = null;
 	
 	
 	private void setCaminhoManualMaisCaminhoAtalho() throws Exception { 	
-		if (this.fornecedor.IsServicoNuvem) {
-	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
+    	this.caminhoManual = "C:/Arquivos de Programas PC/";
+	  	this.caminhoAtalhoManualPai = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
+
+    	if (this.fornecedor.IsServicoNuvem) {
 		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + this.fornecedor.SiglaSistemaFornecedor + " Cloud/";
-		  	this.caminhoAtalhoManualPai = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
 		}
-		else if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
-	    	this.caminhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
-	    }
-	    else if (this.fornecedor.tipoSO.equals("Windows Server 2012 R2")) {
-	    	this.caminhoManual = "C:/Arquivos de Programas PC/";
-		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/";
-	    }
-		else if (this.fornecedor.tipoSO.equals("Windows Server 2016") || this.fornecedor.tipoSO.equals("Windows 10 Pro")) {
-		  	this.caminhoManual = "C:/Arquivos de Programas PC/";
-		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + this.fornecedor.SiglaSistemaFornecedor + "/";
+		else if (   this.fornecedor.tipoSO.equals("Windows Server 2016") 
+				  || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
+				  || this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")
+				  || this.fornecedor.tipoSO.equals("Windows 10 Pro")) 
+		{
+		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + this.siglaSistemaFornecedor + "/";
 	    }
 	    else
 	    	throw new Exception("O sistema operacional \"" + this.fornecedor.tipoSO + "\" ainda está sem diretório padrão definido para o Manual de Manutenção para a TI.");
@@ -82,20 +80,19 @@ public class ManualManutencao {
         	  || this.fornecedor.tipoSO.equals("Windows Server 2016") 
               || this.fornecedor.tipoSO.equals("Windows 10 Pro")
               || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
+              || this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")
             ) {
         	
         	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
-        	if(!diretorioAtalhoManual.exists()) { 
-        		if (this.fornecedor.IsServicoNuvem)
-        		   diretorioAtalhoManual.mkdirs();
-        		else
-         		   diretorioAtalhoManual.mkdir();
+        	if (!diretorioAtalhoManual.exists()) 
+        	{ 
+       		    diretorioAtalhoManual.mkdirs();
         	}
         	else {
         		// Excluir eventuais atalhos antigos:
         		for (final File file : diretorioManual.listFiles()) 
         		{
-        			if (file.getName().startsWith("Manual") && file.getName().endsWith(".lnk"))
+        			if (file.getName().endsWith(".lnk"))
        			       file.delete();
         		}
         	}
@@ -131,6 +128,7 @@ public class ManualManutencao {
           	    || this.fornecedor.tipoSO.equals("Windows Server 2016") 
         		|| this.fornecedor.tipoSO.equals("Windows 10 Pro")
                 || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
+                || this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")
            ) {
         	File diretorioAtalhoManual = new File(caminhoAtalhoManual);
         	
@@ -156,51 +154,31 @@ public class ManualManutencao {
         		      temOutrosAtalhos = true;
         		}
 
-        	    // Remover os seguintes menus de Windows: 
-        	    // (i)  No caso de ambientes não-nuvem:
-        	    //         - Start Menu/Programs/Portal Cronos/
-        	    // (ii) No caso de ambientes nuvem:
-        	    //         - Start Menu/Programs/Portal Cronos/Integrador XXXXXXXX Cloud/
         	    if (!temOutrosAtalhos) 
-        			diretorioAtalhoManual.delete();
-        	    
-        	    // Remover os seguintes menus de Windows: 
-        	    // (i)  No caso de ambientes não-nuvem:
-        	    //         - nada
-        	    // (ii) No caso de ambientes nuvem:
-        	    //         - Start Menu/Programs/Portal Cronos/
-        	    if (this.fornecedor.IsServicoNuvem)
         	    {
-                	File diretorioAtalhoManualPai = new File(caminhoAtalhoManualPai);
-                	if (diretorioAtalhoManualPai.exists()) 
-            			 diretorioAtalhoManualPai.delete();
+            	    // Remover os seguintes menus de Windows: 
+            	    // (i)  No caso de ambientes não-nuvem:
+            	    //         - Start Menu/Programs/Portal Cronos/Integrador XXXXXXXX/
+            	    // (ii) No caso de ambientes nuvem:
+            	    //         - Start Menu/Programs/Portal Cronos/Integrador XXXXXXXX Cloud/
+        			diretorioAtalhoManual.delete();
+	        	    
+	        	    // Remover os seguintes menus de Windows: 
+	        	    // Em todos os casos de ambientes nuvem:
+	        	    //         - Start Menu/Programs/Portal Cronos/
+	            	File diretorioAtalhoManualPai = new File(caminhoAtalhoManualPai);
+	            	if (diretorioAtalhoManualPai.exists()) 
+	        			 diretorioAtalhoManualPai.delete();
         	    }
         	}
         }
-
-
-        
-        // Para o caso de Windows 2008 (não tem atalho no menu, o manual está no menu mesmo:
-        File diretorioManual = new File(caminhoManual);
-    	
-    	if(diretorioManual.exists()) { 
-    		boolean temOutrosArquivos = false;
-    		
-    		for (final File file : diretorioManual.listFiles()) 
-    		{
-    			if (file.getName().startsWith("Manual") && file.getName().endsWith(".txt"))
-  			       file.delete();
-    			else
-    			   temOutrosArquivos = true;
-    		}
-    		if (!temOutrosArquivos) diretorioManual.delete();
-    	}
 	}
 	
 	
 	
-	public ManualManutencao(Fornecedor f) throws Exception {
+	public ManualManutencao(Fornecedor f, String siglaSistema) throws Exception {
 		this.fornecedor = f;
+		this.siglaSistemaFornecedor = siglaSistema;
 		setNomeArquivoMaisAtalho();
 		
 

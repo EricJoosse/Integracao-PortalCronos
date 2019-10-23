@@ -68,7 +68,8 @@ public class Desinstalador {
 			    else
 			   	   idFornecedor = fRep.getIdFornecedorByCnpj(cnpjFornecedor);
 			
-	            ManualManutencao m = new ManualManutencao(fRep.getFornecedor(idFornecedor));
+			    Fornecedor f = fRep.getFornecedor(idFornecedor); 
+	            ManualManutencao m = new ManualManutencao(f, f.SiglaSistemaFornecedor);
 	            m.removerPCronosDoMenuWindows();
 			}
     		

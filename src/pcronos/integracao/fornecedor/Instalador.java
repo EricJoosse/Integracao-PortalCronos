@@ -66,11 +66,10 @@ public class Instalador {
 			// 2. if (idFornecedor == null) não tratar aqui, pois neste caso entra no ArrayIndexOutOfBoundsException 
 			if (idFornecedor != -1) 
 			{
-		        ManualManutencao m = new ManualManutencao(f);
-		        m.gravarEmArquivoNoMenuWindows();
-
 				if (f.IsServicoNuvem) 
 				{
+			        ManualManutencao m = new ManualManutencao(f, null);
+			        m.gravarEmArquivoNoMenuWindows();
 					
 					gravarIsAmbienteNuvem(1);
 
@@ -90,9 +89,13 @@ public class Instalador {
 				}
 				else if (!f.IsServicoNuvem)
 				{
+					String siglaSistema = args[1];
+
+					ManualManutencao m = new ManualManutencao(f, siglaSistema);
+			        m.gravarEmArquivoNoMenuWindows();
+
 					gravarIsAmbienteNuvem(0);
 
-					String siglaSistema = args[1];
 			       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES, siglaSistema);
 
 			       	TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
