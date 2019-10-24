@@ -29,7 +29,7 @@ public class Instalador {
 	}
 	
 	
-	private static void editarArquivoConfig(String caminhoMaisNomeArquivo, String siglaSistema) throws IOException, DefaultCharsetException
+	private static void editarArquivoConfig(String caminhoMaisNomeArquivo, String siglaSistema, String cnpjFornecedor) throws IOException, DefaultCharsetException
 	{
 		if (!Utils.getDefaultCharsetJVM().equals("windows-1252"))
 		{
@@ -39,6 +39,9 @@ public class Instalador {
      	String conteudoArquivo = new String(Files.readAllBytes(Paths.get(caminhoMaisNomeArquivo)), Charset.forName("windows-1252"));
      	
      	conteudoArquivo = conteudoArquivo.replace("SiglaSistema                      = XXX", "SiglaSistema                      = " + siglaSistema);
+     	
+     	if (cnpjFornecedor != null)
+     		conteudoArquivo = conteudoArquivo.replace("CnpjFornecedor                    = 11222333444455", "CnpjFornecedor                    = " + cnpjFornecedor);
      	
      	BufferedWriter bWriter = new BufferedWriter(new FileWriter(caminhoMaisNomeArquivo, false));
         bWriter.write(conteudoArquivo);
@@ -96,7 +99,9 @@ public class Instalador {
 
 					gravarIsAmbienteNuvem(0);
 
-			       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES, siglaSistema);
+			       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES
+			       			           , siglaSistema
+			       			           , f.cnpjFornecedor);
 
 			       	TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 					tarefaWindows.gravarEmArquivoXML();
@@ -108,7 +113,9 @@ public class Instalador {
 				gravarIsAmbienteNuvem(0);
 
 				String siglaSistema = args[1];
-		       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES, siglaSistema);
+		       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES
+		       			           , siglaSistema
+		       			           , null);
 
 		        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 				tarefaWindows.gravarEmArquivoXML();
