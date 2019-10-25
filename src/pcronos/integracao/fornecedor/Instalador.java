@@ -71,11 +71,11 @@ public class Instalador {
 			{
 				if (f.IsServicoNuvem) 
 				{
+					gravarIsAmbienteNuvem(1); // Primeiro para evitar instalação amíguo de tipo nuvem ou não-nuvem no caso de instalação abortada por causa de qq erro no instalador
+
 			        ManualManutencao m = new ManualManutencao(f, null);
 			        m.gravarEmArquivoNoMenuWindows();
 					
-					gravarIsAmbienteNuvem(1);
-
 					String caminhoMaisNomeArquivo = "C:/Arquivos de Programas PC/AdicionarFornecedorNuvem.bat";
 					String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + f.SiglaSistemaFornecedor + " Cloud/Adicionar Instância.lnk";
 					ShellLink slAdicionar = ShellLink.createLink(caminhoMaisNomeArquivo)
@@ -92,16 +92,21 @@ public class Instalador {
 				}
 				else if (!f.IsServicoNuvem)
 				{
+					gravarIsAmbienteNuvem(0); // Primeiro para evitar instalação amíguo de tipo nuvem ou não-nuvem no caso de instalação abortada por causa de qq erro no instalador
+
 					String siglaSistema = args[1];
 
+					// Primeiro para evitar instalação amíguo de tipo nuvem ou não-nuvem no caso de instalação abortada por causa de qq erro no instalador:
+			       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES
+	       			           , siglaSistema
+	       			           , f.cnpjFornecedor);
+
+			       	
+					if (!f.SiglaSistemaFornecedor.equals(siglaSistema))
+						throw new Exception("A sigla digitada do sistema não bate com a sigla cadastrada no site do Portal Cronos!");
+					
 					ManualManutencao m = new ManualManutencao(f, siglaSistema);
 			        m.gravarEmArquivoNoMenuWindows();
-
-					gravarIsAmbienteNuvem(0);
-
-			       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES
-			       			           , siglaSistema
-			       			           , f.cnpjFornecedor);
 
 			       	TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 					tarefaWindows.gravarEmArquivoXML();
@@ -136,7 +141,7 @@ public class Instalador {
 		}
 		catch (Exception ex) 
 		{
-			String msg = "Erro: " + ex.getMessage() + "\r\n" + "Não foi possível instalar o serviço 100 % !";
+			String msg = "Erro: " + ex.getMessage() + "\r\n" + "Não foi possível instalar o Integrador 100 % !";
 			System.out.println(msg);
 			throw new Exception(msg);
 		}
