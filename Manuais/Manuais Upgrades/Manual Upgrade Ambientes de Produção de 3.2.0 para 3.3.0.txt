@@ -36,8 +36,11 @@ Manual Upgrade dos Ambientes de Produção de 3.2.0 para 3.3.0
 3. (i)  Copiar o arquivo novo integr-fornecedor-3.3.0.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
-4. (i)  Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
- 
+4. (i)  Em todos os casos (nuvem e não-nuvem):
+        Atualizar os seguintes arquivos no servidor do fornecedor:
+		- /bin/Versao.bat 
+		- AbrirConfigFornecedor.bat
+
    (ii) Apenas no caso de servidors não-nuvem e não no servidor do monitorador: 
           - Manuais TI:
 	     		- É mais fácil fazer backup do arquivo .properties e desinstalar o Integrador
@@ -52,6 +55,11 @@ Manual Upgrade dos Ambientes de Produção de 3.2.0 para 3.3.0
    		 				+ 2 atalhos no menu de Windows 
    		 				+ ícones 
    		 				+ forçamento "Executar como Administrador"
+   		 				
+   		 - Criar atalho no menu para o arquivo de configurações:
+	     		- É mais fácil fazer backup do arquivo .properties e desinstalar o Integrador
+	     		  e re-instalar de zero (sem mexer na instalação de Java)
+	     		_ Caso contrário: 
 
 
 5. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat

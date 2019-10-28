@@ -105,10 +105,23 @@ public class Instalador {
 					if (!f.SiglaSistemaFornecedor.equals(siglaSistema))
 						throw new Exception("A sigla digitada do sistema não bate com a sigla cadastrada no site do Portal Cronos!");
 					
+
 					ManualManutencao m = new ManualManutencao(f, siglaSistema);
 			        m.gravarEmArquivoNoMenuWindows();
 
-			       	TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
+			        			        
+				    String atalho = "C:/Arquivos de Programas PC/AbrirConfigFornecedor.bat";				    
+					String nomeAtalho = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + siglaSistema + "/Configurações.lnk";
+			       	ShellLink sLink = ShellLink.createLink(atalho)
+			       			                // .setWorkingDir("..")
+			   		                           .setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/ConfiguraçõesInstância.ico")
+			       		                    // .setIconLocation("%SystemRoot%\\system32\\SHELL32.dll")
+			    		                       ;
+			       	sLink.getHeader().setIconIndex(0);
+			       	sLink.saveTo(nomeAtalho);
+			        
+			        			        
+			        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 					tarefaWindows.gravarEmArquivoXML();
 				}
 			}

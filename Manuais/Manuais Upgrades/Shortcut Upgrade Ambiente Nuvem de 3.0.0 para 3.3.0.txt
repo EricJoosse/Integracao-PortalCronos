@@ -23,6 +23,7 @@ Shortcut Upgrade dos Ambiente Nuvem de 3.0.0 para 3.3.0
        	    - bin\Versao.bat 
         	- Integração Fornecedor - Portal Cronos\integr-fornecedor-3.3.0.jar
    			- Integração Fornecedor - Portal Cronos\Job15a15min.bat
+			- Arquivos de Programas PC\AbrirConfigFornecedor.bat
         	- Arquivos de Programas PC\AdicionarFornecedorNuvem.bat
         	- Arquivos de Programas PC\RemoverFornecedorNuvem.bat 
         	- Arquivos de Programas PC\Desinstalador_Integrador_ou_Monitorador.bat

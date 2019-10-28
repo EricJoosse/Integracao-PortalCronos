@@ -31,9 +31,14 @@ chcp 1252>nul
 cd\
 cd "Arquivos de Programas PC"
 
+call "Integração Fornecedor - Portal Cronos\bin\IsAmbienteNuvem.bat"
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
-start notepad "Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%1.properties"
+if "%IsAmbienteNuvem%" == "1" (
+    start notepad "Integração Fornecedor - Portal Cronos/conf/Integração APS - Portal Cronos.%1.properties"
+) else if "%IsAmbienteNuvem%" == "0" (
+    start notepad "Integração Fornecedor - Portal Cronos/conf/Integração Fornecedor - Portal Cronos.properties"
+)
 
 exit
 
