@@ -288,15 +288,13 @@ if %tipoInstalacao% == 2 (
 cd\
 
 
-REM Proteção contra exclusão indevida por gerente TI ignorante que gosta de apagar coisas 
-REM e que apaga tudo que não foi ele mesmo que tinha feito, sem avisar ninguêm,
-REM apenas no servidor de monitoramento:
-
-if %idFornecedor% == -1 (
+REM Na versão nuvem os arquivos de configuração sempre se encontravam no menu de Windows:
+if %tipoInstalacao% == 2 (
     attrib "Arquivos de Programas PC" +S +H
 )
 
-if %tipoInstalacao% == 2 (
+REM A partir da versão 3.3.0, na versão não-nuvem o arquivo de configuração também se encontra no menu de Windows:
+if %tipoInstalacao% == 1 (
     attrib "Arquivos de Programas PC" +S +H
 )
 

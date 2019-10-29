@@ -648,9 +648,10 @@ Como vai ser?
 			2. Já foi feito automaticamente pelo pom.xml na geração do .jar. 
 
 
-   16. Apenas nos seguintes casos:
+   16. Em todos os casos (a partir da versão 3.3.0):
          - instalação no servidor do monitoramento
          - instalação no servidor do APS Cloud
+         - instalação nos servidores não-nuvem
 		  (i)  No Windows Explorer alterar a opção para NÃO exibir arquivos de sistema operacional protegidos, 
 		       (marcar "Hide protected operating system files")  
 		       porém pode exibir hidden files, para todos os usuários inclusive cronostech 
