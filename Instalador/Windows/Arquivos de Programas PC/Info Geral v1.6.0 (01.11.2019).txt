@@ -1,0 +1,23 @@
+Informações técnicas gerais:
+============================
+
+- Ao ligar ou reiniciar o servidor, o serviço de integração starta automaticamente. 
+ 
+- O serviço executa de 15 a 15 minutos.
+
+- Se a integração parou de ofertar automaticamente:  
+  1. Veja a lista de possíveis causas no capítulo "A" no "Manual Manutenção" no menu de Windows 
+     Portal Cronos > Integrador WinThor > Manual Manutenção
+     
+  2. Em todos os casos, após a solução, veja no capítulo "B" como verificar se o serviço 
+     realmente voltou a funcionar.
+     Favor NÃO SIMPLESMENTE REINICIAR O SERVIDOR, porém identificar a causa para podermos evitar repetição no futuro.
+      
+      
+- O "serviço" de integração é um "serviço" de Java portanto é independente de Windows,
+  portanto não se encontra em nenhuma das seguintes ferramentas de Windows:
+      - na lista de Serviços de Windows, 
+      - no "Gerenciador de Tarefas" ("Task Manager"), 
+  	  - no "Visualizador de Eventos" ("Event Viewer")
+            
+
