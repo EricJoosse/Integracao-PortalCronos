@@ -55,6 +55,10 @@ Manual Upgrade dos Ambientes de Produção de 3.2.0 para 3.3.0
    		 				+ 2 atalhos no menu de Windows 
    		 				+ ícones 
    		 				+ forçamento "Executar como Administrador"
+   		 			- Apagar o manual "C:/Arquivos de Programas PC/Info Geral v1.5.0 (20.09.2019).txt"
+   		 			  e o atalho no menu
+   		 			- Copiar o novo manual "C:/Arquivos de Programas PC/Info Geral v1.6.0 (01.11.2019).txt"
+   		 			  e criar o atalho novo
    		 				
    		 - Criar atalho no menu para o arquivo de configurações:
 	     		- É mais fácil fazer backup do arquivo .properties e desinstalar o Integrador
