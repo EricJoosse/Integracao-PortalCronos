@@ -32,7 +32,7 @@ REM goto TesteIfExistArqConfEspecifico
 goto TesteFindTarefaEspecifica
 
 
-REM ================ Testes Instalação Manual Manutenção TI do menu de Windows: ========================================
+REM ================ Testes Instalação Resolver Paradas do menu de Windows: ========================================
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
 REM ================  (testado com Windows Server 2016,        funcionou)       ========================================
@@ -42,7 +42,7 @@ REM ================  (testado com Windows 10 Pro - apenas testado no caso de um
 call Instalador.bat
 exit
 
-REM ================ Testes Desinstalação Manual Manutenção TI do menu de Windows: ========================================
+REM ================ Testes Desinstalação Resolver Paradas do menu de Windows: ========================================
 REM ================  (testado com Windows Server 2008 R2 SP1, funcionou)       ========================================
 REM ================  (testado com Windows Server 2012 R2,     funcionou)       ========================================
 REM ================  (testado com Windows Server 2016,        funcionou)       ========================================

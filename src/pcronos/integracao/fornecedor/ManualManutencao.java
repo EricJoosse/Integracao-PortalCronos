@@ -40,7 +40,7 @@ public class ManualManutencao {
 
 	private void setNomeArquivoMaisAtalho() throws Exception { 	
 		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.5.0 (20.09.2019).txt";
-		this.nomeAtalho = "Manual Manutenção.lnk";
+		this.nomeAtalho = "Resolver Paradas.lnk";
 
 //		if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {
 //			this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.5.0 (20.09.2019).txt";
@@ -137,7 +137,7 @@ public class ManualManutencao {
         		
         	    // O seguinte remove os seguintes atalhos no menu de Windows:
         	    // (i)  Em todos os casos:
-        	    //         - Manual Manutenção TI
+        	    //         - Manual "Resolver Paradas"
         	    // 
         	    // (ii) No caso de ambientes nuvem:
         	    //         - Adicionar Instância

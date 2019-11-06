@@ -6,8 +6,8 @@ Informações técnicas gerais:
 - O serviço executa de 15 a 15 minutos.
 
 - Se a integração parou de ofertar automaticamente:  
-  1. Veja a lista de possíveis causas no capítulo "A" no "Manual Manutenção" no menu de Windows 
-     Portal Cronos > Integrador WinThor > Manual Manutenção
+  1. Veja a lista de possíveis causas no capítulo "A" na opção "Resolver Paradas" no menu de Windows: 
+     Portal Cronos > Integrador WinThor > Resolver Paradas
      
   2. Em todos os casos, após a solução, veja no capítulo "B" como verificar se o serviço 
      realmente voltou a funcionar.

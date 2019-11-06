@@ -15,8 +15,8 @@ Versão .jar		Versão Manual TI
 
 
 
-B. Manual Manutenção TI:
-========================
+B. Manual "Resolver Paradas":
+=============================
 
 Versão .jar		Versão Manual TI
 -----------		-------------------

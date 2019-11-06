@@ -49,7 +49,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- No caso do fornecedor com JRE diferente: 
 		- executar TestadorUnitario.bat e verificar se funcionou: veja TestadorUnitario.log
 		- depois do teste, apagar TestadorUnitario.log
-		- Ajustar Manual Manutenção TI manualmente: 
+		- Ajustar o manual "Resolver Paradas" manualmente: 
 			- editar "Program Files" / "Program Files (x86)"
 			- editar versão JRE
 			

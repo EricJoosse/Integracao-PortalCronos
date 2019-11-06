@@ -1431,14 +1431,18 @@ public final class IntegracaoFornecedorCompleta {
 	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 	+ " " + "\r\n"
 	+ "Recebi um email automático que o Integrador WinThor / PCronos da " + dto.Nmfornecedor + " está parado desde sábado (22/09/2018) às 19:25, indevidamente." + "\r\n" 
-	+ "Talvez o adaptador de rede do servidor local está com problemas novamente? Ou talvez tem um conflito de endereços IP novamente? " + "\r\n"
-	+ "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor 187.113.65.138, " + "\r\n"
-	+ "no menu <b>Iniciar > Portal Cronos > Manual Manutenção TI</b>, a última versão da lista de possíveis causas e outras dicas. " + "\r\n"
-	+ " " + "\r\n"
-	+ "Após a solução da causa, veja neste mesmo manual como verificar se o serviço realmente voltou a funcionar." + "\r\n"
-	+ " " + "\r\n"
-	+ "É urgente pois tem muitas cotações com prazo de ofertamento expirando hoje de manhã!" + "\r\n"
-	;
+	+ "Talvez o adaptador de rede do servidor local está com problemas novamente? Ou talvez tem um conflito de endereços IP novamente? " + "\r\n";
+				            	 
+				            	 if (f.versaoIntegrador.compareTo("3.3.0") >= 0 || f.versaoIntegrador.compareTo("3.3") >= 0)
+				            	 {
+				            	 	body += "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor 187.113.65.138, " + "\r\n"
+										+ "no menu <b>Iniciar > Portal Cronos > Integrador " + f.SiglaSistemaFornecedor + " > Resolver Paradas</b>, a última versão da lista de possíveis causas e outras dicas. " + "\r\n"
+										+ " " + "\r\n"
+										+ "Após a solução da causa, veja neste mesmo manual como verificar se o serviço realmente voltou a funcionar." + "\r\n"
+										+ " " + "\r\n";
+				            	 }
+	
+				            	 body += "É urgente pois tem muitas cotações com prazo de ofertamento expirando hoje de manhã!" + "\r\n";
 					     		    body += " " + "\r\n"
 							     			+ "Atc," + "\r\n"
 						     				+ "O email automático do Portal Cronos " + "\r\n"
@@ -1497,14 +1501,17 @@ public final class IntegracaoFornecedorCompleta {
 	+ "É melhor resolver isso logo, antes de " + ateQuando + "  (é a data fim da cotação que vence primeiro e que não está ofertada)," + "\r\n"  
 	+ "pois tem muitos produtos vendidos pela " + dto.Nmfornecedor + " (" + Integer.toString(dto.QtdMeusProdutos) + " \"Meus Produtos\") nesta cotação!" + "\r\n"
 	+ " " + "\r\n"
-	+ "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n" 
-	+ "Se você não tem nenhuma ideia da causa, veja em anexo uma lista de possíveis causas e outras dicas. " + "\r\n"
+	+ "<b>É melhor NÃO simplesmente reiniciar o servidor</b>, porém é melhor identificar a causa <red>para podermos evitar repetição durante finais da semana quando não tem ninguém disponível para ficar reiniciando</red>." + "\r\n";
+				            	 
+ if (f.versaoIntegrador.compareTo("3.3.0") >= 0 || f.versaoIntegrador.compareTo("3.3") >= 0)
+ {
+    body += "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor 187.113.65.138, " + "\r\n"
+	+ "no menu <b>Iniciar > Portal Cronos > Integrador " + f.SiglaSistemaFornecedor + " > Resolver Paradas</b>, a última versão da lista de possíveis causas e outras dicas. " + "\r\n"
 	+ " " + "\r\n"
-	+ "OU:" + "\r\n"
-	+ "Se você não tem nenhuma ideia da causa, veja em anexo a última versão da lista de possíveis causas e outras dicas." + "\r\n"
-	+ "Após a solução da causa, veja no manual em anexo como verificar se o serviço realmente voltou a funcionar.\r\n"
+	+ "Após a solução da causa, veja neste mesmo manual como verificar se o serviço realmente voltou a funcionar.\r\n"
 	+ " " + "\r\n"
 	;
+ }
 	
 	//		     		    String sqlVerificacaoCadastros = 
 	//		     		    		  "select distinct ds_ocorrencia_logeint "
