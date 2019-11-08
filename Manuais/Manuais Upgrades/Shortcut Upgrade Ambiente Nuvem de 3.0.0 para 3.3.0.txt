@@ -1,6 +1,71 @@
 Shortcut Upgrade dos Ambiente Nuvem de 3.0.0 para 3.3.0 
 =======================================================
 
+
+A. Upgrade de forma automatizada:
+=================================
+    
+1. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para a Marizpan
+   (ii)  Executar Maven para compilar e atualizar o arquivo integr-fornecedor-x.y.z.jar
+
+	
+1. (i)  Gerar o Instalador no Eclipse.
+   (ii) Zippar o Instalador para o arquivo PatchNuvem3.3.0.zip
+        colocando a senha cronos@2019 no arquivo .zip para evitar uso indevido e hackeado. 
+ 
+2. a. Verificar se o usuário logado é administrador ou administrator, 
+      local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+	      
+   b. Verificar se o usuário logado consegue abrir o botão "Environment Variables" 
+      no Control Panel > System > Advanced System Settings > "Environment Variables".
+      Caso contrário, provavelmente o usuário logado é de uma máquina virtual. 
+      Pedir a TI conectar com um usuário administrador na máquina real debaixo da máquina virtual.
+	      
+   c. Nas opções do Windows Explorer marcar "Mostrar arquivos, pastas e unidades ocultas"  
+      (foi testado no fornecedor Padeirão que não precisa desmarcar "Hide protected operating system files").
+      Fechar e re-abrir o Windows Explorer. Senão re-abrir o Windows Explorer, 
+      vai pensar indevidamente que não existe o dir C:\ProgramData\ por exemplo............. 
+	
+   d. Copiar o arquivo PatchNuvem3.3.0.zip para a máquina de Bernardino e pedir ele copiar isso 
+      para o servidor do APS Cloud. 
+   
+   e. Unzippar no dir C:/temp/ (senha cronos@2019)
+   
+   f. Backup do arquivo de configuração da Marizpan para o diretório C:/Eric/ 
+
+
+3. Esperar até o processo atual do Integrador terminou.
+ 
+4. (i)   Primeiro verificar que o desinstalador local (da versão anterior 3.0.00 não desinstala java!!!
+         No caso, descomentar "goto SKIP_JRE"
+   (ii)  Executar o Desinstalador como Administrador   
+   (iii) Verificar se o Desinstalador apagou o menu de Windows, a Task Schedule, e os diretórios
+
+
+5. Re-instalar a Marizpan: 
+	- Adicionar cliente novo "Marizpan"
+	- Recuperar o conteúdo do backup do config da Marizpan para "Integração APS - Portal Cronos.Marizpan.properties"
+	  
+	-     (i)  No Windows Explorer alterar a opção para NÃO exibir arquivos de sistema operacional protegidos, 
+		       (marcar "Hide protected operating system files")  
+		       porém pode exibir hidden files, para todos os usuários inclusive cronostech 
+		       (marcar "Show hidden files, folders, and drives")
+		  (ii) Verificar se o diretório "Arquivos de Programas PC" ficou invisível no Windows Explorer como deveria
+
+
+6. Em todos os casos: 
+     - Acompanhar 15 minutos se o Integrador começa executar automaticamente
+     
+7. Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+   esperando o processamento atual terminar primeiro
+   
+
+
+
+
+B. Upgrade de forma manual:
+===========================
+
 1. Verificar se o usuário logado é administrador ou administrator, 
    local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
 	      
