@@ -99,8 +99,17 @@ public class ManualManutencao {
 
         	if (!this.fornecedor.IsServicoNuvem)
         	{
-        	    ShellLink.createLink(caminhoManual + "Info Geral v1.6.0 (01.11.2019).txt", caminhoAtalhoManual + "Info Geral.lnk");
-        	    ShellLink.createLink(caminhoManual + nomeArquivo, caminhoAtalhoManual + nomeAtalho);
+        		ShellLink sLink = ShellLink.createLink(caminhoManual + "Info Geral v1.6.0 (01.11.2019).txt")
+                                           .setIconLocation("%SystemRoot%\\system32\\SHELL32.dll");
+				sLink.getHeader().setIconIndex(277);
+				sLink.saveTo(caminhoAtalhoManual + "Info Geral.lnk");
+
+				
+				ShellLink sLink2 = ShellLink.createLink(caminhoManual + nomeArquivo)
+											.setIconLocation("%SystemRoot%\\system32\\SHELL32.dll");
+										 // .setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/Troubleshooting.ico");
+				sLink2.getHeader().setIconIndex(35); // (0)
+				sLink2.saveTo(caminhoAtalhoManual + nomeAtalho);
         	}
         }
 	}
