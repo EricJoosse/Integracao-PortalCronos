@@ -1,16 +1,16 @@
-Fornecedor   IdForn	Sistema		Em produção		IP Público 			Porta IP Aberta	Frequência	Debug	Qtd.Dias   		
-----------	 ------	-------     -----------	    ---------- 			---------------	----------	-----	--------	 	
-Formaggio 		 13	APS		    Sim				187.113.120.97	    	80			15 min		true	100		 			
-JR Distribuição	947	WinThor	    Sim				jrolinda.dyndns.org	Não precisa		15 min		true	100							
-Prolac 			 30	WinThor	    Sim				187.103.76.53		Não precisa		15 min		true	100		 						
-Marítimos		 21	WinThor	    Não	  												15 min		true	100							
-Karne Keijo		 60	SAP		    Não													15 min		true	100							
-Comal 			 33	WinThor	    Sim				187.1.168.74			80			15 min		true	100					
-Monitoramento    -- PCronos     Sim				Não se aplica		Não se aplica	15 min		false	 32		
-SOST (BA)		170 WinThor     Sim													15 min		true	 15				 	
-Walmart         385 PCronos	  	Sim																				
-Propão 			171	WinThor	    Sim				187.113.65.138		Não precisa		15 min		true	100					
-Padeirão 		 14	WinThor	    Sim				192.141.110.189		Não precisa		15 min		true	100				
-Marizpan	   1995	APS Cloud	Sim				18.214.93.120			2525		15 min		true	100																													
-Atacamax	      1	APS			Sim				179.180.145.146			???			15 min		true	100																													
-Atacamax	      1	APS Cloud	Não				18.214.93.120			2525		15 min		true	100																													
+Fornecedor   IdForn	Sistema		Em produção		Porta IP Aberta	Frequência	Debug	Qtd.Dias   		
+----------	 ------	-------     -----------	    ---------------	----------	-----	--------	 	
+Formaggio 		 13	APS		    Sim				   	80			15 min		true	100		 			
+JR Distribuição	947	WinThor	    Sim				Não precisa		15 min		true	100							
+Prolac 			 30	WinThor	    Sim				Não precisa		15 min		true	100		 						
+Marítimos		 21	WinThor	    Não	  							15 min		true	100							
+Karne Keijo		 60	SAP		    Não								15 min		true	100							
+Comal 			 33	WinThor	    Sim					80			15 min		true	100					
+Monitoramento    -- PCronos     Sim				Não se aplica	15 min		false	 32		
+SOST (BA)		170 WinThor     Sim								15 min		true	 15				 	
+Walmart         385 PCronos	  	Sim																			
+Propão 			171	WinThor	    Sim				Não precisa		15 min		true	100					
+Padeirão 		 14	WinThor	    Sim				Não precisa		15 min		true	100				
+Marizpan	   1995	APS Cloud	Sim					2525		15 min		true	100																													
+Atacamax	      1	APS			Sim					???			15 min		true	100																													
+Atacamax	      1	APS Cloud	Não					2525		15 min		true	100																													
