@@ -1435,7 +1435,8 @@ public final class IntegracaoFornecedorCompleta {
 				            	 
 				            	 if (f.versaoIntegrador.compareTo("3.3.0") >= 0 || f.versaoIntegrador.compareTo("3.3") >= 0)
 				            	 {
-				            	 	body += "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor 187.113.65.138, " + "\r\n"
+				            	 	body += "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor " 
+				            	        + (!Utils.isNullOrBlank(f.EnderecoIpPublicoServidor) ? f.EnderecoIpPublicoServidor : ("que está hospedando o Integrador " + f.SiglaSistemaFornecedor + " / PCronos")) + ", " + "\r\n"
 										+ "no menu <b>Iniciar > Portal Cronos > Integrador " + f.SiglaSistemaFornecedor + " > Resolver Paradas</b>, a última versão da lista de possíveis causas e outras dicas. " + "\r\n"
 										+ " " + "\r\n"
 										+ "Após a solução da causa, veja neste mesmo manual como verificar se o serviço realmente voltou a funcionar." + "\r\n"
@@ -1505,7 +1506,8 @@ public final class IntegracaoFornecedorCompleta {
 				            	 
  if (f.versaoIntegrador.compareTo("3.3.0") >= 0 || f.versaoIntegrador.compareTo("3.3") >= 0)
  {
-    body += "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor 187.113.65.138, " + "\r\n"
+    body += "Se você não tem nenhuma ideia da causa, veja no menu de Windows, no servidor " 
+    + (!Utils.isNullOrBlank(f.EnderecoIpPublicoServidor) ? f.EnderecoIpPublicoServidor : ("que está hospedando o Integrador " + f.SiglaSistemaFornecedor + " / PCronos")) + ", " + "\r\n"
 	+ "no menu <b>Iniciar > Portal Cronos > Integrador " + f.SiglaSistemaFornecedor + " > Resolver Paradas</b>, a última versão da lista de possíveis causas e outras dicas. " + "\r\n"
 	+ " " + "\r\n"
 	+ "Após a solução da causa, veja neste mesmo manual como verificar se o serviço realmente voltou a funcionar.\r\n"

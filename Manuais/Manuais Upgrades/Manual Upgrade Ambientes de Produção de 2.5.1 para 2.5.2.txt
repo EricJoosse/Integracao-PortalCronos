@@ -33,7 +33,7 @@ Manual Upgrade dos Ambientes de Produção de 2.5.1 para 2.5.2
    No IE, Chrome ou Firefox acessar http://ip4.me/
    Testar ping primeiro (sem porta). Se isso não funcionar, procurar uma porta IP que está aberta e usar 
    C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat. 
-   Atualizar isso no arquivo Tabela Fornecedores_Versões.txt.
+   Atualizar isso no arquivo FornecedorRepositorio.java.
   
 5. Remover "exit" e a linha em branco no início do arquivo Job15a15minOfertamentoJava_Windows.bat
    no servidor do fornecedor
