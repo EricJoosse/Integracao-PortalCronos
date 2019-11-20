@@ -2400,6 +2400,7 @@ public final class IntegracaoFornecedorCompleta {
 	boolean temCadastroPreco = true;
 
     if (toVerificarEstoque) {
+       debugar(sqlStringSemEstoque);
   	   rSet = stat.executeQuery( sqlStringSemEstoque ) ;
 
   	   if (rSet != null && rSet.next()) 
@@ -2457,7 +2458,7 @@ public final class IntegracaoFornecedorCompleta {
         }
     }
     else if (i == 0) 
-    	debugar(toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque);
+    	debugar("i == 0: " + (toVerificarEstoque ? sqlStringComEstoque : sqlStringSemEstoque));
     else
     	debugar("Preço: " + nf.format(preco));
      
