@@ -52,6 +52,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "90 GB";
 		f[i].MemoriaRamLivre = "1.4 - 1.9 GB";
 		f[i].EnderecoIpPublicoServidor = "Não se aplica";
+		f[i].PortaIpAberta = "Não se aplica";
 
 		i++;
 		f[i].IdFornecedor = 13;
@@ -79,6 +80,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "9 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "187.113.120.97";
+		f[i].PortaIpAberta = "80";
 
 		i++;
 		f[i].IdFornecedor = 947;
@@ -105,6 +107,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "902 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "jrolinda.dyndns.org";
+		f[i].PortaIpAberta = "Não precisa";
 
 		i++;
 		f[i].IdFornecedor = 30;
@@ -131,6 +134,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "422 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "187.103.76.53";
+		f[i].PortaIpAberta = "Não precisa";
 
 		i++;
 		f[i].IdFornecedor = 21;
@@ -155,6 +159,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "48 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
+		f[i].PortaIpAberta = "";
 
 		i++;
 		f[i].IdFornecedor = 170;
@@ -180,6 +185,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "0.6 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
+		f[i].PortaIpAberta = "";
 
 		i++;
 		f[i].IdFornecedor = 60;
@@ -204,6 +210,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "62 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
+		f[i].PortaIpAberta = "";
 
 		i++;
 		f[i].IdFornecedor = 33;
@@ -230,6 +237,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "69 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "187.1.168.74";
+		f[i].PortaIpAberta = "80";
 
 		i++;
 		f[i].IdFornecedor = 171;
@@ -255,6 +263,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "167 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "187.113.65.138";
+		f[i].PortaIpAberta = "Não se aplica";
 
 		i++;
 		f[i].IdFornecedor = 14;
@@ -279,6 +288,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "703 GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "192.141.110.189";
+		f[i].PortaIpAberta = "Não se aplica";
 
 		
 		
@@ -294,6 +304,7 @@ public class FornecedorRepositorio {
 		String EspacoLivreDiscoApsCloud = "18 GB";
 		String MemoriaRamLivreApsCloud = "0 - 200 MB";
 		String EnderecoIpPublicoServidorApsCloud = "18.214.93.120";
+		String PortaIpAbertaApsCloud = "2525";
 		
 		String EmailResponsavelTIApsCloud = "bernardino@apsinformatica.com.br";
 		String SkypeResponsavelTIApsCloud = "Bernardino Borba (live:berna31pe)";
@@ -333,6 +344,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = EspacoLivreDiscoApsCloud;
 		f[i].MemoriaRamLivre = MemoriaRamLivreApsCloud;
 		f[i].EnderecoIpPublicoServidor = EnderecoIpPublicoServidorApsCloud;
+		f[i].PortaIpAberta = PortaIpAbertaApsCloud;
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
 
 		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
@@ -374,6 +386,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = "41 GB"; // EspacoLivreDiscoApsCloud;
 		f[i].MemoriaRamLivre = "17 GB"; // MemoriaRamLivreApsCloud;
 		f[i].EnderecoIpPublicoServidor = "179.180.145.146"; // EnderecoIpPublicoServidorApsCloud;
+		f[i].PortaIpAberta = "???"; // PortaIpAbertaApsCloud;
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  
 
 		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
@@ -413,6 +426,7 @@ public class FornecedorRepositorio {
 		f[i].EspacoLivreDisco = " GB";
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
+		f[i].PortaIpAberta = ""; 
 		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
 
 		f[i].EmailResponsavelTI = "";

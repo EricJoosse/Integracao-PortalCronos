@@ -29,6 +29,7 @@ public class Fornecedor {
 	String DiscoIntegrador;
 	String EspacoLivreDisco;
 	String EnderecoIpPublicoServidor;
+	String PortaIpAberta;
 	String cnpjFornecedor;
 	public String EmailResponsavelTI_Nuvem;
 	public String SkypeResponsavelTI_Nuvem;
