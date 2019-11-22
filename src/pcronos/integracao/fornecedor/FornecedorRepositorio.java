@@ -95,6 +95,7 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].IdAplicativoDesktopRemoto = "bljj9pg@ad ou 734228115";
 		f[i].IdAplicativoDesktopRemoto = "734228115";
 		f[i].usuarioWebservice = "ws-jrembalagem";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -123,6 +124,7 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTIAlternativo = "Marcelo";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].IdAplicativoDesktopRemoto = "servidormaxima@ad (Marcelo) ou 7092380 (Marcos)";
 		f[i].IdAplicativoDesktopRemoto = "685 885 292";
 		f[i].usuarioWebservice = "ws-prolac";
 		f[i].versaoJRE = "jre1.8.0_92";
@@ -227,6 +229,11 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "98609-4887";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].IdAplicativoDesktopRemoto = "usuário FusionDMS: 833 323 573, Administrador: 886 263 056";
+// - Comal: 1. usuário FusionDMS:    este usuário fica em uma VM, por isso usuário FusionDMS 
+//									 não aparece na lista de usuários se conectar com Administrador.....)
+// 			2. usuário Administrador: !!!!!! INSTALADO COM ESTE USUÁRIO!!!!!!!
+		
 		f[i].usuarioWebservice = "ws-comal";
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
@@ -253,6 +260,7 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "99535-1999";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].IdAplicativoDesktopRemoto = "382 127 135";
 		f[i].usuarioWebservice = "ws-propao";
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
@@ -296,6 +304,7 @@ public class FornecedorRepositorio {
 		String versaoIntegradorApsCloud = "3.3.0";
 		String SiglaSistemaFornecedorApsCloud = "APS";
 		String AplicativoDesktopRemotoApsCloud = "AnyDesk";
+		String IdAplicativoDesktopRemotoApsCloud = "desktop-fvkrc84@ad";
 		String tipoSOApsCloud = "Windows Server 2008 R2 SP1"; 
 		String dirProgramFilesApsCloud = "Program Files (x86)";
 		String versaoJREApsCloud = "jre1.8.0_191";
@@ -335,6 +344,7 @@ public class FornecedorRepositorio {
 		f[i].SequenciaInstanciaNuvem = 1;
 
 		f[i].AplicativoDesktopRemoto = AplicativoDesktopRemotoApsCloud;
+		f[i].IdAplicativoDesktopRemoto = IdAplicativoDesktopRemotoApsCloud; 
 		f[i].usuarioWebservice = "ws-marizpan";  // APS Cloud - primeiro fornecedor de muitos
 		f[i].tipoSO = tipoSOApsCloud; 
 		f[i].dirProgramFiles = dirProgramFilesApsCloud;

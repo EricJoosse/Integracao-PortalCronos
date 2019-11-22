@@ -18,6 +18,7 @@ public class Fornecedor {
 	String FuncaoResponsavelTIAlternativo;
 	String TelefoneResponsavelTI;
 	String AplicativoDesktopRemoto;
+	String IdDesktopRemoto; // !!!!!!!!!!!! ID do AnyDesk depende do usuário logado!!!!!!!!!!!!!!!!!!
 	String IdAplicativoDesktopRemoto;
 	String usuarioWebservice;
 	String versaoJRE;
