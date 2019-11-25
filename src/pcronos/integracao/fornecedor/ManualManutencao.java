@@ -108,7 +108,7 @@ public class ManualManutencao {
 				ShellLink sLink2 = ShellLink.createLink(caminhoManual + nomeArquivo)
 											.setIconLocation("%SystemRoot%\\system32\\SHELL32.dll");
 										 // .setIconLocation("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/res/Troubleshooting.ico");
-				sLink2.getHeader().setIconIndex(35); // (0)
+				sLink2.getHeader().setIconIndex(23); // (35) ou (0)
 				sLink2.saveTo(caminhoAtalhoManual + nomeAtalho);
         	}
         }
