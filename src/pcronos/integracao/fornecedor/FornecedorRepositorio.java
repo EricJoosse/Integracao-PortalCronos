@@ -113,7 +113,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = 30;
 		f[i].NomeFantasiaEmpresa = "Prolac";
-		f[i].versaoIntegrador = "2.8.4";
+		f[i].versaoIntegrador = "3.4.0";
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].EmailResponsavelTI = "mscomprolac@gmail.com"; 
@@ -124,19 +124,18 @@ public class FornecedorRepositorio {
 		f[i].ApelidoResponsavelTIAlternativo = "Marcelo";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
-		f[i].IdAplicativoDesktopRemoto = "servidormaxima@ad (Marcelo) ou 7092380 (Marcos)";
-		f[i].IdAplicativoDesktopRemoto = "685 885 292";
+		f[i].IdAplicativoDesktopRemoto = "739 265 928 (Marcos) - era servidormaxima@ad (Marcelo)";
 		f[i].usuarioWebservice = "ws-prolac";
-		f[i].versaoJRE = "jre1.8.0_92";
+		f[i].versaoJRE = "jre1.8.0_231";
 		f[i].tipoJRE = "(64 bit)";
 		f[i].tipoSO = "Windows Server 2012 R2";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07182763000140"; 
 		f[i].DiscoIntegrador = "C";
-		f[i].EspacoLivreDisco = "422 GB";
-		f[i].MemoriaRamLivre = "";
+		f[i].EspacoLivreDisco = "269 GB";
+		f[i].MemoriaRamLivre = "6.5 GB";
 		f[i].EnderecoIpPublicoServidor = "187.103.76.53";
-		f[i].PortaIpAberta = "Não precisa";
+		f[i].PortaIpAberta = "80";
 
 		i++;
 		f[i].IdFornecedor = 21;

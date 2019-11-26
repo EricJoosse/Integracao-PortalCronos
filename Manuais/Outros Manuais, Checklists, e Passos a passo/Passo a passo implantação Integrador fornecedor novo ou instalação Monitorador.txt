@@ -167,7 +167,7 @@ Eric
    
 Marcos, bom dia!   
      
-Favor ativar o AnyDesk e informar o ID no Skype. Pretendo re-instalar o Integrador WinThor / PCronos hoje, 
+O ID do Anydesk é 739 265 928 ainda? 
  
 Atc,
 Eric 
@@ -251,7 +251,7 @@ Como vai ser?
 		    - Preencher isso no f[i].tipoSO = "" no FornecedorRepositorio   
 	
 	
-	   (ii) Verificar a memória RAM livre no servidor de Produção do fornecedor (sem contar meu JVM).
+	   (ii) No "taskmgr.exe" verificar a memória RAM livre no servidor de Produção do fornecedor (sem contar meu JVM).
 		    - Preencher isso no f[i].MemoriaRamLivre = "" no FornecedorRepositorio
 		    - Não fazer no caso de servidores de Teste / Homologação (por exemplo o do APS Cloud)   
 			- Observação: no servidor de monitoramento o serviço + JVM ocupa 60 MB de memória
@@ -353,7 +353,7 @@ Como vai ser?
 
              	- No caso que a JRE existente funciona: 
              			- Descomentar "REM goto SKIP_JRE"no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat"              
-                  		  (feito assim no Padeirão)
+                  		  (feito assim na Padeirão e na Prolac)
              
     					- Verificar e, no caso, ajustar o if no arquivo CaminhoJRE.bat.
     					
@@ -395,8 +395,9 @@ Como vai ser?
     5a. Descobrir o endereço IP público do servidor do fornecedor e uma porta IP que está aberta 
         para poder fazer ping ou TNSping de fora para o servidor do fornecedor na hora que precisar. 
         No IE, Chrome ou Firefox acessar http://ip4.me/
-        Testar ping primeiro (sem porta). Se isso não funcionar, procurar uma porta IP que está aberta e usar 
-        C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat para testar isso. 
+        Testar ping primeiro (sem porta). Se isso não funcionar, procurar uma porta IP que está aberta usando  
+        a utilidade C:\PCronos\Integração Fornecedor - Portal Cronos\PsPing_Servidor_Fornecedor.bat no projeto 
+        Eclipse para testar isso. 
         
         Se não conseguir nada:
         Skype: este servidor com IP público 18.214.93.120 tem alguma porta que pode ser pingada com psping -w 0 %enderecoIP%:%portaIP%? Tentei as portas 80 e 3389 porém o Amazon não deixa pingar. Meu programa só faz um psping automático quando as ofertas automáticas pararam de chegar no Portal Cronos, para saber automaticamente porque a integração parou.
@@ -511,7 +512,7 @@ Como vai ser?
        
        
        
-   9e. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9d, 
+   9e. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9e, 
        fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarDirLog
@@ -527,7 +528,7 @@ Como vai ser?
        Fazer isso ainda em todos os outros tipos de Windows. 
 
        
-   9f. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9e, 
+   9f. No caso de versões de Windows que ainda não estão na lista abaixo dentro deste item 9f, 
        fazer testes unitários ou integrais usando os seguintes métodos de teste já prontos, 
        descomentando o seguinte no TestadorUnitário.bat:
 			- REM goto InstalarManualTI
@@ -865,3 +866,16 @@ SELECT u.cd_usuario_sistema_ususis
   		  separadamente.
   		  
   		
+  32. Apenas no caso re-instalação não-nuvem, editar e enviar o seguinte email:
+  
+Marcos, Leão,
+ 
+    o Integrador WinThor / PCronos foi re-instalado no servidor 187.103.76.53. Testei que tudo está funcionando.
+ 
+Observação:
+Na versão nova do Integrador WinThor / PCronos não existe mais o diretório de configuração <i>C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\</i>
+e também não existe mais o arquivo de configuração "<i>Integração Fornecedor - Portal Cronos.properties</i>" neste diretório.
+A partir de agora as configurações se encontram no menu de Windows "<i>Iniciar" > "Portal Cronos" > "Integrador WinThor" > "Configurações</i>", 
+ 
+Atc,
+Eric
