@@ -300,10 +300,10 @@ public class FornecedorRepositorio {
 		
 		
 		
-		String versaoIntegradorApsCloud = "3.3.0";
+		String versaoIntegradorApsCloud = "3.4.0";
 		String SiglaSistemaFornecedorApsCloud = "APS";
 		String AplicativoDesktopRemotoApsCloud = "AnyDesk";
-		String IdAplicativoDesktopRemotoApsCloud = "desktop-fvkrc84@ad";
+		String IdAplicativoDesktopRemotoApsCloud = "759304784 (era desktop-fvkrc84@ad)";
 		String tipoSOApsCloud = "Windows Server 2008 R2 SP1"; 
 		String dirProgramFilesApsCloud = "Program Files (x86)";
 		String versaoJREApsCloud = "jre1.8.0_191";
