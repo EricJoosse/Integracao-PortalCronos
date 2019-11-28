@@ -13,6 +13,7 @@ Versão .jar		Versão Manual TI
 3.2.0			Nenhum atalho no menu de Windows
 3.3.0			Não se aplica - 3.3.0 apenas instalado no ambiente nuvem, ainda sem Manual
 3.4.0			v1.6.0 (01.11.2019)
+3.4.1			v1.6.0 (01.11.2019)
 
 
 
@@ -39,4 +40,5 @@ Versão .jar		Versão Manual TI
 3.2.0			Nenhum atalho no menu de Windows
 3.3.0			Não se aplica - 3.3.0 apenas instalado no ambiente nuvem, ainda sem Manual
 3.4.0			v1.5.0 (20.09.2019) 
+3.4.1			v1.5.0 (20.09.2019) 
 
