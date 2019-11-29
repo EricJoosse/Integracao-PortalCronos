@@ -1821,13 +1821,15 @@ public final class IntegracaoFornecedorCompleta {
 				    {
 			    	   toNaoVerificarDemaisErros = true;
 			    	   try {
-					       Date dataExclusao = rSet.getDate(1);
 					       String strDataExclusao = "";
 
 					       if (siglaSistema.equals("APS"))
 								strDataExclusao = "....." ;
 					        else if (siglaSistema.equals("WinThor"))
-					        	strDataExclusao = new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao);
+					        {
+						        Date dataExclusao = rSet.getDate(1);
+						        strDataExclusao = new SimpleDateFormat("dd/MM/yyyy").format(dataExclusao);
+					        }
 
 					       enviarErroParaPortalCronos(docOfertas, elmErros, "", "Cotação " + cdCotacao + " " + NAO_OFERTADA_IMPACTO_SE_ALTERAR + "! A empresa compradora " + cpfOuNomeComCpf + " foi desativada no sistema " + siglaSistema + " do fornecedor " + nomeFantasiaFornecedor + " no dia " + strDataExclusao + ".");
 			    	   }
