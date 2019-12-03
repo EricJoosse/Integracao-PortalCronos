@@ -1082,37 +1082,41 @@ public final class IntegracaoFornecedorCompleta {
            	    	BufferedReader br = new BufferedReader(new FileReader(diretorioArquivosXmlSemBarraNoFinal + "/" + file.getName()));
            	    	try 
            	    	{
-           	    		boolean podeTerErroEmail = true;
+           	    		boolean temErroSnapshotIsolation = false;
+           	    		String conteudoArqErro = "";
            	    	    String linha = br.readLine();
+           	    	    conteudoArqErro = linha + "\r\n";
 
-           	    	    while (linha != null && podeTerErroEmail)
+           	    	    while (linha != null)
            	    	    {
            	    	    	if (linha.indexOf("Snapshot isolation transaction failed in database") >= 0)
            	    	    	{
-  		           	    	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro não-fatal ", null, "Erro! Aconteceu o erro \"Snapshot isolation transaction failed in database\" no Monitorador.", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
-	           	    	           br.close();
-					               file.delete();
-					               podeTerErroEmail = false;
+					               temErroSnapshotIsolation = true;
            	    	    	}
-           	    	    	else
-           	    	    	{
-        	    	               linha = br.readLine();
-           	    	    	}
+
+           	    	    	linha = br.readLine();
+           	    	    	conteudoArqErro = conteudoArqErro + linha + "\r\n";
            	    	    }
            	    	    	
-		           	    if (podeTerErroEmail)
+		           	    if (temErroSnapshotIsolation)
 		           	    {
-			           	    	 // Aguardar 54 horas para o reset do limite diária ou semanal de emails,  
-			           	    	 // e tentar enviar um email automaticamente avisando do erro: 
-			           	    	    if (datahoraArquivo.isAfter(horaInicio.minusHours(54).minusMinutes(25)) && datahoraArquivo.isBefore(horaInicio.minusHours(54))) {
-	    		           	    	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, "Erro! Monitoramento parado! Aconteceu um erro fatal 54 horas atrás. Veja a causa no arquivo de log " + file.getName() + ". O monitoramento automático continuará parado até a verificação e a exclusão manual deste arquivo de log de erro! ", provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
-			           	    	    }
-   	    	    			     // Se existir um arquivo de log com erro pelo email do Bol de qualquer data, 
-   	    	    				 // automaticamente nunca mais enviar nenhum email (nem sobre fornecedores nem sobre o monitoramento) 
-   	    	    			     // até este arquivo de log de erro será excluido: 
-   	    	    				    debugar("monitorarPendencias(): o monitoramento foi abortado pois um dos processamentos anteriores deu erro!");
-   	    	    				    isEnvioEmailouMonitoramentoDandoErroInterno = true;
+	           	    	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro não-fatal ", null, "Erro! Aconteceu o erro \"Snapshot isolation transaction failed in database\" no Monitorador:\r\n\r\n" + conteudoArqErro, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+	           	    	       br.close();
+				               file.delete();
 		           	    }
+		           	    else
+		           	    {
+		           	    	 // Aguardar 54 horas para o reset do limite diária ou semanal de emails,  
+		           	    	 // e tentar enviar um email automaticamente avisando do erro: 
+		           	    	    if (datahoraArquivo.isAfter(horaInicio.minusHours(54).minusMinutes(25)) && datahoraArquivo.isBefore(horaInicio.minusHours(54))) {
+   		           	    	       EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro fatal! ", null, "Erro! Monitoramento parado! Aconteceu um erro fatal 54 horas atrás. O monitoramento automático continuará parado até a exclusão manual do arquivo de log de erro \"" + file.getName() + "\"! \r\n\r\nErro:\r\n" + conteudoArqErro, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+		           	    	    }
+	    	    			 // Se existir um arquivo de log com erro pelo email do Bol de qualquer data, 
+	    	    			 // automaticamente nunca mais enviar nenhum email (nem sobre fornecedores nem sobre o monitoramento) 
+	    	    			 // até este arquivo de log de erro será excluido: 
+	    	    			    debugar("monitorarPendencias(): o monitoramento foi abortado pois um dos processamentos anteriores deu erro!");
+	    	    			    isEnvioEmailouMonitoramentoDandoErroInterno = true;
+	           	    }
            	    	    
            	    	} 
            	    	finally 
