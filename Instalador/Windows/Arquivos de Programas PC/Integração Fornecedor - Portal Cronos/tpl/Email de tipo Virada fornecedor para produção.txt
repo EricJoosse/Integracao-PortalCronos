@@ -8,7 +8,7 @@ A integração do fornecedor com id_fornecedor = [IdFornecedorString] foi colocada
    Dica: procura "[IdFornecedorString]" nesta sp.
  
 2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado): 
-   favor alterar a chave "Em produção" de "Não" para "Sim" no arquivo Tabela Fornecedores_Versões.txt
+   favor alterar a chave "Em produção" de "Não" para "Sim" no arquivo FornecedorRepositorio.java
    
  
 Atc,

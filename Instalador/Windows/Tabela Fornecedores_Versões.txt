@@ -1,16 +1,16 @@
-Fornecedor   IdForn	Sistema		Em produção		Frequência	Debug	Qtd.Dias   		
-----------	 ------	-------     -----------	    ----------	-----	--------	 	
-Formaggio 		 13	APS		    Sim				15 min		true	100		 			
-JR Distribuição	947	WinThor	    Sim				15 min		true	100							
-Prolac 			 30	WinThor	    Sim				15 min		true	100		 						
-Marítimos		 21	WinThor	    Não	  			15 min		true	100							
-Karne Keijo		 60	SAP		    Não				15 min		true	100							
-Comal 			 33	WinThor	    Sim				15 min		true	100					
-Monitoramento    -- PCronos     Sim				15 min		false	 32		
-SOST (BA)		170 WinThor     Sim				15 min		true	 15				 	
-Walmart         385 PCronos	  	Sim																		
-Propão 			171	WinThor	    Sim				15 min		true	100					
-Padeirão 		 14	WinThor	    Sim				15 min		true	100				
-Marizpan	   1995	APS Cloud	Sim				15 min		true	100																													
-Atacamax	      1	APS			Sim				15 min		true	100																													
-Atacamax	      1	APS Cloud	Não				15 min		true	100																													
+Fornecedor   IdForn	Sistema		Frequência	Debug	Qtd.Dias   		
+----------	 ------	-------     ----------	-----	--------	 	
+Formaggio 		 13	APS		    15 min		true	100		 			
+JR Distribuição	947	WinThor	    15 min		true	100							
+Prolac 			 30	WinThor	    15 min		true	100		 						
+Marítimos		 21	WinThor	    15 min		true	100							
+Karne Keijo		 60	SAP		    15 min		true	100							
+Comal 			 33	WinThor	    15 min		true	100					
+Monitoramento    -- PCronos     15 min		false	 32		
+SOST (BA)		170 WinThor     15 min		true	 15				 	
+Walmart         385 PCronos	  															
+Propão 			171	WinThor	    15 min		true	100					
+Padeirão 		 14	WinThor	    15 min		true	100				
+Marizpan	   1995	APS Cloud	15 min		true	100																													
+Atacamax	      1	APS			15 min		true	100																													
+Atacamax	      1	APS Cloud	15 min		true	100																													

@@ -500,7 +500,7 @@ public class TestadorSnippets {
      	body += "Dica: procura \"" + dtoVirada.IdFornecedorString + "\" nesta sp." + "\r\n";
 	    body += " " + "\r\n";
      	body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
-	    body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo Tabela Fornecedores_Versões.txt" + "\r\n\r\n";
+	    body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo FornecedorRepositorio.java" + "\r\n\r\n";
 	    body += " " + "\r\n"
 	    			+ "Atc," + "\r\n"
 	    			+ "O email automático do Portal Cronos " + "\r\n"

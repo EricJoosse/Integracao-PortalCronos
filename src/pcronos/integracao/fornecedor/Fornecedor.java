@@ -24,6 +24,7 @@ public class Fornecedor {
 	String versaoJRE;
 	String tipoJRE;
 	public String versaoIntegrador;
+	String IsEmProducao;
 	String tipoSO;
 	String SO32ou64bit;
 	String dirProgramFiles;
