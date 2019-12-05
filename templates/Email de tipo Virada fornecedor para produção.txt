@@ -7,7 +7,7 @@ A integração do fornecedor com id_fornecedor = [IdFornecedorString] foi colocada
    Favor excluir o "OR" deste id_fornecedor no arquivo "/scripts/sp_monitorarIntegracaoFornecedores.sql" no projeto Eclipse e executar o script na base de produção.
    Dica: procura "[IdFornecedorString]" nesta sp.
  
-2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado): 
+2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador, e enquanto que o seguinte ainda não foi automatizado): 
    favor alterar a chave "Em produção" de "Não" para "Sim" no arquivo FornecedorRepositorio.java
    
  

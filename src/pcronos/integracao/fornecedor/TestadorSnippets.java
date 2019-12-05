@@ -499,7 +499,7 @@ public class TestadorSnippets {
 	    body += "   Favor excluir o \"OR\" deste id_fornecedor no arquivo \"/scripts/sp_monitorarIntegracaoFornecedores.sql\" no projeto Eclipse e executar o script na base de produção. ";
      	body += "Dica: procura \"" + dtoVirada.IdFornecedorString + "\" nesta sp." + "\r\n";
 	    body += " " + "\r\n";
-     	body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
+     	body += "2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador, e enquanto que o seguinte ainda não foi automatizado):" + "\r\n"; 
 	    body += "   favor alterar a chave \"Em produção\" de \"Não	\" para \"Sim\" no arquivo FornecedorRepositorio.java" + "\r\n\r\n";
 	    body += " " + "\r\n"
 	    			+ "Atc," + "\r\n"

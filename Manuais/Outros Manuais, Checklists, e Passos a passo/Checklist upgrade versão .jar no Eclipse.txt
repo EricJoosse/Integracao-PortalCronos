@@ -33,7 +33,7 @@ Checklist upgrade versão .jar no Eclipse
  
 - Se precisar: atualizar o instalador, ou registrar uma pendência. 
   Geralmente não precisa, pois a atualização do instalador já é um dos passos na instalação do Integrador 
-  em um servidor novo, (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado). 
+  em um servidor novo, (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador). 
 
 - Commitar o instalador da versão anterior (sem JRE) no GitHub
   

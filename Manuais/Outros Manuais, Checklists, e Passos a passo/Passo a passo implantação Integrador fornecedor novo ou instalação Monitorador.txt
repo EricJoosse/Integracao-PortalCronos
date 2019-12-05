@@ -18,7 +18,7 @@ Alternativo: 1. abrir o arquivo .bat com Wordpad e "Save as " > "Text Document -
 JÁ ADIANTAR ANTES DO ACESSO VIA ANYDESK:
 ======================================== 
 
--8. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+-8. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
     criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
     Descobrir o idFornecedor editando e executando os seguintes selects:
 
@@ -140,7 +140,7 @@ Eric
 
 
 
-    0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
        no FornecedorRepositorio.java, no static constructor:
        (i)   adicionar o fornecedor novo no final da lista de fornecedores, 
              copiando o fornecedor template vazio, e preencher o CNPJ dele
@@ -402,13 +402,13 @@ Como vai ser?
         Se não conseguir nada:
         Skype: este servidor com IP público 18.214.93.120 tem alguma porta que pode ser pingada com psping -w 0 %enderecoIP%:%portaIP%? Tentei as portas 80 e 3389 porém o Amazon não deixa pingar. Meu programa só faz um psping automático quando as ofertas automáticas pararam de chegar no Portal Cronos, para saber automaticamente porque a integração parou.
         
-        Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+        Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
         atualizar o endereço IP e a porta IP aberta no arquivo FornecedorRepositorio.java.
                 
-    5b. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    5b. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
         preencher todas as outras colunas no arquivo Tabela Fornecedores_Versões.txt.
     
-    5c. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    5c. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
         no FornecedorRepositorio.java, no static constructor, preencher o resto de TODOS 
         os outros campos do fornecedor sem falta, antes de continuar, exceto as colunas versaoJRE  
         e tipoJRE, pois sem isso a instalação do Manual de Manutenção para a TI não vai funcionar corretamente.
@@ -419,11 +419,11 @@ Como vai ser?
         ou no caso de todas as outras causas de paradas da integração automática.
         
         
-    5d. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    5d. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
         executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
         
-    6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+    6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
        NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
        Regerar o instalador, veja o arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt"  
        no diretório C:\PCronos\Integração Fornecedor - Portal Cronos\Manuais\Outros Manuais, Checklists, e Passos a passo\.

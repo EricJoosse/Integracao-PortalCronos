@@ -2,7 +2,7 @@ Manual como incluir um fornecedor nuvem novo no Monitorador
 ===========================================================
 
 
-1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+1. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
     criar um registro novo no arquivo Tabela Fornecedores_Versões.txt para o fornecedor novo.
     Descobrir o idFornecedor e o CNPJ editando e executando os seguintes selects:
 
@@ -39,7 +39,7 @@ select  id_pessoa, nm_pessoa, nr_cnpj_pessoa, *
       (iii) executar o script na base de produção
 
       
-4. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+4. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
    no FornecedorRepositorio.java, no static constructor:
        (i)   adicionar o fornecedor novo no final da lista de fornecedores, 
              copiando outro fornecedor nuvem (por exemplo Marizpan, Atacamax), 
@@ -52,10 +52,10 @@ select  id_pessoa, nm_pessoa, nr_cnpj_pessoa, *
              e aumentar +1 
     
       
-5. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+5. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
    preencher todas as outras colunas no arquivo Tabela Fornecedores_Versões.txt.
     
-6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Fornecedor_Integrado): 
+6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
    executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
    (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
         
