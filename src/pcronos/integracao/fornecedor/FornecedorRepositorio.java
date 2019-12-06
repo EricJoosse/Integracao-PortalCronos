@@ -37,7 +37,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = null;
 		f[i].NomeFantasiaEmpresa = "Monitoramento";
-		f[i].versaoIntegrador = "3.4.0";
+		f[i].versaoIntegrador = "3.4.1";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
@@ -227,7 +227,7 @@ public class FornecedorRepositorio {
 		f[i].versaoIntegrador = "2.8.2";
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
-		f[i].IsEmProducao = "Sim";
+		f[i].IsEmProducao = "Não";
 		f[i].EmailResponsavelTI = "ti@comalcomercio.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Rildson Carlos";

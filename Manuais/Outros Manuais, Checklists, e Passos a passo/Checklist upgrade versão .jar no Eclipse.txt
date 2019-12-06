@@ -35,5 +35,9 @@ Checklist upgrade versão .jar no Eclipse
   Geralmente não precisa, pois a atualização do instalador já é um dos passos na instalação do Integrador 
   em um servidor novo, (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador). 
 
-- Commitar o instalador da versão anterior (sem JRE) no GitHub
+- Commitar no GitHub:
+	- o instalador da versão anterior do Integrador,  sem JRE! (para minimizar o tamanho no GitHub)
+	- o instalador da versão anterior do Monitorador, sem JRE! (para minimizar o tamanho no GitHub)
+	- a remoção da versão antes disso do instalador do Integrador
+	- a remoção da versão antes disso do instalador do Monitorador
   

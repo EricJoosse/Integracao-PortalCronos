@@ -36,7 +36,7 @@ A. Upgrade de forma automatizada:
 
 3. Esperar até o processo atual do Integrador terminou.
  
-4. (i)   Primeiro verificar que o desinstalador local (da versão anterior 3.0.00 não desinstala java!!!
+4. (i)   Primeiro verificar que o desinstalador local (da versão anterior 3.0.0 não desinstala java!!!
          No caso, descomentar "goto SKIP_JRE"
    (ii)  Executar o Desinstalador como Administrador   
    (iii) Verificar se o Desinstalador apagou o menu de Windows, a Task Schedule, e os diretórios
