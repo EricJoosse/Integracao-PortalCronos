@@ -41,6 +41,7 @@ public class Fornecedor {
 	String MemoriaRamLivre;
 	public boolean IsServicoNuvem;
 	public int SequenciaInstanciaNuvem;
+	public String FrequenciaProcessamento;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

@@ -1,16 +1,16 @@
-Fornecedor   IdForn	Sistema		Frequência	Debug	Qtd.Dias   		
-----------	 ------	-------     ----------	-----	--------	 	
-Formaggio 		 13	APS		    15 min		true	100		 			
-JR Distribuição	947	WinThor	    15 min		true	100							
-Prolac 			 30	WinThor	    15 min		true	100		 						
-Marítimos		 21	WinThor	    15 min		true	100							
-Karne Keijo		 60	SAP		    15 min		true	100							
-Comal 			 33	WinThor	    15 min		true	100					
-Monitoramento    -- PCronos     15 min		false	 32		
-SOST (BA)		170 WinThor     15 min		true	 15				 	
+Fornecedor   IdForn	Sistema		Debug	Qtd.Dias   		
+----------	 ------	-------     -----	--------	 	
+Formaggio 		 13	APS		    true	100		 			
+JR Distribuição	947	WinThor	    true	100							
+Prolac 			 30	WinThor	    true	100		 						
+Marítimos		 21	WinThor	    true	100							
+Karne Keijo		 60	SAP		    true	100							
+Comal 			 33	WinThor	    true	100					
+Monitoramento    -- PCronos     false	 32		
+SOST (BA)		170 WinThor     true	 15				 	
 Walmart         385 PCronos	  															
-Propão 			171	WinThor	    15 min		true	100					
-Padeirão 		 14	WinThor	    15 min		true	100				
-Marizpan	   1995	APS Cloud	15 min		true	100																													
-Atacamax	      1	APS			15 min		true	100																													
-Atacamax	      1	APS Cloud	15 min		true	100																													
+Propão 			171	WinThor	    true	100					
+Padeirão 		 14	WinThor	    true	100				
+Marizpan	   1995	APS Cloud	true	100																													
+Atacamax	      1	APS			true	100																													
+Atacamax	      1	APS Cloud	true	100																													
