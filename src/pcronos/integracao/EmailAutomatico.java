@@ -33,6 +33,7 @@ package pcronos.integracao;
 //
 import javax.mail.internet.* ;
 
+import pcronos.integracao.fornecedor.Constants;
 import pcronos.integracao.fornecedor.IntegracaoFornecedorCompleta;
 
 import javax.mail.*          ;
@@ -283,10 +284,15 @@ boolean                              isEnviadoJa = false;
 	   
 	   // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email 
 	   // por motivo de abuso/spam: 
-	   if (qtdEmailsEnviadosHojeTotal >= 11)
+	   if (       qtdEmailsEnviadosHojeTotal >= 11 
+			   && (     ?????  (!nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS)) 
+					   || !p_Assunto.equalsIgnoreCase(Constants.ESPACO_LIVRE))
+		)
 	   	    return;
 	   
-	   if (qtdEmailsEnviadosHojeFornecedor >= 3)
+	   if (     (qtdEmailsEnviadosHojeFornecedor >= 3 && !p_Assunto.equalsIgnoreCase(Constants.ESPACO_LIVRE))
+			 || (qtdEmailsEnviadosHojeFornecedor >= 1 && p_Assunto.equalsIgnoreCase(Constants.ESPACO_LIVRE))
+		  )
 		   	return;
 		   
 	   if (qtdEmailsEnviadosFornecedorUltimos3horas >= 1)

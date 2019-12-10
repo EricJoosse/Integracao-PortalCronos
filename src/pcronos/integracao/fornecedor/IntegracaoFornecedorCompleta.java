@@ -2814,6 +2814,32 @@ public final class IntegracaoFornecedorCompleta {
 	  } // if (siglaSistema.equals("PCronos"))
    }
 
+  
+   public static boolean verificarEstouroHD(LocalDateTime horaInicio) {
+		  File unidadeC = new File("C:");
+          long freeSpace = unidadeC.getFreeSpace();
+          String nomeServidor = Utils.getNomeServidor();
+          String assuntoEstouroHD = "";
+
+          if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 40000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+          else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+          else if (nomeServidor.equals("ServTeste") && freeSpace < 40000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+          else if (freeSpace < 1000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+
+          if (!assuntoEstouroHD.equals(""))
+            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor + ": " + Utils.displayFilesize(freeSpace), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
+          
+          
+          if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+        	  return true;
+          else 
+        	  return false;
+   }
+
    
    public static long Executar(boolean isPrimeiraVez) 
    {
@@ -2832,6 +2858,12 @@ public final class IntegracaoFornecedorCompleta {
 	      
 		  LocalDateTime horaInicio = LocalDateTime.now();
 
+		  if (verificarEstouroHD(horaInicio))
+		  {
+			   LocalDateTime horaFimCiclo = LocalDateTime.now();
+			   return Duration.between(horaIniCiclo,  horaFimCiclo).toMillis();
+		  }
+	      
 	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		  DateTimeFormatter formatterIntervalo = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 

@@ -16,6 +16,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Transformer;
@@ -190,8 +194,7 @@ public class Utils {
 	  
 	    return conteudoArquivo;
     }
-		
-	
+			
 	public static byte calcularMinutoAgendamento(boolean isAmbienteNuvem, Integer idFornecedorNaoNuvem) throws Exception {
 		// Gerar minuto inteiro apenas de 0 até 14 pois "15" é a mesma coisa como "0"
 
@@ -264,5 +267,22 @@ public class Utils {
 		return minIni;
 	}
 
+	public static String displayFilesize(long fileSize) {
+        if (fileSize <= 0) {
+            return "0";
+        } else {
+            String[] fileUnit = new String[] {"B","KB","MB","GB","TB"};
+            int group = (int)(Math.log10(fileSize) / Math.log10(1024));
+            return new DecimalFormat("#,##0.#").format(fileSize / Math.pow(1024, group)) + " " + fileUnit[group];
+        }
+    }
+	
+	public static String getNomeServidor() {
+        try {
+			return InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException e) {
+			return "Desconhecido";
+		}
 
+	}
 }

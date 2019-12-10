@@ -22,5 +22,9 @@ public class Constants {
 	   
 	   public static final String DIR_LOG_REMOTO = "C:/ProgramData/PortalCronos/Logs/Remoto/Integracao";
 	   // O seguinte funciona também em dir = new File(xxx): "C:\\ProgramData\\PortalCronos\\Logs\\Remoto\\Integracao"
+	   
+	   public static final String ESPACO_LIVRE = "Espaço livre";
+	   public static final String SERVAPPCRONOS = "AppSrvProd2008";
+	   public static final String SERVBANCOCRONOS = "BDSrvProd2012";
 
 }
