@@ -737,6 +737,26 @@ public class TestadorSnippets {
 			
 	  }
 
+	  private static void testarVerificacaoEspacoLivreHD() {
+		  File unidadeC = new File("C:");
+          long freeSpace = unidadeC.getFreeSpace();
+          String nomeServidor = Utils.getNomeServidor();
+          
+          String assuntoEstouroHD = "";
+
+          if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 40000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
+          else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
+          else if (nomeServidor.equals("ServTeste") && freeSpace < 40000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
+          else if (freeSpace < 1000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
+
+          System.out.println("Servidor atual = " + nomeServidor);
+          System.out.println("Assunto email automático = " + assuntoEstouroHD);
+          System.out.println("Body email automático = " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor + ": " + Utils.displayFilesize(freeSpace));
+	  }
 	  
  	  public static void main(String[] args) throws Exception {
 
@@ -774,7 +794,8 @@ public class TestadorSnippets {
 		 // testarGetIsAmbienteNuvem();
 		 // testarSetIconLocation();
 		 // testarCalculoAgendamentos();
-			testarMapaCotacao();
+		 // testarMapaCotacao();
+			testarVerificacaoEspacoLivreHD();
          
 
          // throw new Exception("try");
