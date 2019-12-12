@@ -748,15 +748,28 @@ public class TestadorSnippets {
         	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
           else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L)
         	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
-          else if (nomeServidor.equals("ServTeste") && freeSpace < 40000000000L)
-        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
+          else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 5400000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando 5,4 GB!";
+          else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 5800000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando 5,8 GB!";
+          else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 40000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando 40 GB!";
           else if (freeSpace < 1000000000L)
         	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + IntegracaoFornecedorCompleta.nomeFantasiaFornecedor + " estourando!";
 
           System.out.println("Servidor atual = " + nomeServidor);
+          System.out.println("long freeSpace = " + freeSpace);
+          System.out.println("Utils.displayFilesize(freeSpace) = " + Utils.displayFilesize(freeSpace));
           System.out.println("Assunto email automático = " + assuntoEstouroHD);
           System.out.println("Body email automático = " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor + ": " + Utils.displayFilesize(freeSpace));
-	  }
+
+          if ((nomeServidor.equals(Constants.SERVBANCOCRONOS) || nomeServidor.equals(Constants.SERVAPPCRONOS)) && !assuntoEstouroHD.equals(""))
+          {
+    		  LocalDateTime horaInicio = LocalDateTime.now();
+          	  EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assuntoEstouroHD, null, Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor + ": " + Utils.displayFilesize(freeSpace), IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, nomeServidor,  null);
+          }
+       
+      }
 	  
  	  public static void main(String[] args) throws Exception {
 

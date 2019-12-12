@@ -2822,13 +2822,11 @@ public final class IntegracaoFornecedorCompleta {
           String assuntoEstouroHD = "";
 
           if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 40000000000L)
-        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+        	  assuntoEstouroHD = "HD do servidor de banco " + nomeServidor + " do Portal Cronos começando estourar!";
           else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L)
-        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
-          else if (nomeServidor.equals("ServTeste") && freeSpace < 40000000000L)
-        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
-          else if (freeSpace < 1000000000L)
-        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+        	  assuntoEstouroHD = "HD do servidor de aplicação " + nomeServidor + " do Portal Cronos começando estourar!";
+          else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L)
+        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " começando estourar!";
 
           if (!assuntoEstouroHD.equals(""))
             	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor + ": " + Utils.displayFilesize(freeSpace), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);

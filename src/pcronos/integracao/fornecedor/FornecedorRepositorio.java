@@ -59,6 +59,29 @@ public class FornecedorRepositorio {
 		f[i].FrequenciaProcessamento = "15 min";
 
 		i++;
+		f[i].IdFornecedor = null;
+		f[i].NomeFantasiaEmpresa = "Monitoramento Banco";
+		f[i].versaoIntegrador = "3.4.1";
+		f[i].SiglaSistemaFornecedor = "PCronos";
+		f[i].IsServicoNuvem = false;
+		f[i].IsEmProducao = "Não";
+		f[i].EmailResponsavelTI = "";
+		f[i].EmailResponsavelTIAlternativo = "";
+		f[i].ApelidoResponsavelTI = "";
+		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].AplicativoDesktopRemoto = "mstsc";
+		f[i].versaoJRE = "jre1.8.0_92";
+		f[i].tipoJRE = "(.. bit)";
+		f[i].tipoSO = "Windows Server 2012 R2";
+		f[i].dirProgramFiles = "Program Files";
+		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "43 GB";
+		f[i].MemoriaRamLivre = "1.2 GB";
+		f[i].EnderecoIpPublicoServidor = "Não se aplica";
+		f[i].PortaIpAberta = "Não se aplica";
+		f[i].FrequenciaProcessamento = "15 min";
+
+		i++;
 		f[i].IdFornecedor = 13;
 		f[i].NomeFantasiaEmpresa = "Formaggio";
 		f[i].versaoIntegrador = "2.6";
