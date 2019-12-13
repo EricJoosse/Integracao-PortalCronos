@@ -771,7 +771,34 @@ public class TestadorSnippets {
        
       }
 	  
- 	  public static void main(String[] args) throws Exception {
+	  public static boolean testarTemCrescimentoTempdb() 
+	  {
+		  LocalDateTime horaInicio = LocalDateTime.now();
+		  String arqTempdb = "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf";
+		  long tamanhoCerto = 283508736;
+	      File tempdb = new File(arqTempdb);
+	      long tamanhoArqTempdb = tempdb.length();
+	      
+	      System.out.println("tamanhoArqTempdb = " + tamanhoArqTempdb); 
+	      System.out.println("tamanhoCerto =     " + tamanhoCerto); 
+	      
+	      tamanhoArqTempdb = tamanhoArqTempdb + 1;
+	      System.out.println("tamanhoArqTempdb ALTERADO = " + tamanhoArqTempdb); 
+	      
+	      if (tamanhoArqTempdb > tamanhoCerto)
+	      {
+	    	  String bodyEstouroHD = "Arquivo: " + arqTempdb + "\r\n"
+	    			               + "Tamanho certo: " + tamanhoCerto + "\r\n"
+	    			               + "Tamanho atual: " + tamanhoArqTempdb;
+	    	  String assuntoEstouroHD = "Crescimento perigoso do TEMPDB no servidor de teste " + Utils.getNomeServidor() + " !";
+          	  EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, Constants.SERVTESTE,  null);
+	      	  return true;
+	      }
+	      else
+	    	  return false;
+	  }
+
+	  public static void main(String[] args) throws Exception {
 
 		try
         {			
@@ -808,6 +835,7 @@ public class TestadorSnippets {
 		 // testarSetIconLocation();
 		 // testarCalculoAgendamentos();
 		 // testarMapaCotacao();
+			testarTemCrescimentoTempdb();
 			testarVerificacaoEspacoLivreHD();
          
 

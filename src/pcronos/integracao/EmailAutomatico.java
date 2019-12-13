@@ -283,15 +283,16 @@ boolean                              isEnviadoJa = false;
 	
 	   
 	   // Para evitar estouro do limite do Bol e para evitar que o Bol talvez vai cancelar a conta de email 
-	   // por motivo de abuso/spam: 
-	   if (       qtdEmailsEnviadosHojeTotal >= 11 
-			   && (     ?????  (!nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS)) 
-					   || !p_Assunto.equalsIgnoreCase(Constants.ESPACO_LIVRE))
-		)
+	   // por motivo de abuso/spam, limitar a quantidade de emails por dia em todos os servidores, 
+	   // até no caso de emails super-urgentes sobre estouro do HD nos servidores de produção do Portal Cronos: 
+	   if ( qtdEmailsEnviadosHojeTotal >= 11 )
 	   	    return;
 	   
-	   if (     (qtdEmailsEnviadosHojeFornecedor >= 3 && !p_Assunto.equalsIgnoreCase(Constants.ESPACO_LIVRE))
-			 || (qtdEmailsEnviadosHojeFornecedor >= 1 && p_Assunto.equalsIgnoreCase(Constants.ESPACO_LIVRE))
+	   // No caso de servidores de fornecedores enviar emails sobre estouro do HD apenas 1 repetição a cada 15 dias, 
+	   // no caso de servidores de monitoramento do Portal Cronos manter o padrão do envio de no máximo 3 repetições por dia:
+	   if (     (qtdEmailsEnviadosHojeFornecedor >= 3 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) == -1)
+			 || (qtdEmailsEnviadosHojeFornecedor >= 1 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) > -1 && !nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS))
+			 || (qtdEmailsEnviadosHojeFornecedor >= 3 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) > -1 && (nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) || nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS)))
 		  )
 		   	return;
 		   
@@ -304,11 +305,18 @@ boolean                              isEnviadoJa = false;
 
 
    if ( ( p_Assunto == null ) && ( p_Anexo == null ) && ( p_Mensagem == null ) ) {
-  IntegracaoFornecedorCompleta.logarErro( "Erro ! Informar o seguinte erro ao GINFO-Recife (Eric Joosse) \n"
-               + "Email automático encontrado sem assunto, sem anexo, sem mensagem...\n" 
-               + "Este email não foi enviado para " + p_Para + " por isso !" ) ; 
-  return ;
-}
+	  IntegracaoFornecedorCompleta.logarErro( "Erro ! Informar o seguinte erro ao GINFO-Recife (Eric Joosse) \n"
+	               + "Email automático encontrado sem assunto, sem anexo, sem mensagem...\n" 
+	               + "Este email não foi enviado para " + p_Para + " por isso !" ) ; 
+	  return ;
+   }
+  
+  if (p_Endereco_IP_Servidor_Email == null)
+  {
+	  IntegracaoFornecedorCompleta.logarErro( "Erro! Informar o seguinte erro ao equipe técnico do Portal Cronos (eric.jo@bol.com.br): \n"
+                                            + "Configurações do Email Automático não informadas no arquivo .properties!\n") ; 
+	  return ;
+  }
 
 java.util.Properties props = java.lang.System.getProperties()       ;
 props.setProperty( "mail.smtp.host", p_Endereco_IP_Servidor_Email ) ;

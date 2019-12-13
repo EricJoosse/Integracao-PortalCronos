@@ -365,8 +365,8 @@ public final class IntegracaoFornecedorCompleta {
 	        	toExecutarHorarioPico = Boolean.parseBoolean(config.getProperty("ExecutarHorarioPico"));
 	  	    }
 
-	        if (siglaSistema.equals("PCronos") || (IsSistemaFornecedorNuvem && nomeArquivoProperties.equals(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES)))
-	  	    {
+	     // if (siglaSistema.equals("PCronos") || (IsSistemaFornecedorNuvem && nomeArquivoProperties.equals(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES)))
+	  	 // {
 	            toEnviarEmailAutomatico = Boolean.parseBoolean(config.getProperty("EnviarEmailAutomatico"));
 	            // Foi debugado que toEnviarEmailAutomatico fica false corretamente no caso que a configuração NÃO existe no arq .config
 
@@ -381,7 +381,7 @@ public final class IntegracaoFornecedorCompleta {
 	               usuarioEmailAutomatico = config.getProperty("UsuarioEmailAutomatico");
 	               senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"), toDebugar);
 	            }
-	  	    }
+	  	 // }
 	        
 	        if (!siglaSistema.equals("SAP"))
 	  	    {
@@ -2815,27 +2815,77 @@ public final class IntegracaoFornecedorCompleta {
    }
 
   
-   public static boolean verificarEstouroHD(LocalDateTime horaInicio) {
-		  File unidadeC = new File("C:");
-          long freeSpace = unidadeC.getFreeSpace();
-          String nomeServidor = Utils.getNomeServidor();
-          String assuntoEstouroHD = "";
+  public static boolean temCrescimentoTempdb(LocalDateTime horaInicio, String arqTempdb, long tamanhoCerto) {
+      File tempdb = new File(arqTempdb);
+      long tamanhoArqTempdb = tempdb.length();
+      
+      if (tamanhoArqTempdb > tamanhoCerto)
+      {
+    	  String bodyEstouroHD = "Arquivo: " + arqTempdb + "\r\n"
+    			               + "Tamanho certo: " + tamanhoCerto + "\r\n"
+    			               + "Tamanho atual: " + tamanhoArqTempdb;
+    	  String assuntoEstouroHD = "Crescimento perigoso do TEMPDB no servidor de banco " + Utils.getNomeServidor() + "!";
+      	  EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, Constants.SERVBANCOCRONOS,  null);
+      	  return true;
+      }
+      else
+    	  return false;
+  }
 
-          if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 40000000000L)
-        	  assuntoEstouroHD = "HD do servidor de banco " + nomeServidor + " do Portal Cronos começando estourar!";
-          else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L)
-        	  assuntoEstouroHD = "HD do servidor de aplicação " + nomeServidor + " do Portal Cronos começando estourar!";
-          else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L)
-        	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " começando estourar!";
+  
+  public static boolean verificarEstouroHD(LocalDateTime horaInicio) 
+  {
+      String nomeServidor = Utils.getNomeServidor();
 
-          if (!assuntoEstouroHD.equals(""))
-            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor + ": " + Utils.displayFilesize(freeSpace), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
-          
-          
-          if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+      {
+          if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf", 30169497600L))
         	  return true;
-          else 
-        	  return false;
+	      if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdev2.ndf", 25911427072L))
+        	  return true;
+	      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev3.ndf", 7932477440L))
+        	  return true;
+	      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev4.ndf", 8376549376L))
+        	  return true;
+      }
+
+
+      File unidadeC = new File("C:"); // Para todos os servidores do Portal Cronos
+      long freeSpace = unidadeC.getFreeSpace();
+      String assuntoEstouroHD = "";
+      String bodyEstouroHD = "";
+      
+      
+      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 10000000000L)
+      {
+          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de banco " + nomeServidor;
+    	  assuntoEstouroHD = bodyEstouroHD;
+      }
+      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L)
+      {
+          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de aplicação " + nomeServidor;
+    	  assuntoEstouroHD = bodyEstouroHD;
+      }
+      else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L)
+      {
+          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de teste " + nomeServidor;
+    	  assuntoEstouroHD = bodyEstouroHD;
+      }
+      else if (freeSpace < 10000000L)
+      {   // No caso de servidores de fornecedores:
+          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor;
+    	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+      }
+
+      
+      if (!assuntoEstouroHD.equals(""))
+        	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
+      
+      
+      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+    	  return true;
+      else 
+    	  return false;
    }
 
    

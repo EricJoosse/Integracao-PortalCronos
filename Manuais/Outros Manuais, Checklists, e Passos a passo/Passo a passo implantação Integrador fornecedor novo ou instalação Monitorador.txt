@@ -723,6 +723,8 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        favor não se esquecer para me avisar com alguns dias de antecedência! 
        Caso contrário, o Integrador WinThor/PCronos de repente vai parar de funcionar alguns dias! 
        
+   24. No caso do Monitorador: informar a senha certa (criptografada) do email do Bol no arquivo .properties
+   
    24. Copiar o arquivo /conf/xxx.properties do diretório de backups no projeto Eclipse para o servidor
        do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
  
