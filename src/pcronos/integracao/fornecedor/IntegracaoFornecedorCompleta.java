@@ -365,8 +365,8 @@ public final class IntegracaoFornecedorCompleta {
 	        	toExecutarHorarioPico = Boolean.parseBoolean(config.getProperty("ExecutarHorarioPico"));
 	  	    }
 
-	     // if (siglaSistema.equals("PCronos") || (IsSistemaFornecedorNuvem && nomeArquivoProperties.equals(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES)))
-	  	 // {
+	        if (siglaSistema.equals("PCronos") || (IsSistemaFornecedorNuvem && nomeArquivoProperties.equals(Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_TEMPLATE_CLOUD_PROPERTIES)))
+	  	    {
 	            toEnviarEmailAutomatico = Boolean.parseBoolean(config.getProperty("EnviarEmailAutomatico"));
 	            // Foi debugado que toEnviarEmailAutomatico fica false corretamente no caso que a configuração NÃO existe no arq .config
 
@@ -381,7 +381,7 @@ public final class IntegracaoFornecedorCompleta {
 	               usuarioEmailAutomatico = config.getProperty("UsuarioEmailAutomatico");
 	               senhaCriptografadaEmailAutomatico = Criptografia.decrypt(config.getProperty("SenhaCriptografadaEmailAutomatico"), toDebugar);
 	            }
-	  	 // }
+	  	    }
 	        
 	        if (!siglaSistema.equals("SAP"))
 	  	    {
@@ -2856,26 +2856,27 @@ public final class IntegracaoFornecedorCompleta {
       String bodyEstouroHD = "";
       
       
-      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 10000000000L)
+      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 10000000000L) // 10 GB
       {
           bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de banco " + nomeServidor;
     	  assuntoEstouroHD = bodyEstouroHD;
       }
-      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L)
+      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L) // 10 GB
       {
           bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de aplicação " + nomeServidor;
     	  assuntoEstouroHD = bodyEstouroHD;
       }
-      else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L)
-      {
-          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de teste " + nomeServidor;
-    	  assuntoEstouroHD = bodyEstouroHD;
-      }
-      else if (freeSpace < 10000000L)
-      {   // No caso de servidores de fornecedores:
-          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor;
-    	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
-      }
+//      else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L) // 1 GB, somente para teste. Depois comentar este if do servidor de teste
+//      {
+//          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de teste " + nomeServidor;
+//    	  assuntoEstouroHD = bodyEstouroHD;
+//      }
+
+   // else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 10000000L) // 10 MB
+   // {   // No caso de servidores de fornecedores:
+   //     bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor;
+   //	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+   // }
 
       
       if (!assuntoEstouroHD.equals(""))

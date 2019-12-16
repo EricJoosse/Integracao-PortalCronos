@@ -9,7 +9,7 @@ public class FornecedorRepositorio {
 
     static {
 		hashMap = new HashMap<Integer, Fornecedor>(); 
-		final int qtdFornecedores = 13;
+		final int qtdFornecedores = 14;
 		Fornecedor[] f = new Fornecedor[qtdFornecedores];
 
 		for (int j=0; j < (qtdFornecedores); j++) {
@@ -19,7 +19,7 @@ public class FornecedorRepositorio {
 		int i = 0;
 		
 		f[i].IdFornecedor = 2016;
-		f[i].NomeFantasiaEmpresa = "Teste Windows Server 2016";
+		f[i].NomeFantasiaEmpresa = "Teste Win Server 2016";
 		f[i].versaoIntegrador = "";
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
@@ -59,7 +59,7 @@ public class FornecedorRepositorio {
 		f[i].FrequenciaProcessamento = "15 min";
 
 		i++;
-		f[i].IdFornecedor = null;
+		f[i].IdFornecedor = -2;
 		f[i].NomeFantasiaEmpresa = "Monitoramento Banco";
 		f[i].versaoIntegrador = "3.4.1";
 		f[i].SiglaSistemaFornecedor = "PCronos";

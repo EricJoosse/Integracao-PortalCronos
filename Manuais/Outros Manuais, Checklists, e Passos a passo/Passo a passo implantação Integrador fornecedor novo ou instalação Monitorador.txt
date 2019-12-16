@@ -116,12 +116,18 @@ Eric
        Neste momento apenas preencher os seguintes dados (os outros dados estão explicados no final da instalação): 
        (i)   Descobrir o CNPJ do fornecedor usando o mesmo select acima.
        
-       (iii) No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos 
-       		 apenas preencher as seguintes chaves e deixar o resto como o default do instalador: 
+       (ii)  No caso de instalação do Monitorador do Servidor de Banco do Portal Cronos 
+             e no caso do Monitorador dos Integradores + Servidor de Aplicação do Portal Cronos: 
+             apenas preencher as seguintes chaves e deixar o resto como o default do instalador: 
        			- SiglaSistema: PCronos
-       			- Todas as chaves da seção "Base de Dados do sistema do fornecedor"
        			- Todas as chaves "******EmailAutomatico"
-
+				- Informar a senha certa (criptografada) do email do Bol no arquivo .properties. 
+       		      Não colocar esta senha no arquivo .properties que está no GitHub!
+   
+       (iii) No casao do Monitorador dos Integradores + Servidor de Aplicação do Portal Cronos
+             preencher as seguintes chaves também:
+       			- Todas as chaves da seção "Base de Dados do sistema do fornecedor"
+       
        (iv)  (a) No arquivo de configuração, no caso que "SiglaSistema" = "PCronos" (servidor de monitoramento automático): 
        				- "Debugar" = "false" 
              		- "QtdDiasArquivosXmlGuardados" = "32" (para sempre ter arquivos de log de um mês completo)
@@ -136,7 +142,8 @@ Eric
 	    		- a coluna "Qtd.Dias"   
 	    		
 	    	 (d) No caso de servidores de fornecedores: 
-	    	       - Remover todas as referências ao monitorador (pesquisar o texto "monitor") no arquivo de configuração
+	    	       - Remover todas as referências ao monitorador (pesquisar o texto "monitor") no arquivo de configuração:
+	    	         (em relação ao email automático, e outras referências)
 
 
 
@@ -723,8 +730,6 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        favor não se esquecer para me avisar com alguns dias de antecedência! 
        Caso contrário, o Integrador WinThor/PCronos de repente vai parar de funcionar alguns dias! 
        
-   24. No caso do Monitorador: informar a senha certa (criptografada) do email do Bol no arquivo .properties
-   
    24. Copiar o arquivo /conf/xxx.properties do diretório de backups no projeto Eclipse para o servidor
        do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
  

@@ -16,7 +16,7 @@ public class VersaoIntegradorPorFornecedor {
 		     // System.out.println("NomeFantasiaEmpresa = " + ((Fornecedor)value).NomeFantasiaEmpresa);
 		     // System.out.println("versaoIntegrador = " + ((Fornecedor)value).versaoIntegrador);
 		        System.out.println(  		Utils.rpad(Utils.replaceNull(((Fornecedor)value).IdFornecedor).toString(), 4) 
-    								+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).NomeFantasiaEmpresa), 16)
+    								+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).NomeFantasiaEmpresa), 21)
     								+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).versaoIntegrador), 6)
 		        					+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).EmailResponsavelTI), 40)
 		        					+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).ApelidoResponsavelTI), 12)
