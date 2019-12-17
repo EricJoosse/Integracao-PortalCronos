@@ -137,7 +137,7 @@ Eric
              		- "Debugar" = "true" (para facilitar atendimento imediato no futuro) 
              		- "QtdDiasArquivosXmlGuardados" = "100"
 
-			 (c) Preencher no arquivo "Tabela Fornecedores_Versões.txt":
+			 (c) Preencher no arquivo "FornecedorRepositorio.java":
 	    		- a coluna "Debug"       
 	    		- a coluna "Qtd.Dias"   
 	    		

@@ -42,6 +42,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].ApelidoResponsavelTI = "";
@@ -65,6 +66,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Não";
+		f[i].IsDebugAtivado = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].ApelidoResponsavelTI = "";
@@ -88,6 +90,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "APS";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "projetosti@formaggio.com.br";  
 		f[i].EmailResponsavelTIAlternativo = "ti@formaggio.com.br??????"; 
 		f[i].SkypeResponsavelTI = "live:projetosti_1 = Geymison Lima - TI Formaggio";
@@ -118,6 +121,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "jrembalagem.ti@gmail.com"; 
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "ivan barros";
@@ -148,6 +152,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "mscomprolac@gmail.com"; 
 		f[i].EmailResponsavelTIAlternativo = "marcelo@casadoqueijo.net.br";
 		f[i].SkypeResponsavelTI = "marcos.scognamiglio";
@@ -177,6 +182,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Naõ";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "felipe.lolaia@maritimospescados.com.br"; 
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Felipe Lolaia";
@@ -204,6 +210,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Não";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "informatica@sost.com.br OU cleijonatassilva@sost.com.br"; 
 		f[i].EmailResponsavelTIAlternativo = "informatica@sost.com.br OU carlossena@sost.com.br";
 		f[i].SkypeResponsavelTI = "Cleijonatas S Silva";
@@ -232,6 +239,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "SAP";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Não";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "timons@kk.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Timon Dourado";
@@ -259,6 +267,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Não";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "ti@comalcomercio.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Rildson Carlos";
@@ -293,6 +302,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "ti@propao.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Apoio.propao@hotmail.com";
@@ -322,6 +332,7 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "tiagoautran@padeirao.com";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "tiagoautran";
@@ -389,6 +400,7 @@ public class FornecedorRepositorio {
 		f[i].SequenciaInstanciaNuvem = 1;
 
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = true;
 		f[i].AplicativoDesktopRemoto = AplicativoDesktopRemotoApsCloud;
 		f[i].IdAplicativoDesktopRemoto = IdAplicativoDesktopRemotoApsCloud; 
 		f[i].usuarioWebservice = "ws-marizpan";  // APS Cloud - primeiro fornecedor de muitos
@@ -435,6 +447,7 @@ public class FornecedorRepositorio {
 	 // f[i].SequenciaInstanciaNuvem = 2;
 
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = true;
 		f[i].AplicativoDesktopRemoto = AplicativoDesktopRemotoApsCloud;
 		f[i].usuarioWebservice = "ws-atacamax";  
 		f[i].tipoSO = "Windows Server 2012 R2"; //tipoSOApsCloud; 
@@ -478,6 +491,7 @@ public class FornecedorRepositorio {
 		f[i].versaoIntegrador = "";
 		f[i].SiglaSistemaFornecedor = "";
 		f[i].IsEmProducao = "Não";
+		f[i].IsDebugAtivado = true;
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "";
 		f[i].tipoSO = ""; 
