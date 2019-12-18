@@ -1,0 +1,16 @@
+<hibernate-configuration>
+<session-factory>
+<property name="hibernate.dialect">
+   org.hibernate.dialect.SQLServerDialect
+</property>
+<property name="hibernate.connection.driver_class">
+   com.microsoft.sqlserver.jdbc.SQLServerDriver
+</property>
+<property name="hibernate.connection.url">
+    jdbc:sqlserver://ipipipip:1433;databaseName=xxxxxxxx
+</property>
+<property name="hibernate.default_schema">dbo</property>
+<property name="hibernate.connection.username">xxxxxxx</property>
+<property name="hibernate.connection.password">xxxxxxx</property>
+</session-factory>
+</hibernate-configuration>
