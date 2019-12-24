@@ -6,6 +6,10 @@ if object_id('Configuracao_Monitorador_Integradores') is not NULL
   drop table [dbo].[Configuracao_Monitorador_Integradores]
 go
 
+if object_id('Configuracao_Instalador_Integrador_Nuvem') is not NULL
+  drop table [dbo].[Configuracao_Instalador_Integrador_Nuvem]
+go
+
 
 SET ANSI_NULLS ON
 GO
@@ -39,6 +43,70 @@ INSERT INTO [dbo].[Sistema_Integrado]
            ,1)
 */
            
+
+create table [dbo].[Configuracao_Instalador_Integrador_Nuvem](
+	[id_config_instalador_integrador_nuvem_ciintnuv] [int] IDENTITY(1,1) NOT NULL,
+	[id_sistema_integrado_sisint] [int] NOT NULL,
+	tipo_sist_operacional_coninsint varchar(30) NOT NULL,
+	sist_operacional_32_ou_64_bit_coninsint varchar(6) NOT NULL,
+	espaco_livre_disco_coninsint varchar(10) NOT NULL,
+	memoria_ram_livre_coninsint varchar(10) NOT NULL,
+	versao_jre_coninsint varchar(15) NOT NULL,
+	tipo_jre_coninsint varchar(10) NOT NULL,
+	versao_integrador_coninsint varchar(10) NOT NULL,
+	disco_integrador_coninsint char NOT NULL,
+	dir_programfiles_coninsint varchar(30) NOT NULL,
+	endereco_ip_publico_servidor_coninsint varchar(30) NOT NULL,
+	porta_ip_aberta_coninsint varchar(15) NOT NULL,
+	frequencia_processamento_coninsint varchar(10) NOT NULL,
+
+	apelido_contato_ti_nuvem_ciintnuv varchar(30) NULL,
+	email_contato_ti_nuvem_ciintnuv varchar(30) NULL,
+	skype_contato_ti_nuvem_ciintnuv varchar(30) NULL,
+	telefone_contato_ti_Nuvem_ciintnuv varchar(30) NULL,
+
+	apelido_contato_ti_secundario_nuvem_ciintnuv varchar(30) NULL,
+	email_contato_ti_secundario_nuvem_ciintnuv varchar(30) NULL,
+	skype_contato_ti_secundario_nuvem_ciintnuv varchar(30) NULL,
+	telefone_contato_ti_secundario_Nuvem_ciintnuv varchar(30) NULL,
+
+	[dt_cadastro_ciintnuv] [datetime] NULL,
+	[dt_desativacao_ciintnuv] [datetime] NULL,
+	[dt_alteracao_ciintnuv] [datetime] NULL,
+	[user_id_ususis] [int] NOT NULL,
+CONSTRAINT [PK_CIINTNUV] PRIMARY KEY CLUSTERED 
+(
+	[id_config_instalador_integrador_nuvem_ciintnuv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CIINTNUV_SISINT] UNIQUE NONCLUSTERED 
+(
+	[id_sistema_integrado_sisint] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CIINTNUV_SISINT] FOREIGN KEY([id_sistema_integrado_sisint])
+REFERENCES [dbo].[Sistema_Integrado] ([id_sistema_integrado_sisint])
+GO
+ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem] CHECK CONSTRAINT [FK_CIINTNUV_SISINT]
+GO
+
+
+ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CIINTNUV_USUSIS] FOREIGN KEY([user_id_ususis])
+REFERENCES [dbo].[Usuario_Sistema] ([user_id])
+GO
+ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem] CHECK CONSTRAINT [FK_CIINTNUV_USUSIS]
+GO
+
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cada fornecedor no servidor nuvem tem outro padrão de integração.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos pelo Monitorador.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_nuvem_ciintnuv'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos pelo Monitorador.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_secundario_nuvem_ciintnuv'
+GO
+
+
 create table [dbo].[Configuracao_Monitorador_Integradores](
 	[id_config_monitorador_integradores_conmonint] [int] IDENTITY(1,1) NOT NULL,
 	[id_fornecedor_fornec] [int] NOT NULL,
