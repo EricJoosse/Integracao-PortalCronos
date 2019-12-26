@@ -65,7 +65,7 @@ public class FornecedorRepositorio {
 		f[i].versaoIntegrador = "3.4.1";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
-		f[i].IsEmProducao = "Não";
+		f[i].IsEmProducao = "Sim";
 		f[i].IsDebugAtivado = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";

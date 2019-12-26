@@ -2756,45 +2756,30 @@ public final class IntegracaoFornecedorCompleta {
   }
   
   
-  public static void excluirArquivos(LocalDateTime horaInicio)
+  public static void excluirArquivos(LocalDateTime horaInicio) throws Exception
   {
-	   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm");
-	   
-	   // Limpeza dump files do JRE:
-	   File dir = new File("C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos");
-	   for (final File file : dir.listFiles()) 
-	   {
-		   if (file.getName().indexOf("hs_err_pid") == 0 || file.getName().indexOf("replay_pid") == 0) 
-		   {
-		      logarErro("Arquivo " + file.getName() + " encontrado, então a memória RAM estava cheia na execução anterior do serviço de ofertas automáticas no dia " + sdf.format(file.lastModified()) + "." );
-		      file.delete();
-		   }
-	   }
-	   
-	   
-	   // Limpeza dos arquivos próprios deste serviço (arquivos .log e .xml):
-	   dir = new File(diretorioArquivosXmlSemBarraNoFinal); 
-	// System.out.println("dir = " + dir.getAbsolutePath());
-	   for (final File file : dir.listFiles()) 
-	   {
-		// System.out.println("file = " + file.getName());
-		   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
-		   
-		   if (datahoraArquivo.isBefore(horaInicio.minusDays(qtdDiasArquivosXmlGuardados))) 
-		   {
-		      file.delete();
-		   }
-	   }
-	   
-	   
-
-	  if (siglaSistema.equals("PCronos")) 
+	  try
 	  {
-		   // Limpeza dos arquivos remotos deste serviço (arquivos .log):
-		   // É importante porque o monitorador pesquisa todos os arquivos de log com cada rodada.
-       	   File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO); 
-		   for (final File file : dirLogRemoto.listFiles()) 
+		   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm");
+		   
+		   // Limpeza dump files do JRE:
+		   File dir = new File("C:\\Arquivos de Programas PC\\Integração Fornecedor - Portal Cronos");
+		   for (final File file : dir.listFiles()) 
 		   {
+			   if (file.getName().indexOf("hs_err_pid") == 0 || file.getName().indexOf("replay_pid") == 0) 
+			   {
+			      logarErro("Arquivo " + file.getName() + " encontrado, então a memória RAM estava cheia na execução anterior do serviço de ofertas automáticas no dia " + sdf.format(file.lastModified()) + "." );
+			      file.delete();
+			   }
+		   }
+		   
+		   
+		   // Limpeza dos arquivos próprios deste serviço (arquivos .log e .xml):
+		   dir = new File(diretorioArquivosXmlSemBarraNoFinal); 
+		// System.out.println("dir = " + dir.getAbsolutePath());
+		   for (final File file : dir.listFiles()) 
+		   {
+			// System.out.println("file = " + file.getName());
 			   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
 			   
 			   if (datahoraArquivo.isBefore(horaInicio.minusDays(qtdDiasArquivosXmlGuardados))) 
@@ -2802,16 +2787,42 @@ public final class IntegracaoFornecedorCompleta {
 			      file.delete();
 			   }
 		   }
-
-	  	  
-		   purgeArqsLogRemotosRepetidos("ws-karnekeijo.Erro.Homologacao.", horaInicio, dirLogRemoto);
-		   purgeArqsLogRemotosRepetidos(".Erro.Homologacao.", horaInicio, dirLogRemoto);
-		   purgeArqsLogRemotosRepetidos("ws-empresa.Erro.Homologacao.", horaInicio, dirLogRemoto);
-		   purgeArqsLogRemotosRepetidos("ws-varig.Erro.Homologacao.", horaInicio, dirLogRemoto);
-		   purgeArqsLogRemotosRepetidos("ws-vasp.Erro.Homologacao.", horaInicio, dirLogRemoto);
-		   purgeArqsLogRemotosRepetidos("ws-klm.Erro.Homologacao.", horaInicio, dirLogRemoto);
-
-	  } // if (siglaSistema.equals("PCronos"))
+		   
+		   
+	
+		  if (siglaSistema.equals("PCronos") && Utils.getNomeServidor().equals(Constants.SERVAPPCRONOS)) 
+		  {
+			   // Limpeza dos arquivos remotos deste serviço (arquivos .log):
+			   // É importante porque o monitorador pesquisa todos os arquivos de log com cada rodada.
+	       	   File dirLogRemoto = new File(Constants.DIR_LOG_REMOTO);
+	       	   
+	       	   if (!dirLogRemoto.exists())
+	       		   throw new Exception("O diretório " + Constants.DIR_LOG_REMOTO + " não existe!");
+	       	   
+	       	   for (final File file : dirLogRemoto.listFiles()) 
+			   {
+				   LocalDateTime datahoraArquivo = LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault()); 
+				   
+				   if (datahoraArquivo.isBefore(horaInicio.minusDays(qtdDiasArquivosXmlGuardados))) 
+				   {
+				      file.delete();
+				   }
+			   }
+	
+		  	  
+			   purgeArqsLogRemotosRepetidos("ws-karnekeijo.Erro.Homologacao.", horaInicio, dirLogRemoto);
+			   purgeArqsLogRemotosRepetidos(".Erro.Homologacao.", horaInicio, dirLogRemoto);
+			   purgeArqsLogRemotosRepetidos("ws-empresa.Erro.Homologacao.", horaInicio, dirLogRemoto);
+			   purgeArqsLogRemotosRepetidos("ws-varig.Erro.Homologacao.", horaInicio, dirLogRemoto);
+			   purgeArqsLogRemotosRepetidos("ws-vasp.Erro.Homologacao.", horaInicio, dirLogRemoto);
+			   purgeArqsLogRemotosRepetidos("ws-klm.Erro.Homologacao.", horaInicio, dirLogRemoto);
+	
+		  } // if (siglaSistema.equals("PCronos"))
+	  }
+	  catch (Exception ex)
+	  {
+		  throw new Exception("excluirArquivos(): Erro: " + ex.getMessage());
+	  }
    }
 
   
@@ -2824,7 +2835,7 @@ public final class IntegracaoFornecedorCompleta {
     	  String bodyEstouroHD = "Arquivo: " + arqTempdb + "\r\n"
     			               + "Tamanho certo: " + tamanhoCerto + "\r\n"
     			               + "Tamanho atual: " + tamanhoArqTempdb;
-    	  String assuntoEstouroHD = "Crescimento perigoso do TEMPDB no servidor de banco " + Utils.getNomeServidor() + "!";
+    	  String assuntoEstouroHD = "URGENTE!!! Crescimento perigoso do TEMPDB no servidor de banco " + Utils.getNomeServidor() + " !!!";
       	  EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, Constants.SERVBANCOCRONOS,  null);
       	  return true;
       }
@@ -2835,58 +2846,66 @@ public final class IntegracaoFornecedorCompleta {
   
   public static boolean verificarEstouroHD(LocalDateTime horaInicio) 
   {
-      String nomeServidor = Utils.getNomeServidor();
-
-      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
-      {
-          if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf", 30169497600L))
-        	  return true;
-	      if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdev2.ndf", 25911427072L))
-        	  return true;
-	      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev3.ndf", 7932477440L))
-        	  return true;
-	      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev4.ndf", 8376549376L))
-        	  return true;
-      }
-
-
-      File unidadeC = new File("C:"); // Para todos os servidores do Portal Cronos
-      long freeSpace = unidadeC.getFreeSpace();
-      String assuntoEstouroHD = "";
-      String bodyEstouroHD = "";
-      
-      
-      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 10000000000L) // 10 GB
-      {
-          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de banco " + nomeServidor;
-    	  assuntoEstouroHD = bodyEstouroHD;
-      }
-      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L) // 10 GB
-      {
-          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de aplicação " + nomeServidor;
-    	  assuntoEstouroHD = bodyEstouroHD;
-      }
-//      else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L) // 1 GB, somente para teste. Depois comentar este if do servidor de teste
-//      {
-//          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de teste " + nomeServidor;
-//    	  assuntoEstouroHD = bodyEstouroHD;
-//      }
-
-   // else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 10000000L) // 10 MB
-   // {   // No caso de servidores de fornecedores:
-   //     bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor;
-   //	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
-   // }
-
-      
-      if (!assuntoEstouroHD.equals(""))
-        	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
-      
-      
-      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+	  try 
+	  {
+		  String nomeServidor = Utils.getNomeServidor();
+	
+	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+	      {
+	          if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf", 30169497600L))
+	        	  return true;
+		      if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdev2.ndf", 25911427072L))
+	        	  return true;
+		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev3.ndf", 7932477440L))
+	        	  return true;
+		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev4.ndf", 8376549376L))
+	        	  return true;
+	      }
+	
+	
+	      File unidadeC = new File("C:"); // Para todos os servidores do Portal Cronos
+	      long freeSpace = unidadeC.getFreeSpace();
+	      String assuntoEstouroHD = "";
+	      String bodyEstouroHD = "";
+	      
+	      
+	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 10000000000L) // 10 GB
+	      {
+	          bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de banco " + nomeServidor;
+	    	  assuntoEstouroHD = bodyEstouroHD;
+	      }
+	      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L) // 10 GB
+	      {
+	          bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de aplicação " + nomeServidor;
+	    	  assuntoEstouroHD = bodyEstouroHD;
+	      }
+	//      else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L) // 1 GB, somente para teste. Depois comentar este if do servidor de teste
+	//      {
+	//          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de teste " + nomeServidor;
+	//    	  assuntoEstouroHD = bodyEstouroHD;
+	//      }
+	
+	   // else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 10000000L) // 10 MB
+	   // {   // No caso de servidores de fornecedores:
+	   //     bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor;
+	   //	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+	   // }
+	
+	      
+	      if (!assuntoEstouroHD.equals(""))
+	        	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
+	      
+	      
+		  if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+	    	  return true;
+	      else 
+	    	  return false;
+	  }
+	  catch (Exception ex)
+	  {
+		  logarErro("verificarEstouroHD(): Erro: " + ex.getMessage());
     	  return true;
-      else 
-    	  return false;
+	  }
    }
 
    

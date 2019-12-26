@@ -7,6 +7,7 @@ Marítimos		 21	WinThor	    100
 Karne Keijo		 60	SAP		    100							
 Comal 			 33	WinThor	    100					
 Monitoramento    -- PCronos      32		
+Monitoramento BD -- PCronos      32		
 SOST (BA)		170 WinThor      15				 	
 Walmart         385 PCronos	  															
 Propão 			171	WinThor	    100					
