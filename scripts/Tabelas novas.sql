@@ -121,7 +121,7 @@ create table [dbo].[Configuracao_Monitorador_Integradores](
 	apelido_contato_ti_secundario_conmonint varchar(15) NULL,
 	email_contato_ti_secundario_conmonint varchar(30) NULL,
 	skype_contato_ti_secundario_conmonint  varchar(30) NULL,
-	telefone_contato_ti_secundario_conmonint varchar(30) NOT NULL,
+	telefone_contato_ti_secundario_conmonint varchar(30) NULL,
 	funcao_contato_ti_secundario_conmonint varchar(30) NULL,
 
 	aplicativo_desktop_remoto_conmonint varchar(30) NOT NULL,

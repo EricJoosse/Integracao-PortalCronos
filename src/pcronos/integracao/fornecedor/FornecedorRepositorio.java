@@ -3,9 +3,22 @@ package pcronos.integracao.fornecedor;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.HibernateException;
+import org.hibernate.validator.constraints.InvalidValue;
+
+import org.hibernate.validator.constraints.InvalidStateException;
+
 public class FornecedorRepositorio {
 
 	public static HashMap<Integer, Fornecedor> hashMap;
+	private static SessionFactory factory; 
 
     static {
 		hashMap = new HashMap<Integer, Fornecedor>(); 
@@ -570,6 +583,78 @@ public class FornecedorRepositorio {
 			throw new Exception("Erro: idFornecedor " + idFornecedor.toString() + " não existe");
 
 		return f;
+	}
+
+	private static void cargaTabelas() throws Exception
+	{
+		try {
+	         factory = new Configuration().
+	                   configure("hibernate.cfg.xml.Teste").
+	                   addAnnotatedClass(ConfigMonitoradorIntegradores.class).
+	                   buildSessionFactory();
+	    } 
+		catch (Throwable ex) 
+		{ 
+	         System.err.println("Failed to create sessionFactory object." + ex);
+	         throw new ExceptionInInitializerError(ex); 
+	    }
+		
+		Session session = factory.openSession();
+		Transaction tx = null;
+		
+		try 
+		{
+			for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) 
+			{
+				Object value = entry.getValue();
+				Integer idFornecedor = ((Fornecedor) value).IdFornecedor;
+				FornecedorRepositorio fRep = new FornecedorRepositorio();
+				Fornecedor f = fRep.getFornecedor(idFornecedor);
+				
+				if (idFornecedor == null || idFornecedor < 0 || idFornecedor == 2016)
+					continue;
+				
+		        tx = session.beginTransaction();
+		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
+		        confMon.IdFornecedor = idFornecedor;
+		        confMon.ApelidoContatoTI = f.ApelidoResponsavelTI;
+		        confMon.EmailContatoTI =f.EmailResponsavelTI;
+		        confMon.SkypeContatoTI = f.SkypeResponsavelTI;
+		        confMon.TelefoneContatoTI = f.TelefoneResponsavelTI;
+			    confMon.FuncaoContatoTI = f.FuncaoResponsavelTI;
+			    confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
+			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
+			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
+		        session.save(confMon); 
+	            tx.commit();
+			}
+			
+			System.out.println("Carga concluída sem erros.");
+	    } 
+		catch (InvalidStateException vex) {
+	         if (tx!=null) tx.rollback();
+			   InvalidValue[] invalid = vex.getInvalidValues();
+			   for (int i=; i<invalid.length; ++i) {
+			     InvalidValue bad = invalid[i];
+			     log.error("insert(), " + bad.getPropertyPath()
+			     + ":" + bad.getPropertyName()
+			     + ":" + bad.getMessage());
+ 	    }
+		catch (HibernateException e) 
+		{
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	    } 
+		finally 
+		{
+	         session.close(); 
+	    }
+		 
+	}
+
+	public static void main(String[] args) throws Exception
+	{
+	   cargaTabelas();	   
 	}
 
 }
