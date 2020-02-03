@@ -600,6 +600,9 @@ public class FornecedorRepositorio {
 	    }
 		
 		Session session = factory.openSession();
+
+		Utils.executarScriptEmConexaoHibernate(session, "Criar tabelas Instalador e Monitorador.sql");
+		
 		Transaction tx = null;
 		
 		try 
@@ -647,6 +650,7 @@ public class FornecedorRepositorio {
 	    } 
 		finally 
 		{
+ 			 Utils.executarScriptEmConexaoHibernate(session, "Drop tabelas Instalador e Monitorador.sql");
 	         session.close(); 
 	    }
 		 

@@ -1,5 +1,6 @@
 package pcronos.integracao.fornecedor;
 
+import java.io.Reader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,6 +39,12 @@ import org.xml.sax.SAXException;
 import pcronos.integracao.DefaultCharsetException;
 import pcronos.integracao.EmailAutomatico;
 
+import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 
 public class Utils {
@@ -283,6 +290,32 @@ public class Utils {
 		} catch (UnknownHostException e) {
 			return "Desconhecido";
 		}
-
+	}
+	
+	public static void executarScriptEmConexaoHibernate(Session session, String nomeScript) {
+		
+		// O seguinte é uma forma para executar qualquer comando JDBC usando a conexão JDBC 
+		// por baixo da conexão Hibernate, sem usar as Entidades Hibernate:
+		session.doWork(new Work() {
+		     
+		    @Override
+		    public void execute(Connection conn) throws SQLException {
+		    	try
+		    	{
+		    		// A documentação do ibatis e do mybatis não diz com quais bases de dados o ScriptRunner funciona (Oracle, Sybase, etc)
+		    		// porém foi testado que pelo menos o script "Criar tabelas Instalador e Monitorador.sql" funciona com SQL Server
+		    		// usando mybatis-3.4.5:
+			        ScriptRunner sr = new ScriptRunner(conn);
+			        Reader reader = new BufferedReader(new FileReader("C:\\PCronos\\Integração Fornecedor - Portal Cronos\\scripts\\" + nomeScript));
+			        sr.setSendFullScript(true);
+			        sr.runScript(reader);
+		    	}
+		    	catch (Exception ex)
+		    	{
+		    		System.out.println(ex.getMessage());
+		    	}
+		    }
+		});
 	}
 }
+

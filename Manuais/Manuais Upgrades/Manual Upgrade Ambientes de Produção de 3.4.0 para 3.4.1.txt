@@ -38,7 +38,7 @@ Manual Upgrade dos Ambientes de Produção de 3.4.0 para 3.4.1
  
 4. (i)  Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
    (ii) Copiar o arquivo lib\hibernate-core-5.4.10.Final.jar e todos os jars dependentes 
-        para o servidor do fornecedor: ordenar o diretório \lib\ no Instalador no projeto Eclipse 
+        e também mybatis-3.4.5.jar para o servidor do fornecedor: ordenar o diretório \lib\ no Instalador no projeto Eclipse 
         por Date Modified e copiar todos os jars de 18.12.2019 08:24. 
 
 5. Apenas no caso do servidor de monitoramento dos Integradores e do servidor de aplicação:

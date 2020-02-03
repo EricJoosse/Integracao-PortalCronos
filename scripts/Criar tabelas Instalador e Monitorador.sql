@@ -1,23 +1,26 @@
 if object_id('Configuracao_Instalador_Integrador') is not NULL
-  drop table [dbo].[Configuracao_Instalador_Integrador]
-go
+  drop table [dbo].[Configuracao_Instalador_Integrador];
+--go
 
 if object_id('Configuracao_Monitorador_Integradores') is not NULL
-  drop table [dbo].[Configuracao_Monitorador_Integradores]
-go
+  drop table [dbo].[Configuracao_Monitorador_Integradores];
+--go
 
 if object_id('Configuracao_Instalador_Integrador_Nuvem') is not NULL
-  drop table [dbo].[Configuracao_Instalador_Integrador_Nuvem]
-go
+  drop table [dbo].[Configuracao_Instalador_Integrador_Nuvem];
+--go
 
 
-SET ANSI_NULLS ON
-GO
+SET ANSI_NULLS ON;
+--GO
 
-SET QUOTED_IDENTIFIER ON
-GO
+SET QUOTED_IDENTIFIER ON;
+--GO
 
 /*
+ 
+select * from [dbo].[Sistema_Integrado]
+ 
 update   [dbo].[Sistema_Integrado]
    set   sg_sistema_integrado_sisint = 'WinThor'
    where sg_sistema_integrado_sisint = 'WINTHOR'
@@ -41,6 +44,9 @@ INSERT INTO [dbo].[Sistema_Integrado]
            ,null
            ,'2017-08-02 10:31:00.000'
            ,1)
+
+select * from [dbo].[Sistema_Integrado]
+
 */
            
 
@@ -87,24 +93,24 @@ CONSTRAINT [PK_CIINTNUV] PRIMARY KEY CLUSTERED
 
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CIINTNUV_SISINT] FOREIGN KEY([id_sistema_integrado_sisint])
 REFERENCES [dbo].[Sistema_Integrado] ([id_sistema_integrado_sisint])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem] CHECK CONSTRAINT [FK_CIINTNUV_SISINT]
-GO
+--GO
 
 
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CIINTNUV_USUSIS] FOREIGN KEY([user_id_ususis])
 REFERENCES [dbo].[Usuario_Sistema] ([user_id])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem] CHECK CONSTRAINT [FK_CIINTNUV_USUSIS]
-GO
+--GO
 
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cada fornecedor no servidor nuvem tem outro padrão de integração.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos pelo Monitorador.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_nuvem_ciintnuv'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos pelo Monitorador.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_secundario_nuvem_ciintnuv'
-GO
+--GO
 
 create table [dbo].[Configuracao_Monitorador_Integradores](
 	[id_config_monitorador_integradores_conmonint] [int] IDENTITY(1,1) NOT NULL,
@@ -143,38 +149,38 @@ CONSTRAINT [PK_CONMONINT] PRIMARY KEY CLUSTERED
 
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores]  WITH CHECK ADD  CONSTRAINT [FK_CONMONINT_FORNEC] FOREIGN KEY([id_fornecedor_fornec])
 REFERENCES [dbo].[Fornecedor] ([id_fornecedor_fornec])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores] CHECK CONSTRAINT [FK_CONMONINT_FORNEC]
-GO
+--GO
 
 
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores]  WITH CHECK ADD  CONSTRAINT [FK_CONMONINT_USUSIS] FOREIGN KEY([user_id_ususis])
 REFERENCES [dbo].[Usuario_Sistema] ([user_id])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores] CHECK CONSTRAINT [FK_CONMONINT_USUSIS]
-GO
+--GO
 
 
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores]  WITH CHECK ADD  CONSTRAINT [FK_CONMONINT_RESP_USUSIS] FOREIGN KEY([id_vendedor_responsavel_integracao_ususis])
 REFERENCES [dbo].[Usuario_Sistema] ([user_id])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores] CHECK CONSTRAINT [FK_CONMONINT_RESP_USUSIS]
-GO
+--GO
 
 
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'A sigla do sistema do fornecedor pode ser obtido pelo Padrao_Integracao do Fornecedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'id_fornecedor_fornec'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Vendedor responsável para a manutenção dos De-Para´s, etc.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'id_vendedor_responsavel_integracao_ususis'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Em produção ou não no lado do fornecedor (no servidor próprio dele).' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'sn_em_producao_conmonint'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_conmonint'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_secundario_conmonint'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Na maioria dos fornecedores o ID do AnyDesk nunca muda.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'id_aplicativo_desktop_remoto_conmonint'
-GO
+--GO
 
 
 
@@ -213,7 +219,7 @@ CONSTRAINT [PK_CONINSINT] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-GO
+--GO
 
 
 CREATE UNIQUE INDEX UK_CONINSINT_SEQ_NUVEM 
@@ -223,40 +229,43 @@ ON dbo.Configuracao_Instalador_Integrador(
 )
 WHERE id_config_instalador_integrador_nuvem_ciintnuv is not null
 	  AND nr_sequencia_instancia_nuvem_coninsint is not null
-GO
+--GO
 
 
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador]  WITH CHECK ADD  CONSTRAINT [FK_CONINSINT_SISINT] FOREIGN KEY([id_sistema_integrado_sisint])
 REFERENCES [dbo].[Sistema_Integrado] ([id_sistema_integrado_sisint])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador] CHECK CONSTRAINT [FK_CONINSINT_SISINT]
-GO
+--GO
 
 
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador]  WITH CHECK ADD  CONSTRAINT [FK_CONINSINT_USUSIS] FOREIGN KEY([user_id_ususis])
 REFERENCES [dbo].[Usuario_Sistema] ([user_id])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador] CHECK CONSTRAINT [FK_CONINSINT_USUSIS]
-GO
+--GO
 
 
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador]  WITH CHECK ADD  CONSTRAINT [FK_CONINSINT_FORNEC] FOREIGN KEY([id_fornecedor_fornec])
 REFERENCES [dbo].[Fornecedor] ([id_fornecedor_fornec])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador] CHECK CONSTRAINT [FK_CONINSINT_FORNEC]
-GO
+--GO
 
 
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador]  WITH CHECK ADD  CONSTRAINT [FK_CONINSINT_CIINTNUV] FOREIGN KEY([id_config_instalador_integrador_nuvem_ciintnuv])
 REFERENCES [dbo].[Configuracao_Instalador_Integrador_Nuvem] ([id_config_instalador_integrador_nuvem_ciintnuv])
-GO
+--GO
 ALTER TABLE [dbo].[Configuracao_Instalador_Integrador] CHECK CONSTRAINT [FK_CONINSINT_CIINTNUV]
-GO
+--GO
 
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Na hora da instalação do lado do fornecedor ainda não existe um padrão de integração em produção.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
-GO
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Debug no lado do fornecedor (no servidor local dele + debug remoto).' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador', @level2type=N'COLUMN',@level2name=N'sn_debug_ativado_coninsint'
-GO
+--GO
 		
 
+select * from [dbo].[Configuracao_Instalador_Integrador];
+select * from [dbo].[Configuracao_Monitorador_Integradores];
+select * from [dbo].[Configuracao_Instalador_Integrador_Nuvem];
