@@ -2,6 +2,7 @@ package pcronos.integracao.fornecedor;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,11 +10,24 @@ import org.hibernate.cfg.Configuration;
 
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.HibernateException;
-import org.hibernate.validator.constraints.InvalidValue;
 
-import org.hibernate.validator.constraints.InvalidStateException;
+//import javax.persistence.RollbackException;
+//import javax.validation.ConstraintViolationException;
+//import javax.validation.ConstraintViolation;
+
+//import org.hibernate.validator.constraints.InvalidValue; 
+//import org.hibernate.validator.constraints.InvalidStateException;
+//import org.hibernate.validator.InvalidValue;          // hibernate.validator.3.1.0.GA 
+//import org.hibernate.validator.InvalidStateException; // hibernate.validator.3.1.0.GA
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 public class FornecedorRepositorio {
 
@@ -617,6 +631,13 @@ public class FornecedorRepositorio {
 				if (idFornecedor == null || idFornecedor < 0 || idFornecedor == 2016)
 					continue;
 				
+				// Estouro de uma coluna dá erro "jdbc.SQLServerException: String or binary data would be truncated"
+				// e nem Hibernate nem JDBC diz qual coluna é a causa e ainda menos qual valor é o problema.
+				// Solução: usar o Hibernate Validator:
+				ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		        Validator validator = factory.getValidator();
+		 
+				
 		        tx = session.beginTransaction();
 		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
 		        confMon.IdFornecedor = idFornecedor;
@@ -628,37 +649,78 @@ public class FornecedorRepositorio {
 			    confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
 			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
-		        session.save(confMon); 
-	            tx.commit();
+			    
+		        confMon.ApelidoContatoTIsecundario = f.ApelidoResponsavelTIAlternativo;
+
+		        Set<ConstraintViolation<ConfigMonitoradorIntegradores>> constraintViolations = validator.validate(confMon);
+		        
+		        if (constraintViolations.size() > 0) 
+		        {
+		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolations) 
+		            {
+		                System.out.println(violation.getMessage());
+		                if (tx!=null) tx.rollback();
+		            }
+		        } else 
+		        {
+		            System.out.println("Valid Object");
+		            session.save(confMon); 
+		            tx.commit();
+		        }
+		        
+		        
 			}
 			
 			System.out.println("Carga concluída sem erros.");
 	    } 
-		catch (InvalidStateException vex) {
-	         if (tx!=null) tx.rollback();
-			   InvalidValue[] invalid = vex.getInvalidValues();
-			   for (int i=; i<invalid.length; ++i) {
-			     InvalidValue bad = invalid[i];
-			     log.error("insert(), " + bad.getPropertyPath()
-			     + ":" + bad.getPropertyName()
-			     + ":" + bad.getMessage());
- 	    }
-		catch (HibernateException e) 
+		
+		// Usando o Entity Maneger de JPA:
+//		catch (RollbackException e) {
+//			Set<ConstraintViolation<?>> violations = ((ConstraintViolationException)e.getCause()).getConstraintViolations();
+//			for (ConstraintViolation v : violations) {
+//				System.out.println("InvalidValue = " +  v.getInvalidValue() + ", erro: " + v.getMessage());
+//			}
+//		}
+		
+		// Usando hibernate.validator.3.1.0.GA:  
+//		catch (InvalidStateException vex) 
+//		{
+//			// Nunca entrou aqui. Talvez isso é por causa do uso dos mais modernos annotations ao invés de mapeamentos ORM via XML.....
+//		
+//	         if (tx!=null) tx.rollback();
+//	         
+//			   InvalidValue[] invalid = vex.getInvalidValues();
+//			   for (int i=0; i<invalid.length; ++i) {
+//			     InvalidValue bad = invalid[i];
+//			     System.out.println("InvalidValue: " + bad.getPropertyPath() + ":" + bad.getPropertyName() + ":" + bad.getMessage());
+//			   }
+// 	    }
+		
+		catch (HibernateException hex) 
 		{
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
+			if (tx!=null) tx.rollback();
+			
+			 hex.printStackTrace(); 
+	         System.out.println("Causa: " + hex.getCause());
+	         
+	         Throwable cause = hex.getCause();
+	         if (cause instanceof SQLServerException) {
+	             System.out.println("Causa: " + cause.getMessage());
+	         }
 	    } 
 		finally 
 		{
- 			 Utils.executarScriptEmConexaoHibernate(session, "Drop tabelas Instalador e Monitorador.sql");
-	         session.close(); 
+			Utils.executarScriptEmConexaoHibernate(session, "Drop tabelas Instalador e Monitorador.sql");
+	        session.close(); 
 	    }
 		 
 	}
 
 	public static void main(String[] args) throws Exception
 	{
-	   cargaTabelas();	   
+		// Temporariamente executar o seguinte após qq alteração nos dados dos fornecedores, 
+		// por enquanto que o Web Installer ainda não está pronto:
+	   cargaTabelas();
 	}
 
 }

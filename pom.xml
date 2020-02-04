@@ -34,31 +34,37 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
     <dependency>
     	<groupId>com.sun.jersey</groupId>
     	<artifactId>jersey-core</artifactId>
     	<version>1.12</version>
     </dependency>
+    
     <dependency>
     	<groupId>com.sun.jersey</groupId>
     	<artifactId>jersey-bundle</artifactId>
     	<version>1.12</version>
     </dependency>
+    
     <dependency>
     	<groupId>com.sun.jersey.contribs</groupId>
     	<artifactId>jersey-multipart</artifactId>
     	<version>1.12</version>
     </dependency>
+    
     <dependency>
     	<groupId>oracle.jdbc</groupId>
     	<artifactId>jdbc-oracle</artifactId>
     	<version>10.2.0.5.0</version>
     </dependency>
+    
     <dependency>
     	<groupId>org.firebirdsql.jdbc</groupId>
     	<artifactId>jaybird-full</artifactId>
     	<version>2.2.10</version>
     </dependency>
+    
 <!--     O seguinte dá runtime error ao executar "java -jar {sapjco3-path}/sapjco3.jar"  -->
 <!--     que "sapjco3.jar não pode ser renomeado":  -->
 <!--<dependency> -->
@@ -66,6 +72,7 @@
 <!--   	<artifactId>jco-sap</artifactId> -->
 <!--  	<version>3.0.17</version> -->
 <!--</dependency> -->
+
     <dependency>
          <groupId>sapjco3</groupId>
          <artifactId>sapjco3</artifactId>
@@ -73,6 +80,7 @@
          <version>3.0.17</version>
          <systemPath>C:\PCronos\PCronos Lib\lib\sapjco3.jar</systemPath>
     </dependency>
+    
 	<dependency>
 	    <groupId>javax.mail</groupId>
 	    <artifactId>mail</artifactId>
@@ -84,42 +92,74 @@
 	    	</exclusion>
 	    </exclusions>
 	</dependency>
+	
 	<dependency>
 	    <groupId>com.microsoft.sqlserver</groupId>
 	    <artifactId>mssql-jdbc</artifactId>
 	    <version>6.2.2.jre8</version>
 	</dependency>
+	
 	<dependency>
 	    <groupId>org.json</groupId>
 	    <artifactId>json</artifactId>
 	    <version>20171018</version>
 	</dependency>
+	
 	<dependency>
 		<groupId>commons-codec</groupId>
 		<artifactId>commons-codec</artifactId>
 		<version>1.11</version>
 	</dependency>
+	
     <dependency>
 		<groupId>com.github.vatbub</groupId>
 		<artifactId>mslinks</artifactId>
 		<version>1.0.4</version>
 	</dependency>
-	<dependency>
-	    <groupId>org.hibernate</groupId>
-	    <artifactId>hibernate-core</artifactId>
-	    <version>5.4.10.Final</version>
-	</dependency>
-<!-- 	<dependency>
-	    <groupId>org.hibernate</groupId>
-	    <artifactId>hibernate-validator</artifactId>
-	    <version>5.3.6.Final</version>
-	</dependency> -->
+	
 	<dependency>
 	   <groupId>org.mybatis</groupId>
 	   <artifactId>mybatis</artifactId>
 	   <version>3.4.5</version>
 	</dependency>
+	
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-core</artifactId>
+<!-- 	<version>3.3.0.SP1</version> -->
+		<version>5.4.10.Final</version>
+	</dependency>
+	
+	<!-- Java bean validation API - Especificação (interfaces): -->
+	<dependency>
+	    <groupId>javax.validation</groupId>
+	    <artifactId>validation-api</artifactId>
+	    <version>2.0.1.Final</version>
+	</dependency>
+	
+	<!-- Hibernate validator - Implementação do Bean validation API: -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+<!--    <version>3.1.0.GA</version> -->
+	    <version>6.1.1.Final</version>
+	</dependency>
+	
+	<!-- Unified Expression Language - Especificação (interfaces): -->
+	<dependency>
+	    <groupId>javax.el</groupId>
+	    <artifactId>javax.el-api</artifactId>
+	    <version>3.0.1-b06</version>
+	</dependency>
+	
+	<!-- Unified Expression Language - Implementação: -->
+	<dependency>
+	    <groupId>org.glassfish.web</groupId>
+	    <artifactId>javax.el</artifactId>
+	    <version>2.2.6</version>
+	</dependency>	
   </dependencies>
+  
   
   <build>
     <sourceDirectory>${project.basedir}/src</sourceDirectory>

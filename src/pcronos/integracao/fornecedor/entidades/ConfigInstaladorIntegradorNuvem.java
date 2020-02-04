@@ -1,11 +1,18 @@
 package pcronos.integracao.fornecedor.entidades;
 
 import java.time.LocalDateTime;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import org.hibernate.validator.constraints.Length;
+//import org.hibernate.validator.Length;  // hibernate.validator.3.1.0.GA
 
 
-@Entity
+//@Entity
 @Table(name="Configuracao_Instalador_Integrador_Nuvem")
 public class ConfigInstaladorIntegradorNuvem {
 

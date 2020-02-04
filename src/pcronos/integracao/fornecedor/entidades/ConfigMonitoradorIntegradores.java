@@ -1,11 +1,21 @@
 package pcronos.integracao.fornecedor.entidades;
 
 import java.time.LocalDateTime;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+
 import org.hibernate.validator.constraints.Length;
+//import org.hibernate.validator.Length;  // hibernate.validator.3.1.0.GA
+import javax.validation.constraints.Size;
 
 
-@Entity
+//@Entity
 @Table(name="Configuracao_Monitorador_Integradores")
 public class ConfigMonitoradorIntegradores {
 
@@ -25,51 +35,52 @@ public class ConfigMonitoradorIntegradores {
 	public boolean IsEmProducao;
 
     @Column(name="apelido_contato_ti_conmonint")
-    @Length(max=15)
+    @Size(max=15)
     public String ApelidoContatoTI;
     
 	@Column(name="email_contato_ti_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String EmailContatoTI;
 	
 	@Column(name="skype_contato_ti_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String SkypeContatoTI;
 	
 	@Column(name="telefone_contato_ti_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String TelefoneContatoTI;
 	
 	@Column(name="funcao_contato_ti_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String FuncaoContatoTI;
 
 	@Column(name="apelido_contato_ti_secundario_conmonint")
-	@Length(max=15)
+ // @Length(max=15)
+	@Length(max = 15, message = "ApelidoContatoTIsecundario = ${validatedValue}")
 	public String ApelidoContatoTIsecundario;
 	
 	@Column(name="email_contato_ti_secundario_conmonint")
-	@Length(max=30)
+	@Size(max=30)
 	public String EmailContatoTIsecundario;
 	
 	@Column(name="skype_contato_ti_secundario_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String SkypeContatoTIsecundario;
 	
 	@Column(name="telefone_contato_ti_secundario_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String TelefoneContatoTIsecundario;
 
 	@Column(name="funcao_contato_ti_secundario_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String FuncaoContatoTIsecundario;
 
 	@Column(name="aplicativo_desktop_remoto_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String AplicativoDesktopRemoto;
 	
 	@Column(name="id_aplicativo_desktop_remoto_conmonint")
-    @Length(max=30)
+    @Size(max=30)
 	public String IdAplicativoDesktopRemoto;
 	
 	@Column(name="dt_cadastro_conmonint")
