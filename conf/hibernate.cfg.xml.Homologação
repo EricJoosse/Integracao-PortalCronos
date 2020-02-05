@@ -1,0 +1,16 @@
+<hibernate-configuration>
+<session-factory>
+<property name="hibernate.dialect">
+   org.hibernate.dialect.SQLServerDialect
+</property>
+<property name="hibernate.connection.driver_class">
+   com.microsoft.sqlserver.jdbc.SQLServerDriver
+</property>
+<property name="hibernate.connection.url">
+    jdbc:sqlserver://13.92.57.6:1433;databaseName=PCronos_Homologacao
+</property>
+<property name="hibernate.default_schema">dbo</property>
+<property name="hibernate.connection.username">xxxxx</property>
+<property name="hibernate.connection.password">xxxxx</property>
+</session-factory>
+</hibernate-configuration>

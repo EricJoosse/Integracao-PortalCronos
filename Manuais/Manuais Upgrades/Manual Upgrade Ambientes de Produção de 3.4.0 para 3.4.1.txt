@@ -47,28 +47,20 @@ Manual Upgrade dos Ambientes de Produção de 3.4.0 para 3.4.1
 5. Apenas no caso do servidor de monitoramento dos Integradores e do servidor de aplicação:
    (i) Atualizar o arquivo tpl\"Email de tipo Virada fornecedor para produção.txt" no servidor do monitoramento.
  
-6. (i) Em todos os servidores: 
-			- Copiar o arquivo /conf/hibernate.cfg.xml do Instalador no projeto Eclipse para o servidor
-       	  	  do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
-       	  	  
-   (ii) Apenas no caso do Monitorador dos Integradores e do Servidor de Aplicação do Portal Cronos:
-       		- Verificar e no caso atualizar o IP, usuário e senha no arquivo "hibernate.cfg.xml.Produção" 
-       		  no diretório de backup no projeto Eclipse e copiar o conteúdo para o servidor de produção.
-             
-7. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
+6. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-8. Em todos os casos: 
+7. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador começa executar automaticamente
      
-9. Apenas no caso do servidor do monitoramento: 
+8. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
      
      
-10. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
-    (ii)  Compilar o arquivo .jar
-    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
-          esperando o processamento atual terminar primeiro
+9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+   (ii)  Compilar o arquivo .jar
+   (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+         esperando o processamento atual terminar primeiro
    

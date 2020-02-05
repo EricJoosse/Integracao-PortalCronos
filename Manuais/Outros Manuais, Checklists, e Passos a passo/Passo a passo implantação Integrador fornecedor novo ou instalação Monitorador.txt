@@ -112,8 +112,6 @@ Eric
        
        Não comittar este arquivo no GitHub pois contêm senhas!!! Adicionar no .gitignore.  
        
-       No caso de instalação do Monitorador, mesma coisa para o arquivo "hibernate.cfg.xml".
-            
        Neste momento apenas preencher os seguintes dados (os outros dados estão explicados no final da instalação): 
        (i)   Descobrir o CNPJ do fornecedor usando o mesmo select acima.
        
@@ -145,11 +143,6 @@ Eric
 	    	 (d) No caso de servidores de fornecedores: 
 	    	       - Remover todas as referências ao monitorador (pesquisar o texto "monitor") no arquivo de configuração:
 	    	         (em relação ao email automático, e outras referências)
-
-
-   -1. No caso do Monitorador dos Integradores e do Servidor de Aplicação do Portal Cronos:
-       		- Verificar e no caso atualizar o IP, usuário e senha no arquivo "hibernate.cfg.xml.Produção" 
-       		  no diretório de backup no projeto Eclipse.
 
 
     0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
@@ -735,14 +728,9 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        favor não se esquecer para me avisar com alguns dias de antecedência! 
        Caso contrário, o Integrador WinThor/PCronos de repente vai parar de funcionar alguns dias! 
        
-   24. (i)  Copiar o arquivo /conf/xxx.properties do diretório de backups no projeto Eclipse para o servidor
-            do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
-           
-       (ii) No caso do Monitorador dos Integradores e do Servidor de Aplicação do Portal Cronos:
-       			- Copiar o conteúdo do arquivo "conf/hibernate.cfg.xml.Produção" do diretório de backups 
-       			  no projeto Eclipse para o servidor do fornecedor 
-       			  C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\hibernate.cfg.xml
- 
+   24. Copiar o arquivo /conf/xxx.properties do diretório de backups no projeto Eclipse para o servidor
+       do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
+
    25. No caso que a TI do fornecedor geralmente usa uma máquina virtual para dar acesso remoto etc 
        (exemplo: Comal), pedir a TI conectar com um usuário desta máquina virtual para ver: 
        		- se o manual aparece no menu de Windows

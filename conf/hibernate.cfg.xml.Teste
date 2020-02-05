@@ -7,10 +7,10 @@
    com.microsoft.sqlserver.jdbc.SQLServerDriver
 </property>
 <property name="hibernate.connection.url">
-    jdbc:sqlserver://ipipipip:1433;databaseName=xxxxxxxx
+    jdbc:sqlserver://52.170.47.238:1433;databaseName=PCronos_Teste
 </property>
 <property name="hibernate.default_schema">dbo</property>
-<property name="hibernate.connection.username">xxxxxxx</property>
-<property name="hibernate.connection.password">xxxxxxx</property>
+<property name="hibernate.connection.username">xxxxx</property>
+<property name="hibernate.connection.password">xxxxx</property>
 </session-factory>
 </hibernate-configuration>
