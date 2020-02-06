@@ -30,6 +30,7 @@ public class Fornecedor {
 	String dirProgramFiles;
 	String DiscoIntegrador;
 	String EspacoLivreDisco;
+	int QtdDiasArquivosXmlGuardados;
 	String EnderecoIpPublicoServidor;
 	String PortaIpAberta;
 	String cnpjFornecedor;

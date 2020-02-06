@@ -60,6 +60,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "";
 		f[i].tipoSO = "Windows Server 2016";
 		f[i].dirProgramFiles = "Program Files";
+		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].FrequenciaProcessamento = "15 min";
 
 		i++;
@@ -81,6 +82,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "90 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 32;
 		f[i].MemoriaRamLivre = "1.4 - 1.9 GB";
 		f[i].EnderecoIpPublicoServidor = "Não se aplica";
 		f[i].PortaIpAberta = "Não se aplica";
@@ -105,6 +107,7 @@ public class FornecedorRepositorio {
 		f[i].dirProgramFiles = "Program Files";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "43 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 32;
 		f[i].MemoriaRamLivre = "1.2 GB";
 		f[i].EnderecoIpPublicoServidor = "Não se aplica";
 		f[i].PortaIpAberta = "Não se aplica";
@@ -136,6 +139,7 @@ public class FornecedorRepositorio {
 		f[i].cnpjFornecedor = "02870737000190";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "9 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "187.113.120.97";
 		f[i].PortaIpAberta = "80";
@@ -167,6 +171,7 @@ public class FornecedorRepositorio {
 		f[i].cnpjFornecedor = "00680755000265";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "902 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "jrolinda.dyndns.org";
 		f[i].PortaIpAberta = "Não precisa";
@@ -197,6 +202,7 @@ public class FornecedorRepositorio {
 		f[i].cnpjFornecedor = "07182763000140"; 
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "269 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].MemoriaRamLivre = "6.5 GB";
 		f[i].EnderecoIpPublicoServidor = "187.103.76.53";
 		f[i].PortaIpAberta = "80";
@@ -225,6 +231,7 @@ public class FornecedorRepositorio {
 		f[i].cnpjFornecedor = "04666316000178";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "48 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = "";
@@ -254,6 +261,7 @@ public class FornecedorRepositorio {
 		f[i].cnpjFornecedor = "07041307000180";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "0.6 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 15;
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = "";
@@ -282,6 +290,7 @@ public class FornecedorRepositorio {
 		f[i].cnpjFornecedor = "24150377000195";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "62 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = "";

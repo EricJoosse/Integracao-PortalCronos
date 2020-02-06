@@ -1,17 +1,17 @@
-Fornecedor   IdForn	Sistema		Qtd.Dias   		
-----------	 ------	-------     --------	 	
-Formaggio 		 13	APS		    100		 			
-JR Distribuição	947	WinThor	    100							
-Prolac 			 30	WinThor	    100		 						
-Marítimos		 21	WinThor	    100							
-Karne Keijo		 60	SAP		    100							
-Comal 			 33	WinThor	    100					
-Monitoramento    -- PCronos      32		
-Monitoramento BD -- PCronos      32		
-SOST (BA)		170 WinThor      15				 	
+Fornecedor   IdForn	Sistema			
+----------	 ------	-------     	 	
+Formaggio 		 13	APS		    		 			
+JR Distribuição	947	WinThor	    							
+Prolac 			 30	WinThor	    		 						
+Marítimos		 21	WinThor	    							
+Karne Keijo		 60	SAP		    							
+Comal 			 33	WinThor	    					
+Monitoramento    -- PCronos     		
+Monitoramento BD -- PCronos     		
+SOST (BA)		170 WinThor     				 	
 Walmart         385 PCronos	  															
-Propão 			171	WinThor	    100					
-Padeirão 		 14	WinThor	    100				
-Marizpan	   1995	APS Cloud	100																													
-Atacamax	      1	APS			100																													
-Atacamax	      1	APS Cloud	100																													
+Propão 			171	WinThor	    					
+Padeirão 		 14	WinThor	    				
+Marizpan	   1995	APS Cloud																														
+Atacamax	      1	APS																																
+Atacamax	      1	APS Cloud																														
