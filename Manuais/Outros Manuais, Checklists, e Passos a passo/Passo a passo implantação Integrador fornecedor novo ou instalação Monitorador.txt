@@ -137,8 +137,8 @@ Eric
              		- "QtdDiasArquivosXmlGuardados" = "100"
 
 			 (c) Preencher no arquivo "FornecedorRepositorio.java":
-	    		- a coluna "Debug"       
-	    		- a coluna "Qtd.Dias"   
+	    		- o atributo "IsDebugAtivado"       
+	    		- o atributo "QtdDiasArquivosXmlGuardados"   
 	    		
 	    	 (d) No caso de servidores de fornecedores: 
 	    	       - Remover todas as referências ao monitorador (pesquisar o texto "monitor") no arquivo de configuração:
@@ -312,12 +312,12 @@ Como vai ser?
 		  Observações: 
 		    - se Java já está instalado, somente precisa de 700 MB livre
 		    - Se precisar, diminuir "QtdDiasArquivosXmlGuardados" no arquivo .properties 
-		      e atualizar a coluna "Qtd.Dias" no arquivo "Tabela Fornecedores_Versões.txt"
+		      e atualizar o atributo "QtdDiasArquivosXmlGuardados" no arquivo "FornecedorRepositorio.java"
 		  
 		  
 	    - No caso que o espaço livre é suficiente, preencher no FornecedorRepositorio:
-	    		- a coluna "DiscoIntegrador"       
-	    		- a coluna "EspacoLivreDisco"   
+	    		- o atributo "DiscoIntegrador"       
+	    		- o atributo "EspacoLivreDisco"   
 
 
 		- Se decidir não instalar Java porém usar uma versão existente, 

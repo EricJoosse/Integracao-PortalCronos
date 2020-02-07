@@ -91,7 +91,7 @@ public class ConfigInstaladorIntegrador {
 	boolean IsDebugAtivado;
 
 	@Column(name="qtd_dias_arquivos_xml_guardados_coninsint")
-	int QtdDiaArquivosXmlGuardados;
+	int QtdDiasArquivosXmlGuardados;
 
 	@Column(name="dt_cadastro_coninsint")
  	LocalDateTime DtCadastro;
