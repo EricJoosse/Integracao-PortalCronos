@@ -667,7 +667,7 @@ public class FornecedorRepositorio {
 		        {
 		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolations) 
 		            {
-		                System.out.println(violation.getMessage());
+		                System.out.println("Atributo " + violation.getPropertyPath().toString() + " " +  violation.getMessage());
 		                if (tx!=null) tx.rollback();
 		            }
 		        } else 

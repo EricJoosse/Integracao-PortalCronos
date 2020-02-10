@@ -56,7 +56,10 @@ public class ConfigMonitoradorIntegradores {
 
 	@Column(name="apelido_contato_ti_secundario_conmonint")
  // @Length(max=15)
-	@Length(max = 15, message = "ApelidoContatoTIsecundario = ${validatedValue}")
+ // Não funcionou: @Length(max = 15, message = "IdFornecedor = ${ConfigMonitoradorIntegradores.IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+ // Não funcionou: @Length(max = 15, message = "IdFornecedor = ${IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+ // Não funcionou: @Length(max = 15, message = "${propertyPath} = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
 	public String ApelidoContatoTIsecundario;
 	
 	@Column(name="email_contato_ti_secundario_conmonint")
