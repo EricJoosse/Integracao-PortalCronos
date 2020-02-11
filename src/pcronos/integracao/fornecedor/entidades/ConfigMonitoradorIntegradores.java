@@ -11,12 +11,16 @@ import javax.persistence.GenerationType;
 
 
 import org.hibernate.validator.constraints.Length;
+
+import pcronos.integracao.fornecedor.annotations.ValidConfigMonitoradorIntegradores;
+
 //import org.hibernate.validator.Length;  // hibernate.validator.3.1.0.GA
 import javax.validation.constraints.Size;
 
 
 //@Entity
 @Table(name="Configuracao_Monitorador_Integradores")
+@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.IdFornecedor} inválido")
 public class ConfigMonitoradorIntegradores {
 
 	public ConfigMonitoradorIntegradores() {}
