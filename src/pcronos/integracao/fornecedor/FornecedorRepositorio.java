@@ -667,18 +667,18 @@ public class FornecedorRepositorio {
 		        {
 		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolations) 
 		            {
-		                System.out.println("Atributo " + violation.getPropertyPath().toString() + " " +  violation.getMessage());
+		                System.out.println( (Utils.isNullOrBlank(violation.getPropertyPath().toString()) ? "" : "Atributo " + violation.getPropertyPath().toString() + " ") +  violation.getMessage());
 		                if (tx!=null) tx.rollback();
 		            }
-		        } else 
+		            System.out.println("");
+		        } 
+		        else 
 		        {
 		            System.out.println("Valid Object");
 		            session.save(confMon); 
 		            tx.commit();
 		        }
-		        
-		        
-			}
+			} // loop sobre os fornecedores
 			
 			System.out.println("Carga concluída sem erros.");
 	    } 

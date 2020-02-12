@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 //import org.hibernate.validator.Length;  // hibernate.validator.3.1.0.GA
 
 
-//@Entity
+@Entity // Para evitar org.hibernate.MappingException: Unknown entity que acontece quando usar class-level constraints com EL
 @Table(name="Configuracao_Instalador_Integrador")
 public class ConfigInstaladorIntegrador {
 
@@ -25,6 +25,8 @@ public class ConfigInstaladorIntegrador {
 	
 	@Column(name="id_fornecedor_fornec")
 	int IdFornecedor;
+	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
+	public int getIdFornecedor() { return IdFornecedor; }
 	
 	@Column(name="id_sistema_integrado_sisint")
 	int IdSistemaIntegrado;

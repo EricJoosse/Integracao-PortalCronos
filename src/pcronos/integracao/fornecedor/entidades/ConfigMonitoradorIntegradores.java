@@ -18,9 +18,11 @@ import pcronos.integracao.fornecedor.annotations.ValidConfigMonitoradorIntegrado
 import javax.validation.constraints.Size;
 
 
-//@Entity
+@Entity // Para evitar org.hibernate.MappingException: Unknown entity que acontece quando usar class-level constraints com EL
 @Table(name="Configuracao_Monitorador_Integradores")
-@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.IdFornecedor} inválido")
+// O seguinte dá erro javax.el.PropertyNotFoundException
+//@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.IdFornecedor} inválido")
+@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.getIdFornecedor()} inválido")
 public class ConfigMonitoradorIntegradores {
 
 	public ConfigMonitoradorIntegradores() {}
@@ -31,6 +33,9 @@ public class ConfigMonitoradorIntegradores {
 	
 	@Column(name="id_fornecedor_fornec")
 	public int IdFornecedor;
+	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
+	public int getIdFornecedor() { return IdFornecedor; }
+	
 	
 	@Column(name="id_vendedor_responsavel_integracao_ususis")
 	public int IdVendedorResponsavel;
