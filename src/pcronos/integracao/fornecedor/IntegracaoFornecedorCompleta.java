@@ -2852,13 +2852,13 @@ public final class IntegracaoFornecedorCompleta {
 	
 	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
 	      {
-	          if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf", 30169497600L))
+	          if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf", 1180696576L))
 	        	  return true;
-		      if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdev2.ndf", 25911427072L))
+		      if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdev2.ndf", 1180696576L))
 	        	  return true;
-		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev3.ndf", 7932477440L))
+		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev3.ndf", 1180696576L))
 	        	  return true;
-		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev4.ndf", 8376549376L))
+		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev4.ndf", 1180696576L))
 	        	  return true;
 	      }
 	
