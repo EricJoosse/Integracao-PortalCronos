@@ -22,7 +22,9 @@ import javax.validation.constraints.Size;
 @Table(name="Configuracao_Monitorador_Integradores")
 // O seguinte dá erro javax.el.PropertyNotFoundException
 //@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.IdFornecedor} inválido")
-@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.getIdFornecedor()} inválido")
+@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
+// Não funciona:
+//@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue.toString().replace(\"cronos.integracao.fornecedor.entidades\",\"\"}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
 public class ConfigMonitoradorIntegradores {
 
 	public ConfigMonitoradorIntegradores() {}

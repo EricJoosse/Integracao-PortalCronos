@@ -667,7 +667,12 @@ public class FornecedorRepositorio {
 		        {
 		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolations) 
 		            {
-		                System.out.println( (Utils.isNullOrBlank(violation.getPropertyPath().toString()) ? "" : "Atributo " + violation.getPropertyPath().toString() + " ") +  violation.getMessage());
+		            	String msg = violation.getMessage().replace("pcronos.integracao.fornecedor.entidades.", "");
+		            	
+		             // if (msg.indexOf("@") > -1)
+		             //	msg = msg.substring(0, msg.indexOf("@"));
+
+		            	System.out.println( (Utils.isNullOrBlank(violation.getPropertyPath().toString()) ? "" : "Atributo " + violation.getPropertyPath().toString() + " ") +  msg);
 		                if (tx!=null) tx.rollback();
 		            }
 		            System.out.println("");
