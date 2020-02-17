@@ -22,9 +22,10 @@ import javax.validation.constraints.Size;
 @Table(name="Configuracao_Monitorador_Integradores")
 // O seguinte dá erro javax.el.PropertyNotFoundException
 //@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.IdFornecedor} inválido")
-@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
+@ValidConfigMonitoradorIntegradores( message = "${validatedValue}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
 // Não funciona:
 //@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue.toString().replace(\"cronos.integracao.fornecedor.entidades\",\"\"}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
+//@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue.getRootBeanClass().getSimpleName()}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
 public class ConfigMonitoradorIntegradores {
 
 	public ConfigMonitoradorIntegradores() {}
@@ -70,7 +71,7 @@ public class ConfigMonitoradorIntegradores {
  // Não funcionou: @Length(max = 15, message = "IdFornecedor = ${ConfigMonitoradorIntegradores.IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
  // Não funcionou: @Length(max = 15, message = "IdFornecedor = ${IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
  // Não funcionou: @Length(max = 15, message = "${propertyPath} = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
-	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
 	public String ApelidoContatoTIsecundario;
 	
 	@Column(name="email_contato_ti_secundario_conmonint")

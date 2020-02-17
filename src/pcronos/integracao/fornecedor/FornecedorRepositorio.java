@@ -667,12 +667,29 @@ public class FornecedorRepositorio {
 		        {
 		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolations) 
 		            {
-		            	String msg = violation.getMessage().replace("pcronos.integracao.fornecedor.entidades.", "");
+		            	String entidade = "";
+		            	String atributo = "";
+		            	String msg = violation.getMessage();
 		            	
-		             // if (msg.indexOf("@") > -1)
-		             //	msg = msg.substring(0, msg.indexOf("@"));
+		            	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
+		            	{
+		            		// Class-level constraint violation:
+		            		entidade = ""; // A entidade se encontra no EL na annotation 
+		            		atributo = ""; // Não se aplica no nível de classe ( = entidade)
+			            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
 
-		            	System.out.println( (Utils.isNullOrBlank(violation.getPropertyPath().toString()) ? "" : "Atributo " + violation.getPropertyPath().toString() + " ") +  msg);
+			              // if (msg.indexOf("@") > -1)
+				          //	msg = msg.substring(0, msg.indexOf("@"));
+		            	}
+		            	else
+		            	{
+		            		// Field-level constraint violation:
+		            		entidade = violation.getRootBeanClass().getSimpleName();
+		            		atributo = "." + violation.getPropertyPath().toString();
+		            	}
+		            	
+		            	
+		            	System.out.println(entidade + atributo + msg);
 		                if (tx!=null) tx.rollback();
 		            }
 		            System.out.println("");
