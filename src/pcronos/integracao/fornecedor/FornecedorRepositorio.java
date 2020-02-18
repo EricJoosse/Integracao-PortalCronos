@@ -669,13 +669,15 @@ public class FornecedorRepositorio {
 		            {
 		            	String entidade = "";
 		            	String atributo = "";
+		            	String instanciaEntidade = "";
 		            	String msg = violation.getMessage();
 		            	
 		            	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
 		            	{
 		            		// Class-level constraint violation:
-		            		entidade = ""; // A entidade se encontra no EL na annotation 
-		            		atributo = ""; // Não se aplica no nível de classe ( = entidade)
+		            		entidade = "";          // A entidade já se encontra no EL na annotation 
+		            		atributo = "";          // Não se aplica no nível de classe ( = entidade)
+		            		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
 			            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
 
 			              // if (msg.indexOf("@") > -1)
@@ -686,6 +688,8 @@ public class FornecedorRepositorio {
 		            		// Field-level constraint violation:
 		            		entidade = violation.getRootBeanClass().getSimpleName();
 		            		atributo = "." + violation.getPropertyPath().toString();
+		            		instanciaEntidade = Integer.toString(((ConfigMonitoradorIntegradores)(violation.getLeafBean())).getIdFornecedor());
+		            		msg = " - IdFornecedor = " + instanciaEntidade + ": " + msg;
 		            	}
 		            	
 		            	
