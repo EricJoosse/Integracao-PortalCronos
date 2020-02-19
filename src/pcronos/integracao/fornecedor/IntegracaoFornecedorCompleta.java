@@ -2843,8 +2843,50 @@ public final class IntegracaoFornecedorCompleta {
     	  return false;
   }
 
+  public static void verificarEstouroHD(LocalDateTime horaInicio, String nomeServidor, String strUnidade) 
+  {
+      File unidade = new File(strUnidade); 
+      long freeSpace = unidade.getFreeSpace();
+      String assuntoEstouroHD = "";
+      String bodyEstouroHD = "";
+      
+      
+      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && strUnidade.equals("C:") && freeSpace < 10000000000L) // 10 GB
+      {
+          bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco " + strUnidade + "\\: do servidor de banco " + nomeServidor;
+    	  assuntoEstouroHD = bodyEstouroHD;
+      }
+      else if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && strUnidade.equals("F:") && freeSpace < 20000000000L) // 20 GB
+      {
+    	  assuntoEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco " + strUnidade + ":\\: do servidor de banco " + nomeServidor;
+    	  bodyEstouroHD = "Provavelmente o Cobian Backup parou de fazer a limpeza automática dos arquivos.";
+      }
+      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L) // 10 GB
+      {
+          bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco " + strUnidade + ":\\: do servidor de aplicação " + nomeServidor;
+    	  assuntoEstouroHD = bodyEstouroHD;
+      }
+//      else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L) // 1 GB, somente para teste. Depois comentar este if do servidor de teste
+//      {
+//          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de teste " + nomeServidor;
+//    	  assuntoEstouroHD = bodyEstouroHD;
+//      }
+
+   // else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 10000000L) // 10 MB
+   // {   // No caso de servidores de fornecedores:
+   //     bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor;
+   //	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
+   // }
+
+      
+      if (!assuntoEstouroHD.equals(""))
+        	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
+      
+      
+  }
+
   
-  public static boolean verificarEstouroHD(LocalDateTime horaInicio) 
+  public static boolean verificarEstouroHDs(LocalDateTime horaInicio) 
   {
 	  try 
 	  {
@@ -2862,41 +2904,12 @@ public final class IntegracaoFornecedorCompleta {
 	        	  return true;
 	      }
 	
-	
-	      File unidadeC = new File("C:"); // Para todos os servidores do Portal Cronos
-	      long freeSpace = unidadeC.getFreeSpace();
-	      String assuntoEstouroHD = "";
-	      String bodyEstouroHD = "";
+
+	      verificarEstouroHD(horaInicio, nomeServidor, "C:"); // Para todos os servidores do Portal Cronos
+	      verificarEstouroHD(horaInicio, nomeServidor, "F:");
+
 	      
-	      
-	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && freeSpace < 10000000000L) // 10 GB
-	      {
-	          bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de banco " + nomeServidor;
-	    	  assuntoEstouroHD = bodyEstouroHD;
-	      }
-	      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L) // 10 GB
-	      {
-	          bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de aplicação " + nomeServidor;
-	    	  assuntoEstouroHD = bodyEstouroHD;
-	      }
-	//      else if (nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 1000000000L) // 1 GB, somente para teste. Depois comentar este if do servidor de teste
-	//      {
-	//          bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor de teste " + nomeServidor;
-	//    	  assuntoEstouroHD = bodyEstouroHD;
-	//      }
-	
-	   // else if (!nomeServidor.equals(Constants.SERVTESTE) && freeSpace < 10000000L) // 10 MB
-	   // {   // No caso de servidores de fornecedores:
-	   //     bodyEstouroHD = Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco C:\\: do servidor " + nomeServidor;
-	   //	  assuntoEstouroHD = "HD servidor " + nomeServidor + " do fornecedor " + nomeFantasiaFornecedor + " estourando!";
-	   // }
-	
-	      
-	      if (!assuntoEstouroHD.equals(""))
-	        	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
-	      
-	      
-		  if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
 	    	  return true;
 	      else 
 	    	  return false;
@@ -2926,7 +2939,7 @@ public final class IntegracaoFornecedorCompleta {
 	      
 		  LocalDateTime horaInicio = LocalDateTime.now();
 
-		  if (verificarEstouroHD(horaInicio))
+		  if (verificarEstouroHDs(horaInicio))
 		  {
 			   LocalDateTime horaFimCiclo = LocalDateTime.now();
 			   return Duration.between(horaIniCiclo,  horaFimCiclo).toMillis();
