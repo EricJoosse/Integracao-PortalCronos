@@ -111,7 +111,7 @@ public class FornecedorRepositorio {
 		f[i].MemoriaRamLivre = "1.2 GB";
 		f[i].EnderecoIpPublicoServidor = "Não se aplica";
 		f[i].PortaIpAberta = "Não se aplica";
-		f[i].FrequenciaProcessamento = "15 min";
+		f[i].FrequenciaProcessamento = "5 min";
 
 		i++;
 		f[i].IdFornecedor = 13;

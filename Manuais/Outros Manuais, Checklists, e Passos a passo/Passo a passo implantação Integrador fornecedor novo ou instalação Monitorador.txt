@@ -884,3 +884,13 @@ A partir de agora as configurações se encontram no menu de Windows "<i>Iniciar" 
  
 Atc,
 Eric
+	  
+
+  34. Apenas no caso de instalação no servidor de banco de produção do Portal Cronos:
+	     - Por enquanto manualmente, no Task Scheduler deshabilitar o Integrador, 
+	       alterar a frequência de 15 min para 5 min, 
+	       e em seguida habilitar o Integrador de volta, 
+	       e testar as primeiras 2 rodadas alterando Debug -> true no arquivo .properties 
+	       em um momento que o serviço não está rodando.
+	       Depois dos testes voltar Debug -> false em um momento que o serviço não está rodando.
+	  
