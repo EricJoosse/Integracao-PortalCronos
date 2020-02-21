@@ -8,8 +8,21 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+
+
+//Foi testado que não faz nenhuma diferença usar "@Length" do Hibernate ou "@Size" do JPA,
+//até os atributos "max" e "message" funcionam igualmente: 
+//@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
+//@Size(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 //import org.hibernate.validator.Length;  // hibernate.validator.3.1.0.GA
+
+//Não funcionou: @Length(max = 15, message = "IdFornecedor = ${ConfigMonitoradorIntegradores.IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+//Não funcionou: @Length(max = 15, message = "IdFornecedor = ${IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+//Não funcionou: @Length(max = 15, message = "${propertyPath} = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+
+
 
 
 @Entity // Para evitar org.hibernate.MappingException: Unknown entity que acontece quando usar class-level constraints com EL
