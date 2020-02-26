@@ -667,6 +667,7 @@ public class FornecedorRepositorio {
 		        {
 		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolations) 
 		            {
+		            	String prefix = "";
 		            	String entidade = "";
 		            	String atributo = "";
 		            	String instanciaEntidade = "";
@@ -689,11 +690,11 @@ public class FornecedorRepositorio {
 		            		entidade = violation.getRootBeanClass().getSimpleName();
 		            		atributo = "." + violation.getPropertyPath().toString();
 		            		instanciaEntidade = Integer.toString(((ConfigMonitoradorIntegradores)(violation.getLeafBean())).getIdFornecedor());
-		            		msg = " - IdFornecedor = " + instanciaEntidade + ": " + msg;
+		            		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
 		            	}
 		            	
 		            	
-		            	System.out.println(entidade + atributo + msg);
+		            	System.out.println(prefix + entidade + atributo + msg);
 		                if (tx!=null) tx.rollback();
 		            }
 		            System.out.println("");

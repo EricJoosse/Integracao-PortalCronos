@@ -31,7 +31,7 @@ import pcronos.integracao.fornecedor.annotations.ValidConfigMonitoradorIntegrado
 @Table(name="Configuracao_Monitorador_Integradores")
 // O seguinte dá erro javax.el.PropertyNotFoundException
 //@ValidConfigMonitoradorIntegradores( message = "Fornecedor ${validatedValue.IdFornecedor} inválido")
-@ValidConfigMonitoradorIntegradores( message = "${validatedValue}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
+@ValidConfigMonitoradorIntegradores( message = "IdFornecedor = ${validatedValue.getIdFornecedor()}: ${validatedValue}: Fornecedor inválido")
 // Não funciona:
 //@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue.toString().replace(\"cronos.integracao.fornecedor.entidades\",\"\"}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
 //@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue.getRootBeanClass().getSimpleName()}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
