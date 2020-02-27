@@ -10,6 +10,10 @@ if object_id('Configuracao_Instalador_Integrador_Nuvem') is not NULL
   drop table [dbo].[Configuracao_Instalador_Integrador_Nuvem];
 --go
 
+if object_id('Configuracao_Monitorador_Integradores_Nuvem') is not NULL
+  drop table [dbo].[Configuracao_Monitorador_Integradores_Nuvem];
+--go
+
 
 SET ANSI_NULLS ON;
 --GO
@@ -49,6 +53,64 @@ select * from [dbo].[Sistema_Integrado]
 
 */
            
+
+create table [dbo].[Configuracao_Monitorador_Integradores_Nuvem](
+	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] IDENTITY(1,1) NOT NULL,
+	[id_sistema_integrado_sisint] [int] NOT NULL,
+
+	apelido_contato_ti_cmintnuv varchar(15) NOT NULL,
+	email_contato_ti_cmintnuv varchar(30) NOT NULL,
+	skype_contato_ti_cmintnuv varchar(30) NOT NULL,
+	telefone_contato_ti_cmintnuv varchar(30) NOT NULL,
+	funcao_contato_ti_cmintnuv varchar(30) NULL,
+
+	apelido_contato_ti_secundario_cmintnuv varchar(15) NULL,
+	email_contato_ti_secundario_cmintnuv varchar(30) NULL,
+	skype_contato_ti_secundario_cmintnuv  varchar(30) NULL,
+	telefone_contato_ti_secundario_cmintnuv varchar(30) NULL,
+	funcao_contato_ti_secundario_cmintnuv varchar(30) NULL,
+
+	aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
+	id_aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
+
+	[dt_cadastro_cmintnuv] [datetime] NULL,
+	[dt_desativacao_cmintnuv] [datetime] NULL,
+	[dt_alteracao_cmintnuv] [datetime] NULL,
+	[user_id_ususis] [int] NOT NULL,
+CONSTRAINT [PK_CMINTNUV] PRIMARY KEY CLUSTERED 
+(
+	[id_config_monitorador_integradores_nuvem_cmintnuv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CMINTNUV_SISINT] UNIQUE NONCLUSTERED 
+(
+	[id_sistema_integrado_sisint] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_SISINT] FOREIGN KEY([id_sistema_integrado_sisint])
+REFERENCES [dbo].[Sistema_Integrado] ([id_sistema_integrado_sisint])
+--GO
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_SISINT]
+--GO
+
+
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_USUSIS] FOREIGN KEY([user_id_ususis])
+REFERENCES [dbo].[Usuario_Sistema] ([user_id])
+--GO
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_USUSIS]
+--GO
+
+
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cada fornecedor no servidor nuvem tem outro padrão de integração.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
+--GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_cmintnuv'
+--GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_secundario_cmintnuv'
+--GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Na maioria dos fornecedores o ID do AnyDesk nunca muda.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'id_aplicativo_desktop_remoto_cmintnuv'
+--GO
+
 
 create table [dbo].[Configuracao_Instalador_Integrador_Nuvem](
 	[id_config_instalador_integrador_nuvem_ciintnuv] [int] IDENTITY(1,1) NOT NULL,
@@ -269,3 +331,4 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Debug no lado 
 select * from [dbo].[Configuracao_Instalador_Integrador];
 select * from [dbo].[Configuracao_Monitorador_Integradores];
 select * from [dbo].[Configuracao_Instalador_Integrador_Nuvem];
+select * from [dbo].[Configuracao_Monitorador_Integradores_Nuvem];
