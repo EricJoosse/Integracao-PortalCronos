@@ -179,6 +179,7 @@ create table [dbo].[Configuracao_Monitorador_Integradores](
 	[id_fornecedor_fornec] [int] NOT NULL,
 	id_vendedor_responsavel_integracao_ususis int NULL,
 	sn_em_producao_conmonint bit NOT NULL,
+	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] NULL,
 
     apelido_contato_ti_conmonint varchar(15) NOT NULL,
 	email_contato_ti_conmonint varchar(30) NOT NULL,
@@ -229,6 +230,12 @@ REFERENCES [dbo].[Usuario_Sistema] ([user_id])
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores] CHECK CONSTRAINT [FK_CONMONINT_RESP_USUSIS]
 --GO
 
+
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores]  WITH CHECK ADD  CONSTRAINT [FK_CONMONINT_CMINTNUV] FOREIGN KEY([id_config_monitorador_integradores_nuvem_cmintnuv])
+REFERENCES [dbo].[Configuracao_Monitorador_Integradores_Nuvem] ([id_config_monitorador_integradores_nuvem_cmintnuv])
+--GO
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores] CHECK CONSTRAINT [FK_CONMONINT_CMINTNUV]
+--GO
 
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'A sigla do sistema do fornecedor pode ser obtido pelo Padrao_Integracao do Fornecedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'id_fornecedor_fornec'
