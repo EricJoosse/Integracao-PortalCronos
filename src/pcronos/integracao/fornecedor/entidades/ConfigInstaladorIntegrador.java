@@ -42,16 +42,22 @@ public class ConfigInstaladorIntegrador {
 	@Column(name="id_sistema_integrado_sisint")
 	int IdSistemaIntegrado;
 	
+    @Column(name="usuario_webservice_coninsint")
+    @Length(max=30)
+    String UsuarioWebservice;
+    
+	@Column(name="sn_debug_ativado_coninsint")
+	boolean IsDebugAtivado;
+
+	@Column(name="qtd_dias_arquivos_xml_guardados_coninsint")
+	int QtdDiasArquivosXmlGuardados;
+
 	@Column(name="id_config_instalador_integrador_nuvem_ciintnuv")
 	int IdConfigInstaladorIntegradorNuvem;
 	
 	@Column(name="nr_sequencia_instancia_nuvem_coninsint")
 	int NrSequenciaInstanciaNuvem;
 	
-    @Column(name="usuario_webservice_coninsint")
-    @Length(max=30)
-    String UsuarioWebservice;
-    
     @Column(name="tipo_sist_operacional_coninsint")
     @Length(max=30)
     String TipoSO;
@@ -100,12 +106,6 @@ public class ConfigInstaladorIntegrador {
     @Length(max=10)
     String FrequenciaProcessamento;
     
-	@Column(name="sn_debug_ativado_coninsint")
-	boolean IsDebugAtivado;
-
-	@Column(name="qtd_dias_arquivos_xml_guardados_coninsint")
-	int QtdDiasArquivosXmlGuardados;
-
 	@Column(name="dt_cadastro_coninsint")
  	LocalDateTime DtCadastro;
  	

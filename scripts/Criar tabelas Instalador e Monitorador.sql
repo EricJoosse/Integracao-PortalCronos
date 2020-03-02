@@ -181,7 +181,7 @@ create table [dbo].[Configuracao_Monitorador_Integradores](
 	sn_em_producao_conmonint bit NOT NULL,
 	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] NULL,
 
-    apelido_contato_ti_conmonint varchar(15) NOT NULL,
+	apelido_contato_ti_conmonint varchar(15) NOT NULL,
 	email_contato_ti_conmonint varchar(30) NOT NULL,
 	skype_contato_ti_conmonint varchar(30) NOT NULL,
 	telefone_contato_ti_conmonint varchar(30) NOT NULL,
@@ -208,7 +208,6 @@ CONSTRAINT [PK_CONMONINT] PRIMARY KEY CLUSTERED
 	[id_fornecedor_fornec] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
 
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores]  WITH CHECK ADD  CONSTRAINT [FK_CONMONINT_FORNEC] FOREIGN KEY([id_fornecedor_fornec])
 REFERENCES [dbo].[Fornecedor] ([id_fornecedor_fornec])
@@ -252,14 +251,17 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Na maioria dos
 --GO
 
 
-
 create table [dbo].[Configuracao_Instalador_Integrador](
 	[id_config_instalador_integrador_coninsint] [int] IDENTITY(1,1) NOT NULL,
 	[id_fornecedor_fornec] [int] NOT NULL,
 	[id_sistema_integrado_sisint] [int] NOT NULL,
+	usuario_webservice_coninsint varchar(30) NOT NULL,
+	sn_debug_ativado_coninsint bit NOT NULL,
+	qtd_dias_arquivos_xml_guardados_coninsint int NOT NULL,
+	
 	[id_config_instalador_integrador_nuvem_ciintnuv] [int] NULL,
 	nr_sequencia_instancia_nuvem_coninsint int NULL,
-	usuario_webservice_coninsint varchar(30) NOT NULL,
+	
 	tipo_sist_operacional_coninsint varchar(30) NOT NULL,
 	sist_operacional_32_ou_64_bit_coninsint varchar(6) NOT NULL,
 	espaco_livre_disco_coninsint varchar(10) NOT NULL,
@@ -272,8 +274,6 @@ create table [dbo].[Configuracao_Instalador_Integrador](
 	endereco_ip_publico_servidor_coninsint varchar(30) NOT NULL,
 	porta_ip_aberta_coninsint varchar(15) NOT NULL,
 	frequencia_processamento_coninsint varchar(10) NOT NULL,
-	sn_debug_ativado_coninsint bit NOT NULL,
-	qtd_dias_arquivos_xml_guardados_coninsint int NOT NULL,
 	[dt_cadastro_coninsint] [datetime] NULL,
 	[dt_desativacao_coninsint] [datetime] NULL,
 	[dt_alteracao_coninsint] [datetime] NULL,
