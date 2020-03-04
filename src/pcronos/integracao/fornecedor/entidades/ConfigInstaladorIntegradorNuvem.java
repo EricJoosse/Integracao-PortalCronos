@@ -90,43 +90,6 @@ public class ConfigInstaladorIntegradorNuvem {
     
 
     
-    @Column(name="apelido_contato_ti_nuvem_ciintnuv")
-    @Length(max=15)
-    String ApelidoContatoTiNuvem;
-    
-	@Column(name="email_contato_ti_nuvem_ciintnuv")
-    @Length(max=30)
-	String EmailContatoTiNuvem;
-	
-	@Column(name="skype_contato_ti_nuvem_ciintnuv")
-    @Length(max=30)
-	String SkypeContatoTiNuvem;
-	
-	@Column(name="telefone_contato_ti_nuvem_ciintnuv")
-    @Length(max=30)
-	String TelefoneContatoTiNuvem;
-	
-	
-	
-
-	@Column(name="apelido_contato_ti_secundario_nuvem_ciintnuv")
-	@Length(max=15)
-	String ApelidoContatoTIsecundarioNuvem;
-	
-	@Column(name="email_contato_ti_secundario_nuvem_ciintnuv")
-	@Length(max=30)
-	String EmailContatoTIsecundarioNuvem;
-	
-	@Column(name="skype_contato_ti_secundario_nuvem_ciintnuv")
-    @Length(max=30)
-	String SkypeContatoTIsecundarioNuvem;
-	
-	@Column(name="telefone_contato_ti_secundario_nuvem_ciintnuv")
-    @Length(max=30)
-	String TelefoneContatoTIsecundarioNuvem;
-
-	
-	
 	@Column(name="dt_cadastro_ciintnuv")
  	LocalDateTime DtCadastro;
  	

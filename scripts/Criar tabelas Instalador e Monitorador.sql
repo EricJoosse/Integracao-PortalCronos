@@ -128,16 +128,6 @@ create table [dbo].[Configuracao_Instalador_Integrador_Nuvem](
 	porta_ip_aberta_ciintnuv varchar(15) NOT NULL,
 	frequencia_processamento_ciintnuv varchar(10) NOT NULL,
 
-	apelido_contato_ti_nuvem_ciintnuv varchar(15) NOT NULL,
-	email_contato_ti_nuvem_ciintnuv varchar(30) NOT NULL,
-	skype_contato_ti_nuvem_ciintnuv varchar(30) NOT NULL,
-	telefone_contato_ti_Nuvem_ciintnuv varchar(30) NOT NULL,
-
-	apelido_contato_ti_secundario_nuvem_ciintnuv varchar(15) NULL,
-	email_contato_ti_secundario_nuvem_ciintnuv varchar(30) NULL,
-	skype_contato_ti_secundario_nuvem_ciintnuv varchar(30) NULL,
-	telefone_contato_ti_secundario_Nuvem_ciintnuv varchar(30) NULL,
-
 	[dt_cadastro_ciintnuv] [datetime] NULL,
 	[dt_desativacao_ciintnuv] [datetime] NULL,
 	[dt_alteracao_ciintnuv] [datetime] NULL,
@@ -168,10 +158,6 @@ ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem] CHECK CONSTRAINT [F
 
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cada fornecedor no servidor nuvem tem outro padrão de integração.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
---GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos pelo Monitorador.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_nuvem_ciintnuv'
---GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos pelo Monitorador.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_secundario_nuvem_ciintnuv'
 --GO
 
 create table [dbo].[Configuracao_Monitorador_Integradores](
