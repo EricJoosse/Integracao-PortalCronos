@@ -18,8 +18,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 //import org.hibernate.validator.Length;  // hibernate.validator.3.1.0.GA
 
-// Não funcionou: @Length(max = 15, message = "IdFornecedor = ${ConfigMonitoradorIntegradores.IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
-// Não funcionou: @Length(max = 15, message = "IdFornecedor = ${IdFornecedor}: ApelidoContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+// Não funcionou: @Length(max = 15, message = "IdFornecedor = ${ConfigMonitoradorIntegradores.IdFornecedor}: PrenomeContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
+// Não funcionou: @Length(max = 15, message = "IdFornecedor = ${IdFornecedor}: PrenomeContatoTIsecundario = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
 // Não funcionou: @Length(max = 15, message = "${propertyPath} = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
 
 
@@ -42,9 +42,9 @@ public class ConfigMonitoradorIntegradoresNuvem {
 	public int getIdSistemaIntegrado() { return IdSistemaIntegrado; }
 	
 	
-	@Column(name="apelido_contato_ti_cmintnuv")
+	@Column(name="prenome_contato_ti_cmintnuv")
 	@Size(max=15)
-	public String ApelidoContatoTI;
+	public String PrenomeContatoTI;
     
 	@Column(name="email_contato_ti_cmintnuv")
 	@Size(max=30)
@@ -62,9 +62,9 @@ public class ConfigMonitoradorIntegradoresNuvem {
 	@Size(max=30)
 	public String FuncaoContatoTI;
 
-	@Column(name="apelido_contato_ti_secundario_cmintnuv")
+	@Column(name="prenome_contato_ti_secundario_cmintnuv")
 	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-	public String ApelidoContatoTIsecundario;
+	public String PrenomeContatoTIsecundario;
 	
 	@Column(name="email_contato_ti_secundario_cmintnuv")
 	@Size(max=30)

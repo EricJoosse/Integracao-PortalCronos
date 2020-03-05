@@ -12,8 +12,8 @@ public class Fornecedor {
 	String EmailResponsavelTIAlternativo;
 	public String SkypeResponsavelTI;
 	String SkypeResponsavelTIAlternativo;
-	public String ApelidoResponsavelTI;
-	String ApelidoResponsavelTIAlternativo;
+	public String PrenomeResponsavelTI;
+	String PrenomeResponsavelTIAlternativo;
 	String FuncaoResponsavelTI;
 	String FuncaoResponsavelTIAlternativo;
 	String TelefoneResponsavelTI;
@@ -36,7 +36,7 @@ public class Fornecedor {
 	String cnpjFornecedor;
 	public String EmailResponsavelTI_Nuvem;
 	public String SkypeResponsavelTI_Nuvem;
-	public String ApelidoResponsavelTI_Nuvem;
+	public String PrenomeResponsavelTI_Nuvem;
 	public String TelefoneResponsavelTI_Nuvem;
 	String ResponsavelDeParasProdutos;
 	String MemoriaRamLivre;

@@ -19,7 +19,7 @@ public class VersaoIntegradorPorFornecedor {
     								+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).NomeFantasiaEmpresa), 21)
     								+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).versaoIntegrador), 6)
 		        					+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).EmailResponsavelTI), 40)
-		        					+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).ApelidoResponsavelTI), 12)
+		        					+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).PrenomeResponsavelTI), 12)
 		        					+ " " + Utils.rpad(Utils.replaceNull(((Fornecedor)value).SkypeResponsavelTI), 20)
 		        		          );
 	    }

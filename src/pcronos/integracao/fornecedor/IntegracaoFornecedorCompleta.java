@@ -1462,7 +1462,7 @@ public final class IntegracaoFornecedorCompleta {
 		           	         if (f.IdFornecedor == 171) // Propão
 		           	    	 {
 				            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
-	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
+	+ f.PrenomeResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 	+ " " + "\r\n"
 	+ "Recebi um email automático que o Integrador WinThor / PCronos da " + dto.Nmfornecedor + " está parado desde sábado (22/09/2018) às 19:25, indevidamente." + "\r\n" 
 	+ "Talvez o adaptador de rede do servidor local está com problemas novamente? Ou talvez tem um conflito de endereços IP novamente? " + "\r\n";
@@ -1502,7 +1502,7 @@ public final class IntegracaoFornecedorCompleta {
 				            	 body += "NÃO COPIAR LEÃO!!!!!!\r\n";
 				            	 body += "NÃO ENVIAR NAS SEXTA-FEIRAS DE MANHÃ E NÃO ENVIAR SE PODE PREJUDICAR O ALMOÇO!!! \r\n\r\n\r\n\r\n";
 				            	 body += "Para: " + f.EmailResponsavelTI + "\r\n"
-	+ f.ApelidoResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
+	+ f.PrenomeResponsavelTI + ", " + strParteDoDia + "!" + "\r\n"
 	+ " " + "\r\n"
 	+ "<i>Este email foi enviado automaticamente pelo sistema Portal Cronos</i>\r\n"
 	+ "Desde hoje (23/02/2018) 08:40 o Portal Cronos não está mais recebendo ofertas automáticas da " + dto.Nmfornecedor + "." + "\r\n"

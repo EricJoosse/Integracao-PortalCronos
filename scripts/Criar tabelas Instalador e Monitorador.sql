@@ -58,13 +58,13 @@ create table [dbo].[Configuracao_Monitorador_Integradores_Nuvem](
 	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] IDENTITY(1,1) NOT NULL,
 	[id_sistema_integrado_sisint] [int] NOT NULL,
 
-	apelido_contato_ti_cmintnuv varchar(15) NOT NULL,
+	prenome_contato_ti_cmintnuv varchar(15) NOT NULL,
 	email_contato_ti_cmintnuv varchar(30) NOT NULL,
 	skype_contato_ti_cmintnuv varchar(30) NOT NULL,
 	telefone_contato_ti_cmintnuv varchar(30) NOT NULL,
 	funcao_contato_ti_cmintnuv varchar(30) NULL,
 
-	apelido_contato_ti_secundario_cmintnuv varchar(15) NULL,
+	prenome_contato_ti_secundario_cmintnuv varchar(15) NULL,
 	email_contato_ti_secundario_cmintnuv varchar(30) NULL,
 	skype_contato_ti_secundario_cmintnuv  varchar(30) NULL,
 	telefone_contato_ti_secundario_cmintnuv varchar(30) NULL,
@@ -104,9 +104,9 @@ ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cada fornecedor no servidor nuvem tem outro padrão de integração.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
 --GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_cmintnuv'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'prenome_contato_ti_cmintnuv'
 --GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_secundario_cmintnuv'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'prenome_contato_ti_secundario_cmintnuv'
 --GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Na maioria dos fornecedores o ID do AnyDesk nunca muda.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores_Nuvem', @level2type=N'COLUMN',@level2name=N'id_aplicativo_desktop_remoto_cmintnuv'
 --GO
@@ -167,13 +167,13 @@ create table [dbo].[Configuracao_Monitorador_Integradores](
 	sn_em_producao_conmonint bit NOT NULL,
 	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] NULL,
 
-	apelido_contato_ti_conmonint varchar(15) NOT NULL,
+	prenome_contato_ti_conmonint varchar(15) NOT NULL,
 	email_contato_ti_conmonint varchar(30) NOT NULL,
 	skype_contato_ti_conmonint varchar(30) NOT NULL,
 	telefone_contato_ti_conmonint varchar(30) NOT NULL,
 	funcao_contato_ti_conmonint varchar(30) NULL,
 
-	apelido_contato_ti_secundario_conmonint varchar(15) NULL,
+	prenome_contato_ti_secundario_conmonint varchar(15) NULL,
 	email_contato_ti_secundario_conmonint varchar(30) NULL,
 	skype_contato_ti_secundario_conmonint  varchar(30) NULL,
 	telefone_contato_ti_secundario_conmonint varchar(30) NULL,
@@ -229,9 +229,9 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Vendedor respo
 --GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Em produção ou não no lado do fornecedor (no servidor próprio dele).' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'sn_em_producao_conmonint'
 --GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_conmonint'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'prenome_contato_ti_conmonint'
 --GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Serve para o conteúdo dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'apelido_contato_ti_secundario_conmonint'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'prenome_contato_ti_secundario_conmonint'
 --GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Na maioria dos fornecedores o ID do AnyDesk nunca muda.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Monitorador_Integradores', @level2type=N'COLUMN',@level2name=N'id_aplicativo_desktop_remoto_conmonint'
 --GO

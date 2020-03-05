@@ -53,8 +53,8 @@ public class FornecedorRepositorio {
 		f[i].IsEmProducao = "Não";
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
-		f[i].ApelidoResponsavelTI = "";
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].AplicativoDesktopRemoto = "";
 		f[i].usuarioWebservice = "";
 		f[i].versaoJRE = "";
@@ -73,8 +73,8 @@ public class FornecedorRepositorio {
 		f[i].IsDebugAtivado = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
-		f[i].ApelidoResponsavelTI = "";
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].AplicativoDesktopRemoto = "mstsc";
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
@@ -98,8 +98,8 @@ public class FornecedorRepositorio {
 		f[i].IsDebugAtivado = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";
-		f[i].ApelidoResponsavelTI = "";
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].AplicativoDesktopRemoto = "mstsc";
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
@@ -125,8 +125,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTIAlternativo = "ti@formaggio.com.br??????"; 
 		f[i].SkypeResponsavelTI = "live:projetosti_1 = Geymison Lima - TI Formaggio";
 		f[i].SkypeResponsavelTIAlternativo = "Braytner Vasconcelos";
-		f[i].ApelidoResponsavelTI = "Geymison";
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "Geymison";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].FuncaoResponsavelTI = "Coordenador de Projetos de TI";
 		f[i].FuncaoResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "";
@@ -156,8 +156,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTI = "jrembalagem.ti@gmail.com"; 
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "ivan barros";
-		f[i].ApelidoResponsavelTI = "Ivan";
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "Ivan";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "bljj9pg@ad ou 734228115";
@@ -189,8 +189,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTIAlternativo = "marcelo@casadoqueijo.net.br";
 		f[i].SkypeResponsavelTI = "marcos.scognamiglio";
 		f[i].SkypeResponsavelTIAlternativo = "Marcelo Bezerra";
-		f[i].ApelidoResponsavelTI = "Marcos";
-		f[i].ApelidoResponsavelTIAlternativo = "Marcelo";
+		f[i].PrenomeResponsavelTI = "Marcos";
+		f[i].PrenomeResponsavelTIAlternativo = "Marcelo";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "739 265 928 (Marcos) - era servidormaxima@ad (Marcelo)";
@@ -219,8 +219,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTI = "felipe.lolaia@maritimospescados.com.br"; 
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Felipe Lolaia";
-		f[i].ApelidoResponsavelTI = "Felipe";
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "Felipe";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "Team Viewer";
 		f[i].usuarioWebservice = "ws-mpescados";
@@ -249,8 +249,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTIAlternativo = "informatica@sost.com.br OU carlossena@sost.com.br";
 		f[i].SkypeResponsavelTI = "Cleijonatas S Silva";
 		f[i].SkypeResponsavelTIAlternativo = "Sena Junior";
-		f[i].ApelidoResponsavelTI = "Cleijonatas";
-		f[i].ApelidoResponsavelTIAlternativo = "Sena";
+		f[i].PrenomeResponsavelTI = "Cleijonatas";
+		f[i].PrenomeResponsavelTIAlternativo = "Sena";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-sost";
@@ -278,8 +278,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTI = "timons@kk.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Timon Dourado";
-		f[i].ApelidoResponsavelTI = "Timon";
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "Timon";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "";
 		f[i].AplicativoDesktopRemoto = "Team Viewer";
 		f[i].usuarioWebservice = "ws-karnekeijo";
@@ -307,10 +307,10 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTI = "ti@comalcomercio.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Rildson Carlos";
-		f[i].ApelidoResponsavelTI = "Rildson"; 
+		f[i].PrenomeResponsavelTI = "Rildson"; 
 						// Tem vontade para ajudar, porém é muito incompetente 
 						// e muito burro, tem que explicar tudo detalhadamente
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTIAlternativo = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 		f[i].TelefoneResponsavelTI = "98609-4887";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "usuário FusionDMS: 833 323 573, Administrador: 886 263 056";
@@ -342,9 +342,9 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTI = "ti@propao.com.br";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "Apoio.propao@hotmail.com";
-		f[i].ApelidoResponsavelTI = "Elthon"; 
+		f[i].PrenomeResponsavelTI = "Elthon"; 
 						// Desenrolado, responsável para o cadastro de De-Para´s
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "99535-1999";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "382 127 135";
@@ -372,8 +372,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTI = "tiagoautran@padeirao.com";
 		f[i].EmailResponsavelTIAlternativo = "";
 		f[i].SkypeResponsavelTI = "tiagoautran";
-		f[i].ApelidoResponsavelTI = "Tiago"; 
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "Tiago"; 
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "99116-8070 ou 3073-4551";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "ws-padeirao";
@@ -409,18 +409,18 @@ public class FornecedorRepositorio {
 				
 		String EmailResponsavelTIApsCloud = "bernardino@apsinformatica.com.br";
 		String SkypeResponsavelTIApsCloud = "Bernardino Borba (live:berna31pe)";
-		String ApelidoResponsavelTIApsCloud = "Bernardino"; 
+		String PrenomeResponsavelTIApsCloud = "Bernardino"; 
 		String FuncaoResponsavelTIApsCloud = "Sócio do APS";
 		String TelefoneResponsavelTIApsCloud = "99780-1192";
 		
 		String EmailResponsavelTIAlternativoApsCloud = "saulo@apsinformatica.com.br";		
 		String SkypeResponsavelTIAlternativoApsCloud = "Saulo Gomes de Lima (saulo_analista)";		
-		String ApelidoResponsavelTIAlternativoApsCloud = "Saulo"; // Alguém foi demitido, provavelmente foi ele
+		String PrenomeResponsavelTIAlternativoApsCloud = "Saulo"; // Alguém foi demitido, provavelmente foi ele
 		String FuncaoResponsavelTIAlternativoApsCloud = "Analista";
 		
 		String EmailResponsavelTI_NuvemApsCloud = "bernardino@apsinformatica.com.br";
 		String SkypeResponsavelTI_NuvemApsCloud = "Bernardino Borba (live:berna31pe)"; 
-		String ApelidoResponsavelTI_NuvemApsCloud = "Bernardino"; 
+		String PrenomeResponsavelTI_NuvemApsCloud = "Bernardino"; 
 		String TelefoneResponsavelTI_NuvemApsCloud = "99780-1192"; 
 
 		
@@ -455,18 +455,18 @@ public class FornecedorRepositorio {
 
 		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
 		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
-		f[i].ApelidoResponsavelTI = ApelidoResponsavelTIApsCloud; 
+		f[i].PrenomeResponsavelTI = PrenomeResponsavelTIApsCloud; 
 		f[i].FuncaoResponsavelTI = FuncaoResponsavelTIApsCloud;
 		f[i].TelefoneResponsavelTI = TelefoneResponsavelTIApsCloud;
 		
 		f[i].EmailResponsavelTIAlternativo = EmailResponsavelTIAlternativoApsCloud;		
 		f[i].SkypeResponsavelTIAlternativo = SkypeResponsavelTIAlternativoApsCloud;		
-		f[i].ApelidoResponsavelTIAlternativo = ApelidoResponsavelTIAlternativoApsCloud;
+		f[i].PrenomeResponsavelTIAlternativo = PrenomeResponsavelTIAlternativoApsCloud;
 		f[i].FuncaoResponsavelTIAlternativo = FuncaoResponsavelTIAlternativoApsCloud;
 		
 		f[i].EmailResponsavelTI_Nuvem = EmailResponsavelTI_NuvemApsCloud;
 		f[i].SkypeResponsavelTI_Nuvem = SkypeResponsavelTI_NuvemApsCloud; 
-		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud;
+		f[i].PrenomeResponsavelTI_Nuvem = PrenomeResponsavelTI_NuvemApsCloud;
 		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
 		
@@ -501,18 +501,18 @@ public class FornecedorRepositorio {
 
 		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
 		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
-		f[i].ApelidoResponsavelTI = ApelidoResponsavelTIApsCloud; 
+		f[i].PrenomeResponsavelTI = PrenomeResponsavelTIApsCloud; 
 		f[i].FuncaoResponsavelTI = FuncaoResponsavelTIApsCloud;
 		f[i].TelefoneResponsavelTI = TelefoneResponsavelTIApsCloud;
 		
 		f[i].EmailResponsavelTIAlternativo = EmailResponsavelTIAlternativoApsCloud;		
 		f[i].SkypeResponsavelTIAlternativo = SkypeResponsavelTIAlternativoApsCloud;		
-		f[i].ApelidoResponsavelTIAlternativo = ApelidoResponsavelTIAlternativoApsCloud;
+		f[i].PrenomeResponsavelTIAlternativo = PrenomeResponsavelTIAlternativoApsCloud;
 		f[i].FuncaoResponsavelTIAlternativo = FuncaoResponsavelTIAlternativoApsCloud;
 		
 		f[i].EmailResponsavelTI_Nuvem = EmailResponsavelTI_NuvemApsCloud;
 		f[i].SkypeResponsavelTI_Nuvem = SkypeResponsavelTI_NuvemApsCloud; 
-		f[i].ApelidoResponsavelTI_Nuvem = ApelidoResponsavelTI_NuvemApsCloud;
+		f[i].PrenomeResponsavelTI_Nuvem = PrenomeResponsavelTI_NuvemApsCloud;
 		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
 		
@@ -545,18 +545,18 @@ public class FornecedorRepositorio {
 
 		f[i].EmailResponsavelTI = "";
 		f[i].SkypeResponsavelTI = "";
-		f[i].ApelidoResponsavelTI = ""; 
+		f[i].PrenomeResponsavelTI = ""; 
 		f[i].FuncaoResponsavelTI = "";
 		f[i].TelefoneResponsavelTI = "";
 		
 		f[i].EmailResponsavelTIAlternativo = "";		
 		f[i].SkypeResponsavelTIAlternativo = "";		
-		f[i].ApelidoResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].FuncaoResponsavelTIAlternativo = "";
 		
 		f[i].EmailResponsavelTI_Nuvem = "";
 		f[i].SkypeResponsavelTI_Nuvem = ""; 
-		f[i].ApelidoResponsavelTI_Nuvem = ""; 
+		f[i].PrenomeResponsavelTI_Nuvem = ""; 
  */
 		
 		for (int j=0; j < (qtdFornecedores); j++) {
@@ -650,7 +650,7 @@ public class FornecedorRepositorio {
 		        tx = session.beginTransaction();
 		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
 		        confMon.IdFornecedor = idFornecedor;
-		        confMon.ApelidoContatoTI = f.ApelidoResponsavelTI;
+		        confMon.PrenomeContatoTI = f.PrenomeResponsavelTI;
 		        confMon.EmailContatoTI =f.EmailResponsavelTI;
 		        confMon.SkypeContatoTI = f.SkypeResponsavelTI;
 		        confMon.TelefoneContatoTI = f.TelefoneResponsavelTI;
@@ -659,7 +659,7 @@ public class FornecedorRepositorio {
 			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
 			    
-		        confMon.ApelidoContatoTIsecundario = f.ApelidoResponsavelTIAlternativo;
+		        confMon.PrenomeContatoTIsecundario = f.PrenomeResponsavelTIAlternativo;
 
 		        Set<ConstraintViolation<ConfigMonitoradorIntegradores>> constraintViolations = validator.validate(confMon);
 		        
