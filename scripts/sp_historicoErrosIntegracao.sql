@@ -1,6 +1,12 @@
 USE [PCronos_Producao]
 GO
 
+
+if object_id('historicoErrosIntegracao') is not NULL
+  drop procedure [dbo].[historicoErrosIntegracao]
+go
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -64,29 +70,33 @@ SELECT [id_comprador_compr]
       ,[sn_ignorar_vl_previsto_produto_logeint]
       ,[tp_erro_ocorrencia_logeint]
   FROM [dbo].[Log_Erro_Integracao]
- where (   cd_cotacao_logeint is null
+  where id_fornecedor_fornec is not null
+   and (   cd_cotacao_logeint is null
       --OR id_fornecedor_fornec = 947
         OR replace(cd_cotacao_logeint, ' (2)','') in 
-      (select     c.cd_cotacao_cot
-  FROM  dbo.Historico_Status_Cotacao as HIST 
-        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
-                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
-                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
-        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
-   where HIST.id_status_cotacao_stcot in (5,7,9)
-     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate()))
+					      (select     c.cd_cotacao_cot
+							  FROM  dbo.Historico_Status_Cotacao as HIST 
+							        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
+							                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
+							                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
+							        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
+							   where HIST.id_status_cotacao_stcot in (5,7,9)
+							     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate())
+						  )
        ) 
 
 delete from [dbo].[Log_Erro_Integracao]
- where (   cd_cotacao_logeint is null
+ where id_fornecedor_fornec is not null
+   and (   cd_cotacao_logeint is null
       --OR id_fornecedor_fornec = 947
         OR replace(cd_cotacao_logeint, ' (2)','') in 
-      (select     c.cd_cotacao_cot
-  FROM  dbo.Historico_Status_Cotacao as HIST 
-        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
-                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
-                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
-        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
-   where HIST.id_status_cotacao_stcot in (5,7,9)
-     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate()))
+				      (select     c.cd_cotacao_cot
+						  FROM  dbo.Historico_Status_Cotacao as HIST 
+						        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
+						                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
+						                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
+						        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
+						   where HIST.id_status_cotacao_stcot in (5,7,9)
+						     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate())
+					  )
        )
