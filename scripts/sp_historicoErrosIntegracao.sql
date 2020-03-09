@@ -70,33 +70,63 @@ SELECT [id_comprador_compr]
       ,[sn_ignorar_vl_previsto_produto_logeint]
       ,[tp_erro_ocorrencia_logeint]
   FROM [dbo].[Log_Erro_Integracao]
-  where id_fornecedor_fornec is not null
-   and (   cd_cotacao_logeint is null
-      --OR id_fornecedor_fornec = 947
-        OR replace(cd_cotacao_logeint, ' (2)','') in 
-					      (select     c.cd_cotacao_cot
-							  FROM  dbo.Historico_Status_Cotacao as HIST 
-							        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
-							                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
-							                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
-							        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
-							   where HIST.id_status_cotacao_stcot in (5,7,9)
-							     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate())
-						  )
-       ) 
+  where (      id_fornecedor_fornec is not null
+		   and (   cd_cotacao_logeint is null
+		      --OR id_fornecedor_fornec = 947
+		        OR replace(cd_cotacao_logeint, ' (2)','') in 
+							      (select     c.cd_cotacao_cot
+									  FROM  dbo.Historico_Status_Cotacao as HIST 
+									        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
+									                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
+									                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
+									        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
+									   where HIST.id_status_cotacao_stcot in (5,7,9)
+									     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate())
+								  )
+		       ) 
+       )
+       OR
+       (     id_comprador_compr is not null
+         and cd_requisicao_logeint is not null
+         and cd_requisicao_logeint in (select req.cd_requisicao_reqei
+                                          from dbo.Requisicao_Entrada_Integra req
+										        inner join dbo.Historico_Status_Requisicao hsr on hsr.id_requisicao_entr_int_reqei = req.id_requisicao_entr_int_reqei
+										                                                      AND hsr.id_hist_status_requisicao_htstreq = (SELECT TOP 1 h2.id_hist_status_requisicao_htstreq
+																										                                     FROM Historico_Status_Requisicao h2
+																										                                    WHERE h2.id_requisicao_entr_int_reqei = hsr.id_requisicao_entr_int_reqei
+																										                                    ORDER BY h2.dt_status_requisicao_htstreq DESC) 
+										                                                      AND hsr.id_status_requisicao_streq in (4, 5)
+                                         where req.dt_cadastro_reqei < DATEADD("DAY", -30, getdate())
+                                       )
+       )
 
 delete from [dbo].[Log_Erro_Integracao]
- where id_fornecedor_fornec is not null
-   and (   cd_cotacao_logeint is null
-      --OR id_fornecedor_fornec = 947
-        OR replace(cd_cotacao_logeint, ' (2)','') in 
-				      (select     c.cd_cotacao_cot
-						  FROM  dbo.Historico_Status_Cotacao as HIST 
-						        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
-						                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
-						                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
-						        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
-						   where HIST.id_status_cotacao_stcot in (5,7,9)
-						     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate())
-					  )
+ where (       id_fornecedor_fornec is not null
+		   and (   cd_cotacao_logeint is null
+		      --OR id_fornecedor_fornec = 947
+		        OR replace(cd_cotacao_logeint, ' (2)','') in 
+						      (select     c.cd_cotacao_cot
+								  FROM  dbo.Historico_Status_Cotacao as HIST 
+								        INNER JOIN (SELECT H.id_cotacao_cot, MAX(H.dt_status_cotacao_htstcot) as dt_status_cotacao_htstcot 
+								                      FROM dbo.Historico_Status_Cotacao H GROUP by id_cotacao_cot) as TEMP_TABLE 
+								                   ON HIST.dt_status_cotacao_htstcot = TEMP_TABLE.dt_status_cotacao_htstcot AND HIST.id_cotacao_cot = TEMP_TABLE.id_cotacao_cot 
+								        INNER JOIN      dbo.Cotacao            as c    on c.id_cotacao_cot = HIST.id_cotacao_cot
+								   where HIST.id_status_cotacao_stcot in (5,7,9)
+								     and c.dt_hr_fim_vigencia_cot < DATEADD("DAY", -23, getdate())
+							  )
+		       )
+       )
+       OR
+       (     id_comprador_compr is not null
+         and cd_requisicao_logeint is not null
+         and cd_requisicao_logeint in (select req.cd_requisicao_reqei
+                                          from dbo.Requisicao_Entrada_Integra req
+										        inner join dbo.Historico_Status_Requisicao hsr on hsr.id_requisicao_entr_int_reqei = req.id_requisicao_entr_int_reqei
+										                                                      AND hsr.id_hist_status_requisicao_htstreq = (SELECT TOP 1 h2.id_hist_status_requisicao_htstreq
+																										                                     FROM Historico_Status_Requisicao h2
+																										                                    WHERE h2.id_requisicao_entr_int_reqei = hsr.id_requisicao_entr_int_reqei
+																										                                    ORDER BY h2.dt_status_requisicao_htstreq DESC) 
+										                                                      AND hsr.id_status_requisicao_streq in (4, 5)
+                                         where req.dt_cadastro_reqei < DATEADD("DAY", -30, getdate())
+                                       )
        )
