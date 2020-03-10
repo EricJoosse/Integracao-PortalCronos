@@ -88,7 +88,7 @@ SELECT [id_comprador_compr]
        OR
        (     id_comprador_compr is not null
          and cd_requisicao_logeint is not null
-         and cd_requisicao_logeint in (select req.cd_requisicao_reqei
+         and cd_requisicao_logeint in (select req.cd_requisicao_reqei collate Latin1_General_CI_AS
                                           from dbo.Requisicao_Entrada_Integra req
 										        inner join dbo.Historico_Status_Requisicao hsr on hsr.id_requisicao_entr_int_reqei = req.id_requisicao_entr_int_reqei
 										                                                      AND hsr.id_hist_status_requisicao_htstreq = (SELECT TOP 1 h2.id_hist_status_requisicao_htstreq
@@ -99,7 +99,16 @@ SELECT [id_comprador_compr]
                                          where req.dt_cadastro_reqei < DATEADD("DAY", -30, getdate())
                                        )
        )
+       OR
+       (     id_comprador_compr is not null
+         and id_ordem_compra_ordcom is not null
+         and id_ordem_compra_ordcom in (select oc.id_ordem_compra_ordcom
+                                           from dbo.Ordem_Compra oc
+                                           where oc.dt_cadastro_ordcom < DATEADD("DAY", -30, getdate())
+                                        )
+       )
 
+       
 delete from [dbo].[Log_Erro_Integracao]
  where (       id_fornecedor_fornec is not null
 		   and (   cd_cotacao_logeint is null
@@ -119,7 +128,7 @@ delete from [dbo].[Log_Erro_Integracao]
        OR
        (     id_comprador_compr is not null
          and cd_requisicao_logeint is not null
-         and cd_requisicao_logeint in (select req.cd_requisicao_reqei
+         and cd_requisicao_logeint in (select req.cd_requisicao_reqei collate Latin1_General_CI_AS
                                           from dbo.Requisicao_Entrada_Integra req
 										        inner join dbo.Historico_Status_Requisicao hsr on hsr.id_requisicao_entr_int_reqei = req.id_requisicao_entr_int_reqei
 										                                                      AND hsr.id_hist_status_requisicao_htstreq = (SELECT TOP 1 h2.id_hist_status_requisicao_htstreq
@@ -129,4 +138,12 @@ delete from [dbo].[Log_Erro_Integracao]
 										                                                      AND hsr.id_status_requisicao_streq in (4, 5)
                                          where req.dt_cadastro_reqei < DATEADD("DAY", -30, getdate())
                                        )
+       )
+       OR
+       (     id_comprador_compr is not null
+         and id_ordem_compra_ordcom is not null
+         and id_ordem_compra_ordcom in (select oc.id_ordem_compra_ordcom
+                                           from dbo.Ordem_Compra oc
+                                           where oc.dt_cadastro_ordcom < DATEADD("DAY", -30, getdate())
+                                        )
        )
