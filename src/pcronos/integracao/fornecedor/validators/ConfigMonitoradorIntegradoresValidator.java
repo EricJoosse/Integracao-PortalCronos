@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import pcronos.integracao.fornecedor.annotations.ValidConfigMonitoradorIntegradores;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
 
-//Validator:
 public class ConfigMonitoradorIntegradoresValidator implements ConstraintValidator<ValidConfigMonitoradorIntegradores, ConfigMonitoradorIntegradores> {
 
     @Override

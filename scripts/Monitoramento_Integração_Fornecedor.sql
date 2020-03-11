@@ -1,5 +1,3 @@
-
-
 exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0
 exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 1
 

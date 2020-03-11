@@ -63,3 +63,9 @@ select  id_pessoa, nm_pessoa, nr_cnpj_pessoa, *
    o serviço de monitoramento para evitar o erro que o idFornecedor novo não existe
    no FornecedorRepositorio.getFornecedor()
        
+
+8. Temporariamente executar FornecedorRepositorio.launch no projeto Eclipse 
+   após qq alteração nos dados dos fornecedores, 
+   por enquanto que o Web Installer ainda não está pronto.
+	  
+       

@@ -43,6 +43,8 @@ Manual Upgrade dos Ambientes de Produção de 3.4.0 para 3.4.1
         	  javax.el-api-3.0.1-b06.jar, javax.el-2.2.6.jar,  e todos os jars dependentes 
         	  e também mybatis-3.4.5.jar para o servidor do fornecedor: ordenar o diretório \lib\ no Instalador no projeto Eclipse 
         	  por Date Modified e copiar todos os jars de 18.12.2019 08:24 e todos os jars posteriores. 
+   (iii) Em todos os servidores:
+   			- Remover jar´s antigas 
 
 5. Apenas no caso do servidor de monitoramento dos Integradores e do servidor de aplicação:
    (i) Atualizar o arquivo tpl\"Email de tipo Virada fornecedor para produção.txt" no servidor do monitoramento.

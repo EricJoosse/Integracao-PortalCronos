@@ -884,6 +884,11 @@ A partir de agora as configurações se encontram no menu de Windows "<i>Iniciar" 
  
 Atc,
 Eric
+
+
+  33. Temporariamente executar FornecedorRepositorio.launch no projeto Eclipse 
+      após qq alteração nos dados dos fornecedores, 
+	  por enquanto que o Web Installer ainda não está pronto.
 	  
 
   34. Apenas no caso de instalação no servidor de banco de produção do Portal Cronos:
