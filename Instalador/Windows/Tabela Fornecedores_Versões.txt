@@ -10,6 +10,7 @@ Monitoramento    -- PCronos
 Monitoramento BD -- PCronos     		
 SOST (BA)		170 WinThor     				 	
 Walmart         385 PCronos	  															
+HVC Hortifrúti 6487 PCronos???????????	  															
 Propão 			171	WinThor	    					
 Padeirão 		 14	WinThor	    				
 Marizpan	   1995	APS Cloud																														

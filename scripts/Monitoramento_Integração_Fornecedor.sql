@@ -10,6 +10,7 @@ Karne Keijo		60
 Comal 			33
 SOST (BA)		170
 Walmart        	385
+HVC Hortifrúti 6487 	  															
 Propão			171
 Padeirão		14
 Marizpan	    1995
