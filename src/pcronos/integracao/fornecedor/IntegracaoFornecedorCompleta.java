@@ -1437,7 +1437,7 @@ public final class IntegracaoFornecedorCompleta {
 						            	 dtCadastroFim = dto.FimIntervalo;	
 						            	 
 						 	             if (!isEnvioEmailouMonitoramentoDandoErroInterno && !isForaExpedienteOuDurantePico)
-						 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, dto.Nmfornecedor, dto.CdCotacao);
+						 	            	 EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Bug Monitorador integração! qtdProdutosComEstoque, " + dto.Nmfornecedor, null, body, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, dto.Nmfornecedor, dto.CdCotacao);
 						 	             
 				     	        		 continue cotacoesloop;
 				     	        	 }
@@ -1679,14 +1679,24 @@ public final class IntegracaoFornecedorCompleta {
 		       logarErro(dex, false);	      
 
 	           if (!isEnvioEmailouMonitoramentoDandoErroInterno)
-	   	          EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + dex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+	   	          EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Bug Monitorador integração! DefaultCharsetException", null, "Erro: " + dex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
 		}
 	    catch (java.lang.Exception ex) { 
 			debugar("monitorarPendencias() - catch ex entrado");
 	       logarErro(ex, false);	      
 
            if (!isEnvioEmailouMonitoramentoDandoErroInterno)
-   	          EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Monitoramento integração - Erro interno!", null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+           {
+        	   String tipoErro = "";
+        	   if (ex.getMessage().contains("Snapshot isolation transaction failed in database"))
+        		   tipoErro = "Snapshot isolation transaction failed";
+        	   else if (ex.getMessage().contains("idFornecedor") && ex.getMessage().contains("não existe"))
+        		   tipoErro = ex.getMessage().replace("Erro: Erro: ", "");
+        	   else 
+        		   tipoErro = ex.getMessage().substring(0, 40);
+        	   
+   	           EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, "Bug Monitorador integração! " + tipoErro, null, "Erro: " + ex.getMessage(), provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, "Monitoramento", null);
+           }
 	    }
 	    finally { 
 	      if (cstat != null) {
