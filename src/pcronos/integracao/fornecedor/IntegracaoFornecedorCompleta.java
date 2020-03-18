@@ -2871,7 +2871,7 @@ public final class IntegracaoFornecedorCompleta {
     	  assuntoEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco " + strUnidade + ":\\: do servidor de banco " + nomeServidor;
     	  bodyEstouroHD = "Provavelmente o Cobian Backup parou de fazer a limpeza automática dos arquivos.";
       }
-      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && freeSpace < 10000000000L) // 10 GB
+      else if (nomeServidor.equals(Constants.SERVAPPCRONOS) && strUnidade.equals("C:") && freeSpace < 10000000000L) // 10 GB
       {
           bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco " + strUnidade + ":\\: do servidor de aplicação " + nomeServidor;
     	  assuntoEstouroHD = bodyEstouroHD;
@@ -2916,7 +2916,7 @@ public final class IntegracaoFornecedorCompleta {
 	
 
 	      verificarEstouroHD(horaInicio, nomeServidor, "C:"); // Para todos os servidores do Portal Cronos
-	      verificarEstouroHD(horaInicio, nomeServidor, "F:");
+	      verificarEstouroHD(horaInicio, nomeServidor, "F:"); //  Apenas para Constants.SERVBANCOCRONOS
 
 	      
 	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
