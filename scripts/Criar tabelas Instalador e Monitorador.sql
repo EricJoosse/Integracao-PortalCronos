@@ -14,6 +14,10 @@ if object_id('Configuracao_Monitorador_Integradores_Nuvem') is not NULL
   drop table [dbo].[Configuracao_Monitorador_Integradores_Nuvem];
 --go
 
+if object_id('Contato_TI_Integrador') is not NULL
+  drop table [dbo].[Contato_TI_Integrador];
+--go
+
 
 SET ANSI_NULLS ON;
 --GO
@@ -53,6 +57,37 @@ select * from [dbo].[Sistema_Integrado]
 
 */
            
+
+create table [dbo].[Contato_TI_Integrador]
+(
+	[id_contato_TI_integrador] [int] IDENTITY(1,1) NOT NULL,
+	prenome_contato_TI_contiint varchar(15) NOT NULL,
+	email_contato_TI_contiint varchar(30) NOT NULL,
+	skype_contato_TI_contiint varchar(30) NOT NULL,
+	telefone_contato_TI_contiint varchar(30) NOT NULL,
+	funcao_contato_TI_contiint varchar(30) NULL,
+CONSTRAINT [PK_CONTIINT] PRIMARY KEY CLUSTERED 
+(
+	[id_contato_TI_integrador] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CONTIINT_EMAIL] UNIQUE NONCLUSTERED 
+(
+	[email_contato_TI_contiint] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CONTIINT_SKYPE] UNIQUE NONCLUSTERED 
+(
+	[skype_contato_TI_contiint] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CONTIINT_TELEFONE] UNIQUE NONCLUSTERED 
+(
+	[telefone_contato_TI_contiint] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Contato_TI_Integrador', @level2type=N'COLUMN',@level2name=N'prenome_contato_TI_contiint'
+--GO
+
+
 
 create table [dbo].[Configuracao_Monitorador_Integradores_Nuvem](
 	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] IDENTITY(1,1) NOT NULL,
@@ -321,6 +356,7 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Debug no lado 
 --GO
 		
 
+select * from [dbo].[Contato_TI_Integrador];
 select * from [dbo].[Configuracao_Instalador_Integrador];
 select * from [dbo].[Configuracao_Monitorador_Integradores];
 select * from [dbo].[Configuracao_Instalador_Integrador_Nuvem];
