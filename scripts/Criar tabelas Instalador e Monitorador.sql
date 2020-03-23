@@ -66,6 +66,11 @@ create table [dbo].[Contato_TI_Integrador]
 	skype_contato_TI_contiint varchar(30) NOT NULL,
 	telefone_contato_TI_contiint varchar(30) NOT NULL,
 	funcao_contato_TI_contiint varchar(30) NULL,
+
+	[dt_cadastro_contiint] [datetime] NULL,
+	[dt_desativacao_contiint] [datetime] NULL,
+	[dt_alteracao_contiint] [datetime] NULL,
+	[user_id_ususis] [int] NOT NULL,
 CONSTRAINT [PK_CONTIINT] PRIMARY KEY CLUSTERED 
 (
 	[id_contato_TI_integrador_contiint] ASC
@@ -83,6 +88,13 @@ CONSTRAINT [PK_CONTIINT] PRIMARY KEY CLUSTERED
 	[telefone_contato_TI_contiint] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+
+ALTER TABLE [dbo].[Contato_TI_Integrador]  WITH CHECK ADD  CONSTRAINT [FK_CONTIINT_USUSIS] FOREIGN KEY([user_id_ususis])
+REFERENCES [dbo].[Usuario_Sistema] ([user_id])
+--GO
+ALTER TABLE [dbo].[Contato_TI_Integrador] CHECK CONSTRAINT [FK_CONTIINT_USUSIS]
+--GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Contato_TI_Integrador', @level2type=N'COLUMN',@level2name=N'prenome_contato_TI_contiint'
 --GO
