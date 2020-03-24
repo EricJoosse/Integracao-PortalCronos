@@ -38,7 +38,7 @@ public class ContatoTiIntegrador {
 	public int Id;
 	
     @Column(name="prenome_contato_ti_conmonint")
-    @Size(max=15)
+	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     public String PrenomeContatoTI;
     
 	@Column(name="email_contato_ti_conmonint")
@@ -69,3 +69,4 @@ public class ContatoTiIntegrador {
 	@Column(name="user_id_ususis")
 	public int IdUsuario;
 }
+

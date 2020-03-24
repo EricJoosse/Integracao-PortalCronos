@@ -106,7 +106,7 @@ create table [dbo].[Configuracao_Monitorador_Integradores_Nuvem](
 	[id_sistema_integrado_sisint] [int] NOT NULL,
 
 	[id_contato_TI_integrador_contiint] [int] NOT NULL,
-	[id_contato_TI_integrador_secundario_contiint] [int] NULL,
+	[id_contato_TI_secundario_integrador_contiint] [int] NULL,
 
 	aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
 	id_aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
@@ -144,7 +144,7 @@ REFERENCES [dbo].[Contato_TI_Integrador] ([id_contato_TI_integrador_contiint])
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_CONTIINT]
 --GO
 
-ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_SEC_CONTIINT] FOREIGN KEY([id_contato_TI_integrador_secundario_contiint])
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_SEC_CONTIINT] FOREIGN KEY([id_contato_TI_secundario_integrador_contiint])
 REFERENCES [dbo].[Contato_TI_Integrador] ([id_contato_TI_integrador_contiint])
 --GO
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_SEC_CONTIINT]
@@ -214,7 +214,7 @@ create table [dbo].[Configuracao_Monitorador_Integradores](
 	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] NULL,
 
 	[id_contato_TI_integrador_contiint] [int] NOT NULL,
-	[id_contato_TI_integrador_secundario_contiint] [int] NULL,
+	[id_contato_TI_secundario_integrador_contiint] [int] NULL,
 
 	aplicativo_desktop_remoto_conmonint varchar(30) NOT NULL,
 	id_aplicativo_desktop_remoto_conmonint varchar(30) NOT NULL,
@@ -265,7 +265,7 @@ REFERENCES [dbo].[Contato_TI_Integrador] ([id_contato_TI_integrador_contiint])
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores] CHECK CONSTRAINT [FK_CONMONINT_CONTIINT]
 --GO
 
-ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores]  WITH CHECK ADD  CONSTRAINT [FK_CONMONINT_SEC_CONTIINT] FOREIGN KEY([id_contato_TI_integrador_secundario_contiint])
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores]  WITH CHECK ADD  CONSTRAINT [FK_CONMONINT_SEC_CONTIINT] FOREIGN KEY([id_contato_TI_secundario_integrador_contiint])
 REFERENCES [dbo].[Contato_TI_Integrador] ([id_contato_TI_integrador_contiint])
 --GO
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores] CHECK CONSTRAINT [FK_CONMONINT_SEC_CONTIINT]

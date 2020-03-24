@@ -55,45 +55,11 @@ public class ConfigMonitoradorIntegradores {
 	@Column(name="sn_em_producao_conmonint")
 	public boolean IsEmProducao;
 
-    @Column(name="prenome_contato_ti_conmonint")
-    @Size(max=15)
-    public String PrenomeContatoTI;
-    
-	@Column(name="email_contato_ti_conmonint")
-    @Size(max=30)
-	public String EmailContatoTI;
-	
-	@Column(name="skype_contato_ti_conmonint")
-    @Size(max=30)
-	public String SkypeContatoTI;
-	
-	@Column(name="telefone_contato_ti_conmonint")
-    @Size(max=30)
-	public String TelefoneContatoTI;
-	
-	@Column(name="funcao_contato_ti_conmonint")
-    @Size(max=30)
-	public String FuncaoContatoTI;
+    @Column(name="id_contato_TI_integrador_contiint")
+    public int IdContatoTiIntegrador;
 
-	@Column(name="prenome_contato_ti_secundario_conmonint")
-	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-	public String PrenomeContatoTIsecundario;
-	
-	@Column(name="email_contato_ti_secundario_conmonint")
-	@Size(max=30)
-	public String EmailContatoTIsecundario;
-	
-	@Column(name="skype_contato_ti_secundario_conmonint")
-    @Size(max=30)
-	public String SkypeContatoTIsecundario;
-	
-	@Column(name="telefone_contato_ti_secundario_conmonint")
-    @Size(max=30)
-	public String TelefoneContatoTIsecundario;
-
-	@Column(name="funcao_contato_ti_secundario_conmonint")
-    @Size(max=30)
-	public String FuncaoContatoTIsecundario;
+    @Column(name="id_contato_TI_secundario_integrador_contiint")
+    public Integer IdContatoTiSecundarioIntegrador;
 
 	@Column(name="aplicativo_desktop_remoto_conmonint")
     @Size(max=30)
