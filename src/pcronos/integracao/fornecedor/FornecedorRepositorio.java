@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
+import pcronos.integracao.fornecedor.entidades.ContatoTiIntegrador;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -649,6 +650,8 @@ public class FornecedorRepositorio {
 				
 		        tx = session.beginTransaction();
 		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
+		        ContatoTiIntegrador conTI = new ContatoTiIntegrador();
+		        
 		        confMon.IdFornecedor = idFornecedor;
 		        confMon.PrenomeContatoTI = f.PrenomeResponsavelTI;
 		        confMon.EmailContatoTI =f.EmailResponsavelTI;
@@ -661,11 +664,47 @@ public class FornecedorRepositorio {
 			    
 		        confMon.PrenomeContatoTIsecundario = f.PrenomeResponsavelTIAlternativo;
 
-		        Set<ConstraintViolation<ConfigMonitoradorIntegradores>> constraintViolations = validator.validate(confMon);
+		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTI = validator.validate(conTI);
+		        Set<ConstraintViolation<ConfigMonitoradorIntegradores>> constraintViolationsConfMon = validator.validate(confMon);
 		        
-		        if (constraintViolations.size() > 0) 
+		        if (constraintViolationsConTI.size() > 0 || constraintViolationsConfMon.size() > 0) 
 		        {
-		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolations) 
+		            for (ConstraintViolation<ContatoTiIntegrador> violation : constraintViolationsConTI) 
+		            {
+		            	String prefix = "";
+		            	String entidade = "";
+		            	String atributo = "";
+		            	String instanciaEntidade = "";
+		            	String msg = violation.getMessage();
+		            	
+		            	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
+		            	{
+		            		// Class-level constraint violation:
+		            		entidade = "";          // A entidade já se encontra no EL na annotation 
+		            		atributo = "";          // Não se aplica no nível de classe ( = entidade)
+		            		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
+			            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
+
+			              // if (msg.indexOf("@") > -1)
+				          //	msg = msg.substring(0, msg.indexOf("@"));
+		            	}
+		            	else
+		            	{
+		            		// Field-level constraint violation:
+		            		entidade = violation.getRootBeanClass().getSimpleName();
+		            		atributo = "." + violation.getPropertyPath().toString();
+		            		instanciaEntidade = Integer.toString(((ContatoTiIntegrador)(violation.getLeafBean())).getIdFornecedor());
+		            		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
+		            	}
+		            	
+		            	
+		            	System.out.println(prefix + entidade + atributo + msg);
+		                if (tx!=null) tx.rollback();
+		            }
+		            System.out.println("");
+
+
+		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolationsConfMon) 
 		            {
 		            	String prefix = "";
 		            	String entidade = "";
@@ -698,10 +737,12 @@ public class FornecedorRepositorio {
 		                if (tx!=null) tx.rollback();
 		            }
 		            System.out.println("");
+
 		        } 
 		        else 
 		        {
 		            System.out.println("Valid Object");
+		            session.save(conTI);
 		            session.save(confMon); 
 		            tx.commit();
 		        }
