@@ -3,6 +3,7 @@ package pcronos.integracao.fornecedor;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -651,25 +652,32 @@ public class FornecedorRepositorio {
 		        tx = session.beginTransaction();
 		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
 		        ContatoTiIntegrador conTI = new ContatoTiIntegrador();
+		        ContatoTiIntegrador conTIsecundario = new ContatoTiIntegrador();
 		        
 		        confMon.IdFornecedor = idFornecedor;
-		        confMon.PrenomeContatoTI = f.PrenomeResponsavelTI;
-		        confMon.EmailContatoTI =f.EmailResponsavelTI;
-		        confMon.SkypeContatoTI = f.SkypeResponsavelTI;
-		        confMon.TelefoneContatoTI = f.TelefoneResponsavelTI;
-			    confMon.FuncaoContatoTI = f.FuncaoResponsavelTI;
+		        conTI.PrenomeContatoTI = f.PrenomeResponsavelTI;
+		        conTI.EmailContatoTI =f.EmailResponsavelTI;
+		        conTI.SkypeContatoTI = f.SkypeResponsavelTI;
+		        conTI.TelefoneContatoTI = f.TelefoneResponsavelTI;
+			    conTI.FuncaoContatoTI = f.FuncaoResponsavelTI;
 			    confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
 			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
 			    
-		        confMon.PrenomeContatoTIsecundario = f.PrenomeResponsavelTIAlternativo;
+		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
 
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTI = validator.validate(conTI);
+		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIsecundario = validator.validate(conTIsecundario);
+		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIambos = constraintViolationsConTI
+		        		                                            .stream() 
+                                                                    .collect(Collectors.toSet()); 
+		        constraintViolationsConTIambos.addAll(constraintViolationsConTIsecundario); 
+		        
 		        Set<ConstraintViolation<ConfigMonitoradorIntegradores>> constraintViolationsConfMon = validator.validate(confMon);
 		        
-		        if (constraintViolationsConTI.size() > 0 || constraintViolationsConfMon.size() > 0) 
+		        if (constraintViolationsConTIambos.size() > 0 || constraintViolationsConfMon.size() > 0) 
 		        {
-		            for (ConstraintViolation<ContatoTiIntegrador> violation : constraintViolationsConTI) 
+		            for (ConstraintViolation<ContatoTiIntegrador> violation : constraintViolationsConTIambos) 
 		            {
 		            	String prefix = "";
 		            	String entidade = "";
@@ -743,6 +751,7 @@ public class FornecedorRepositorio {
 		        {
 		            System.out.println("Valid Object");
 		            session.save(conTI);
+		            session.save(conTIsecundario);
 		            session.save(confMon); 
 		            tx.commit();
 		        }
