@@ -35,7 +35,7 @@ public class ConfigInstaladorIntegrador {
 	int Id;
 	
 	@Column(name="id_fornecedor_fornec")
-	int IdFornecedor;
+	public int IdFornecedor;
 	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
 	public int getIdFornecedor() { return IdFornecedor; }
 	

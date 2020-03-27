@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegrador;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegrador;
 
@@ -650,10 +651,12 @@ public class FornecedorRepositorio {
 		 
 				
 		        tx = session.beginTransaction();
-		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
+		        ConfigInstaladorIntegrador confInst = new ConfigInstaladorIntegrador(); 
 		        ContatoTiIntegrador conTI = new ContatoTiIntegrador();
 		        ContatoTiIntegrador conTIsecundario = new ContatoTiIntegrador();
+		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
 		        
+		        confInst.IdFornecedor = idFornecedor;
 		        confMon.IdFornecedor = idFornecedor;
 		        conTI.PrenomeContatoTI = f.PrenomeResponsavelTI;
 		        conTI.EmailContatoTI =f.EmailResponsavelTI;
@@ -666,6 +669,8 @@ public class FornecedorRepositorio {
 			    
 		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
 
+		        Set<ConstraintViolation<ConfigInstaladorIntegrador>> constraintViolationsConfInst = validator.validate(confInst);
+		        
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTI = validator.validate(conTI);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIsecundario = validator.validate(conTIsecundario);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIambos = constraintViolationsConTI
@@ -675,8 +680,43 @@ public class FornecedorRepositorio {
 		        
 		        Set<ConstraintViolation<ConfigMonitoradorIntegradores>> constraintViolationsConfMon = validator.validate(confMon);
 		        
-		        if (constraintViolationsConTIambos.size() > 0 || constraintViolationsConfMon.size() > 0) 
+		        if (constraintViolationsConfInst.size() > 0 || constraintViolationsConTIambos.size() > 0 || constraintViolationsConfMon.size() > 0) 
 		        {
+		            for (ConstraintViolation<ConfigInstaladorIntegrador> violation : constraintViolationsConfInst) 
+		            {
+		            	String prefix = "";
+		            	String entidade = "";
+		            	String atributo = "";
+		            	String instanciaEntidade = "";
+		            	String msg = violation.getMessage();
+		            	
+		            	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
+		            	{
+		            		// Class-level constraint violation:
+		            		entidade = "";          // A entidade já se encontra no EL na annotation 
+		            		atributo = "";          // Não se aplica no nível de classe ( = entidade)
+		            		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
+			            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
+
+			              // if (msg.indexOf("@") > -1)
+				          //	msg = msg.substring(0, msg.indexOf("@"));
+		            	}
+		            	else
+		            	{
+		            		// Field-level constraint violation:
+		            		entidade = violation.getRootBeanClass().getSimpleName();
+		            		atributo = "." + violation.getPropertyPath().toString();
+		            		instanciaEntidade = Integer.toString(((ConfigInstaladorIntegrador)(violation.getLeafBean())).getIdFornecedor());
+		            		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
+		            	}
+		            	
+		            	
+		            	System.out.println(prefix + entidade + atributo + msg);
+		                if (tx!=null) tx.rollback();
+		            }
+		            System.out.println("");
+
+
 		            for (ConstraintViolation<ContatoTiIntegrador> violation : constraintViolationsConTIambos) 
 		            {
 		            	String prefix = "";
@@ -751,6 +791,7 @@ public class FornecedorRepositorio {
 		        {
 		            System.out.println("Valid Object");
 		            session.save(conTI);
+		            session.save(confInst);
 		            session.save(conTIsecundario);
 		            session.save(confMon); 
 		            tx.commit();
