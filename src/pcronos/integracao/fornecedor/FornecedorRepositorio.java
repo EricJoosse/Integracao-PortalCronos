@@ -611,6 +611,48 @@ public class FornecedorRepositorio {
 		return f;
 	}
 
+	
+	private static <T, S> void listarValidacoesEntidade(T t, S s, Validator validator)
+	{
+        Set<ConstraintViolation<S>> constraintViolations = validator.validate(s);
+        
+        for (ConstraintViolation<S> violation : constraintViolations) 
+        {
+        	String prefix = "";
+        	String entidade = "";
+        	String atributo = "";
+        	String instanciaEntidade = "";
+        	String msg = violation.getMessage();
+        	
+        	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
+        	{
+        		// Class-level constraint violation:
+        		entidade = "";          // A entidade já se encontra no EL na annotation 
+        		atributo = "";          // Não se aplica no nível de classe ( = entidade)
+        		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
+            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
+
+              // if (msg.indexOf("@") > -1)
+	          //	msg = msg.substring(0, msg.indexOf("@"));
+        	}
+        	else
+        	{
+        		// Field-level constraint violation:
+        		entidade = violation.getRootBeanClass().getSimpleName();
+        		atributo = "." + violation.getPropertyPath().toString();
+        		instanciaEntidade = Integer.toString(((T)(violation.getLeafBean())).getIdFornecedor());
+        		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
+        	}
+        	
+        	
+        	System.out.println(prefix + entidade + atributo + msg);
+            if (tx!=null) tx.rollback();
+        }
+        System.out.println("");
+	}
+	
+
+	
 	private static void cargaTabelas() throws Exception
 	{
 		try {
@@ -669,8 +711,6 @@ public class FornecedorRepositorio {
 			    
 		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
 
-		        Set<ConstraintViolation<ConfigInstaladorIntegrador>> constraintViolationsConfInst = validator.validate(confInst);
-		        
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTI = validator.validate(conTI);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIsecundario = validator.validate(conTIsecundario);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIambos = constraintViolationsConTI
