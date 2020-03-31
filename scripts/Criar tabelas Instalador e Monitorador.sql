@@ -61,6 +61,9 @@ select * from [dbo].[Sistema_Integrado]
 create table [dbo].[Contato_TI_Integrador]
 (
 	[id_contato_TI_integrador_contiint] [int] IDENTITY(1,1) NOT NULL,
+	[id_fornecedor_fornec] [int] NOT NULL,
+	[nr_sequencia_contato_contiint] smallint NOT NULL,
+
 	prenome_contato_TI_contiint varchar(15) NOT NULL,
 	email_contato_TI_contiint varchar(30) NOT NULL,
 	skype_contato_TI_contiint varchar(30) NOT NULL,
@@ -96,6 +99,14 @@ REFERENCES [dbo].[Usuario_Sistema] ([user_id])
 ALTER TABLE [dbo].[Contato_TI_Integrador] CHECK CONSTRAINT [FK_CONTIINT_USUSIS]
 --GO
 
+ALTER TABLE [dbo].[Contato_TI_Integrador]  WITH CHECK ADD  CONSTRAINT [FK_CONTIINT_FORNEC] FOREIGN KEY([id_fornecedor_fornec])
+REFERENCES [dbo].[Fornecedor] ([id_fornecedor_fornec])
+--GO
+ALTER TABLE [dbo].[Contato_TI_Integrador] CHECK CONSTRAINT [FK_CONTIINT_FORNEC]
+--GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1 = contatar primeiro, 2 = contatar em caso de ausência do primeiro.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Contato_TI_Integrador', @level2type=N'COLUMN',@level2name=N'nr_sequencia_contato_contiint'
+--GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Contato_TI_Integrador', @level2type=N'COLUMN',@level2name=N'prenome_contato_TI_contiint'
 --GO
 
