@@ -62,7 +62,7 @@ create table [dbo].[Contato_TI_Integrador]
 (
 	[id_contato_TI_integrador_contiint] [int] IDENTITY(1,1) NOT NULL,
 	[id_fornecedor_fornec] [int] NOT NULL,
-	[nr_sequencia_contato_contiint] smallint NOT NULL,
+	[nr_sequencia_contato_contiint] tinyint NOT NULL,
 
 	prenome_contato_TI_contiint varchar(15) NOT NULL,
 	email_contato_TI_contiint varchar(30) NOT NULL,

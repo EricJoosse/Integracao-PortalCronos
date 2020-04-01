@@ -37,7 +37,15 @@ public class ContatoTiIntegrador {
 	@Column(name="id_contato_TI_integrador_contiint")
 	public int Id;
 	
-    @Column(name="prenome_contato_ti_conmonint")
+	@Column(name="id_fornecedor_fornec")
+	public int IdFornecedor;
+	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
+	public int getIdFornecedor() { return IdFornecedor; }
+	
+	@Column(name="nr_sequencia_contato_contiint")
+	public byte nrSequenciaContato;
+
+	@Column(name="prenome_contato_ti_conmonint")
 	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     public String PrenomeContatoTI;
     
