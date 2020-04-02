@@ -58,6 +58,63 @@ select * from [dbo].[Sistema_Integrado]
 */
            
 
+create table [dbo].[Contato_TI_Integrador_Nuvem]
+(
+	[id_contato_TI_integrador_nuvem_ctintnuv] [int] IDENTITY(1,1) NOT NULL,
+	[id_sistema_integrado_sisint] [int] NOT NULL,
+	[nr_sequencia_contato_ctintnuv] tinyint NOT NULL,
+
+	prenome_contato_TI_ctintnuv varchar(15) NOT NULL,
+	email_contato_TI_ctintnuv varchar(30) NOT NULL,
+	skype_contato_TI_ctintnuv varchar(30) NOT NULL,
+	telefone_contato_TI_ctintnuv varchar(30) NOT NULL,
+	funcao_contato_TI_ctintnuv varchar(30) NULL,
+
+	[dt_cadastro_ctintnuv [datetime] NULL,
+	[dt_desativacao_ctintnuv] [datetime] NULL,
+	[dt_alteracao_ctintnuv] [datetime] NULL,
+	[user_id_ususis] [int] NOT NULL,
+CONSTRAINT [PK_CTINTNUV] PRIMARY KEY CLUSTERED 
+(
+	[id_contato_TI_integrador_nuvem_ctintnuv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CTINTNUV_EMAIL] UNIQUE NONCLUSTERED 
+(
+	[email_contato_TI_ctintnuv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CTINTNUV_SKYPE] UNIQUE NONCLUSTERED 
+(
+	[skype_contato_TI_ctintnuv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UK_CTINTNUV_TELEFONE] UNIQUE NONCLUSTERED 
+(
+	[telefone_contato_TI_ctintnuv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+ALTER TABLE [dbo].[Contato_TI_Integrador_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CTINTNUV_SISINT] FOREIGN KEY([id_sistema_integrado_sisint])
+REFERENCES [dbo].[Sistema_Integrado] ([id_sistema_integrado_sisint])
+--GO
+ALTER TABLE [dbo].[Contato_TI_Integrador_Nuvem] CHECK CONSTRAINT [FK_CTINTNUV_SISINT]
+--GO
+
+ALTER TABLE [dbo].[Contato_TI_Integrador_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CTINTNUV_USUSIS] FOREIGN KEY([user_id_ususis])
+REFERENCES [dbo].[Usuario_Sistema] ([user_id])
+--GO
+ALTER TABLE [dbo].[Contato_TI_Integrador_Nuvem] CHECK CONSTRAINT [FK_CTINTNUV_USUSIS]
+--GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1 = contatar primeiro, 2 = contatar em caso de ausência do primeiro.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Contato_TI_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'nr_sequencia_contato_ctintnuv'
+--GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Usado no início dos emails automáticos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Contato_TI_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'prenome_contato_TI_ctintnuv'
+--GO
+
+
+
+
+
+
 create table [dbo].[Contato_TI_Integrador]
 (
 	[id_contato_TI_integrador_contiint] [int] IDENTITY(1,1) NOT NULL,
