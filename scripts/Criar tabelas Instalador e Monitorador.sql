@@ -18,6 +18,10 @@ if object_id('Contato_TI_Integrador') is not NULL
   drop table [dbo].[Contato_TI_Integrador];
 --go
 
+if object_id('Contato_TI_Integrador_Nuvem') is not NULL
+  drop table [dbo].[Contato_TI_Integrador_Nuvem];
+--go
+
 
 SET ANSI_NULLS ON;
 --GO
@@ -70,7 +74,7 @@ create table [dbo].[Contato_TI_Integrador_Nuvem]
 	telefone_contato_TI_ctintnuv varchar(30) NOT NULL,
 	funcao_contato_TI_ctintnuv varchar(30) NULL,
 
-	[dt_cadastro_ctintnuv [datetime] NULL,
+	[dt_cadastro_ctintnuv] [datetime] NULL,
 	[dt_desativacao_ctintnuv] [datetime] NULL,
 	[dt_alteracao_ctintnuv] [datetime] NULL,
 	[user_id_ususis] [int] NOT NULL,
@@ -173,8 +177,8 @@ create table [dbo].[Configuracao_Monitorador_Integradores_Nuvem](
 	[id_config_monitorador_integradores_nuvem_cmintnuv] [int] IDENTITY(1,1) NOT NULL,
 	[id_sistema_integrado_sisint] [int] NOT NULL,
 
-	[id_contato_TI_integrador_contiint] [int] NOT NULL,
-	[id_contato_TI_secundario_integrador_contiint] [int] NULL,
+	[id_contato_TI_integrador_nuvem_ctintnuv] [int] NOT NULL,
+	[id_contato_TI_secundario_integrador_nuvem_ctintnuv] [int] NULL,
 
 	aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
 	id_aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
@@ -206,16 +210,16 @@ REFERENCES [dbo].[Usuario_Sistema] ([user_id])
 ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_USUSIS]
 --GO
 
-ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_CONTIINT] FOREIGN KEY([id_contato_TI_integrador_contiint])
-REFERENCES [dbo].[Contato_TI_Integrador] ([id_contato_TI_integrador_contiint])
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_CTINTNUV] FOREIGN KEY([id_contato_TI_integrador_nuvem_ctintnuv])
+REFERENCES [dbo].[Contato_TI_Integrador_Nuvem] ([id_contato_TI_integrador_nuvem_ctintnuv])
 --GO
-ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_CONTIINT]
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_CTINTNUV]
 --GO
 
-ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_SEC_CONTIINT] FOREIGN KEY([id_contato_TI_secundario_integrador_contiint])
-REFERENCES [dbo].[Contato_TI_Integrador] ([id_contato_TI_integrador_contiint])
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem]  WITH CHECK ADD  CONSTRAINT [FK_CMINTNUV_SEC_CTINTNUV] FOREIGN KEY([id_contato_TI_secundario_integrador_nuvem_ctintnuv])
+REFERENCES [dbo].[Contato_TI_Integrador_Nuvem] ([id_contato_TI_integrador_nuvem_ctintnuv])
 --GO
-ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_SEC_CONTIINT]
+ALTER TABLE [dbo].[Configuracao_Monitorador_Integradores_Nuvem] CHECK CONSTRAINT [FK_CMINTNUV_SEC_CTINTNUV]
 --GO
 
 
@@ -434,6 +438,7 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Debug no lado 
 --GO
 		
 
+select * from [dbo].[Contato_TI_Integrador_Nuvem];
 select * from [dbo].[Contato_TI_Integrador];
 select * from [dbo].[Configuracao_Instalador_Integrador];
 select * from [dbo].[Configuracao_Monitorador_Integradores];
