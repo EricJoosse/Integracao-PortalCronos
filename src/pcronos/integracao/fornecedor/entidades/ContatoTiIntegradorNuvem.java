@@ -28,50 +28,50 @@ import pcronos.integracao.fornecedor.annotations.ValidConfigMonitoradorIntegrado
 
 
 @Entity // Para evitar org.hibernate.MappingException: Unknown entity que acontece quando usar class-level constraints com EL
-@Table(name="Contato_TI_Integrador")
-public class ContatoTiIntegrador {
+@Table(name="Contato_TI_Integrador_Nuvem")
+public class ContatoTiIntegradorNuvem {
 
-	public ContatoTiIntegrador() {}
+	public ContatoTiIntegradorNuvem() {}
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_contato_TI_integrador_contiint")
+	@Column(name="id_contato_TI_integrador_nuvem_ctintnuv")
 	public int Id;
 	
-	@Column(name="id_fornecedor_fornec")
-	public int IdFornecedor;
+	@Column(name="id_sistema_integrado_sisint")
+	int IdSistemaIntegrado;
 	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
-	public int getIdFornecedor() { return IdFornecedor; }
+	public int getIdSistemaIntegrado() { return IdSistemaIntegrado; }
 	
-	@Column(name="nr_sequencia_contato_contiint")
+	@Column(name="nr_sequencia_contato_ctintnuv")
 	public byte nrSequenciaContato;
 
-	@Column(name="prenome_contato_ti_contiint")
+	@Column(name="prenome_contato_ti_ctintnuv")
 	@Length(max = 15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     public String PrenomeContatoTI;
     
-	@Column(name="email_contato_ti_contiint")
+	@Column(name="email_contato_ti_ctintnuv")
     @Size(max=30)
 	public String EmailContatoTI;
 	
-	@Column(name="skype_contato_ti_contiint")
+	@Column(name="skype_contato_ti_ctintnuv")
     @Size(max=30)
 	public String SkypeContatoTI;
 	
-	@Column(name="telefone_contato_ti_contiint")
+	@Column(name="telefone_contato_ti_ctintnuv")
     @Size(max=30)
 	public String TelefoneContatoTI;
 	
-	@Column(name="funcao_contato_ti_contiint")
+	@Column(name="funcao_contato_ti_ctintnuv")
     @Size(max=30)
 	public String FuncaoContatoTI;
 
-	@Column(name="dt_cadastro_contiint")
+	@Column(name="dt_cadastro_ctintnuv")
 	public LocalDateTime DtCadastro;
  	
-	@Column(name="dt_desativacao_contiint")
+	@Column(name="dt_desativacao_ctintnuv")
 	public LocalDateTime DtDesativacao;
  	
-	@Column(name="dt_alteracao_contiint")
+	@Column(name="dt_alteracao_ctintnuv")
 	public LocalDateTime DtAlteracao;
  	
 	@Column(name="user_id_ususis")
