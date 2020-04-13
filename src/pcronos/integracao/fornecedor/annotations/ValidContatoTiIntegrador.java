@@ -7,7 +7,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import pcronos.integracao.fornecedor.validators.ConfigInstaladorIntegradorValidator;
+import pcronos.integracao.fornecedor.validators.ContatoTiIntegradorValidator;
 
 
 @Documented
