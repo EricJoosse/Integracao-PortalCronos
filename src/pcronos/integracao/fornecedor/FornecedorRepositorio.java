@@ -711,6 +711,8 @@ public class FornecedorRepositorio {
 			    
 		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
 
+		        Set<ConstraintViolation<ConfigInstaladorIntegrador>> constraintViolationsConfInst = validator.validate(confInst);
+		        
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTI = validator.validate(conTI);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIsecundario = validator.validate(conTIsecundario);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIambos = constraintViolationsConTI
