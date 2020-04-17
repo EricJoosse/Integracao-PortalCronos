@@ -612,7 +612,7 @@ public class FornecedorRepositorio {
 	}
 
 	
-	private static <T, S> void listarValidacoesEntidade(T t, S s, Validator validator)
+	private static <T, S> void listarValidacoesEntidade(T t, S s, Validator validator, Transaction tx)
 	{
         Set<ConstraintViolation<S>> constraintViolations = validator.validate(s);
         
