@@ -612,17 +612,18 @@ public class FornecedorRepositorio {
 	}
 
 	
-	private static <T, S> void listarValidacoesEntidade(T t, S s, Validator validator, Transaction tx)
+	private static <T> void listarValidacoesEntidade(T t, Validator validator, Transaction tx)
 	{
-        Set<ConstraintViolation<S>> constraintViolations = validator.validate(s);
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
         
-        for (ConstraintViolation<S> violation : constraintViolations) 
+        for (ConstraintViolation<T> violation : constraintViolations) 
         {
         	String prefix = "";
         	String entidade = "";
         	String atributo = "";
         	String instanciaEntidade = "";
         	String msg = violation.getMessage();
+
         	
         	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
         	{
