@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import pcronos.integracao.fornecedor.interfaces.FornecedorInterface;
 import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegrador;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegrador;
@@ -612,7 +613,7 @@ public class FornecedorRepositorio {
 	}
 
 	
-	private static <T> void listarValidacoesEntidade(T t, Validator validator, Transaction tx)
+	private static <T extends FornecedorInterface> void listarValidacoesEntidade(T t, Validator validator, Transaction tx)
 	{
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
         
