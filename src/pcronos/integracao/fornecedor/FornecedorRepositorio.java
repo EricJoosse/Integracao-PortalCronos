@@ -713,8 +713,6 @@ public class FornecedorRepositorio {
 			    
 		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
 
-		        Set<ConstraintViolation<ConfigInstaladorIntegrador>> constraintViolationsConfInst = validator.validate(confInst);
-		        
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTI = validator.validate(conTI);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIsecundario = validator.validate(conTIsecundario);
 		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIambos = constraintViolationsConTI
@@ -722,43 +720,10 @@ public class FornecedorRepositorio {
                                                                     .collect(Collectors.toSet()); 
 		        constraintViolationsConTIambos.addAll(constraintViolationsConTIsecundario); 
 		        
-		        Set<ConstraintViolation<ConfigMonitoradorIntegradores>> constraintViolationsConfMon = validator.validate(confMon);
 		        
 		        if (constraintViolationsConfInst.size() > 0 || constraintViolationsConTIambos.size() > 0 || constraintViolationsConfMon.size() > 0) 
 		        {
-		            for (ConstraintViolation<ConfigInstaladorIntegrador> violation : constraintViolationsConfInst) 
-		            {
-		            	String prefix = "";
-		            	String entidade = "";
-		            	String atributo = "";
-		            	String instanciaEntidade = "";
-		            	String msg = violation.getMessage();
-		            	
-		            	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
-		            	{
-		            		// Class-level constraint violation:
-		            		entidade = "";          // A entidade já se encontra no EL na annotation 
-		            		atributo = "";          // Não se aplica no nível de classe ( = entidade)
-		            		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
-			            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
-
-			              // if (msg.indexOf("@") > -1)
-				          //	msg = msg.substring(0, msg.indexOf("@"));
-		            	}
-		            	else
-		            	{
-		            		// Field-level constraint violation:
-		            		entidade = violation.getRootBeanClass().getSimpleName();
-		            		atributo = "." + violation.getPropertyPath().toString();
-		            		instanciaEntidade = Integer.toString(((ConfigInstaladorIntegrador)(violation.getLeafBean())).getIdFornecedor());
-		            		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
-		            	}
-		            	
-		            	
-		            	System.out.println(prefix + entidade + atributo + msg);
-		                if (tx!=null) tx.rollback();
-		            }
-		            System.out.println("");
+					listarValidacoesEntidade(confInst, validator, tx);
 
 
 		            for (ConstraintViolation<ContatoTiIntegrador> violation : constraintViolationsConTIambos) 
@@ -796,39 +761,7 @@ public class FornecedorRepositorio {
 		            System.out.println("");
 
 
-		            for (ConstraintViolation<ConfigMonitoradorIntegradores> violation : constraintViolationsConfMon) 
-		            {
-		            	String prefix = "";
-		            	String entidade = "";
-		            	String atributo = "";
-		            	String instanciaEntidade = "";
-		            	String msg = violation.getMessage();
-		            	
-		            	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
-		            	{
-		            		// Class-level constraint violation:
-		            		entidade = "";          // A entidade já se encontra no EL na annotation 
-		            		atributo = "";          // Não se aplica no nível de classe ( = entidade)
-		            		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
-			            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
-
-			              // if (msg.indexOf("@") > -1)
-				          //	msg = msg.substring(0, msg.indexOf("@"));
-		            	}
-		            	else
-		            	{
-		            		// Field-level constraint violation:
-		            		entidade = violation.getRootBeanClass().getSimpleName();
-		            		atributo = "." + violation.getPropertyPath().toString();
-		            		instanciaEntidade = Integer.toString(((ConfigMonitoradorIntegradores)(violation.getLeafBean())).getIdFornecedor());
-		            		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
-		            	}
-		            	
-		            	
-		            	System.out.println(prefix + entidade + atributo + msg);
-		                if (tx!=null) tx.rollback();
-		            }
-		            System.out.println("");
+					listarValidacoesEntidade(confMon, validator, tx);
 
 		        } 
 		        else 
