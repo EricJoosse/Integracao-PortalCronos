@@ -613,9 +613,22 @@ public class FornecedorRepositorio {
 	}
 
 	
-	private static <T extends FornecedorInterface> void listarValidacoesEntidade(T t, Validator validator, Transaction tx)
+	private static <T extends FornecedorInterface> void listarValidacoesEntidade(Transaction tx, Validator validator, T t1, T t2)
 	{
-        Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
+		Set<ConstraintViolation<T>> constraintViolations = null;
+        Set<ConstraintViolation<T>> constraintViolations1 = validator.validate(t1);
+        
+        if (t2 != null)
+        {
+            Set<ConstraintViolation<T>> constraintViolations2 = validator.validate(t2);
+	        constraintViolations = constraintViolations1.stream() 
+                                                        .collect(Collectors.toSet()); 
+	        constraintViolations.addAll(constraintViolations2); 
+	        
+        }
+        else
+        	constraintViolations = constraintViolations1;
+        
         
         for (ConstraintViolation<T> violation : constraintViolations) 
         {
@@ -651,6 +664,7 @@ public class FornecedorRepositorio {
             if (tx!=null) tx.rollback();
         }
         System.out.println("");
+
 	}
 	
 
@@ -713,55 +727,12 @@ public class FornecedorRepositorio {
 			    
 		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
 
-		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTI = validator.validate(conTI);
-		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIsecundario = validator.validate(conTIsecundario);
-		        Set<ConstraintViolation<ContatoTiIntegrador>> constraintViolationsConTIambos = constraintViolationsConTI
-		        		                                            .stream() 
-                                                                    .collect(Collectors.toSet()); 
-		        constraintViolationsConTIambos.addAll(constraintViolationsConTIsecundario); 
-		        
 		        
 		        if (constraintViolationsConfInst.size() > 0 || constraintViolationsConTIambos.size() > 0 || constraintViolationsConfMon.size() > 0) 
 		        {
-					listarValidacoesEntidade(confInst, validator, tx);
-
-
-		            for (ConstraintViolation<ContatoTiIntegrador> violation : constraintViolationsConTIambos) 
-		            {
-		            	String prefix = "";
-		            	String entidade = "";
-		            	String atributo = "";
-		            	String instanciaEntidade = "";
-		            	String msg = violation.getMessage();
-		            	
-		            	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
-		            	{
-		            		// Class-level constraint violation:
-		            		entidade = "";          // A entidade já se encontra no EL na annotation 
-		            		atributo = "";          // Não se aplica no nível de classe ( = entidade)
-		            		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
-			            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
-
-			              // if (msg.indexOf("@") > -1)
-				          //	msg = msg.substring(0, msg.indexOf("@"));
-		            	}
-		            	else
-		            	{
-		            		// Field-level constraint violation:
-		            		entidade = violation.getRootBeanClass().getSimpleName();
-		            		atributo = "." + violation.getPropertyPath().toString();
-		            		instanciaEntidade = Integer.toString(((ContatoTiIntegrador)(violation.getLeafBean())).getIdFornecedor());
-		            		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
-		            	}
-		            	
-		            	
-		            	System.out.println(prefix + entidade + atributo + msg);
-		                if (tx!=null) tx.rollback();
-		            }
-		            System.out.println("");
-
-
-					listarValidacoesEntidade(confMon, validator, tx);
+					listarValidacoesEntidade(tx, validator, confInst, null);
+					listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
+					listarValidacoesEntidade(tx, validator, confMon, null);
 
 		        } 
 		        else 
