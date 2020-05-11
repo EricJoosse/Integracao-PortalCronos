@@ -613,7 +613,7 @@ public class FornecedorRepositorio {
 	}
 
 	
-	private static <T extends FornecedorInterface> void listarValidacoesEntidade(Transaction tx, Validator validator, T t1, T t2)
+	private static <T extends FornecedorInterface> int listarValidacoesEntidade(Transaction tx, Validator validator, T t1, T t2)
 	{
 		Set<ConstraintViolation<T>> constraintViolations = null;
         Set<ConstraintViolation<T>> constraintViolations1 = validator.validate(t1);
@@ -664,7 +664,7 @@ public class FornecedorRepositorio {
             if (tx!=null) tx.rollback();
         }
         System.out.println("");
-
+        return constraintViolations.size();
 	}
 	
 
@@ -727,15 +727,13 @@ public class FornecedorRepositorio {
 			    
 		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
 
+		        int qtdViolatons = 0;
 		        
-		        if (constraintViolationsConfInst.size() > 0 || constraintViolationsConTIambos.size() > 0 || constraintViolationsConfMon.size() > 0) 
-		        {
-					listarValidacoesEntidade(tx, validator, confInst, null);
-					listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
-					listarValidacoesEntidade(tx, validator, confMon, null);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
 
-		        } 
-		        else 
+	        	if (qtdViolatons == 0)
 		        {
 		            System.out.println("Valid Object");
 		            session.save(conTI);
