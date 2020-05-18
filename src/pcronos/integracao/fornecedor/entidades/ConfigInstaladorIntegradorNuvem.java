@@ -70,7 +70,7 @@ public class ConfigInstaladorIntegradorNuvem {
     
     @Column(name="disco_integrador_ciintnuv")
     @Length(max=1)
-    char DiscoIntegrador;
+    String DiscoIntegrador;
     
     @Column(name="dir_programfiles_ciintnuv")
     @Length(max=30)

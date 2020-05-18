@@ -90,7 +90,7 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface {
     
     @Column(name="disco_integrador_coninsint")
     @Length(max=1)
-    char DiscoIntegrador;
+    String DiscoIntegrador;
     
     @Column(name="dir_programfiles_coninsint")
     @Length(max=30)
