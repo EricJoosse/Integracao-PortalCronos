@@ -52,19 +52,19 @@ public class ContatoTiIntegrador implements FornecedorInterface {
     public String PrenomeContatoTI;
     
 	@Column(name="email_contato_ti_contiint")
-    @Size(max=30)
+    @Size(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
 	public String EmailContatoTI;
 	
 	@Column(name="skype_contato_ti_contiint")
-    @Size(max=30)
+    @Size(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
 	public String SkypeContatoTI;
 	
 	@Column(name="telefone_contato_ti_contiint")
-    @Size(max=30)
+    @Size(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
 	public String TelefoneContatoTI;
 	
 	@Column(name="funcao_contato_ti_contiint")
-    @Size(max=30)
+    @Size(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
 	public String FuncaoContatoTI;
 
 	@Column(name="dt_cadastro_contiint")

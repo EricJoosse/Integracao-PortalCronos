@@ -41,51 +41,51 @@ public class ConfigInstaladorIntegradorNuvem {
 	public int getIdSistemaIntegrado() { return IdSistemaIntegrado; }
 	
     @Column(name="tipo_sist_operacional_ciintnuv")
-    @Length(max=30)
+    @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String TipoSO;
     
     @Column(name="sist_operacional_32_ou_64_bit_ciintnuv")
-    @Length(max=6)
+    @Length(max=6, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String So32ou64bit;
     
     @Column(name="espaco_livre_disco_ciintnuv")
-    @Length(max=10)
+    @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String EspacoLivreDisco;
     
     @Column(name="memoria_ram_livre_ciintnuv")
-    @Length(max=10)
+    @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String MemoriaRamLivre;
     
     @Column(name="versao_jre_ciintnuv")
-    @Length(max=15)
+    @Length(max=15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String VersaoJRE;
     
     @Column(name="tipo_jre_ciintnuv")
-    @Length(max=10)
+    @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String TipoJRE;
     
     @Column(name="versao_integrador_ciintnuv")
-    @Length(max=10)
+    @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String VersaoIntegrador;
     
     @Column(name="disco_integrador_ciintnuv")
-    @Length(max=1)
+    @Length(max=1, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String DiscoIntegrador;
     
     @Column(name="dir_programfiles_ciintnuv")
-    @Length(max=30)
+    @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String DirProgramfiles;
     
     @Column(name="endereco_ip_publico_servidor_ciintnuv")
-    @Length(max=30)
+    @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String EnderecoIpPublicoServidor;
     
     @Column(name="porta_ip_aberta_ciintnuv")
-    @Length(max=15)
+    @Length(max=15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String PortaIpAberta;
     
     @Column(name="frequencia_processamento_ciintnuv")
-    @Length(max=10)
+    @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String FrequenciaProcessamento;
     
 

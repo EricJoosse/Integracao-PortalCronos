@@ -64,11 +64,11 @@ public class ConfigMonitoradorIntegradores implements FornecedorInterface {
     public Integer IdContatoTiSecundarioIntegrador;
 
 	@Column(name="aplicativo_desktop_remoto_conmonint")
-    @Size(max=30)
+    @Size(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
 	public String AplicativoDesktopRemoto;
 	
 	@Column(name="id_aplicativo_desktop_remoto_conmonint")
-    @Size(max=30)
+    @Size(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
 	public String IdAplicativoDesktopRemoto;
 	
 	@Column(name="dt_cadastro_conmonint")
