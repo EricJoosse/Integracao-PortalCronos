@@ -16,7 +16,7 @@ public class ConfigMonitoradorIntegradoresValidator implements ConstraintValidat
     @Override
     public boolean isValid(final ConfigMonitoradorIntegradores value,
                              final ConstraintValidatorContext context) {
-    	if (value.ApelidoContatoTIsecundario.equals(value.ApelidoContatoTI))
+    	if (value.IdContatoTiSecundarioIntegrador != null && value.IdContatoTiSecundarioIntegrador == value.IdContatoTiIntegrador)
     		return false;
     	else
             return true;

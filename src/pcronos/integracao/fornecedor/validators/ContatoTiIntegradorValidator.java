@@ -16,6 +16,6 @@ public class ContatoTiIntegradorValidator implements ConstraintValidator<ValidCo
     @Override
     public boolean isValid(final ContatoTiIntegrador value,
                              final ConstraintValidatorContext context) {
-    	return false;
+    	return true;
     }
 }

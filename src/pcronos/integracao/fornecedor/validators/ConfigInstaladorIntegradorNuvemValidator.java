@@ -16,6 +16,6 @@ public class ConfigInstaladorIntegradorNuvemValidator implements ConstraintValid
     @Override
     public boolean isValid(final ConfigInstaladorIntegradorNuvem value,
                              final ConstraintValidatorContext context) {
-    	return false;
+    	return true;
     }
 }

@@ -16,10 +16,9 @@ public class ConfigMonitoradorIntegradoresNuvemValidator implements ConstraintVa
     @Override
     public boolean isValid(final ConfigMonitoradorIntegradoresNuvem value,
                              final ConstraintValidatorContext context) {
-    	return false;
-//    	if (value.PrenomeContatoTIsecundario.equals(value.PrenomeContatoTI))
-//    		return false;
-//    	else
-//            return true;
+    	if (value.IdContatoTiSecundarioIntegrador != null && value.IdContatoTiSecundarioIntegrador == value.IdContatoTiIntegrador)
+    		return false;
+    	else
+            return true;
     }
 }

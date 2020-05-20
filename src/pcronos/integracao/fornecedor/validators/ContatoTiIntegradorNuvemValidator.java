@@ -16,6 +16,6 @@ public class ContatoTiIntegradorNuvemValidator implements ConstraintValidator<Va
     @Override
     public boolean isValid(final ContatoTiIntegradorNuvem value,
                              final ConstraintValidatorContext context) {
-    	return false;
+    	return true;
     }
 }
