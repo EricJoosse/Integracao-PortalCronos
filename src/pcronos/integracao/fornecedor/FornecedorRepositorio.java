@@ -1,5 +1,6 @@
 package pcronos.integracao.fornecedor;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -715,18 +716,37 @@ public class FornecedorRepositorio {
 		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
 		        
 		        confInst.IdFornecedor = idFornecedor;
-		        confMon.IdFornecedor = idFornecedor;
+		        
+		        conTI.IdFornecedor = idFornecedor;
+		        conTI.nrSequenciaContato = 1;
 		        conTI.PrenomeContatoTI = f.PrenomeResponsavelTI;
 		        conTI.EmailContatoTI =f.EmailResponsavelTI;
 		        conTI.SkypeContatoTI = f.SkypeResponsavelTI;
 		        conTI.TelefoneContatoTI = f.TelefoneResponsavelTI;
 			    conTI.FuncaoContatoTI = f.FuncaoResponsavelTI;
-			    confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
+			    conTI.DtCadastro = LocalDateTime.now();
+			    conTI.IdUsuario = 14767; // login "eric"
+
+			    if (f.PrenomeResponsavelTIAlternativo != null || f.EmailResponsavelTIAlternativo != null)
+			    {
+				    conTIsecundario.IdFornecedor = idFornecedor;
+				    conTIsecundario.nrSequenciaContato = 2;
+			        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
+			        conTIsecundario.EmailContatoTI = f.EmailResponsavelTIAlternativo;
+			        conTIsecundario.SkypeContatoTI = f.SkypeResponsavelTIAlternativo;
+			        conTIsecundario.TelefoneContatoTI = f.TelefoneResponsavelTIAlternativo;
+			        conTIsecundario.FuncaoContatoTI = f.FuncaoResponsavelTIAlternativo;
+				    conTIsecundario.DtCadastro = LocalDateTime.now();
+				    conTIsecundario.IdUsuario = 14767; // login "eric"
+			    }
+
+			    confMon.IdFornecedor = idFornecedor;
+		        confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
 			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
+			    confMon.IdContatoTiIntegrador = 111;
+			    confMon.IdContatoTiSecundarioIntegrador = 111;
 			    
-		        conTIsecundario.PrenomeContatoTI = f.PrenomeResponsavelTIAlternativo;
-
 		        int qtdViolatons = 0;
 		        
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
