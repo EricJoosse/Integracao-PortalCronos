@@ -109,7 +109,7 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface {
     String FrequenciaProcessamento;
     
 	@Column(name="dt_cadastro_coninsint")
- 	LocalDateTime DtCadastro;
+	public LocalDateTime DtCadastro;
  	
 	@Column(name="dt_desativacao_coninsint")
  	LocalDateTime DtDesativacao;
@@ -118,5 +118,5 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface {
  	LocalDateTime DtAlteracao;
  	
 	@Column(name="user_id_ususis")
-	int IdUsuario;
+	public int IdUsuario;
 }

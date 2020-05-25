@@ -91,7 +91,7 @@ public class ConfigInstaladorIntegradorNuvem {
 
     
 	@Column(name="dt_cadastro_ciintnuv")
- 	LocalDateTime DtCadastro;
+	public LocalDateTime DtCadastro;
  	
 	@Column(name="dt_desativacao_ciintnuv")
  	LocalDateTime DtDesativacao;
@@ -100,5 +100,5 @@ public class ConfigInstaladorIntegradorNuvem {
  	LocalDateTime DtAlteracao;
  	
 	@Column(name="user_id_ususis")
-	int IdUsuario;
+	public int IdUsuario;
 }

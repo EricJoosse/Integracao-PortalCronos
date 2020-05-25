@@ -12,7 +12,9 @@ import org.hibernate.cfg.Configuration;
 
 import pcronos.integracao.fornecedor.interfaces.FornecedorInterface;
 import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegrador;
+import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegradorNuvem;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
+import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradoresNuvem;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegrador;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -710,12 +712,13 @@ public class FornecedorRepositorio {
 		 
 				
 		        tx = session.beginTransaction();
-		        ConfigInstaladorIntegrador confInst = new ConfigInstaladorIntegrador(); 
+		        
 		        ContatoTiIntegrador conTI = new ContatoTiIntegrador();
 		        ContatoTiIntegrador conTIsecundario = new ContatoTiIntegrador();
+		        ConfigInstaladorIntegrador confInst = new ConfigInstaladorIntegrador(); 
+		        ConfigInstaladorIntegradorNuvem confInstNuvem = new ConfigInstaladorIntegradorNuvem(); 
 		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
-		        
-		        confInst.IdFornecedor = idFornecedor;
+		        ConfigMonitoradorIntegradoresNuvem confMonNuvem = new ConfigMonitoradorIntegradoresNuvem();
 		        
 		        conTI.IdFornecedor = idFornecedor;
 		        conTI.nrSequenciaContato = 1;
@@ -740,18 +743,32 @@ public class FornecedorRepositorio {
 				    conTIsecundario.IdUsuario = 14767; // login "eric"
 			    }
 
-			    confMon.IdFornecedor = idFornecedor;
+		        confInst.IdFornecedor = idFornecedor;
+		        confInst.DtCadastro = LocalDateTime.now();
+		        confInst.IdUsuario = 14767; // login "eric"
+		        
+		        confInstNuvem.DtCadastro = LocalDateTime.now();
+		        confInstNuvem.IdUsuario = 14767; // login "eric"
+
+		        confMon.IdFornecedor = idFornecedor;
 		        confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
 			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
 			    confMon.IdContatoTiIntegrador = 111;
 			    confMon.IdContatoTiSecundarioIntegrador = 111;
+			    confMon.DtCadastro = LocalDateTime.now();
+			    confMon.IdUsuario = 14767; // login "eric"
 			    
-		        int qtdViolatons = 0;
+			    confMonNuvem.DtCadastro = LocalDateTime.now();
+			    confMonNuvem.IdUsuario = 14767; // login "eric"
+
+			    int qtdViolatons = 0;
 		        
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInstNuvem, null);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMonNuvem, null);
 
 	        	if (qtdViolatons == 0)
 		        {

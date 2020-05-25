@@ -74,7 +74,7 @@ create table [dbo].[Contato_TI_Integrador_Nuvem]
 	telefone_contato_TI_ctintnuv varchar(30) NOT NULL,
 	funcao_contato_TI_ctintnuv varchar(30) NULL,
 
-	[dt_cadastro_ctintnuv] [datetime] NULL,
+	[dt_cadastro_ctintnuv] [datetime] NOT NULL,
 	[dt_desativacao_ctintnuv] [datetime] NULL,
 	[dt_alteracao_ctintnuv] [datetime] NULL,
 	[user_id_ususis] [int] NOT NULL,
@@ -131,7 +131,7 @@ create table [dbo].[Contato_TI_Integrador]
 	telefone_contato_TI_contiint varchar(30) NOT NULL,
 	funcao_contato_TI_contiint varchar(30) NULL,
 
-	[dt_cadastro_contiint] [datetime] NULL,
+	[dt_cadastro_contiint] [datetime] NOT NULL,
 	[dt_desativacao_contiint] [datetime] NULL,
 	[dt_alteracao_contiint] [datetime] NULL,
 	[user_id_ususis] [int] NOT NULL,
@@ -183,7 +183,7 @@ create table [dbo].[Configuracao_Monitorador_Integradores_Nuvem](
 	aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
 	id_aplicativo_desktop_remoto_cmintnuv varchar(30) NOT NULL,
 
-	[dt_cadastro_cmintnuv] [datetime] NULL,
+	[dt_cadastro_cmintnuv] [datetime] NOT NULL,
 	[dt_desativacao_cmintnuv] [datetime] NULL,
 	[dt_alteracao_cmintnuv] [datetime] NULL,
 	[user_id_ususis] [int] NOT NULL,
@@ -246,7 +246,7 @@ create table [dbo].[Configuracao_Instalador_Integrador_Nuvem](
 	porta_ip_aberta_ciintnuv varchar(15) NOT NULL,
 	frequencia_processamento_ciintnuv varchar(10) NOT NULL,
 
-	[dt_cadastro_ciintnuv] [datetime] NULL,
+	[dt_cadastro_ciintnuv] [datetime] NOT NULL,
 	[dt_desativacao_ciintnuv] [datetime] NULL,
 	[dt_alteracao_ciintnuv] [datetime] NULL,
 	[user_id_ususis] [int] NOT NULL,
@@ -290,7 +290,8 @@ create table [dbo].[Configuracao_Monitorador_Integradores](
 
 	aplicativo_desktop_remoto_conmonint varchar(30) NOT NULL,
 	id_aplicativo_desktop_remoto_conmonint varchar(30) NOT NULL,
-	[dt_cadastro_conmonint] [datetime] NULL,
+	
+	[dt_cadastro_conmonint] [datetime] NOT NULL,
 	[dt_desativacao_conmonint] [datetime] NULL,
 	[dt_alteracao_conmonint] [datetime] NULL,
 	[user_id_ususis] [int] NOT NULL,
@@ -377,7 +378,8 @@ create table [dbo].[Configuracao_Instalador_Integrador](
 	endereco_ip_publico_servidor_coninsint varchar(30) NOT NULL,
 	porta_ip_aberta_coninsint varchar(15) NOT NULL,
 	frequencia_processamento_coninsint varchar(10) NOT NULL,
-	[dt_cadastro_coninsint] [datetime] NULL,
+	
+	[dt_cadastro_coninsint] [datetime] NOT NULL,
 	[dt_desativacao_coninsint] [datetime] NULL,
 	[dt_alteracao_coninsint] [datetime] NULL,
 	[user_id_ususis] [int] NOT NULL,
