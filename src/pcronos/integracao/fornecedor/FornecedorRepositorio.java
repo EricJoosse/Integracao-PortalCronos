@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import pcronos.integracao.fornecedor.interfaces.FornecedorInterface;
+import pcronos.integracao.fornecedor.interfaces.SistemaIntegradoInterface;
 import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegrador;
 import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegradorNuvem;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
@@ -672,6 +673,50 @@ public class FornecedorRepositorio {
 	
 
 	
+	private static <T extends SistemaIntegradoInterface> int listarValidacoesEntidadeNuvem(Transaction tx, Validator validator, T t)
+	{
+		Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
+                
+        
+        for (ConstraintViolation<T> violation : constraintViolations) 
+        {
+        	String prefix = "";
+        	String entidade = "";
+        	String atributo = "";
+        	String instanciaEntidade = "";
+        	String msg = violation.getMessage();
+
+        	
+        	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
+        	{
+        		// Class-level constraint violation:
+        		entidade = "";          // A entidade já se encontra no EL na annotation 
+        		atributo = "";          // Não se aplica no nível de classe ( = entidade)
+        		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
+            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
+
+              // if (msg.indexOf("@") > -1)
+	          //	msg = msg.substring(0, msg.indexOf("@"));
+        	}
+        	else
+        	{
+        		// Field-level constraint violation:
+        		entidade = violation.getRootBeanClass().getSimpleName();
+        		atributo = "." + violation.getPropertyPath().toString();
+        		instanciaEntidade = Integer.toString(((T)(violation.getLeafBean())).getIdSistemaIntegrado());
+        		prefix = "IdSistema = " + instanciaEntidade + ": ";  
+        	}
+        	
+        	
+        	System.out.println(prefix + entidade + atributo + msg);
+            if (tx!=null) tx.rollback();
+        }
+        System.out.println("");
+        return constraintViolations.size();
+	}
+	
+
+	
 	private static void cargaTabelas() throws Exception
 	{
 		try {
@@ -766,9 +811,9 @@ public class FornecedorRepositorio {
 		        
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInstNuvem, null);
+	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confInstNuvem);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMonNuvem, null);
+	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confMonNuvem);
 
 	        	if (qtdViolatons == 0)
 		        {
