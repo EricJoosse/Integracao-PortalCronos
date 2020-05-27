@@ -1,5 +1,7 @@
 package pcronos.integracao.fornecedor;
 
+import java.time.LocalDate;
+
 public class Fornecedor {
 
 	public Fornecedor() {		
@@ -44,6 +46,7 @@ public class Fornecedor {
 	public boolean IsServicoNuvem;
 	public int SequenciaInstanciaNuvem;
 	public String FrequenciaProcessamento;
+	LocalDate DtCadastro;
 	
 	
 	public String getTipoBaseDeDados() throws Exception {

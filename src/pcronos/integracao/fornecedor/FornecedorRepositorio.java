@@ -1,5 +1,6 @@
 package pcronos.integracao.fornecedor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -152,6 +153,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "187.113.120.97";
 		f[i].PortaIpAberta = "80";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2018, 6, 21);
 
 		i++;
 		f[i].IdFornecedor = 947;
@@ -184,6 +186,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "jrolinda.dyndns.org";
 		f[i].PortaIpAberta = "Não precisa";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2018, 11, 9);
 
 		i++;
 		f[i].IdFornecedor = 30;
@@ -215,6 +218,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "187.103.76.53";
 		f[i].PortaIpAberta = "80";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2019, 11, 27);
 
 		i++;
 		f[i].IdFornecedor = 21;
@@ -244,6 +248,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = "";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2017, 12, 12);
 
 		i++;
 		f[i].IdFornecedor = 170;
@@ -274,6 +279,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = "";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2018, 3, 22);
 
 		i++;
 		f[i].IdFornecedor = 60;
@@ -303,6 +309,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = "";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2018, 5, 11);
 
 		i++;
 		f[i].IdFornecedor = 33;
@@ -338,6 +345,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "187.1.168.74";
 		f[i].PortaIpAberta = "80";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2018, 11, 20);
 
 		i++;
 		f[i].IdFornecedor = 171;
@@ -368,6 +376,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "187.113.65.138";
 		f[i].PortaIpAberta = "Não se aplica";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2018, 10, 27);
 
 		i++;
 		f[i].IdFornecedor = 14;
@@ -396,6 +405,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "192.141.110.189";
 		f[i].PortaIpAberta = "Não se aplica";
 		f[i].FrequenciaProcessamento = "15 min";
+		f[i].DtCadastro = LocalDate.of(2018, 11, 29);
 
 		
 		
@@ -477,6 +487,7 @@ public class FornecedorRepositorio {
 		f[i].PrenomeResponsavelTI_Nuvem = PrenomeResponsavelTI_NuvemApsCloud;
 		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
+		f[i].DtCadastro = LocalDate.of(2019, 11, 27);
 		
 
 		
@@ -523,7 +534,9 @@ public class FornecedorRepositorio {
 		f[i].PrenomeResponsavelTI_Nuvem = PrenomeResponsavelTI_NuvemApsCloud;
 		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
+		f[i].DtCadastro = LocalDate.of(2019, 10, 17);
 		
+
 /*  Template:
     =========
     !!!!!!!!! Não se esqueça incremementar o variável constante "qtdFornecedores" mais 1 !!!!!
@@ -565,6 +578,8 @@ public class FornecedorRepositorio {
 		f[i].EmailResponsavelTI_Nuvem = "";
 		f[i].SkypeResponsavelTI_Nuvem = ""; 
 		f[i].PrenomeResponsavelTI_Nuvem = ""; 
+
+		f[i].DtCadastro = LocalDate.of(yyyy, mm, dd);
  */
 		
 		for (int j=0; j < (qtdFornecedores); j++) {
