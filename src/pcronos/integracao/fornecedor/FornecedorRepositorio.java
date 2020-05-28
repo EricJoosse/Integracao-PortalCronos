@@ -787,7 +787,7 @@ public class FornecedorRepositorio {
 		        conTI.SkypeContatoTI = f.SkypeResponsavelTI;
 		        conTI.TelefoneContatoTI = f.TelefoneResponsavelTI;
 			    conTI.FuncaoContatoTI = f.FuncaoResponsavelTI;
-			    conTI.DtCadastro = LocalDateTime.now();
+			    conTI.DtCadastro = f.DtCadastro;
 			    conTI.IdUsuario = 14767; // login "eric"
 
 			    if (f.PrenomeResponsavelTIAlternativo != null || f.EmailResponsavelTIAlternativo != null)
@@ -799,15 +799,15 @@ public class FornecedorRepositorio {
 			        conTIsecundario.SkypeContatoTI = f.SkypeResponsavelTIAlternativo;
 			        conTIsecundario.TelefoneContatoTI = f.TelefoneResponsavelTIAlternativo;
 			        conTIsecundario.FuncaoContatoTI = f.FuncaoResponsavelTIAlternativo;
-				    conTIsecundario.DtCadastro = LocalDateTime.now();
+				    conTIsecundario.DtCadastro = f.DtCadastro;
 				    conTIsecundario.IdUsuario = 14767; // login "eric"
 			    }
 
 		        confInst.IdFornecedor = idFornecedor;
-		        confInst.DtCadastro = LocalDateTime.now();
+		        confInst.DtCadastro = f.DtCadastro;
 		        confInst.IdUsuario = 14767; // login "eric"
 		        
-		        confInstNuvem.DtCadastro = LocalDateTime.now();
+		        confInstNuvem.DtCadastro = f.DtCadastro;
 		        confInstNuvem.IdUsuario = 14767; // login "eric"
 
 		        confMon.IdFornecedor = idFornecedor;
@@ -816,10 +816,10 @@ public class FornecedorRepositorio {
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
 			    confMon.IdContatoTiIntegrador = 111;
 			    confMon.IdContatoTiSecundarioIntegrador = 111;
-			    confMon.DtCadastro = LocalDateTime.now();
+			    confMon.DtCadastro = f.DtCadastro;
 			    confMon.IdUsuario = 14767; // login "eric"
 			    
-			    confMonNuvem.DtCadastro = LocalDateTime.now();
+			    confMonNuvem.DtCadastro = f.DtCadastro;
 			    confMonNuvem.IdUsuario = 14767; // login "eric"
 
 			    int qtdViolatons = 0;

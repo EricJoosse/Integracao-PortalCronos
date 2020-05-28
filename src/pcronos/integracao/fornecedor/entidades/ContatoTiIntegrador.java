@@ -1,6 +1,7 @@
 package pcronos.integracao.fornecedor.entidades;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -68,7 +69,7 @@ public class ContatoTiIntegrador implements FornecedorInterface {
 	public String FuncaoContatoTI;
 
 	@Column(name="dt_cadastro_contiint")
-	public LocalDateTime DtCadastro;
+	public LocalDate DtCadastro;
  	
 	@Column(name="dt_desativacao_contiint")
 	public LocalDateTime DtDesativacao;

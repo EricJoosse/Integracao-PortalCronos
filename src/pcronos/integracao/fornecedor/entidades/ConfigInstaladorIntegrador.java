@@ -1,6 +1,7 @@
 package pcronos.integracao.fornecedor.entidades;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -109,7 +110,7 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface {
     String FrequenciaProcessamento;
     
 	@Column(name="dt_cadastro_coninsint")
-	public LocalDateTime DtCadastro;
+	public LocalDate DtCadastro;
  	
 	@Column(name="dt_desativacao_coninsint")
  	LocalDateTime DtDesativacao;
