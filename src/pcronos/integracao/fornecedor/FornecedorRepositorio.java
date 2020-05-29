@@ -775,8 +775,12 @@ public class FornecedorRepositorio {
 		        
 		        ContatoTiIntegrador conTI = new ContatoTiIntegrador();
 		        ContatoTiIntegrador conTIsecundario = new ContatoTiIntegrador();
+		        ContatoTiIntegrador conTINuvem = new ContatoTiIntegrador();
+		        ContatoTiIntegrador conTIsecundarioNuvem = new ContatoTiIntegrador();
+		        
 		        ConfigInstaladorIntegrador confInst = new ConfigInstaladorIntegrador(); 
-		        ConfigInstaladorIntegradorNuvem confInstNuvem = new ConfigInstaladorIntegradorNuvem(); 
+		        ConfigInstaladorIntegradorNuvem confInstNuvem = new ConfigInstaladorIntegradorNuvem();
+		        
 		        ConfigMonitoradorIntegradores confMon = new ConfigMonitoradorIntegradores();
 		        ConfigMonitoradorIntegradoresNuvem confMonNuvem = new ConfigMonitoradorIntegradoresNuvem();
 		        
@@ -803,6 +807,17 @@ public class FornecedorRepositorio {
 				    conTIsecundario.IdUsuario = 14767; // login "eric"
 			    }
 
+		        conTINuvem.nrSequenciaContato = 1;
+			    conTINuvem.DtCadastro = f.DtCadastro;
+			    conTINuvem.IdUsuario = 14767; // login "eric"
+
+			    if (f.PrenomeResponsavelTIAlternativo != null || f.EmailResponsavelTIAlternativo != null)
+			    {
+				    conTIsecundarioNuvem.nrSequenciaContato = 2;
+				    conTIsecundarioNuvem.DtCadastro = f.DtCadastro;
+				    conTIsecundarioNuvem.IdUsuario = 14767; // login "eric"
+			    }
+
 		        confInst.IdFornecedor = idFornecedor;
 		        confInst.DtCadastro = f.DtCadastro;
 		        confInst.IdUsuario = 14767; // login "eric"
@@ -825,6 +840,7 @@ public class FornecedorRepositorio {
 			    int qtdViolatons = 0;
 		        
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTINuvem, conTIsecundarioNuvem);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
 	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confInstNuvem);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
@@ -834,9 +850,13 @@ public class FornecedorRepositorio {
 		        {
 		            System.out.println("Valid Object");
 		            session.save(conTI);
-		            session.save(confInst);
 		            session.save(conTIsecundario);
+		            session.save(conTINuvem);
+		            session.save(conTIsecundarioNuvem);
+		            session.save(confInst);
+		            session.save(confInstNuvem);
 		            session.save(confMon); 
+		            session.save(confMonNuvem); 
 		            tx.commit();
 		        }
 			} // loop sobre os fornecedores
