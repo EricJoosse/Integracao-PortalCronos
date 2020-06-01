@@ -18,6 +18,7 @@ import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegradorNuvem;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradoresNuvem;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegrador;
+import pcronos.integracao.fornecedor.entidades.ContatoTiIntegradorNuvem;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -688,10 +689,22 @@ public class FornecedorRepositorio {
 	
 
 	
-	private static <T extends SistemaIntegradoInterface> int listarValidacoesEntidadeNuvem(Transaction tx, Validator validator, T t)
+	private static <T extends SistemaIntegradoInterface> int listarValidacoesEntidadeNuvem(Transaction tx, Validator validator, T t1, T t2)
 	{
-		Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
-                
+		Set<ConstraintViolation<T>> constraintViolations = null;
+        Set<ConstraintViolation<T>> constraintViolations1 = validator.validate(t1);
+        
+        if (t2 != null)
+        {
+            Set<ConstraintViolation<T>> constraintViolations2 = validator.validate(t2);
+	        constraintViolations = constraintViolations1.stream() 
+                                                        .collect(Collectors.toSet()); 
+	        constraintViolations.addAll(constraintViolations2); 
+	        
+        }
+        else
+        	constraintViolations = constraintViolations1;
+        
         
         for (ConstraintViolation<T> violation : constraintViolations) 
         {
@@ -775,8 +788,8 @@ public class FornecedorRepositorio {
 		        
 		        ContatoTiIntegrador conTI = new ContatoTiIntegrador();
 		        ContatoTiIntegrador conTIsecundario = new ContatoTiIntegrador();
-		        ContatoTiIntegrador conTINuvem = new ContatoTiIntegrador();
-		        ContatoTiIntegrador conTIsecundarioNuvem = new ContatoTiIntegrador();
+		        ContatoTiIntegradorNuvem conTINuvem = new ContatoTiIntegradorNuvem();
+		        ContatoTiIntegradorNuvem conTIsecundarioNuvem = new ContatoTiIntegradorNuvem();
 		        
 		        ConfigInstaladorIntegrador confInst = new ConfigInstaladorIntegrador(); 
 		        ConfigInstaladorIntegradorNuvem confInstNuvem = new ConfigInstaladorIntegradorNuvem();
@@ -840,11 +853,11 @@ public class FornecedorRepositorio {
 			    int qtdViolatons = 0;
 		        
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTINuvem, conTIsecundarioNuvem);
+	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, conTINuvem, conTIsecundarioNuvem);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
-	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confInstNuvem);
+	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confInstNuvem, null);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
-	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confMonNuvem);
+	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confMonNuvem, null);
 
 	        	if (qtdViolatons == 0)
 		        {

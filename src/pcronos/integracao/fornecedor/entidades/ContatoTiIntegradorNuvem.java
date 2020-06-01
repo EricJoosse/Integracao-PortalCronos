@@ -25,12 +25,13 @@ import org.hibernate.validator.constraints.Length;
 
 
 import pcronos.integracao.fornecedor.annotations.ValidConfigMonitoradorIntegradores;
+import pcronos.integracao.fornecedor.interfaces.SistemaIntegradoInterface;
 
 
 
 @Entity // Para evitar org.hibernate.MappingException: Unknown entity que acontece quando usar class-level constraints com EL
 @Table(name="Contato_TI_Integrador_Nuvem")
-public class ContatoTiIntegradorNuvem {
+public class ContatoTiIntegradorNuvem implements SistemaIntegradoInterface {
 
 	public ContatoTiIntegradorNuvem() {}
 	
@@ -41,6 +42,7 @@ public class ContatoTiIntegradorNuvem {
 	@Column(name="id_sistema_integrado_sisint")
 	int IdSistemaIntegrado;
 	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
+	@Override
 	public int getIdSistemaIntegrado() { return IdSistemaIntegrado; }
 	
 	@Column(name="nr_sequencia_contato_ctintnuv")
