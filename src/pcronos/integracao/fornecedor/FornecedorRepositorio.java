@@ -13,6 +13,7 @@ import org.hibernate.cfg.Configuration;
 
 import pcronos.integracao.fornecedor.interfaces.FornecedorInterface;
 import pcronos.integracao.fornecedor.interfaces.SistemaIntegradoInterface;
+import pcronos.integracao.fornecedor.interfaces.FornecedorOuSistemaIntegradoInterface;
 import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegrador;
 import pcronos.integracao.fornecedor.entidades.ConfigInstaladorIntegradorNuvem;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
@@ -633,7 +634,7 @@ public class FornecedorRepositorio {
 	}
 
 	
-	private static <T extends FornecedorInterface> int listarValidacoesEntidade(Transaction tx, Validator validator, T t1, T t2)
+	private static <T extends FornecedorOuSistemaIntegradoInterface> int listarValidacoesEntidade(Transaction tx, Validator validator, T t1, T t2)
 	{
 		Set<ConstraintViolation<T>> constraintViolations = null;
         Set<ConstraintViolation<T>> constraintViolations1 = validator.validate(t1);
@@ -675,64 +676,12 @@ public class FornecedorRepositorio {
         		// Field-level constraint violation:
         		entidade = violation.getRootBeanClass().getSimpleName();
         		atributo = "." + violation.getPropertyPath().toString();
-        		instanciaEntidade = Integer.toString(((T)(violation.getLeafBean())).getIdFornecedor());
-        		prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
-        	}
-        	
-        	
-        	System.out.println(prefix + entidade + atributo + msg);
-            if (tx!=null) tx.rollback();
-        }
-        System.out.println("");
-        return constraintViolations.size();
-	}
-	
-
-	
-	private static <T extends SistemaIntegradoInterface> int listarValidacoesEntidadeNuvem(Transaction tx, Validator validator, T t1, T t2)
-	{
-		Set<ConstraintViolation<T>> constraintViolations = null;
-        Set<ConstraintViolation<T>> constraintViolations1 = validator.validate(t1);
-        
-        if (t2 != null)
-        {
-            Set<ConstraintViolation<T>> constraintViolations2 = validator.validate(t2);
-	        constraintViolations = constraintViolations1.stream() 
-                                                        .collect(Collectors.toSet()); 
-	        constraintViolations.addAll(constraintViolations2); 
-	        
-        }
-        else
-        	constraintViolations = constraintViolations1;
-        
-        
-        for (ConstraintViolation<T> violation : constraintViolations) 
-        {
-        	String prefix = "";
-        	String entidade = "";
-        	String atributo = "";
-        	String instanciaEntidade = "";
-        	String msg = violation.getMessage();
-
-        	
-        	if (Utils.isNullOrBlank(violation.getPropertyPath().toString()))
-        	{
-        		// Class-level constraint violation:
-        		entidade = "";          // A entidade já se encontra no EL na annotation 
-        		atributo = "";          // Não se aplica no nível de classe ( = entidade)
-        		instanciaEntidade = ""; // O IdFornecedor já se encontra no EL na annotation
-            	msg = msg.replace("pcronos.integracao.fornecedor.entidades.", "");
-
-              // if (msg.indexOf("@") > -1)
-	          //	msg = msg.substring(0, msg.indexOf("@"));
-        	}
-        	else
-        	{
-        		// Field-level constraint violation:
-        		entidade = violation.getRootBeanClass().getSimpleName();
-        		atributo = "." + violation.getPropertyPath().toString();
-        		instanciaEntidade = Integer.toString(((T)(violation.getLeafBean())).getIdSistemaIntegrado());
-        		prefix = "IdSistema = " + instanciaEntidade + ": ";  
+        		instanciaEntidade = Integer.toString(((T)(violation.getLeafBean())).getIdFornecedorOuSistemaIntegrado());
+        		
+        		if (t1 instanceof FornecedorInterface)
+            	   prefix = "IdFornecedor = " + instanciaEntidade + ": ";  
+        		else if (t1 instanceof SistemaIntegradoInterface)
+         		   prefix = "IdSistema = " + instanciaEntidade + ": ";  
         	}
         	
         	
@@ -820,6 +769,7 @@ public class FornecedorRepositorio {
 				    conTIsecundario.IdUsuario = 14767; // login "eric"
 			    }
 
+			    conTINuvem.EmailContatoTI = "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
 		        conTINuvem.nrSequenciaContato = 1;
 			    conTINuvem.DtCadastro = f.DtCadastro;
 			    conTINuvem.IdUsuario = 14767; // login "eric"
@@ -853,11 +803,11 @@ public class FornecedorRepositorio {
 			    int qtdViolatons = 0;
 		        
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
-	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, conTINuvem, conTIsecundarioNuvem);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTINuvem, conTIsecundarioNuvem);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
-	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confInstNuvem, null);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInstNuvem, null);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
-	        	qtdViolatons += listarValidacoesEntidadeNuvem(tx, validator, confMonNuvem, null);
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMonNuvem, null);
 
 	        	if (qtdViolatons == 0)
 		        {

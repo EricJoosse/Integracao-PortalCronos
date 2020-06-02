@@ -26,6 +26,7 @@ import org.hibernate.validator.constraints.Length;
 
 import pcronos.integracao.fornecedor.annotations.ValidConfigMonitoradorIntegradores;
 import pcronos.integracao.fornecedor.interfaces.FornecedorInterface;
+import pcronos.integracao.fornecedor.interfaces.FornecedorOuSistemaIntegradoInterface;
 
 
 
@@ -37,7 +38,7 @@ import pcronos.integracao.fornecedor.interfaces.FornecedorInterface;
 // Não funciona:
 //@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue.toString().replace(\"cronos.integracao.fornecedor.entidades\",\"\"}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
 //@ValidConfigMonitoradorIntegradores( message = "Entidade ${validatedValue.getRootBeanClass().getSimpleName()}: Fornecedor ${validatedValue.getIdFornecedor()} inválido")
-public class ConfigMonitoradorIntegradores implements FornecedorInterface {
+public class ConfigMonitoradorIntegradores implements FornecedorInterface, FornecedorOuSistemaIntegradoInterface {
 
 	public ConfigMonitoradorIntegradores() {}
 	
@@ -50,6 +51,8 @@ public class ConfigMonitoradorIntegradores implements FornecedorInterface {
 	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
 	@Override
 	public int getIdFornecedor() { return IdFornecedor; }
+	@Override
+	public int getIdFornecedorOuSistemaIntegrado() { return IdFornecedor; }
 	
 	
 	@Column(name="id_vendedor_responsavel_integracao_ususis")

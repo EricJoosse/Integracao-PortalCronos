@@ -24,12 +24,13 @@ import org.hibernate.validator.constraints.Length;
 //Não funcionou: @Length(max = 15, message = "${propertyPath} = ${validatedValue}, tamanho = ${validatedValue.length()}, max = {max}")
 
 import pcronos.integracao.fornecedor.interfaces.SistemaIntegradoInterface;
+import pcronos.integracao.fornecedor.interfaces.FornecedorOuSistemaIntegradoInterface;
 
 
 
 @Entity // Para evitar org.hibernate.MappingException: Unknown entity que acontece quando usar class-level constraints com EL
 @Table(name="Configuracao_Instalador_Integrador_Nuvem")
-public class ConfigInstaladorIntegradorNuvem implements SistemaIntegradoInterface {
+public class ConfigInstaladorIntegradorNuvem implements SistemaIntegradoInterface, FornecedorOuSistemaIntegradoInterface {
 
 	public ConfigInstaladorIntegradorNuvem() {}
 	
@@ -42,6 +43,8 @@ public class ConfigInstaladorIntegradorNuvem implements SistemaIntegradoInterfac
 	// O seguinte serve apenas para evitar erro "javax.el.PropertyNotFoundException" pelo class-level Hibernate constraint com EL:
 	@Override
 	public int getIdSistemaIntegrado() { return IdSistemaIntegrado; }
+	@Override
+	public int getIdFornecedorOuSistemaIntegrado() { return IdSistemaIntegrado; }
 	
     @Column(name="tipo_sist_operacional_ciintnuv")
     @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
