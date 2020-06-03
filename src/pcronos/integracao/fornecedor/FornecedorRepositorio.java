@@ -812,10 +812,11 @@ public class FornecedorRepositorio {
 	        	if (qtdViolatons == 0)
 		        {
 		            System.out.println("Valid Object");
-		            session.save(conTI);
-		            session.save(conTIsecundario);
-		            session.save(conTINuvem);
-		            session.save(conTIsecundarioNuvem);
+		            confMon.IdContatoTiIntegrador = (int)session.save(conTI);
+		            confMon.IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundario);
+		            confMonNuvem.IdContatoTiIntegrador = (int)session.save(conTINuvem);
+		            confMonNuvem.IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundarioNuvem);
+		            
 		            session.save(confInst);
 		            session.save(confInstNuvem);
 		            session.save(confMon); 
