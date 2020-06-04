@@ -716,7 +716,10 @@ public class FornecedorRepositorio {
 		
 		try 
 		{
-			for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) 
+            Integer IdconTINuvem = null;
+            Integer IdconTIsecundarioNuvem = null;
+
+            for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) 
 			{
 				Object value = entry.getValue();
 				Integer idFornecedor = ((Fornecedor) value).IdFornecedor;
@@ -769,25 +772,25 @@ public class FornecedorRepositorio {
 				    conTIsecundario.IdUsuario = 14767; // login "eric"
 			    }
 
-			    conTINuvem.EmailContatoTI = "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
-		        conTINuvem.nrSequenciaContato = 1;
-			    conTINuvem.DtCadastro = f.DtCadastro;
-			    conTINuvem.IdUsuario = 14767; // login "eric"
-
-			    if (f.PrenomeResponsavelTIAlternativo != null || f.EmailResponsavelTIAlternativo != null)
+			    if (f.IsServicoNuvem && IdconTINuvem == null)
 			    {
-				    conTIsecundarioNuvem.nrSequenciaContato = 2;
-				    conTIsecundarioNuvem.DtCadastro = f.DtCadastro;
-				    conTIsecundarioNuvem.IdUsuario = 14767; // login "eric"
+				    conTINuvem.EmailContatoTI = "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
+			        conTINuvem.nrSequenciaContato = 1;
+				    conTINuvem.DtCadastro = f.DtCadastro;
+				    conTINuvem.IdUsuario = 14767; // login "eric"
+	
+				    if (f.PrenomeResponsavelTIAlternativo != null || f.EmailResponsavelTIAlternativo != null)
+				    {
+					    conTIsecundarioNuvem.nrSequenciaContato = 2;
+					    conTIsecundarioNuvem.DtCadastro = f.DtCadastro;
+					    conTIsecundarioNuvem.IdUsuario = 14767; // login "eric"
+				    }
 			    }
 
 		        confInst.IdFornecedor = idFornecedor;
 		        confInst.DtCadastro = f.DtCadastro;
 		        confInst.IdUsuario = 14767; // login "eric"
 		        
-		        confInstNuvem.DtCadastro = f.DtCadastro;
-		        confInstNuvem.IdUsuario = 14767; // login "eric"
-
 		        confMon.IdFornecedor = idFornecedor;
 		        confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
 			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
@@ -797,30 +800,53 @@ public class FornecedorRepositorio {
 			    confMon.DtCadastro = f.DtCadastro;
 			    confMon.IdUsuario = 14767; // login "eric"
 			    
-			    confMonNuvem.DtCadastro = f.DtCadastro;
-			    confMonNuvem.IdUsuario = 14767; // login "eric"
+			    if (f.IsServicoNuvem)
+			    {
+			        confInstNuvem.DtCadastro = f.DtCadastro;
+			        confInstNuvem.IdUsuario = 14767; // login "eric"
+				    confMonNuvem.DtCadastro = f.DtCadastro;
+				    confMonNuvem.IdUsuario = 14767; // login "eric"
+			    }
+
 
 			    int qtdViolatons = 0;
 		        
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTINuvem, conTIsecundarioNuvem);
+	        	if (f.IsServicoNuvem && IdconTINuvem == null) qtdViolatons += listarValidacoesEntidade(tx, validator, conTINuvem, conTIsecundarioNuvem);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInstNuvem, null);
+	        	if (f.IsServicoNuvem && IdconTINuvem == null) qtdViolatons += listarValidacoesEntidade(tx, validator, confInstNuvem, null);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMonNuvem, null);
+	        	if (f.IsServicoNuvem && IdconTINuvem == null) qtdViolatons += listarValidacoesEntidade(tx, validator, confMonNuvem, null);
 
 	        	if (qtdViolatons == 0)
 		        {
 		            System.out.println("Valid Object");
+		            
 		            confMon.IdContatoTiIntegrador = (int)session.save(conTI);
 		            confMon.IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundario);
-		            confMonNuvem.IdContatoTiIntegrador = (int)session.save(conTINuvem);
-		            confMonNuvem.IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundarioNuvem);
+
+		            if (f.IsServicoNuvem && IdconTINuvem == null) 
+		            {
+		            	IdconTINuvem = (int)session.save(conTINuvem);
+		                confMonNuvem.IdContatoTiIntegrador = IdconTINuvem;
+		            }
+		            else if (f.IsServicoNuvem)
+		                confMonNuvem.IdContatoTiIntegrador = IdconTINuvem;
+
+
+		            if (f.IsServicoNuvem && IdconTIsecundarioNuvem == null) 
+		            {
+		            	IdconTIsecundarioNuvem = (int)session.save(conTIsecundarioNuvem);
+		                confMonNuvem.IdContatoTiSecundarioIntegrador = (int)IdconTIsecundarioNuvem;
+		            }
+		            else if (f.IsServicoNuvem)
+		                confMonNuvem.IdContatoTiSecundarioIntegrador = (int)IdconTIsecundarioNuvem;
 		            
+
 		            session.save(confInst);
-		            session.save(confInstNuvem);
+		            if (f.IsServicoNuvem && IdconTINuvem == null) session.save(confInstNuvem);
 		            session.save(confMon); 
-		            session.save(confMonNuvem); 
+		            if (f.IsServicoNuvem && IdconTINuvem == null) session.save(confMonNuvem); 
 		            tx.commit();
 		        }
 			} // loop sobre os fornecedores
