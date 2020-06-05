@@ -843,10 +843,14 @@ public class FornecedorRepositorio {
 		                confMonNuvem.IdContatoTiSecundarioIntegrador = (int)IdconTIsecundarioNuvem;
 		            
 
+		            if (f.IsServicoNuvem && IdconTINuvem == null) 
+		            	confInst.IdConfigInstaladorIntegradorNuvem = (int) session.save(confInstNuvem);
 		            session.save(confInst);
-		            if (f.IsServicoNuvem && IdconTINuvem == null) session.save(confInstNuvem);
+
+		            if (f.IsServicoNuvem && IdconTINuvem == null) 
+		            	confMon.IdConfigMonitoradorIntegradoresNuvem = (int) session.save(confMonNuvem); 
 		            session.save(confMon); 
-		            if (f.IsServicoNuvem && IdconTINuvem == null) session.save(confMonNuvem); 
+		            
 		            tx.commit();
 		        }
 			} // loop sobre os fornecedores

@@ -61,6 +61,9 @@ public class ConfigMonitoradorIntegradores implements FornecedorInterface, Forne
 	@Column(name="sn_em_producao_conmonint")
 	public boolean IsEmProducao;
 
+	@Column(name="id_config_monitorador_integradores_nuvem_cmintnuv")
+	public int IdConfigMonitoradorIntegradoresNuvem;	
+	
     @Column(name="id_contato_TI_integrador_contiint")
     public int IdContatoTiIntegrador;
 

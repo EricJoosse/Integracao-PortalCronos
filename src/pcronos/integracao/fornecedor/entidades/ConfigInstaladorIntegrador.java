@@ -59,7 +59,7 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface, Forneced
 	int QtdDiasArquivosXmlGuardados;
 
 	@Column(name="id_config_instalador_integrador_nuvem_ciintnuv")
-	int IdConfigInstaladorIntegradorNuvem;
+	public int IdConfigInstaladorIntegradorNuvem;
 	
 	@Column(name="nr_sequencia_instancia_nuvem_coninsint")
 	int NrSequenciaInstanciaNuvem;
