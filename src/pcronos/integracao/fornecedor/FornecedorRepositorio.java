@@ -718,6 +718,8 @@ public class FornecedorRepositorio {
 		{
             Integer IdconTINuvem = null;
             Integer IdconTIsecundarioNuvem = null;
+            Integer IdConfigInstaladorIntegradorNuvem = null;
+            Integer IdConfigMonitoradorIntegradoresNuvem = null;
 
             for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) 
 			{
@@ -814,10 +816,11 @@ public class FornecedorRepositorio {
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, conTI, conTIsecundario);
 	        	if (f.IsServicoNuvem && IdconTINuvem == null) qtdViolatons += listarValidacoesEntidade(tx, validator, conTINuvem, conTIsecundarioNuvem);
 	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confInst, null);
-	        	if (f.IsServicoNuvem && IdconTINuvem == null) qtdViolatons += listarValidacoesEntidade(tx, validator, confInstNuvem, null);
-	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);
+	        	if (f.IsServicoNuvem && IdconTINuvem == null) qtdViolatons += listarValidacoesEntidade(tx, validator, confInstNuvem, null);	        	
+	        	qtdViolatons += listarValidacoesEntidade(tx, validator, confMon, null);	        	
 	        	if (f.IsServicoNuvem && IdconTINuvem == null) qtdViolatons += listarValidacoesEntidade(tx, validator, confMonNuvem, null);
 
+	        	
 	        	if (qtdViolatons == 0)
 		        {
 		            System.out.println("Valid Object");
@@ -825,31 +828,47 @@ public class FornecedorRepositorio {
 		            confMon.IdContatoTiIntegrador = (int)session.save(conTI);
 		            confMon.IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundario);
 
-		            if (f.IsServicoNuvem && IdconTINuvem == null) 
+		            
+		            if (f.IsServicoNuvem) 
 		            {
-		            	IdconTINuvem = (int)session.save(conTINuvem);
+		            	if (IdconTINuvem == null)
+		            		IdconTINuvem = (int)session.save(conTINuvem);
+		            	
 		                confMonNuvem.IdContatoTiIntegrador = IdconTINuvem;
 		            }
-		            else if (f.IsServicoNuvem)
-		                confMonNuvem.IdContatoTiIntegrador = IdconTINuvem;
 
 
-		            if (f.IsServicoNuvem && IdconTIsecundarioNuvem == null) 
+		            
+		            if (f.IsServicoNuvem) 
 		            {
-		            	IdconTIsecundarioNuvem = (int)session.save(conTIsecundarioNuvem);
+		            	if (IdconTIsecundarioNuvem == null)
+		            		IdconTIsecundarioNuvem = (int)session.save(conTIsecundarioNuvem);
+		            	
 		                confMonNuvem.IdContatoTiSecundarioIntegrador = (int)IdconTIsecundarioNuvem;
 		            }
-		            else if (f.IsServicoNuvem)
-		                confMonNuvem.IdContatoTiSecundarioIntegrador = (int)IdconTIsecundarioNuvem;
 		            
 
-		            if (f.IsServicoNuvem && IdconTINuvem == null) 
-		            	confInst.IdConfigInstaladorIntegradorNuvem = (int) session.save(confInstNuvem);
+		            
+		            if (f.IsServicoNuvem) 
+		            {
+		            	if (IdConfigInstaladorIntegradorNuvem == null)
+		            		IdConfigInstaladorIntegradorNuvem = (int) session.save(confInstNuvem);
+		            	
+		            	confInst.IdConfigInstaladorIntegradorNuvem = IdConfigInstaladorIntegradorNuvem;
+		            }
 		            session.save(confInst);
 
-		            if (f.IsServicoNuvem && IdconTINuvem == null) 
-		            	confMon.IdConfigMonitoradorIntegradoresNuvem = (int) session.save(confMonNuvem); 
+		            
+		            
+		            if (f.IsServicoNuvem) 
+		            {
+		            	if (IdConfigMonitoradorIntegradoresNuvem == null)
+		            	      IdConfigMonitoradorIntegradoresNuvem = (int) session.save(confMonNuvem);
+		            	
+		            	confMon.IdConfigMonitoradorIntegradoresNuvem = IdConfigMonitoradorIntegradoresNuvem;
+		            }
 		            session.save(confMon); 
+		            
 		            
 		            tx.commit();
 		        }
