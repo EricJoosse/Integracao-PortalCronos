@@ -794,11 +794,7 @@ public class FornecedorRepositorio {
 		        confInst.IdUsuario = 14767; // login "eric"
 		        
 		        confMon.IdFornecedor = idFornecedor;
-		        confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
-			    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
-			    confMon.IdContatoTiIntegrador = 111;
-			    confMon.IdContatoTiSecundarioIntegrador = 111;
 			    confMon.DtCadastro = f.DtCadastro;
 			    confMon.IdUsuario = 14767; // login "eric"
 			    
@@ -825,8 +821,8 @@ public class FornecedorRepositorio {
 		        {
 		            System.out.println("Valid Object");
 		            
-		            confMon.IdContatoTiIntegrador = (int)session.save(conTI);
-		            confMon.IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundario);
+		            int IdContatoTiIntegrador = (int)session.save(conTI);
+		            int IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundario);
 
 		            
 		            if (f.IsServicoNuvem) 
@@ -856,6 +852,9 @@ public class FornecedorRepositorio {
 		            	
 		            	confInst.IdConfigInstaladorIntegradorNuvem = IdConfigInstaladorIntegradorNuvem;
 		            }
+		            else {
+		            	confInst.
+		            }
 		            session.save(confInst);
 
 		            
@@ -866,6 +865,13 @@ public class FornecedorRepositorio {
 		            	      IdConfigMonitoradorIntegradoresNuvem = (int) session.save(confMonNuvem);
 		            	
 		            	confMon.IdConfigMonitoradorIntegradoresNuvem = IdConfigMonitoradorIntegradoresNuvem;
+		            }
+		            else
+		            {
+					    confMon.IdContatoTiIntegrador = IdContatoTiIntegrador;
+					    confMon.IdContatoTiSecundarioIntegrador = IdContatoTiSecundarioIntegrador;
+				        confMon.AplicativoDesktopRemoto = f.AplicativoDesktopRemoto;
+					    confMon.IdAplicativoDesktopRemoto = f.IdAplicativoDesktopRemoto;
 		            }
 		            session.save(confMon); 
 		            
