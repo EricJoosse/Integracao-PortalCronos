@@ -852,8 +852,21 @@ public class FornecedorRepositorio {
 		            	
 		            	confInst.IdConfigInstaladorIntegradorNuvem = IdConfigInstaladorIntegradorNuvem;
 		            }
-		            else {
-		            	confInst.
+		            else 
+		            {
+		            	confInst.DirProgramfiles = f.dirProgramFiles;
+		            	confInst.DiscoIntegrador = f.DiscoIntegrador;
+		            	confInst.EnderecoIpPublicoServidor = f.EnderecoIpPublicoServidor;
+		            	confInst.EspacoLivreDisco = f.EspacoLivreDisco;
+		            	confInst.FrequenciaProcessamento = f.FrequenciaProcessamento;
+		            	confInst.MemoriaRamLivre = f.MemoriaRamLivre;
+		            	//confInst.NrSequenciaInstanciaNuvem =
+		            	confInst.PortaIpAberta = f.PortaIpAberta;
+		            	confInst.So32ou64bit = f.SO32ou64bit;
+		            	confInst.TipoJRE = f.tipoJRE;
+		            	confInst.TipoSO = f.tipoSO;
+		            	confInst.VersaoIntegrador = f.versaoIntegrador;
+		            	confInst.VersaoJRE = f.versaoJRE;
 		            }
 		            session.save(confInst);
 

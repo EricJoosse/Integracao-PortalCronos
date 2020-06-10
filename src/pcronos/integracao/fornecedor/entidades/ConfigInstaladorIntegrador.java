@@ -62,55 +62,55 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface, Forneced
 	public int IdConfigInstaladorIntegradorNuvem;
 	
 	@Column(name="nr_sequencia_instancia_nuvem_coninsint")
-	int NrSequenciaInstanciaNuvem;
+	public int NrSequenciaInstanciaNuvem;
 	
     @Column(name="tipo_sist_operacional_coninsint")
     @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String TipoSO;
+    public String TipoSO;
     
     @Column(name="sist_operacional_32_ou_64_bit_coninsint")
     @Length(max=6, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String So32ou64bit;
+    public String So32ou64bit;
     
     @Column(name="espaco_livre_disco_coninsint")
     @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String EspacoLivreDisco;
+    public String EspacoLivreDisco;
     
     @Column(name="memoria_ram_livre_coninsint")
     @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String MemoriaRamLivre;
+    public String MemoriaRamLivre;
     
     @Column(name="versao_jre_coninsint")
     @Length(max=15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String VersaoJRE;
+    public String VersaoJRE;
     
     @Column(name="tipo_jre_coninsint")
     @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String TipoJRE;
+    public String TipoJRE;
     
     @Column(name="versao_integrador_coninsint")
     @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String VersaoIntegrador;
+    public String VersaoIntegrador;
     
     @Column(name="disco_integrador_coninsint")
     @Length(max=1, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String DiscoIntegrador;
+    public String DiscoIntegrador;
     
     @Column(name="dir_programfiles_coninsint")
     @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String DirProgramfiles;
+    public String DirProgramfiles;
     
     @Column(name="endereco_ip_publico_servidor_coninsint")
     @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String EnderecoIpPublicoServidor;
+    public String EnderecoIpPublicoServidor;
     
     @Column(name="porta_ip_aberta_coninsint")
     @Length(max=15, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String PortaIpAberta;
+    public String PortaIpAberta;
     
     @Column(name="frequencia_processamento_coninsint")
     @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String FrequenciaProcessamento;
+    public String FrequenciaProcessamento;
     
 	@Column(name="dt_cadastro_coninsint")
 	public LocalDate DtCadastro;
