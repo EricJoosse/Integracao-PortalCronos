@@ -46,14 +46,14 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface, Forneced
 	public int getIdFornecedorOuSistemaIntegrado() { return IdFornecedor; }
 	
 	@Column(name="id_sistema_integrado_sisint")
-	int IdSistemaIntegrado;
+	public int IdSistemaIntegrado;
 	
     @Column(name="usuario_webservice_coninsint")
     @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
-    String UsuarioWebservice;
+    public String UsuarioWebservice;
     
 	@Column(name="sn_debug_ativado_coninsint")
-	boolean IsDebugAtivado;
+	public boolean IsDebugAtivado;
 
 	@Column(name="qtd_dias_arquivos_xml_guardados_coninsint")
 	int QtdDiasArquivosXmlGuardados;
@@ -61,8 +61,8 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface, Forneced
 	@Column(name="id_config_instalador_integrador_nuvem_ciintnuv")
 	public int IdConfigInstaladorIntegradorNuvem;
 	
-	@Column(name="nr_sequencia_instancia_nuvem_coninsint")
-	public int NrSequenciaInstanciaNuvem;
+	@Column(name="nr_sequencia_instancia_integrador_nuvem_coninsint")
+	public int NrSequenciaInstanciaIntegradorNuvem;
 	
     @Column(name="tipo_sist_operacional_coninsint")
     @Length(max=30, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")

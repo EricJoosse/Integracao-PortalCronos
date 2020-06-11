@@ -789,6 +789,10 @@ public class FornecedorRepositorio {
 				    }
 			    }
 
+			    // Colunas valendo para ambos os ambientes Nuvem e Não-Nuvem:
+			    confInst.UsuarioWebservice = f.usuarioWebservice;
+			    confInst.IsDebugAtivado = f.IsDebugAtivado;
+			    confInst.IdSistemaIntegrado = f.SiglaSistemaFornecedor;.......
 		        confInst.IdFornecedor = idFornecedor;
 		        confInst.DtCadastro = f.DtCadastro;
 		        confInst.IdUsuario = 14767; // login "eric"
@@ -851,6 +855,7 @@ public class FornecedorRepositorio {
 		            		IdConfigInstaladorIntegradorNuvem = (int) session.save(confInstNuvem);
 		            	
 		            	confInst.IdConfigInstaladorIntegradorNuvem = IdConfigInstaladorIntegradorNuvem;
+		            	confInst.NrSequenciaInstanciaIntegradorNuvem = f.SequenciaInstanciaNuvem;
 		            }
 		            else 
 		            {
@@ -860,7 +865,6 @@ public class FornecedorRepositorio {
 		            	confInst.EspacoLivreDisco = f.EspacoLivreDisco;
 		            	confInst.FrequenciaProcessamento = f.FrequenciaProcessamento;
 		            	confInst.MemoriaRamLivre = f.MemoriaRamLivre;
-		            	//confInst.NrSequenciaInstanciaNuvem =
 		            	confInst.PortaIpAberta = f.PortaIpAberta;
 		            	confInst.So32ou64bit = f.SO32ou64bit;
 		            	confInst.TipoJRE = f.tipoJRE;

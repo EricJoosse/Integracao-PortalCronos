@@ -364,7 +364,7 @@ create table [dbo].[Configuracao_Instalador_Integrador](
 	qtd_dias_arquivos_xml_guardados_coninsint int NOT NULL,
 	
 	[id_config_instalador_integrador_nuvem_ciintnuv] [int] NULL,
-	nr_sequencia_instancia_nuvem_coninsint int NULL,
+	nr_sequencia_instancia_integrador_nuvem_coninsint int NULL,
 	
 	tipo_sist_operacional_coninsint varchar(30) NOT NULL,
 	sist_operacional_32_ou_64_bit_coninsint varchar(6) NOT NULL,
