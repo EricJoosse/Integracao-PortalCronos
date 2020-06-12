@@ -41,7 +41,7 @@ public class Fornecedor {
 	public String SkypeResponsavelTI_Nuvem;
 	public String PrenomeResponsavelTI_Nuvem;
 	public String TelefoneResponsavelTI_Nuvem;
-	String ResponsavelDeParasProdutos;
+	String EmailResponsavelDeParasProdutos;
 	String MemoriaRamLivre;
 	public boolean IsServicoNuvem;
 	public int SequenciaInstanciaNuvem;

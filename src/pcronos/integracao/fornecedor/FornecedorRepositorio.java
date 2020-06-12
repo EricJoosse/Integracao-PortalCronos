@@ -471,7 +471,7 @@ public class FornecedorRepositorio {
 		f[i].PortaIpAberta = PortaIpAbertaApsCloud;
 		f[i].FrequenciaProcessamento = FrequenciaProcessamentoApsCloud; 
 
-		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
+		f[i].EmailResponsavelDeParasProdutos = "Uma vendedora";  // APS Cloud - primeiro fornecedor de muitos
 
 		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
 		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
@@ -518,7 +518,7 @@ public class FornecedorRepositorio {
 		f[i].PortaIpAberta = "???"; // PortaIpAbertaApsCloud;
 		f[i].FrequenciaProcessamento = "15 min"; // FrequenciaProcessamentoApsCloud; 
 
-		f[i].ResponsavelDeParasProdutos = "Uma vendedora";  
+		f[i].EmailResponsavelDeParasProdutos = "Uma vendedora";  
 
 		f[i].EmailResponsavelTI = EmailResponsavelTIApsCloud;
 		f[i].SkypeResponsavelTI = SkypeResponsavelTIApsCloud;
@@ -564,7 +564,7 @@ public class FornecedorRepositorio {
 		f[i].PortaIpAberta = ""; 
 		f[i].FrequenciaProcessamento = "15 min";
 
-		f[i].ResponsavelDeParasProdutos = "Uma vendedora";
+		f[i].EmailResponsavelDeParasProdutos = "Uma vendedora";
 
 		f[i].EmailResponsavelTI = "";
 		f[i].SkypeResponsavelTI = "";
@@ -798,6 +798,7 @@ public class FornecedorRepositorio {
 		        confInst.IdUsuario = 14767; // login "eric"
 		        
 		        confMon.IdFornecedor = idFornecedor;
+		        confMon.IdVendedorResponsavel = f.EmailResponsavelDeParasProdutos;.........
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
 			    confMon.DtCadastro = f.DtCadastro;
 			    confMon.IdUsuario = 14767; // login "eric"
