@@ -7,9 +7,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.HibernateException;
+import org.hibernate.query.Query;
 
 import pcronos.integracao.fornecedor.interfaces.FornecedorInterface;
 import pcronos.integracao.fornecedor.interfaces.SistemaIntegradoInterface;
@@ -20,11 +23,10 @@ import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradoresNuvem;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegrador;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegradorNuvem;
+import pcronos.integracao.fornecedor.entidades.SistemaIntegrado;
+import pcronos.integracao.fornecedor.entidades.UsuarioSistema;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-
-import org.hibernate.SessionFactory;
-import org.hibernate.HibernateException;
 
 //import javax.persistence.RollbackException;
 //import javax.validation.ConstraintViolationException;
@@ -792,13 +794,21 @@ public class FornecedorRepositorio {
 			    // Colunas valendo para ambos os ambientes Nuvem e Não-Nuvem:
 			    confInst.UsuarioWebservice = f.usuarioWebservice;
 			    confInst.IsDebugAtivado = f.IsDebugAtivado;
-			    confInst.IdSistemaIntegrado = f.SiglaSistemaFornecedor;.......
+			    
+			    Query q = session.createQuery("from SistemaIntegrado s where upper(s.SiglaSistemaIntegrado) = '" + f.SiglaSistemaFornecedor.toUpperCase() + "'");
+			    SistemaIntegrado s = (SistemaIntegrado) (q.getSingleResult());
+			    confInst.IdSistemaIntegrado = s.Id;
+			    
 		        confInst.IdFornecedor = idFornecedor;
 		        confInst.DtCadastro = f.DtCadastro;
 		        confInst.IdUsuario = 14767; // login "eric"
 		        
 		        confMon.IdFornecedor = idFornecedor;
-		        confMon.IdVendedorResponsavel = f.EmailResponsavelDeParasProdutos;.........
+		        
+		        q = session.createQuery("from UsuarioSistema u inner join dbo.Pessoa p on p.id_pessoa = u.id_pessoa where lower(p.Email) = '" + f.EmailResponsavelDeParasProdutos.toLowerCase() + "'");
+		        UsuarioSistema u = (UsuarioSistema) (q.getSingleResult()); 
+		        confMon.IdVendedorResponsavel = u.Id;
+		        
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
 			    confMon.DtCadastro = f.DtCadastro;
 			    confMon.IdUsuario = 14767; // login "eric"

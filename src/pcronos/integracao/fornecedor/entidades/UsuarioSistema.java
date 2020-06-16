@@ -9,7 +9,7 @@ public class UsuarioSistema {
 	public UsuarioSistema() {  }
 
 	@Column(name="user_id")
-	int Id;
+	public int Id;
 	
 	@Column(name="id_pessoa")
 	int IdPessoa;

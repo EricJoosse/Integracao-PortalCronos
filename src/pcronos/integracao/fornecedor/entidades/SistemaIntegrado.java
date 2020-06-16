@@ -9,7 +9,7 @@ public class SistemaIntegrado {
 	public SistemaIntegrado() { }
 
 	@Column(name="id_sistema_integrado_sisint")
-	int Id;
+	public int Id;
 	
 	@Column(name="sg_sistema_integrado_sisint")
 	String SiglaSistemaIntegrado;
