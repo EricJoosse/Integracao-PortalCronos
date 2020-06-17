@@ -23,6 +23,7 @@ import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradores;
 import pcronos.integracao.fornecedor.entidades.ConfigMonitoradorIntegradoresNuvem;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegrador;
 import pcronos.integracao.fornecedor.entidades.ContatoTiIntegradorNuvem;
+import pcronos.integracao.fornecedor.entidades.Pessoa;
 import pcronos.integracao.fornecedor.entidades.SistemaIntegrado;
 import pcronos.integracao.fornecedor.entidades.UsuarioSistema;
 
@@ -702,6 +703,9 @@ public class FornecedorRepositorio {
 	         factory = new Configuration().
 	                   configure("hibernate.cfg.xml.Teste").
 	                   addAnnotatedClass(ConfigMonitoradorIntegradores.class).
+	                   addAnnotatedClass(SistemaIntegrado.class).
+	                   addAnnotatedClass(UsuarioSistema.class).
+	                   addAnnotatedClass(Pessoa.class).
 	                   buildSessionFactory();
 	    } 
 		catch (Throwable ex) 
@@ -795,9 +799,11 @@ public class FornecedorRepositorio {
 			    confInst.UsuarioWebservice = f.usuarioWebservice;
 			    confInst.IsDebugAtivado = f.IsDebugAtivado;
 			    
-			    Query q = session.createQuery("from SistemaIntegrado s where upper(s.SiglaSistemaIntegrado) = '" + f.SiglaSistemaFornecedor.toUpperCase() + "'");
+			    Query q = session.createQuery("from SistemaIntegrado where upper(SiglaSistemaIntegrado) = '" + f.SiglaSistemaFornecedor.toUpperCase() + "'");
 			    SistemaIntegrado s = (SistemaIntegrado) (q.getSingleResult());
 			    confInst.IdSistemaIntegrado = s.Id;
+			    System.out.println("f.SiglaSistemaFornecedor = " + f.SiglaSistemaFornecedor);
+			    System.out.println("confInst.IdSistemaIntegrado = " + confInst.IdSistemaIntegrado + "\r\n");
 			    
 		        confInst.IdFornecedor = idFornecedor;
 		        confInst.DtCadastro = f.DtCadastro;
@@ -805,9 +811,12 @@ public class FornecedorRepositorio {
 		        
 		        confMon.IdFornecedor = idFornecedor;
 		        
-		        q = session.createQuery("from UsuarioSistema u inner join dbo.Pessoa p on p.id_pessoa = u.id_pessoa where lower(p.Email) = '" + f.EmailResponsavelDeParasProdutos.toLowerCase() + "'");
-		        UsuarioSistema u = (UsuarioSistema) (q.getSingleResult()); 
-		        confMon.IdVendedorResponsavel = u.Id;
+		        if (f.EmailResponsavelDeParasProdutos != null)
+		        {
+			        q = session.createQuery("from UsuarioSistema u inner join dbo.Pessoa p on p.id_pessoa = u.id_pessoa where lower(p.Email) = '" + f.EmailResponsavelDeParasProdutos.toLowerCase() + "'");
+			        UsuarioSistema u = (UsuarioSistema) (q.getSingleResult()); 
+			        confMon.IdVendedorResponsavel = u.Id;
+		        }
 		        
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);
 			    confMon.DtCadastro = f.DtCadastro;
