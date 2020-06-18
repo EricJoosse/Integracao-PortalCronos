@@ -29,6 +29,8 @@ import pcronos.integracao.fornecedor.entidades.UsuarioSistema;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import javax.persistence.NoResultException;
+
 //import javax.persistence.RollbackException;
 //import javax.validation.ConstraintViolationException;
 //import javax.validation.ConstraintViolation;
@@ -351,6 +353,7 @@ public class FornecedorRepositorio {
 		f[i].PortaIpAberta = "80";
 		f[i].FrequenciaProcessamento = "15 min";
 		f[i].DtCadastro = LocalDate.of(2018, 11, 20);
+		f[i].EmailResponsavelDeParasProdutos = "TesteDeEmail@hotmail.com";
 
 		i++;
 		f[i].IdFornecedor = 171;
@@ -813,9 +816,20 @@ public class FornecedorRepositorio {
 		        
 		        if (f.EmailResponsavelDeParasProdutos != null)
 		        {
-			        q = session.createQuery("from UsuarioSistema u inner join dbo.Pessoa p on p.id_pessoa = u.id_pessoa where lower(p.Email) = '" + f.EmailResponsavelDeParasProdutos.toLowerCase() + "'");
-			        UsuarioSistema u = (UsuarioSistema) (q.getSingleResult()); 
-			        confMon.IdVendedorResponsavel = u.Id;
+			        q = session.createQuery("select u from UsuarioSistema u inner join u.pessoa p where lower(p.Email) = '" + f.EmailResponsavelDeParasProdutos.toLowerCase() + "'");
+			        if (q != null)
+			        {
+			        	try
+			        	{
+				        	UsuarioSistema u = (UsuarioSistema) (q.getSingleResult()); 
+				        	confMon.IdVendedorResponsavel = u.Id;
+						    System.out.println("f.EmailResponsavelDeParasProdutos = " + f.EmailResponsavelDeParasProdutos);
+						    System.out.println("confMon.IdVendedorResponsavel = " + confMon.IdVendedorResponsavel + "\r\n");
+			        	}
+			        	catch (NoResultException nex)
+			        	{ }
+			        	
+			        }
 		        }
 		        
 			    confMon.IsEmProducao = ( f.IsEmProducao.equals("Sim") ? true : false);

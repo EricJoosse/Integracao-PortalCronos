@@ -3,6 +3,7 @@ package pcronos.integracao.fornecedor.entidades;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity // Para evitar erro "org.hibernate.hql.internal.ast.QuerySyntaxException: SistemaIntegrado is not mapped"
@@ -17,5 +18,8 @@ public class Pessoa {
 	
 	@Column(name="ds_email_pessoa")
 	String Email;
+	
+	@OneToOne(mappedBy = "pessoa")
+	UsuarioSistema user;
 	
 }
