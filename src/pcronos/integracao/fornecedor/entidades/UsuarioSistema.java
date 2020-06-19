@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity // Para evitar erro "org.hibernate.hql.internal.ast.QuerySyntaxException: SistemaIntegrado is not mapped"
@@ -17,8 +17,8 @@ public class UsuarioSistema {
 	@Column(name="user_id")
 	public int Id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="id_pessoa")
-	public Pessoa pessoa;
+	private Pessoa pessoa;
 	
 }

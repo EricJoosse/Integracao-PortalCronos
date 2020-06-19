@@ -707,8 +707,8 @@ public class FornecedorRepositorio {
 	                   configure("hibernate.cfg.xml.Teste").
 	                   addAnnotatedClass(ConfigMonitoradorIntegradores.class).
 	                   addAnnotatedClass(SistemaIntegrado.class).
-	                   addAnnotatedClass(UsuarioSistema.class).
 	                   addAnnotatedClass(Pessoa.class).
+	                   addAnnotatedClass(UsuarioSistema.class).
 	                   buildSessionFactory();
 	    } 
 		catch (Throwable ex) 
