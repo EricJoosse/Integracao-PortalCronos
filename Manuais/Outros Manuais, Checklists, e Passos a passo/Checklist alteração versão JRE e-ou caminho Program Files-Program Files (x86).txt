@@ -4,22 +4,15 @@ Checklist alteração versão JRE e/ou caminho Program Files/Program Files (x86)
 Observação: este checklist serve apenas no caso de alterações nos servidores dos fornecedores, 
 			e não serve para alterações no projeto Eclipse
 			
-- TestadorUnitario.bat: 
+- bin\CaminhoJRE.bat:
 	- Adicionar "else if" no path
 	- Adicionar "else if" na chamada jre
 	- Testar se os parenteses entre aspas funcionam usando um snippet de uma mensagem
 
-- Job15a15min.bat:
+- TestadorUnitario.bat: 
 	- Adicionar "else if" no path
 	- Adicionar "else if" na chamada jre
-
-- Instalador.bat: 
-	- Adicionar "else if" no path
-	- Adicionar "else if" na chamada jre
-
-- Desinstalador.bat: 
-	- Adicionar "else if" no path
-	- Adicionar "else if" na chamada jre
+	- Testar se os parenteses entre aspas funcionam usando um snippet de uma mensagem
 
 - FornecedorRepository.cs: alterar:
 		f.dirProgramFiles = "Program Files (x86)"; ou:

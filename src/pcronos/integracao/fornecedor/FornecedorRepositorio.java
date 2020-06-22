@@ -132,7 +132,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = 13;
 		f[i].NomeFantasiaEmpresa = "Formaggio";
-		f[i].versaoIntegrador = "2.6";
+		f[i].versaoIntegrador = "3.4.1";
 		f[i].SiglaSistemaFornecedor = "APS";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
@@ -146,19 +146,19 @@ public class FornecedorRepositorio {
 		f[i].FuncaoResponsavelTI = "Coordenador de Projetos de TI";
 		f[i].FuncaoResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "";
-		f[i].AplicativoDesktopRemoto = "Team Viewer";
+		f[i].AplicativoDesktopRemoto = "AnyDesk"; // 299 273 091
 		f[i].usuarioWebservice = "ws-formaggio";
-		f[i].versaoJRE = "jre1.8.0_92";
-		f[i].tipoJRE = "(.. bit)";
+		f[i].versaoJRE = "jre1.8.0_161";
+		f[i].tipoJRE = "(64 bit)"; // 32 bit está instsalado tb e funciona tb, no Program Files (x86)
 		f[i].tipoSO = "Windows Server 2012 R2";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "02870737000190";
 		f[i].DiscoIntegrador = "C";
-		f[i].EspacoLivreDisco = "9 GB";
+		f[i].EspacoLivreDisco = "4.8 GB";
 		f[i].QtdDiasArquivosXmlGuardados = 100;
-		f[i].MemoriaRamLivre = "";
-		f[i].EnderecoIpPublicoServidor = "187.113.120.97";
-		f[i].PortaIpAberta = "80";
+		f[i].MemoriaRamLivre = "1 GB";
+		f[i].EnderecoIpPublicoServidor = "179.189.251.54"; // Era 187.113.120.97
+		f[i].PortaIpAberta = "3389"; // era 80
 		f[i].FrequenciaProcessamento = "15 min";
 		f[i].DtCadastro = LocalDate.of(2018, 6, 21);
 

@@ -38,8 +38,9 @@ Manual Upgrade dos Ambientes de Produção de 3.4.0 para 3.4.1
  
 4. (i)  Em todos os servidores: 
 			- Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
+			- Copiar bin\CaminhoJRE.bat do instalador para o servidor do fornecedor
    (ii) Em todos os servidores: 
-			- Copiar o arquivo lib\hibernate-core-5.4.10.Final.jar, validation-api-2.0.1.Final.jar, hibernate-validator-6.1.1.Final.jar,
+			- Copiar os arquivos lib\hibernate-core-5.4.10.Final.jar, validation-api-2.0.1.Final.jar, hibernate-validator-6.1.1.Final.jar,
         	  javax.el-api-3.0.1-b06.jar, javax.el-2.2.6.jar,  e todos os jars dependentes 
         	  e também mybatis-3.4.5.jar para o servidor do fornecedor: ordenar o diretório \lib\ no Instalador no projeto Eclipse 
         	  por Date Modified e copiar todos os jars de 18.12.2019 08:24 e todos os jars posteriores. 
