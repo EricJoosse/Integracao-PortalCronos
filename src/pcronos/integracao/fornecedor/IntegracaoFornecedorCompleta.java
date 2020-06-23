@@ -1792,11 +1792,19 @@ public final class IntegracaoFornecedorCompleta {
 	        {
 	   	        // O Campo CLIENTE.NOME é a razão social, 
 	   	        // O campo CLIENTE.NOMEFANTAZIA é o nome fantasia.
-	        	sqlString = "select nomefantazia "
-	                      + "     , cpfcgc "
-	                      + "  from cronos_clientes  "
-	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-	                      ;
+	        	
+	        	if (nomeFantasiaFornecedor.equals("Formaggio"))
+		        	sqlString = "select nomefantazia "
+		                      + "     , cpfcgc "
+		                      + "  from cliente  "
+		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+		                      ;
+	        	else
+		        	sqlString = "select nomefantazia "
+		                      + "     , cpfcgc "
+		                      + "  from cronos_clientes  "
+		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+		                      ;
 	        }
 	        else if (siglaSistema.equals("WinThor"))
 	        {
@@ -1837,11 +1845,14 @@ public final class IntegracaoFornecedorCompleta {
 		    {
 				if (siglaSistema.equals("APS"))
 		        {
-		        	sqlString = "select 1 "
-		                      + "  from cronos_clientes  "
-		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-				              + "   and ativo = 1 "
-		                      ;
+		        	if (nomeFantasiaFornecedor.equals("Formaggio"))
+			        	sqlString = null;
+		        	else
+			        	sqlString = "select 1 "
+			                      + "  from cronos_clientes  "
+			                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+					              + "   and ativo = 1 "
+			                      ;
 		        }
 		        else if (siglaSistema.equals("WinThor"))
 		        {
@@ -1934,12 +1945,23 @@ public final class IntegracaoFornecedorCompleta {
 
 		    if (siglaSistema.equals("APS"))
 	        {
-	        	sqlString = "select codtipopag       "
-	                      + "  from cronos_clientes  "
-	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-				          + "   and ativo = 2        "
-	                      ;
-	                   // + "   and codstatus = 1" // 1 = BLOQUEADO, no APS isso quer dizer apenas bloqueado para pagto. a prazo, e NÃO bloqueado para pagto. a vista !
+	        	if (nomeFantasiaFornecedor.equals("Formaggio"))
+	        	{
+		        	sqlString = "select codtipopag "
+		                      + "  from cliente    "
+		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+		                      ;
+	        				// + "   and codstatus = 1" // 1 = BLOQUEADO, no APS isso quer dizer apenas bloqueado para pagto. a prazo, e NÃO bloqueado para pagto. a vista !
+	        	}
+	        	else
+	        	{
+		        	sqlString = "select codtipopag       "
+		                      + "  from cronos_clientes  "
+		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+					          + "   and ativo = 2        "
+		                      ;
+		                   // + "   and codstatus = 1" // 1 = BLOQUEADO, no APS isso quer dizer apenas bloqueado para pagto. a prazo, e NÃO bloqueado para pagto. a vista !
+	        	}
 	        }
 	        else if (siglaSistema.equals("WinThor"))
 	        {
@@ -2053,10 +2075,15 @@ public final class IntegracaoFornecedorCompleta {
 
 		    if (siglaSistema.equals("APS"))
 	        {
-	        	sqlString = "select replace(precousado,'ç','c') "
-	                      + "  from cronos_clientes             "
-	                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
-	        			  + "   and ativo = 2                   ";
+	        	if (nomeFantasiaFornecedor.equals("Formaggio"))
+		        	sqlString = "select replace(precousado,'ç','c') "
+		                      + "  from cliente "
+		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'";
+	        	else
+		        	sqlString = "select replace(precousado,'ç','c') "
+		                      + "  from cronos_clientes             "
+		                      + " where replace(replace(replace(cpfcgc, '.',''), '/',''), '-','') = '" + cdComprador + "'"
+		        			  + "   and ativo = 2                   ";
 	        }
 	        else if (siglaSistema.equals("WinThor"))
 	        {
@@ -2266,14 +2293,27 @@ public final class IntegracaoFornecedorCompleta {
     
     if (siglaSistema.equals("APS"))
     {
-    	sqlString = "select 1 "
-                  + "  from cronos_produto "
-               // + "       join prodfilho on cronos_produto.codproduto = prodfilho.codproduto "
-               // + " where prodfilho.codprodfilho = " + cdProdutoFornecedor
-                  + " where cronos_produto.codprodfilho = " + cdProdutoFornecedor
-                  + " ";
-                  // No APS é normal que o produto pode ficar desativado temporariamente, 
-                  // então neste momento não usar a condição + "   and produto.ativo          = 2 ".
+    	if (nomeFantasiaFornecedor.equals("Formaggio"))
+    	{
+        	sqlString = "select 1 "
+                    + "  from produto "
+                    + "       join prodfilho on produto.codproduto = prodfilho.codproduto "
+                    + " where prodfilho.codprodfilho = " + cdProdutoFornecedor
+                    + " ";
+                    // No APS é normal que o produto pode ficar desativado temporariamente, 
+                    // então neste momento não usar a condição + "   and produto.ativo          = 2 ".
+    	}
+    	else
+    	{
+	    	sqlString = "select 1 "
+	                  + "  from cronos_produto "
+	               // + "       join prodfilho on cronos_produto.codproduto = prodfilho.codproduto "
+	               // + " where prodfilho.codprodfilho = " + cdProdutoFornecedor
+	                  + " where cronos_produto.codprodfilho = " + cdProdutoFornecedor
+	                  + " ";
+	                  // No APS é normal que o produto pode ficar desativado temporariamente, 
+	                  // então neste momento não usar a condição + "   and produto.ativo          = 2 ".
+    	}
     }
     else if (siglaSistema.equals("WinThor"))
     {
@@ -2310,14 +2350,29 @@ public final class IntegracaoFornecedorCompleta {
     try {
 	    if (siglaSistema.equals("APS"))
 	    {
-	    	 sqlString = "select 'abc' " 
-	                   + "  from cronos_estoque "
-	                   + " where cronos_estoque.codprodfilho = " + cdProdutoFornecedor;
+         	 if (nomeFantasiaFornecedor.equals("Formaggio"))
+    	    	 sqlString = "select 'abc' " 
+  	                   + "  from estoqueempresa "
+  	                   + " where estoqueempresa.codprodfilho = " + cdProdutoFornecedor;
+         	 else
+		    	 sqlString = "select 'abc' " 
+		                   + "  from cronos_estoque "
+		                   + " where cronos_estoque.codprodfilho = " + cdProdutoFornecedor;
 	
 			 if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-	            	sqlString += "                        and cronos_estoque.estoque >= " + qtSolicitada;
+			 {
+	         	 if (nomeFantasiaFornecedor.equals("Formaggio"))
+		            	sqlString += "                        and estoqueempresa.estoque >= " + qtSolicitada;
+             	 else
+             		 	sqlString += "                        and cronos_estoque.estoque >= " + qtSolicitada;
+			 }
 	         else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-	            	sqlString += "                        and cronos_estoque.estoque > 0 ";
+	         {
+	         	 if (nomeFantasiaFornecedor.equals("Formaggio"))
+		            	sqlString += "                        and estoqueempresa.estoque > 0 ";
+             	 else
+             		 	sqlString += "                        and cronos_estoque.estoque > 0 ";
+	         }
 	    }
 	    else if (siglaSistema.equals("WinThor"))
 	    {
@@ -2364,11 +2419,21 @@ public final class IntegracaoFornecedorCompleta {
 
     if (siglaSistema.equals("APS"))
     {
-    	sqlString = "select cronos_preco." + tipoPrecoComprador + " "
-                  + "  from cronos_preco "
-               // + "       join        prodfilho on        prodfilho.codprodfilho = cronos_preco.codprodfilho "
-               // + "       join cronos_produto   on cronos_produto.codproduto     = prodfilho.codproduto ";
-                  + "       join cronos_produto   on cronos_produto.codprodfilho   = cronos_preco.codprodfilho ";
+    	if (nomeFantasiaFornecedor.equals("Formaggio"))
+    	{
+        	sqlString = "select precoempresa." + tipoPrecoComprador + " "
+                    + "  from precoempresa "
+                    + "       join prodfilho on prodfilho.codprodfilho = precoempresa.codprodfilho "
+                    + "       join produto   on produto.codproduto     = prodfilho.codproduto ";
+    	}
+    	else
+    	{
+	    	sqlString = "select cronos_preco." + tipoPrecoComprador + " "
+	                  + "  from cronos_preco "
+	               // + "       join        prodfilho on        prodfilho.codprodfilho = cronos_preco.codprodfilho "
+	               // + "       join cronos_produto   on cronos_produto.codproduto     = prodfilho.codproduto ";
+	                  + "       join cronos_produto   on cronos_produto.codprodfilho   = cronos_preco.codprodfilho ";
+    	}
     }
     else if (siglaSistema.equals("WinThor"))
     {
@@ -2391,12 +2456,26 @@ public final class IntegracaoFornecedorCompleta {
     {
         if (siglaSistema.equals("APS"))
         {
-        	sqlStringComEstoque += "       join cronos_estoque  on cronos_estoque.codprodfilho = cronos_preco.codprodfilho ";
+        	if (nomeFantasiaFornecedor.equals("Formaggio"))
+            	sqlStringComEstoque += "       join estoqueempresa  on estoqueempresa.codprodfilho = precoempresa.codprodfilho ";
+        	else
+        		sqlStringComEstoque += "       join cronos_estoque  on cronos_estoque.codprodfilho = cronos_preco.codprodfilho ";
 
+        	
             if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorOuIgualQtdSolicitada"))
-            	sqlStringComEstoque += "                        and cronos_estoque.estoque >= " + qtSolicitada;
+            {
+            	if (nomeFantasiaFornecedor.equals("Formaggio"))
+                	sqlStringComEstoque += "                        and estoqueempresa.estoque >= " + qtSolicitada;
+            	else
+            		sqlStringComEstoque += "                        and cronos_estoque.estoque >= " + qtSolicitada;
+            }
             else if (criterioVerificacaoEstoque.equals("QtdEstoqueMaiorZero"))
-            	sqlStringComEstoque += "                        and cronos_estoque.estoque > 0 ";
+            {
+            	if (nomeFantasiaFornecedor.equals("Formaggio"))
+                	sqlStringComEstoque += "                        and estoqueempresa.estoque > 0 ";
+                else
+            		sqlStringComEstoque += "                        and cronos_estoque.estoque > 0 ";
+            }
         }
         else if (siglaSistema.equals("WinThor"))
         {
@@ -2407,13 +2486,27 @@ public final class IntegracaoFornecedorCompleta {
     
     if (siglaSistema.equals("APS"))
     {
-    	sqlStringSemEstoque += " where cronos_preco.codprodfilho = " + cdProdutoFornecedor
-                            +  "   and cronos_produto.ativo             = 2 "
-                            +  "   and cronos_produto.ativopesq         = 1 ";
+    	if (nomeFantasiaFornecedor.equals("Formaggio"))
+        	sqlStringSemEstoque += " where precoempresa.codprodfilho = " + cdProdutoFornecedor
+					            +  "   and produto.ativo             = 2 "
+					            +  "   and produto.ativopesq         = 1 ";
+    	else
+	    	sqlStringSemEstoque += " where cronos_preco.codprodfilho = " + cdProdutoFornecedor
+	                            +  "   and cronos_produto.ativo             = 2 "
+	                            +  "   and cronos_produto.ativopesq         = 1 ";
+
+    	
         if (toVerificarEstoque) 
-        	sqlStringComEstoque += " where cronos_preco.codprodfilho = " + cdProdutoFornecedor
-                                +  "   and cronos_produto.ativo             = 2 "
-                                +  "   and cronos_produto.ativopesq         = 1 ";
+        {
+        	if (nomeFantasiaFornecedor.equals("Formaggio"))
+            	sqlStringComEstoque += " where precoempresa.codprodfilho = " + cdProdutoFornecedor
+					                +  "   and produto.ativo             = 2 "
+					                +  "   and produto.ativopesq         = 1 ";
+           	else
+	        	sqlStringComEstoque += " where cronos_preco.codprodfilho = " + cdProdutoFornecedor
+	                                +  "   and cronos_produto.ativo             = 2 "
+	                                +  "   and cronos_produto.ativopesq         = 1 ";
+        }
     }
     else if (siglaSistema.equals("WinThor"))
     {
