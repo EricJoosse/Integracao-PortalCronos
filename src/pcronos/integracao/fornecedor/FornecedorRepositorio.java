@@ -160,7 +160,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "179.189.251.54"; // Era 187.113.120.97
 		f[i].PortaIpAberta = "3389"; // era 80
 		f[i].FrequenciaProcessamento = "15 min";
-		f[i].DtCadastro = LocalDate.of(2018, 6, 21);
+		f[i].DtCadastro = LocalDate.of(2017, 6, 27);
 
 		i++;
 		f[i].IdFornecedor = 947;
@@ -193,7 +193,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "jrolinda.dyndns.org";
 		f[i].PortaIpAberta = "Não precisa";
 		f[i].FrequenciaProcessamento = "15 min";
-		f[i].DtCadastro = LocalDate.of(2018, 11, 9);
+		f[i].DtCadastro = LocalDate.of(2018, 10, 17);
 
 		i++;
 		f[i].IdFornecedor = 30;
@@ -255,7 +255,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = "";
 		f[i].FrequenciaProcessamento = "15 min";
-		f[i].DtCadastro = LocalDate.of(2017, 12, 12);
+		f[i].DtCadastro = LocalDate.of(2017, 8, 8);
 
 		i++;
 		f[i].IdFornecedor = 170;
@@ -352,7 +352,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "187.1.168.74";
 		f[i].PortaIpAberta = "80";
 		f[i].FrequenciaProcessamento = "15 min";
-		f[i].DtCadastro = LocalDate.of(2018, 11, 20);
+		f[i].DtCadastro = LocalDate.of(2018, 10, 17);
 		f[i].EmailResponsavelDeParasProdutos = "TesteDeEmail@hotmail.com";
 
 		i++;
@@ -384,7 +384,7 @@ public class FornecedorRepositorio {
 		f[i].EnderecoIpPublicoServidor = "187.113.65.138";
 		f[i].PortaIpAberta = "Não se aplica";
 		f[i].FrequenciaProcessamento = "15 min";
-		f[i].DtCadastro = LocalDate.of(2018, 10, 27);
+		f[i].DtCadastro = LocalDate.of(2018, 10, 17);
 
 		i++;
 		f[i].IdFornecedor = 14;
@@ -495,7 +495,7 @@ public class FornecedorRepositorio {
 		f[i].PrenomeResponsavelTI_Nuvem = PrenomeResponsavelTI_NuvemApsCloud;
 		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
-		f[i].DtCadastro = LocalDate.of(2019, 11, 27);
+		f[i].DtCadastro = LocalDate.of(2019, 5, 10);
 		
 
 		
@@ -542,7 +542,7 @@ public class FornecedorRepositorio {
 		f[i].PrenomeResponsavelTI_Nuvem = PrenomeResponsavelTI_NuvemApsCloud;
 		f[i].TelefoneResponsavelTI_Nuvem = TelefoneResponsavelTI_NuvemApsCloud;
 
-		f[i].DtCadastro = LocalDate.of(2019, 10, 17);
+		f[i].DtCadastro = LocalDate.of(2019, 11, 11);
 		
 
 /*  Template:
