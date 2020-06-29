@@ -353,7 +353,7 @@ public class FornecedorRepositorio {
 		f[i].PortaIpAberta = "80";
 		f[i].FrequenciaProcessamento = "15 min";
 		f[i].DtCadastro = LocalDate.of(2018, 10, 17);
-		f[i].EmailResponsavelDeParasProdutos = "TesteDeEmail@hotmail.com";
+		f[i].EmailResponsavelDeParasProdutos = "";
 
 		i++;
 		f[i].IdFornecedor = 171;
@@ -821,6 +821,7 @@ public class FornecedorRepositorio {
 			        {
 			        	try
 			        	{
+						    System.out.println("f.IdFornecedor = " + f.IdFornecedor);
 				        	UsuarioSistema u = (UsuarioSistema) (q.getSingleResult()); 
 				        	confMon.IdVendedorResponsavel = u.Id;
 						    System.out.println("f.EmailResponsavelDeParasProdutos = " + f.EmailResponsavelDeParasProdutos);
