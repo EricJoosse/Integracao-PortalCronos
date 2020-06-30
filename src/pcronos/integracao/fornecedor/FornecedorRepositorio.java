@@ -706,9 +706,14 @@ public class FornecedorRepositorio {
 	         factory = new Configuration().
 	                   configure("hibernate.cfg.xml.Teste").
 	                   addAnnotatedClass(ConfigMonitoradorIntegradores.class).
+	                   addAnnotatedClass(ConfigMonitoradorIntegradoresNuvem.class).
+	                   addAnnotatedClass(ConfigInstaladorIntegrador.class).
+	                   addAnnotatedClass(ConfigInstaladorIntegradorNuvem.class).
 	                   addAnnotatedClass(SistemaIntegrado.class).
 	                   addAnnotatedClass(Pessoa.class).
 	                   addAnnotatedClass(UsuarioSistema.class).
+	                   addAnnotatedClass(ContatoTiIntegrador.class).
+	                   addAnnotatedClass(ContatoTiIntegradorNuvem.class).
 	                   buildSessionFactory();
 	    } 
 		catch (Throwable ex) 
