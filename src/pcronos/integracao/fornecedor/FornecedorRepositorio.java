@@ -745,7 +745,9 @@ public class FornecedorRepositorio {
 				if (idFornecedor == null || idFornecedor < 0 || idFornecedor == 2016)
 					continue;
 				
-				// Estouro de uma coluna dá erro "jdbc.SQLServerException: String or binary data would be truncated"
+			    System.out.println("f.IdFornecedor = " + f.IdFornecedor);
+
+			    // Estouro de uma coluna dá erro "jdbc.SQLServerException: String or binary data would be truncated"
 				// e nem Hibernate nem JDBC diz qual coluna é a causa e ainda menos qual valor é o problema.
 				// Solução: usar o Hibernate Validator:
 				ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -775,7 +777,7 @@ public class FornecedorRepositorio {
 			    conTI.DtCadastro = f.DtCadastro;
 			    conTI.IdUsuario = 14767; // login "eric"
 
-			    if (f.PrenomeResponsavelTIAlternativo != null || f.EmailResponsavelTIAlternativo != null)
+			    if (!Utils.isNullOrBlank(f.PrenomeResponsavelTIAlternativo) || !Utils.isNullOrBlank(f.EmailResponsavelTIAlternativo))
 			    {
 				    conTIsecundario.IdFornecedor = idFornecedor;
 				    conTIsecundario.nrSequenciaContato = 2;
@@ -795,7 +797,7 @@ public class FornecedorRepositorio {
 				    conTINuvem.DtCadastro = f.DtCadastro;
 				    conTINuvem.IdUsuario = 14767; // login "eric"
 	
-				    if (f.PrenomeResponsavelTIAlternativo != null || f.EmailResponsavelTIAlternativo != null)
+				    if (!Utils.isNullOrBlank(f.PrenomeResponsavelTIAlternativo) || !Utils.isNullOrBlank(f.EmailResponsavelTIAlternativo))
 				    {
 					    conTIsecundarioNuvem.nrSequenciaContato = 2;
 					    conTIsecundarioNuvem.DtCadastro = f.DtCadastro;
@@ -819,14 +821,13 @@ public class FornecedorRepositorio {
 		        
 		        confMon.IdFornecedor = idFornecedor;
 		        
-		        if (f.EmailResponsavelDeParasProdutos != null)
+		        if (!Utils.isNullOrBlank(f.EmailResponsavelDeParasProdutos))
 		        {
 			        q = session.createQuery("select u from UsuarioSistema u inner join u.pessoa p where lower(p.Email) = '" + f.EmailResponsavelDeParasProdutos.toLowerCase() + "'");
 			        if (q != null)
 			        {
 			        	try
 			        	{
-						    System.out.println("f.IdFornecedor = " + f.IdFornecedor);
 				        	UsuarioSistema u = (UsuarioSistema) (q.getSingleResult()); 
 				        	confMon.IdVendedorResponsavel = u.Id;
 						    System.out.println("f.EmailResponsavelDeParasProdutos = " + f.EmailResponsavelDeParasProdutos);
@@ -866,7 +867,12 @@ public class FornecedorRepositorio {
 		            System.out.println("Valid Object");
 		            
 		            int IdContatoTiIntegrador = (int)session.save(conTI);
-		            int IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundario);
+		            
+		            Integer IdContatoTiSecundarioIntegrador = null;
+		            if (!Utils.isNullOrBlank(f.PrenomeResponsavelTIAlternativo) || !Utils.isNullOrBlank(f.EmailResponsavelTIAlternativo))
+		            {
+		            	IdContatoTiSecundarioIntegrador = (int)session.save(conTIsecundario);
+		            }
 
 		            
 		            if (f.IsServicoNuvem) 
