@@ -75,6 +75,7 @@ public class FornecedorRepositorio {
 		f[i].usuarioWebservice = "";
 		f[i].versaoJRE = "";
 		f[i].tipoSO = "Windows Server 2016";
+		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].FrequenciaProcessamento = "15 min";
@@ -95,6 +96,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
+		f[i].SO32ou64bit = "?";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "90 GB";
@@ -120,6 +122,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2012 R2";
+		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "43 GB";
@@ -151,6 +154,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_161";
 		f[i].tipoJRE = "(64 bit)"; // 32 bit está instsalado tb e funciona tb, no Program Files (x86)
 		f[i].tipoSO = "Windows Server 2012 R2";
+		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "02870737000190";
 		f[i].DiscoIntegrador = "C";
@@ -216,6 +220,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_231";
 		f[i].tipoJRE = "(64 bit)";
 		f[i].tipoSO = "Windows Server 2012 R2";
+		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07182763000140"; 
 		f[i].DiscoIntegrador = "C";
@@ -246,6 +251,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "?????????????????????";
+		f[i].SO32ou64bit = "?";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "04666316000178";
 		f[i].DiscoIntegrador = "C";
@@ -277,6 +283,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
+		f[i].SO32ou64bit = "?";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07041307000180";
 		f[i].DiscoIntegrador = "C";
@@ -307,6 +314,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1";
+		f[i].SO32ou64bit = "?";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24150377000195";
 		f[i].DiscoIntegrador = "C";
@@ -344,6 +352,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2016"; // Windows Server 2016 Standard
+		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "07534303000133";
 		f[i].DiscoIntegrador = "C";
@@ -376,6 +385,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
+		f[i].SO32ou64bit = "?";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "24407389000233";
 		f[i].DiscoIntegrador = "C";
@@ -405,6 +415,7 @@ public class FornecedorRepositorio {
 		f[i].versaoJRE = "jre1.8.0_111";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].tipoSO = "Windows Server 2012 R2"; // Windows Server 2012 R2 Standard (sem nenhum service pack)
+		f[i].SO32ou64bit = "64bit";
 		f[i].dirProgramFiles = "Program Files";
 		f[i].cnpjFornecedor = "03042263000151";
 		f[i].DiscoIntegrador = "C";
@@ -423,6 +434,7 @@ public class FornecedorRepositorio {
 		String AplicativoDesktopRemotoApsCloud = "AnyDesk";
 		String IdAplicativoDesktopRemotoApsCloud = "759304784 (era desktop-fvkrc84@ad)";
 		String tipoSOApsCloud = "Windows Server 2008 R2 SP1"; 
+		String SO32ou64bitApsCloud = "?"; 
 		String dirProgramFilesApsCloud = "Program Files (x86)";
 		String versaoJREApsCloud = "jre1.8.0_191";
 		String tipoJREApsCloud = "(32 bit)";
@@ -467,6 +479,7 @@ public class FornecedorRepositorio {
 		f[i].IdAplicativoDesktopRemoto = IdAplicativoDesktopRemotoApsCloud; 
 		f[i].usuarioWebservice = "ws-marizpan";  // APS Cloud - primeiro fornecedor de muitos
 		f[i].tipoSO = tipoSOApsCloud; 
+		f[i].SO32ou64bit = SO32ou64bitApsCloud;
 		f[i].dirProgramFiles = dirProgramFilesApsCloud;
 		f[i].versaoJRE = versaoJREApsCloud;
 		f[i].tipoJRE = tipoJREApsCloud;
@@ -514,6 +527,7 @@ public class FornecedorRepositorio {
 		f[i].AplicativoDesktopRemoto = AplicativoDesktopRemotoApsCloud;
 		f[i].usuarioWebservice = "ws-atacamax";  
 		f[i].tipoSO = "Windows Server 2012 R2"; //tipoSOApsCloud; 
+		f[i].SO32ou64bit = "64bit"; // SO32ou64bitApsCloud;
 		f[i].dirProgramFiles = "Program Files (x86)"; // dirProgramFilesApsCloud;
 		f[i].versaoJRE = "jre1.8.0_211"; // versaoJREApsCloud;
 		f[i].tipoJRE = "(32 bit)";  // tipoJREApsCloud
@@ -560,6 +574,7 @@ public class FornecedorRepositorio {
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].usuarioWebservice = "";
 		f[i].tipoSO = ""; 
+		f[i].SO32ou64bit = ""; // "32bit" ou "64bit"
 		f[i].dirProgramFiles = "";
 		f[i].versaoJRE = "";
 		f[i].tipoJRE = "(.. bit)";
