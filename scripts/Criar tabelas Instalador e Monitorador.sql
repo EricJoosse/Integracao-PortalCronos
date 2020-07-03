@@ -399,10 +399,10 @@ CONSTRAINT [PK_CONINSINT] PRIMARY KEY CLUSTERED
 CREATE UNIQUE INDEX UK_CONINSINT_SEQ_NUVEM 
 ON dbo.Configuracao_Instalador_Integrador(
 	[id_config_instalador_integrador_nuvem_ciintnuv] ASC,
-	nr_sequencia_instancia_nuvem_coninsint ASC
+	nr_sequencia_instancia_integrador_nuvem_coninsint ASC
 )
 WHERE id_config_instalador_integrador_nuvem_ciintnuv is not null
-	  AND nr_sequencia_instancia_nuvem_coninsint is not null
+	  AND nr_sequencia_instancia_integrador_nuvem_coninsint is not null
 --GO
 
 
