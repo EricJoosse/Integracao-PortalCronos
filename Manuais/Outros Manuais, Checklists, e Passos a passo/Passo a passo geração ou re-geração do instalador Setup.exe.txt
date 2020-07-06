@@ -24,8 +24,8 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
 2. (i)  Primeiro verificar se este arquivo bate com o arquivo a ser excluido 
         no GitHub.
    (ii) Deletar ou renomear um dos seguintes arquivos:
-   			-     "Instalador do Integrador Fornecedores - Portal Cronos.3.4.1.Win2008.R2.SP1.exe"
-   			- ou  "Instalador do Monitorador.3.4.1.Win2008.R2.SP1.exe"
+   			-     "Instalador do Integrador Fornecedores - Portal Cronos.3.4.2.Win2008.R2.SP1.exe"
+   			- ou  "Instalador do Monitorador.3.4.2.Win2008.R2.SP1.exe"
         pelo Eclipse (não pelo Windows Explorer!). 
      
 3. Usando o Winrar 4.01, criar um self extractable file com absolute path "C:/" 
@@ -40,8 +40,8 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
       - WinRAR                   : Mudar .rar para .zip
       - WinRAR                   : Método de compressão : Ótimo
       - WinRAR                   : marcar checkbox SFX
-      - Nome                     : (i)      Instalador do Integrador Fornecedores - Portal Cronos.3.4.1.Win2008.R2.SP1.exe
-                                   (ii) ou  Instalador do Monitorador.3.4.1.Win2008.R2.SP1.exe
+      - Nome                     : (i)      Instalador do Integrador Fornecedores - Portal Cronos.3.4.2.Win2008.R2.SP1.exe
+                                   (ii) ou  Instalador do Monitorador.3.4.2.Win2008.R2.SP1.exe
                                    Obs.: Se mudar para outro nome diferente de "Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
                                          ou "Instalador do Monitorador.*.exe", 
                                          ajustar o mesmo no final de Instalador_Integrador.bat e/ou Instalador_Monitorador.bat.
