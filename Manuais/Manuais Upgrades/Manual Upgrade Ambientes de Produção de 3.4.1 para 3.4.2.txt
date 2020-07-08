@@ -1,7 +1,7 @@
 Manual Upgrade dos Ambientes de Produção de 3.4.1 para 3.4.2 
 ============================================================
 
-1. (i)  Apenas no caso do servidor do monitoramento:
+1. (i)  Apenas no caso do servidor do monitoramento e dos servidores de banco e de contingência:
 		 - Conectar como cronostech
 	     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
 	       (desmarcar "Hide protected operating system files") temporariamente
@@ -19,13 +19,20 @@ Manual Upgrade dos Ambientes de Produção de 3.4.1 para 3.4.2
          e verificar no taskmgr.exe se o JRE está rodando ainda. 
          Esperar até o JRE terminou.
    
-   (ii)  Em todos os casos (incluindo no caso JR Distribuição / Windows 10):
- 		   - Adicionar "exit" seguida por uma linha em branco no início do arquivo 
- 		     Job15a15min.bat no servidor do fornecedor. 
+   (ii)  Em todos os casos nos quais a frequência do processamento for 5 min ou menos
+         exceto no caso JR Distribuição / Windows 10:
+         (até agora apenas no servidor de banco do Portal e no servidor de contingência de banco do Portal) 
+ 		   - Desativar o processamento adicionando "exit" seguida por uma linha em branco 
+ 		     no início do arquivo Job15a15min.bat no servidor do fornecedor. 
  		     (NÃO renomear Job15a15min.bat para evitar que o Scheduler 
               possivelmente se perde comprometendo os derrubamentos automáticos dos JRE´s travados)
+              
+   (iii) Em todos os casos nos quais a frequência do processamento for 15 min ou mais
+         (incluindo no caso JR Distribuição / Windows 10):
+          - Se 14 min for suficiente para fazer todos os passos do upgrade, não precisa 
+            desativar o processamento.
 
-   (iii) Apenas no caso de instalação no servidor da JR Distribuição (Windows 10):
+   (iv) Apenas no caso de instalação no servidor da JR Distribuição (Windows 10):
 	        a. Primeiro verificar no diretório C:\ProgramData\PortalCronos\Logs\Local\ 
 	           se o Integrador está ofertando no momento e ficar esperando até ele terminar 
 	           o último passo (a atualização do arquivo TemposExecução.log)
@@ -38,11 +45,13 @@ Manual Upgrade dos Ambientes de Produção de 3.4.1 para 3.4.2
  
 4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
  
-5. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
+5. No caso que o processamento foi desativado: 
+   remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
 6. Em todos os casos: 
-     - Acompanhar 15 minutos se o Integrador começa executar automaticamente
+     - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
+       ou 5 minutos, dependendo da frequência do processamento.
      
 7. Apenas no caso do servidor do monitoramento: 
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
