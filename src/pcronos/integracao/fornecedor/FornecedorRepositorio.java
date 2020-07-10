@@ -52,7 +52,7 @@ public class FornecedorRepositorio {
 
     static {
 		hashMap = new HashMap<Integer, Fornecedor>(); 
-		final int qtdFornecedores = 14;
+		final int qtdFornecedores = 15;
 		Fornecedor[] f = new Fornecedor[qtdFornecedores];
 
 		for (int j=0; j < (qtdFornecedores); j++) {
@@ -113,6 +113,32 @@ public class FornecedorRepositorio {
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
+		f[i].IsDebugAtivado = false;
+		f[i].EmailResponsavelTI = "";
+		f[i].EmailResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTI = "";
+		f[i].PrenomeResponsavelTIAlternativo = "";
+		f[i].AplicativoDesktopRemoto = "mstsc";
+		f[i].versaoJRE = "jre1.8.0_92";
+		f[i].tipoJRE = "(.. bit)";
+		f[i].tipoSO = "Windows Server 2012 R2";
+		f[i].SO32ou64bit = "64bit";
+		f[i].dirProgramFiles = "Program Files";
+		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "43 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 32;
+		f[i].MemoriaRamLivre = "1.2 GB";
+		f[i].EnderecoIpPublicoServidor = "Não se aplica";
+		f[i].PortaIpAberta = "Não se aplica";
+		f[i].FrequenciaProcessamento = "5 min";
+
+		i++;
+		f[i].IdFornecedor = -3;
+		f[i].NomeFantasiaEmpresa = "Monitoramento Banco de Contingência";
+		f[i].versaoIntegrador = "3.4.2";
+		f[i].SiglaSistemaFornecedor = "PCronos";
+		f[i].IsServicoNuvem = false;
+		f[i].IsEmProducao = "Não"; // Tem "exit" no início do Job.bat
 		f[i].IsDebugAtivado = false;
 		f[i].EmailResponsavelTI = "";
 		f[i].EmailResponsavelTIAlternativo = "";

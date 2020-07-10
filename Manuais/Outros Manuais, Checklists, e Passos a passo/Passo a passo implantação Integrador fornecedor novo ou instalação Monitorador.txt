@@ -891,7 +891,8 @@ Eric
 	  por enquanto que o Web Installer ainda não está pronto.
 	  
 
-  34. Apenas no caso de instalação no servidor de banco de produção do Portal Cronos:
+  34. Apenas no caso de instalação no servidor de banco de produção do Portal Cronos
+      e no caso do servidor de contingência de banco de produção do Portal Cronos:
 	     - Por enquanto manualmente, no Task Scheduler deshabilitar o Integrador, 
 	       alterar a frequência de 15 min para 5 min, 
 	       e em seguida habilitar o Integrador de volta, 

@@ -2929,7 +2929,7 @@ public final class IntegracaoFornecedorCompleta {
    }
 
   
-  public static boolean temCrescimentoTempdb(LocalDateTime horaInicio, String arqTempdb, long tamanhoCerto) {
+  public static boolean temCrescimentoTempdb(LocalDateTime horaInicio, String arqTempdb, long tamanhoCerto, String nomeServidor) {
       File tempdb = new File(arqTempdb);
       long tamanhoArqTempdb = tempdb.length();
       
@@ -2939,7 +2939,7 @@ public final class IntegracaoFornecedorCompleta {
     			               + "Tamanho certo: " + tamanhoCerto + "\r\n"
     			               + "Tamanho atual: " + tamanhoArqTempdb;
     	  String assuntoEstouroHD = "URGENTE!!! Crescimento perigoso do TEMPDB no servidor de banco " + Utils.getNomeServidor() + " !!!";
-      	  EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, Constants.SERVBANCOCRONOS,  null);
+      	  EmailAutomatico.enviar(remetenteEmailAutomatico, destinoEmailAutomatico, ccEmailAutomatico, assuntoEstouroHD, null, bodyEstouroHD, provedorEmailAutomatico, portaEmailAutomatico, usuarioEmailAutomatico, senhaCriptografadaEmailAutomatico, diretorioArquivosXmlSemBarraNoFinal, horaInicio, diretorioArquivosXml, nomeServidor,  null);
       	  return true;
       }
       else
@@ -2954,12 +2954,12 @@ public final class IntegracaoFornecedorCompleta {
       String bodyEstouroHD = "";
       
       
-      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && strUnidade.equals("C:") && freeSpace < 10000000000L) // 10 GB
+      if ((nomeServidor.equals(Constants.SERVBANCOCRONOS) || nomeServidor.equals(Constants.SERVBANCOCRONOSCONTINGENCIA)) && strUnidade.equals("C:") && freeSpace < 10000000000L) // 10 GB
       {
           bodyEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco " + strUnidade + "\\: do servidor de banco " + nomeServidor;
     	  assuntoEstouroHD = bodyEstouroHD;
       }
-      else if (nomeServidor.equals(Constants.SERVBANCOCRONOS) && strUnidade.equals("F:") && freeSpace < 20000000000L) // 20 GB
+      else if ((nomeServidor.equals(Constants.SERVBANCOCRONOS) || nomeServidor.equals(Constants.SERVBANCOCRONOSCONTINGENCIA)) && strUnidade.equals("F:") && freeSpace < 20000000000L) // 20 GB
       {
     	  assuntoEstouroHD = "URGENTE!!! " + Utils.displayFilesize(freeSpace) + " " + Constants.ESPACO_LIVRE + " no disco " + strUnidade + ":\\: do servidor de banco " + nomeServidor;
     	  bodyEstouroHD = "Provavelmente o Cobian Backup parou de fazer a limpeza automática dos arquivos.";
@@ -2995,24 +2995,24 @@ public final class IntegracaoFornecedorCompleta {
 	  {
 		  String nomeServidor = Utils.getNomeServidor();
 	
-	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) || nomeServidor.equals(Constants.SERVBANCOCRONOSCONTINGENCIA))
 	      {
-	          if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf", 1180696576L))
+	          if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdb.mdf", 1180696576L, nomeServidor))
 	        	  return true;
-		      if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdev2.ndf", 1180696576L))
+		      if (temCrescimentoTempdb(horaInicio, "C:/Program Files/Microsoft SQL Server/MSSQL12.MSSQLSERVER/MSSQL/DATA/tempdev2.ndf", 1180696576L, nomeServidor))
 	        	  return true;
-		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev3.ndf", 1180696576L))
+		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev3.ndf", 1180696576L, nomeServidor))
 	        	  return true;
-		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev4.ndf", 1180696576L))
+		      if (temCrescimentoTempdb(horaInicio, "F:/Microsoft SQL Server/DATA/tempdev4.ndf", 1180696576L, nomeServidor))
 	        	  return true;
 	      }
 	
 
 	      verificarEstouroHD(horaInicio, nomeServidor, "C:"); // Para todos os servidores do Portal Cronos
-	      verificarEstouroHD(horaInicio, nomeServidor, "F:"); //  Apenas para Constants.SERVBANCOCRONOS
+	      verificarEstouroHD(horaInicio, nomeServidor, "F:"); //  Apenas para Constants.SERVBANCOCRONOS e Constants.SERVBANCOCRONOSCONTINGENCIA
 
 	      
-	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS))
+	      if (nomeServidor.equals(Constants.SERVBANCOCRONOS) || nomeServidor.equals(Constants.SERVBANCOCRONOSCONTINGENCIA))
 	    	  return true;
 	      else 
 	    	  return false;
