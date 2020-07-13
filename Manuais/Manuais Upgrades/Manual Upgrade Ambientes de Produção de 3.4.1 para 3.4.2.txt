@@ -1,15 +1,19 @@
 Manual Upgrade dos Ambientes de Produção de 3.4.1 para 3.4.2 
 ============================================================
 
-1. (i)  Apenas no caso do servidor do monitoramento e dos servidores de banco e de contingência:
-		 - Conectar como cronostech
-	     - No Windows Explorer alterar a opção para exibir arquivos de sistema 
-	       (desmarcar "Hide protected operating system files") temporariamente
-
-	(ii) Em todos os servidores dos fornecedores:
-	      - Verificar se o usuário logado é administrador ou administrator, 
-	        local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
-	        (Formaggio: user "techcorp")
+1. (i)   Apenas no caso dos servidores do Portal Cronos com o Monitorador instalado: 
+         (servidor de aplicação, servidor de banco e servidor de banco de contingência):
+           - Conectar como cronostech
+ 
+   (ii)  Em todos os servidores dos fornecedores:
+           - Verificar se o usuário logado é administrador ou administrator, 
+             local ou da rede, abrindo e fechando cmd.exe (como administrador da rede ainda não foi testado).
+             (Formaggio: user "techcorp")
+ 
+   (ii) Em todos os servidores com versão do Integrador > 3.3.0:
+           - Digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
+             (pois este diretório é "Hidden" e "Protected operating system file" desde a versão 3.3.0,
+              e o arquivo de configuração foi para o menu de Windows)
 	      
 
 2. Fazer exatamente na seguinte sequência:
@@ -53,13 +57,7 @@ Manual Upgrade dos Ambientes de Produção de 3.4.1 para 3.4.2
      - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
        ou 5 minutos, dependendo da frequência do processamento.
      
-7. Apenas no caso do servidor do monitoramento: 
-     (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
-          (marcar "Hide protected operating system files")
-     (ii) Fechar o Windows Explorer e abrir novamente
-     
-     
-8. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+7. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
    (ii)  Compilar o arquivo .jar
    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
          esperando o processamento atual terminar primeiro
