@@ -78,9 +78,7 @@ Manual Upgrade dos Ambientes de Produção de 3.2.0 para 3.3.0
 5. Remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-6. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
-   digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
-     (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
+6.   (i)  No Windows Explorer alterar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
 
