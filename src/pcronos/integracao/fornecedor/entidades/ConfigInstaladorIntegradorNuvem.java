@@ -54,6 +54,10 @@ public class ConfigInstaladorIntegradorNuvem implements SistemaIntegradoInterfac
     @Length(max=6, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String So32ou64bit;
     
+    @Column(name="idioma_sist_operacional_ciintnuv")
+    @Length(max=1, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
+    String IdiomaSO;
+    
     @Column(name="espaco_livre_disco_ciintnuv")
     @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     String EspacoLivreDisco;

@@ -72,6 +72,10 @@ public class ConfigInstaladorIntegrador implements FornecedorInterface, Forneced
     @Length(max=6, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     public String So32ou64bit;
     
+    @Column(name="idioma_sist_operacional_coninsint")
+    @Length(max=1, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
+    String IdiomaSO;
+    
     @Column(name="espaco_livre_disco_coninsint")
     @Length(max=10, message = " = ${validatedValue}, tamanho = ${validatedValue.length()}, máximo permitido = {max}")
     public String EspacoLivreDisco;

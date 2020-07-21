@@ -30,6 +30,7 @@ public class Fornecedor {
 	boolean IsDebugAtivado;
 	String tipoSO;
 	String SO32ou64bit;
+	String IdiomaSO;
 	String dirProgramFiles;
 	String DiscoIntegrador;
 	String EspacoLivreDisco;

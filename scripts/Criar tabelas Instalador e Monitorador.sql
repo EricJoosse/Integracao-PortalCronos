@@ -235,6 +235,7 @@ create table [dbo].[Configuracao_Instalador_Integrador_Nuvem](
 	[id_sistema_integrado_sisint] [int] NOT NULL,
 	tipo_sist_operacional_ciintnuv varchar(30) NOT NULL,
 	sist_operacional_32_ou_64_bit_ciintnuv varchar(6) NOT NULL,
+	idioma_sist_operacional_ciintnuv char(1) NOT NULL,
 	espaco_livre_disco_ciintnuv varchar(10) NOT NULL,
 	memoria_ram_livre_ciintnuv varchar(10) NOT NULL,
 	versao_jre_ciintnuv varchar(15) NOT NULL,
@@ -276,6 +277,8 @@ ALTER TABLE [dbo].[Configuracao_Instalador_Integrador_Nuvem] CHECK CONSTRAINT [F
 
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cada fornecedor no servidor nuvem tem outro padrão de integração.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
+--GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Necessário para suporte automático. Por exemplo o caminho no menu de Windows depende disso. "I" = "Inglês", "P" = "Português".' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador_Nuvem', @level2type=N'COLUMN',@level2name=N'idioma_sist_operacional_ciintnuv'
 --GO
 
 create table [dbo].[Configuracao_Monitorador_Integradores](
@@ -368,6 +371,7 @@ create table [dbo].[Configuracao_Instalador_Integrador](
 	
 	tipo_sist_operacional_coninsint varchar(30) NOT NULL,
 	sist_operacional_32_ou_64_bit_coninsint varchar(6) NOT NULL,
+	idioma_sist_operacional_coninsint char(1) NOT NULL,
 	espaco_livre_disco_coninsint varchar(10) NOT NULL,
 	memoria_ram_livre_coninsint varchar(10) NOT NULL,
 	versao_jre_coninsint varchar(15) NOT NULL,
@@ -437,6 +441,8 @@ ALTER TABLE [dbo].[Configuracao_Instalador_Integrador] CHECK CONSTRAINT [FK_CONI
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Na hora da instalação do lado do fornecedor ainda não existe um padrão de integração em produção.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador', @level2type=N'COLUMN',@level2name=N'id_sistema_integrado_sisint'
 --GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Debug no lado do fornecedor (no servidor local dele + debug remoto).' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador', @level2type=N'COLUMN',@level2name=N'sn_debug_ativado_coninsint'
+--GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Necessário para suporte automático. Por exemplo o caminho no menu de Windows depende disso. "I" = "Inglês", "P" = "Português".' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Configuracao_Instalador_Integrador', @level2type=N'COLUMN',@level2name=N'idioma_sist_operacional_coninsint'
 --GO
 		
 
