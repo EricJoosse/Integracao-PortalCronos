@@ -27,6 +27,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.transaction.SystemException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -316,6 +317,25 @@ public class Utils {
 		    	}
 		    }
 		});
+	}
+	
+	
+	public static String explicarCaminhoMenuWindows(String tipoSO, String idiomaSO) throws Exception
+	{
+		if (isNullOrBlank(tipoSO))
+			throw new Exception("O tipo de sistema operacional é um parâmetro obrigatório!");
+		
+		else if (isNullOrBlank(idiomaSO))
+			throw new Exception("O idioma do sistema operacional é um parâmetro obrigatório!");
+		
+		else if ( !(idiomaSO.equals("P") || idiomaSO.equals("I")) )
+			throw new Exception("O idioma do sistema operacional só pode ser I ou P!");
+		
+		else if (tipoSO.equals("Windows Server 2012 R2") && idiomaSO.equals("I"))
+			return "Ícone Windows (\"Start\") no canto esquerdo > Seta para baixo (\"Apps\") > letra P > Portal Cronos ?? > Integrador ....???";
+		
+		else
+			return "Menu de Windows \"Iniciar\" > \"Portal Cronos\"  ??? > \"Integrador\"?????....";
 	}
 }
 
