@@ -31,14 +31,27 @@
           	            C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;c:\InstantClient
           					        
        
-       Propão antes:	D:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;%SystemRoot%;
-       					%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+Propão SERVIDOR ANTIGO antes:	D:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;%SystemRoot%;
+							    %SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
        					
        					
-       		depois: 	C:\ProgramData\Oracle\Java\javapath;D:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;%SystemRoot%;
-       					%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+ 	   				   depois: 	C:\ProgramData\Oracle\Java\javapath;D:\oracle\product\10.2.0\client_1\bin;%SystemRoot%\system32;%SystemRoot%;
+         						%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
        					
-       					
+Propão SERVIDOR NOVO antes:	Windows: C:\oracle\administrador\product\11.2.0\client_1\bin;%SystemRoot%\system32;
+								     %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;
+								     %SYSTEMROOT%\System32\OpenSSH\
+								     
+						    Administrador: %USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
+
+ 	   				 depois: Windows: C:\ProgramData\Oracle\Java\javapath;
+ 	   				 				  C:\oracle\administrador\product\11.2.0\client_1\bin;%SystemRoot%\system32;
+ 	   				 				  %SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;
+ 	   				 				  %SYSTEMROOT%\System32\OpenSSH\	
+ 	   				   
+						    Administrador: %USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
+						    
+						           					
 Comal - antes: 
 		User variable "Path" Administrador =  %USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
 		

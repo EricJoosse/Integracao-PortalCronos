@@ -75,19 +75,10 @@ Eric
         where cd_usuario_sistema_ususis = 'ericcoringa'
    
    
-   -3. (i) Conectar nas telas do Portal Cronos (produção - 80) logado como ericcoringa e verificar se eles usam 
-           um texto padrão do fornecedor para todas as cotações de todos os compradores 
-           e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema".
+   -3. Conectar nas telas do Portal Cronos (produção - 80) logado como ericcoringa e verificar se eles usam 
+       um texto padrão do fornecedor para todas as cotações de todos os compradores 
+       e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema".
            
-       (ii) Depois disso voltar ericcoringa APENAS na base de produção: 
-
-		update [dbo].[Usuario_Sistema]  
-		   set id_fornecedor_fornec = null
-		     , id_perfil_acesso_perace = 1
-		     , id_central_compra_ctrcom = 1
-		     , id_comprador_compr = null
-		 where cd_usuario_sistema_ususis = 'ericcoringa'
-    
     
    -2. Leão, 
    
@@ -405,7 +396,7 @@ Como vai ser?
         Eclipse para testar isso. 
         
         Se não conseguir nada:
-        Skype: este servidor com IP público 18.214.93.120 tem alguma porta que pode ser pingada com psping -w 0 %enderecoIP%:%portaIP%? Tentei as portas 80 e 3389 porém o Amazon não deixa pingar. Meu programa só faz um psping automático quando as ofertas automáticas pararam de chegar no Portal Cronos, para saber automaticamente porque a integração parou.
+        Skype: Este servidor novo com IP público 186.235.190.42 tem alguma porta aberta que pode ser pingada com psping -w 0 %enderecoIP%:%portaIP%? Tentei as portas 80 e 3389 porém não consegui TNSpingar. Meu programa só faz um psping automático quando as ofertas automáticas pararam de chegar no Portal Cronos, para saber automaticamente porque a integração parou.
         
         Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
         atualizar o endereço IP e a porta IP aberta no arquivo FornecedorRepositorio.java.
@@ -452,8 +443,8 @@ Como vai ser?
  
     9.  Após a instalação:
     
-    9a. No caso: no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" (no projeto Eclipse) 
-        re-comentar REM goto SKIP_JRE 
+    9a. Em todos os casos: no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" (no projeto Eclipse) 
+        descomentar "REM goto SKIP_JRE" para ficar "goto SKIP_JRE"  
 
     9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
@@ -899,4 +890,14 @@ Eric
 	       e testar as primeiras 2 rodadas alterando Debug -> true no arquivo .properties 
 	       em um momento que o serviço não está rodando.
 	       Depois dos testes voltar Debug -> false em um momento que o serviço não está rodando.
-	  
+
+  35. Após todos os testes desvincular ericcoringa (apenas na base de produção): 
+
+		update [dbo].[Usuario_Sistema]  
+		   set id_fornecedor_fornec = null
+		     , id_perfil_acesso_perace = 1
+		     , id_central_compra_ctrcom = 1
+		     , id_comprador_compr = null
+		 where cd_usuario_sistema_ususis = 'ericcoringa'
+    
+  	  

@@ -46,8 +46,15 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
                                          ou "Instalador do Monitorador.*.exe", 
                                          ajustar o mesmo no final de Instalador_Integrador.bat e/ou Instalador_Monitorador.bat.
 
-	  - Em todos os casos pelo menos clicar no botão Aba "Avancado" do WinRAR > botão "Opções SFX..."
+	  - Em todos os casos:
+	    pelo menos clicar no botão Aba "Avancado" do WinRAR > botão "Opções SFX..."
 	    pois se não fazer isso, WinRAR não gera um SFX, mesmo se marcou o checkbox SFX.
+
+	  - Em todos os casos verificar:
+   		Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
+	      - Executar após a extração :     Instalador_Integrador.bat
+	                                   ou  Instalador_Monitorador.bat
+
 	    
 	  - Apenas no caso da primeira vez em uma máquina de desenvolvimento nova ou em outra máquina diferente:    
    		Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
@@ -64,11 +71,5 @@ Manual para a geração e/ou atualização do instalador Setup.exe:
        	                               (na segunda vez tudo já está salvo, apenas precisa abrir 
            	                            a aba "Avancado" > botão "Opções SFX..." e clicar OK, 
                	                        e não precisa repetir os itens acima.)
-
-	  - Na segunda vez na mesma máquina de desenvolvimento: 
-   		Aba "Avancado" do WinRAR > botão "Opções SFX..." : 
-	      - Executar após a extração : Escolher:
-	                                      Instalador_Integrador.bat
-	                                   ou Instalador_Monitorador.bat
 
  

@@ -404,7 +404,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = 171;
 		f[i].NomeFantasiaEmpresa = "Propão";
-		f[i].versaoIntegrador = "2.6.1";
+		f[i].versaoIntegrador = "3.4.2"; // No servidor anterior era "2.6.1"
 		f[i].SiglaSistemaFornecedor = "WinThor";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Sim";
@@ -417,20 +417,20 @@ public class FornecedorRepositorio {
 		f[i].PrenomeResponsavelTIAlternativo = "";
 		f[i].TelefoneResponsavelTI = "99535-1999";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
-		f[i].IdAplicativoDesktopRemoto = "382 127 135";
+		f[i].IdAplicativoDesktopRemoto = "928 767 259"; //No servidor anterior era "382 127 135";
 		f[i].usuarioWebservice = "ws-propao";
 		f[i].versaoJRE = "jre1.8.0_92";
-		f[i].tipoJRE = "(.. bit)";
-		f[i].tipoSO = "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
-		f[i].SO32ou64bit = "?";
-		f[i].IdiomaSO = "";
-		f[i].dirProgramFiles = "Program Files";
+		f[i].tipoJRE = "(64 bit)";
+		f[i].tipoSO = "Windows Server 2019"; // Na verdade "Windows Server 2019 Standard" // No servidor anterior era "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
+		f[i].SO32ou64bit = "64bit";
+		f[i].IdiomaSO = "PT";
+		f[i].dirProgramFiles = "Program Files"; // Alias = "Programas" no servidor novo de 2019 PT // No servidor anterior era "Program Files";
 		f[i].cnpjFornecedor = "24407389000233";
 		f[i].DiscoIntegrador = "C";
-		f[i].EspacoLivreDisco = "167 GB";
-		f[i].MemoriaRamLivre = "";
-		f[i].EnderecoIpPublicoServidor = "187.113.65.138";
-		f[i].PortaIpAberta = "Não se aplica";
+		f[i].EspacoLivreDisco = "78 GB";  // No servidor anterior era "167 GB";
+		f[i].MemoriaRamLivre = "3.8 GB"; // No servidor anterior era "210 - 240 MB"
+		f[i].EnderecoIpPublicoServidor = "186.235.190.42"; // No servidor anterior era "187.113.65.138";
+		f[i].PortaIpAberta = "5050"; // No servidor anterior era "Não se aplica";
 		f[i].FrequenciaProcessamento = "15 min";
 		f[i].DtCadastro = LocalDate.of(2018, 10, 17);
 
