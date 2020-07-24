@@ -26,7 +26,8 @@ public class ManualManutencao {
     	if (this.fornecedor.IsServicoNuvem) {
 		  	this.caminhoAtalhoManual = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Portal Cronos/Integrador " + this.fornecedor.SiglaSistemaFornecedor + " Cloud/";
 		}
-		else if (   this.fornecedor.tipoSO.equals("Windows Server 2016") 
+		else if (   this.fornecedor.tipoSO.equals("Windows Server 2019") 
+				  || this.fornecedor.tipoSO.equals("Windows Server 2016") 
 				  || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
 				  || this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")
 				  || this.fornecedor.tipoSO.equals("Windows 10 Pro")) 
@@ -77,7 +78,8 @@ public class ManualManutencao {
         
         
         if (     this.fornecedor.IsServicoNuvem
-        	  || this.fornecedor.tipoSO.equals("Windows Server 2016") 
+        	  || this.fornecedor.tipoSO.equals("Windows Server 2019") 
+              || this.fornecedor.tipoSO.equals("Windows Server 2016") 
               || this.fornecedor.tipoSO.equals("Windows 10 Pro")
               || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")
               || this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")
@@ -134,6 +136,7 @@ public class ManualManutencao {
         setCaminhoManualMaisCaminhoAtalho();
 		
         if (       this.fornecedor.IsServicoNuvem
+          	    || this.fornecedor.tipoSO.equals("Windows Server 2019") 
           	    || this.fornecedor.tipoSO.equals("Windows Server 2016") 
         		|| this.fornecedor.tipoSO.equals("Windows 10 Pro")
                 || this.fornecedor.tipoSO.equals("Windows Server 2012 R2")

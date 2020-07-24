@@ -21,7 +21,7 @@ echo Tipos de Windows homologados:
 echo.
 echo 1 = Windows Server 2008 R2 SP1
 echo 2 = Windows Server 2012 R2
-echo 3 = Windows Server 2016
+echo 3 = Windows Server 2016 ou 2019
 echo.
 
 SET /P idOsVersion=Favor digitar o ID do tipo de Windows: 

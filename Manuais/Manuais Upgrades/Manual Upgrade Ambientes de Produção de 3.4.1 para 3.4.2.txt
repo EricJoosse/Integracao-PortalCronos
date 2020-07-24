@@ -51,8 +51,9 @@ Manual Upgrade dos Ambientes de Produção de 3.4.1 para 3.4.2
 3. (i)  Copiar o arquivo novo integr-fornecedor-3.4.2.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
-4. Atualizar o arquivo bin\Versao.bat no servidor do fornecedor.
- 
+4. Copiar os seguintes arquivos do projeto Eclipse para o servidor do fornecedor:
+	- bin\Versao.bat
+	 
 5. No caso que o processamento foi desativado: 
    remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).

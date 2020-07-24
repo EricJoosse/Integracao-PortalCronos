@@ -612,7 +612,8 @@ Como vai ser?
 		REM     set arquivoRegedit=DeshabilitarJavaUpdates.x64.reg
 
    
-   14. No caso de Windows 10, no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 min.
+   14. No caso de Windows Server 2019, e também no caso de Windows 10:  
+       no Agendador de Tarefas, alterar o dia / hora início para hoje após 5 - 15 min dependendo do id_fornecedor.
    
    
    15. No caso de integração com o SAP: 
