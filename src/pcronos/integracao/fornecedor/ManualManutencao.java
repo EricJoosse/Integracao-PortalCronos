@@ -209,7 +209,10 @@ this.conteudo +=
 "  - O disco rígido (\"HD\") " + f.DiscoIntegrador + ":\\ está cheio?" + "\r\n" +
 "" + "\r\n" +
 "  - Houve uma atualização de Windows?" + "\r\n" +
-"    Isso pode acabar com o serviço. Neste caso, entrar em contato com \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email)." + "\r\n" +
+"    Isso pode travar ou até acabar com o serviço. Neste caso, reiniciar o servidor mais uma (segunda) vez," + "\r\n" + 
+"    mesmo se o servidor já foi reinicado uma vez durante a atualização de Windows. " + "\r\n" + 
+"    A segunda reiniciada deve ser feita SEM atualização automatica de Windows ao reiniciar o servidor." + "\r\n" +
+"    Se o problema ainda persistir, entrar em contato com \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email)." + "\r\n" +
 "" + "\r\n" +
 "  - Houve uma atualização de Java?" + "\r\n" +
 "    Isso acaba com o serviço com certeza. Neste caso, entrar em contato com \"Eric Jo\" via Skype (ou com eric.jo@bol.com.br via email)." + "\r\n" +
