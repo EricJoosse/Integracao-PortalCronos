@@ -36,8 +36,8 @@ Checklist upgrade versão .jar no Eclipse
   em um servidor novo, (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador). 
 
 - Commitar no GitHub:
-	- o instalador da versão anterior do Integrador,  sem JRE! (para minimizar o tamanho no GitHub)
-	- o instalador da versão anterior do Monitorador, sem JRE! (para minimizar o tamanho no GitHub)
-	- a remoção da versão antes disso do instalador do Integrador
-	- a remoção da versão antes disso do instalador do Monitorador
+	- o instalador da versão ANTERIOR do Integrador,  sem JRE! (para minimizar o tamanho no GitHub)
+	- o instalador da versão ANTERIOR do Monitorador, sem JRE! (para minimizar o tamanho no GitHub)
+	- a remoção da versão ANTES do anterior do instalador do Integrador
+	- a remoção da versão ANTES do anterior do instalador do Monitorador
   

@@ -1,1 +1,1 @@
-SET versaoIntegrador=3.4.2
+SET versaoIntegrador=3.4.3
