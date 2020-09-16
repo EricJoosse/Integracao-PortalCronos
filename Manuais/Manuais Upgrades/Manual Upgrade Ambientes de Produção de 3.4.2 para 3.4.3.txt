@@ -54,21 +54,39 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 4. Copiar os seguintes arquivos do projeto Eclipse para o servidor do fornecedor:
 	- bin\Versao.bat
 	 
-5. No caso que o processamento foi desativado: 
+5.  (i) Editar o conteúdo do Manual TI:
+		- aumentar a versão no título
+		- Substituir:
+
+  - Houve uma atualização de Windows?
+    Isso pode acabar com o serviço. Neste caso, entrar em contato com "Eric Jo" via Skype (ou com eric.jo@bol.com.br via email).
+
+          Por:
+  - Houve uma atualização de Windows?
+    Isso pode travar ou até acabar com o serviço. Neste caso, reiniciar o servidor mais uma (segunda) vez,
+    mesmo se o servidor já foi reinicado uma vez durante a atualização de Windows. 
+    A segunda reiniciada deve ser feita SEM atualização automatica de Windows ao reiniciar o servidor.
+    Se o problema ainda persistir, entrar em contato com "Eric Jo" via Skype (ou com eric.jo@bol.com.br via email).
+		
+	(ii)  Renomear o nome do arquivo do Manual TI (aumentar a versão de 1.5.0 para 1.5.1 e a data de 20.09.2019 para 13.09.2020)
+	(iii) Editar o atalho no menu de Windows para apontar para o arquivo renomeado
+	(iv)  Se precisar (depende da versão de Windows), renomear o atalho 
+ 
+6. No caso que o processamento foi desativado: 
    remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-6. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
+7. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
    digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
 
-7. Em todos os casos: 
+8. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
        ou 5 minutos, dependendo da frequência do processamento.
      
-8. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
    (ii)  Compilar o arquivo .jar
    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
          esperando o processamento atual terminar primeiro

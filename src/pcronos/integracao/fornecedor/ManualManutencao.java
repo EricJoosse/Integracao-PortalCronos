@@ -40,7 +40,7 @@ public class ManualManutencao {
 
 
 	private void setNomeArquivoMaisAtalho() throws Exception { 	
-		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.5.0 (20.09.2019).txt";
+		this.nomeArquivo = "Manual solucionamento paradas da integração Portal Cronos - v1.5.1 (13.09.2020).txt";
 		this.nomeAtalho = "Resolver Paradas.lnk";
 
 //		if (this.fornecedor.tipoSO.equals("Windows Server 2008 R2 SP1")) {

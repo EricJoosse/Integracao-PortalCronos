@@ -1,11 +1,13 @@
 Checklist upgrade versão Manual TI no Eclipse
 =============================================
 
-- Aumentar a versão do .jar também, veja "Checklist upgrade versão .jar no Eclipse.txt"
+- PRIMEIRO, ANTES DE EDITAR A ALTERAÇÃO NO MANNUAL:
+  No caso que a versão atual do .jar no Eclipse project já está em produção em algum servidor de um fornecedor:
+  aumentar a versão do .jar também, veja "Checklist upgrade versão .jar no Eclipse.txt"
 
 - Editar o conteúdo do manual em ManualManutencao.java
-	- aumentar a versão no título
-	- as alterações necessárias
+	- aumentar a versão no título (no método setNomeArquivoMaisAtalho())
+	- as alterações necessárias   (no constructor da clasase)
 
 - Editar a geração do nome do arquivo do manual (a versão) em ManualManutencao.java (em 3 lugares)
 
@@ -18,17 +20,30 @@ Checklist upgrade versão Manual TI no Eclipse
 - Atualizar o arquivo "Tabela Versão .jar X Versão Manual TI.txt"
 
 - Re-gerar o Manual TI no raiz do projeto Eclipse para acompanhamento dos setores TI dos forneceores
-  (usando GeradorNaHoraManualTI_COM_PARAMETRO_IdFornecedor.launch e passando o idFornecedor como parâmetro - default = 947). 
-  	- Apagar versões anteriores no raiz do projeto Eclipse apenas se não estão 
+  (usando GeradorNaHoraManualTI_COM_PARAMETRO_IdFornecedor.launch e passando o idFornecedor como parâmetro - default = 947).
+    - Testar o manual gerado
+    
+    - Mover a versão anterior para: 
+      C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos - Versões anteriores\
+       
+  	- Talvez apagar versões anteriores no raiz do projeto Eclipse apenas se não estão 
 	  usadas mais em nenhum servidor de nenhum fornecedor
 
-- Criar novo "Manual Upgrade Ambientes de Produção de x.y(.z) para a.b(.c).txt"
-	- Editar o conteúdo do Manual TI:
+
+- Criar ou editar novo "Manual Upgrade Ambientes de Produção de x.y(.z) para a.b(.c).txt"
+
+5.	(i) Editar o conteúdo do Manual TI:
 		- aumentar a versão no título
-		- as alterações necessárias
-	- Renomear o nome do arquivo do Manual TI (aumentar a versão)
-	- Editar o atalho no menu de Windows para apontar para o arquivo renomeado
-	- Se precisar (depende da versão de Windows), renomear o atalho 
+		- Substituir:
+
+  - .......
+
+          Por:
+  - .......
+		
+	(ii)  Renomear o nome do arquivo do Manual TI (aumentar a versão de x.y.z para x.y.z e a data de dd.mm.yyyy para dd.mm.yyyy)
+	(iii) Editar o atalho no menu de Windows para apontar para o arquivo renomeado
+	(iv)  Se precisar (depende da versão de Windows), renomear o atalho 
 
 - Se precisar, atualizar o instalador
 
