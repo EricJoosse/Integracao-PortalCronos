@@ -863,7 +863,7 @@ SELECT u.cd_usuario_sistema_ususis
   		  separadamente.
   		  
   		
-  32. Apenas no caso re-instalação não-nuvem, editar e enviar o seguinte email:
+  32. Apenas no caso de re-instalação não-nuvem, editar e enviar o seguinte email:
   
 Marcos, Leão,
  

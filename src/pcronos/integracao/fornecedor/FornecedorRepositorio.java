@@ -410,12 +410,16 @@ public class FornecedorRepositorio {
 		f[i].IsEmProducao = "Sim";
 		f[i].IsDebugAtivado = true;
 		f[i].EmailResponsavelTI = "ti@propao.com.br";
-		f[i].EmailResponsavelTIAlternativo = "";
+		f[i].EmailResponsavelTIAlternativo = "ti@propao.com.br";         //  O MESMO!!!!!!
 		f[i].SkypeResponsavelTI = "Apoio.propao@hotmail.com";
+		f[i].SkypeResponsavelTIAlternativo = "Apoio.propao@hotmail.com"; //  O MESMO!!!!!!
 		f[i].PrenomeResponsavelTI = "Elthon"; 
 						// Desenrolado, responsável para o cadastro de De-Para´s
-		f[i].PrenomeResponsavelTIAlternativo = "";
+		f[i].PrenomeResponsavelTIAlternativo = "Nicolas"; // Nicolas Florencio
 		f[i].TelefoneResponsavelTI = "99535-1999";
+		f[i].TelefoneResponsavelTIAlternativo = "99846-7777 ou 3727-9400";
+		f[i].FuncaoResponsavelTI = "";
+		f[i].FuncaoResponsavelTIAlternativo = "Supervisor de Ti";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "928 767 259"; //No servidor anterior era "382 127 135";
 		f[i].usuarioWebservice = "ws-propao";
