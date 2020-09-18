@@ -9,11 +9,6 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- Adicionar "else if" na chamada jre
 	- Testar se os parenteses entre aspas funcionam usando um snippet de uma mensagem
 
-- TestadorUnitario.bat: 
-	- Adicionar "else if" no path
-	- Adicionar "else if" na chamada jre
-	- Testar se os parenteses entre aspas funcionam usando um snippet de uma mensagem
-
 - FornecedorRepository.cs: alterar:
 		f.dirProgramFiles = "Program Files (x86)"; ou:
 		f.dirProgramFiles = "Program Files";
@@ -21,7 +16,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 - FornecedorReposity.cs: alterar:
         f.versaoJRE = "jre1.8.0_xxxxxxxxxxxxxxxxx";
 
-- Upgrade .jar por motivo da alteracao no FornecedorRepository (veja "Checklist upgrade versão .jar no Eclipse.txt")
+- Upgrade .jar por motivo da alteração no FornecedorRepository (veja "Checklist upgrade versão .jar no Eclipse.txt")
 
 - Re-gerar o Manual TI no raiz do projeto Eclipse para acompanhamento dos setores TI dos forneceores
   (usando GeradorNaHoraManualTI_COM_PARAMETRO_IdFornecedor.launch e passando o idFornecedor como parâmetro - default = 947). 
@@ -32,13 +27,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 	- No caso do fornecedor com JRE diferente: 
 		- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
 		- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
-	- Job15a15min.bat: 
-		- Adicionar "else if" no path
-		- Adicionar "else if" na chamada jre
-	- Copiar Desinstalador.bat do instalador para o servidor do fornecedor
-	- Copiar TestadorUnitario.bat do instalador para o servidor do fornecedor
-	- Não copiar Instalador.bat do instalador para o servidor do fornecedor, 
-	  pois o instalador remove isso também automaticamente no final da instalação
+	- Copiar bin\CaminhoJRE.bat do instalador para o servidor do fornecedor
 	- No caso do fornecedor com JRE diferente: 
 		- executar TestadorUnitario.bat e verificar se funcionou: veja TestadorUnitario.log
 		- depois do teste, apagar TestadorUnitario.log
