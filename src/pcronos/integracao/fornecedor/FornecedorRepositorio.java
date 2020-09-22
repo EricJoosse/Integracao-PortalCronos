@@ -138,7 +138,7 @@ public class FornecedorRepositorio {
 		i++;
 		f[i].IdFornecedor = -3;
 		f[i].NomeFantasiaEmpresa = "Monitoramento Banco de Contingência";
-		f[i].versaoIntegrador = "3.4.2";
+		f[i].versaoIntegrador = "3.4.3";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
 		f[i].IsEmProducao = "Não"; // Tem "exit" no início do Job.bat
