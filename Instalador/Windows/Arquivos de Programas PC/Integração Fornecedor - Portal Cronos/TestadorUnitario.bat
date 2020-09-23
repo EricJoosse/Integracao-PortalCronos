@@ -11,11 +11,24 @@ REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os 
 
 chcp 1252>nul
 
-if not exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
-  cd\
+cd\
+
+REM Se testar dentro do Eclipse ao invés de nos servidores:
+if exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
+  cd PCronos
+  cd "Integração Fornecedor - Portal Cronos"
+  cd Instalador
+  cd Windows
+  cd "Arquivos de Programas PC"
+  cd "Integração Fornecedor - Portal Cronos"
+) else (  
   cd "Arquivos de Programas PC"
   cd "Integração Fornecedor - Portal Cronos"
 )
+
+REM "pwd" em Linux = "%cd% em DOS:
+echo %cd%
+
 
 REM goto TesteVersao
 REM goto TesteParamDosOptional

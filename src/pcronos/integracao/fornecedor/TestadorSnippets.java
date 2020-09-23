@@ -191,6 +191,20 @@ public class TestadorSnippets {
 	        System.out.println("TestadorSnippets.java: idFornecedor = " + Integer.toString(idFornecedor));		  
 	  }
 	  
+	  private static void testarTestadorUnitario(String[] args2)
+	  {
+		  if (args2.length > 0)
+		  {
+	        System.out.println("TestadorSnippets.java: args2[0] = " + args2[0]);		  
+	        System.out.println("TestadorSnippets.java: args2[1] = " + args2[1]);		  
+	        System.out.println("TestadorSnippets.java: args2[2] = " + args2[2]);		  
+	        System.out.println("TestadorSnippets.java: args2[3] = " + args2[3]);
+		  }
+		  else {
+		        System.out.println("TestadorSnippets.java: nenhum arg foi passado para testarTestadorUnitario(String[] args2).");
+		}
+	  }
+	  
 	  private static void testarIncrementOperator()
 	  {
 	    	int qtdProdutosComEstoqueNovo = 0;
@@ -804,7 +818,6 @@ public class TestadorSnippets {
         {			
 		 // testarGetIdFornecedorByCnpj();
 		 // testarGetFornecedor();
-	     // testarMainArgs(args);
 	     // testarIncrementOperator();
 		 // testarIncrementOperatorString();
 	     // testarGetQtdProdutosComEstoqueDeArquivoLog();
@@ -835,8 +848,10 @@ public class TestadorSnippets {
 		 // testarSetIconLocation();
 		 // testarCalculoAgendamentos();
 		 // testarMapaCotacao();
-			testarTemCrescimentoTempdb();
-			testarVerificacaoEspacoLivreHD();
+		 // testarTemCrescimentoTempdb();
+		 // testarVerificacaoEspacoLivreHD();
+	     // testarMainArgs(args);
+	        testarTestadorUnitario(args);
          
 
          // throw new Exception("try");

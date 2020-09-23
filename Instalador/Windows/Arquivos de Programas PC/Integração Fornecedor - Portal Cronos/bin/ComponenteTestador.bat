@@ -19,22 +19,4 @@ echo Versão = %versaoIntegrador%
 
 REM pause
 
-cd\
-
-REM Se testar dentro do Eclipse ao invés de nos servidores:
-if exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
-  cd PCronos
-  cd "Integração Fornecedor - Portal Cronos"
-  cd Instalador
-  cd Windows
-  cd "Arquivos de Programas PC"
-  cd "Integração Fornecedor - Portal Cronos"
-) else (  
-  cd "Arquivos de Programas PC"
-  cd "Integração Fornecedor - Portal Cronos"
-)
-
-REM "pwd" em Linux = "%cd% em DOS:
-echo %cd%
-
-call CaminhoJRE.bat %1 %2 %3
+call bin\CaminhoJRE.bat %1 %2 %3
