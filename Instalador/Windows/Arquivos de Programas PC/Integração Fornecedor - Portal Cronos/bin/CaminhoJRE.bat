@@ -18,9 +18,11 @@ REM set CLASSPATH=%CLASSPATH%;.
 
 REM echo %classpath%
 
-cd\
-cd "Arquivos de Programas PC"
-cd "Integração Fornecedor - Portal Cronos"
+if not exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
+  cd\
+  cd "Arquivos de Programas PC"
+  cd "Integração Fornecedor - Portal Cronos"
+)
 
 
 if "%1"=="Desinstalador.log" (

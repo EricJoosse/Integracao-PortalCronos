@@ -54,6 +54,8 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 4. Copiar os seguintes arquivos do projeto Eclipse para o servidor do fornecedor:
 	- bin\Versao.bat
 	- bin\ComponenteTestador.bat
+	- bin\CaminhoJRE.bat
+	- TestadorUnitario.bat
 	 
 5.  (i) Editar o conteúdo do Manual TI:
 		- aumentar a versão no título
