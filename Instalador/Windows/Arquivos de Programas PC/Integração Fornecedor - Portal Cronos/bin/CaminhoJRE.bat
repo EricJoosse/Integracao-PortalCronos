@@ -18,7 +18,9 @@ REM set CLASSPATH=%CLASSPATH%;.
 
 REM echo %classpath%
 
+REM O seguinte "if" é uma gambiarra para o Testador Unitário poder funcionar no Eclipse:
 if not exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
+REM echo if not Eclipse entrado
   cd\
   cd "Arquivos de Programas PC"
   cd "Integração Fornecedor - Portal Cronos"

@@ -56,6 +56,7 @@ cls
 call bin\Inicializacoes.bat
 call bin\Versao.bat
 call bin\ComponenteTestador.bat TestadorUnitario.log TestadorSnippets
+REM call bin\ComponenteTestador.bat TestadorUnitario.log TestadorSnippets 123teste
 start notepad TestadorUnitario.log
 
 ENDLOCAL

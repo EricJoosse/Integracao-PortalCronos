@@ -193,16 +193,16 @@ public class TestadorSnippets {
 	  
 	  private static void testarTestadorUnitario(String[] args2)
 	  {
-		  if (args2.length > 0)
-		  {
-	        System.out.println("TestadorSnippets.java: args2[0] = " + args2[0]);		  
-	        System.out.println("TestadorSnippets.java: args2[1] = " + args2[1]);		  
-	        System.out.println("TestadorSnippets.java: args2[2] = " + args2[2]);		  
-	        System.out.println("TestadorSnippets.java: args2[3] = " + args2[3]);
-		  }
-		  else {
+	      if (args2.length == 0)
 		        System.out.println("TestadorSnippets.java: nenhum arg foi passado para testarTestadorUnitario(String[] args2).");
-		}
+		  if (args2.length > 0)
+	            System.out.println("TestadorSnippets.java: args2[0] = " + args2[0]);		  
+		  if (args2.length > 1)
+		        System.out.println("TestadorSnippets.java: args2[1] = " + args2[1]);		  
+		  if (args2.length > 2)
+	            System.out.println("TestadorSnippets.java: args2[2] = " + args2[2]);		  
+		  if (args2.length > 3)
+	            System.out.println("TestadorSnippets.java: args2[3] = " + args2[3]);
 	  }
 	  
 	  private static void testarIncrementOperator()
