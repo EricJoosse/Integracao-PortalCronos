@@ -10,6 +10,26 @@ REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os 
 
 chcp 1252>nul
 
+
+REM o diretório default de MS-DOS é C:\Windows\system32, então é melhor em todos os casos 
+REM pelo menos navegar primeiro para o diretório onde fica este Testador Unitário do Instalador e do Desinstalador:
+
+cd\
+
+REM Se testar dentro do Eclipse ao invés de nos servidores:
+if exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
+  cd PCronos
+  cd "Integração Fornecedor - Portal Cronos"
+  cd Instalador
+  cd Windows
+  cd "Arquivos de Programas PC"
+) else (  
+  cd "Arquivos de Programas PC"
+)
+
+REM "pwd" em Linux = "%cd% em DOS:
+echo %cd%
+
 REM goto InstalarManualTI
 REM goto DesinstalarManualTI
 REM goto InstalarDirLog
@@ -23,13 +43,13 @@ REM goto TesteSubDirBin
 REM goto TesteIfExist
 REM goto TesteAttrib
 REM goto TesteVersao
-REM goto TesteTresParam
 REM goto TesteTemplate
 REM goto TesteDelTpl
 REM goto TesteIsAmbienteNuvem
 REM goto TesteRemocaoMultiplasTarefasWindows
 REM goto TesteIfExistArqConfEspecifico
-goto TesteFindTarefaEspecifica
+REM goto TesteFindTarefaEspecifica
+goto TesteTresParam
 
 
 REM ================ Testes Instalação Resolver Paradas do menu de Windows: ========================================
@@ -337,9 +357,9 @@ REM Fechar o script chamador também:
 exit
 :PularErro
 
-
-call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
-call "Integração Fornecedor - Portal Cronos\bin\ComponenteTestador.bat" TesteTresParam.log TestadorSnippets %idFornecedor%
+cd "Integração Fornecedor - Portal Cronos"
+call bin\Versao.bat
+call bin\ComponenteTestador.bat TesteTresParam.log TestadorSnippets %idFornecedor%
 
 
 pause
