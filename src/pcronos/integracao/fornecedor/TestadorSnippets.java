@@ -811,7 +811,17 @@ public class TestadorSnippets {
 	      else
 	    	  return false;
 	  }
+	  
+	  
+	  public static void testarProvedorEmail()
+	  {
+		  LocalDateTime horaInicio = LocalDateTime.now();
+		  System.out.println("Provedor de Email = " + IntegracaoFornecedorCompleta.provedorEmailAutomatico);
+		  System.out.println("Conta de Email = " + IntegracaoFornecedorCompleta.remetenteEmailAutomatico);
+      	  EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, "Assunto teste", null, "body teste", IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "nomeServidor",  null);		  
+	  }
 
+	  
 	  public static void main(String[] args) throws Exception {
 
 		try
@@ -851,7 +861,8 @@ public class TestadorSnippets {
 		 // testarTemCrescimentoTempdb();
 		 // testarVerificacaoEspacoLivreHD();
 	     // testarMainArgs(args);
-	        testarTestadorUnitario(args);
+	     // testarTestadorUnitario(args);
+			testarProvedorEmail();
          
 
          // throw new Exception("try");
