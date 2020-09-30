@@ -321,7 +321,11 @@ boolean                              isEnviadoJa = false;
 java.util.Properties props = java.lang.System.getProperties()       ;
 props.setProperty( "mail.smtp.host", p_Endereco_IP_Servidor_Email ) ;
 props.put("mail.smtp.auth", "true");
-//props.put("mail.smtp.starttls.enable", "true");
+
+// No caso de provedor smtps.bol.com.br N„O alterar "mail.smtp.starttls.enable":
+if (p_Endereco_IP_Servidor_Email.equals("smtp.gmail.com"))
+   props.put("mail.smtp.starttls.enable", "true");
+
 props.setProperty("mail.smtp.port", PortaEmailAutomatico);
 
 //session = Session.getInstance( props, null ) ;  // Sess„o default
