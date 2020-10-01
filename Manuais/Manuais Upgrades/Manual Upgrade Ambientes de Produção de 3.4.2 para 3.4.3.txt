@@ -56,8 +56,46 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 	- bin\ComponenteTestador.bat
 	- bin\CaminhoJRE.bat
 	- TestadorUnitario.bat
+
+5. No caso dos servidores da Cronos, no arquivo /conf/.properties:
+
+	   Substituir:
+
+
+EnviarEmailAutomatico             = true
+ProvedorEmailAutomatico           = smtps.bol.com.br
+PortaEmailAutomatico              = 587
+RemetenteEmailAutomatico          = portalcronos@bol.com.br
+DestinoEmailAutomatico            = eric.jo@bol.com.br
+CcEmailAutomatico                 =
+UsuarioEmailAutomatico            = portalcronos@bol.com.br
+SenhaCriptografadaEmailAutomatico = xxxxxx
+
+
+
+		Por:
+
+
+EnviarEmailAutomatico             = true
+DestinoEmailAutomatico            = eric.jo@bol.com.br
+CcEmailAutomatico                 =
+SenhaCriptografadaEmailAutomatico = xxxxxx
+
+# Pago:
+# ProvedorEmailAutomatico           = smtps.bol.com.br
+# PortaEmailAutomatico              = 587
+# RemetenteEmailAutomatico          = portalcronos@bol.com.br
+# UsuarioEmailAutomatico            = portalcronos@bol.com.br
+
+# Gratuito:
+ProvedorEmailAutomatico           = smtp.gmail.com
+PortaEmailAutomatico              = 587
+RemetenteEmailAutomatico          = portalcronos.br@gmail.com
+UsuarioEmailAutomatico            = portalcronos.br@gmail.com
+
+
 	 
-5.  (i) Editar o conteúdo do Manual TI:
+6.  (i) Editar o conteúdo do Manual TI:
 		- aumentar a versão no título
 		- Substituir:
 
@@ -75,22 +113,22 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 	(iii) Editar o atalho no menu de Windows para apontar para o arquivo renomeado
 	(iv)  Se precisar (depende da versão de Windows), renomear o atalho 
  
-6. No caso que o processamento foi desativado: 
+7. No caso que o processamento foi desativado: 
    remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-7. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
+8. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
    digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
 
-8. Em todos os casos: 
+9. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
        ou 5 minutos, dependendo da frequência do processamento.
      
-9. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
-   (ii)  Compilar o arquivo .jar
-   (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
-         esperando o processamento atual terminar primeiro
+10. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+    (ii)  Compilar o arquivo .jar
+    (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
+          esperando o processamento atual terminar primeiro
    
