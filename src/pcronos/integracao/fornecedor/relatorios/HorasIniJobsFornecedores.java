@@ -8,10 +8,12 @@ import pcronos.integracao.fornecedor.Utils;
 public class HorasIniJobsFornecedores {
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(Utils.rpad("ID", 4) + " " + Utils.rpad("Fornecedor", 26) + " "
+		System.out.println(Utils.rpad("ID", 4) + " " + Utils.rpad("Fornecedor", 29) + " "
 				+ Utils.rpad("Minuto Atual", 13) + " " + Utils.rpad("Minuto v 3.1.0 e maior", 6));
-		System.out.println(Utils.rpad("==", 4) + " " + Utils.rpad("==========", 26) + " "
+		System.out.println(Utils.rpad("==", 4) + " " + Utils.rpad("==========", 29) + " "
 				+ Utils.rpad("============", 13) + " " + Utils.rpad("======================", 6));
+		System.out.println(Utils.rpad("", 4) + " " + Utils.rpad("", 29) + " "
+				+ Utils.rpad("(hh:mm:ss)", 13) + " " + Utils.rpad("(hh:mm:ss)", 6));
 		System.out.println();
 
 		for (Entry<Integer, Fornecedor> entry : FornecedorRepositorio.hashMap.entrySet()) {
@@ -98,9 +100,9 @@ public class HorasIniJobsFornecedores {
 
             
 			System.out.println(Utils.rpad(Utils.replaceNull(idFornecedor).toString(), 4) + " "
-						+ Utils.rpad(Utils.replaceNull(((Fornecedor) value).NomeFantasiaEmpresa), 31) + " "
-						+ Utils.rpad((Utils.replaceNull(minutoAgendamentoAtual) + ":" + segundoAgendamentoAtual), 16) + " "
-						+ Utils.rpad((Utils.replaceNull(minutoAgendamentoFuturo) + ":" + segundoAgendamentoFuturo), 6));
+						+ Utils.rpad(Utils.replaceNull(((Fornecedor) value).NomeFantasiaEmpresa).replace("ência","."), 29) + " "
+						+ Utils.rpad(("00:" + Utils.replaceNull(minutoAgendamentoAtual) + ":" + segundoAgendamentoAtual), 13) + " "
+						+ Utils.rpad(("00:" + Utils.replaceNull(minutoAgendamentoFuturo) + ":" + segundoAgendamentoFuturo), 6));
 		}
 	}
 

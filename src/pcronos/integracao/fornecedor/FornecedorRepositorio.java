@@ -83,7 +83,7 @@ public class FornecedorRepositorio {
 
 		i++;
 		f[i].IdFornecedor = null;
-		f[i].NomeFantasiaEmpresa = "Monitoramento";
+		f[i].NomeFantasiaEmpresa = "Monitorador Integradores";
 		f[i].versaoIntegrador = "3.4.3";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
@@ -110,7 +110,7 @@ public class FornecedorRepositorio {
 
 		i++;
 		f[i].IdFornecedor = -2;
-		f[i].NomeFantasiaEmpresa = "Monitoramento Banco";
+		f[i].NomeFantasiaEmpresa = "Monitorador Banco";
 		f[i].versaoIntegrador = "3.4.3";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
@@ -137,7 +137,7 @@ public class FornecedorRepositorio {
 
 		i++;
 		f[i].IdFornecedor = -3;
-		f[i].NomeFantasiaEmpresa = "Monitoramento Banco de Contingência";
+		f[i].NomeFantasiaEmpresa = "Monitorador Banco de Contingência";
 		f[i].versaoIntegrador = "3.4.3";
 		f[i].SiglaSistemaFornecedor = "PCronos";
 		f[i].IsServicoNuvem = false;
