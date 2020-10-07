@@ -67,9 +67,12 @@ public class Utils {
 		  return input == null ? "" : input.toString();
 	}
 	
-	public static String lpad(String txt, int tamanho)
+	public static String lpad(String txt, int tamanho, char caratere)
 	{
-		return String.format("%" + Integer.toString(tamanho) + "s", txt);
+		if (caratere == ' ')
+		     return String.format("%" + Integer.toString(tamanho) + "s", txt);
+		else 
+			 return String.format("%" + Integer.toString(tamanho) + "s", txt).replace(' ', caratere);
 	}
 	
 	public static String rpad(String txt, int tamanho)

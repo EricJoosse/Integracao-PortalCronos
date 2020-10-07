@@ -104,7 +104,7 @@ public class HorasIniJobsFornecedores {
             
 			System.out.println(Utils.rpad(Utils.replaceNull(idFornecedor).toString(), 4) + " "
 					+ Utils.rpad(Utils.replaceNull(((Fornecedor) value).NomeFantasiaEmpresa).replace("ência","."), 29) + " "
-					+ Utils.rpad(Utils.lpad(Utils.replaceNull(((Fornecedor) value).FrequenciaProcessamento).replace(" min",""), 3), 6) + " "
+					+ Utils.rpad(Utils.lpad(Utils.replaceNull(((Fornecedor) value).FrequenciaProcessamento).replace(" min",""), 3, ' '), 6) + " "
 					+ Utils.rpad(("00:" + Utils.replaceNull(minutoAgendamentoAtual) + ":" + segundoAgendamentoAtual), 13) + " "
 					+ Utils.rpad(("00:" + Utils.replaceNull(minutoAgendamentoFuturo) + ":" + segundoAgendamentoFuturo), 6));
 		}
