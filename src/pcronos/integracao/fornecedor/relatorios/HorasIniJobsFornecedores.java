@@ -111,7 +111,11 @@ public class HorasIniJobsFornecedores {
             int iFreq = Integer.parseInt(Utils.replaceNull(((Fornecedor) value).FrequenciaProcessamento).replace(" min",""));
             for (int i = 1; i <= (60 / iFreq); i++)
             {
-            	minutos += Utils.lpad(Integer.toString(Integer.parseInt(minutoAgendamentoAtual) + i * iFreq), 2, '0') + "-";
+            	int iMinutoInicial = Integer.parseInt(minutoAgendamentoAtual);
+            	if (Integer.parseInt(segundoAgendamentoAtual) >= 30) iMinutoInicial += 1;
+            	int iMinuto = iMinutoInicial + i * iFreq;
+            	if (iMinuto >= 60) iMinuto -= 60;
+            	minutos += Utils.lpad(Integer.toString(iMinuto), 2, '0') + "-";
             }
             minutos = minutos.substring(0, (minutos.length() - 1));
             

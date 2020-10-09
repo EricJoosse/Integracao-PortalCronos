@@ -822,6 +822,13 @@ public class TestadorSnippets {
 	  }
 
 	  
+	  public static void testarParseInt()
+	  {
+		  String minutoAgendamentoAtual = "07";
+		  int iMinuto = Integer.parseInt(minutoAgendamentoAtual);
+		  System.out.println("Integer.toString(iMinuto) = " + Integer.toString(iMinuto));
+	  }
+	  
 	  public static void main(String[] args) throws Exception {
 
 		try
@@ -862,7 +869,8 @@ public class TestadorSnippets {
 		 // testarVerificacaoEspacoLivreHD();
 	     // testarMainArgs(args);
 	     // testarTestadorUnitario(args);
-			testarProvedorEmail();
+		 // testarProvedorEmail();
+			testarParseInt();
          
 
          // throw new Exception("try");
