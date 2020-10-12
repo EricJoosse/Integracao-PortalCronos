@@ -65,6 +65,8 @@ if exist C:/"Program Files (x86)"/Java/jre1.8.0_111/bin/java.exe (
     goto PathAtacamaxNaoNuvem
 ) else if exist C:/"Program Files"/Java/jre1.8.0_231/bin/java.exe (
     goto PathProlac
+) else if exist C:/"Program Files"/Java/jre1.8.0_261/bin/java.exe (
+    goto PathPropao
 ) else if exist C:/"Program Files"/Java/jre1.8.0_92/bin/java.exe (
     goto PathOutros
 ) else (
@@ -96,6 +98,12 @@ goto PularPathOutros
 :PathProlac
 set path=C:\Program Files\Java\jre1.8.0_231\bin;%path%
 C:/"Program Files"/Java/jre1.8.0_231/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.%2 %3 %4 >> %1
+goto PularPathOutros
+
+:PathPropao
+set path=C:\Program Files\Java\jre1.8.0_261\bin;%path%
+REM Errado em versões < 2.1.2B: set path=%path%;C:\Program Files\Java\jre1.8.0_261\bin
+C:/"Program Files"/Java/jre1.8.0_261/bin/java.exe -cp integr-fornecedor-%versaoIntegrador%.jar pcronos.integracao.fornecedor.%2 %3 %4 >> %1
 goto PularPathOutros
 
 :PathOutros

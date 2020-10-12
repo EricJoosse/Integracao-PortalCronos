@@ -51,6 +51,8 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 3. (i)  Copiar o arquivo novo integr-fornecedor-3.4.3.jar do instalador para o servidor do fornecedor.
    (ii) Apagar a versão anterior integr-fornecedor-*.*.*.jar.
  
+
+
 4. Copiar os seguintes arquivos do projeto Eclipse para o servidor do fornecedor:
 	- bin\Versao.bat
 	- bin\ComponenteTestador.bat
@@ -112,22 +114,39 @@ UsuarioEmailAutomatico            = portalcronos.br@gmail.com
 	(ii)  Renomear o nome do arquivo do Manual TI (aumentar a versão de 1.5.0 para 1.5.1 e a data de 20.09.2019 para 13.09.2020)
 	(iii) Editar o atalho no menu de Windows para apontar para o arquivo renomeado
 	(iv)  Se precisar (depende da versão de Windows), renomear o atalho 
+	(v)   Apenas no caso do Propão: 
+			- Ajustar o manual "Resolver Paradas" manualmente: 
+				- editar versão JRE de "jre1.8.0_92" para "jre1.8.0_261"
  
-7. No caso que o processamento foi desativado: 
+
+
+7. Apenas no caso do Propão: 
+		- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
+		- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
+
+
+8. Apenas no caso do servidor de aplicação do Cronos, pois é o primeiro servidor a ser atualizado,
+	  e já foi testado na Propão na forma de gambiarra: 
+		- executar TestadorUnitario.bat para verificar se a alteração no CaminhJRE.bat funcionou: veja TestadorUnitario.log
+		- depois do teste, apagar TestadorUnitario.log
+
+
+
+9. No caso que o processamento foi desativado: 
    remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-8. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
-   digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
+10. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
+    digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
 
-9. Em todos os casos: 
+11. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
        ou 5 minutos, dependendo da frequência do processamento.
      
-10. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+12. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
     (ii)  Compilar o arquivo .jar
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro

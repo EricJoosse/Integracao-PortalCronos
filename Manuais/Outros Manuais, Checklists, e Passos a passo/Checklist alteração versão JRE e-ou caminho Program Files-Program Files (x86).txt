@@ -18,7 +18,7 @@ Observação: este checklist serve apenas no caso de alterações nos servidores dos
 
 - Upgrade .jar por motivo da alteração no FornecedorRepository (veja "Checklist upgrade versão .jar no Eclipse.txt")
 
-- Re-gerar o Manual TI no raiz do projeto Eclipse para acompanhamento dos setores TI dos forneceores
+- Re-gerar o Manual TI no raiz do projeto Eclipse para acompanhamento dos setores TI dos fornecedores
   (usando GeradorNaHoraManualTI_COM_PARAMETRO_IdFornecedor.launch e passando o idFornecedor como parâmetro - default = 947). 
   	- Apagar versões anteriores no raiz do projeto Eclipse apenas se não estão 
 	  usadas mais em nenhum servidor de nenhum fornecedor

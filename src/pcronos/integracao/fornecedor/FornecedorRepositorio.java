@@ -421,9 +421,9 @@ public class FornecedorRepositorio {
 		f[i].FuncaoResponsavelTI = "";
 		f[i].FuncaoResponsavelTIAlternativo = "Supervisor de Ti";
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
-		f[i].IdAplicativoDesktopRemoto = "928 767 259"; //No servidor anterior era "382 127 135";
+		f[i].IdAplicativoDesktopRemoto = "928 767 259/propao/administrador"; //No servidor anterior era "382 127 135";
 		f[i].usuarioWebservice = "ws-propao";
-		f[i].versaoJRE = "jre1.8.0_92";
+		f[i].versaoJRE = "jre1.8.0_261";
 		f[i].tipoJRE = "(64 bit)";
 		f[i].tipoSO = "Windows Server 2019"; // Na verdade "Windows Server 2019 Standard" // No servidor anterior era "Windows Server 2008 R2 SP1"; // Na verdade "Windows Server 2008 R2 Enterprise" sem nenhum service pack.........
 		f[i].SO32ou64bit = "64bit";
