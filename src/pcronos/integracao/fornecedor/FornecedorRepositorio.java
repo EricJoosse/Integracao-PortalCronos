@@ -433,8 +433,13 @@ public class FornecedorRepositorio {
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "78 GB";  // No servidor anterior era "167 GB";
 		f[i].MemoriaRamLivre = "3.8 GB"; // No servidor anterior era "210 - 240 MB"
+		
 		f[i].EnderecoIpPublicoServidor = "186.235.190.42"; // No servidor anterior era "187.113.65.138";
 		f[i].PortaIpAberta = "5050"; // No servidor anterior era "Não se aplica";
+		// Observação: se tnsping dá erro "timeout period expired", o servidor está desligado ou fora da Internet; 
+		//             se tnsping dá erro "the computer refused the connection", o servidor está funcionando normalmente.
+		//             Isso foi testado com outro servidor que estava desligado (o o antigo servidor de teste que foi excluido do Azure).
+		
 		f[i].FrequenciaProcessamento = "15 min";
 		f[i].DtCadastro = LocalDate.of(2018, 10, 17);
 

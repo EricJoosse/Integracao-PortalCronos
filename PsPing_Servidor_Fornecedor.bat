@@ -3,6 +3,18 @@ cls
 
 REM Exemplo para teste: 13.92.86.174
 
+echo.
+echo Observacao: 
+echo Se tnsping dar erro "timeout period expired", 
+echo o servidor esta desligado ou fora da Internet.
+echo.
+echo Se tnsping dar erro "the computer refused the connection", 
+echo o servidor esta funcionando normalmente.
+echo.
+echo Isso foi testado com outro servidor que estava desligado 
+echo (o o antigo servidor de teste que foi excluido do Azure).
+echo.
+
 SET /P enderecoIP=Favor digitar o endereço IP do fornecedor: 
 IF "%enderecoIP%"=="" GOTO ErroEnderecoIP
 GOTO PularErroEnderecoIP
