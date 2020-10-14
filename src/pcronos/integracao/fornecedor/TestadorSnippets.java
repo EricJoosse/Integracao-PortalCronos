@@ -869,8 +869,8 @@ public class TestadorSnippets {
 		 // testarVerificacaoEspacoLivreHD();
 	     // testarMainArgs(args);
 	     // testarTestadorUnitario(args);
-		 // testarProvedorEmail();
-			testarParseInt();
+	     // testarParseInt();
+		    testarProvedorEmail();
          
 
          // throw new Exception("try");
