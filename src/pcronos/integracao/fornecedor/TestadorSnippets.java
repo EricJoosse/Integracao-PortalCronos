@@ -816,9 +816,12 @@ public class TestadorSnippets {
 	  public static void testarProvedorEmail()
 	  {
 		  LocalDateTime horaInicio = LocalDateTime.now();
-		  System.out.println("Provedor de Email = " + IntegracaoFornecedorCompleta.provedorEmailAutomatico);
-		  System.out.println("Conta de Email = " + IntegracaoFornecedorCompleta.remetenteEmailAutomatico);
-      	  EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, "Assunto teste", null, "body teste", IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "nomeServidor",  null);		  
+          String nomeServidor = Utils.getNomeServidor();
+          String assunto = "Teste Provedor de Email " + IntegracaoFornecedorCompleta.provedorEmailAutomatico + " no servidor " + nomeServidor;
+          String body = "Conta de Email = " + IntegracaoFornecedorCompleta.remetenteEmailAutomatico;
+		  System.out.println(assunto);
+		  System.out.println(body);
+      	  EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "nomeServidor",  null);		  
 	  }
 
 	  
