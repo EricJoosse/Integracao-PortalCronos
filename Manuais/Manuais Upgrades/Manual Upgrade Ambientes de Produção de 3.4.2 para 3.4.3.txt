@@ -127,26 +127,32 @@ UsuarioEmailAutomatico            = portalcronos.br@gmail.com
 
 8. Apenas no caso do servidor de aplicação do Cronos, pois é o primeiro servidor a ser atualizado,
 	  e já foi testado na Propão na forma de gambiarra: 
+	    - no Testador Unitário TestadorSnippets.java descomentar testarParseInt() e comentar qualquer outra Test Unit.
 		- executar TestadorUnitario.bat para verificar se a alteração no CaminhJRE.bat funcionou: veja TestadorUnitario.log
 		- depois do teste, apagar TestadorUnitario.log
 
 
+9. No Testador Unitário TestadorSnippets.java descomentar testarProvedorEmail() e comentar qualquer outra Test Unit. 
+   Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat no servidor de destino. 
+   Se o email de teste não chegar, adicionar o servidor nos "recognized devices" (dispositivos reconhecidos) 
+   na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
+   Apagar TestadorUnitario.log no servidor.
 
-9. No caso que o processamento foi desativado: 
-   remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
-   no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
+10. No caso que o processamento foi desativado: 
+    remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
+    no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-10. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
+11. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
     digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
 
-11. Em todos os casos: 
+12. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
        ou 5 minutos, dependendo da frequência do processamento.
      
-12. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+13. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
     (ii)  Compilar o arquivo .jar
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
