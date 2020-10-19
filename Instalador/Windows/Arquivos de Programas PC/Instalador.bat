@@ -79,19 +79,9 @@ if %tamanhoArqLog% GTR 0 (
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     start notepad Instalador.log
-) else if %tipoInstalacao% == 1 (
-    if exist Instalador.log del /f /q Instalador.log 
-    echo.
-    echo          Primeira fase da instalação concluida!
-    echo.
-    
-    echo MSGBOX "Primeira fase da instalação concluida!" > %temp%\TEMPmessage.vbs
-    call %temp%\TEMPmessage.vbs
-    del %temp%\TEMPmessage.vbs /f /q
-
-    cd\
-    cd "Arquivos de Programas PC"
-    start notepad "Integração Fornecedor - Portal Cronos/conf/Integração Fornecedor - Portal Cronos.properties"
+REM Abortar a instalação, então fechar este arquivo .bat atual 
+REM e também fechar o arquivo .bat chamador (Instalador_Integrador.bat e Instalador_Monitorador.bat):     
+    exit
 ) else (
     if exist Instalador.log del /f /q Instalador.log 
 )

@@ -320,8 +320,24 @@ cd "Arquivos de Programas PC"
 REM Apagar o arquivo "Integração Portal Cronos - Fornecedor.Windows.2008_R2.TaskSchedule.xml" e outros arquivos parecidos: 
 del /f /q *.xml
 
+
+echo.
+echo          Primeira fase da instalação concluida!
+echo.
+
+echo MSGBOX "Primeira fase da instalação concluida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+
+cd\
+cd "Arquivos de Programas PC"
+start notepad "Integração Fornecedor - Portal Cronos/conf/Integração Fornecedor - Portal Cronos.properties"
+
+
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
+cd\
+cd "Arquivos de Programas PC"
 del /f /q Instalador_Monitorador.bat
 
 exit
