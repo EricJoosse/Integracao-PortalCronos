@@ -329,6 +329,19 @@ echo MSGBOX "Primeira fase da instalação concluida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 
+echo Próximas atividades:
+echo ====================
+echo 1. Preencher o arquivo de configuração, já aberto automaticamente em segundo plano.
+echo.
+echo 2. APÓS a conclusõa do preenchimento deste arquivo, 
+echo    em todos os casos de todos os servidores da Cronos (servidor de aplicação, servidor BD, servidor BD Contingência):
+echo     - No Testador Unitário TestadorSnippets.java descomentar testarProvedorEmail() e comentar qualquer outra Test Unit. 
+echo     - Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat no servidor de destino. 
+echo     - Se o email de teste não chegar, adicionar o servidor nos "recognized devices" (dispositivos reconhecidos) 
+echo       na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
+echo     - Apagar TestadorUnitario.log no servidor.
+echo.
+
 cd\
 cd "Arquivos de Programas PC"
 start notepad "Integração Fornecedor - Portal Cronos/conf/Integração Fornecedor - Portal Cronos.properties"
