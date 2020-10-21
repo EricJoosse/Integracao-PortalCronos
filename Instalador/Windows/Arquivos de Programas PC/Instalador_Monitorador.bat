@@ -325,27 +325,36 @@ echo.
 echo          Primeira fase da instalação concluida!
 echo.
 
-echo MSGBOX "Primeira fase da instalação concluida!" > %temp%\TEMPmessage.vbs
-call %temp%\TEMPmessage.vbs
-del %temp%\TEMPmessage.vbs /f /q
-
 echo Próximas atividades:
 echo ====================
-echo 1. Preencher o arquivo de configuração, já aberto automaticamente em segundo plano.
+echo 1. Preencher o arquivo de configuração, já aberto automaticamente em segundo 
+echo    plano.
 echo.
-echo 2. APÓS a conclusõa do preenchimento deste arquivo, 
-echo    em todos os casos de todos os servidores da Cronos (servidor de aplicação, servidor BD, servidor BD Contingência):
-echo     - No Testador Unitário TestadorSnippets.java descomentar testarProvedorEmail() e comentar qualquer outra Test Unit. 
-echo     - Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat no servidor de destino. 
-echo     - Se o email de teste não chegar, adicionar o servidor nos "recognized devices" (dispositivos reconhecidos) 
-echo       na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
+echo 2. APÓS a conclusão do preenchimento deste arquivo, 
+echo    em todos os casos de todos os servidores da Cronos (servidor de aplicação, 
+echo    servidor BD, servidor BD Contingência):
+echo     - No Testador Unitário TestadorSnippets.java descomentar 
+echo       testarProvedorEmail() e comentar qualquer outra Test Unit. 
+echo     - Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat
+echo       no servidor de destino. 
+echo     - Se o email de teste não chegar, adicionar o servidor nos "recognized
+echo       devices" (dispositivos reconhecidos) na conta portalcronos.br@gmail.com
+echo       do Gmail via acesso no Gmail via browser. 
 echo     - Apagar TestadorUnitario.log no servidor.
 echo.
+
+
+echo MSGBOX "Primeira fase da instalação concluida! Leia os próximos passos na tela MS-DOS!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
 
 cd\
 cd "Arquivos de Programas PC"
 start notepad "Integração Fornecedor - Portal Cronos/conf/Integração Fornecedor - Portal Cronos.properties"
 
+REM Provisoriamente uma pausa para a leitura dos próximos passos da instalação.
+REM Tem que ser ANTES da exclusão deste Instalador_Monitorador.bat para a pausa poder funcionar:
+pause
 
 REM Excluir este próprio arquivo apenas no final, 
 REM pois foi testado que não vai excluir os arquivos que viriam depois disso:
