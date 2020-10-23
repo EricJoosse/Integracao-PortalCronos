@@ -49,7 +49,8 @@ REM goto TesteIsAmbienteNuvem
 REM goto TesteRemocaoMultiplasTarefasWindows
 REM goto TesteIfExistArqConfEspecifico
 REM goto TesteFindTarefaEspecifica
-goto TesteTresParam
+REM goto TesteTresParam
+goto TesteIfExistWildcard
 
 
 REM ================ Testes Instalação Resolver Paradas do menu de Windows: ========================================
@@ -549,6 +550,22 @@ if not exist "C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/
     del %temp%\TEMPmessage.vbs /f /q
     exit
 )
+
+
+pause
+exit
+
+
+REM ================ Teste If Exist com Wildcard (testado??????????, funcionou????????????????): ========================================
+
+:TesteIfExistWildcard
+
+if exist *.reg echo reg exists
+if exist *.rrr echo rrr exists
+if exist *.e echo exe exists
+if exist *.exe echo exe exists
+if exist .git echo .git exists
+if exist .gitignore echo .gitignore exists
 
 
 pause

@@ -237,12 +237,15 @@ if %idFornecedor% == -1 (
 
 cd "Arquivos de Programas PC"
 
-del /f /q *.reg
-del /f /q *.exe
+REM Os seguintes arquivos não existem se optar por instalação usando uma JRE já existente.
+REM Para evitar erro indevido "Arquivo não encontrado" usar if exist:
+if exist *.reg del /f /q *.reg
+if exist *.exe del /f /q *.exe
+
 del /f /q Instalador.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
-del /f /q UpgradeNaoNuvem3.1.0.bat
-del /f /q .gitignore
+if exist UpgradeNaoNuvem3.1.0.bat del /f /q UpgradeNaoNuvem3.1.0.bat
+if exist .gitignore del /f /q .gitignore
 
 if %tipoInstalacao% == 1 (
     del /f /q AdicionarFornecedorNuvem.bat
