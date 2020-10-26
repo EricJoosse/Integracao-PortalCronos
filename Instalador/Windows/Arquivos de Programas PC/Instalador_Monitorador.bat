@@ -73,7 +73,34 @@ if "%idOsVersion%"=="1" (
     exit
 )
 
-  
+:PerguntaToInstalarJRE
+cls
+echo.
+echo.
+echo Deseja instalar o Java Runtime? 
+echo.
+echo S = Sim
+echo N = Não
+echo C = Cancelar instalação
+echo.
+
+SET /P toInstalarJRE=Favor digitar S ou N: 
+IF "%toInstalarJRE%"=="" GOTO ErroToInstalarJRE
+IF "%toInstalarJRE%"=="S" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="N" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="C" exit
+echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+goto PerguntaToInstalarJRE
+:ErroToInstalarJRE
+echo MSGBOX "Erro: Opção não informada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+goto PerguntaToInstalarJRE
+:PularErroToInstalarJRE
+
+
 REM echo MSGBOX "Instalando..." > %temp%\TEMPmessage.vbs
 REM call %temp%\TEMPmessage.vbs
 REM del %temp%\TEMPmessage.vbs /f /q
@@ -119,7 +146,7 @@ REM set drive=D:
 
 
 
-REM goto SKIP_JRE
+IF "%toInstalarJRE%"=="N" goto SKIP_JRE
 REM goto SKIP_JRE_TEMPDIR
 REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
 REM goto FIM
