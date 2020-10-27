@@ -825,6 +825,15 @@ public class TestadorSnippets {
 	  }
 
 	  
+	  public static void testarEmailParaDoisEnderecos()
+	  {
+		  LocalDateTime horaInicio = LocalDateTime.now();
+          String assunto = "Teste Email automático do servidor de banco";
+          String body = assunto;
+      	  EmailAutomatico.enviar(IntegracaoFornecedorCompleta.remetenteEmailAutomatico, IntegracaoFornecedorCompleta.destinoEmailAutomatico, IntegracaoFornecedorCompleta.ccEmailAutomatico, assunto, null, body, IntegracaoFornecedorCompleta.provedorEmailAutomatico, IntegracaoFornecedorCompleta.portaEmailAutomatico, IntegracaoFornecedorCompleta.usuarioEmailAutomatico, IntegracaoFornecedorCompleta.senhaCriptografadaEmailAutomatico, IntegracaoFornecedorCompleta.diretorioArquivosXmlSemBarraNoFinal, horaInicio, IntegracaoFornecedorCompleta.diretorioArquivosXml, "nomeServidor",  null);		  
+	  }
+
+	  
 	  public static void testarParseInt()
 	  {
 		  String minutoAgendamentoAtual = "07";
@@ -873,7 +882,8 @@ public class TestadorSnippets {
 	     // testarMainArgs(args);
 	     // testarTestadorUnitario(args);
 	     // testarParseInt();
-		    testarProvedorEmail();
+		 // testarProvedorEmail();
+			testarEmailParaDoisEnderecos();
          
 
          // throw new Exception("try");
