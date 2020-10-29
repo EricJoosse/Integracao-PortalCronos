@@ -15,6 +15,8 @@ cd "Arquivos de Programas PC"
 del /f /q Instalador_Integrador.bat
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
+:PerguntaTipoWin
+cls
 echo.
 echo.
 echo Tipos de Windows homologados: 
@@ -22,11 +24,19 @@ echo.
 echo 1 = Windows Server 2008 R2 SP1
 echo 2 = Windows Server 2012 R2
 echo 3 = Windows Server 2016 ou 2019
+echo C = Cancelar instalação
 echo.
 
 SET /P idOsVersion=Favor digitar o ID do tipo de Windows: 
 IF "%idOsVersion%"=="" GOTO ErroTipoWin
-GOTO PularErroTipoWin
+IF "%idOsVersion%"=="C" GOTO CancelarInstalacao
+IF "%idOsVersion%"=="1" GOTO PularErroTipoWin
+IF "%idOsVersion%"=="2" GOTO PularErroTipoWin
+IF "%idOsVersion%"=="3" GOTO PularErroTipoWin
+goto PerguntaTipoWin
+echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
 :ErroTipoWin
 echo MSGBOX "Erro: ID do tipo de Windows não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
@@ -88,7 +98,7 @@ SET /P toInstalarJRE=Favor digitar S ou N:
 IF "%toInstalarJRE%"=="" GOTO ErroToInstalarJRE
 IF "%toInstalarJRE%"=="S" GOTO PularErroToInstalarJRE
 IF "%toInstalarJRE%"=="N" GOTO PularErroToInstalarJRE
-IF "%toInstalarJRE%"=="C" exit
+IF "%toInstalarJRE%"=="C" GOTO CancelarInstalacao
 echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
@@ -355,14 +365,14 @@ echo.
 echo          Primeira fase da instalação concluida!
 echo.
 
-echo Próximas atividades:
-echo ====================
+echo Próximos passos:
+echo ================
 echo 1. Preencher o arquivo de configuração, já aberto automaticamente em segundo 
 echo    plano.
 echo.
 echo 2. APÓS a conclusão do preenchimento deste arquivo, 
-echo    em todos os casos de todos os servidores da Cronos (servidor de aplicação, 
-echo    servidor BD, servidor BD Contingência):
+echo    em todos os casos de todos os servidores da Cronos: 
+echo    (servidor de aplicação, servidor BD, servidor BD Contingência):
 echo     - No Testador Unitário TestadorSnippets.java descomentar 
 echo       testarProvedorEmail() e comentar qualquer outra Test Unit. 
 echo     - Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat
@@ -395,4 +405,24 @@ del /f /q Instalador_Monitorador.bat
 exit
 
 :FIM
+
+
+goto PularCancelarInstalacao
+:CancelarInstalacao
+echo.
+echo          Rollback da instalação concluida!
+echo.
+
+echo MSGBOX "Rollback da instalação concluida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+
+REM ================ Remover diretório "Arquivos de Programas PC": ========================================
+
+REM O seguinte consegue remover todos os arquivos no diretório "Arquivos de Programas PC",
+REM até este arquivo .bat, porém não consegue remover o diretório "Arquivos de Programas PC" :
+REM ????????? Funcionou quando usei vbs acima antes disso !!!!!!!!!
+cd\
+rmdir /s /q "Arquivos de Programas PC"
+:PularCancelarInstalacao
 
