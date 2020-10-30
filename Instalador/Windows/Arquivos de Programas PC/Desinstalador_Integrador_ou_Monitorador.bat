@@ -51,6 +51,7 @@ if "%IsAmbienteNuvem%" == "1" (
     SCHTASKS /End /TN "Integração Portal Cronos - Fornecedor"
     SCHTASKS /Delete /TN "Integração Portal Cronos - Fornecedor" /F
 ) else (
+REM Não fazer cls aqui, para poder visualizar eventuais erros
     echo.
     echo          A desinstalação falhou! Variável IsAmbienteNuvem inválido!
     echo.
@@ -118,6 +119,7 @@ wmic product where "name like 'Java 8 Update 92%%'" call uninstall /nointeractiv
 
 :FIM
 
+REM Não fazer cls aqui, para poder visualizar eventuais erros
 echo.
 echo          Desinstalação concluida!
 echo.

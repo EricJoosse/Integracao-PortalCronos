@@ -16,7 +16,6 @@ del /f /q Instalador_Integrador.bat
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
 :PerguntaTipoWin
-cls
 echo.
 echo.
 echo Tipos de Windows homologados: 
@@ -24,19 +23,21 @@ echo.
 echo 1 = Windows Server 2008 R2 SP1
 echo 2 = Windows Server 2012 R2
 echo 3 = Windows Server 2016 ou 2019
-echo C = Cancelar instalação
+echo C = Cancelar instalação (com rollback)
 echo.
 
 SET /P idOsVersion=Favor digitar o ID do tipo de Windows: 
 IF "%idOsVersion%"=="" GOTO ErroTipoWin
 IF "%idOsVersion%"=="C" GOTO CancelarInstalacao
+IF "%idOsVersion%"=="c" GOTO CancelarInstalacao
 IF "%idOsVersion%"=="1" GOTO PularErroTipoWin
 IF "%idOsVersion%"=="2" GOTO PularErroTipoWin
 IF "%idOsVersion%"=="3" GOTO PularErroTipoWin
-goto PerguntaTipoWin
 echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+cls
+goto PerguntaTipoWin
 :ErroTipoWin
 echo MSGBOX "Erro: ID do tipo de Windows não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
@@ -84,24 +85,27 @@ if "%idOsVersion%"=="1" (
 )
 
 :PerguntaToInstalarJRE
-cls
 echo.
 echo.
 echo Deseja instalar o Java Runtime? 
 echo.
 echo S = Sim
 echo N = Não
-echo C = Cancelar instalação
+echo C = Cancelar instalação (com rollback)
 echo.
 
 SET /P toInstalarJRE=Favor digitar S ou N: 
 IF "%toInstalarJRE%"=="" GOTO ErroToInstalarJRE
 IF "%toInstalarJRE%"=="S" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="s" GOTO PularErroToInstalarJRE
 IF "%toInstalarJRE%"=="N" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="n" GOTO PularErroToInstalarJRE
 IF "%toInstalarJRE%"=="C" GOTO CancelarInstalacao
+IF "%toInstalarJRE%"=="c" GOTO CancelarInstalacao
 echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+cls
 goto PerguntaToInstalarJRE
 :ErroToInstalarJRE
 echo MSGBOX "Erro: Opção não informada!" > %temp%\TEMPmessage.vbs
@@ -409,6 +413,11 @@ exit
 
 goto PularCancelarInstalacao
 :CancelarInstalacao
+
+REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
+del /f /q C:\temp\"Instalador do Monitorador.*.exe"
+
+REM Não fazer cls aqui, para poder visualizar eventuais erros
 echo.
 echo          Rollback da instalação concluida!
 echo.

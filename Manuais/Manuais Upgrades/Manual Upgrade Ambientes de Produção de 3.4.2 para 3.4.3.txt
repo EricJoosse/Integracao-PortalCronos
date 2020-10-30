@@ -58,6 +58,7 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 	- bin\ComponenteTestador.bat
 	- bin\CaminhoJRE.bat
 	- TestadorUnitario.bat
+	- Desinstalador_Integrador_ou_Monitorador.bat
 
 5. No caso dos servidores da Cronos, no arquivo /conf/.properties:
 
