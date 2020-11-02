@@ -15,6 +15,7 @@ cd "Arquivos de Programas PC"
 del /f /q Instalador_Integrador.bat
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
+
 :PerguntaTipoWin
 echo.
 echo.
@@ -161,6 +162,7 @@ REM set drive=D:
 
 
 IF "%toInstalarJRE%"=="N" goto SKIP_JRE
+IF "%toInstalarJRE%"=="n" goto SKIP_JRE
 REM goto SKIP_JRE_TEMPDIR
 REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
 REM goto FIM

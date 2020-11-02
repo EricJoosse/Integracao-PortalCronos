@@ -15,6 +15,8 @@ cd "Arquivos de Programas PC"
 del /f /q Instalador_Monitorador.bat
 call "Integração Fornecedor - Portal Cronos\bin\VerificarUsuarioAdministrador.bat"
 
+
+:PerguntaTipoWin
 echo.
 echo.
 echo Tipos de Windows homologados: 
@@ -22,11 +24,21 @@ echo.
 echo 1 = Windows Server 2008 R2 SP1
 echo 2 = Windows Server 2012 R2
 echo 3 = Windows Server 2016 ou 2019
+echo C = Cancelar instalação (com rollback)
 echo.
 
 SET /P idOsVersion=Favor digitar o ID do tipo de Windows: 
 IF "%idOsVersion%"=="" GOTO ErroTipoWin
-GOTO PularErroTipoWin
+IF "%idOsVersion%"=="C" GOTO CancelarInstalacao
+IF "%idOsVersion%"=="c" GOTO CancelarInstalacao
+IF "%idOsVersion%"=="1" GOTO PularErroTipoWin
+IF "%idOsVersion%"=="2" GOTO PularErroTipoWin
+IF "%idOsVersion%"=="3" GOTO PularErroTipoWin
+echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+cls
+goto PerguntaTipoWin
 :ErroTipoWin
 echo MSGBOX "Erro: ID do tipo de Windows não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
@@ -130,6 +142,37 @@ if "%idOsVersion%"=="1" (
 )
 
   
+:PerguntaToInstalarJRE
+echo.
+echo.
+echo Deseja instalar o Java Runtime? 
+echo.
+echo S = Sim
+echo N = Não
+echo C = Cancelar instalação (com rollback)
+echo.
+
+SET /P toInstalarJRE=Favor digitar S ou N: 
+IF "%toInstalarJRE%"=="" GOTO ErroToInstalarJRE
+IF "%toInstalarJRE%"=="S" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="s" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="N" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="n" GOTO PularErroToInstalarJRE
+IF "%toInstalarJRE%"=="C" GOTO CancelarInstalacao
+IF "%toInstalarJRE%"=="c" GOTO CancelarInstalacao
+echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+cls
+goto PerguntaToInstalarJRE
+:ErroToInstalarJRE
+echo MSGBOX "Erro: Opção não informada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+goto PerguntaToInstalarJRE
+:PularErroToInstalarJRE
+
+
 REM echo MSGBOX "Instalando..." > %temp%\TEMPmessage.vbs
 REM call %temp%\TEMPmessage.vbs
 REM del %temp%\TEMPmessage.vbs /f /q
@@ -175,7 +218,8 @@ REM set drive=D:
 
 
 
-REM goto SKIP_JRE
+IF "%toInstalarJRE%"=="N" goto SKIP_JRE
+IF "%toInstalarJRE%"=="n" goto SKIP_JRE
 REM goto SKIP_JRE_TEMPDIR
 REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
 REM goto FIM
@@ -428,4 +472,32 @@ del /f /q Instalador_Integrador.bat
 exit
 
 :FIM
+
+
+
+goto PularCancelarInstalacao
+:CancelarInstalacao
+
+REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
+REM após o duplo-clique para executar a instalação:
+REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
+del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+
+REM Não fazer cls aqui, para poder visualizar eventuais erros
+echo.
+echo          Rollback da instalação concluida!
+echo.
+
+echo MSGBOX "Rollback da instalação concluida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+
+REM ================ Remover diretório "Arquivos de Programas PC": ========================================
+
+REM O seguinte consegue remover todos os arquivos no diretório "Arquivos de Programas PC",
+REM até este arquivo .bat, porém não consegue remover o diretório "Arquivos de Programas PC" :
+REM ????????? Funcionou quando usei vbs acima antes disso !!!!!!!!!
+cd\
+rmdir /s /q "Arquivos de Programas PC"
+:PularCancelarInstalacao
 
