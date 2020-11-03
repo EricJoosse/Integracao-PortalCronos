@@ -37,7 +37,7 @@ echo.
 echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
 echo.
 
-SET /P idFornecedor=Favor digitar o ID da empresa fornecedora: 
+SET /P idFornecedor=Digite o ID da empresa fornecedora + ^<Enter^>: 
 IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
 GOTO PularErro
 :ErroIdFornecedor

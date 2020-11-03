@@ -27,7 +27,7 @@ echo 3 = Windows Server 2016 ou 2019
 echo C = Cancelar instalação (com rollback)
 echo.
 
-SET /P idOsVersion=Favor digitar o ID do tipo de Windows: 
+SET /P idOsVersion=Digite 1, 2, 3 ou C + ^<Enter^>: 
 IF "%idOsVersion%"=="" GOTO ErroTipoWin
 IF "%idOsVersion%"=="C" GOTO CancelarInstalacao
 IF "%idOsVersion%"=="c" GOTO CancelarInstalacao
@@ -56,7 +56,7 @@ echo 1 = Hospedagem Local
 echo 2 = Nuvem
 echo.
 
-SET /P tipoInstalacao=Favor digitar o ID do tipo de instalação: 
+SET /P tipoInstalacao=Digite 1 ou 2 + ^<Enter^>: 
 IF "%tipoInstalacao%"=="" GOTO ErroTipoInst
 GOTO PularErroTipoInst
 :ErroTipoInst
@@ -79,7 +79,7 @@ echo.
 echo Sigla do sistema: 
 echo.
 
-SET /P siglaSistema=Favor digitar a sigla (APS, WinThor ou SAP): 
+SET /P siglaSistema=Digite a sigla (APS, WinThor ou SAP) + ^<Enter^>: 
 if "%siglaSistema%"=="" (
     GOTO ErroSiglaSistema
 ) else if "%siglaSistema%"=="APS" (
@@ -152,7 +152,7 @@ echo N = Não
 echo C = Cancelar instalação (com rollback)
 echo.
 
-SET /P toInstalarJRE=Favor digitar S ou N: 
+SET /P toInstalarJRE=Digite S, N ou C + ^<Enter^>: 
 IF "%toInstalarJRE%"=="" GOTO ErroToInstalarJRE
 IF "%toInstalarJRE%"=="S" GOTO PularErroToInstalarJRE
 IF "%toInstalarJRE%"=="s" GOTO PularErroToInstalarJRE
