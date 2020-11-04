@@ -40,11 +40,11 @@ del %temp%\TEMPmessage.vbs /f /q
 cls
 goto PerguntaTipoWin
 :ErroTipoWin
-echo MSGBOX "Erro: ID do tipo de Windows não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Tipo de Windows não informado!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaTipoWin
 :PularErroTipoWin
 
 
@@ -112,6 +112,7 @@ goto PerguntaToInstalarJRE
 echo MSGBOX "Erro: Opção não informada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+cls
 goto PerguntaToInstalarJRE
 :PularErroToInstalarJRE
 

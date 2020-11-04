@@ -44,8 +44,8 @@ GOTO PularErro
 echo MSGBOX "Erro: ID do fornecedor não informado! Instalação não concluída!!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaIdFornecedor
 :PularErro
 :PularPerguntaIdFornecedor
 

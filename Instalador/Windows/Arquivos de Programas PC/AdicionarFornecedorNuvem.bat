@@ -19,6 +19,7 @@ echo      =================================================
 echo    ^| TELA PROVISORIA PARA INCLUSAO DE INSTANCIA NOVA ^|
 echo    ^| DO INTEGRADOR PCRONOS - APS CLOUD               ^|
 echo      =================================================
+:PerguntaNmFornecedor
 echo. 
 echo.
 echo Digite o nome fantasia da empresa cliente a ser adicionada,
@@ -32,14 +33,14 @@ GOTO PularErroNmFornecedor
 echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Adicionamento da instância não efetuado!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaNmFornecedor
 :ErroNmFornecedor
 echo MSGBOX "Erro: nome não informado! Adicionamento da instância não efetuado!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaNmFornecedor
 :PularErroNmFornecedor
 
 

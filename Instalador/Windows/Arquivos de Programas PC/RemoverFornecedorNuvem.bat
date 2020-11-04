@@ -21,6 +21,7 @@ echo    ^| TELA PROVISORIA PARA EXCLUSAO DE INSTANCIA NOVA ^|
 echo    ^| DO INTEGRADOR PCRONOS - APS CLOUD               ^|
 echo      =================================================
 echo. 
+REM :PerguntaTemCerteza
 REM echo.
 REM echo.
 REM echo Tem certeza que deseja remover a instância de um cliente?
@@ -40,12 +41,13 @@ REM :ErroTemCerteza
 REM echo MSGBOX "Erro: confirmação não informada! Remoção de nenhuma instância efetuada!" > %temp%\TEMPmessage.vbs
 REM call %temp%\TEMPmessage.vbs
 REM del %temp%\TEMPmessage.vbs /f /q
-REM REM Fechar o script chamador também: 
-REM exit
+REM cls
+REM goto PerguntaTemCerteza
 REM :PularErroTemCerteza
 
 REM cls
 
+:PerguntaNmFornecedor
 echo.
 echo Digite o nome fantasia da empresa cliente a ser excluida
 echo (para evitar exclusão da instância errada),
@@ -59,14 +61,14 @@ GOTO PularErroNmFornecedor
 echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção da instância não efetuada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaNmFornecedor
 :ErroNmFornecedor
 echo MSGBOX "Erro: nome não informado! Remoção da instância não efetuada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaNmFornecedor
 :PularErroNmFornecedor
 
 

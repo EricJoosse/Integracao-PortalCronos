@@ -40,31 +40,42 @@ del %temp%\TEMPmessage.vbs /f /q
 cls
 goto PerguntaTipoWin
 :ErroTipoWin
-echo MSGBOX "Erro: ID do tipo de Windows não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: Tipo de Windows não informado!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaTipoWin
 :PularErroTipoWin
 
 
+
+:PerguntaTipoInst
 echo.
 echo.
 echo Tipo de instalação: 
 echo.
 echo 1 = Hospedagem Local
 echo 2 = Nuvem
+echo C = Cancelar instalação (com rollback)
 echo.
 
-SET /P tipoInstalacao=Digite 1 ou 2 + ^<Enter^>: 
+SET /P tipoInstalacao=Digite 1, 2 ou C + ^<Enter^>: 
 IF "%tipoInstalacao%"=="" GOTO ErroTipoInst
-GOTO PularErroTipoInst
-:ErroTipoInst
-echo MSGBOX "Erro: ID do tipo de instalação não informado! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+IF "%tipoInstalacao%"=="1" GOTO PularErroTipoInst
+IF "%tipoInstalacao%"=="2" GOTO PularErroTipoInst
+IF "%tipoInstalacao%"=="C" GOTO PularErroTipoInst
+IF "%tipoInstalacao%"=="c" GOTO PularErroTipoInst
+echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaTipoInst
+:ErroTipoInst
+echo MSGBOX "Erro: Tipo de instalação não informado!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+cls
+goto PerguntaTipoInst
 :PularErroTipoInst
 
 
@@ -74,6 +85,7 @@ if %tipoInstalacao% == 2 (
     GOTO PularErroSiglaSistema
 )
 
+:PerguntaSiglaSistema
 echo.
 echo.
 echo Sigla do sistema: 
@@ -96,15 +108,15 @@ if "%siglaSistema%"=="" (
     echo MSGBOX "Erro: apenas as siglas ""APS"", ""WinThor"" ou ""SAP"" estão permitidas!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-    exit
+    cls
+    goto PerguntaSiglaSistema
 )
 :ErroSiglaSistema
-echo MSGBOX "Erro: sigla não informada! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+echo MSGBOX "Erro: sigla não informada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-exit
+cls
+goto PerguntaSiglaSistema
 :PularErroSiglaSistema
 
 
@@ -134,7 +146,7 @@ if "%idOsVersion%"=="1" (
 ) else if "%idOsVersion%"=="3" (
     set osVersion=Windows_Server_2016
 ) else (
-    echo MSGBOX "Erro: ID do tipo de Windows inválido! Instalação abortada!!" > %temp%\TEMPmessage.vbs
+    echo MSGBOX "Erro interno! Valor da variável idOsVersion não tratado na definição da variável osVersion. Instalação abortada! Entre em contato com o setor Desenvolvimento do Portal Cronos." > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     REM Fechar o script chamador também: 
@@ -169,6 +181,7 @@ goto PerguntaToInstalarJRE
 echo MSGBOX "Erro: Opção não informada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+cls
 goto PerguntaToInstalarJRE
 :PularErroToInstalarJRE
 
