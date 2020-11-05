@@ -311,10 +311,6 @@ Como vai ser?
 	    		- o atributo "EspacoLivreDisco"   
 
 
-		- Se decidir não instalar Java porém usar uma versão existente, 
-		  descomentar o seguinte skip no início de "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat":
-						REM goto SKIP_JRE
-
 		- Verificar se precisa descomentar um dos seguintes skips no início de "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat":
 						REM goto SKIP_JRE_TEMPDIR
 						REM goto SKIP_JRE_TEMPDIR_PROGRAMDIR
@@ -341,16 +337,13 @@ Como vai ser?
              		O Java no servidor está usado por programas ou sistemas em produção?
              
                 
-	    	 No caso se decidir não instalar uma JRE nova porém usar uma JRE existente já instalado no servidor:
+	    	 No caso se decidir não instalar uma versão nova de java porém usar uma versão existente da JRE já instalado no servidor:
 	     		- Primeiro fazer um teste rápido se o seguinte funciona: 
 					C:/"Program Files (xxxxxxxxxxxx)"/Java/jre1.8.0_xxxxx/bin/java.exe -version
 					
 	        	- Atualização automática de Java sim ou não: não verificar isso neste momento pois isso não é motivo para instalar outro Java novo sim ou não
 
              	- No caso que a JRE existente funciona: 
-             			- Descomentar "REM goto SKIP_JRE"no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat"              
-                  		  (feito assim na Padeirão e na Prolac)
-             
     					- Verificar e, no caso, ajustar o if no arquivo CaminhoJRE.bat.
     					
     					- No FornecedorRepository, preencher:
@@ -443,9 +436,6 @@ Como vai ser?
  
     9.  Após a instalação:
     
-    9a. Em todos os casos: no arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat" (no projeto Eclipse) 
-        descomentar "REM goto SKIP_JRE" para ficar "goto SKIP_JRE"  
-
     9a. Verificar e comparar o variável de ambiente do sistema "Path" de Windows
     
     9b. Restaurar o backup de C:\ProgramData\Oracle\Java\javapath\, no caso.
