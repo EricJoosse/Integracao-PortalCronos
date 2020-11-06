@@ -62,7 +62,8 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 	- AdicionarFornecedorNuvem.bat (apenas para servidores nuvem)
 	- RemoverFornecedorNuvem.bat   (apenas para servidores nuvem)
 
-5. No caso dos servidores da Cronos, no arquivo /conf/.properties:
+5. Apenas no caso dos servidores da Cronos (servidor de aplicação, servidor BD, servidor BD Contingência), 
+   no arquivo /conf/.properties:
 
 	   Substituir:
 
@@ -128,18 +129,19 @@ UsuarioEmailAutomatico            = portalcronos.br@gmail.com
 		- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
 
 
-8. Apenas no caso do servidor de aplicação do Cronos, pois é o primeiro servidor a ser atualizado,
+8. Apenas no caso do servidor de aplicação da Cronos, pois é o primeiro servidor a ser atualizado,
 	  e já foi testado na Propão na forma de gambiarra: 
 	    - no Testador Unitário TestadorSnippets.java descomentar testarParseInt() e comentar qualquer outra Test Unit.
 		- executar TestadorUnitario.bat para verificar se a alteração no CaminhJRE.bat funcionou: veja TestadorUnitario.log
 		- depois do teste, apagar TestadorUnitario.log
 
 
-9. No Testador Unitário TestadorSnippets.java descomentar testarProvedorEmail() e comentar qualquer outra Test Unit. 
-   Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat no servidor de destino. 
-   Se o email de teste não chegar, adicionar o servidor nos "recognized devices" (dispositivos reconhecidos) 
-   na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
-   Apagar TestadorUnitario.log no servidor.
+9. Apenas no caso dos servidores da Cronos (servidor de aplicação, servidor BD, servidor BD Contingência):
+     - No Testador Unitário TestadorSnippets.java descomentar testarProvedorEmail() e comentar qualquer outra Test Unit. 
+     - Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat no servidor de destino. 
+     - Se o email de teste não chegar, adicionar o servidor nos "recognized devices" (dispositivos reconhecidos) 
+       na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
+     - Apagar TestadorUnitario.log no servidor.
 
 10. No caso que o processamento foi desativado: 
     remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
