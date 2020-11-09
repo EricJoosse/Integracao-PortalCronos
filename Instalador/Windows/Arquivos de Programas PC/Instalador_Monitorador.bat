@@ -27,7 +27,7 @@ echo 3 = Windows Server 2016 ou 2019
 echo C = Cancelar instalação (com rollback)
 echo.
 
-SET /P idOsVersion=Digite 1, 2, 3 ou C + ^<Enter^>: 
+SET /P idOsVersion=Digite 1, 2, 3 ou C + a tecla ^<Enter^>: 
 IF "%idOsVersion%"=="" GOTO ErroTipoWin
 IF "%idOsVersion%"=="C" GOTO CancelarInstalacao
 IF "%idOsVersion%"=="c" GOTO CancelarInstalacao
@@ -95,7 +95,7 @@ echo N = Não
 echo C = Cancelar instalação (com rollback)
 echo.
 
-SET /P toInstalarJRE=Digite S, N ou C + ^<Enter^>: 
+SET /P toInstalarJRE=Digite S, N ou C + a tecla ^<Enter^>: 
 IF "%toInstalarJRE%"=="" GOTO ErroToInstalarJRE
 IF "%toInstalarJRE%"=="S" GOTO PularErroToInstalarJRE
 IF "%toInstalarJRE%"=="s" GOTO PularErroToInstalarJRE

@@ -29,7 +29,7 @@ REM echo.
 REM echo IMPORTANTE: É recomend vel primeiro fazer backup das configura‡oes do cliente!
 REM echo.
 REM 
-REM SET /P temCerteza=Digite S (=Sim) ou N (=Nao) + ^<Enter^>:  
+REM SET /P temCerteza=Digite S (=Sim) ou N (=Nao) + a tecla ^<Enter^>:  
 REM IF "%temCerteza%"=="" GOTO ErroTemCerteza
 REM if "%temCerteza%"=="S" (
 REM GOTO PularErroTemCerteza
