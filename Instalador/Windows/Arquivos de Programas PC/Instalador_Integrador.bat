@@ -88,24 +88,38 @@ if %tipoInstalacao% == 2 (
 :PerguntaSiglaSistema
 echo.
 echo.
-echo Sigla do sistema: 
+echo Sigla do sistema (APS, WinThor ou SAP): 
 echo.
 
-SET /P siglaSistema=Digite a sigla (APS, WinThor ou SAP) + a tecla ^<Enter^>: 
+SET /P siglaSistema=Digite a sigla ou C (= Cancelar) + a tecla ^<Enter^>: 
+IF "%siglaSistema%"=="C" GOTO CancelarInstalacao
+IF "%siglaSistema%"=="c" GOTO CancelarInstalacao
 if "%siglaSistema%"=="" (
     GOTO ErroSiglaSistema
 ) else if "%siglaSistema%"=="APS" (
     GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="aps" (
+    set siglaSistema=APS
+    GOTO PularErroSiglaSistema
 ) else if "%siglaSistema%"=="WinThor" (
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="winthor" (
+    set siglaSistema=WinThor
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="WINTHOR" (
+    set siglaSistema=WinThor
     GOTO PularErroSiglaSistema
 ) else if "%siglaSistema%"=="SAP" (
     GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="sap" (
+    set siglaSistema=SAP
+    GOTO PularErroSiglaSistema
 ) else (
     echo.
-    ECHO Erro: apenas as siglas ^"APS^", ^"WinThor^" ou ^"SAP^" estão permitidas!
+    ECHO Erro: apenas as siglas ^"APS^", ^"WinThor^", ^"SAP^" ou a tecla ^"C^" estão permitidas!
     echo.
 
-    echo MSGBOX "Erro: apenas as siglas ""APS"", ""WinThor"" ou ""SAP"" estão permitidas!" > %temp%\TEMPmessage.vbs
+    echo MSGBOX "Erro: apenas as siglas ""APS"", ""WinThor"", ""SAP"" ou a tecla ""C"" estão permitidas!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     cls

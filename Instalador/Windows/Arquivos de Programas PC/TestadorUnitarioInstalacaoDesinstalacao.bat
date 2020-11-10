@@ -50,7 +50,8 @@ REM goto TesteRemocaoMultiplasTarefasWindows
 REM goto TesteIfExistArqConfEspecifico
 REM goto TesteFindTarefaEspecifica
 REM goto TesteTresParam
-goto TesteIfExistWildcard
+REM goto TesteIfExistWildcard
+goto TestePromptsDOS
 
 
 REM ================ Testes Instalação Resolver Paradas do menu de Windows: ========================================
@@ -567,6 +568,78 @@ if exist *.exe echo exe exists
 if exist .git echo .git exists
 if exist .gitignore echo .gitignore exists
 
+
+pause
+exit
+
+REM ================ Teste Prompts DOS (testado, funcionou): ========================================
+
+:TestePromptsDOS
+
+:PerguntaSiglaSistema
+echo.
+echo.
+echo Sigla do sistema (APS, WinThor ou SAP): 
+echo.
+
+SET /P siglaSistema=Digite a sigla ou C (= Cancelar) + a tecla ^<Enter^>: 
+IF "%siglaSistema%"=="C" GOTO CancelarInstalacao
+IF "%siglaSistema%"=="c" GOTO CancelarInstalacao
+if "%siglaSistema%"=="" (
+    GOTO ErroSiglaSistema
+) else if "%siglaSistema%"=="APS" (
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="aps" (
+    set siglaSistema=APS
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="WinThor" (
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="winthor" (
+    set siglaSistema=WinThor
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="WINTHOR" (
+    set siglaSistema=WinThor
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="SAP" (
+    GOTO PularErroSiglaSistema
+) else if "%siglaSistema%"=="sap" (
+    set siglaSistema=SAP
+    GOTO PularErroSiglaSistema
+) else (
+    echo.
+    ECHO Erro: apenas as siglas ^"APS^", ^"WinThor^", ^"SAP^" ou a tecla ^"C^" estão permitidas!
+    echo.
+
+    echo MSGBOX "Erro: apenas as siglas ""APS"", ""WinThor"", ""SAP"" ou a tecla ""C"" estão permitidas!" > %temp%\TEMPmessage.vbs
+    call %temp%\TEMPmessage.vbs
+    del %temp%\TEMPmessage.vbs /f /q
+    cls
+    goto PerguntaSiglaSistema
+)
+:ErroSiglaSistema
+echo MSGBOX "Erro: sigla não informada!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+cls
+goto PerguntaSiglaSistema
+:PularErroSiglaSistema
+
+
+echo siglaSistema = %siglaSistema%
+
+goto PularCancelarInstalacao
+:CancelarInstalacao
+
+REM Não fazer cls aqui, para poder visualizar eventuais erros
+echo.
+echo          Rollback da instalação concluida!
+echo.
+
+echo MSGBOX "Rollback da instalação concluida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+
+:PularCancelarInstalacao
 
 pause
 exit
