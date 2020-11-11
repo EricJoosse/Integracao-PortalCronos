@@ -22,10 +22,11 @@ echo      =================================================
 :PerguntaNmFornecedor
 echo. 
 echo.
-echo Digite o nome fantasia da empresa cliente a ser adicionada,
-echo e em seguida clique na tecla ^<Enter^>:
+echo Nome fantasia da empresa cliente a ser adicionada:
 echo.
-SET /P nmFornecedor=Nome fantasia: 
+SET /P nmFornecedor=Digite o nome fantasia ou C (= Cancelar), e em seguida clique na tecla ^<Enter^>: 
+IF "%nmFornecedor%"=="C" exit
+IF "%nmFornecedor%"=="c" exit
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor

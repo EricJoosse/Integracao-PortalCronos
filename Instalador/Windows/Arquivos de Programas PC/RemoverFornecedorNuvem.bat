@@ -49,11 +49,12 @@ REM cls
 
 :PerguntaNmFornecedor
 echo.
-echo Digite o nome fantasia da empresa cliente a ser excluida
-echo (para evitar exclusão da instância errada),
-echo e em seguida clique na tecla ^<Enter^>:
+echo Nome fantasia da empresa cliente a ser excluida
+echo (para evitar exclusão da instância errada):
 echo.
-SET /P nmFornecedor=Nome fantasia: 
+SET /P nmFornecedor=Digite o nome fantasia ou C (= Cancelar), e em seguida clique na tecla ^<Enter^>: 
+IF "%nmFornecedor%"=="C" exit
+IF "%nmFornecedor%"=="c" exit
 IF "%nmFornecedor%"=="" GOTO ErroNmFornecedor
 if not "%nmFornecedor%"=="%nmFornecedor: =%" goto ErroEspacosNmFornecedor
 GOTO PularErroNmFornecedor
