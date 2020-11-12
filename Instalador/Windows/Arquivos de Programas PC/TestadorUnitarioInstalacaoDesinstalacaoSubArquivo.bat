@@ -10,10 +10,12 @@ REM "Integração Fornecedor - Portal Cronos" em alguns ou talvez até em todos os 
 
 chcp 1252>nul
 
-if %tipoInstalacao% == 2 (
-   set idFornecedor=1995
-   goto PularPerguntaIdFornecedor
-)
+echo.
+echo Subarquivo .bat entrado: 
+echo Param 0 = %0
+echo Param 1 = %1
+echo Param 2 = %2
+echo Param 3 = %3
 
 if "%1"=="m" (
     set idFornecedor=-1
@@ -53,42 +55,7 @@ goto PerguntaIdFornecedor
 :PularPerguntaIdFornecedor
 
 
-REM Alternativo antigo: 
-REM 
-REM if %idFornecedor% == 30 (
-REM     goto PathProlac
-REM ) else (
-REM     goto PathOutros
-REM )
-
-
-call "Integração Fornecedor - Portal Cronos\bin\Inicializacoes.bat"
-call "Integração Fornecedor - Portal Cronos\bin\Versao.bat"
-call "Integração Fornecedor - Portal Cronos\bin\CaminhoJRE.bat" Instalador.log Instalador %idFornecedor% %2
-
-
-
-set arquivoLog="Instalador.log"
-set tamanhoArqLog=0
-
-FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
-
-if %tamanhoArqLog% GTR 0 (
-    echo.
-    echo          A instalação falhou!
-    echo.
-    
-    echo MSGBOX "A instalação falhou!" > %temp%\TEMPmessage.vbs
-    call %temp%\TEMPmessage.vbs
-    del %temp%\TEMPmessage.vbs /f /q
-    start notepad Instalador.log
-REM Abortar a instalação, então fechar este arquivo .bat atual 
-REM e também fechar o arquivo .bat chamador (Instalador_Integrador.bat e Instalador_Monitorador.bat):     
-    exit
-) else (
-    if exist Instalador.log del /f /q Instalador.log 
-)
-
+echo Pergunta Passada
 
 ENDLOCAL
 REM /B para não fechar os scripts chamadores (Instalador_Integrador.bat e Instalador_Monitorador.bat):  

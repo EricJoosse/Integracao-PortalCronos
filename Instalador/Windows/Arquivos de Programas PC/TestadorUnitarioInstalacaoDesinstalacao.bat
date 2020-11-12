@@ -51,7 +51,8 @@ REM goto TesteIfExistArqConfEspecifico
 REM goto TesteFindTarefaEspecifica
 REM goto TesteTresParam
 REM goto TesteIfExistWildcard
-goto TestePromptsDOS
+REM goto TestePromptsDOS
+goto TestePerguntaIdFornecedorEmUmSubArquivoBat
 
 
 REM ================ Testes Instalação Resolver Paradas do menu de Windows: ========================================
@@ -640,6 +641,48 @@ call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 
 :PularCancelarInstalacao
+
+pause
+exit
+
+REM ================ Teste Pergunta ID fornecedor em um subarquivo .bat (testado??????????, funcionou????????????????): ========================================
+
+:TestePerguntaIdFornecedorEmUmSubArquivoBat
+
+cd\
+
+REM Se testar dentro do Eclipse ao invés de nos servidores:
+if exist C:/PCronos/"Integração Fornecedor - Portal Cronos"/Instalador/Windows/"Arquivos de Programas PC"/Instalador.bat (
+  cd PCronos
+  cd "Integração Fornecedor - Portal Cronos"
+  cd Instalador
+  cd Windows
+  cd "Arquivos de Programas PC"
+) else (  
+  cd "Arquivos de Programas PC"
+)
+
+REM "pwd" em Linux = "%cd% em DOS:
+echo %cd%
+
+
+call TestadorUnitarioInstalacaoDesinstalacaoSubArquivo.bat i
+
+
+goto PularCancelarInstalacao
+:CancelarInstalacao
+
+REM Não fazer cls aqui, para poder visualizar eventuais erros
+echo.
+echo          Rollback de teste funcionou!
+echo.
+
+echo MSGBOX "Rollback de teste funcionou!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+
+:PularCancelarInstalacao
+
 
 pause
 exit
