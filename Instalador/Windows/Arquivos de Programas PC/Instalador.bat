@@ -95,3 +95,33 @@ REM /B para não fechar os scripts chamadores (Instalador_Integrador.bat e Instal
 exit /B 0
 
 
+goto PularCancelarInstalacao
+:CancelarInstalacao
+
+REM Foi testado via teste integrado completo que o seguinte funciona, mesmo que deixar o arquivo selecionado 
+REM após o duplo-clique para executar a instalação:
+REM Foi testado que o seguinte funciona também no caso que o diretório for C:\Temp\ ao invés de C:\temp\:
+del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+
+REM Não fazer cls aqui, para poder visualizar eventuais erros
+echo.
+echo          Rollback da instalação concluida!
+echo.
+
+echo MSGBOX "Rollback da instalação concluida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+
+REM ================ Remover diretório "Arquivos de Programas PC": ========================================
+
+REM O seguinte consegue remover todos os arquivos no diretório "Arquivos de Programas PC",
+REM até este arquivo .bat, porém não consegue remover o diretório "Arquivos de Programas PC" :
+REM ????????? Funcionou quando usei vbs acima antes disso !!!!!!!!!
+cd\
+rmdir /s /q "Arquivos de Programas PC"
+REM Neste caso também fechar os scripts chamadores (Instalador_Integrador.bat ou Instalador_Monitorador.bat):
+exit
+:PularCancelarInstalacao
+
+
+

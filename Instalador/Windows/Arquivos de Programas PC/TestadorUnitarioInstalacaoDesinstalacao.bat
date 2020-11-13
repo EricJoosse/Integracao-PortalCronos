@@ -645,7 +645,7 @@ del %temp%\TEMPmessage.vbs /f /q
 pause
 exit
 
-REM ================ Teste Pergunta ID fornecedor em um subarquivo .bat (testado??????????, funcionou????????????????): ========================================
+REM ================ Teste Pergunta ID fornecedor em um subarquivo .bat (testado, não funcionou): ========================================
 
 :TestePerguntaIdFornecedorEmUmSubArquivoBat
 

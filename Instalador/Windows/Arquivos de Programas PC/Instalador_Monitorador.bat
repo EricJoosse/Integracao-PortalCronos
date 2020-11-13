@@ -288,6 +288,7 @@ if exist *.exe del /f /q *.exe
 
 del /f /q Instalador.bat
 del /f /q TestadorUnitarioInstalacaoDesinstalacao.bat
+del /f /q TestadorUnitarioInstalacaoDesinstalacaoSubArquivo.bat
 if exist UpgradeNaoNuvem3.1.0.bat del /f /q UpgradeNaoNuvem3.1.0.bat
 if exist .gitignore del /f /q .gitignore
 
