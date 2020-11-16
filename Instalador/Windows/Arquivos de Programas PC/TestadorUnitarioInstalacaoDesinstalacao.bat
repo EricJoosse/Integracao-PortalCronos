@@ -50,9 +50,9 @@ REM goto TesteRemocaoMultiplasTarefasWindows
 REM goto TesteIfExistArqConfEspecifico
 REM goto TesteFindTarefaEspecifica
 REM goto TesteTresParam
-REM goto TesteIfExistWildcard
+goto TesteIfExistWildcard
 REM goto TestePromptsDOS
-goto TestePerguntaIdFornecedorEmUmSubArquivoBat
+REM goto TestePerguntaIdFornecedorEmUmSubArquivoBat
 
 
 REM ================ Testes Instalação Resolver Paradas do menu de Windows: ========================================
@@ -558,7 +558,7 @@ pause
 exit
 
 
-REM ================ Teste If Exist com Wildcard (testado??????????, funcionou????????????????): ========================================
+REM ================ Teste If Exist com Wildcard e/ou com pontos (testado, funcionou): ========================================
 
 :TesteIfExistWildcard
 
@@ -568,6 +568,8 @@ if exist *.e echo exe exists
 if exist *.exe echo exe exists
 if exist .git echo .git exists
 if exist .gitignore echo .gitignore exists
+if exist UpgradeNaoNuvem3.1.bat echo UpgradeNaoNuvem3.1.bat exists
+if exist UpgradeNaoNuvem3.1.0.bat echo UpgradeNaoNuvem3.1.0.bat exists
 
 
 pause
