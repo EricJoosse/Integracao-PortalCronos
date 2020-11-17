@@ -160,7 +160,7 @@ if "%idOsVersion%"=="1" (
 ) else if "%idOsVersion%"=="3" (
     set osVersion=Windows_Server_2016
 ) else (
-    echo MSGBOX "Erro interno! Valor da variável idOsVersion não tratado na definição da variável osVersion. Instalação abortada! Entre em contato com o setor Desenvolvimento do Portal Cronos." > %temp%\TEMPmessage.vbs
+    echo MSGBOX "Erro interno! Entre em contato com o Suporte do Portal Cronos, informando que tem um erro interno na definição da versão de Windows. Instalação abortada!!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
     REM Fechar o script chamador também: 
@@ -308,7 +308,7 @@ REM echo Favor esperar 300 segundos, e NÃO CONTINUAR! Não aperta nenhuma tecla!
 REM timeout 300
     regedit.exe /s %arquivoRegedit%
 ) else (
-    echo Tipo OS %tipoOS% não reconhecido ^! Opções: 32 ou 64 ^(Bits^)
+    echo Erro interno! Tipo OS %tipoOS% não reconhecido ^! Opções: 32 ou 64 ^(Bits^)
 )
 
 
