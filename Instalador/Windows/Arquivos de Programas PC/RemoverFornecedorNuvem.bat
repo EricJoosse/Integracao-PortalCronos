@@ -32,7 +32,9 @@ REM
 REM SET /P temCerteza=Digite S (=Sim) ou N (=Nao) + a tecla ^<Enter^>:  
 REM IF "%temCerteza%"=="" GOTO ErroTemCerteza
 REM if "%temCerteza%"=="S" (
-REM GOTO PularErroTemCerteza
+REM     GOTO PularErroTemCerteza
+REM ) else if "%temCerteza%"=="s" (
+REM     GOTO PularErroTemCerteza
 REM ) else (
 REM REM Fechar o script chamador também: 
 REM    exit
