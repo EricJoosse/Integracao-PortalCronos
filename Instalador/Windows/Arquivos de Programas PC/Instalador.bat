@@ -34,11 +34,11 @@ REM Fechar o script chamador também:
 
 :PerguntaIdFornecedor
 echo.
-echo ID da empresa fornecedora:
-echo (Entre em contato com o setor Desenvolvimento do Portal Cronos para obter este ID)
+echo Entre em contato com o setor Desenvolvimento do Portal Cronos 
+echo para obter o ID da empresa fornecedora:
 echo.
 
-SET /P idFornecedor=Digite este ID ou C (= Cancelar) + a tecla ^<Enter^>: 
+SET /P idFornecedor=Digite este ID ou a tecla C (= Cancelar) + a tecla ^<Enter^>: 
 IF "%idFornecedor%"=="C" GOTO CancelarInstalacao
 IF "%idFornecedor%"=="c" GOTO CancelarInstalacao
 IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
