@@ -74,6 +74,10 @@ set tamanhoArqLog=0
 FOR /F "usebackq" %%A IN ('%arquivoLog%') DO set tamanhoArqLog=%%~zA
 
 if %tamanhoArqLog% GTR 0 (
+    copy /Y Instalador.log C:\temp\Instalador.log
+    start notepad C:\temp\Instalador.log
+    del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+
     echo.
     echo          A instalação falhou! Foi feito rollback da instalação!
     echo.
@@ -81,9 +85,11 @@ if %tamanhoArqLog% GTR 0 (
     echo MSGBOX "A instalação falhou! Foi feito rollback da instalação!" > %temp%\TEMPmessage.vbs
     call %temp%\TEMPmessage.vbs
     del %temp%\TEMPmessage.vbs /f /q
-    copy Instalador.log C:\temp\Instalador.log
-    start notepad C:\temp\Instalador.log
-    del /f /q C:\temp\"Instalador do Integrador Fornecedores - Portal Cronos.*.exe"
+
+REM O seguinte consegue remover todos os arquivos no diretório "Arquivos de Programas PC",
+REM até este arquivo .bat, porém não consegue remover o diretório "Arquivos de Programas PC" :
+REM ????????? Funcionou quando usei vbs acima imediatamente antes disso,
+REM e quando movi todos os outros camandos DOS mais para cima para antes do echo !!!!!!!!!
     cd\
     rmdir /s /q "Arquivos de Programas PC"
 REM Abortar a instalação, então fechar este arquivo .bat atual 
