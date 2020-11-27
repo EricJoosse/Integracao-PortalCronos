@@ -37,6 +37,8 @@ IF "%idOsVersion%"=="3" GOTO PularErroTipoWin
 echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+REM SET /P doesn't change the content of a variable, if the user doesn't enter text:
+SET "idOsVersion="
 cls
 goto PerguntaTipoWin
 :ErroTipoWin
@@ -106,6 +108,8 @@ IF "%toInstalarJRE%"=="c" GOTO CancelarInstalacao
 echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+REM SET /P doesn't change the content of a variable, if the user doesn't enter text:
+SET "toInstalarJRE="
 cls
 goto PerguntaToInstalarJRE
 :ErroToInstalarJRE

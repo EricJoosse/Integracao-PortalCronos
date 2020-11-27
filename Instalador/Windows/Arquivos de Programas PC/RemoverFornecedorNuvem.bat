@@ -64,6 +64,8 @@ GOTO PularErroNmFornecedor
 echo MSGBOX "Erro: não pode ter nenhum espaço em branco no nome! Remoção da instância não efetuada!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
+REM SET /P doesn't change the content of a variable, if the user doesn't enter text:
+SET "nmFornecedor="
 cls
 goto PerguntaNmFornecedor
 :ErroNmFornecedor
