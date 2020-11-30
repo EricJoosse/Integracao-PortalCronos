@@ -65,8 +65,8 @@ SET /P tipoInstalacao=Digite 1, 2 ou C + a tecla ^<Enter^>:
 IF "%tipoInstalacao%"=="" GOTO ErroTipoInst
 IF "%tipoInstalacao%"=="1" GOTO PularErroTipoInst
 IF "%tipoInstalacao%"=="2" GOTO PularErroTipoInst
-IF "%tipoInstalacao%"=="C" GOTO PularErroTipoInst
-IF "%tipoInstalacao%"=="c" GOTO PularErroTipoInst
+IF "%tipoInstalacao%"=="C" GOTO CancelarInstalacao
+IF "%tipoInstalacao%"=="c" GOTO CancelarInstalacao
 echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
 call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
