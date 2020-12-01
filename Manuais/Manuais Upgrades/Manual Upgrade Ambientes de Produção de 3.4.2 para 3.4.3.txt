@@ -69,8 +69,8 @@ Manual Upgrade dos Ambientes de Produção de 3.4.2 para 3.4.3
 	- bin\CaminhoJRE.bat
 	- TestadorUnitario.bat
 	- Desinstalador_Integrador_ou_Monitorador.bat
-	- AdicionarFornecedorNuvem.bat (apenas para servidores nuvem)
-	- RemoverFornecedorNuvem.bat   (apenas para servidores nuvem)
+	- AdicionarFornecedorNuvem.bat (apenas para servidores com Integrador Nuvem)
+	- RemoverFornecedorNuvem.bat   (apenas para servidores Integrador Nuvem)
 
 5. Apenas no caso dos servidores da Cronos (servidor de aplicação, servidor BD, servidor BD Contingência), 
    no arquivo /conf/.properties:
@@ -111,7 +111,47 @@ UsuarioEmailAutomatico            = portalcronos.br@gmail.com
 
 
 	 
-6.  (i) Editar o conteúdo do Manual TI:
+6. Apenas no caso de servidores com o Integrador Nuvem: 
+   
+   (i) No arquivo TemplateNuvemAPS.properties sustituir o seguinte:
+
+EnviarEmailAutomatico             = true
+ProvedorEmailAutomatico           = smtps.bol.com.br
+PortaEmailAutomatico              = 587
+RemetenteEmailAutomatico          = portalcronos@bol.com.br
+DestinoEmailAutomatico            = eric.jo@bol.com.br
+CcEmailAutomatico                 =
+UsuarioEmailAutomatico            = portalcronos@bol.com.br
+SenhaCriptografadaEmailAutomatico = gzdOSeePXqyw0sWfaLtVQw==
+
+   por:
+
+EnviarEmailAutomatico             = true
+DestinoEmailAutomatico            = eric.jo@bol.com.br
+CcEmailAutomatico                 =
+SenhaCriptografadaEmailAutomatico = gzdOSeePXqyw0sWfaLtVQw==
+
+# Pago:
+# ProvedorEmailAutomatico           = smtps.bol.com.br
+# PortaEmailAutomatico              = 587
+# RemetenteEmailAutomatico          = portalcronos@bol.com.br
+# UsuarioEmailAutomatico            = portalcronos@bol.com.br
+
+# Gratuito:
+ProvedorEmailAutomatico           = smtp.gmail.com
+PortaEmailAutomatico              = 587
+RemetenteEmailAutomatico          = portalcronos.br@gmail.com
+UsuarioEmailAutomatico            = portalcronos.br@gmail.com
+
+
+    (ii) Conectar no Gmail manualmente via Firefox ou Chrome no servidor nuvem 
+         para adicionar este servidor nas "recognized devices":
+			- Usuário: portalcronos.br@gmail.com
+			- Senha: cronos2019
+			- Número de telefone: Brazil + 81 985954203 (celular de Eric, por enquanto)
+    
+
+7.  (i) Editar o conteúdo do Manual TI:
 		- aumentar a versão no título
 		- Substituir:
 
@@ -134,40 +174,40 @@ UsuarioEmailAutomatico            = portalcronos.br@gmail.com
  
 
 
-7. Apenas no caso do Propão: 
+8. Apenas no caso do Propão: 
 		- remover diretório C:/"Program Files"/Java/jre1.8.0_92/bin/       por completo
 		- remover diretório C:/"Program Files (x86)"/Java/jre1.8.0_92/bin/ por completo
 
 
-8. Apenas no caso do servidor de aplicação da Cronos, pois é o primeiro servidor a ser atualizado,
+9. Apenas no caso do servidor de aplicação da Cronos, pois é o primeiro servidor a ser atualizado,
 	  e já foi testado na Propão na forma de gambiarra: 
 	    - no Testador Unitário TestadorSnippets.java descomentar testarParseInt() e comentar qualquer outra Test Unit.
 		- executar TestadorUnitario.bat para verificar se a alteração no CaminhJRE.bat funcionou: veja TestadorUnitario.log
 		- depois do teste, apagar TestadorUnitario.log
 
 
-9. Apenas no caso dos servidores da Cronos (servidor de aplicação, servidor BD, servidor BD Contingência):
-     - No Testador Unitário TestadorSnippets.java descomentar testarProvedorEmail() e comentar qualquer outra Test Unit. 
-     - Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat no servidor de destino. 
-     - Se o email de teste não chegar, adicionar o servidor nos "recognized devices" (dispositivos reconhecidos) 
-       na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
-     - Apagar TestadorUnitario.log no servidor.
+10. Apenas no caso dos servidores da Cronos (servidor de aplicação, servidor BD, servidor BD Contingência):
+      - No Testador Unitário TestadorSnippets.java descomentar testarProvedorEmail() e comentar qualquer outra Test Unit. 
+      - Re-gerar o .jar e copiar para o servidor e executar TestadorUnitario.bat no servidor de destino. 
+      - Se o email de teste não chegar, adicionar o servidor nos "recognized devices" (dispositivos reconhecidos) 
+        na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
+      - Apagar TestadorUnitario.log no servidor.
 
-10. No caso que o processamento foi desativado: 
+11. No caso que o processamento foi desativado: 
     remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
     no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-11. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
+12. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
     digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
 
-12. Em todos os casos: 
+13. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
        ou 5 minutos, dependendo da frequência do processamento.
      
-13. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+14. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
     (ii)  Compilar o arquivo .jar
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
