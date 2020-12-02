@@ -412,6 +412,18 @@ Como vai ser?
         executar Maven para compilar e atualizar integr-fornecedor-x.y.z.jar 
         (no diretório ...\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\)
         
+        
+    5e. No caso de instalação do Monitorador do Servidor de Banco do Portal Cronos 
+        e no caso do Monitorador dos Integradores e do Servidor de Aplicação do Portal Cronos,
+        e também no caso de instalação do Integrador Nuvem:
+        
+          - Conectar no Gmail manualmente via Firefox ou Chrome no servidor nuvem ou do Portal 
+            para adicionar este servidor nas "recognized devices":
+			  - Usuário: portalcronos.br@gmail.com
+			  - Senha: cronos2019
+			  - Número de telefone: Brazil + 81 985954203 (celular de Eric, por enquanto)
+    
+          
     6. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
        NUNCA MAIS PULAR ESTE PASSO (por causa da geração do Manual de Manutenção para a TI): 
        Regerar o instalador, veja o arquivo "Passo a passo geração ou re-geração do instalador Setup.exe.txt"  
