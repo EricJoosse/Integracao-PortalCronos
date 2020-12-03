@@ -66,6 +66,20 @@ REM Não fazer cls aqui, para poder visualizar eventuais erros
 
 REM ================ Remover subdiretórios de "Arquivos de Programas PC": ========================================
 
+REM Esperar 2 minutos para o caso que tem um processo de java.exe rodando neste momento,
+REM para evitar o seguinte erro: 
+REM "integr-fornecedor-x.y.z.jar - The process cannot access the file because it is being used by another process."
+REM e o mesmo erro para o arquivo Job15a15min.log e os jars no diretório /lib.
+
+cls
+echo.
+echo.
+echo Esperando 2 minutos para o processo de integração terminar que está rodando neste momento... 
+echo Favor não interromper!
+echo.
+
+timeout /T 120 /nobreak
+
 cd\
 cd "Arquivos de Programas PC"
 rmdir /s /q "Integração Fornecedor - Portal Cronos"
