@@ -77,6 +77,14 @@ echo.
 echo Esperando 2 minutos para o processo de integração terminar que está rodando neste momento... 
 echo Favor não interromper!
 echo.
+REM Mais tarde terminar e descomentar o seguinte if:
+REM if "%idOsVersion%" == "Windows 10 Pro" (
+REM    if "%idFornecedor%" == "947" (
+         echo Favor matar o processo "java.exe" do Integrador no Windows Task Manager
+         echo (taskmgr.exe), aba "Processos", ordenando por Nome
+         echo.
+REM    )
+REM )
 
 timeout /T 120 /nobreak
 
