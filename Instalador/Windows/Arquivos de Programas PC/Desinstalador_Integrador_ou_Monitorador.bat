@@ -74,19 +74,25 @@ REM e o mesmo erro para o arquivo Job15a15min.log e os jars no diretório /lib.
 cls
 echo.
 echo.
+REM Mais tarde terminar e descomentar os seguintes if´s:
+REM if "%idOsVersion%" == "Windows 10 Pro" (
+REM    if "%idFornecedor%" == "947" (
+         echo Favor procurar o processo "java.exe" do Integrador
+         echo no Windows Task Manager (taskmgr.exe), na aba "Processos", 
+         echo ordenando por Nome, e se tiver, matar o processo manualmente.
+         echo.
+         echo Esperando 3 minutos... 
+         echo.
+         timeout /T 180 /nobreak
+         goto FimEspera
+REM    )
+REM )
 echo Esperando 2 minutos para o processo de integração terminar que está rodando neste momento... 
 echo Favor não interromper!
 echo.
-REM Mais tarde terminar e descomentar o seguinte if:
-REM if "%idOsVersion%" == "Windows 10 Pro" (
-REM    if "%idFornecedor%" == "947" (
-         echo Favor matar o processo "java.exe" do Integrador no Windows Task Manager
-         echo (taskmgr.exe), aba "Processos", ordenando por Nome
-         echo.
-REM    )
-REM )
-
 timeout /T 120 /nobreak
+:FimEspera
+
 
 cd\
 cd "Arquivos de Programas PC"

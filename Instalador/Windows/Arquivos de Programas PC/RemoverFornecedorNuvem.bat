@@ -142,6 +142,20 @@ if %tamanhoArqLog% GTR 0 (
   cd "Integração Fornecedor - Portal Cronos"
   cd conf
   del /f /q "Integração APS - Portal Cronos.%nmFornecedor%.properties"
+
+REM Esperar 2 minutos para o caso que tem um processo de java.exe rodando neste momento,
+REM para evitar o seguinte erro: 
+REM "Job15a15min.%nmFornecedor%.log - The process cannot access the file because it is being used by another process."
+
+  cls
+  echo.
+  echo.
+  echo Esperando 2 minutos para o processo de integração terminar que está rodando neste momento... 
+  echo Favor não interromper!
+  echo.
+  timeout /T 120 /nobreak
+  
+  if exist Job15a15min.%nmFornecedor%.log del /f /q Job15a15min.%nmFornecedor%.log
 )
 
 
