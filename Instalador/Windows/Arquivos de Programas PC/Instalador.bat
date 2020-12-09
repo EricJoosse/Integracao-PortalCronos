@@ -16,8 +16,7 @@ if %tipoInstalacao% == 2 (
 )
 
 if "%1"=="m" (
-    set idFornecedor=-1
-    goto PularPerguntaIdFornecedor
+    goto PerguntaIdMonitorador
 ) else if "%1"=="i" (
     goto PerguntaIdFornecedor
 ) else (
@@ -32,7 +31,43 @@ REM Fechar o script chamador também:
     exit
 )
 
+:PerguntaIdMonitorador
+echo.
+echo.
+echo ID da empresa fornecedora:
+echo.
+echo -1 = Monitorador do Servidor de Aplicação
+echo -2 = Monitorador do Servidor de Banco
+echo -3 = Monitorador do Servidor de Banco de Contingência
+echo C = Cancelar instalação (com rollback)
+echo.
+
+SET /P idFornecedor=Digite -1, -2, -3 ou C + a tecla ^<Enter^>: 
+IF "%idFornecedor%"=="C" GOTO CancelarInstalacao
+IF "%idFornecedor%"=="c" GOTO CancelarInstalacao
+IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
+IF "%idFornecedor%"=="-1" GOTO PularErroIdMonitorador 
+IF "%idFornecedor%"=="-2" GOTO PularErroIdMonitorador 
+IF "%idFornecedor%"=="-3" GOTO PularErroIdMonitorador 
+echo MSGBOX "Erro: Opção inválida!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+REM SET /P doesn't change the content of a variable, if the user doesn't enter text:
+SET "idFornecedor="
+cls
+goto PerguntaIdMonitorador
+:ErroIdMonitorador
+echo MSGBOX "Erro: ID do fornecedor não informado!" > %temp%\TEMPmessage.vbs
+call %temp%\TEMPmessage.vbs
+del %temp%\TEMPmessage.vbs /f /q
+cls
+goto PerguntaIdMonitorador
+:PularErroIdMonitorador
+:PularPerguntaIdMonitorador
+
+
 :PerguntaIdFornecedor
+echo.
 echo.
 echo Entre em contato com o setor Desenvolvimento do Portal Cronos 
 echo para obter o ID da empresa fornecedora:
