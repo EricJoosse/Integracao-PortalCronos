@@ -193,21 +193,37 @@ UsuarioEmailAutomatico            = portalcronos.br@gmail.com
         na conta portalcronos.br@gmail.com do Gmail via acesso no Gmail via browser. 
       - Apagar TestadorUnitario.log no servidor.
 
-11. No caso que o processamento foi desativado: 
+
+11. Apenas no caso de dois dos servidores da Cronos, no caso do servidor de BD de Produção e do servidor de BD de Contingência,
+    (no servidor de aplicação não):  
+      (i)  alterar o parâmetro "Debugar" para true no arquivo /conf/.properties
+      (ii) alterar o Windows Schedule manualmente:
+             - no servidor BD de Produção:     alterar Hora Início de 18:04:47 para 18:13:00
+             - no servidor BD de Contingência: alterar Hora Início de 18:04:47 para 18:12:00
+
+
+12. No caso que o processamento foi desativado: 
     remover "exit" e a linha em branco no início do arquivo Job15a15min.bat
     no servidor do fornecedor (Sempre como último passo no AnyDesk para forçar 100 % conclusão do upgrade).
 
-12. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
+
+13. Apenas no caso de dois dos servidores da Cronos, no caso do servidor de BD de Produção e do servidor de BD de Contingência,
+    (no servidor de aplicação não):  
+      (iii) acompanhar a próxima rodada
+      (iv)  alterar o parâmetro "Debugar" de volta para false no arquivo /conf/.properties após os testes
+      
+
+14. Apenas no caso que não foi possível no Windows 2016 ou Windows 2020 ou em outra versão futura do Windows
     digitar "C:\Arquivos de Programas PC" na barra de endereços do Windows Explorer:
      (i)  No Windows Explorer voltar a opção para não exibir arquivos de sistema 
           (marcar "Hide protected operating system files")
      (ii) Fechar o Windows Explorer e abrir novamente
 
-13. Em todos os casos: 
+15. Em todos os casos: 
      - Acompanhar 15 minutos se o Integrador ou o Monitorador começa executar automaticamente, 
        ou 5 minutos, dependendo da frequência do processamento.
      
-14. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
+16. (i)   Atualizar a versão do .jar no arquivo "FornecedorRepositorio.java" para o fornecedor que foi atualizado
     (ii)  Compilar o arquivo .jar
     (iii) Atualizar o arquivo .jar no servidor de monitoramento (não precisa atualizar o servidor do fornecedor)
           esperando o processamento atual terminar primeiro
