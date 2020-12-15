@@ -39,13 +39,13 @@ echo.
 echo -1 = Monitorador do Servidor de Aplicação
 echo -2 = Monitorador do Servidor de Banco
 echo -3 = Monitorador do Servidor de Banco de Contingência
-echo C = Cancelar instalação (com rollback)
+echo  C = Cancelar instalação (com rollback)
 echo.
 
 SET /P idFornecedor=Digite -1, -2, -3 ou C + a tecla ^<Enter^>: 
 IF "%idFornecedor%"=="C" GOTO CancelarInstalacao
 IF "%idFornecedor%"=="c" GOTO CancelarInstalacao
-IF "%idFornecedor%"=="" GOTO ErroIdFornecedor
+IF "%idFornecedor%"=="" GOTO ErroIdMonitorador
 IF "%idFornecedor%"=="-1" GOTO PularErroIdMonitorador 
 IF "%idFornecedor%"=="-2" GOTO PularErroIdMonitorador 
 IF "%idFornecedor%"=="-3" GOTO PularErroIdMonitorador 
@@ -63,7 +63,6 @@ del %temp%\TEMPmessage.vbs /f /q
 cls
 goto PerguntaIdMonitorador
 :PularErroIdMonitorador
-:PularPerguntaIdMonitorador
 
 
 :PerguntaIdFornecedor
@@ -85,6 +84,8 @@ del %temp%\TEMPmessage.vbs /f /q
 cls
 goto PerguntaIdFornecedor
 :PularErroIdFornecedor
+
+
 :PularPerguntaIdFornecedor
 
 
