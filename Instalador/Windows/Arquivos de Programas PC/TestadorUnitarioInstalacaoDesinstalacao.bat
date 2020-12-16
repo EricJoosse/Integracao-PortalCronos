@@ -50,9 +50,10 @@ REM goto TesteRemocaoMultiplasTarefasWindows
 REM goto TesteIfExistArqConfEspecifico
 REM goto TesteFindTarefaEspecifica
 REM goto TesteTresParam
-goto TesteIfExistWildcard
+REM goto TesteIfExistWildcard
 REM goto TestePromptsDOS
 REM goto TestePerguntaIdFornecedorEmUmSubArquivoBat
+goto TesteSleep
 
 
 REM ================ Testes Instalação Resolver Paradas do menu de Windows: ========================================
@@ -684,6 +685,33 @@ call %temp%\TEMPmessage.vbs
 del %temp%\TEMPmessage.vbs /f /q
 
 :PularCancelarInstalacao
+
+
+pause
+exit
+
+REM ================ Teste sleep in MS-DOS (testado, funcionou): ========================================
+
+:TesteSleep
+
+  cls
+  echo.
+  echo.
+  echo Esperando 2 minutos para o processamento atual do Integrador terminar....... 
+  echo Favor não fechar esta tela preta!!
+  echo.
+timeout /T 120 /nobreak
+echo depois
+pause
+
+  cls
+  echo.
+  echo.
+  echo Esperando 2 minutos para o processamento atual do Integrador terminar....... 
+  echo Favor não fechar esta tela preta!!
+  echo.
+timeout /T 120 /nobreak > NUL
+echo depois com NUL
 
 
 pause

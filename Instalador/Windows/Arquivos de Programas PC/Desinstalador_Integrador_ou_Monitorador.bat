@@ -81,16 +81,18 @@ REM    if "%idFornecedor%" == "947" (
          echo no Windows Task Manager (taskmgr.exe), na aba "Processos", 
          echo ordenando por Nome, e se tiver, matar o processo manualmente.
          echo.
-         echo Esperando 3 minutos... 
          echo.
-         timeout /T 180 /nobreak
+         echo Esperando 3 minutos......
+         echo Favor não fechar esta tela preta!!
+         echo.
+         timeout /T 180 /nobreak > NUL
          goto FimEspera
 REM    )
 REM )
-echo Esperando 2 minutos para o processo de integração terminar que está rodando neste momento... 
-echo Favor não interromper!
+echo Esperando 2 minutos para o processamento atual do Integrador terminar....... 
+echo Favor não fechar esta tela preta!!
 echo.
-timeout /T 120 /nobreak
+timeout /T 120 /nobreak > NUL
 :FimEspera
 
 

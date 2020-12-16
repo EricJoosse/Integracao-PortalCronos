@@ -150,10 +150,10 @@ REM "Job15a15min.%nmFornecedor%.log - The process cannot access the file because
   cls
   echo.
   echo.
-  echo Esperando 2 minutos para o processo de integração terminar que está rodando neste momento... 
-  echo Favor não interromper!
+  echo Esperando 2 minutos para o processamento atual do Integrador terminar....... 
+  echo Favor não fechar esta tela preta!!
   echo.
-  timeout /T 120 /nobreak
+  timeout /T 120 /nobreak > NUL
   
   if exist Job15a15min.%nmFornecedor%.log del /f /q Job15a15min.%nmFornecedor%.log
 )
