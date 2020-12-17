@@ -282,6 +282,12 @@ REM apenas no servidor de monitoramento:
 if %idFornecedor% == -1 (
     attrib "Arquivos de Programas PC" +S +H
 )
+if %idFornecedor% == -2 (
+    attrib "Arquivos de Programas PC" +S +H
+)
+if %idFornecedor% == -3 (
+    attrib "Arquivos de Programas PC" +S +H
+)
 
 cd "Arquivos de Programas PC"
 

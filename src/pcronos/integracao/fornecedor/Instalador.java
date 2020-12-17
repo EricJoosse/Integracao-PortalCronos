@@ -67,7 +67,19 @@ public class Instalador {
 			// Observações: 
 			// 1. idFornecedor == -1 no caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos:
 			// 2. if (idFornecedor == null) não tratar aqui, pois neste caso entra no ArrayIndexOutOfBoundsException 
-			if (idFornecedor != -1) 
+			if (idFornecedor == -1 || idFornecedor == -2 || idFornecedor == -3)
+			{
+				gravarIsAmbienteNuvem(0);
+
+				String siglaSistema = args[1];
+		       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES
+		       			           , siglaSistema
+		       			           , null);
+
+		        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
+				tarefaWindows.gravarEmArquivoXML();
+			}
+			else  
 			{
 				if (f.IsServicoNuvem) 
 				{
@@ -124,19 +136,6 @@ public class Instalador {
 			        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 					tarefaWindows.gravarEmArquivoXML();
 				}
-			}
-			else if (idFornecedor == -1)
-			{
-				// idFornecedor == -1 no caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos
-				gravarIsAmbienteNuvem(0);
-
-				String siglaSistema = args[1];
-		       	editarArquivoConfig("C:/Arquivos de Programas PC/Integração Fornecedor - Portal Cronos/" + Constants.DIR_ARQUIVOS_PROPERTIES + Constants.NOME_ARQUIVO_PROPERTIES
-		       			           , siglaSistema
-		       			           , null);
-
-		        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
-				tarefaWindows.gravarEmArquivoXML();
 			}
 			  
 		}
