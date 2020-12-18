@@ -45,7 +45,7 @@ public class HorasIniJobsFornecedores {
 			try 
 			{
 				// No caso do servidor de monitoramento:
-				if (idFornecedor == null || idFornecedor == -1)
+				if (idFornecedor == -1)
 				{
 					minutoAgendamentoFuturo = Byte.toString(Utils.calcularMinutoAgendamento(false, -1));
 					segundoAgendamentoFuturo = "47";

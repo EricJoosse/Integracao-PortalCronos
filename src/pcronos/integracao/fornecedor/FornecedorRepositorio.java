@@ -82,7 +82,7 @@ public class FornecedorRepositorio {
 		f[i].FrequenciaProcessamento = "15 min";
 
 		i++;
-		f[i].IdFornecedor = null;
+		f[i].IdFornecedor = -1;
 		f[i].NomeFantasiaEmpresa = "Monitorador Integradores";
 		f[i].versaoIntegrador = "3.4.3";
 		f[i].SiglaSistemaFornecedor = "PCronos";
