@@ -441,9 +441,6 @@ Como vai ser?
     
     8. Durante a instalação: 
             - Mouse sobre o instalador, botão direito do mouse "Executar como Administrador"
-            
-            - No caso de instalação do serviço de monitoramento automático no servidor de aplicação do Portal Cronos: 
-              na pergunta do idFornecedor preencher -1. 
 
  
     9.  Após a instalação:
