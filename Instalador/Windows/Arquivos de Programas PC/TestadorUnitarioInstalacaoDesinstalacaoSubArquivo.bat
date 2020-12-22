@@ -17,23 +17,6 @@ echo Param 1 = %1
 echo Param 2 = %2
 echo Param 3 = %3
 
-if "%1"=="m" (
-    set idFornecedor=-1
-    goto PularPerguntaIdFornecedor
-) else if "%1"=="i" (
-    goto PerguntaIdFornecedor
-) else (
-    echo.
-    ECHO Erro: apenas os tipos de instalação ^"i^" e ^"m^" estão permitidos!
-    echo.
-
-    echo MSGBOX "Erro: apenas os tipos de instalação ""i"" e ""m"" estão permitidos!" > %temp%\TEMPmessage.vbs
-    call %temp%\TEMPmessage.vbs
-    del %temp%\TEMPmessage.vbs /f /q
-REM Fechar o script chamador também: 
-    exit
-)
-
 :PerguntaIdFornecedor
 echo.
 echo ID da empresa fornecedora:

@@ -52,7 +52,7 @@ REM goto TesteFindTarefaEspecifica
 REM goto TesteTresParam
 REM goto TesteIfExistWildcard
 REM goto TestePromptsDOS
-REM goto TestePerguntaIdFornecedorEmUmSubArquivoBat
+REM goto TesteGoToCancelarInstalacaoEmUmSubArquivoBat
 goto TesteSleep
 
 
@@ -648,9 +648,9 @@ del %temp%\TEMPmessage.vbs /f /q
 pause
 exit
 
-REM ================ Teste Pergunta ID fornecedor em um subarquivo .bat (testado, não funcionou): ========================================
+REM ================ Teste GOTO CancelarInstalacao em um subarquivo .bat (testado, NÃO funcionou): ========================================
 
-:TestePerguntaIdFornecedorEmUmSubArquivoBat
+:TesteGoToCancelarInstalacaoEmUmSubArquivoBat
 
 cd\
 
@@ -669,7 +669,7 @@ REM "pwd" em Linux = "%cd% em DOS:
 echo %cd%
 
 
-call TestadorUnitarioInstalacaoDesinstalacaoSubArquivo.bat i
+call TestadorUnitarioInstalacaoDesinstalacaoSubArquivo.bat
 
 
 goto PularCancelarInstalacao
