@@ -1,6 +1,7 @@
 package pcronos.integracao.fornecedor;
 
 
+// Esta classe está usada em UpgradeNaoNuvem3.1.0.bat
 
 public class GeradorTarefaWindowsNaoNuvem {
 
@@ -11,11 +12,8 @@ public class GeradorTarefaWindowsNaoNuvem {
         try 
         {
 			// Primeiro testar se o idFornecedor digitado existe:
-        	if (idFornecedor != -1)
-        	{
-				FornecedorRepositorio fRep = new FornecedorRepositorio();
-		        Fornecedor f = fRep.getFornecedor(idFornecedor);
-        	}
+ 		    FornecedorRepositorio fRep = new FornecedorRepositorio();
+		    Fornecedor f = fRep.getFornecedor(idFornecedor);
 	
 	        TarefaWindows tarefaWindows = new TarefaWindows(false, null, idFornecedor);
 			tarefaWindows.gravarEmArquivoXML();

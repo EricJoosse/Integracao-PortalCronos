@@ -10,6 +10,8 @@ chcp 1252>nul
 
 echo.
 echo Favor entrar em contato com o setor Desenvolvimento do Portal Cronos para obter o ID da empresa fornecedora.
+echo Digite -1, -2 ou -3 no caso de upgrade do Monitorador no servidor de de aplicação, base de dados, 
+echo ou base de dados de contingência.
 echo.
 
 SET /P idFornecedor=Favor digitar o ID da empresa fornecedora: 
