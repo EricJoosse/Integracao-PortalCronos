@@ -15,4 +15,5 @@ Propão 			171	WinThor
 Padeirão 		 14	WinThor	    				
 Marizpan	   1995	APS Cloud																														
 Atacamax	      1	APS																																
-Atacamax	      1	APS Cloud																														
+Atacamax	      1	APS Cloud	
+Ingá Vinhos		 23	WinThor																													

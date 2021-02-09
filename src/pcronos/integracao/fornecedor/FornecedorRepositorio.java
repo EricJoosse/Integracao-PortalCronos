@@ -52,7 +52,7 @@ public class FornecedorRepositorio {
 
     static {
 		hashMap = new HashMap<Integer, Fornecedor>(); 
-		final int qtdFornecedores = 15;
+		final int qtdFornecedores = 16;
 		Fornecedor[] f = new Fornecedor[qtdFornecedores];
 
 		for (int j=0; j < (qtdFornecedores); j++) {
@@ -610,6 +610,52 @@ public class FornecedorRepositorio {
 		f[i].DtCadastro = LocalDate.of(2019, 11, 11);
 		
 
+		
+		i++;
+		f[i].IdFornecedor = 23;
+		f[i].NomeFantasiaEmpresa = "Ingá Vinhos";
+		f[i].cnpjFornecedor = "05390477000225";
+		f[i].versaoIntegrador = "3.4.3";
+		f[i].SiglaSistemaFornecedor = "WinThor";
+		f[i].IsServicoNuvem = false;
+		f[i].IsEmProducao = "Não";
+		f[i].IsDebugAtivado = true;
+		f[i].AplicativoDesktopRemoto = "AnyDesk"; // 411 964 317/legolas/administrador
+		f[i].usuarioWebservice = "ws-inga";
+		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
+		f[i].SO32ou64bit = "64bit"; // "32bit" ou "64bit"
+		f[i].IdiomaSO = ""; 
+		f[i].dirProgramFiles = "Program Files";
+		f[i].versaoJRE = "jre1.8.0_271";
+		f[i].tipoJRE = "(.. bit)";
+		f[i].DiscoIntegrador = "C";
+		f[i].EspacoLivreDisco = "46 GB";
+		f[i].QtdDiasArquivosXmlGuardados = 100;
+		f[i].MemoriaRamLivre = "3.5 GB";
+		f[i].EnderecoIpPublicoServidor = "";
+		f[i].PortaIpAberta = ""; 
+		f[i].FrequenciaProcessamento = "15 min";
+
+		f[i].EmailResponsavelDeParasProdutos = "Uma vendedora";
+
+		f[i].EmailResponsavelTI = "fabiano@ingavinhos.com.br";
+		f[i].SkypeResponsavelTI = "FABIANO NAVARRO (live:fabiano_631)";
+		f[i].PrenomeResponsavelTI = "Fabiano"; 
+		f[i].FuncaoResponsavelTI = "";
+		f[i].TelefoneResponsavelTI = "99117-6551";
+		
+		f[i].EmailResponsavelTIAlternativo = "";		
+		f[i].SkypeResponsavelTIAlternativo = "";		
+		f[i].PrenomeResponsavelTIAlternativo = "";
+		f[i].FuncaoResponsavelTIAlternativo = "";
+		
+		f[i].EmailResponsavelTI_Nuvem = "";
+		f[i].SkypeResponsavelTI_Nuvem = ""; 
+		f[i].PrenomeResponsavelTI_Nuvem = ""; 
+
+		f[i].DtCadastro = LocalDate.of(2021, 2, 8);
+
+		
 /*  Template:
     =========
     !!!!!!!!! Não se esqueça incremementar o variável constante "qtdFornecedores" mais 1 !!!!!

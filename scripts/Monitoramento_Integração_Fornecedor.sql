@@ -15,6 +15,7 @@ Propão			171
 Padeirão		14
 Marizpan	    1995
 Atacamax	    1
+Ingá Vinhos		23																													
 
 /*
 select id_fornecedor_fornec, *

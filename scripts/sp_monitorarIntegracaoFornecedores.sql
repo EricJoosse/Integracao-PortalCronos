@@ -123,6 +123,7 @@ declare c cursor for
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   14) -- Padeirão
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <> 1995) -- Marizpan
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>    1) -- Atacamax
+    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   23) -- Ingá Vinhos
 
 -- 1. DESCOMENTAR OS "and"´S DOS f.id_fornecedor_fornec´S ACIMA APENAS PARA SUPRIMIR QUANTIDADES GRANDES DE EMAILS TEMPORARIAMENTE, 
 --    NO CASO QUE JÁ SABEMOS QUE FORNECEDOR X NÃO ESTÁ FUNCIONANDO MAIS POR ENQUANTO; 
@@ -146,6 +147,7 @@ while @@fetch_status = 0
   if @fornecedor_id =     0  -- Para facilitar a manutenção deste if 
   or @fornecedor_id =   385  -- O Walmart        integra via tabela de preço, por enquanto fora do Monitoramento 
   or @fornecedor_id =  6487  -- O HVC Hortifrúti integra via tabela de preço (????), por enquanto fora do Monitoramento 
+  or @fornecedor_id =    23  -- Ingá Vinhos ainda não está em produção 
     begin
       if (
          --  ((select  count(distinct left(convert(varchar, dt_envio_cotacao_icotfor, 120),13))
