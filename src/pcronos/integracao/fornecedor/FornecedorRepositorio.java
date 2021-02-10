@@ -624,16 +624,16 @@ public class FornecedorRepositorio {
 		f[i].usuarioWebservice = "ws-inga";
 		f[i].tipoSO = "Windows Server 2008 R2 SP1"; 
 		f[i].SO32ou64bit = "64bit"; // "32bit" ou "64bit"
-		f[i].IdiomaSO = ""; 
+		f[i].IdiomaSO = "PT-BR - syntax????"; 
 		f[i].dirProgramFiles = "Program Files";
 		f[i].versaoJRE = "jre1.8.0_271";
-		f[i].tipoJRE = "(.. bit)";
+		f[i].tipoJRE = "(64 bit)";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = "46 GB";
 		f[i].QtdDiasArquivosXmlGuardados = 100;
 		f[i].MemoriaRamLivre = "3.5 GB";
-		f[i].EnderecoIpPublicoServidor = "";
-		f[i].PortaIpAberta = ""; 
+		f[i].EnderecoIpPublicoServidor = "170.239.108.202";
+		f[i].PortaIpAberta = "Não se aplica"; 
 		f[i].FrequenciaProcessamento = "15 min";
 
 		f[i].EmailResponsavelDeParasProdutos = "Uma vendedora";

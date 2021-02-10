@@ -137,4 +137,14 @@ Ingá Vinhos: antes:
 		C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\
 		
        	Java não instalado pois já existente
+       	
+Ingá Vinhos: depois:
+		User variable "Path" Administrador: não existe
+		
+		System variable "path" = 
+       	C:\oracle\product\10.2.0\client_1\bin;C:\app\Administrador\product\11.2.0\client_1;
+       	C:\Program Files (x86)\Common Files\Oracle\Java\javapath;%SystemRoot%\system32;
+       	%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;
+       	C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\
+       	
        		
