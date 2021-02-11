@@ -39,12 +39,15 @@ select  id_pessoa, nm_pessoa, nr_cnpj_pessoa, *
 	informando Nome + ID do fornecedor novo
 
 
--6. (i) Se ainda não sabe o contato da TI no Skype, editar e já adiantar enviando o seguinte email:
+-6. Se ainda não sabe o contato da TI no Skype:
+    (i)  Abrir meu Skype
+    (ii) Editar e já adiantar enviando o seguinte email:
 
-Elthon, boa tarde!
+Fabiano, boa tarde!
  
-    sou da TI do Portal Cronos. Vou instalar a integração WinThor / PCronos hoje.
-Qual é o nome do seu contato no Skype?
+   sou técnico do Portal Cronos e vou instalar o plugin "Integrador Winthor / PCronos" segunda-feira.
+Qual é sua identificação no Skype para eu enviar um convite para contato? É mais fácil do que celular para fazer a instgalação.
+Ao invés de responder este email, se quiser, você pode também enviar um convite via Skype para minha identificação "eric.jo31", pois estou no Skype, 
  
 Atc,
 Eric
@@ -62,10 +65,14 @@ Eric
 
            (Dica: pesquisar o texto "Para facilitar a manutenção deste if" nesta sp).
             
-      (iii) executar o script na base de produção
+      (iii) executar o script na base de produção escolhendo um momento quando o Monitorador não está executando
 
       
-   -4. Executar o seguinte em todas as bases de produção, homologação, e cópias da base de produção:
+   -4. Pelo menos em produção não executar mais o seguinte em todas as bases de Produção, Homologação, 
+       e eventuais cópias da base de produção,
+       porém usar a tela "Alterar Empresa / Perfil - usuário Coringa".
+       Apenas no caso que esta tela ainda não está funcionando na base de Homologação, 
+       executar o seguinte naquela base:
    
        update [dbo].[Usuario_Sistema]  
           set id_fornecedor_fornec = .....
@@ -76,8 +83,10 @@ Eric
    
    
    -3. Conectar nas telas do Portal Cronos (produção - 80) logado como ericcoringa e verificar se eles usam 
-       um texto padrão do fornecedor para todas as cotações de todos os compradores 
+       um texto padrão do fornecedor para todas as cotações de todos os compradores, 
+       na tela "Condições Comerciais" (????) e na tela as ofertas para cada produto (?????) 
        e preencher isso no parâmetro "ObsOfertasPadraoSeNaoTemNoSistema".
+       No caso, primeiro confirmar isso com Leão.
            
     
    -2. Leão, 
@@ -91,8 +100,18 @@ Eric
         Apenas no caso do WinThor: 
 			UsarValorMinimoSistemaFornecedor  = true / false?  
 		 
+	   Atc,
 	   Eric
    
+
+   -2. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
+       no FornecedorRepositorio.java, no static constructor:
+       (i)   adicionar o fornecedor novo no final da lista de fornecedores, 
+             copiando o fornecedor template vazio, e preencher o CNPJ dele: 
+             descobrir o CNPJ do fornecedor usando o mesmo select acima             
+       (ii)  não se esqueça adicionar i++ antes do fornecedor novo
+       (iii) não se esqueça incremementar o variável constante "qtdFornecedores" mais 1 no início do static constructor
+    
 
    -1. NÃO colocar os dados do fornecedor novo no arquivo único /conf/.properties no diretório da instalação 
        C:\PCronos\Integração Fornecedor - Portal Cronos\Instalador\Windows\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\.
@@ -101,10 +120,11 @@ Eric
          diretório: C:\PCronos\Integração Fornecedor - Portal Cronos\conf\
          arquivo  : Integração Fornecedor - Portal Cronos.x.y.z.properties.WinThor(APS).NomeFornecedor.Homolog
        
-       Não comittar este arquivo no GitHub pois contêm senhas!!! Adicionar no .gitignore.  
+       Não comittar este arquivo no GitHub pois contêm senhas!!! Adicionar o arquivo novo no .gitignore
+       usando o botão direito do mouse Team > Ignore. Depois disso comittar o arquivo .gitignore para o Git Index.  
        
        Neste momento apenas preencher os seguintes dados (os outros dados estão explicados no final da instalação): 
-       (i)   Descobrir o CNPJ do fornecedor usando o mesmo select acima.
+       (i)   Preencher "CnpjFornecedor", "NomeFantasiaFornecedor", "SiglaSistema".
        
        (ii)  No caso de instalação do Monitorador do Servidor de Banco do Portal Cronos 
              e no caso do Monitorador dos Integradores e do Servidor de Aplicação do Portal Cronos: 
@@ -136,14 +156,59 @@ Eric
 	    	         (em relação ao email automático, e outras referências)
 
 
-    0. Provisoriamente (enquanto que ainda não existe uma tabela nova dbo.Configuracao_Integrador): 
-       no FornecedorRepositorio.java, no static constructor:
-       (i)   adicionar o fornecedor novo no final da lista de fornecedores, 
-             copiando o fornecedor template vazio, e preencher o CNPJ dele
-       (ii)  não se esqueça adicionar i++ antes do fornecedor novo
-       (iii) não se esqueça incremementar o variável constante "qtdFornecedores" mais 1
     
+
+   21. Enviar Email/ Skype: 
+   
+       Vocês têm apenas UMA base de dados WinThor/Oracle? Ou talvez tem uma base de produção e outra base de teste, por exemplo?
+
+       É melhor usar logo a base de produção
+
+	   No caso do Winthor:
+       		Qual é o endereço IP, porta, SID, usuário e senha do banco Oracle de produção? A porta é a porta "default" (1521) ?
+       		O usuário do banco Oracle pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado no WinThor.
+
+	   No caso do APS:
+       		Qual é o endereço IP, porta, usuário e senha do banco Firebird de produção? A porta é a porta "default" (3050)? Qual é o caminho completo + nome do arquivo.FDB do Firebird, exemplo: /home/usuario/banco.fdb (Linux) ou C:/diretorio/NomeBanco.FDB (Windows).
+       		O usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado na base do APS.
+
+       No caso que o DBA do fornecedor quer dar privilêgios apenas para as tabelas usadas: 
+       		APS:     cliente, produto, prodfilho, estoqueempresa, precoempresa
+       		WinThor: .......
+         
+       Se precisar: você tem um arquivo "tnsnames.ora" em alguma máquina que está com o WinThor instalado? Coloca o conteúdo no Skype: neste arquivo dá para ver se o SID é WINT ou PROD
+
+       Se o DBA demorar demais para criar um usuário novo, não podemos usar um dos usuários Oracle que já existe? Com certeza deve existir pelo menos um. Eu posso até colocar a senha deste usuário no arquivo de parâmetros do Portal Cronos de forma criptografada. 
+
+	   Criptografei a senha do usuário do banco Oracle/Firebird/etc no arquivo de configuração da integração para impossibilitar comprometimento de segurança.
+       
+
+
+Leão explicou os parâmetros no arquivco de configuração? (por exemplo "UsarValorMinimoSistemaFornecedor" = "true"/"false", "CriterioVerificacaoEstoque" = "QtdEstoqueMaiorZero"/""QtdEstoqueMaiorOuIgualQtdSolicitada", etc)
+
+OK, a parte técnica da instalação está concluída. Vou falar com Leão para continuar os próximos passos
+       
+Outra dúvida: os vendedores querem qual das seguintes opções?
+1. que o WinThor envia automaticamente os preços ofertados de TODOS os produtos solicitados para o Portal Cronos mesmo no caso que o estoque de alguns produtos estiver zerado no WinThor? 
+2. ou apenas os preços dos produtos solicitados que tiverem pelo menos 1 produto no estoque no WinThor?
+3. ou apenas os preços dos produtos solicitados que tiverem uma quantidade no estoque no WinThor maior ou igual à quantidade solicitada?            
+
+Exemplos de vantagens / desvantagens:
+por exemplo uma possível desvantagem da opção 1: se o cliente escolher a SOST para fornecer alguns produtos e mandar uma ordem de compra, o risco é que vocês não vão conseguir cumprir o pedido ou apenas parcialmente
+por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da SOST não está sendo informado no WinThor, pode acontecer que a SOST vai perder oportunidades de vendas porque a integração automática vai deixar de ofertar produtos       
+       
+
+       No caso que os vendedores escolham fora do padrão (2): Todos os vendedores concordam com esta escolha?
+        
+       ????????????? ANTIGO: Terminei minha parte da instalação. 
+                             Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
     
+
+   22. Criptografar a senha do usuário do banco Oracle/Firebird/etc no arquivo de configuração
+       e alterar SenhaBancoDeDadosCriptografada = false -> true.
+   
+
+
 
 DURANTE O ACESSO VIA ANYDESK:
 ============================= 
@@ -221,9 +286,9 @@ Como vai ser?
 		Quando você desocupar o servidor, me avise
 
 
-    2. No caso do WinThor: "pfv me dá a lista de filiais que têm no WinThor" 
-       para decidir se a filial do estoque é 1, 2, ou 3. 
-       Não podemos usar o estoque de uma loja de balçao pequena.
+    2. No caso do WinThor: "Favor informar a lista de filiais que têm no WinThor  
+       para decidir se a filial do estoque que usaremos no plugin WinThor-PCronos será 1, 2, ou 3. 
+       Não podemos usar o estoque de uma loja de balcão pequena."
        
        Registrar a filial no arquivo .properties neste projeto Eclipse, C:\PCronos\Integração Fornecedor - Portal Cronos\conf\ 
        
@@ -255,7 +320,6 @@ Como vai ser?
 	    
 	   (iii) No arquivo "Instalador_Integrador.bat" ou "Instalador_Monitorador.bat": 
 	   
-		- Verificar a versão de Windows no servidor do fornecedor 
 		- No caso que a versão de Windows ainda não está na seguinte lista: 
 				echo Tipos de Windows homologados: 
 				echo.
@@ -269,6 +333,8 @@ Como vai ser?
 		- No caso de Windows Server 2008 ou outros que têm a opção para escolher na instalação de Windows: 
 		  Verificar a variável "tipoOS=32" ou "tipoOS=64" no Instalador_xxxxxxxx.bat
 		  Obs: no caso de Windows Server 2012 ou 2016 não precisa.
+		  
+		- Também registrar "32bit" ou "64bit" no atributo "SO32ou64bit" no FornecedorRepository.java.
 		
 		- Se a versão de Windows ainda não está homologada, 
 		  comentar "regedit.exe /s %arquivoRegedit%" no  "if %tipoOS% == 64" ou "32".		  
@@ -344,13 +410,18 @@ Como vai ser?
 	        	- Atualização automática de Java sim ou não: não verificar isso neste momento pois isso não é motivo para instalar outro Java novo sim ou não
 
              	- No caso que a JRE existente funciona: 
-    					- Verificar e, no caso, ajustar o if no arquivo CaminhoJRE.bat.
+    					- Verificar e, no caso, ajustar o "if" no arquivo CaminhoJRE.bat e criara um novo label :"PatXxxxx".
     					
     					- No FornecedorRepository, preencher:
 								- f[i].dirProgramFiles = ".......";
 								- f[i].versaoJRE = "......";
 								- f[i].tipoJRE = "(.. bit)";
 										Obs.: para verificar se foi instalado 32 ou 64 bit JRE: 
+   											    CMD> cd\
+   											    CMD> cd "Program Files xxx"
+   											    CMD> cd Java
+   											    CMD> cd jre1.8.0_xxx
+   											    CMD> cd bin
    											    CMD> java -d32 -version
    											    CMD> java -d64 -version
           
@@ -441,6 +512,10 @@ Como vai ser?
     
     8. Durante a instalação: 
             - Mouse sobre o instalador, botão direito do mouse "Executar como Administrador"
+
+    		- Na hora que o Instalador abre o arquivo xxx.properties automaticamente, 
+    		  copiar o conteúdo do arquivo /conf/xxx.properties no diretório de backups no projeto Eclipse para 
+			  este arquivo aberto
 
  
     9.  Após a instalação:
@@ -661,57 +736,6 @@ Como vai ser?
        no FornecedorRepositorio.getFornecedor()
        
        
-   21. Enviar Email/ Skype: 
-   
-       Vocês têm apenas UMA base de dados WinThor/Oracle? Ou talvez tem uma base de produção e outra base de teste, por exemplo?
-
-       É melhor usar logo a base de produção
-
-	   No caso do Winthor:
-       		Qual é o endereço IP, porta, SID, usuário e senha do banco Oracle de produção? A porta é a porta "default" (1521) ?
-       		O usuário do banco Oracle pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado no WinThor.
-
-	   No caso do APS:
-       		Qual é o endereço IP, porta, usuário e senha do banco Firebird de produção? A porta é a porta "default" (3050)? Qual é o caminho completo + nome do arquivo.FDB do Firebird, exemplo: /home/usuario/banco.fdb (Linux) ou C:/diretorio/NomeBanco.FDB (Windows).
-       		O usuário do banco Firebird pode ser um usuário que tem apenas privilêgio para consulta, pois o Portal Cronos precisa apenas consultar o estoque e os preços dos produtos e alguns dados dos clientes e não faz nenhuma alteração de nenhum dado na base do APS.
-
-       No caso que o DBA do fornecedor quer dar privilêgios apenas para as tabelas usadas: 
-       		APS:     cliente, produto, prodfilho, estoqueempresa, precoempresa
-       		WinThor: .......
-         
-       Se precisar: você tem um arquivo "tnsnames.ora" em alguma máquina que está com o WinThor instalado? Coloca o conteúdo no Skype: neste arquivo dá para ver se o SID é WINT ou PROD
-
-       Se o DBA demorar demais para criar um usuário novo, não podemos usar um dos usuários Oracle que já existe? Com certeza deve existir pelo menos um. Eu posso até colocar a senha deste usuário no arquivo de parâmetros do Portal Cronos de forma criptografada. 
-
-	   Criptografei a senha do usuário do banco Oracle/Firebird/etc no arquivo de configuração da integração para impossibilitar comprometimento de segurança.
-       
-
-Este usuário está dando erro "ORA-00942: a tabela ou view não existe" então este usuário não tem privilégios suficientes.
-Sugiro conectar no SQL Navigator ou outra ferramenta com este usuário para ver se este usuário consegue visualizar pelo menos uma tabela ou nenhuma
-
-
-Leão explicou os parâmetros no arquivco de configuração? (por exemplo "UsarValorMinimoSistemaFornecedor" = "true"/"false", "CriterioVerificacaoEstoque" = "QtdEstoqueMaiorZero"/""QtdEstoqueMaiorOuIgualQtdSolicitada", etc)
-
-OK, a parte técnica da instalação está concluída. Vou falar com Leão para continuar os próximos passos
-       
-Outra dúvida: os vendedores querem qual das seguintes opções?
-1. que o WinThor envia automaticamente os preços ofertados de TODOS os produtos solicitados para o Portal Cronos mesmo no caso que o estoque de alguns produtos estiver zerado no WinThor? 
-2. ou apenas os preços dos produtos solicitados que tiverem pelo menos 1 produto no estoque no WinThor?
-3. ou apenas os preços dos produtos solicitados que tiverem uma quantidade no estoque no WinThor maior ou igual à quantidade solicitada?            
-
-Exemplos de vantagens / desvantagens:
-por exemplo uma possível desvantagem da opção 1: se o cliente escolher a SOST para fornecer alguns produtos e mandar uma ordem de compra, o risco é que vocês não vão conseguir cumprir o pedido ou apenas parcialmente
-por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da SOST não está sendo informado no WinThor, pode acontecer que a SOST vai perder oportunidades de vendas porque a integração automática vai deixar de ofertar produtos       
-       
-
-       No caso que os vendedores escolham fora do padrão (2): Todos os vendedores concordam com esta escolha?
-        
-       ANTIGO: Terminei minha parte da instalação. Favor verificar e salvar as seguintes chaves no arquivo de configuração que já está aberto no servidor atualmente: EnderecoIpServidorBancoDeDados, InstanciaBancoDeDados, UsuarioBancoDeDados, SenhaBancoDeDados, VerificarEstoque, CriterioVerificacaoEstoque, ObsOfertasPadraoSeNaoTemNoSistema, UsarValorMinimoSistemaFornecedor
-    
-
-   22. Criptografar a senha do usuário do banco Oracle/Firebird/etc no arquivo de configuração
-       e alterar SenhaBancoDeDadosCriptografada = false -> true.
-   
    23. Apenas no caso que já tem outro Java instalado no mesmo servidor para outro sistema,
        colocar o seguinte no Skype: 
        No caso que você precisa atualizar a versão de Java um dia no futuro, 
@@ -719,9 +743,6 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        favor não se esquecer para me avisar com alguns dias de antecedência! 
        Caso contrário, o Integrador WinThor/PCronos de repente vai parar de funcionar alguns dias! 
        
-   24. Copiar o arquivo /conf/xxx.properties do diretório de backups no projeto Eclipse para o servidor
-       do fornecedor C:\Arquivos de Programas PC\Integração Fornecedor - Portal Cronos\conf\
-
    25. No caso que a TI do fornecedor geralmente usa uma máquina virtual para dar acesso remoto etc 
        (exemplo: Comal), pedir a TI conectar com um usuário desta máquina virtual para ver: 
        		- se o manual aparece no menu de Windows
@@ -729,6 +750,16 @@ por exemplo uma possível desvantagem da opção 2 ou 3: no caso que o estoque da S
        		
    26. Testar as ofertas automáticas conectando nas telas do Portal Cronos (homologação - 81) logado como ericcoringa
    
+       - Se acontecer o erro "ORA-00942: a tabela ou view não existe": 
+			O usuário "xxx" na base Oracle/xxxxx está dando erro "ORA-00942: a tabela ou view não existe" então este usuário não tem privilégios suficientes.
+			Sugiro conectar no SQL Navigator ou outra ferramenta com este usuário para ver se este usuário consegue visualizar pelo menos uma tabela ou nenhuma
+			
+			Se a TI perguntar "nao pode ser inga.pcprodut por exemplo?:
+			Resposta: Não, pois o plugin funciona para muitas empresas diferentes. 
+					  Em outras empresas não tem "inga" na frente das tabelas!
+					  Todas as empresas no Brasil usam "synonyms"
+			
+
        - Se acontecer o seguinte erro: 
        		"Cotação 101-0249 não ofertada! O Valor Mínimo para Entrega para a empresa compradora 
        		 XXXXXXXX não pode ser nulo ou em branco no sistema WinThor do fornecedor Propão, 
