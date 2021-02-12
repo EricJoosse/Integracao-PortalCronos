@@ -666,9 +666,11 @@ public class FornecedorRepositorio {
 		f[i].cnpjFornecedor = "";
 		f[i].versaoIntegrador = "";
 		f[i].SiglaSistemaFornecedor = "";
+		f[i].IsServicoNuvem = true/false;
 		f[i].IsEmProducao = "Não";
 		f[i].IsDebugAtivado = true;
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
+		f[i].IdAplicativoDesktopRemoto = "";
 		f[i].usuarioWebservice = "";
 		f[i].tipoSO = ""; 
 		f[i].SO32ou64bit = ""; // "32bit" ou "64bit"
@@ -678,6 +680,7 @@ public class FornecedorRepositorio {
 		f[i].tipoJRE = "(.. bit)";
 		f[i].DiscoIntegrador = "C";
 		f[i].EspacoLivreDisco = " GB";
+		f[i].QtdDiasArquivosXmlGuardados = ...;
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
 		f[i].PortaIpAberta = ""; 
