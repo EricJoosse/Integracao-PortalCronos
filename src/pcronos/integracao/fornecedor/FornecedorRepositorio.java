@@ -665,17 +665,17 @@ public class FornecedorRepositorio {
 		f[i].NomeFantasiaEmpresa = "";
 		f[i].cnpjFornecedor = "";
 		f[i].versaoIntegrador = "";
-		f[i].SiglaSistemaFornecedor = "";
+		f[i].SiglaSistemaFornecedor = ""; // "WinThor" ou "APS" ou "SAP" ou "PCronos"
 		f[i].IsServicoNuvem = true/false;
 		f[i].IsEmProducao = "Não";
 		f[i].IsDebugAtivado = true;
 		f[i].AplicativoDesktopRemoto = "AnyDesk";
 		f[i].IdAplicativoDesktopRemoto = "";
 		f[i].usuarioWebservice = "";
-		f[i].tipoSO = ""; 
-		f[i].SO32ou64bit = ""; // "32bit" ou "64bit"
-		f[i].IdiomaSO = ""; 
-		f[i].dirProgramFiles = "";
+		f[i].tipoSO = "";          // "Windows Server 2008 R2 SP1" ou "Windows Server 2012 R2" ou "Windows 10 Pro" ou "Windows Server 2016" ou "Windows Server 2019"
+		f[i].SO32ou64bit = "";     // "32bit" ou "64bit"
+		f[i].IdiomaSO = "";        // "I" = "Inglês", "P" = "Português"
+		f[i].dirProgramFiles = ""; // "Program Files" ou "Program Files (x86)"
 		f[i].versaoJRE = "";
 		f[i].tipoJRE = "(.. bit)";
 		f[i].DiscoIntegrador = "C";
@@ -683,13 +683,13 @@ public class FornecedorRepositorio {
 		f[i].QtdDiasArquivosXmlGuardados = ...;
 		f[i].MemoriaRamLivre = "";
 		f[i].EnderecoIpPublicoServidor = "";
-		f[i].PortaIpAberta = ""; 
+		f[i].PortaIpAberta = ""; // Por exemplo "Não se aplica"
 		f[i].FrequenciaProcessamento = "15 min";
 
 		f[i].EmailResponsavelDeParasProdutos = "Uma vendedora";
 
 		f[i].EmailResponsavelTI = "";
-		f[i].SkypeResponsavelTI = "";
+		f[i].SkypeResponsavelTI = "...Display name... (live:......)"; // Veja o live-id nas propriedades do usuário no Skype
 		f[i].PrenomeResponsavelTI = ""; 
 		f[i].FuncaoResponsavelTI = "";
 		f[i].TelefoneResponsavelTI = "";
@@ -703,7 +703,7 @@ public class FornecedorRepositorio {
 		f[i].SkypeResponsavelTI_Nuvem = ""; 
 		f[i].PrenomeResponsavelTI_Nuvem = ""; 
 
-		f[i].DtCadastro = LocalDate.of(yyyy, mm, dd);
+		f[i].DtCadastro = LocalDate.of(yyyy, m, d);  // Sem leading zeros
  */
 		
 		for (int j=0; j < (qtdFornecedores); j++) {
