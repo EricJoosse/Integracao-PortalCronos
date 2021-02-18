@@ -1,4 +1,4 @@
-Conectar no banco Oracle como usuário inga ou usuário SYS ou outro usuário DBA e rodar o seguinte:
+Conectar no banco Oracle como usuário "inga" ou usuário "SYS" ou outro usuário DBA e rodar o seguinte:
 
 CREATE PUBLIC SYNONYM PCCLIENT FOR inga.PCCLIENT;
 CREATE PUBLIC SYNONYM PCPRODUT FOR inga.PCPRODUT;

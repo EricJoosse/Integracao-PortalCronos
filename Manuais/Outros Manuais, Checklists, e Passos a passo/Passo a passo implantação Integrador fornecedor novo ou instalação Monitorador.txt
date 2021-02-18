@@ -757,7 +757,12 @@ Como vai ser?
 			Se a TI perguntar "nao pode ser inga.pcprodut por exemplo?:
 			Resposta: Não, pois o plugin funciona para muitas empresas diferentes. 
 					  Em outras empresas não tem "inga" na frente das tabelas!
-					  Todas as empresas no Brasil usam "synonyms"
+					  Todas as empresas no Brasil usam "synonyms".
+					  
+			No Skype perguntar: estou com um script pronto para criar os sinônimos necessários, você quer?
+			                    No caso, modificar os usuários "inga" e "cronos" 
+			                    dentro do script /scripts/"Criar Sinônimos WinThor.sql"
+			                    e depois enviar o script.
 			
 
        - Se acontecer o seguinte erro: 
