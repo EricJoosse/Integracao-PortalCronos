@@ -112,7 +112,7 @@ declare c cursor for
     where f.id_padrao_sistema_int_psisint is not null
       and (                          f.id_fornecedor_fornec <>   21) -- Marítimos
       and (                          f.id_fornecedor_fornec <>  170) -- SOST (BA)
-      and (                          f.id_fornecedor_fornec <>   33) -- Comal
+      and (                          f.id_fornecedor_fornec <>   13) -- Formaggio
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   13) -- Formaggio
     --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>  947) -- JR Distribuição
     --and (                          f.id_fornecedor_fornec <>   30) -- Prolac
@@ -147,6 +147,7 @@ while @@fetch_status = 0
   if @fornecedor_id =     0  -- Para facilitar a manutenção deste if 
   or @fornecedor_id =   385  -- O Walmart        integra via tabela de preço, por enquanto fora do Monitoramento 
   or @fornecedor_id =  6487  -- O HVC Hortifrúti integra via tabela de preço (????), por enquanto fora do Monitoramento 
+  or @fornecedor_id =    13  -- Formaggio ainda não está em produção 
   or @fornecedor_id =    23  -- Ingá Vinhos ainda não está em produção 
     begin
       if (
