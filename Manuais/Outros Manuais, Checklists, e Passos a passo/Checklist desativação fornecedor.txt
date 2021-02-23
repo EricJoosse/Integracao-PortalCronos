@@ -4,4 +4,22 @@ Checklist desativação fornecedor
 - Fazer backup das últimas configurações, copiando isso do último arquivo de log remoto 
   para um arquivo novo  /Backup_Logs_Remotos/Último_log_<NomeEmpresa>.txt
   
+- No FornecedorRepository alterar f[i].IsEmProducao para "Não"
+
+- No script "sp_monitorarIntegracaoFornecedores.sql":
+	- Em todos os casos substituir:
+	    --and (@incremental_15min = 0 OR f.id_fornecedor_fornec <>   xx) -- AAAAAAAAA
+	  Por:
+          and (                          f.id_fornecedor_fornec <>   xx) -- AAAAAAAAA
+
+	- No caso de migração do fornecedor do APS para o WinThor ou outro sistema, depois de seguinte:
+		or @fornecedor_id =   385  -- O Walmart        integra via tabela de preço, por enquanto fora do Monitoramento 
+      Adicionar:
+	    or @fornecedor_id =    13  -- Formaggio ainda não está em produção 
+	
+- Rodar o script na base de produção
+
+- Testar o seguinte:
+	exec dbo.monitorarIntegracaoFornecedores @incremental_15min = 0
+
 - ........
