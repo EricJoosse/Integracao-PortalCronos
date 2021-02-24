@@ -96,7 +96,7 @@ public class FornecedorRepositorio {
 		f[i].AplicativoDesktopRemoto = "mstsc";
 		f[i].versaoJRE = "jre1.8.0_92";
 		f[i].tipoJRE = "(.. bit)";
-		f[i].tipoSO = "Windows Server 2008 R2 SP1";
+		f[i].tipoSO = "Windows Server 2012 R2"; // Era "Windows Server 2008 R2 SP1";
 		f[i].SO32ou64bit = "?";
 		f[i].IdiomaSO = "";
 		f[i].dirProgramFiles = "Program Files";
