@@ -291,8 +291,8 @@ boolean                              isEnviadoJa = false;
 	   // No caso de servidores de fornecedores enviar emails sobre estouro do HD apenas 1 repetição a cada 15 dias, 
 	   // no caso de servidores de monitoramento do Portal Cronos manter o padrão do envio de no máximo 3 repetições por dia:
 	   if (     (qtdEmailsEnviadosHojeFornecedor >= 3 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) == -1)
-			 || (qtdEmailsEnviadosHojeFornecedor >= 1 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) > -1 && !nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOSCONTINGENCIA))
-			 || (qtdEmailsEnviadosHojeFornecedor >= 3 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) > -1 && (nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) || nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS) || nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOSCONTINGENCIA)))
+			 || (qtdEmailsEnviadosHojeFornecedor >= 1 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) > -1 && !nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOSCONTINGENCIA) && !nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOSNOVO))
+			 || (qtdEmailsEnviadosHojeFornecedor >= 3 &&  p_Assunto.toLowerCase().indexOf(Constants.ESPACO_LIVRE.toLowerCase()) > -1 && (nmFornecedor.equalsIgnoreCase(Constants.SERVAPPCRONOS) || nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOS) || nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOSCONTINGENCIA) || nmFornecedor.equalsIgnoreCase(Constants.SERVBANCOCRONOSNOVO)))
 		  )
 		   	return;
 		   

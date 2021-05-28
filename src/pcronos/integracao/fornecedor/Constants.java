@@ -26,6 +26,7 @@ public class Constants {
 	   public static final String ESPACO_LIVRE = "espaço livre";
 	   public static final String SERVAPPCRONOS = "AppSrvProd2012B";
 	   public static final String SERVBANCOCRONOS = "BDSrvProd2012";
+	   public static final String SERVBANCOCRONOSNOVO = "BDSrvProd2019";
 	   public static final String SERVBANCOCRONOSCONTINGENCIA = "SrvBancoConting";
 	   public static final String SERVTESTE = "ServTeste";
 
